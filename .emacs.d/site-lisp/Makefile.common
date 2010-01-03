@@ -1,0 +1,16 @@
+# byte compile elisp files
+
+EMACS=emacs
+MAINT_FILE=~/.emacs.d/site-lisp/config/xwl-path.el
+SRC=$(filter-out $(MAINT_FILE) wajig.el, $(wildcard *.el))
+OBJ=$(wildcard *.elc)
+TARGET=$(patsubst %.el,%.elc,$(SRC))
+
+all: #$(TARGET)
+	@echo "byte-compile disabled."
+
+%.elc: %.el
+	@$(EMACS) -q --no-site-file -batch  -l $(MAINT_FILE) -f batch-byte-compile $<
+
+clean:
+	-rm -f *~ *.elc

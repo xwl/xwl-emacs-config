@@ -1,0 +1,830 @@
+;;; xwl-util.el --- Utilities and global variables
+
+;; Copyright (C) 2007, 2008, 2009  William Xu
+
+;; Author: William Xu <william.xwl@gmail.com>
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+;;
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with this program; if not, write to the Free Software
+;; Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+;; 02110-1301 USA
+
+;;; Commentary:
+
+;; Things that has very few or no dependencies to other elisp extensions.
+
+;;; Code:
+
+(eval-when-compile
+  (require 'cl))
+
+(require 'url-extra)
+
+;;; Global Variables
+
+;; (defun xwl-network-on-p ()
+;;   "Test whether network is okay by ping."
+;;   (zerop (shell-command "ping -t 1 www.gmail.com > /dev/null")))
+
+(defun xwl-at-company ()
+  (message "瞅瞅我们是不是在公司网络呢…")
+  ;;   (zerop (shell-command
+  ;;          "traceroute -w 2 -m 2 www.google.com  | grep abc"))
+
+  ;; (zerop (shell-command "ping -c 1 172.28.8.246"))
+
+  ;; (and (not (eq system-type 'darwin))
+;;        (or (zerop (shell-command "ipconfig | grep 172.28"))
+;;            (zerop (shell-command "ipconfig | grep 10.162"))))
+
+  ;; (string= (user-login-name) "wixu"))
+  (not (eq system-type 'darwin)))
+  
+
+(defvar xwl-at-company-p nil)
+(defvar xwl-w3m-arguments '())
+
+
+;;; Compat
+
+(defun xwl-compat-select (list predicate)
+  "Return `cdr' of matched element in LIST by applying PREDICATE on
+`car' of elements.
+
+This is useful for sharing .emacs on multiple platforms, where
+each OS has different set of tools. "
+  (let ((l list)
+        (ret nil))
+    (while l
+      (if (funcall predicate (caar l))
+          (progn
+            (setq ret (cadar l))
+            (setq l nil))
+        (setq l (cdr l))))
+    (if (stringp ret)
+        ret
+      (eval ret))))
+
+(defun xwl-compat-select-by-executable (list)
+  (xwl-compat-select list 'executable-find))
+
+(defun xwl-compat-select-by-window-system (list)
+  (xwl-compat-select list (lambda (w) (eq window-system w))))
+
+
+;; crazycool 的一个函数，显示 ascii 表
+(defun ascii-table-show ()
+  "Print the ascii table"
+  (interactive)
+  (with-current-buffer (switch-to-buffer "*ASCII table*")
+    (setq buffer-read-only nil)
+    (erase-buffer)
+    (let ((i   0)
+          (tmp 0))
+      (insert (propertize
+               "                                [ASCII table]\n\n"
+               'face font-lock-comment-face))
+      (while (< i 32)
+        (dolist (tmp (list i (+ 32 i) (+ 64 i) (+ 96 i)))
+          (insert (concat
+                   (propertize (format "%3d " tmp)
+                               'face font-lock-function-name-face)
+                   (propertize (format "[%2x]" tmp)
+                               'face font-lock-constant-face)
+                   "    "
+                   (propertize (format "%3s" (single-key-description tmp))
+                               'face font-lock-string-face)
+                   (unless (= tmp (+ 96 i))
+                     (propertize " | " 'face font-lock-variable-name-face)))))
+        (newline)
+        (setq i (+ i 1)))
+      (beginning-of-buffer))
+    (toggle-read-only 1)))
+
+
+;;; 随机签名档
+
+(defun xwl-qiushibaike-random ()
+  "从 qiushibaike.com 获取一条随机笑话。"
+  (let* ((n (random 30000))
+         (url (format "http://www.qiushibaike.com/qiushi/number/%d" n))
+         (buf (url-retrieve-synchronously url))
+         (valid? nil)
+         (ret ""))
+    (with-current-buffer buf
+      ;; (switch-to-buffer buf)
+      (url-extra-html-decode-buffer)
+      (goto-char (point-min))
+      (when (re-search-forward "<div class=\"content\">" nil t 1)
+        (let ((start (+ (point) 1))     ;跳到下一行开头
+              (content ""))
+          (when (or (and (re-search-forward "<div class=\"tag\"" nil t 1)
+                         (re-search-backward "<div class=\"tag\"" nil t 1))
+                    (and (re-search-forward "<\\/div>" nil t 1)
+                         (re-search-backward "<\\/div>" nil t 1)))
+            (setq valid? t)
+            (setq ret
+                  (concat
+                   "<p>"
+                   (replace-regexp-in-string
+                    "<br \\/>\\|^ +\\| +$\\|\\|\n"
+                    ""
+                    (delete-and-extract-region start (point)))
+                   "</p>"
+                   (format "\n<a href=\"%s\">糗事#%d</a>" url n)))))))
+    (kill-buffer buf)
+    (if valid?
+        ret
+      (xwl-qiushibaike-random))))
+
+;;; paste in IRC
+
+(setq xwl-paste-username "xwl")
+
+(setq xwl-paste-ubuntu-cn-classes
+      '("applescript" "actionscript-french" "ada" "apache" "asm" "asp" "autoit" "bash"
+        "blitzbasic" "c" "c_mac" "caddcl" "cadlisp" "cfdg" "cpp" "csharp" "css" "d"
+        "delphi" "diff" "div" "dos" "eiffel" "fortran" "freebasic" "gml" "html4strict"
+        "inno" "java" "java5" "javascript" "lisp" "lua" "matlab" "mpasm" "mysql" "nsis"
+        "objc" "ocaml" "ocaml-brief" "oobas" "oracle8" "pascal" "perl" "php" "php-brief"
+        "python" "qbasic" "robots" "ruby" "sas" "scheme" "sdlbasic" "smarty" "sql"
+        "tsql" "vb" "vbnet" "vhdl" "visualfoxpro" "xml"))
+        
+(defun xwl-paste-ubuntu-cn (beg end &optional class)
+  "Paste region between BEG and END to http://paste.ubuntu.org.cn.
+
+Resulted post url will be appended to your kill ring, so you can
+simply yank it when needed."
+  (interactive "r")
+  (unless class
+    (if current-prefix-arg
+        (setq class (ido-completing-read "Use mode: " xwl-wgetpaste-ubuntu-cn-classes))
+      (setq class (xwl-paste-match-mode))))
+  (let ((url "http://paste.ubuntu.org.cn"))
+    (with-current-buffer 
+        (url-extra-http-post url
+                       `((poster . ,xwl-paste-username)
+                         (class . ,class)
+                         (paste . "1")
+                         (code2 . ,(buffer-substring-no-properties beg end))
+                         ;; (screenshot . "c:/Users/My Pictures/orgmode.PNG")
+                         ;; (x . "---xwl\r\nContent-Disposition: form-data;name=screenshot;filename=\"c:/Users/My Pictures/orgmode.PNG\"\r\n---xwl")
+                         ))
+      (goto-char (point-min))
+      (if (re-search-forward 
+           (concat "<li class=\"highlight\"><a href=\"\/\\([0-9]+\\)\">" xwl-paste-username)
+           nil t 1)
+          (let ((s (concat url "/" (match-string 1))))
+            (kill-new s)
+            (message s)
+            (kill-buffer (current-buffer)))
+        (message "paste failed")
+        (switch-to-buffer (current-buffer))))))
+
+(setq xwl-paste-match-table
+      '(((emacs-lisp-mode lisp-interaction-mode) . "lisp")
+        ((c++-mode) . "cpp")))
+
+(defun xwl-paste-match-mode ()
+  "Find a suituable mode on the paste host based on current `major-mode'."
+  ;; FIXME: No plain text?? I will just use lisp then.
+  (let ((mode "lisp"))
+    (cond 
+     ((member (replace-regexp-in-string "-mode" "" (symbol-name major-mode))
+              xwl-paste-ubuntu-cn-classes)
+      (replace-regexp-in-string "-mode" "" (symbol-name major-mode)))
+     (t
+      (let ((tbl xwl-paste-match-table)
+            match)
+        (while tbl
+          (setq match (car tbl)
+                tbl (cdr tbl))
+          (when (member major-mode (car match))
+            (setq mode (cdr match))
+            (setq tbl nil)))
+        mode)))))
+;;; salary
+
+;; http://www.tekken.com.cn/m/money.html
+
+;; 保险
+(defun salary-insurances (salary)
+  ;; 养老(每年4月更新)、医疗（另加3元）、失业、公积金(每年7月更新)
+  ;; 北京人均工资: 3322 (2008-2009), 3726 (2009-)
+  (let* ((bj-avg 3726)
+         (cap (* bj-avg 3))
+    ;; (round (+ (* (min salary cap) (+ 0.08 0.02 0.005 0.12)) 3))))
+         (items
+          (append (mapcar (lambda (i) (* (min salary cap) i)) '(0.08 0.02 0.005 0.12))
+                  (list 3))))
+    (list (round (apply '+ items)) 
+          (mapcar* 'cons 
+                   '("养老 8%" "医疗 2%" "失业 0.5%" "公积金 12%" "医疗額外 3")
+                   items))))
+
+;; 个税起征点
+(setq salary-tax-base 2000)             ; 北京
+
+(defconst salary-tax-table
+  ;; from  to     rate 扣除额?
+  '((0     500    0.10 0)               ; (0, 500]
+    (500   2000   0.10 25)
+    (2000  5000   0.15 125)
+    (5000  20000  0.20 375)
+    (20000 40000  0.25 1375)
+    (40000 60000  0.30 3375)
+    (60000 80000  0.35 6375)
+    (80000 100000 0.40 10375)
+
+    (10000 0.45 15375)))
+
+(defun salary-tax (salary)
+  (let ((table salary-tax-table)
+        (i nil)
+        (exceeded (- salary 
+                     salary-tax-base 
+                     (car (salary-insurances salary))))
+        (rate 0)
+        (to-substract 0))
+    (while table
+      (setq i (car table))
+      (setq table (cdr table))
+      (if (= (list-length i) 3)
+          (when (> exceeded (car i))
+            (setq rate (nth 1 i)
+                  to-substract (nth 2 i))
+            (setq table nil))
+        (let ((low (nth 0 i))
+              (high (nth 1 i)))
+          (when (and (> exceeded low) (<= exceeded high))
+            (setq rate (nth 2 i)
+                  to-substract (nth 3 i))
+            (setq table nil)))))
+    (cons (round (- (* exceeded rate) to-substract))
+          (format "%d%% base %d" (* rate 100) salary-tax-base))))
+
+(defun salary-at-hand (salary)
+  "除掉个税、保险后真正到手的钱。"
+  (- salary (car (salary-insurances salary)) (car (salary-tax salary))))
+
+(defun salary-show (salary)
+  (interactive "n税前：")
+  (let ((s (format "税前(%d) - 个税%S - 四险一金%S = 最后到手(%d)"
+                   salary
+                   (salary-tax salary)
+                   (salary-insurances salary)
+                   (salary-at-hand salary))))
+    (if current-prefix-arg
+        (insert s)
+      (message "%s" s))))
+
+
+;;; calendar
+
+(when (< emacs-major-version 23)
+  (defun calendar-extract-month (date)
+    (car date))
+
+  (defun calendar-extract-day (date)
+    (cadr date))
+  )
+
+
+;;; noninteractive setup
+
+(when noninteractive
+  (setq vc-follow-symlinks t)
+
+  (defun yes-or-no-p (p)
+    t)
+
+  (defun y-or-n-p (p)
+    t)
+  )
+
+
+;;; Misc
+
+(defun xwl-strip-blank-lines-buffer ()
+  "Strip all blank lines in current buffer."
+  (interactive)
+  (xwl-strip-blank-lines-region (point-min) (point-max)))
+
+(defun xwl-strip-blank-lines-region (start end)
+  "Strip all blank lines in region."
+  (interactive "r")
+  (save-excursion
+    (save-restriction
+      (narrow-to-region start end)
+      (goto-char (point-min))
+      (while (re-search-forward "^[[:space:]]*\n" nil t)
+        (replace-match "" t t))
+      (widen))))
+
+(defun xwl-shell-command-asynchronously (cmd)
+  (start-process-shell-command cmd nil cmd))
+
+;; resolve file names
+(defun xwl-resolve-file-name (file type)
+  "Resolve file name in various ways.
+
+file is the abosolute filename.
+
+type stands for different kinds of resolve.
+
+ F  absolute pathname            ( /usr/local/bin/netscape.bin )
+ f  file name without directory  ( netscape.bin )
+ n  file name without extention  ( netscape )
+ e  extention of file name       ( bin )"
+  (cond
+   ((string= type "F") file)
+   ((string= type "f") (file-name-nondirectory file))
+   ((string= type "n") (file-name-sans-extension (file-name-nondirectory file)))
+   (t (file-name-extension file))))
+
+;; insert line number before each line.
+(defun xwl-numerate-lines ()
+  "Insert line numbers into buffer"
+  (interactive)
+  (save-excursion
+    (let ((max (count-lines (point-min) (point-max)))
+	  (line 1))
+      (goto-char (point-min))
+      (while (<= line max)
+	(insert (format "%4d " line))
+	(beginning-of-line 2)
+	(setq line (+ line 1))))))
+
+;; a simple way of aligning columns
+(defun his-align-cols (start end max-cols)
+  "Align text between point and mark as columns.  Columns are separated by
+whitespace characters.  Prefix arg means align that many columns. (default
+is all)"
+  (interactive "r\nP")
+  (save-excursion
+    (let ((p start)
+	  pos
+	  end-of-line
+	  word
+	  count
+	  (max-cols (if (numberp max-cols) (max 0 (1- max-cols)) nil))
+	  (pos-list nil)
+	  (ref-list nil))
+
+      ;; find the positions
+      (goto-char start)
+      (while (< p end)
+	(beginning-of-line)
+	(setq count 0)
+	(setq end-of-line (save-excursion (end-of-line) (point)))
+	(re-search-forward "^\\s-*" end-of-line t)
+	(setq pos (current-column))	;start of first word
+	(if (null (car ref-list))
+	    (setq pos-list (list pos))
+	  (setq pos-list (list (max pos (car ref-list))))
+	  (setq ref-list (cdr ref-list)))
+	(while (and (if max-cols (< count max-cols) t)
+		    (re-search-forward "\\s-+" end-of-line t))
+	  (setq count (1+ count))
+	  (setq word (- (current-column) pos))
+	  ;; length of next word including following whitespaces
+	  (setq pos (current-column))
+	  (if (null (car ref-list))
+	      (setq pos-list (cons word pos-list))
+	    (setq pos-list (cons (max word (car ref-list)) pos-list))
+	    (setq ref-list (cdr ref-list))))
+	(while ref-list
+	  (setq pos-list (cons (car ref-list) pos-list))
+	  (setq ref-list (cdr ref-list)))
+	(setq ref-list (nreverse pos-list))
+	(forward-line)
+	(setq p (point)))
+
+      ;; align the cols starting with last row
+      (setq pos-list (copy-sequence ref-list))
+      (setq start
+	    (save-excursion (goto-char start) (beginning-of-line) (point)))
+      (goto-char end)
+      (beginning-of-line)
+      (while (>= p start)
+	(beginning-of-line)
+	(setq count 0)
+	(setq end-of-line (save-excursion (end-of-line) (point)))
+	(re-search-forward "^\\s-*" end-of-line t)
+	(goto-char (match-end 0))
+	(setq pos (nth count pos-list))
+	(while (< (current-column) pos)
+	  (insert-char ?\040 1))
+	(setq end-of-line (save-excursion (end-of-line) (point)))
+	(while (and (if max-cols (< count max-cols) t)
+		    (re-search-forward "\\s-+" end-of-line t))
+	  (setq count (1+ count))
+	  (setq pos   (+  pos (nth count pos-list)))
+	  (goto-char (match-end 0))
+	  (while (< (current-column) pos)
+	    (insert-char ?\040 1))
+	  (setq end-of-line (save-excursion (end-of-line) (point))))
+	(forward-line -1)
+	(if (= p (point-min)) (setq p (1- p))
+	  (setq p (point)))))))
+
+;; count Chinese, English words
+(defun xwl-count-ce-word (beg end)
+  "Count Chinese and English words in marked region."
+  (interactive "r")
+  (let ((cn-word 0)
+	(en-word 0)
+	(total-word 0)
+	(total-byte 0))
+    (setq cn-word (count-matches "\\cc" beg end)
+          en-word (count-matches "\\w+\\W" beg end))
+    (setq total-word (+ cn-word en-word)
+	  total-byte (+ cn-word (abs (- beg end))))
+    (message (format "Total: %d (cn: %d, en: %d) words, %d bytes."
+		     total-word cn-word en-word total-byte))))
+
+;; xwl-word-count-analysis (how many times a word has appeared).
+(defun xwl-word-count-analysis (start end)
+  "Count how many times each word is used in the region.
+    Punctuation is ignored."
+  (interactive "r")
+  (let (words)
+    (save-excursion
+      (goto-char start)
+      (while (re-search-forward "\\w+" end t)
+	(let* ((word (intern (match-string 0)))
+	       (cell (assq word words)))
+	  (if cell
+	      (setcdr cell (1+ (cdr cell)))
+	    (setq words (cons (cons word 1) words))))))
+    (when (interactive-p)
+      (message "%S" words))
+    words))
+
+(defun xwl-hide-buffer ()
+  "Hide current buffer, and enlarge the other one if exists."
+  (interactive)
+  (delete-windows-on (buffer-name)))
+
+(defun xwl-list-ref (list ref)
+  "Return the ref-th element of list."
+  (if (= ref 0)
+      (car list)
+    (xwl-list-ref (cdr list) (1- ref))))
+
+(defun xwl-info (file)
+  (interactive
+   (list (read-file-name "info: ")))
+  (info file))
+
+;; dos <--> unix
+(defun his-dos2unix ()
+  "\r\n --> \r."
+  (interactive)
+  (goto-char (point-min))
+  (while (search-forward "\r" nil t)
+    (replace-match "")))
+
+(defun his-unix2dos ()
+  "\n --> \r\n."
+  (interactive)
+  (goto-char (point-min))
+  (while (search-forward "\n" nil t)
+    (replace-match "\r\n")))
+
+(defun xwl-delete-line (&optional arg)
+  "Delete the rest of the current line; if no nonblanks there, delete thru newline.
+With prefix argument, delete that many lines from point.
+Negative arguments delete lines backward.
+With zero argument, deletes the text before point on the current line.
+
+Note its difference between `xwl-delete-line' and `kill-line' is
+that, the deleted contents won't be inserted to the `kill-ring'."
+  (if arg
+      (dotimes (i arg)
+        (delete-region (point) (save-excursion (forward-line)
+                                               (point))))
+    (if (eolp)
+        (delete-region (point) (save-excursion (forward-line)
+                                               (point)))
+      (delete-region (point) (save-excursion (end-of-line)
+                                             (point))))))
+
+(defun xwl-os-type ()
+  "Return envrionment $OSTYPE."
+  (interactive)
+  (message (car (split-string (shell-command-to-string "echo $OSTYPE")))))
+
+(defun xwl-fortune-laozi ()
+  "Return a random chapter from laozi."
+  (interactive)
+  (with-temp-buffer
+    (insert-file-contents "~/etc/fortune/laozi")
+    (let (beg title)
+      (goto-char (point-min))
+      (search-forward "老子第" nil t (random 81)) ; 81 chapters in total
+      (setq title (buffer-substring-no-properties
+                   (move-beginning-of-line 1)
+                   (progn (move-end-of-line 1)
+                          (point))))
+      (setq beg (move-beginning-of-line 2))
+      (search-forward "老子第" nil t 1)
+      (format "%s
+            ---- %s"
+              (buffer-substring-no-properties
+               beg (progn (move-end-of-line 0)
+                          (point)))
+              title))))
+
+(setq xwl-fortune-favorites-length nil)
+
+(defun xwl-fortune-favorites-vertically (&optional file)
+  (interactive)
+  (let ((ret (xwl-fortune-favorites file)))
+    (setq ret
+          (replace-regexp-in-string
+           (regexp-opt '("，" "。" "！" "《" "》" "、" "？" "；"))
+           "  "
+           ret))
+    (setq ret
+          (shell-command-to-string
+           (format
+            "echo \"%s\" | iconv -f utf-8 -t gbk | pv | iconv -f gbk -t utf-8"
+            ret)))))
+
+(defun xwl-fortune-favorites (&optional file)
+  "Return a random chapter from ~/notes/favorites."
+  (interactive)
+  (unless file
+    (setq file "~/notes/favorites_en"))
+  (with-temp-buffer
+    (let ((flag "^\\%$")
+          (ret ""))
+      (insert-file-contents file)
+      (goto-char (point-min))
+      (re-search-forward flag nil t (random (count-matches flag)))
+      (setq ret (buffer-substring-no-properties
+                 (move-beginning-of-line 2)
+                 (if (re-search-forward flag nil t 1)
+                     (progn (move-end-of-line 0)
+                            (point))
+                   (point-max))))
+      ret)))
+
+(defun xwl-download-book (pre beg end post fmt subdir)
+  "Download link formed of `PRE + index + POST', where `index' belongs to [BEG, END).
+`index' is formated by FMT using `format'. BEG and END are integers. The
+downloaded contents will be saved under \"~/Downloads/SUBDIR\".
+e.g.,
+
+  (xwl-get-book \"http://book.sina.com.cn/longbook/1071818529_qingcheng\"
+                13
+                24
+                \".shtml\"
+                \"%02d\"
+                \"qczl\")"
+  (let ((dst (concat "~/Downloads/" subdir)))
+    (message "Start downloading at background...")
+    (condition-case nil
+        (make-directory dst)
+      (error nil))
+    (dotimes (i (- end beg))
+      (xwl-shell-command-asynchronously
+       (format "wget -c %s -P %s"
+               (concat pre (format fmt (+ i beg)) post)
+               dst)))))
+
+(defun xwl-soft-kill-ring-save (beg end)
+  "Same as `kill-ring-save' except it will convert hard newlines to soft newlines.
+This could be useful for copying texts from Emacs and pasting it to blog
+websites.  It also keeps original empty line for separating paragraphs."
+  (interactive "r")
+  (let ((content (buffer-substring-no-properties beg end)))
+    (with-temp-buffer
+      (insert content)
+      (insert "\n")
+      (goto-char (point-min))
+      (move-beginning-of-line 2)
+      (while (not (eobp))
+        (if (looking-at "\n")
+            (move-beginning-of-line 3)
+          (if (looking-at "[[:ascii:]]")
+              (progn (backward-delete-char-untabify 1)
+                     (insert " "))
+            (backward-delete-char-untabify 1))
+          (move-beginning-of-line 2)))
+      (copy-region-as-kill (point-min) (point-max)))))
+
+;; FIXME: any undefine-key corresponding to define-key?
+(defun xwl-disable-key ()
+  (interactive)
+  (message "This key is disabled in current mode")
+  )
+
+;; Should be re-defun later.
+(defun xds (any) "abcdefg")
+(defun xes (any) "abcdefg")
+
+(defun xwl-switch-or-create (buffer fun)
+  "Switch to BUFFER when it exists, else create it with FUN."
+  (let ((b (get-buffer buffer)))
+    (if b
+        (switch-to-buffer b)
+      (call-interactively fun))))
+
+(defun xwl-revert-buffer-with-sudo ()
+  "Revert buffer using tramp sudo.
+This will also reserve changes already made by a non-root user."
+  (interactive)
+  (let ((f (buffer-file-name)))
+    (when f
+      (let ((content (when (buffer-modified-p)
+                       (widen)
+                       (buffer-string))))
+        (if (file-writable-p f)
+            (revert-buffer)
+          (kill-buffer (current-buffer))
+          (if (file-remote-p f)
+              (find-file
+               (replace-regexp-in-string "^\\/[^:]+:" "/sudo:" f))
+            (find-file (concat "/sudo::" f)))
+          (when content
+            (let ((buffer-read-only nil))
+              (erase-buffer)
+              (insert content))))))))
+
+(global-set-key (kbd "C-c m R") 'xwl-revert-buffer-with-sudo)
+
+(defun his-one-whitespace-between-ce (&optional start end)
+  "Automatically insert a whitespace between Chinese and English,
+Chinese and digits, which is useful when editing TeX files."
+  (interactive)
+  (save-excursion
+    (unless start (setq start (point-min)))
+    (unless end (setq end (point-max)))
+    (goto-char start)
+    (while (re-search-forward "\\(\\cc\\)\\([0-9a-zA-Z]\\)" end t)
+      (replace-match "\\1 \\2" nil nil))
+    (goto-char start)
+    (while (re-search-forward "\\([0-9a-zA-Z]\\)\\(\\cc\\)" end t)
+      (replace-match "\\1 \\2" nil nil))))
+
+(global-set-key (kbd "C-c m o") 'his-one-whitespace-between-ce)
+
+(defun his-transpose-windows (arg)
+  "Transpose the buffers shown in two windows."
+  (interactive "p")
+  (let ((selector (if (>= arg 0) 'next-window 'previous-window)))
+    (while (/= arg 0)
+      (let ((this-win (window-buffer))
+	    (next-win (window-buffer (funcall selector))))
+	(set-window-buffer (selected-window) next-win)
+	(set-window-buffer (funcall selector) this-win)
+	(select-window (funcall selector)))
+      (setq arg (if (plusp arg) (1- arg) (1+ arg))))))
+
+(global-set-key (kbd "C-c m t") 'his-transpose-windows)
+
+(defun xwl-check-holidays ()
+  (calendar)
+  (with-current-buffer "*Calendar*"
+    (or (ignore-errors (diary-view-entries))
+        (when (check-calendar-holidays (calendar-current-date))
+          (calendar-cursor-holidays)))))
+
+(defun xwl-running-daily ()
+  "Staffs to run daily."
+  (xwl-check-holidays)
+  (plan))
+
+
+;; ,----
+;; | Date
+;; `----
+
+(defun xwl-insert-date ()
+  (interactive)
+  (insert (xwl-get-date)))
+
+(defun xwl-get-date ()
+  (format-time-string "%Y/%m/%d" (current-time)))
+  ;; (format-time-string "%Y/%m/%d" (current-time)))
+
+(defun xwl-update-date ()
+  "Auto update '[Ll]ast [Uu]pdated:' part if exists when saving.
+This should not affect `buffer-undo-list'."
+  (interactive)
+  (let ((old-list buffer-undo-list))
+    (save-excursion
+      (beginning-of-buffer)
+      (when (search-forward-regexp "Last\\ updated:" nil t)
+        (xwl-delete-line)
+        (insert " ")
+        (xwl-insert-date)))
+    (setq buffer-undo-list old-list))
+  nil)
+
+
+(global-set-key (kbd "C-c m d") 'xwl-insert-date)
+
+(add-hook 'before-save-hook 'xwl-update-date)
+
+;; named-let, Thanks to Riastradh@#emacs
+(defmacro his-named-let (name parameters &rest body)
+  `(labels
+       ((,name ,(mapcar 'car parameters) ,@body))
+     (,name ,@(mapcar 'cadr parameters))))
+
+(defun xwl-term (&optional create)
+  (interactive)
+  (cond
+   (create
+    (term "/bin/bash")
+    (rename-buffer "*terminal*" t))
+   ((not (get-buffer "xwl-term"))
+    (term "/bin/bash")
+    (rename-buffer "xwl-term" t))
+   (t (switch-to-buffer "xwl-term"))))
+
+(defun xwl-tty-p ()
+  (string= (frame-parameter nil 'font) "tty"))
+
+;;; Keep variables in the end!!
+
+(setq xwl-at-company-p (xwl-at-company))
+
+(when (and xwl-at-company-p
+	   (eq system-type 'windows-nt))
+
+  (setq xwl-proxy-server "172.16.42.137"
+        xwl-proxy-port 8080)
+
+  (setq url-proxy-services
+        `(("http" . ,(format "%s:%d" xwl-proxy-server xwl-proxy-port))))
+
+  ;; ;; redirect
+  ;; (let ((cmd (apply 'shell-quote-argument 
+  ;;                   (remove-if-not 
+  ;;                    'file-exists-p
+  ;;                    (mapcar 'expand-file-name
+  ;;                            '("~/usr/desproxy/desproxy.exe"
+  ;;                              "q:/usr/desproxy/desproxy.exe")))
+  ;;                   )))
+  ;;   ;; kill old connection?
+  ;;   (let ((kill-p nil)
+  ;;         (asked-p nil))
+  ;;     (dolist (p (process-list))
+  ;;       (when (string-match "desproxy" (process-name p))
+  ;;         (unless asked-p
+  ;;           (setq kill-p (y-or-n-p "Kill old connections? ")
+  ;;                 asked-p t))
+  ;;         (when kill-p
+  ;;           (kill-process p)))))
+
+  ;;   (mapcar (lambda (i)
+  ;;             (let ((host (nth 0 i))
+  ;;                   (port (nth 1 i))
+  ;;                   (local-port (nth 2 i)))
+  ;;               (xwl-shell-command-asynchronously
+  ;;                (format "%s %s %d %s %d %d"
+  ;;                        cmd host port xwl-proxy-server xwl-proxy-port local-port))))
+  ;;           ;; host port localport
+  ;;           '(("irc.debian.org" 6669 16669)
+  ;;             ("irc.freenode.net" 6667 16667)
+  ;;             ("irc.lnx.nokia.com" 6668 16668)
+
+  ;;             ("news.gmane.org" 119 10119)
+  ;;             ("news.cn99.com" 119 11119)
+  ;;             ("imap.gmail.com" 993 10993)
+
+  ;;             ("dict.org" 2628 12628)
+  ;;             ("repo.or.cz" 22 10022)
+  ;;             ("git.sv.gnu.org" 9418 19418)
+
+  ;;             ;; im.bitlbee.org
+
+  ;;             ("123.115.112.196" 22 20022)
+  ;;             ;; ("125.34.173.96" 5800 5800) ; vnc server
+  ;;             ;; ("125.34.173.96" 5900 5900)
+
+  ;;             ;; ("www.call-with-current-continuation.org" 80 10080)
+  ;;             )))
+
+  (setq xwl-w3m-arguments
+        (list "-o" (format "http_proxy=http://%s:%d"
+                           xwl-proxy-server
+                           xwl-proxy-port))))
+
+(provide 'xwl-util)
+
+;;; xwl-util.el ends here
