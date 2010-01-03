@@ -1,5 +1,3 @@
-alias pull git pull origin mob
-alias push git push origin mob
 alias commit git commit -a -m (user-login-name)
 
 alias gitxp 'c:/Program Files/git/bin/git'
