@@ -1,0 +1,2 @@
+PATH setup:
+    %home%\usr\emacs\bin;%home%\repo\git\xwl-emacs-config\w32;c:\Program Files\SMPlayer\mplayer

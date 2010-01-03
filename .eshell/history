@@ -1,0 +1,128 @@
+cd
+ls
+cd
+ls
+cd
+ls
+ls
+cd
+ls
+cd .emacs.d/
+ls
+cd site-lisp/
+cd xwl-elisp/
+pull
+pull
+cd
+pull
+git status
+commit
+ls
+push
+ls
+ls
+pull
+cd .emacs.d/
+cd site-lisp/
+cd xwl-elisp/
+ls
+pull
+cd
+ls
+cd
+commit
+pull
+push
+git status
+commit
+push
+git status
+b
+cd
+ls
+git status
+push
+git status 
+cd
+ls
+cd
+ls
+cd
+ls
+ifconfig en1
+pull
+commit
+push
+cd
+ls
+ls -lhtr
+ls
+cd
+ls
+cdup
+ls
+ls
+ls
+cd .emacs.d/
+cd site-lisp/
+cd xwl-elisp/
+push
+ls
+ls
+ls
+ls
+ls
+ls
+ls
+l
+ls
+ls
+ls
+ls
+make
+ls
+cd
+ls
+ls
+cd
+ls
+cd .emacs.d/site-lisp/
+ls
+ls
+ls
+ls
+git status
+cd xwl-elisp/
+ls
+git status
+push
+cd
+ls
+ls
+pull
+ls
+git status
+mv ~/tmp/.newsrc.eld .
+cd
+ls
+ls
+git satus
+git status
+git diff
+git status
+cd .emacs.d/site-lisp/config/
+git commit xwl-convenience.el xwl-depreated.el xwl-emms.el xwl-programming.el -m ".."
+git status|head
+commit
+push
+ls
+cd
+ls
+cd -
+ls
+push
+ls
+ls
+cd 
+ls
+push

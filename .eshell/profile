@@ -1,0 +1,3 @@
+# -*- conf -*-
+
+export EDITOR='emacsclient.exe --server-file Q:/repo/git/xwl-emacs-config/.emacs.d/server/server'

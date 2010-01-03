@@ -1,0 +1,1 @@
+emacsclient.exe -n %*

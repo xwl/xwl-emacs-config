@@ -1,0 +1,21 @@
+#!/bin/sh
+
+count=`ps -ef | grep gnus_agent | grep -v grep | wc -l`
+
+#EMACS=/Users/william/bin/emacs
+EMACS=/Users/william/repo/git/emacs/nextstep/Emacs.app/Contents/MacOS/Emacs
+
+## (其一是 script 本身，其二是父进程中的。注意到 /bin/sh)
+if [ $count -eq 2 ]; then
+    # $EMACS --batch -l ~/.emacs -f gnus-agent-batch
+    $EMACS --eval '(progn (gnus) (gnus-group-save-newsrc) (save-buffers-kill-terminal))'
+else
+    echo "Another gnus_agent is already running or maybe being edited. Skip this round."
+# Kill it? [ y | N ]: "
+#     read killp
+#     if [[ $killp == "y" ]]; then
+#         echo "will kill"
+#     else
+#         echo "not kill"
+#     fi
+fi

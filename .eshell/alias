@@ -1,0 +1,23 @@
+alias pull git pull origin mob
+alias push git push origin mob
+alias commit git commit -a -m (user-login-name)
+
+alias gitxp 'c:/Program Files/git/bin/git'
+alias pullxp gitxp pull origin mob
+alias pushxp gitxp push origin mob
+alias commitxp gitxp commit -a -m (user-login-name)
+
+alias m bldmake bldfiles $*
+alias b abld build winscw udeb $* 
+alias t abld target winscw udeb $* 
+alias c abld clean $* 
+alias cx abld cleanexport $* 
+alias x abld export $* 
+
+alias av cd "\sf\mw\classicui\uifw\avkon\group"
+alias cu cd "\sf\mw\classicui\group"
+alias tf cd "\sf\mw\hapticsservices\group"
+alias ht cd "\sf\os\devicesrv\hwrmhaptics\group"
+
+alias av5 cd "\s60\mw\classicui\uifw\avkon\group"
+alias cu5 cd "\s60\mw\classicui\group"

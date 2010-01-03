@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>xwl.gnus_agent</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+      <key>PATH</key>
+      <string>/Users/william/bin:/Users/william/bin/scripts:/usr/bin:/bin:/usr/local/bin:/sw/bin</string>
+    </dict>
+    <key>Program</key>
+    <!-- must be full path ?!  -->
+    <string>/Users/william/bin/scripts/gnus_agent</string>
+    <key>RunAtLoad</key>
+    <false/>
+    <key>UserName</key>
+    <string>william</string>
+    <key>StartInterval</key>
+    <integer>3600</integer>
+  </dict>
+</plist>
