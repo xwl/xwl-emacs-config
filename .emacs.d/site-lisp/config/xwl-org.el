@@ -46,7 +46,7 @@
      (org-defkey org-agenda-mode-map "m" 'org-agenda-month-view)
 
      (setq org-calendar-agenda-action-key [?K])
-     (org-defkey org-agenda-mode-map [?k] 'calendar-backward-week)
+     (define-key calendar-mode-map [?k] 'calendar-backward-week)
 
      (defadvice org-agenda-day-view (around leave-ndays-alone activate)
        "Do not touch `org-agenda-ndays' please!"
