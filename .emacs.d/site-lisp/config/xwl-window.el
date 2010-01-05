@@ -32,12 +32,12 @@
 
 ;; http://www.gringod.com/2006/02/24/return-of-monacottf/
 (setq xwl-window-fonts
-      '((mac . ("Monaco-14" "stheiti*" "hiragino maru gothic pro"))
+      `((mac . ("Monaco-14" "stheiti*" "hiragino maru gothic pro"))
         (ns  . ("Monaco-14" "Hiragino Sans GB" "Hiragino_Kaku_Gothic_ProN"))
         (w32 . ("Monaco-10" "NSimSun" "NSimSun"))
-        ;; (x   . ("DejaVu Sans Mono-11" "wenquanyi" "wenquanyi")) ; debian
-        (x   . ("DejaVu LGC Sans Mono-14" "SimSun" "SimSun")) ; redhat
-        ))
+        (x   . ,(if (string= system-name "debian..xwl")
+                   '("DejaVu Sans Mono-11" "wenquanyi" "wenquanyi")
+                 '("DejaVu LGC Sans Mono-14" "SimSun" "SimSun")))))
 
 (let* ((fonts (cdr (assoc window-system xwl-window-fonts)))
        (default-font (nth 0 fonts))
