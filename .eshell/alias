@@ -1,9 +1,9 @@
-alias commit git commit -a -m (user-login-name)
+alias commit git commit -a -m (concat "Minor updates.  (" (user-login-name) "@" (symbol-name window-system) ")")
 
 alias gitxp 'c:/Program Files/git/bin/git'
 alias pullxp gitxp pull origin mob
 alias pushxp gitxp push origin mob
-alias commitxp gitxp commit -a -m (user-login-name)
+alias commitxp gitxp commit -a -m (concat (user-login-name) "@" (symbol-name window-system))
 
 alias m bldmake bldfiles $*
 alias b abld build winscw udeb $* 
