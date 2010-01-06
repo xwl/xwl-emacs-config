@@ -63,7 +63,11 @@
                                ;; 'org-agenda
                                ))
 
-(global-set-key (kbd "<f9>") 'eshell) ;xwl-term ;xwl-run-scsh
+(global-set-key (kbd "<f9>") (if (eq system-type 'windows-nt)
+                                 'eshell
+                               'shell))
+;; xwl-term ;xwl-run-scsh
+
 ;; (global-set-key (kbd "<f11>") 'repeat)
 (global-set-key (kbd "<f13>") 'kill-this-buffer)
 
