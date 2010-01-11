@@ -134,7 +134,7 @@
 ;; -------
 (require 'texinfo)
 (when (eq system-type 'darwin)
-  (setq makeinfo-run-command 
+  (setq makeinfo-run-commands 
         "~/repo/cvs/texinfo/makeinfo/makeinfo"))
 
 ;; (define-key Texinfo-mode-map (kbd "C-c g c") 'makeinfo-buffer)

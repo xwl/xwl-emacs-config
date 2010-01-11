@@ -14,4 +14,6 @@ doskey ht = cd "\sf\os\devicesrv\hwrmhaptics\group"
 doskey av5 = cd "\s60\mw\classicui\uifw\avkon\group"
 doskey cu5 = cd "\s60\mw\classicui\group"
 
-doskey ls = ls --color=always $*
+doskey ls = ls -x --color=always $*
+
+set EDITOR=emacsclient

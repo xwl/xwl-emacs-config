@@ -3,7 +3,7 @@
 ;; Copyright (C) 2007, 2008, 2009 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
-;; Last updated: 2009/08/07
+;; Last updated: 2010/01/11
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -71,15 +71,22 @@
      (define-key comint-mode-map (kbd "M-r") 'xwl-shell-shell-search-backward)
      (define-key comint-mode-map (kbd "M-s") 'xwl-shell-shell-search-forward)
 
-     (define-key comint-mode-map (kbd "C-l")
-       (lambda ()
-         (interactive)
-         (if current-prefix-arg
-             (call-interactively 'recenter)
-           (let ((inhibit-read-only t))
-             (erase-buffer)
-             (comint-send-input)
-           ))))
+     (define-key comint-mode-map (kbd "C-l") (lambda ()
+                                               (interactive)
+                                               (if current-prefix-arg
+                                                   (call-interactively 'recenter)
+                                                 (let ((inhibit-read-only t))
+                                                   (erase-buffer)
+                                                   (comint-send-input)
+                                                   ))))
+
+     (define-key comint-mode-map (kbd "RET") (lambda ()
+                                               (interactive)
+                                               (when (and (eq system-type 'windows-nt)
+                                                          (looking-back ">ls"))
+                                                 (insert " -x --color=always"))
+                                               (call-interactively 'comint-send-input)))
+                                               
      ))
 
 
