@@ -104,28 +104,34 @@ point.  Especially useful for w32."
 (ido-everywhere 1)
 
 (setq xwl-frequent-directories
-      (list "/sf/mw/hapticsservices"
-            "/sf/os/devicesrv/hwrmhaptics"
-            "/sf/mw/classicui/uifw/avkon/src"
+      `("/sf/mw/hapticsservices"
+        "/sf/os/devicesrv/hwrmhaptics"
+        "/sf/mw/classicui/uifw/avkon/src"
 
-            "/s60/mw/classicui/uifw/avkon/src"
-            "/s60/mw/classicui/uifw/tactilefeedback"
+        "/s60/mw/classicui/uifw/avkon/src"
+        "/s60/mw/classicui/uifw/tactilefeedback"
 
-            "/epoc32/release/winscw/udeb"
-            "/epoc32/data"
+        "/epoc32/release/winscw/udeb"
+        "/epoc32/data"
 
-            "~/"
-            "/sudo::/"
-            "~/.emacs.d/site-lisp/config"
-            "~/notes"
-              ))
+        "~/"
+        "/sudo::/"
+        "~/.emacs.d/site-lisp/config"
+        "~/notes"
+        
+        ,@(when xwl-w32?
+            (mapcar (lambda (d) (concat (car d) "=" (cdr d))) xwl-w32-drives))
+        ))
 
 (defadvice ido-find-file (around change-default-directory activate)
   "Set `default-directory' on the fly."
-  (let* ((d (if current-prefix-arg
-                (ido-completing-read "let default-directory with: "
-                                     xwl-frequent-directories)
-              default-directory))
+  (let* ((d (replace-regexp-in-string
+             "=.*" 
+             ":"
+             (if current-prefix-arg
+                 (ido-completing-read "let default-directory with: "
+                                      xwl-frequent-directories)
+               default-directory)))
          (default-directory (expand-file-name d)))
     ;; Use shell's current dir as default-directory on w32.
     (when (and (eq system-type 'windows-nt)

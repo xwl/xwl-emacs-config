@@ -669,12 +669,6 @@ prompts for name field."
 
 ;; (add-hook 'newsticker-mode-hook 'less-minor-mode-on)
 
-;; prepend drive name on buffer on w32
-(defadvice uniquify-get-proposed-name (after prepend-drive-name activate)
-  (when (eq system-type 'windows-nt)
-    (setq ad-return-value
-          (concat (substring (ad-get-arg 1) 0 3) "/" ad-return-value))))
-
 ;; (setq inhibit-eol-conversion nil)
 
 

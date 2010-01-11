@@ -837,6 +837,8 @@ This should not affect `buffer-undo-list'."
                            xwl-proxy-port)))
   (xwl-w32-redirect))
 
+(setq xwl-w32? (eq system-type 'windows-nt))
+
 (provide 'xwl-util)
 
 ;;; xwl-util.el ends here

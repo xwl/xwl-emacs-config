@@ -55,6 +55,7 @@
 
 (require 'xwl-autoloads)
 (require 'xwl-util)
+(when xwl-w32? (require 'xwl-w32))
 (require 'xwl-vim)
 (require 'xwl-private)
 (require 'xwl-mode-line)
