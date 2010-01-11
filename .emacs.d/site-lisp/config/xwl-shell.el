@@ -80,12 +80,17 @@
                                                    (comint-send-input)
                                                    ))))
 
-     (define-key comint-mode-map (kbd "RET") (lambda ()
-                                               (interactive)
-                                               (when (and (eq system-type 'windows-nt)
-                                                          (looking-back ">ls"))
-                                                 (insert " -x --color=always"))
-                                               (call-interactively 'comint-send-input)))
+     (define-key comint-mode-map (kbd "RET")
+       (lambda ()
+         (interactive)
+         (when (eq system-type 'windows-nt)
+           (insert " " (some (lambda (i)
+                               (if (looking-back
+                                    (concat ">" (car i)))
+                                   (cadr i)))
+                             '(("ls" "-x --color=always")
+                               ("cd" "%home%")))))
+         (call-interactively 'comint-send-input)))
                                                
      ))
 
