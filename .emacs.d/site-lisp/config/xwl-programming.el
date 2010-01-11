@@ -267,6 +267,20 @@ Thus generate a TAGs file."
 (add-to-list 'vc-handled-backends 'DARCS)
 (setq vc-darcs-mail-address "William Xu <william.xwl@gmail.com>")
 
+(global-set-key (kbd "C-x v p") (lambda () (interactive) (compile "git push")))
+
+(global-set-key (kbd "C-c k") 
+                (lambda ()
+                  (interactive) 
+                  (kill-new (file-name-nondirectory (buffer-file-name)))
+                  (message "Filenamed copied")))
+
+(global-set-key (kbd "C-c K") 
+                (lambda ()
+                  (interactive) 
+                  (kill-new (buffer-file-name))
+                  (message "Full filenamed copied")))
+
 ;;;; skeletons
 ;; -----------
 
@@ -619,8 +633,8 @@ If SCHEME?, `run-scheme'."
              ;; keep the compilation window for now.
              ("\\.mmp$\\|\\.inf$"
               ;; "((dir | grep ABLD.BAT) || bldmake bldfiles) && abld build winscw udeb && xxx"
-              "sbs -c winscw_udeb && yyy"
-              t
+              "sbs -c winscw_udeb && yy"
+              nil
               "epoc"
               )
 
