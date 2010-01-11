@@ -289,7 +289,7 @@ so as to keep an eye on work when necessarily."
       (let ((sv "localhost")
             (nick "xwl__"))
         (when (eq system-type 'windows-nt)
-          (setq sv "172.28.206.207")
+          (setq sv (xwl-w32-redirect-host))
           (setq nick "xwl_"))
 
         (erc-select :server sv :port 16667 :nick nick :password pwerc) 

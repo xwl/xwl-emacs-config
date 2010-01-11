@@ -133,7 +133,10 @@
 ;; Texinfo
 ;; -------
 (require 'texinfo)
-(setq makeinfo-run-command "~/repo/cvs/texinfo/makeinfo/makeinfo")
+(when (eq system-type 'darwin)
+  (setq makeinfo-run-command 
+        "~/repo/cvs/texinfo/makeinfo/makeinfo"))
+
 ;; (define-key Texinfo-mode-map (kbd "C-c g c") 'makeinfo-buffer)
 ;; disable fill at all!
 (setq makeinfo-options "--fill-column=999")

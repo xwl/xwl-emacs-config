@@ -761,6 +761,65 @@ This should not affect `buffer-undo-list'."
 
 ;;; Keep variables in the end!!
 
+(setq xwl-w32-redirect-locally nil)
+
+(defun xwl-w32-redirect ()
+  ;; redirect
+  (let ((cmd (apply 'shell-quote-argument 
+                    (remove-if-not 
+                     'file-exists-p
+                     (mapcar 'expand-file-name
+                             '("~/usr/desproxy/desproxy.exe"
+                               "q:/usr/desproxy/desproxy.exe")))
+                    )))
+    ;; kill old connection?
+    (let ((kill-p nil)
+          (asked-p nil))
+      (dolist (p (process-list))
+        (when (string-match "desproxy" (process-name p))
+          (unless asked-p
+            (setq kill-p (y-or-n-p "Kill old connections? ")
+                  asked-p t))
+          (when kill-p
+            (kill-process p)))))
+
+    (mapcar (lambda (i)
+              (let ((host (nth 0 i))
+                    (port (nth 1 i))
+                    (local-port (nth 2 i)))
+                (xwl-shell-command-asynchronously
+                 (format "%s %s %d %s %d %d"
+                         cmd host port xwl-proxy-server xwl-proxy-port local-port))))
+            ;; host port localport
+            '(("irc.debian.org" 6669 16669)
+              ("irc.freenode.net" 6667 16667)
+              ("irc.lnx.nokia.com" 6668 16668)
+
+              ("news.gmane.org" 119 10119)
+              ("news.cn99.com" 119 11119)
+              ("imap.gmail.com" 993 10993)
+
+              ("dict.org" 2628 12628)
+              ;; ("repo.or.cz" 22 10022)
+              ("github.com" 22 10022)
+              ("git.sv.gnu.org" 9418 19418)
+
+              ;; im.bitlbee.org
+
+              ("123.115.112.196" 22 20022)
+              ;; ("125.34.173.96" 5800 5800) ; vnc server
+              ;; ("125.34.173.96" 5900 5900)
+
+              ;; ("www.call-with-current-continuation.org" 80 10080)
+              ))
+
+    (setq xwl-w32-redirect-locally t)))
+
+(defun xwl-w32-redirect-host ()
+  (if xwl-w32-redirect-locally
+      "localhost"
+    "172.28.206.207"))
+
 (setq xwl-at-company-p (xwl-at-company))
 
 (when (and xwl-at-company-p
@@ -771,54 +830,6 @@ This should not affect `buffer-undo-list'."
 
   (setq url-proxy-services
         `(("http" . ,(format "%s:%d" xwl-proxy-server xwl-proxy-port))))
-
-  ;; ;; redirect
-  ;; (let ((cmd (apply 'shell-quote-argument 
-  ;;                   (remove-if-not 
-  ;;                    'file-exists-p
-  ;;                    (mapcar 'expand-file-name
-  ;;                            '("~/usr/desproxy/desproxy.exe"
-  ;;                              "q:/usr/desproxy/desproxy.exe")))
-  ;;                   )))
-  ;;   ;; kill old connection?
-  ;;   (let ((kill-p nil)
-  ;;         (asked-p nil))
-  ;;     (dolist (p (process-list))
-  ;;       (when (string-match "desproxy" (process-name p))
-  ;;         (unless asked-p
-  ;;           (setq kill-p (y-or-n-p "Kill old connections? ")
-  ;;                 asked-p t))
-  ;;         (when kill-p
-  ;;           (kill-process p)))))
-
-  ;;   (mapcar (lambda (i)
-  ;;             (let ((host (nth 0 i))
-  ;;                   (port (nth 1 i))
-  ;;                   (local-port (nth 2 i)))
-  ;;               (xwl-shell-command-asynchronously
-  ;;                (format "%s %s %d %s %d %d"
-  ;;                        cmd host port xwl-proxy-server xwl-proxy-port local-port))))
-  ;;           ;; host port localport
-  ;;           '(("irc.debian.org" 6669 16669)
-  ;;             ("irc.freenode.net" 6667 16667)
-  ;;             ("irc.lnx.nokia.com" 6668 16668)
-
-  ;;             ("news.gmane.org" 119 10119)
-  ;;             ("news.cn99.com" 119 11119)
-  ;;             ("imap.gmail.com" 993 10993)
-
-  ;;             ("dict.org" 2628 12628)
-  ;;             ("repo.or.cz" 22 10022)
-  ;;             ("git.sv.gnu.org" 9418 19418)
-
-  ;;             ;; im.bitlbee.org
-
-  ;;             ("123.115.112.196" 22 20022)
-  ;;             ;; ("125.34.173.96" 5800 5800) ; vnc server
-  ;;             ;; ("125.34.173.96" 5900 5900)
-
-  ;;             ;; ("www.call-with-current-continuation.org" 80 10080)
-  ;;             )))
 
   (setq xwl-w3m-arguments
         (list "-o" (format "http_proxy=http://%s:%d"

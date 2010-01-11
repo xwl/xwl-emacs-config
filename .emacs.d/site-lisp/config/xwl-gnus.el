@@ -35,8 +35,8 @@
 
 (setq gnus-select-method
       (if xwl-at-company-p
-          '(nntp "news.gmane.org"
-                 (nntp-address "172.28.206.207")
+          `(nntp "news.gmane.org"
+                 (nntp-address ,(xwl-w32-redirect-host))
                  (nntp-port-number 10119))
         '(nntp "news.gmane.org")))
 ;;              (nntp-open-connection-function nntp-open-via-rlogin-and-telnet)
@@ -72,12 +72,12 @@
         ;;   http://www.arcorhome.de/newshamster/tgl/misc/hamster_en.html
 
         ,@(if xwl-at-company-p
-              '(;; (nnimap "imap.gmail.com"
+              `(;; (nnimap "imap.gmail.com"
                 ;;         (nnimap-address "localhost")
                 ;;         (nnimap-server-port 10993)
                 ;;         (nnimap-stream ssl))
                 (nntp "news.cn99.com"
-                      (nntp-address "172.28.206.207")
+                      (nntp-address ,(xwl-w32-redirect-host))
                       (nntp-port-number 11119))
                 )
             '(;; (nnimap "imap.gmail.com"
