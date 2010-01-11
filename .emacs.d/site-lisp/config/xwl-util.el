@@ -761,6 +761,8 @@ This should not affect `buffer-undo-list'."
 
 ;;; Keep variables in the end!!
 
+(setq xwl-at-company-p (xwl-at-company))
+
 (setq xwl-w32-redirect-locally nil)
 
 (defun xwl-w32-redirect ()
@@ -820,8 +822,6 @@ This should not affect `buffer-undo-list'."
       "localhost"
     "172.28.206.207"))
 
-(setq xwl-at-company-p (xwl-at-company))
-
 (when (and xwl-at-company-p
 	   (eq system-type 'windows-nt))
 
@@ -834,7 +834,8 @@ This should not affect `buffer-undo-list'."
   (setq xwl-w3m-arguments
         (list "-o" (format "http_proxy=http://%s:%d"
                            xwl-proxy-server
-                           xwl-proxy-port))))
+                           xwl-proxy-port)))
+  (xwl-w32-redirect))
 
 (provide 'xwl-util)
 
