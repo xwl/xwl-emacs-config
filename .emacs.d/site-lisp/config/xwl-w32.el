@@ -21,6 +21,8 @@
 
 ;;; Code:
 
+(setq xwl-w32? (eq system-type 'windows-nt))
+
 (defun xwl-w32-get-drives ()
   "Get a list of drive names from get_drives.py."
   (read

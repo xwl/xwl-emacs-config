@@ -763,9 +763,7 @@ This should not affect `buffer-undo-list'."
 
 (setq xwl-at-company-p (xwl-at-company))
 
-(when (and xwl-at-company-p
-	   (eq system-type 'windows-nt))
-
+(when (and xwl-at-company-p xwl-w32?)
   (setq xwl-proxy-server "172.16.42.137"
         xwl-proxy-port 8080)
 
@@ -777,8 +775,6 @@ This should not affect `buffer-undo-list'."
                            xwl-proxy-server
                            xwl-proxy-port)))
   (xwl-w32-redirect))
-
-(setq xwl-w32? (eq system-type 'windows-nt))
 
 (provide 'xwl-util)
 

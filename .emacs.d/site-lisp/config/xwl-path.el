@@ -1,6 +1,6 @@
 ;;; xwl-path.el --- path setup
 
-;; Copyright (C) 2009 William Xu
+;; Copyright (C) 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -85,7 +85,12 @@
 		       "/usr/X11R6/bin" )
 		     ":")))
 
-(unless (eq system-type 'windows-nt)
+(if (eq system-type 'windows-nt)
+    (progn 
+      ;; (setenv "PATH" (concat (getenv "PATH") ";C:/OpenSSL/bin"))
+      ;; (setq exec-path (split-string (getenv "PATH") ";"))
+      nil)
+
   (setenv "TERM" "xterm-color")
   (setq exec-path (split-string (getenv "PATH") ":")))
 

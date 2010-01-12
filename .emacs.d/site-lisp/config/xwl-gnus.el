@@ -1,12 +1,12 @@
 ;;; xwl-gnus.el --- Gnus config
 
-;; Copyright (C) 2007, 2008, 2009 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation; either version 2, or (at your option)
+;; the Free Software Foundation; either version 3, or (at your option)
 ;; any later version.
 ;;
 ;; This program is distributed in the hope that it will be useful,
@@ -73,9 +73,10 @@
 
         ,@(if xwl-at-company-p
               `(;; (nnimap "imap.gmail.com"
-                ;;         (nnimap-address "localhost")
+                ;;         (nnimap-address ,(xwl-w32-redirect-host))
                 ;;         (nnimap-server-port 10993)
                 ;;         (nnimap-stream ssl))
+
                 (nntp "news.cn99.com"
                       (nntp-address ,(xwl-w32-redirect-host))
                       (nntp-port-number 11119))

@@ -84,12 +84,14 @@
        (lambda ()
          (interactive)
          (when (eq system-type 'windows-nt)
-           (insert " " (some (lambda (i)
-                               (if (looking-back
-                                    (concat ">" (car i)))
-                                   (cadr i)))
-                             '(("ls" "-x --color=always")
-                               ("cd" "%home%")))))
+           (let ((matched (some (lambda (i)
+                                  (if (looking-back
+                                       (concat ">" (car i)))
+                                      (cadr i)))
+                                '(("ls" "-x --color=always")
+                                  ("cd" "%home%")))))
+             (when matched
+               (insert " " matched))))
          (call-interactively 'comint-send-input)))
                                                
      ))
