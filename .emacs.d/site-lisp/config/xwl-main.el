@@ -82,40 +82,4 @@
   (require 'xwl-window)
   (require 'xwl-color-theme))
 
-(unless noninteractive
-  ;; (shell-command "sudo ~/bin/.xwl-after-start-hook")
-  ;; (setq display-time-mail-file 'no-check)
-
-  ;; On w32: `emacsclient.exe --server-file c:\repo\xwl-emacs-environment\.emacs.d\server\server -n %*'
-  (ignore-errors (server-start))
-
-  (when (executable-find "fortune-zh")
-    (setq xwl-idle-timer
-          (run-with-idle-timer 300 t 'xwl-run-when-idle-hook)))
-
-  ;; EMMS
-  ;; (emms-add-directory-tree emms-source-file-default-directory)
-  ;; (emms-playlist-sort-by-score)
-  ;; (xwl-erc-select)
-  (unless (xwl-check-holidays)
-    (find-file "~/.scratch")
-    ;; (xwl-todo-find-do)
-    (delete-other-windows)
-    (message (substring (emacs-version) 0 16)))
-  ;; (run-with-timer 0 86400 'xwl-running-daily) ; dialy stuffs
-  ;; (xwl-weather-update)
-
-  ;; Run this as the last step.
-  (run-at-time 3 
-               nil
-               '(lambda ()
-                  (color-theme-xwl-console)
-
-                  (when window-system 
-                    (require 'highlight-tail)
-                    (setq highlight-tail-colors  '(("#bc2525" . 0)))
-                    ;; '(("#d8971d" . 0)))
-                    (highlight-tail-reload))))
-  )
-
 ;;; xwl-main.el ends here
