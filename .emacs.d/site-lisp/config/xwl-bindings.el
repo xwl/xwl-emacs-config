@@ -1,6 +1,6 @@
 ;;; xwl-bindings.el --- Key bindings
 
-;; Copyright (C) 2008, 2009 William Xu
+;; Copyright (C) 2008, 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -129,12 +129,6 @@
 
 ;; C-x
 (global-set-key (kbd "C-x C-\\") 'goto-last-change)
-
-;; (global-set-key (kbd "C-x r C-@") 'rm-set-mark)
-;; (global-set-key (kbd "C-x r C-x C-x") 'rm-exchange-point-and-mark)
-;; (global-set-key (kbd "C-x r C-w") 'rm-kill-region)
-;; (global-set-key (kbd "C-x r M-w") 'rm-kill-ring-save)
-;; (global-set-key (kbd "C-x r C-y") 'yank-rectangle)
 
 ;; C-c
 (global-set-key (kbd "C-c f") 'ffap)
