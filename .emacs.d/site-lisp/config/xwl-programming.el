@@ -1,12 +1,12 @@
 ;;; xwl-programming.el --- programming config
 
-;; Copyright (C) 2007, 2009 William Xu
+;; Copyright (C) 2007, 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation; either version 2, or (at your option)
+;; the Free Software Foundation; either version 3, or (at your option)
 ;; any later version.
 ;;
 ;; This program is distributed in the hope that it will be useful,
@@ -261,7 +261,6 @@ Thus generate a TAGs file."
 ;;;; version systems
 ;; -----------------
 
-
 (add-hook 'log-view-mode-hook 'less-minor-mode-on)
 
 (add-to-list 'vc-handled-backends 'DARCS)
@@ -280,6 +279,39 @@ Thus generate a TAGs file."
                   (interactive) 
                   (kill-new (buffer-file-name))
                   (message "Full filenamed copied")))
+
+(eval-after-load 'vc-dir
+  '(progn
+     (defun vc-dir-hide-up-to-date ()
+       "Hide up-to-date items from display."
+       (interactive)
+       (let ((crt (ewoc-nth vc-ewoc -1))
+             (first (ewoc-nth vc-ewoc 0)))
+         ;; Go over from the last item to the first and remove the
+         ;; up-to-date files and directories with no child files.
+         (while (not (eq crt first))
+           (let* ((data (ewoc-data crt))
+                  (dir (vc-dir-fileinfo->directory data))
+                  (next (ewoc-next vc-ewoc crt))
+                  (prev (ewoc-prev vc-ewoc crt))
+                  ;; ewoc-delete does not work without this...
+                  (inhibit-read-only t))
+             (when (or
+                    ;; Remove directories with no child files.
+                    (and dir
+                         (or
+                          ;; Nothing follows this directory.
+                          (not next)
+                          ;; Next item is a directory.
+                          (vc-dir-fileinfo->directory (ewoc-data next))))
+                    ;; Remove files in the up-to-date state.
+                    (or (eq (vc-dir-fileinfo->state data) 'up-to-date)
+                        ;; xwl: hide unregistered as well.
+                        (eq (vc-dir-fileinfo->state data) 'unregistered))
+                    )
+               (ewoc-delete vc-ewoc crt))
+             (setq crt prev)))))
+     ))
 
 ;;;; skeletons
 ;; -----------
