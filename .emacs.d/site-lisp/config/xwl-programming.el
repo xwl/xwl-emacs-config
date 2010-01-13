@@ -582,7 +582,8 @@ If SCHEME?, `run-scheme'."
   (turn-on-haskell-indent)
   (turn-on-haskell-simple-indent)
 
-  (glasses-mode 1))
+  (glasses-mode 1)
+  (smart-operator-mode))
 
 (add-hook 'haskell-mode-hook 'xwl-haskell-mode-hook)
 
@@ -857,6 +858,8 @@ Useful for packing c/c++ functions with one line or empty body."
 ;; ,----
 ;; | ediff
 ;; `----
+
+(require 'ediff)
 
 (defun xwl-ediff-revision ()
   "Compare current state with latest revision, no questions please."

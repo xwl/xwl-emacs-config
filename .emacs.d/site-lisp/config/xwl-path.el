@@ -87,7 +87,7 @@
 
 (if (eq system-type 'windows-nt)
     (progn 
-      ;; (setenv "PATH" (concat (getenv "PATH") ";C:/OpenSSL/bin"))
+      ;; (setenv "PATH" (concat (getenv "PATH") ";C:/OpenSSL/bin;C:/Program Files/Haskell/bin;C:/ghc/ghc-6.12.1/bin"))
       ;; (setq exec-path (split-string (getenv "PATH") ";"))
       nil)
 
