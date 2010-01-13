@@ -1,12 +1,12 @@
 ;;; xwl-buffer.el --- Buffer level operations like switching or listing 
 
-;; Copyright (C) 2009 William Xu
+;; Copyright (C) 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation; either version 2, or (at your option)
+;; the Free Software Foundation; either version 3, or (at your option)
 ;; any later version.
 ;;
 ;; This program is distributed in the hope that it will be useful,
@@ -126,24 +126,21 @@ point.  Especially useful for w32."
 
 (defadvice ido-find-file (around change-default-directory activate)
   "Set `default-directory' on the fly."
-  (let* ((d (replace-regexp-in-string
-             "=.*" 
-             ":"
-             (if current-prefix-arg
-                 (ido-completing-read "let default-directory with: "
-                                      xwl-frequent-directories)
-               default-directory)))
-         (default-directory (expand-file-name d)))
-    ;; Use shell's current dir as default-directory on w32.
-    (when (and (eq system-type 'windows-nt)
-               (eq major-mode 'shell-mode))
-      (save-excursion
-        (goto-char (point-max))
-        (let ((end (progn (search-backward ">" nil t 1)
-                          (point))))
-          (setq default-directory
-                (buffer-substring-no-properties (line-beginning-position) end)))))
-    ad-do-it))
+  (let ((d default-directory))
+    (cond (current-prefix-arg
+           (setq d (replace-regexp-in-string
+                    "=.*" ":" (ido-completing-read "let default-directory with: "
+                                                   xwl-frequent-directories))))
+          ;; Use shell's current dir as default-directory on w32.
+          ((and xwl-w32? (eq major-mode 'shell-mode))
+           (save-excursion 
+             (goto-char (point-max))
+             (let ((end (progn (search-backward ">" nil t 1)
+                               (point))))
+               (setq d (buffer-substring-no-properties 
+                        (line-beginning-position) end))))))
+    (let ((default-directory (expand-file-name d)))
+      ad-do-it)))
 
 (global-set-key (kbd "C-x C-f") 'ido-find-file)
 (global-set-key (kbd "C-x C-d") 'ido-dired)
