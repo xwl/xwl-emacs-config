@@ -805,6 +805,7 @@ passphrase cache or user."
            )
       (auto-complete-mode 1)))
 
+(add-hook 'log-edit-mode-hook (lambda () (smart-operator-mode -1)))
 
 (provide 'xwl-misc)
 
