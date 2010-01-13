@@ -785,6 +785,15 @@ passphrase cache or user."
 (global-auto-complete-mode 1)
 (setq ac-auto-start 3)
 
+(defun auto-complete-mode-maybe ()
+  "What buffer `auto-complete-mode' prefers."
+  (if (and (not (minibufferp (current-buffer)))
+           ;; xwl: Enable for all mode.
+           ;; (memq major-mode ac-modes)
+           )
+      (auto-complete-mode 1)))
+
+
 (provide 'xwl-misc)
 
 ;;; xwl-misc.el ends here
