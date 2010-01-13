@@ -871,7 +871,7 @@ Sets up command `font-lock-mode'.
 ;;;***
 
 ;;;### (autoloads (smart-operator-self-insert-command smart-operator-mode)
-;;;;;;  "smart-operator" "xwl-elisp/smart-operator.el" (19033 41140))
+;;;;;;  "smart-operator" "xwl-elisp/smart-operator.el" (19276 26976))
 ;;; Generated autoloads from xwl-elisp/smart-operator.el
 
 (autoload 'smart-operator-mode "smart-operator" "\
@@ -957,7 +957,7 @@ Major mode for managing todos.
 
 ;;;***
 
-;;;### (autoloads (cwit) "cwit" "xwl-elisp/cwit.el" (18917 53235))
+;;;### (autoloads (cwit) "cwit" "xwl-elisp/cwit.el" (19264 47723))
 ;;; Generated autoloads from xwl-elisp/cwit.el
 
 (autoload 'cwit "cwit" "\
@@ -1001,7 +1001,7 @@ See `cal-china-x-solar-term-name' for a list of solar term names .
 ;;;***
 
 ;;;### (autoloads (buffer-action-run buffer-action-compile) "buffer-action"
-;;;;;;  "xwl-elisp/buffer-action.el" (19264 21830))
+;;;;;;  "xwl-elisp/buffer-action.el" (19272 36874))
 ;;; Generated autoloads from xwl-elisp/buffer-action.el
 
 (autoload 'buffer-action-compile "buffer-action" "\

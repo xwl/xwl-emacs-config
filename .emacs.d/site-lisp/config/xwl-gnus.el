@@ -280,12 +280,7 @@
 
 ;;; Chinese Stuffs
 
-(if (< emacs-major-version 23)
-    ;; Workaround for unsupported charsets.
-    (progn
-      (define-coding-system-alias 'gb18030 'gb2312)
-      (define-coding-system-alias 'gbk 'gb2312))
-  (define-coding-system-alias 'x-gbk 'gb18030))
+(define-coding-system-alias 'x-gbk 'gb18030)
 
 (eval-after-load "gnus"
   '(progn
@@ -755,9 +750,8 @@
 ;; - `*': put it in the cache, and use `Y c' to show it later
 (setq gnus-use-cache 'passive)
 
-(if (< emacs-major-version 23)
-    (xwl-gnus-summary-tree-plain)
-  (rs-gnus-summary-tree-arrows-wide))
+;; (xwl-gnus-summary-tree-plain)
+(rs-gnus-summary-tree-arrows-wide)
 
 ;; ,----
 ;; | threading

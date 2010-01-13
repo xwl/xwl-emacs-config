@@ -54,7 +54,8 @@
 (load "~/.emacs.d/site-lisp/config/xwl-path.el")
 
 (require 'xwl-autoloads)
-(when (eq system-type 'windows-nt) (require 'xwl-w32))
+(require 'xwl-var)
+(when xwl-w32? (require 'xwl-w32))
 (require 'xwl-util)
 (require 'xwl-vim)
 (require 'xwl-private)

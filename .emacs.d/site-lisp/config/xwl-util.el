@@ -1,4 +1,4 @@
-;;; xwl-util.el --- Utilities and global variables
+;;; xwl-util.el --- Utility functions
 
 ;; Copyright (C) 2007, 2008, 2009, 2010  William Xu
 
@@ -25,36 +25,9 @@
 
 ;;; Code:
 
-(eval-when-compile
-  (require 'cl))
-
+(require 'cl)
 (require 'url-extra)
 
-;;; Global Variables
-
-;; (defun xwl-network-on-p ()
-;;   "Test whether network is okay by ping."
-;;   (zerop (shell-command "ping -t 1 www.gmail.com > /dev/null")))
-
-(defun xwl-at-company ()
-  (message "瞅瞅我们是不是在公司网络呢…")
-  ;;   (zerop (shell-command
-  ;;          "traceroute -w 2 -m 2 www.google.com  | grep abc"))
-
-  ;; (zerop (shell-command "ping -c 1 172.28.8.246"))
-
-  ;; (and (not (eq system-type 'darwin))
-;;        (or (zerop (shell-command "ipconfig | grep 172.28"))
-;;            (zerop (shell-command "ipconfig | grep 10.162"))))
-
-  ;; (string= (user-login-name) "wixu"))
-  (not (eq system-type 'darwin)))
-  
-
-(defvar xwl-at-company-p nil)
-(defvar xwl-w3m-arguments '())
-
-
 ;;; Compat
 
 (defun xwl-compat-select (list predicate)
@@ -213,6 +186,7 @@ simply yank it when needed."
             (setq mode (cdr match))
             (setq tbl nil)))
         mode)))))
+
 ;;; salary
 
 ;; http://www.tekken.com.cn/m/money.html
@@ -289,17 +263,7 @@ simply yank it when needed."
       (message "%s" s))))
 
 
-;;; calendar
 
-(when (< emacs-major-version 23)
-  (defun calendar-extract-month (date)
-    (car date))
-
-  (defun calendar-extract-day (date)
-    (cadr date))
-  )
-
-
 ;;; noninteractive setup
 
 (when noninteractive
@@ -333,24 +297,6 @@ simply yank it when needed."
 
 (defun xwl-shell-command-asynchronously (cmd)
   (start-process-shell-command cmd nil cmd))
-
-;; resolve file names
-(defun xwl-resolve-file-name (file type)
-  "Resolve file name in various ways.
-
-file is the abosolute filename.
-
-type stands for different kinds of resolve.
-
- F  absolute pathname            ( /usr/local/bin/netscape.bin )
- f  file name without directory  ( netscape.bin )
- n  file name without extention  ( netscape )
- e  extention of file name       ( bin )"
-  (cond
-   ((string= type "F") file)
-   ((string= type "f") (file-name-nondirectory file))
-   ((string= type "n") (file-name-sans-extension (file-name-nondirectory file)))
-   (t (file-name-extension file))))
 
 ;; insert line number before each line.
 (defun xwl-numerate-lines ()
@@ -759,22 +705,6 @@ This should not affect `buffer-undo-list'."
 (defun xwl-tty-p ()
   (string= (frame-parameter nil 'font) "tty"))
 
-;;; Keep variables in the end!!
-
-(setq xwl-at-company-p (xwl-at-company))
-
-(when (and xwl-at-company-p xwl-w32?)
-  (setq xwl-proxy-server "172.16.42.137"
-        xwl-proxy-port 8080)
-
-  (setq url-proxy-services
-        `(("http" . ,(format "%s:%d" xwl-proxy-server xwl-proxy-port))))
-
-  (setq xwl-w3m-arguments
-        (list "-o" (format "http_proxy=http://%s:%d"
-                           xwl-proxy-server
-                           xwl-proxy-port)))
-  (xwl-w32-redirect))
 
 (provide 'xwl-util)
 

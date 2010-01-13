@@ -37,14 +37,6 @@
                     
             "~/repo/cvs/cedet/common"))
 
-(when (< emacs-major-version 23)
-  (setq load-path `("~/repo/git/erc"
-                    "~/repo/git/remember"
-                    "~/repo/git/org-mode/lisp"
-                    "~/repo/cvs/tramp/lisp"
-
-                    ,@load-path)))
-
 (setenv "INFOPATH"
         (mapconcat 'identity
                    `(

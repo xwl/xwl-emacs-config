@@ -169,7 +169,7 @@ Thus generate a TAGs file."
 (defun xwl-sh-run ()
   (interactive)
   (shell-command
-   (concat "sh " (xwl-resolve-file-name (buffer-file-name) "f"))))
+   (concat "sh " (file-name-nondirectory (buffer-file-name)))))
 
 (defun xwl-sh-mode-hook()
   ;; (set (make-local-variable 'outline-regexp) "###+ ")

@@ -21,8 +21,6 @@
 
 ;;; Code:
 
-(setq xwl-w32? (eq system-type 'windows-nt))
-
 (defun xwl-w32-get-drives ()
   "Get a list of drive names from get_drives.py."
   (read
@@ -39,8 +37,6 @@
                   (cdr (or (assoc d xwl-w32-drives) 
                            (assoc (downcase d) xwl-w32-drives)))
                   ":/" ad-return-value))))
-
-(setq xwl-w32-redirect-locally? nil)
 
 (defun xwl-w32-redirect ()
   ;; redirect
