@@ -651,11 +651,11 @@
 
 (global-set-key (kbd "<f6>") '(lambda ()
                                 (interactive)
-                                ;; (if xwl-at-company-p
+                                (if xwl-at-company-p
                                     (xwl-gnus)
-                                  ;; (message "Hmm, only run when at company")
-                                  ;; )
-                ))
+                                  (message "Hmm, only run when at company")
+                                  )
+                                ))
 
 (setq gnus-permanently-visible-groups
       (regexp-opt `(;; "savings"
