@@ -401,7 +401,7 @@ Thus generate a TAGs file."
       grep-find-command (concat "find . -type f -print0 | xargs -0 "
                                 grep-command))
 
-(global-set-key (kbd "C-c m g") 'grep)
+(global-set-key (kbd "C-c g") 'grep)
 (global-set-key (kbd "C-c m G") 'grep-find)
 
 (make-face 'font-lock-fixme-face)
