@@ -783,6 +783,8 @@ passphrase cache or user."
 
 (add-hook 'log-edit-mode-hook (lambda () (smart-operator-mode -1)))
 
+(add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
+
 (provide 'xwl-misc)
 
 ;;; xwl-misc.el ends here
