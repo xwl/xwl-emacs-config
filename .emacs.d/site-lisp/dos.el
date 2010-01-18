@@ -217,6 +217,7 @@ echo.\n
 
 ;; 5  Main function
 
+;;;###autoload
 (defun dos-mode () "Major mode for editing Dos scripts.\n
 The `dos-help-mode' command shows this page.\n
 Start a new script from `dos-template' or `dos-template-mini'. Navigate between
