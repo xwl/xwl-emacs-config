@@ -585,7 +585,12 @@ If SCHEME?, `run-scheme'."
   (glasses-mode 1)
   (smart-operator-mode))
 
+(defun xwl-inferior-haskell-mode-hook ()
+  (glasses-mode 1)
+  (smart-operator-mode))
+
 (add-hook 'haskell-mode-hook 'xwl-haskell-mode-hook)
+(add-hook 'inferior-haskell-mode-hook 'xwl-inferior-haskell-mode-hook)
 
 (global-set-key (kbd "C-c i h") 'run-haskell)
 

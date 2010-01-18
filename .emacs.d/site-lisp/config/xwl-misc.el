@@ -415,19 +415,6 @@ prompts for name field."
      )
     ((w32)
      (w32-send-sys-command #xf030)))
-  
-  (when (and xwl-at-company-p xwl-w32?)
-    (setq xwl-proxy-server "172.16.42.137"
-          xwl-proxy-port 8080)
-
-    (setq url-proxy-services
-          `(("http" . ,(format "%s:%d" xwl-proxy-server xwl-proxy-port))))
-
-    (setq xwl-w3m-arguments
-          (list "-o" (format "http_proxy=http://%s:%d"
-                             xwl-proxy-server
-                             xwl-proxy-port)))
-    (xwl-w32-redirect))
 
   ;; NOTE: We have to call `frame-width' when window has been maximized.
   ;; (setq erc-fill-column (- (round (/ (frame-width) 2)) 5))
@@ -795,6 +782,8 @@ passphrase cache or user."
       (auto-complete-mode 1)))
 
 (add-hook 'log-edit-mode-hook (lambda () (smart-operator-mode -1)))
+
+(add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
 
 (provide 'xwl-misc)
 

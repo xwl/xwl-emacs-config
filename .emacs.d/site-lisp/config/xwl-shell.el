@@ -3,7 +3,7 @@
 ;; Copyright (C) 2007, 2008, 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
-;; Last updated: 2010/01/13
+;; Last updated: 2010/01/14
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -85,17 +85,18 @@
      (define-key comint-mode-map (kbd "RET")
        (lambda ()
          (interactive)
-         (when (eq system-type 'windows-nt)
-           (let ((matched (some (lambda (i)
-                                  (if (looking-back
-                                       (concat "> *" (car i)))
-                                      (cadr i)))
-                                '(("ls" "-x --color=always")
-                                  ("cd" "%home%")))))
-             (when matched
-               (insert " " matched))))
-         (call-interactively 'comint-send-input)
-         (insert " ")))
+         (if (and xwl-w32? (eq major-mode 'shell-mode))
+             (let ((matched (some (lambda (i)
+                                    (if (looking-back
+                                         (concat "> *" (car i)))
+                                        (cadr i)))
+                                  '(("ls" "-x --color=always")
+                                    ("cd" "%home%")))))
+               (when matched
+                 (insert " " matched))
+               (call-interactively 'comint-send-input)
+               (insert " "))
+           (call-interactively 'comint-send-input))))
                                                
      ))
 

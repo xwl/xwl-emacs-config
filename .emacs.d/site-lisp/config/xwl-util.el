@@ -705,6 +705,29 @@ This should not affect `buffer-undo-list'."
 (defun xwl-tty-p ()
   (string= (frame-parameter nil 'font) "tty"))
 
+(defun xwl-generate-password (len)
+  "[33, 126] is range for printable characters."
+  (let ((min 33)
+        (max 126)
+        (ret ""))
+    (dotimes (l len)
+      (setq ret (concat ret (format "%c" (+ min (random (- max min)))))))
+    ret))
+
+;; Well, as Gnus and other components depend on this, we have to eval this much earlier.
+  
+(when (and xwl-at-company-p xwl-w32?)
+  (setq xwl-proxy-server "172.16.42.137"
+        xwl-proxy-port 8080)
+
+  (setq url-proxy-services
+        `(("http" . ,(format "%s:%d" xwl-proxy-server xwl-proxy-port))))
+
+  (setq xwl-w3m-arguments
+        (list "-o" (format "http_proxy=http://%s:%d"
+                           xwl-proxy-server
+                           xwl-proxy-port)))
+  (xwl-w32-redirect))
 
 (provide 'xwl-util)
 

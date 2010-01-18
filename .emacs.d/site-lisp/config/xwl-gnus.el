@@ -692,9 +692,16 @@
 
 (defalias 'gnus-user-format-function-ct 'rs-gnus-summary-line-content-type)
 
+(defun gnus-user-format-function-from (head)
+  "Trim `From:' to 20 bytes."
+  (let ((from (replace-regexp-in-string " *<.*>" "" (gnus-header-from head))))
+    (when (> (length from) 20)
+      (setq from (concat (substring from 0 18) "..")))
+    (format "%-20s" from)))
+
 ;;(setq gnus-summary-line-format "%U%R%z%-6d  %5k  %-20f%B%s\n")
 (setq gnus-summary-line-format
-      "%U%R%z%10&user-date; %u&ct; %5k  %-20f%B(%t) %s\n")
+      "%U%R%z%10&user-date; %u&ct; %5k  %u&from; %B(%t) %s\n")
 
 (defun xwl-gnus-summary-tree-plain ()
   "My old plain summary tree."
