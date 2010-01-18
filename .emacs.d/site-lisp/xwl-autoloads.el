@@ -1,6 +1,6 @@
 
 ;;;### (autoloads (xwl-makefile-clean xwl-makefile-byte-compile xwl-makefile-all)
-;;;;;;  "xwl-makefile" "xwl-makefile.el" (19264 47560))
+;;;;;;  "xwl-makefile" "xwl-makefile.el" (19265 25913))
 ;;; Generated autoloads from xwl-makefile.el
 
 (autoload 'xwl-makefile-all "xwl-makefile" "\
@@ -25,7 +25,7 @@ Not documented
 ;;;;;;  sawfish-info-function sawfish-describe-variable sawfish-describe-function
 ;;;;;;  sawfish-eval-print-last-sexp sawfish-eval-last-sexp sawfish-eval-expression
 ;;;;;;  sawfish-eval-defun sawfish-eval-buffer sawfish-eval-region
-;;;;;;  sawfish-mode) "sawfish" "sawfish.el" (18862 33836))
+;;;;;;  sawfish-mode) "sawfish" "sawfish.el" (19265 25913))
 ;;; Generated autoloads from sawfish.el
 
 (autoload 'sawfish-mode "sawfish" "\
@@ -129,7 +129,7 @@ Create a sawfish interaction buffer.
 ;;;***
 
 ;;;### (autoloads (pack-windows) "pack-windows" "pack-windows.el"
-;;;;;;  (18862 33836))
+;;;;;;  (19265 25913))
 ;;; Generated autoloads from pack-windows.el
 
 (autoload 'pack-windows "pack-windows" "\
@@ -157,7 +157,7 @@ displayed in the echo area if `pack-windows-verbose' is non-nil.
 ;;;### (autoloads (oddmuse-kill-url oddmuse-browse-this-page oddmuse-browse-page
 ;;;;;;  emacswiki-post oddmuse-insert-pagename oddmuse-revert oddmuse-post
 ;;;;;;  oddmuse-follow oddmuse-edit oddmuse-toggle-minor) "oddmuse"
-;;;;;;  "oddmuse.el" (18862 33836))
+;;;;;;  "oddmuse.el" (19265 25913))
 ;;; Generated autoloads from oddmuse.el
 
 (autoload 'oddmuse-toggle-minor "oddmuse" "\
@@ -224,7 +224,7 @@ Make the URL of current oddmuse page the latest kill in the kill ring.
 ;;;***
 
 ;;;### (autoloads (nuke-trailing-whitespace) "nuke-trailing-whitespace"
-;;;;;;  "nuke-trailing-whitespace.el" (18862 33836))
+;;;;;;  "nuke-trailing-whitespace.el" (19265 25913))
 ;;; Generated autoloads from nuke-trailing-whitespace.el
 
 (autoload 'nuke-trailing-whitespace "nuke-trailing-whitespace" "\
@@ -242,8 +242,8 @@ replacement if the buffer is read-only.
 ;;;***
 
 ;;;### (autoloads (htmlize-many-files-dired htmlize-many-files htmlize-file
-;;;;;;  htmlize-region htmlize-buffer) "htmlize" "htmlize.el" (19245
-;;;;;;  65113))
+;;;;;;  htmlize-region htmlize-buffer) "htmlize" "htmlize.el" (19265
+;;;;;;  25913))
 ;;; Generated autoloads from htmlize.el
 
 (autoload 'htmlize-buffer "htmlize" "\
@@ -309,7 +309,7 @@ HTMLize dired-marked files.
 ;;;***
 
 ;;;### (autoloads (graphviz-dot-mode) "graphviz-dot-mode" "graphviz-dot-mode.el"
-;;;;;;  (18862 33836))
+;;;;;;  (19265 25913))
 ;;; Generated autoloads from graphviz-dot-mode.el
 
 (autoload 'graphviz-dot-mode "graphviz-dot-mode" "\
@@ -365,7 +365,7 @@ Turning on Graphviz Dot mode calls the value of the variable
 ;;;***
 
 ;;;### (autoloads (goto-last-change) "goto-last-change" "goto-last-change.el"
-;;;;;;  (18964 12702))
+;;;;;;  (19265 25913))
 ;;; Generated autoloads from goto-last-change.el
 
 (autoload 'goto-last-change "goto-last-change" "\
@@ -380,7 +380,7 @@ will return point to the current position.
 
 ;;;### (autoloads (file-template-find-file-not-found-hook file-template-auto-insert
 ;;;;;;  file-template-insert) "file-template" "file-template.el"
-;;;;;;  (18911 33708))
+;;;;;;  (19265 25913))
 ;;; Generated autoloads from file-template.el
 
 (autoload 'file-template-insert "file-template" "\
@@ -409,8 +409,8 @@ Hook to (optionally) insert the default template when a new file is created.
 ;;;;;;  etags-select-go-if-unambiguous etags-select-use-short-name-completion
 ;;;;;;  etags-select-highlight-delay etags-select-highlight-tag-after-jump
 ;;;;;;  etags-select-mode-hook etags-select-no-select-for-one-match
-;;;;;;  etags-select-mode) "etags-select" "etags-select.el" (19166
-;;;;;;  65062))
+;;;;;;  etags-select-mode) "etags-select" "etags-select.el" (19265
+;;;;;;  25913))
 ;;; Generated autoloads from etags-select.el
 
 (let ((loads (get 'etags-select-mode 'custom-loads))) (if (member '"etags-select" loads) nil (put 'etags-select-mode 'custom-loads (cons '"etags-select" loads))))
@@ -472,29 +472,27 @@ to do.
 
 ;;;***
 
-;;;### (autoloads (bat-mode) "dosbat" "dosbat.el" (18862 33836))
-;;; Generated autoloads from dosbat.el
+;;;### (autoloads (dos-mode) "dos" "dos.el" (19284 4834))
+;;; Generated autoloads from dos.el
 
-(autoload 'bat-mode "dosbat" "\
-Major mode for editing DOS batch files.
+(autoload 'dos-mode "dos" "\
+Major mode for editing Dos scripts.
 
-Special commands:
-Turning on bat-mode calls the value of the variable `bat-mode-hook',
-if that value is non-nil.
+The `dos-help-mode' command shows this page.
 
-Font lock mode:
+Start a new script from `dos-template' or `dos-template-mini'. Navigate between
+sections using `dos-outline', `imenu', or `outline-minor-mode'. Use `dos-sep' to
+save keystrokes. Read help for Dos command with `dos-help-cmd'. Run script using
+`dos-run' and `dos-run-args'.
 
-Turning on font lock mode causes various bat syntactic structures to be
-highlighted. To turn this on whenever you visit a bat file, add
-the following to your .emacs file:
-  (add-hook 'bat-mode-hook 'turn-on-font-lock)
+\\{dos-mode-map}
 
 \(fn)" t nil)
 
 ;;;***
 
 ;;;### (autoloads (color-theme-select) "color-theme" "color-theme.el"
-;;;;;;  (18862 33836))
+;;;;;;  (19265 25913))
 ;;; Generated autoloads from color-theme.el
 
 (autoload 'color-theme-select "color-theme" "\
@@ -514,7 +512,7 @@ libraries are mainly useful for color theme authors.
 ;;;;;;  boxquote-describe-variable boxquote-describe-function boxquote-boxquote
 ;;;;;;  boxquote-paragraph boxquote-defun boxquote-yank boxquote-kill-ring-save
 ;;;;;;  boxquote-insert-file boxquote-buffer boxquote-region boxquote-title)
-;;;;;;  "boxquote" "boxquote.el" (18919 23358))
+;;;;;;  "boxquote" "boxquote.el" (19265 25913))
 ;;; Generated autoloads from boxquote.el
 
 (autoload 'boxquote-title "boxquote" "\
@@ -640,8 +638,8 @@ Remove the boxquote that contains `point'.
 
 ;;;***
 
-;;;### (autoloads (wget-web-page wget) "wget" "wget-el/wget.el" (18862
-;;;;;;  33836))
+;;;### (autoloads (wget-web-page wget) "wget" "wget-el/wget.el" (19265
+;;;;;;  25913))
 ;;; Generated autoloads from wget-el/wget.el
 
 (autoload 'wget "wget" "\
@@ -666,8 +664,8 @@ wget-web-page downlod whole Web page from it following relative link.
 
 ;;;***
 
-;;;### (autoloads (ruby-mode) "ruby-mode" "ruby/ruby-mode.el" (18862
-;;;;;;  33836))
+;;;### (autoloads (ruby-mode) "ruby-mode" "ruby/ruby-mode.el" (19265
+;;;;;;  25913))
 ;;; Generated autoloads from ruby/ruby-mode.el
 
 (autoload 'ruby-mode "ruby-mode" "\
@@ -686,7 +684,7 @@ The variable ruby-indent-level controls the amount of indentation.
 ;;;### (autoloads (dictionary-popup-matching-words dictionary-mouse-popup-matching-words
 ;;;;;;  dictionary-match-words dictionary-lookup-definition dictionary-search
 ;;;;;;  dictionary dictionary-mode) "dictionary" "dictionary-el/dictionary.el"
-;;;;;;  (18862 33836))
+;;;;;;  (19265 25913))
 ;;; Generated autoloads from dictionary-el/dictionary.el
 
 (autoload 'dictionary-mode "dictionary" "\
@@ -749,8 +747,8 @@ Display entries matching the word at the point
 ;;;;;;  debian-bug-web-package debian-bug-web-packages debian-bug-web-this-bug-under-mouse
 ;;;;;;  debian-bug-web-bug debian-bug-web-developer-page debian-bug-web-bugs
 ;;;;;;  debian-bug-intent-to-package debian-bug-request-for-package
-;;;;;;  debian-bug-wnpp) "debian-bug" "debian/debian-bug.el" (18862
-;;;;;;  33836))
+;;;;;;  debian-bug-wnpp) "debian-bug" "debian/debian-bug.el" (19265
+;;;;;;  25913))
 ;;; Generated autoloads from debian/debian-bug.el
 
 (autoload 'debian-bug-wnpp "debian-bug" "\
@@ -819,7 +817,7 @@ Submit a Debian bug report.
 ;;;***
 
 ;;;### (autoloads (deb-find deb-view-mode deb-view deb-view-dired-view)
-;;;;;;  "deb-view" "debian/deb-view.el" (18862 33836))
+;;;;;;  "deb-view" "debian/deb-view.el" (19265 25913))
 ;;; Generated autoloads from debian/deb-view.el
 
 (autoload 'deb-view-dired-view "deb-view" "\
@@ -857,7 +855,7 @@ easily repeat a `deb-find' command.
 ;;;***
 
 ;;;### (autoloads (apt-sources-mode) "apt-sources" "debian/apt-sources.el"
-;;;;;;  (18862 33836))
+;;;;;;  (19265 25913))
 ;;; Generated autoloads from debian/apt-sources.el
 
 (autoload 'apt-sources-mode "apt-sources" "\
@@ -871,7 +869,7 @@ Sets up command `font-lock-mode'.
 ;;;***
 
 ;;;### (autoloads (smart-operator-self-insert-command smart-operator-mode)
-;;;;;;  "smart-operator" "xwl-elisp/smart-operator.el" (19276 26976))
+;;;;;;  "smart-operator" "xwl-elisp/smart-operator.el" (19276 9360))
 ;;; Generated autoloads from xwl-elisp/smart-operator.el
 
 (autoload 'smart-operator-mode "smart-operator" "\
@@ -888,7 +886,7 @@ Insert the entered operator plus surrounding spaces.
 
 ;;;### (autoloads (less-minor-mode-off less-minor-mode-on auto-less-minor-mode
 ;;;;;;  less-quit less-scroll-down-line less-scroll-up-line less-minor-mode)
-;;;;;;  "less" "xwl-elisp/less.el" (19261 56902))
+;;;;;;  "less" "xwl-elisp/less.el" (19265 26124))
 ;;; Generated autoloads from xwl-elisp/less.el
 
 (autoload 'less-minor-mode "less" "\
@@ -934,7 +932,7 @@ Turn off `less-minor-mode'.
 ;;;***
 
 ;;;### (autoloads (finkinfo-mode) "finkinfo-mode" "xwl-elisp/finkinfo-mode.el"
-;;;;;;  (18867 57586))
+;;;;;;  (19265 26124))
 ;;; Generated autoloads from xwl-elisp/finkinfo-mode.el
 
 (autoload 'finkinfo-mode "finkinfo-mode" "\
@@ -946,7 +944,7 @@ Major mode for fink info files in Mac OS X.
 ;;;***
 
 ;;;### (autoloads (easy-todo-mode) "easy-todo" "xwl-elisp/easy-todo.el"
-;;;;;;  (19120 65217))
+;;;;;;  (19265 26124))
 ;;; Generated autoloads from xwl-elisp/easy-todo.el
 
 (autoload 'easy-todo-mode "easy-todo" "\
@@ -957,7 +955,7 @@ Major mode for managing todos.
 
 ;;;***
 
-;;;### (autoloads (cwit) "cwit" "xwl-elisp/cwit.el" (19264 47723))
+;;;### (autoloads (cwit) "cwit" "xwl-elisp/cwit.el" (19265 26124))
 ;;; Generated autoloads from xwl-elisp/cwit.el
 
 (autoload 'cwit "cwit" "\
@@ -968,7 +966,7 @@ Create a *Cwit* buffer.
 ;;;***
 
 ;;;### (autoloads (holiday-solar-term holiday-lunar cal-china-x-birthday-from-chinese)
-;;;;;;  "cal-china-x" "xwl-elisp/cal-china-x.el" (19264 21587))
+;;;;;;  "cal-china-x" "xwl-elisp/cal-china-x.el" (19265 26124))
 ;;; Generated autoloads from xwl-elisp/cal-china-x.el
 
 (autoload 'cal-china-x-birthday-from-chinese "cal-china-x" "\
@@ -1001,7 +999,7 @@ See `cal-china-x-solar-term-name' for a list of solar term names .
 ;;;***
 
 ;;;### (autoloads (buffer-action-run buffer-action-compile) "buffer-action"
-;;;;;;  "xwl-elisp/buffer-action.el" (19272 36874))
+;;;;;;  "xwl-elisp/buffer-action.el" (19274 48083))
 ;;; Generated autoloads from xwl-elisp/buffer-action.el
 
 (autoload 'buffer-action-compile "buffer-action" "\
@@ -1025,7 +1023,7 @@ more. If you want to edit it again, please add C-u prefix.
 
 ;;;***
 
-;;;### (autoloads (ga) "ga" "xwl-elisp/ga/ga.el" (19214 33075))
+;;;### (autoloads (ga) "ga" "xwl-elisp/ga/ga.el" (19265 26124))
 ;;; Generated autoloads from xwl-elisp/ga/ga.el
 
 (autoload 'ga "ga" "\
@@ -1036,7 +1034,7 @@ Create or switch to a ga buffer.
 ;;;***
 
 ;;;### (autoloads (dashboard) "dashboard" "xwl-elisp/dashboard/dashboard.el"
-;;;;;;  (19214 33075))
+;;;;;;  (19265 26124))
 ;;; Generated autoloads from xwl-elisp/dashboard/dashboard.el
 
 (autoload 'dashboard "dashboard" "\
@@ -1049,7 +1047,7 @@ Create a *Dashboard* buffer.
 ;;;### (autoloads (inferior-haskell-find-haddock inferior-haskell-find-definition
 ;;;;;;  inferior-haskell-info inferior-haskell-type inferior-haskell-load-file
 ;;;;;;  switch-to-haskell) "inf-haskell" "haskell-mode-2.4/inf-haskell.el"
-;;;;;;  (18231 1814))
+;;;;;;  (19265 25913))
 ;;; Generated autoloads from haskell-mode-2.4/inf-haskell.el
 
 (defalias 'run-haskell 'switch-to-haskell)
@@ -1103,8 +1101,8 @@ we load it.
 ;;;***
 
 ;;;### (autoloads (haskell-hoogle literate-haskell-mode haskell-mode)
-;;;;;;  "haskell-mode" "haskell-mode-2.4/haskell-mode.el" (18271
-;;;;;;  25098))
+;;;;;;  "haskell-mode" "haskell-mode-2.4/haskell-mode.el" (19265
+;;;;;;  25913))
 ;;; Generated autoloads from haskell-mode-2.4/haskell-mode.el
 
 (autoload 'haskell-mode "haskell-mode" "\
@@ -1159,7 +1157,7 @@ Do a Hoogle search for QUERY.
 ;;;***
 
 ;;;### (autoloads (haskell-indent-mode) "haskell-indent" "haskell-mode-2.4/haskell-indent.el"
-;;;;;;  (18271 24057))
+;;;;;;  (19265 25913))
 ;;; Generated autoloads from haskell-mode-2.4/haskell-indent.el
 
 (autoload 'haskell-indent-mode "haskell-indent" "\
@@ -1196,7 +1194,7 @@ Invokes `haskell-indent-hook' if not nil.
 ;;;***
 
 ;;;### (autoloads (haskell-doc-show-type haskell-doc-mode) "haskell-doc"
-;;;;;;  "haskell-mode-2.4/haskell-doc.el" (18271 24003))
+;;;;;;  "haskell-mode-2.4/haskell-doc.el" (19265 25913))
 ;;; Generated autoloads from haskell-mode-2.4/haskell-doc.el
 
 (autoload 'haskell-doc-mode "haskell-doc" "\
@@ -1219,7 +1217,7 @@ current buffer.
 ;;;***
 
 ;;;### (autoloads (haskell-decl-scan-mode) "haskell-decl-scan" "haskell-mode-2.4/haskell-decl-scan.el"
-;;;;;;  (18271 24057))
+;;;;;;  (19265 25913))
 ;;; Generated autoloads from haskell-mode-2.4/haskell-decl-scan.el
 
 (autoload 'haskell-decl-scan-mode "haskell-decl-scan" "\
@@ -1269,7 +1267,7 @@ Invokes `haskell-decl-scan-mode-hook'.
 ;;;***
 
 ;;;### (autoloads (haskell-cabal-mode) "haskell-cabal" "haskell-mode-2.4/haskell-cabal.el"
-;;;;;;  (18231 1867))
+;;;;;;  (19265 25913))
 ;;; Generated autoloads from haskell-mode-2.4/haskell-cabal.el
 
 (add-to-list 'auto-mode-alist '("\\.cabal\\'" . haskell-cabal-mode))
@@ -1282,7 +1280,7 @@ Major mode for Cabal package description files.
 ;;;***
 
 ;;;### (autoloads (haskell-c-mode) "haskell-c" "haskell-mode-2.4/haskell-c.el"
-;;;;;;  (18170 47169))
+;;;;;;  (19265 25913))
 ;;; Generated autoloads from haskell-mode-2.4/haskell-c.el
 
 (add-to-list 'auto-mode-alist '("\\.hsc\\'" . haskell-c-mode))
@@ -1308,7 +1306,7 @@ Major mode for Haskell FFI files.
 ;;;;;;  rs-gnus-summary-tree-arrows-test rs-gnus-summary-tree-arrows-wide
 ;;;;;;  rs-gnus-summary-tree-arrows-latin rs-gnus-summary-tree-arrows-ascii
 ;;;;;;  rs-gnus-summary-tree-arrows-ascii-default) "rs-gnus-summary"
-;;;;;;  "slightly-modified/rs-gnus-summary.el" (18867 57586))
+;;;;;;  "slightly-modified/rs-gnus-summary.el" (19265 25913))
 ;;; Generated autoloads from slightly-modified/rs-gnus-summary.el
 
 (autoload 'rs-gnus-summary-tree-arrows-ascii-default "rs-gnus-summary" "\
@@ -1502,7 +1500,7 @@ Kill thread from here using leafnode.
 ;;;***
 
 ;;;### (autoloads (bbdb-vcard-export-update-all) "bbdb-vcard-export"
-;;;;;;  "slightly-modified/bbdb-vcard-export.el" (19037 54896))
+;;;;;;  "slightly-modified/bbdb-vcard-export.el" (19265 25913))
 ;;; Generated autoloads from slightly-modified/bbdb-vcard-export.el
 
 (autoload 'bbdb-vcard-export-update-all "bbdb-vcard-export" "\
