@@ -764,17 +764,6 @@ passphrase cache or user."
               s nil)))
     ret))
 
-
-;; ,----
-;; | pabbrev
-;; `----
-
-;; (require 'pabbrev)
-;; (setq pabbrev-idle-timer-verbose nil)
-;; (global-pabbrev-mode 1)
-
-;; (put 'term-mode 'pabbrev-global-mode-excluded-modes t)
-
 ;; ,----
 ;; | auto-complete
 ;; `----

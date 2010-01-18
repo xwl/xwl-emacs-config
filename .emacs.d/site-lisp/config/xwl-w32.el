@@ -24,8 +24,9 @@
 (defun xwl-w32-get-drives ()
   "Get a list of drive names from get_drives.py."
   (read
-   (shell-command-to-string 
-    (shell-quote-argument (expand-file-name "~/w32/get_drives.py")))))
+   (shell-command-to-string  
+    (concat "python "
+	    (shell-quote-argument (expand-file-name "~/w32/get_drives.py"))))))
 
 (setq xwl-w32-drives (xwl-w32-get-drives))
 
