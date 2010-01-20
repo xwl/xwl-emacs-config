@@ -1,6 +1,6 @@
 ;;; xwl-org.el --- configs for org-mode
 
-;; Copyright (C) 2008, 2009 William Xu
+;; Copyright (C) 2008, 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -23,7 +23,7 @@
 
 ; (require 'org-install)
 
-(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(add-to-list 'auto-mode-alist '("\\.org$\\|todo\\.org_archive" . org-mode))
 
 (setq org-agenda-files '("~/notes/todo.org"))
 

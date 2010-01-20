@@ -1,12 +1,12 @@
 ;;; xwl-tex.el --- TeX or LaTeX config
 
-;; Copyright (C) 2009 William Xu
+;; Copyright (C) 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation; either version 2, or (at your option)
+;; the Free Software Foundation; either version 3, or (at your option)
 ;; any later version.
 ;;
 ;; This program is distributed in the hope that it will be useful,
@@ -134,7 +134,7 @@
 ;; -------
 (require 'texinfo)
 (when (eq system-type 'darwin)
-  (setq makeinfo-run-commands 
+  (setq makeinfo-run-command
         "~/repo/cvs/texinfo/makeinfo/makeinfo"))
 
 ;; (define-key Texinfo-mode-map (kbd "C-c g c") 'makeinfo-buffer)
