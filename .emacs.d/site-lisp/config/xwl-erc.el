@@ -1,6 +1,6 @@
 ;;; xwl-erc.el --- erc config
 
-;; Copyright (C) 2007, 2008, 2009 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -164,6 +164,11 @@ so as to keep an eye on work when necessarily."
 ;; (global-set-key (kbd "C-c C-@") 'xwl-erc-track-switch-buffer-by-face-priority)
 ;; (global-set-key (kbd "C-c RET") 'xwl-erc-track-switch-buffer-by-face-priority)
 
+(defadvice erc-track-switch-buffer (before place-point-to-bottom activate)
+  (when (memq (current-buffer) (erc-buffer-list))
+    (goto-char (point-max))
+    (forward-line -1)))
+
 ;; fill
 (require 'erc-fill)
 (erc-fill-mode 1)
@@ -289,7 +294,7 @@ so as to keep an eye on work when necessarily."
       (let ((sv "localhost")
             (nick "xwl__"))
         (when (eq system-type 'windows-nt)
-          (setq sv "172.28.206.207")
+          (setq sv (xwl-w32-redirect-host))
           (setq nick "xwl_"))
 
         (erc-select :server sv :port 16667 :nick nick :password pwerc) 
@@ -370,6 +375,7 @@ so as to keep an eye on work when necessarily."
 
 (when (xwl-tty-p)
   (global-set-key (kbd "C-c RET") (kbd "C-c C-@")))
+
 
 (provide 'xwl-erc)
 

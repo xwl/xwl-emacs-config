@@ -29,13 +29,14 @@
 (emms-devel)
 ;; (emms-lastfm-enable)
 
-(emms-default-players)
+;; (emms-default-players)
 
-;;   (setq emms-player-list
-;; ;;	emms-setup-default-player-list
-
-;; '(emms-player-mplayer emms-player-mpg321 emms-player-ogg123 emms-player-mplayer-playlist emms-player-mplayer emms-player-vlc))
-
+(setq emms-player-list
+      '(emms-player-mplayer
+        emms-player-mplayer-playlist
+        emms-player-mpg321
+        emms-player-ogg123
+        emms-player-vlc))
 
 (setq emms-player-mpg321-command-name "mpg123")
 

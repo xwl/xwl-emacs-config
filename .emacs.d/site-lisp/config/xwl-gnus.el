@@ -1,12 +1,12 @@
 ;;; xwl-gnus.el --- Gnus config
 
-;; Copyright (C) 2007, 2008, 2009 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation; either version 2, or (at your option)
+;; the Free Software Foundation; either version 3, or (at your option)
 ;; any later version.
 ;;
 ;; This program is distributed in the hope that it will be useful,
@@ -35,8 +35,8 @@
 
 (setq gnus-select-method
       (if xwl-at-company-p
-          '(nntp "news.gmane.org"
-                 (nntp-address "172.28.206.207")
+          `(nntp "news.gmane.org"
+                 (nntp-address ,(xwl-w32-redirect-host))
                  (nntp-port-number 10119))
         '(nntp "news.gmane.org")))
 ;;              (nntp-open-connection-function nntp-open-via-rlogin-and-telnet)
@@ -72,12 +72,13 @@
         ;;   http://www.arcorhome.de/newshamster/tgl/misc/hamster_en.html
 
         ,@(if xwl-at-company-p
-              '(;; (nnimap "imap.gmail.com"
-                ;;         (nnimap-address "localhost")
+              `(;; (nnimap "imap.gmail.com"
+                ;;         (nnimap-address ,(xwl-w32-redirect-host))
                 ;;         (nnimap-server-port 10993)
                 ;;         (nnimap-stream ssl))
+
                 (nntp "news.cn99.com"
-                      (nntp-address "172.28.206.207")
+                      (nntp-address ,(xwl-w32-redirect-host))
                       (nntp-port-number 11119))
                 )
             '(;; (nnimap "imap.gmail.com"
@@ -279,12 +280,7 @@
 
 ;;; Chinese Stuffs
 
-(if (< emacs-major-version 23)
-    ;; Workaround for unsupported charsets.
-    (progn
-      (define-coding-system-alias 'gb18030 'gb2312)
-      (define-coding-system-alias 'gbk 'gb2312))
-  (define-coding-system-alias 'x-gbk 'gb18030))
+(define-coding-system-alias 'x-gbk 'gb18030)
 
 (eval-after-load "gnus"
   '(progn
@@ -655,11 +651,11 @@
 
 (global-set-key (kbd "<f6>") '(lambda ()
                                 (interactive)
-                                ;; (if xwl-at-company-p
+                                (if xwl-at-company-p
                                     (xwl-gnus)
-                                  ;; (message "Hmm, only run when at company")
-                                  ;; )
-                ))
+                                  (message "Hmm, only run when at company")
+                                  )
+                                ))
 
 (setq gnus-permanently-visible-groups
       (regexp-opt `(;; "savings"
@@ -696,9 +692,22 @@
 
 (defalias 'gnus-user-format-function-ct 'rs-gnus-summary-line-content-type)
 
+(defun gnus-user-format-function-from (head)
+  "Trim `From:' to 20 bytes."
+  (let* ((re "[\" ]")
+         (from 
+          (replace-regexp-in-string 
+           (format "^%s+\\|%s+$" re re) 
+           ""
+           (replace-regexp-in-string 
+            "<.*>" "" (gnus-header-from head)))))
+    (when (> (length from) 20)
+      (setq from (concat (substring from 0 18) "..")))
+    (format "%-20s" from)))
+
 ;;(setq gnus-summary-line-format "%U%R%z%-6d  %5k  %-20f%B%s\n")
 (setq gnus-summary-line-format
-      "%U%R%z%10&user-date; %u&ct; %5k  %-20f%B(%t) %s\n")
+      "%U%R%z%10&user-date; %u&ct; %5k  %u&from; %B(%t) %s\n")
 
 (defun xwl-gnus-summary-tree-plain ()
   "My old plain summary tree."
@@ -754,9 +763,8 @@
 ;; - `*': put it in the cache, and use `Y c' to show it later
 (setq gnus-use-cache 'passive)
 
-(if (< emacs-major-version 23)
-    (xwl-gnus-summary-tree-plain)
-  (rs-gnus-summary-tree-arrows-wide))
+;; (xwl-gnus-summary-tree-plain)
+(rs-gnus-summary-tree-arrows-wide)
 
 ;; ,----
 ;; | threading

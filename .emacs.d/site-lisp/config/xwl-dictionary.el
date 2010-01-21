@@ -32,7 +32,7 @@
 ;;         dictionary-proxy-server xwl-proxy-server))
 
 (when xwl-at-company-p
-  (setq dictionary-server "172.28.206.207")
+  (setq dictionary-server (xwl-w32-redirect-host))
   (setq dictionary-port 12628))
 
 (setq dictionary-default-dictionary "*") ;"wn"

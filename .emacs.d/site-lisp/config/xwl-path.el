@@ -1,6 +1,6 @@
 ;;; xwl-path.el --- path setup
 
-;; Copyright (C) 2009 William Xu
+;; Copyright (C) 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -36,14 +36,6 @@
             "~/etc"
                     
             "~/repo/cvs/cedet/common"))
-
-(when (< emacs-major-version 23)
-  (setq load-path `("~/repo/git/erc"
-                    "~/repo/git/remember"
-                    "~/repo/git/org-mode/lisp"
-                    "~/repo/cvs/tramp/lisp"
-
-                    ,@load-path)))
 
 (setenv "INFOPATH"
         (mapconcat 'identity
@@ -85,7 +77,12 @@
 		       "/usr/X11R6/bin" )
 		     ":")))
 
-(unless (eq system-type 'windows-nt)
+(if (eq system-type 'windows-nt)
+    (progn 
+      ;; (setenv "PATH" (concat (getenv "PATH") ";C:/OpenSSL/bin;C:/Program Files/Haskell/bin;C:/ghc/ghc-6.12.1/bin"))
+      ;; (setq exec-path (split-string (getenv "PATH") ";"))
+      nil)
+
   (setenv "TERM" "xterm-color")
   (setq exec-path (split-string (getenv "PATH") ":")))
 

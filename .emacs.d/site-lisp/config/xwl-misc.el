@@ -1,12 +1,12 @@
 ;;; xwl-misc.el --- miscellaneous
 
-;; Copyright (C) 2007, 2008, 2009 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation; either version 2, or (at your option)
+;; the Free Software Foundation; either version 3, or (at your option)
 ;; any later version.
 ;;
 ;; This program is distributed in the hope that it will be useful,
@@ -350,6 +350,8 @@ prompts for name field."
     ;;                (string= (buffer-file-name) qterm-log-file))
     ;;     (nuke-trailing-whitespace))
 
+    (copyright-update)
+
     nil))
 
 
@@ -398,9 +400,8 @@ prompts for name field."
 
 ;; (remove-hook 'find-file-hook 'bracketphobia-hide)
 
-;; maximize frame
-
-(progn
+(defun xwl-after-init-hook ()
+  ;; maximize frame
   (case window-system
     ((mac)
      (require 'maxframe)
@@ -414,10 +415,48 @@ prompts for name field."
      )
     ((w32)
      (w32-send-sys-command #xf030)))
-  
+
   ;; NOTE: We have to call `frame-width' when window has been maximized.
   ;; (setq erc-fill-column (- (round (/ (frame-width) 2)) 5))
-  )
+  
+  (unless noninteractive
+    ;; (shell-command "sudo ~/bin/.xwl-after-start-hook")
+    ;; (setq display-time-mail-file 'no-check)
+
+    ;; On w32: `emacsclient.exe --server-file c:\repo\xwl-emacs-environment\.emacs.d\server\server -n %*'
+    (ignore-errors (server-start))
+
+    (when (executable-find "fortune-zh")
+      (setq xwl-idle-timer
+            (run-with-idle-timer 300 t 'xwl-run-when-idle-hook)))
+
+    ;; EMMS
+    ;; (emms-add-directory-tree emms-source-file-default-directory)
+    ;; (emms-playlist-sort-by-score)
+    ;; (xwl-erc-select)
+    (unless (xwl-check-holidays)
+      (find-file "~/.scratch")
+      ;; (xwl-todo-find-do)
+      (delete-other-windows)
+      (message (substring (emacs-version) 0 16)))
+    ;; (run-with-timer 0 86400 'xwl-running-daily) ; dialy stuffs
+    ;; (xwl-weather-update)
+
+    ;; Run this as the last step.
+    ;; (run-at-time 3 
+    ;;              nil
+    ;;              '(lambda ()
+    (color-theme-xwl-console)
+
+    (when window-system 
+      (require 'highlight-tail)
+      (setq highlight-tail-colors  '(("#bc2525" . 0)))
+      ;; '(("#d8971d" . 0)))
+      (highlight-tail-reload))
+    ;; ))
+    ))
+
+(add-hook 'after-init-hook 'xwl-after-init-hook)
 
 (autoload 'file-template-find-file-not-found-hook "file-template" nil t)
 (add-hook 'find-file-not-found-hooks 'file-template-find-file-not-found-hook 'append)
@@ -463,9 +502,8 @@ prompts for name field."
 
 ;; (require 'faith)
 
-(when (< emacs-major-version 23)
-  (require 'page-break)
-  (turn-on-page-break-mode))
+;; (require 'page-break)
+;; (turn-on-page-break-mode)
 
 (setq image-file-name-regexps
       (mapcar (lambda (el)
@@ -669,12 +707,6 @@ prompts for name field."
 
 ;; (add-hook 'newsticker-mode-hook 'less-minor-mode-on)
 
-;; prepend drive name on buffer on w32
-(defadvice uniquify-get-proposed-name (after prepend-drive-name activate)
-  (when (eq system-type 'windows-nt)
-    (setq ad-return-value
-          (concat (substring (ad-get-arg 1) 0 3) "/" ad-return-value))))
-
 ;; (setq inhibit-eol-conversion nil)
 
 
@@ -732,17 +764,6 @@ passphrase cache or user."
               s nil)))
     ret))
 
-
-;; ,----
-;; | pabbrev
-;; `----
-
-;; (require 'pabbrev)
-;; (setq pabbrev-idle-timer-verbose nil)
-;; (global-pabbrev-mode 1)
-
-;; (put 'term-mode 'pabbrev-global-mode-excluded-modes t)
-
 ;; ,----
 ;; | auto-complete
 ;; `----
@@ -751,6 +772,18 @@ passphrase cache or user."
 (require 'auto-complete-config)
 (global-auto-complete-mode 1)
 (setq ac-auto-start 3)
+
+(defun auto-complete-mode-maybe ()
+  "What buffer `auto-complete-mode' prefers."
+  (if (and (not (minibufferp (current-buffer)))
+           ;; xwl: Enable for all mode.
+           ;; (memq major-mode ac-modes)
+           )
+      (auto-complete-mode 1)))
+
+(add-hook 'log-edit-mode-hook (lambda () (smart-operator-mode -1)))
+
+(add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
 
 (provide 'xwl-misc)
 

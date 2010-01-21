@@ -1,6 +1,6 @@
 ;;; xwl-help.el --- Getting help
 
-;; Copyright (C) 2008 William Xu
+;; Copyright (C) 2008, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 ;; Version: 0.1
@@ -30,10 +30,6 @@
 
 (eval-after-load "help-fns"
   '(progn
-     (defun xwl-split-window-horizontally ()
-       (when (< emacs-major-version 23)
-         (split-window-horizontally)))
-
      (defadvice describe-function (around jump-to-help activate)
        (cond
         ((eq major-mode 'help-mode)
@@ -46,7 +42,6 @@
          ad-do-it
          (other-window 1))
         (t
-         (xwl-split-window-horizontally)
          ad-do-it
          (other-window 1))))
 
@@ -62,7 +57,6 @@
          ad-do-it
          (other-window 1))
         (t
-         (xwl-split-window-horizontally)
          ad-do-it
          (other-window 1))))
 
@@ -78,7 +72,6 @@
          ad-do-it
          (other-window 1))
         (t
-         (xwl-split-window-horizontally)
          ad-do-it
          (other-window 1))))
 
@@ -94,7 +87,6 @@
          ad-do-it
          (other-window 1))
         (t
-         (xwl-split-window-horizontally)
          ad-do-it
          (other-window 1))))
 
@@ -110,7 +102,6 @@
          ad-do-it
          (other-window 1))
         (t
-         (xwl-split-window-horizontally)
          ad-do-it
          (other-window 1))))
      ))

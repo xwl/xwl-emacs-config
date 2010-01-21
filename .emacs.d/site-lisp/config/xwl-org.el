@@ -1,6 +1,6 @@
 ;;; xwl-org.el --- configs for org-mode
 
-;; Copyright (C) 2008, 2009 William Xu
+;; Copyright (C) 2008, 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -23,7 +23,7 @@
 
 ; (require 'org-install)
 
-(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(add-to-list 'auto-mode-alist '("\\.org$\\|todo\\.org_archive" . org-mode))
 
 (setq org-agenda-files '("~/notes/todo.org"))
 
@@ -46,7 +46,7 @@
      (org-defkey org-agenda-mode-map "m" 'org-agenda-month-view)
 
      (setq org-calendar-agenda-action-key [?K])
-     (org-defkey org-agenda-mode-map [?k] 'calendar-backward-week)
+     (define-key calendar-mode-map [?k] 'calendar-backward-week)
 
      (defadvice org-agenda-day-view (around leave-ndays-alone activate)
        "Do not touch `org-agenda-ndays' please!"
@@ -85,6 +85,20 @@
 (setq org-agenda-format-date "%m-%d %a")
 
 (setq org-agenda-show-all-dates nil)
+
+(defun xwl-org-todo (todo)
+  "Read TODO from minibuffer and append it to car of `org-agenda-files'. "
+  (interactive "sTODO: ")
+  (let ((f (car org-agenda-files)))
+    (with-current-buffer (find-file-noselect f)
+      (goto-char (point-max))
+      (unless (bolp)
+        (newline))
+      (insert "** TODO " todo)
+      (newline)
+      (save-buffer))))
+
+(global-set-key (kbd "C-c t") 'xwl-org-todo)
 
 ;; remember
 (add-hook 'remember-mode-hook 'org-remember-apply-template)

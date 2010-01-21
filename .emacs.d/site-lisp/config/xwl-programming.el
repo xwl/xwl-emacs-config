@@ -1,12 +1,12 @@
 ;;; xwl-programming.el --- programming config
 
-;; Copyright (C) 2007, 2009 William Xu
+;; Copyright (C) 2007, 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation; either version 2, or (at your option)
+;; the Free Software Foundation; either version 3, or (at your option)
 ;; any later version.
 ;;
 ;; This program is distributed in the hope that it will be useful,
@@ -169,7 +169,7 @@ Thus generate a TAGs file."
 (defun xwl-sh-run ()
   (interactive)
   (shell-command
-   (concat "sh " (xwl-resolve-file-name (buffer-file-name) "f"))))
+   (concat "sh " (file-name-nondirectory (buffer-file-name)))))
 
 (defun xwl-sh-mode-hook()
   ;; (set (make-local-variable 'outline-regexp) "###+ ")
@@ -261,11 +261,57 @@ Thus generate a TAGs file."
 ;;;; version systems
 ;; -----------------
 
-
 (add-hook 'log-view-mode-hook 'less-minor-mode-on)
 
 (add-to-list 'vc-handled-backends 'DARCS)
 (setq vc-darcs-mail-address "William Xu <william.xwl@gmail.com>")
+
+(global-set-key (kbd "C-x v p") (lambda () (interactive) (compile "git push")))
+
+(global-set-key (kbd "C-c k") 
+                (lambda ()
+                  (interactive) 
+                  (kill-new (file-name-nondirectory (buffer-file-name)))
+                  (message "Filenamed copied")))
+
+(global-set-key (kbd "C-c K") 
+                (lambda ()
+                  (interactive) 
+                  (kill-new (buffer-file-name))
+                  (message "Full filenamed copied")))
+
+(eval-after-load 'vc-dir
+  '(progn
+     (defun vc-dir-hide-up-to-date ()
+       "Hide up-to-date items from display."
+       (interactive)
+       (let ((crt (ewoc-nth vc-ewoc -1))
+             (first (ewoc-nth vc-ewoc 0)))
+         ;; Go over from the last item to the first and remove the
+         ;; up-to-date files and directories with no child files.
+         (while (not (eq crt first))
+           (let* ((data (ewoc-data crt))
+                  (dir (vc-dir-fileinfo->directory data))
+                  (next (ewoc-next vc-ewoc crt))
+                  (prev (ewoc-prev vc-ewoc crt))
+                  ;; ewoc-delete does not work without this...
+                  (inhibit-read-only t))
+             (when (or
+                    ;; Remove directories with no child files.
+                    (and dir
+                         (or
+                          ;; Nothing follows this directory.
+                          (not next)
+                          ;; Next item is a directory.
+                          (vc-dir-fileinfo->directory (ewoc-data next))))
+                    ;; Remove files in the up-to-date state.
+                    (or (eq (vc-dir-fileinfo->state data) 'up-to-date)
+                        ;; xwl: hide unregistered as well.
+                        (eq (vc-dir-fileinfo->state data) 'unregistered))
+                    )
+               (ewoc-delete vc-ewoc crt))
+             (setq crt prev)))))
+     ))
 
 ;;;; skeletons
 ;; -----------
@@ -355,7 +401,7 @@ Thus generate a TAGs file."
       grep-find-command (concat "find . -type f -print0 | xargs -0 "
                                 grep-command))
 
-(global-set-key (kbd "C-c m g") 'grep)
+(global-set-key (kbd "C-c g") 'grep)
 (global-set-key (kbd "C-c m G") 'grep-find)
 
 (make-face 'font-lock-fixme-face)
@@ -536,9 +582,15 @@ If SCHEME?, `run-scheme'."
   (turn-on-haskell-indent)
   (turn-on-haskell-simple-indent)
 
-  (glasses-mode 1))
+  (glasses-mode 1)
+  (smart-operator-mode))
+
+(defun xwl-inferior-haskell-mode-hook ()
+  (glasses-mode 1)
+  (smart-operator-mode))
 
 (add-hook 'haskell-mode-hook 'xwl-haskell-mode-hook)
+(add-hook 'inferior-haskell-mode-hook 'xwl-inferior-haskell-mode-hook)
 
 (global-set-key (kbd "C-c i h") 'run-haskell)
 
@@ -619,8 +671,8 @@ If SCHEME?, `run-scheme'."
              ;; keep the compilation window for now.
              ("\\.mmp$\\|\\.inf$"
               ;; "((dir | grep ABLD.BAT) || bldmake bldfiles) && abld build winscw udeb && xxx"
-              "sbs -c winscw_udeb && yyy"
-              t
+              "sbs -c winscw_udeb && yy"
+              nil
               "epoc"
               )
 
@@ -812,7 +864,24 @@ Useful for packing c/c++ functions with one line or empty body."
 ;; | ediff
 ;; `----
 
-(global-set-key (kbd "C-x v =") 'ediff-revision)
+(require 'ediff)
+
+(defun xwl-ediff-revision ()
+  "Compare current state with latest revision, no questions please."
+  (interactive)
+  (if (and (buffer-modified-p)
+	   (y-or-n-p (format "Buffer %s is modified. Save buffer? "
+                             (buffer-name))))
+      (save-buffer (current-buffer)))
+  (let ((rev1 "")
+        (rev2 "")
+        (startup-hooks '()))
+    (ediff-load-version-control)
+    (funcall
+     (intern (format "ediff-%S-internal" ediff-version-control-package))
+     rev1 rev2 startup-hooks)))
+
+(global-set-key (kbd "C-x v =") 'xwl-ediff-revision)
 
 (global-set-key (kbd "C-c E b") 'ediff-buffers)
 (global-set-key (kbd "C-c E f") 'ediff-files)
