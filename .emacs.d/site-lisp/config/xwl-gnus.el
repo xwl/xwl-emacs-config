@@ -694,7 +694,13 @@
 
 (defun gnus-user-format-function-from (head)
   "Trim `From:' to 20 bytes."
-  (let ((from (replace-regexp-in-string " *<.*>" "" (gnus-header-from head))))
+  (let* ((re "[\" ]")
+         (from 
+          (replace-regexp-in-string 
+           (format "^%s+\\|%s+$" re re) 
+           ""
+           (replace-regexp-in-string 
+            "<.*>" "" (gnus-header-from head)))))
     (when (> (length from) 20)
       (setq from (concat (substring from 0 18) "..")))
     (format "%-20s" from)))
