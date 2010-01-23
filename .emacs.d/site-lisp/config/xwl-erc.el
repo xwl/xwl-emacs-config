@@ -397,7 +397,7 @@ so as to keep an eye on work when necessarily."
   (defun xwl-erc-hook (match-type nickuserhost message)
     "Shows a growl notification, when user's nick was mentioned.
 If the buffer is currently not visible, makes it sticky."
-    (when (erc-match-current-nick-p nickuserhost msg)
+    (when (erc-match-current-nick-p nickuserhost message)
       (xwl-growl
        (concat "ERC: name mentioned on: " (buffer-name (current-buffer)))
        message)))
