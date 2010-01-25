@@ -76,7 +76,7 @@
 (keyboard-translate ?\C-i ?\M-%)
 
 ;; (when (eq window-system 'w32)
-;;   (unless xwl-at-company-p
+;;   (unless xwl-at-company?
 ;;     (setq explicit-shell-file-name "c:/cygwin/bin/bash.exe")
 ;;     (setq shell-file-name explicit-shell-file-name)))
 

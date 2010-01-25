@@ -183,7 +183,7 @@ prompts for name field."
   (not (memq major-mode
              nuke-trailing-whitespace-never-major-modes)))
 
-;; (unless xwl-at-company-p
+;; (unless xwl-at-company?
 ;;   (add-hook 'write-file-functions 'xwl-write-file-functions))
 
 (add-hook 'wordnet-mode-hook 'less-minor-mode-on)
