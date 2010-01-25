@@ -731,8 +731,7 @@ This should not affect `buffer-undo-list'."
   (setq xwl-w3m-arguments
         (list "-o" (format "http_proxy=http://%s:%d"
                            xwl-proxy-server
-                           xwl-proxy-port)))
-  (xwl-w32-redirect))
+                           xwl-proxy-port))))
 
 (provide 'xwl-util)
 
