@@ -300,6 +300,7 @@ so as to keep an eye on work when necessarily."
         (erc-select :server sv :port 16667 :nick nick :password pwerc) 
         (erc-select :server sv :port 16669 :nick nick :password pwdeb) 
         (erc-select :server sv :port 16668 :nick nick :password pwerc))
+
     (erc-select :server "irc.debian.org" ; "localhost"
                 :port 6669               ; 16669
                 :nick "xwl"
@@ -320,18 +321,20 @@ so as to keep an eye on work when necessarily."
 ;;; 	      :nick "xwl"
 ;;; 	      :password "")
 
- ;; (when (and (not (get-buffer "localhost:6667"))
- ;;            (eq system-type 'darwin))
- ;;   (erc-select :server "localhost"
- ;;               :port 6667
- ;;               :nick "william"
- ;;               :password pwbitlbee))
-
 ;;   (erc-select :server "nsx-r"
 ;; 	      :port 6667
 ;; 	      :nick "william"
 ;; 	      :password "")
   ))
+
+(defun xwl-erc-select-bitlbee ()
+  (interactive)
+  (if (get-buffer "&bitlbee")
+      (message "Buffer &bitlbee already exists?")
+    (erc-select :server "localhost"
+                :port (if xwl-at-company? 26667 6667)
+                :nick "william"
+                :password pwbitlbee)))
 
 (global-set-key (kbd "C-c n E") 'xwl-erc-select)
 
