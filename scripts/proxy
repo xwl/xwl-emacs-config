@@ -1,0 +1,14 @@
+#!/bin/sh
+
+proxy=172.16.42.137
+port=8080
+
+desproxy irc.debian.org    6669 $proxy $port 16669 &
+desproxy irc.freenode.net  6667 $proxy $port 16667 &
+desproxy irc.lnx.nokia.com 6668 $proxy $port 16668 &
+
+desproxy news.gmane.org    119  $proxy $port 10119 &
+desproxy news.cn99.com     119  $proxy $port 11119 &
+
+desproxy dict.org          2628 $proxy $port 12628 &
+desproxy github.com        22   $proxy $port 10022 &

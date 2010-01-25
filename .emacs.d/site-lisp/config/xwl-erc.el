@@ -290,11 +290,11 @@ so as to keep an eye on work when necessarily."
 
 (defun xwl-erc-select ()
   (interactive)
-  (if xwl-at-company-p
+  (if xwl-at-company?
       (let ((sv "localhost")
             (nick "xwl__"))
         (when (eq system-type 'windows-nt)
-          (setq sv (xwl-w32-redirect-host))
+          (setq sv (xwl-redirect-host))
           (setq nick "xwl_"))
 
         (erc-select :server sv :port 16667 :nick nick :password pwerc) 

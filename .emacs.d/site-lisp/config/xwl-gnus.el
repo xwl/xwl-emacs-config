@@ -34,9 +34,9 @@
       gnus-use-cross-reference nil)
 
 (setq gnus-select-method
-      (if xwl-at-company-p
+      (if xwl-at-company?
           `(nntp "news.gmane.org"
-                 (nntp-address ,(xwl-w32-redirect-host))
+                 (nntp-address ,(xwl-redirect-host))
                  (nntp-port-number 10119))
         '(nntp "news.gmane.org")))
 ;;              (nntp-open-connection-function nntp-open-via-rlogin-and-telnet)
@@ -71,14 +71,14 @@
         ;; gmail using IMAP. Maybe try hamster some timer later.
         ;;   http://www.arcorhome.de/newshamster/tgl/misc/hamster_en.html
 
-        ,@(if xwl-at-company-p
+        ,@(if xwl-at-company?
               `(;; (nnimap "imap.gmail.com"
-                ;;         (nnimap-address ,(xwl-w32-redirect-host))
+                ;;         (nnimap-address ,(xwl-redirect-host))
                 ;;         (nnimap-server-port 10993)
                 ;;         (nnimap-stream ssl))
 
                 (nntp "news.cn99.com"
-                      (nntp-address ,(xwl-w32-redirect-host))
+                      (nntp-address ,(xwl-redirect-host))
                       (nntp-port-number 11119))
                 )
             '(;; (nnimap "imap.gmail.com"
@@ -651,7 +651,7 @@
 
 (global-set-key (kbd "<f6>") '(lambda ()
                                 (interactive)
-                                (if xwl-at-company-p
+                                (if xwl-at-company?
                                     (xwl-gnus)
                                   (message "Hmm, only run when at company")
                                   )

@@ -514,18 +514,18 @@ yacc source files."
 
 ;; (ad-activate 'scheme-send-last-sexp)
 
-(autoload 'scheme-smart-complete "scheme-complete" nil t)
-(eval-after-load 'scheme
-  '(progn
-     (define-key scheme-mode-map (kbd "<S-tab>") 'scheme-smart-complete)
-     ))
+;; (autoload 'scheme-smart-complete "scheme-complete" nil t)
+;; (eval-after-load 'scheme
+;;   '(progn
+;;      (define-key scheme-mode-map (kbd "<S-tab>") 'scheme-smart-complete)
+;;      ))
 
-(autoload 'scheme-get-current-symbol-info "scheme-complete" nil t)
-(add-hook 'scheme-mode-hook
-  (lambda ()
-    (make-local-variable 'eldoc-documentation-function)
-    (setq eldoc-documentation-function 'scheme-get-current-symbol-info)
-    (eldoc-mode)))
+;; (autoload 'scheme-get-current-symbol-info "scheme-complete" nil t)
+;; (add-hook 'scheme-mode-hook
+;;   (lambda ()
+;;     (make-local-variable 'eldoc-documentation-function)
+;;     (setq eldoc-documentation-function 'scheme-get-current-symbol-info)
+;;     (eldoc-mode)))
 
 ;; (setq default-scheme-implementation
 

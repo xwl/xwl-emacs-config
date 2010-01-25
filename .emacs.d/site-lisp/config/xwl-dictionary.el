@@ -26,13 +26,13 @@
 ;; `----
 
 ;; search online
-;; (when xwl-at-company-p
+;; (when xwl-at-company?
 ;;   (setq dictionary-use-http-proxy t
 ;;         dictionary-proxy-port xwl-proxy-port
 ;;         dictionary-proxy-server xwl-proxy-server))
 
-(when xwl-at-company-p
-  (setq dictionary-server (xwl-w32-redirect-host))
+(when xwl-at-company?
+  (setq dictionary-server (xwl-redirect-host))
   (setq dictionary-port 12628))
 
 (setq dictionary-default-dictionary "*") ;"wn"

@@ -28,8 +28,6 @@
     (concat "python "
 	    (shell-quote-argument (expand-file-name "~/w32/get_drives.py"))))))
 
-(setq xwl-w32-drives (xwl-w32-get-drives))
-
 ;; Prepend drive name on buffer on w32
 (defadvice uniquify-get-proposed-name (after prepend-drive-name activate)
   (let ((d (upcase (substring (ad-get-arg 1) 0 1))))
@@ -91,10 +89,8 @@
               ;; )))
   )
 
-(defun xwl-w32-redirect-host ()
-  (if xwl-w32-redirect-locally?
-      "localhost"
-    "172.28.206.207"))
+(when xwl-w32?
+  (setq xwl-w32-drives (xwl-w32-get-drives)))
 
 (provide 'xwl-w32)
 ;;; xwl-w32.el ends here
