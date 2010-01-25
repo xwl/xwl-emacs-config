@@ -590,42 +590,7 @@ prompts for name field."
 ;; C-x r w
 ;; C-x r j
 
-;; ,----
-;; | after-save-hook
-;; `----
-
-(defun xwl-chmod-file-executable ()
-  "Make scripts executable if necessary."
-  (let ((filename (buffer-file-name))
-	(cmd (shell-command-to-string
-	      "which -a sh bash expect perl octave guile scsh python dtrace"))
-	(exec-signal nil))
-
-    (setq exec-signal
-	  (concat "^#!\\ ?\\("
-		  (replace-regexp-in-string "\n" "\\|"
-					    (substring cmd 0 (1- (length cmd))) nil t)
-		  "\\)"))
-
-    ;; shell-command returns 0 if succeeds, or positive digit if fails.
-    (save-excursion
-      (goto-char (point-min))
-      (if (looking-at exec-signal)
-	  ;; executable already or tramp file ?
-	  (if (or (zerop (shell-command (concat "test -x " filename)))
-                  (file-remote-p (buffer-file-name)))
-	      (message (concat "Wrote " filename))
-	    (progn
-	      (shell-command (concat "chmod u+x " filename))
-	      (message (concat "Wrote and made executable " filename))))
-	(message (concat "Wrote " filename))))))
-
-(defun xwl-after-save-hook ()
-  (xwl-chmod-file-executable))
-
-;; Note: this might make saving slower if calling `which' is slow.
-(unless (eq system-type 'windows-nt)
-  (add-hook 'after-save-hook 'xwl-after-save-hook))
+(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
 ;; ,----
 ;; | sawfish
