@@ -406,6 +406,20 @@ If the buffer is currently not visible, makes it sticky."
 
 (add-hook 'erc-text-matched-hook 'xwl-erc-text-matched-hook)
 
+(defun xwl-erc-PRIVMSG (proc parsed)
+  (let ((buf (buffer-name (current-buffer))))
+    (unless (string-match ":\\|&" buf)
+      (let ((s (concat "ERC: " (buffer-name (current-buffer)))))
+        (case system-type
+          ((darwin)
+           (xwl-growl s message))
+          ((gnu/linux)
+           (xwl-shell-command-asynchronously 
+            (format "zenity --info --text \"%s\"" s))))))))
+
+(add-hook 'erc-server-PRIVMSG-functions 'xwl-erc-PRIVMSG)
+
+
 (provide 'xwl-erc)
 
 ;;; xwl-erc.el ends here
