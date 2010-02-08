@@ -384,30 +384,41 @@ so as to keep an eye on work when necessarily."
 ;; | growl
 ;; `----
 
-(when (eq system-type 'darwin)
+(setq growlnotify-command (executable-find "growlnotify"))
 
-  (setq growlnotify-command (executable-find "growlnotify"))
+(defun xwl-growl (title message)
+  (start-process "growl" " growl" growlnotify-command title "-a" "Emacs")
+  (process-send-string " growl" message)
+  (process-send-string " growl" "\n")
+  (process-send-eof " growl"))
 
-  (defun xwl-growl (title message)
-    (start-process "growl" " growl"
-                   growlnotify-command
-                   title
-                   "-a" "Emacs")
-    (process-send-string " growl" message)
-    (process-send-string " growl" "\n")
-    (process-send-eof " growl"))
-
-  (defun xwl-erc-hook (match-type nickuserhost message)
-    "Shows a growl notification, when user's nick was mentioned.
+(defun xwl-erc-text-matched-hook (match-type nickuserhost message)
+  "Shows a growl notification, when user's nick was mentioned.
 If the buffer is currently not visible, makes it sticky."
-    (when (erc-match-current-nick-p nickuserhost message)
-      (xwl-growl
-       (concat "ERC: name mentioned on: " (buffer-name (current-buffer)))
-       message)))
+  (when (erc-match-current-nick-p nickuserhost message)
+    (let ((s (concat "ERC: " (buffer-name (current-buffer)))))
+      (case system-type
+        ((darwin)
+         (xwl-growl s message))
+        ((gnu/linux)
+         (xwl-shell-command-asynchronously 
+          (format "zenity --info --text \"%s\"" s)))))))
 
-  (add-hook 'erc-text-matched-hook 'xwl-erc-hook)
+(add-hook 'erc-text-matched-hook 'xwl-erc-text-matched-hook)
 
-  )
+(defun xwl-erc-PRIVMSG (proc parsed)
+  (let ((buf (buffer-name (current-buffer))))
+    (unless (string-match ":\\|&" buf)
+      (let ((s (concat "ERC: " (buffer-name (current-buffer)))))
+        (case system-type
+          ((darwin)
+           (xwl-growl s message))
+          ((gnu/linux)
+           (xwl-shell-command-asynchronously 
+            (format "zenity --info --text \"%s\"" s))))))))
+
+(add-hook 'erc-server-PRIVMSG-functions 'xwl-erc-PRIVMSG)
+
 
 (provide 'xwl-erc)
 
