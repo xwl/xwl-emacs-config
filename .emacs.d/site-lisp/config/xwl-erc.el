@@ -333,6 +333,16 @@ so as to keep an eye on work when necessarily."
 ;; 	      :password "")
   ))
 
+
+(defun xwl-erc-select-bitlbee ()
+  (interactive)
+  (when (and (not (get-buffer "localhost:6667"))
+             (eq system-type 'darwin))
+    (erc-select :server "localhost"
+                :port 6667
+                :nick "william"
+                :password pwbitlbee)))
+
 (global-set-key (kbd "C-c n E") 'xwl-erc-select)
 
 (add-hook 'erc-join-hook 'less-minor-mode-on)
@@ -397,7 +407,8 @@ so as to keep an eye on work when necessarily."
   (defun xwl-erc-hook (match-type nickuserhost message)
     "Shows a growl notification, when user's nick was mentioned.
 If the buffer is currently not visible, makes it sticky."
-    (when (erc-match-current-nick-p nickuserhost message)
+    (when ;; (erc-match-current-nick-p nickuserhost message)
+        (string-match (concat erc-nick ":") message)
       (xwl-growl
        (concat "ERC: name mentioned on: " (buffer-name (current-buffer)))
        message)))
