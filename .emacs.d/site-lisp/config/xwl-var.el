@@ -39,7 +39,7 @@
   ;; (string= (user-login-name) "wixu"))
   (not (eq system-type 'darwin)))
 
-(setq xwl-at-company-p (xwl-at-company))
+(setq xwl-at-company? (xwl-at-company))
 
 (setq xwl-w3m-arguments '())
 

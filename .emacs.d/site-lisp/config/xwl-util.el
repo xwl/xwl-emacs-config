@@ -714,9 +714,14 @@ This should not affect `buffer-undo-list'."
       (setq ret (concat ret (format "%c" (+ min (random (- max min)))))))
     ret))
 
+(defun xwl-redirect-host ()
+  (if xwl-w32-redirect-locally?
+      "localhost"
+    "172.28.206.207"))
+
 ;; Well, as Gnus and other components depend on this, we have to eval this much earlier.
   
-(when (and xwl-at-company-p xwl-w32?)
+(when (and xwl-at-company? xwl-w32?)
   (setq xwl-proxy-server "172.16.42.137"
         xwl-proxy-port 8080)
 
@@ -726,8 +731,7 @@ This should not affect `buffer-undo-list'."
   (setq xwl-w3m-arguments
         (list "-o" (format "http_proxy=http://%s:%d"
                            xwl-proxy-server
-                           xwl-proxy-port)))
-  (xwl-w32-redirect))
+                           xwl-proxy-port))))
 
 (provide 'xwl-util)
 

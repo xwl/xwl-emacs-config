@@ -290,16 +290,17 @@ so as to keep an eye on work when necessarily."
 
 (defun xwl-erc-select ()
   (interactive)
-  (if xwl-at-company-p
+  (if xwl-at-company?
       (let ((sv "localhost")
             (nick "xwl__"))
         (when (eq system-type 'windows-nt)
-          (setq sv (xwl-w32-redirect-host))
+          (setq sv (xwl-redirect-host))
           (setq nick "xwl_"))
 
         (erc-select :server sv :port 16667 :nick nick :password pwerc) 
         (erc-select :server sv :port 16669 :nick nick :password pwdeb) 
         (erc-select :server sv :port 16668 :nick nick :password pwerc))
+
     (erc-select :server "irc.debian.org" ; "localhost"
                 :port 6669               ; 16669
                 :nick "xwl"
@@ -320,26 +321,18 @@ so as to keep an eye on work when necessarily."
 ;;; 	      :nick "xwl"
 ;;; 	      :password "")
 
- ;; (when (and (not (get-buffer "localhost:6667"))
- ;;            (eq system-type 'darwin))
- ;;   (erc-select :server "localhost"
- ;;               :port 6667
- ;;               :nick "william"
- ;;               :password pwbitlbee))
-
 ;;   (erc-select :server "nsx-r"
 ;; 	      :port 6667
 ;; 	      :nick "william"
 ;; 	      :password "")
   ))
 
-
 (defun xwl-erc-select-bitlbee ()
   (interactive)
-  (when (and (not (get-buffer "localhost:6667"))
-             (eq system-type 'darwin))
+  (if (get-buffer "&bitlbee")
+      (message "Buffer &bitlbee already exists?")
     (erc-select :server "localhost"
-                :port 6667
+                :port (if xwl-at-company? 26667 6667)
                 :nick "william"
                 :password pwbitlbee)))
 
@@ -391,31 +384,41 @@ so as to keep an eye on work when necessarily."
 ;; | growl
 ;; `----
 
-(when (eq system-type 'darwin)
+(setq growlnotify-command (executable-find "growlnotify"))
 
-  (setq growlnotify-command (executable-find "growlnotify"))
+(defun xwl-growl (title message)
+  (start-process "growl" " growl" growlnotify-command title "-a" "Emacs")
+  (process-send-string " growl" message)
+  (process-send-string " growl" "\n")
+  (process-send-eof " growl"))
 
-  (defun xwl-growl (title message)
-    (start-process "growl" " growl"
-                   growlnotify-command
-                   title
-                   "-a" "Emacs")
-    (process-send-string " growl" message)
-    (process-send-string " growl" "\n")
-    (process-send-eof " growl"))
-
-  (defun xwl-erc-hook (match-type nickuserhost message)
-    "Shows a growl notification, when user's nick was mentioned.
+(defun xwl-erc-text-matched-hook (match-type nickuserhost message)
+  "Shows a growl notification, when user's nick was mentioned.
 If the buffer is currently not visible, makes it sticky."
-    (when ;; (erc-match-current-nick-p nickuserhost message)
-        (string-match (concat erc-nick ":") message)
-      (xwl-growl
-       (concat "ERC: name mentioned on: " (buffer-name (current-buffer)))
-       message)))
+  (when (erc-match-current-nick-p nickuserhost message)
+    (let ((s (concat "ERC: " (buffer-name (current-buffer)))))
+      (case system-type
+        ((darwin)
+         (xwl-growl s message))
+        ((gnu/linux)
+         (xwl-shell-command-asynchronously 
+          (format "zenity --info --text \"%s\"" s)))))))
 
-  (add-hook 'erc-text-matched-hook 'xwl-erc-hook)
+(add-hook 'erc-text-matched-hook 'xwl-erc-text-matched-hook)
 
-  )
+(defun xwl-erc-PRIVMSG (proc parsed)
+  (let ((buf (buffer-name (current-buffer))))
+    (unless (string-match ":\\|&" buf)
+      (let ((s (concat "ERC: " (buffer-name (current-buffer)))))
+        (case system-type
+          ((darwin)
+           (xwl-growl s message))
+          ((gnu/linux)
+           (xwl-shell-command-asynchronously 
+            (format "zenity --info --text \"%s\"" s))))))))
+
+(add-hook 'erc-server-PRIVMSG-functions 'xwl-erc-PRIVMSG)
+
 
 (provide 'xwl-erc)
 

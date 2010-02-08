@@ -28,7 +28,9 @@
 (setq org-agenda-files '("~/notes/todo.org"))
 
 (setq org-todo-keywords
-      '((sequence "TODO" "ONGOING" "WAITING" "DELEGATED" "|" "DONE" "CANCELLED")))
+      '((sequence "-" ">" "o" "|" "x" "|" "w" "o")
+        (sequence "TODO" "ONGOING" "WAITING" "DELEGATED" "|" "DONE" "CANCELLED")
+        ))
 
 (setq org-agenda-todo-ignore-scheduled t)
 
@@ -94,11 +96,16 @@
       (goto-char (point-max))
       (unless (bolp)
         (newline))
-      (insert "** TODO " todo)
+      (insert "** - " todo)
       (newline)
       (save-buffer))))
 
 (global-set-key (kbd "C-c t") 'xwl-org-todo)
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (modify-syntax-entry ?- "w" org-mode-syntax-table)
+            (modify-syntax-entry ?> "w" org-mode-syntax-table)))
 
 ;; remember
 (add-hook 'remember-mode-hook 'org-remember-apply-template)
@@ -121,11 +128,6 @@
         (sequence "STARTED" "WAITING" "LATER" "CANCELLED")
         (sequence "x")
         ))
-
-(add-hook 'org-mode-hook
-          (lambda ()
-            (modify-syntax-entry ?- "w" org-mode-syntax-table)
-            (modify-syntax-entry ?> "w" org-mode-syntax-table)))
 
 (defun xwl-org-set-tags (tag)
   "Insert TAG under point."
