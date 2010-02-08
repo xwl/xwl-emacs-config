@@ -350,7 +350,7 @@ prompts for name field."
     ;;                (string= (buffer-file-name) qterm-log-file))
     ;;     (nuke-trailing-whitespace))
 
-    (copyright-update)
+    ;; (copyright-update)
 
     nil))
 
