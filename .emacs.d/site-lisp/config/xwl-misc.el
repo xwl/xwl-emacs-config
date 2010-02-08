@@ -241,7 +241,7 @@ prompts for name field."
                      :back "<#"
                      :back-offset (end-of-line 1)
                      :face mmm-code-submode-face)
-        
+
         ,@mmm-classes-alist))
 
 (setq mmm-mode-ext-classes-alist
@@ -310,7 +310,7 @@ prompts for name field."
 ;; | file hooks
 ;; `----
 
-(setq xwl-sensitive-files 
+(setq xwl-sensitive-files
       (mapcar 'expand-file-name
               '("/Users/william/notes/todo.org"
                 "~/notes/life_blog")))
@@ -318,7 +318,7 @@ prompts for name field."
 (defun xwl-find-file-hook ()
   (let ((file (expand-file-name (buffer-file-name))))
     ;; ;; gpg todo
-    ;; (when (and (xs-find-first (lambda (f) 
+    ;; (when (and (xs-find-first (lambda (f)
     ;;                             (string= file f))
     ;;                           xwl-sensitive-files)
     ;;            (xwl-has-pgg-header-p))
@@ -338,7 +338,7 @@ prompts for name field."
 (add-hook 'find-file-hook 'xwl-find-file-hook)
 
 (defun xwl-write-file-functions ()
-  (let ((file (buffer-file-name)))
+  (let ((f (buffer-file-name)))
     ;; (when (string= (file-name-nondirectory file) "todo.org")
     ;;   (xwl-pgg-encrypt))
 
@@ -346,14 +346,15 @@ prompts for name field."
     ;; (defun xwl-write-file-functions ()
     ;;   (xwl-update-date)
 
-    ;;   (unless (and (boundp 'qterm-log-file)
-    ;;                (string= (buffer-file-name) qterm-log-file))
-    ;;     (nuke-trailing-whitespace))
+    (when (string-match (regexp-opt (list (file-truename xwl-load-path))) f)
+      (copyright-update)
 
-    ;; (copyright-update)
+      (unless (and (boundp 'qterm-log-file)
+                   (string= (file-truename qterm-log-file) f))
+        (nuke-trailing-whitespace)))
 
+    ;; should return nil
     nil))
-
 
 (add-hook 'write-file-functions 'xwl-write-file-functions)
 
@@ -362,7 +363,7 @@ prompts for name field."
     ;; ;; pgp
     ;; (when (and file
     ;;            (file-exists-p file)
-    ;;            (xs-find-first (lambda (f) 
+    ;;            (xs-find-first (lambda (f)
     ;;                             (string= file f))
     ;;                           xwl-sensitive-files)
     ;;            (not (xwl-has-pgg-header-p)))
@@ -385,7 +386,7 @@ prompts for name field."
 
 (global-set-key (kbd "<f10>") 'ga)
 
-(setq ga-backend-methods 
+(setq ga-backend-methods
       '((apt-get ;; "ssh william@localhost -p 2222 sudo apt-get")
          "sudo apt-get")
         (fink "sudo fink")
@@ -418,7 +419,7 @@ prompts for name field."
 
   ;; NOTE: We have to call `frame-width' when window has been maximized.
   ;; (setq erc-fill-column (- (round (/ (frame-width) 2)) 5))
-  
+
   (unless noninteractive
     ;; (shell-command "sudo ~/bin/.xwl-after-start-hook")
     ;; (setq display-time-mail-file 'no-check)
@@ -443,12 +444,12 @@ prompts for name field."
     ;; (xwl-weather-update)
 
     ;; Run this as the last step.
-    ;; (run-at-time 3 
+    ;; (run-at-time 3
     ;;              nil
     ;;              '(lambda ()
     (color-theme-xwl-console)
 
-    (when window-system 
+    (when window-system
       (require 'highlight-tail)
       (setq highlight-tail-colors  '(("#bc2525" . 0)))
       ;; '(("#d8971d" . 0)))
@@ -463,8 +464,8 @@ prompts for name field."
 
 (eval-after-load 'file-template
   '(progn
-     (setq file-template-mapping-alist 
-           (append file-template-mapping-alist 
+     (setq file-template-mapping-alist
+           (append file-template-mapping-alist
                    '(("\\.texinfo$" . "template.texinfo"))))))
 
 (savehist-mode 1)
@@ -493,7 +494,7 @@ prompts for name field."
 
      ))
 
-(add-hook 'kill-emacs-hook 
+(add-hook 'kill-emacs-hook
           (lambda ()
             (let ((default-directory "~/.emacs.d/site-lisp/"))
               (xwl-makefile-byte-compile))))
