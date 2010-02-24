@@ -23,10 +23,12 @@
 
 (defun xwl-w32-get-drives ()
   "Get a list of drive names from get_drives.py."
-  (read
-   (shell-command-to-string  
-    (concat "python "
-	    (shell-quote-argument (expand-file-name "~/w32/get_drives.py"))))))
+  (when (executable-find "python")
+    (read
+     (shell-command-to-string  
+      (concat "python "
+	      (shell-quote-argument
+	       (expand-file-name "~/w32/get_drives.py")))))))
 
 ;; Prepend drive name on buffer on w32
 (defadvice uniquify-get-proposed-name (after prepend-drive-name activate)
