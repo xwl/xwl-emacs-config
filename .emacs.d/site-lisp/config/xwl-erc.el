@@ -21,7 +21,9 @@
 
 ;;; Code:
 
-;;; Erc - irc client, bitlbee
+;; ,----
+;; | Erc - irc client, bitlbee
+;; `----
 
 ;; ERC (M-x erc-select)
 ;; Set system locale to zh_CN.utf-8 first!
@@ -361,6 +363,10 @@ If the buffer is currently not visible, makes it sticky."
 ;; (require 'erc-bbdb)
 ;; (erc-bbdb-mode 1)
 ;; (setq erc-bbdb-popup-type nil)
+
+;;; Local Variables: ***
+;;; outline-regexp: ";; | " ***
+;;; End: ***
 
 (provide 'xwl-erc)
 

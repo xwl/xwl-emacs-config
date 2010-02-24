@@ -1,6 +1,6 @@
 ;;; xwl-convenience.el --- must have cookies
 
-;; Copyright (C) 2007, 2008, 2009 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -11,8 +11,6 @@
 ;; `----
 
 (global-set-key (kbd "C-c v") 'less-minor-mode)
-
-
 
 (mapc (lambda (hook) (add-hook hook 'less-minor-mode-on))
       '(help-mode-hook
@@ -93,7 +91,7 @@
         ("\\(.mac\\|.lst\\)$"  . asm-mode)
         ("\\(.html\\|.htm\\)$" . html-mode)
         ("[sS][cC]onstruct"    . python-mode)
-        
+
         ,@auto-mode-alist))
 
 (add-to-list 'auto-mode-alist '("Makefile.*" . makefile-mode))
@@ -510,9 +508,9 @@
 (eval-after-load 'imenu
   '(progn
      (defadvice imenu-default-create-index-function (around add-more-default-index activate)
-       (let ((imenu-generic-expression 
+       (let ((imenu-generic-expression
               (cons (list "Outlines"
-                          (format "\\(%s\\|%s\\)\\(%s\\)"                          
+                          (format "\\(%s\\|%s\\)\\(%s\\)"
                                   outline-regexp
                                   (concat "^" comment-start "+ | ")
                                   ".*")
