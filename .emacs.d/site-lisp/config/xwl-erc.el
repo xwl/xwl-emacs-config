@@ -188,6 +188,18 @@ so as to keep an eye on work when necessarily."
       erc-fill-static-center 10
       erc-fill-prefix "      ")
 
+;; trim erc nicks
+(setq erc-format-nick-function 'xwl-erc-format-nick)
+
+(defun xwl-erc-format-nick (&optional user channel-data)
+  "Like `erc-format-nick' but trim nick to a fixed length. "
+  (let ((nick (erc-format-nick user channel-data)))
+    (when (> (length nick) 7)
+      (setq nick (concat (substring nick 0 4)
+                         ".."
+                         (substring (substring nick 7) -1))))
+    nick))
+
 ;; ,----
 ;; | timestamp
 ;; `----
