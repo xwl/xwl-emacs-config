@@ -28,7 +28,7 @@
 (setq org-agenda-files '("~/notes/todo.org"))
 
 (setq org-todo-keywords
-      '((sequence "-" ">" "o" "|" "x" "|" "w" "o")
+      '((sequence "-" ">" "o" "|" "x" "|" "w" "o" "|" "p" "o")
         (sequence "TODO" "ONGOING" "WAITING" "DELEGATED" "|" "DONE" "CANCELLED")
         ))
 

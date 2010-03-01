@@ -32,6 +32,9 @@
 ;; 211.92.88.40:7000 #linuxfire
 ;; irc.debian.org #debian-zh
 
+;; Send offline message to registered user on freenode:
+;;   /msg MemoServ send ID message
+
 (setq erc-track-enable-keybindings t)
 
 (require 'erc)
@@ -222,7 +225,7 @@ so as to keep an eye on work when necessarily."
 
 ;; ignore
 (setq erc-ignore-list nil)
-(setq erc-hide-list 
+(setq erc-hide-list
       '("JOIN" "PART" "QUIT" "MODE"))
 
 ;; ;; sound
@@ -297,8 +300,8 @@ so as to keep an eye on work when necessarily."
           (setq sv (xwl-redirect-host))
           (setq nick "xwl_"))
 
-        (erc-select :server sv :port 16667 :nick nick :password pwerc) 
-        (erc-select :server sv :port 16669 :nick nick :password pwdeb) 
+        (erc-select :server sv :port 16667 :nick nick :password pwerc)
+        (erc-select :server sv :port 16669 :nick nick :password pwdeb)
         (erc-select :server sv :port 16668 :nick nick :password pwerc))
 
     (erc-select :server "irc.debian.org" ; "localhost"
@@ -401,7 +404,7 @@ If the buffer is currently not visible, makes it sticky."
         ((darwin)
          (xwl-growl s message))
         ((gnu/linux)
-         (xwl-shell-command-asynchronously 
+         (xwl-shell-command-asynchronously
           (format "zenity --info --text \"%s\"" s)))))))
 
 (add-hook 'erc-text-matched-hook 'xwl-erc-text-matched-hook)
@@ -414,7 +417,7 @@ If the buffer is currently not visible, makes it sticky."
           ((darwin)
            (xwl-growl s message))
           ((gnu/linux)
-           (xwl-shell-command-asynchronously 
+           (xwl-shell-command-asynchronously
             (format "zenity --info --text \"%s\"" s))))))))
 
 (add-hook 'erc-server-PRIVMSG-functions 'xwl-erc-PRIVMSG)
