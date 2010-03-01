@@ -1,9 +1,9 @@
 ;;; xwl-outline.el --- outline mode config
 
-;; Copyright (C) 2007, 2008, 2009 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
-;; Last updated: 2009/07/05
+;; Last updated: 2010/02/25
 
 (require 'outline)
 
@@ -18,29 +18,12 @@
 ;; (ad-deactivate 'outline-mode)
 ;; (ad-deactivate 'outline-minor-mode)
 
-(if (string= (substring emacs-version 0 2) "21")
-    (setq outline-font-lock-keywords
-	  '((eval list
-		  (concat "^" outline-regexp ".+")
-		  0
-		  '(or (cdr (assq
-			     (outline-font-lock-level)
-			     '((1 . font-lock-function-name-face)
-			       (2 . font-lock-variable-name-face)
-			       (3 . font-lock-keyword-face)
-			       (4 . font-lock-builtin-face)
-			       (5 . font-lock-comment-face)
-			       (6 . font-lock-constant-face)
-			       (7 . font-lock-type-face)
-			       (8 . font-lock-string-face))))
-		       font-lock-warning-face)
-		  'prepend t)))
-  (setq outline-font-lock-keywords
-	'((eval list
-		(concat "^\\(?:" outline-regexp "\\).+")
-		0
-		'(outline-font-lock-face)
-		nil t))))
+(setq outline-font-lock-keywords
+      '((eval list
+              (concat "^\\(?:" outline-regexp "\\).+")
+              0
+              '(outline-font-lock-face)
+              nil t)))
 
 ;; outline extra
 (require 'foldout)

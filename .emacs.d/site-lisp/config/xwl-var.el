@@ -36,8 +36,8 @@
 ;;        (or (zerop (shell-command "ipconfig | grep 172.28"))
 ;;            (zerop (shell-command "ipconfig | grep 10.162"))))
 
-  ;; (string= (user-login-name) "wixu"))
-  (not (eq system-type 'darwin)))
+  (and (string= (user-login-name) "wixu")
+       (not (eq system-type 'darwin))))
 
 (setq xwl-at-company? (xwl-at-company))
 
