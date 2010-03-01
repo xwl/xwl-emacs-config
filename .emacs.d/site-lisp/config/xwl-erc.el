@@ -222,7 +222,7 @@ so as to keep an eye on work when necessarily."
 
 ;; ignore
 (setq erc-ignore-list nil)
-(setq erc-hide-list 
+(setq erc-hide-list
       '("JOIN" "PART" "QUIT" "MODE"))
 
 ;; ;; sound
@@ -297,8 +297,8 @@ so as to keep an eye on work when necessarily."
           (setq sv (xwl-redirect-host))
           (setq nick "xwl_"))
 
-        (erc-select :server sv :port 16667 :nick nick :password pwerc) 
-        (erc-select :server sv :port 16669 :nick nick :password pwdeb) 
+        (erc-select :server sv :port 16667 :nick nick :password pwerc)
+        (erc-select :server sv :port 16669 :nick nick :password pwdeb)
         (erc-select :server sv :port 16668 :nick nick :password pwerc))
 
     (erc-select :server "irc.debian.org" ; "localhost"
@@ -395,13 +395,14 @@ so as to keep an eye on work when necessarily."
 (defun xwl-erc-text-matched-hook (match-type nickuserhost message)
   "Shows a growl notification, when user's nick was mentioned.
 If the buffer is currently not visible, makes it sticky."
-  (when (erc-match-current-nick-p nickuserhost message)
+  (when (and (erc-match-current-nick-p nickuserhost message)
+             (not (string-match (regexp-opt '("*** Users on")) message)))
     (let ((s (concat "ERC: " (buffer-name (current-buffer)))))
       (case system-type
         ((darwin)
          (xwl-growl s message))
         ((gnu/linux)
-         (xwl-shell-command-asynchronously 
+         (xwl-shell-command-asynchronously
           (format "zenity --info --text \"%s\"" s)))))))
 
 (add-hook 'erc-text-matched-hook 'xwl-erc-text-matched-hook)
@@ -414,7 +415,7 @@ If the buffer is currently not visible, makes it sticky."
           ((darwin)
            (xwl-growl s message))
           ((gnu/linux)
-           (xwl-shell-command-asynchronously 
+           (xwl-shell-command-asynchronously
             (format "zenity --info --text \"%s\"" s))))))))
 
 (add-hook 'erc-server-PRIVMSG-functions 'xwl-erc-PRIVMSG)
