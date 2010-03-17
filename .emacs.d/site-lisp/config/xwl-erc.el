@@ -257,7 +257,16 @@ so as to keep an eye on work when necessarily."
 (defun xwl-erc-text-matched-hook (match-type nickuserhost message)
   "Shows a growl notification, when user's nick was mentioned.
 If the buffer is currently not visible, makes it sticky."
-  (when (erc-match-current-nick-p nickuserhost message)
+  (when (and (erc-match-current-nick-p nickuserhost message)
+             (not (string-match (regexp-opt '("Users"
+                                              "User"
+                                              "topic set by"
+                                              "Welcome to "
+                                              "nickname"
+                                              "identified"
+                                              "invalid"
+                                              ))
+                                message)))
     (let ((s (concat "ERC: " (buffer-name (current-buffer)))))
       (case system-type
         ((darwin)
