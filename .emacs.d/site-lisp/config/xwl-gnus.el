@@ -273,7 +273,7 @@
 <#/multipart>
 ")))
      )
-    
+
     ;; (longlines-mode 1)
     ))
 
@@ -467,7 +467,7 @@
                   `(,@xwl-company-list-table ,@xwl-list-table))
 
         (: xwl-split-mailing-lists)
-        
+
         ;; mailinglists that are subscribed by newsgroup
         (any ,(mapconcat 'identity
                          '("sawfish-list@gnome.org")
@@ -587,7 +587,7 @@
 (eval-after-load "gnus-group"
   '(progn
      (define-key gnus-group-mode-map (kbd "g") 'xwl-gnus-group-get-new-news)
-     ;; (define-key gnus-group-mode-map (kbd "g") 'xwl-disable-key) 
+     ;; (define-key gnus-group-mode-map (kbd "g") 'xwl-disable-key)
 
      (define-key gnus-group-mode-map (kbd "m") 'xwl-disable-key)
 
@@ -641,9 +641,9 @@
         (unless xwl-gnus-agent-timer
           (setq xwl-gnus-agent-timer
                 (run-with-timer 0
-                                (* 3600 24)
+                                (* 3600 1)
                                 (lambda ()
-                                  (xwl-shell-command-asynchronously 
+                                  (xwl-shell-command-asynchronously
                                    "emacs --eval \"(progn (suspend-frame) (gnus-agent-batch) (gnus-group-save-newsrc t) (save-buffers-kill-terminal t))\""
                                    )))))
         (message "Gnus agent timer started"))
@@ -695,11 +695,11 @@
 (defun gnus-user-format-function-from (head)
   "Trim `From:' to 20 bytes."
   (let* ((re "[\" ]")
-         (from 
-          (replace-regexp-in-string 
-           (format "^%s+\\|%s+$" re re) 
+         (from
+          (replace-regexp-in-string
+           (format "^%s+\\|%s+$" re re)
            ""
-           (replace-regexp-in-string 
+           (replace-regexp-in-string
             "<.*>" "" (gnus-header-from head)))))
     (when (> (length from) 20)
       (setq from (concat (substring from 0 18) "..")))
@@ -912,7 +912,7 @@
 ;; apply darcs patch
 
 (eval-after-load 'gnus-art
-  '(progn 
+  '(progn
      (define-key gnus-mime-button-map (kbd "a") 'his-gnus-darcs-apply-part)
 
      (defun article-fill-long-lines ()
@@ -1061,7 +1061,7 @@ If there is, use Gnus to create an nnrss group"
 
 ;;; Agent
 
-;; How to put a method into agent mode? `J a' in server buffer. 
+;; How to put a method into agent mode? `J a' in server buffer.
 
 ;; FIXME: This will oops gnus-agent-batch??
 ;; (setq gnus-agent-synchronize-flags t)

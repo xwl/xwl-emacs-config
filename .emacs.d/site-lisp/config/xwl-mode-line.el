@@ -1,6 +1,6 @@
 ;;; xwl-mode-line.el --- mode line display stuffs
 
-;; Copyright (C) 2007, 2008, 2009 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -120,6 +120,8 @@
 	  ;; rcirc-activity-string
 
           ;; xwl-weather-string
+
+          twittering-unread-mode-line-string " "
 
           emms-mode-line-string
           emms-playing-time-string

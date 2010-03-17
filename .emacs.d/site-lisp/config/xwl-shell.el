@@ -3,7 +3,7 @@
 ;; Copyright (C) 2007, 2008, 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
-;; Last updated: 2010/01/14
+;; Last updated: 2010/03/17
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -97,7 +97,9 @@
                (call-interactively 'comint-send-input)
                (insert " "))
            (call-interactively 'comint-send-input))))
-                                               
+
+     ;; Respect global settings.
+     (define-key comint-mode-map (kbd "C-c .") 'previous-buffer)
      ))
 
 
@@ -189,7 +191,7 @@
 
 
 (eval-after-load 'term
-  '(progn 
+  '(progn
      (define-key term-raw-map (kbd "M-v") 'term-paste)
      (define-key term-raw-map (kbd "C-c f") 'ffap)
      (define-key term-raw-map (kbd "RET")

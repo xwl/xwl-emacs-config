@@ -36,14 +36,14 @@
   (if (file-exists-p "../group")
       (c-set-style "whitesmith")        ; symbian c++
     (c-set-style "k&r"))
-  
+
   (if (string= c-indentation-style "whitesmith")
       (setq c-cleanup-list '())
     (setq c-cleanup-list '( ;;brace-else-brace
                            scope-operator
                            empty-defun-braces
                            defun-close-semi
-                         
+
                            space-before-funcall
                            compact-empty-funcall
 
@@ -114,7 +114,7 @@
         (local-set-key "}"  (lambda ()
                               (interactive)
                               (call-interactively 'c-electric-brace)
-                         
+
                               (save-excursion
                                 (forward-line -1)
                                 (indent-according-to-mode)))))
@@ -186,7 +186,7 @@ Thus generate a TAGs file."
 
 (eval-after-load 'sh-script
   '(progn
-     
+
      (defun sh-beginning-of-defun ()
        (interactive)
        (re-search-backward defun-prompt-regexp nil t 1))
@@ -268,15 +268,15 @@ Thus generate a TAGs file."
 
 (global-set-key (kbd "C-x v p") (lambda () (interactive) (compile "git push")))
 
-(global-set-key (kbd "C-c k") 
+(global-set-key (kbd "C-c k")
                 (lambda ()
-                  (interactive) 
+                  (interactive)
                   (kill-new (file-name-nondirectory (buffer-file-name)))
                   (message "Filenamed copied")))
 
-(global-set-key (kbd "C-c K") 
+(global-set-key (kbd "C-c K")
                 (lambda ()
-                  (interactive) 
+                  (interactive)
                   (kill-new (buffer-file-name))
                   (message "Full filenamed copied")))
 
@@ -604,7 +604,7 @@ If SCHEME?, `run-scheme'."
                      nil
                      (lambda ()
                        ;; (winner-undo)
-                       
+
                        (delete-window
                         (get-buffer-window
                          (get-buffer "*compilation*")))
@@ -678,18 +678,19 @@ If SCHEME?, `run-scheme'."
 
              ;; qt
              ((lambda () (not (null (directory-files-and-attributes "." nil "\\.pro$" t))))
-              "make"
+              ;; "make"
+              "qmake -platform symbian-sbsv2"
               (lambda ()
                 (concat "debug/"
                         (replace-regexp-in-string
-                         "\\.pro$" 
+                         "\\.pro$"
                          ".exe"
                          (caar (directory-files-and-attributes "." nil "\\.pro$" t)))))
               (lambda ()
                 (buffer-action-shell-command
                  (concat "debug/"
                          (replace-regexp-in-string
-                          "\\.pro$" 
+                          "\\.pro$"
                           ".exe &"
                           (caar (directory-files-and-attributes "." nil "\\.pro$" t))))))
               )
@@ -702,10 +703,17 @@ If SCHEME?, `run-scheme'."
      ))
 
 (global-set-key (kbd "C-c c")   'buffer-action-compile)
-(global-set-key (kbd "C-c r") '(lambda () 
+(global-set-key (kbd "C-c r") '(lambda ()
                                  (interactive)
-                                 ;; (call-interactively 'buffer-action-compile) 
+                                 ;; (call-interactively 'buffer-action-compile)
                                  (buffer-action-run)))
+(global-set-key (kbd "C-c p")   (lambda ()
+                                  (interactive)
+                                  (let* ((n "*compilation*")
+                                         (b (get-buffer n)))
+                                    (if b
+                                        (switch-to-buffer b)
+                                      (message "Hey, no %s buffer exists yet" n)))))
 
 
 
@@ -811,11 +819,11 @@ If SCHEME?, `run-scheme'."
 (add-to-list 'auto-mode-alist '("\\.pro\\'" . makefile-mode))
 
 ;; 'ffap won't work as ffap is `provide' at the top.
-(eval-after-load "ffap"                 
+(eval-after-load "ffap"
   '(progn
-     (setq ffap-c-path `("../inc" 
-                                 
-                         "../coctlinc" 
+     (setq ffap-c-path `("../inc"
+
+                         "../coctlinc"
                          "/epoc32/include"
                          "/epoc32/include/mw"
                          "/epoc32/include/platform/mw"
@@ -913,7 +921,7 @@ Useful for packing c/c++ functions with one line or empty body."
 ;; TODO fix this on linux
 (eval-after-load 'cedetx
   '(progn
-     (global-ede-mode 1)   
+     (global-ede-mode 1)
      (semantic-load-enable-gaudy-code-helpers)
      ;; FIXME: this looks like screwing my cursor!
      (global-semantic-idle-scheduler-mode -1)
@@ -928,7 +936,7 @@ Useful for packing c/c++ functions with one line or empty body."
 (eval-after-load 'semantic-imenu
   '(progn
      (defadvice semantic-create-imenu-index (after combine-with-default activate)
-       (setq ad-return-value (append (imenu-default-create-index-function) 
+       (setq ad-return-value (append (imenu-default-create-index-function)
                                      ad-return-value)))))
 
 )

@@ -1,6 +1,6 @@
 
 ;;;### (autoloads (xwl-makefile-clean xwl-makefile-byte-compile xwl-makefile-all)
-;;;;;;  "xwl-makefile" "xwl-makefile.el" (19265 25913))
+;;;;;;  "xwl-makefile" "xwl-makefile.el" (19359 10727))
 ;;; Generated autoloads from xwl-makefile.el
 
 (autoload 'xwl-makefile-all "xwl-makefile" "\
@@ -313,8 +313,8 @@ HTMLize dired-marked files.
 ;;; Generated autoloads from graphviz-dot-mode.el
 
 (autoload 'graphviz-dot-mode "graphviz-dot-mode" "\
-Major mode for the dot language. \\<graphviz-dot-mode-map> 
-TAB indents for graph lines. 
+Major mode for the dot language. \\<graphviz-dot-mode-map>
+TAB indents for graph lines.
 
 \\[graphviz-dot-indent-graph]	- Indentaion function.
 \\[graphviz-dot-preview]	- Previews graph in a buffer.
@@ -966,7 +966,7 @@ Create a *Cwit* buffer.
 ;;;***
 
 ;;;### (autoloads (holiday-solar-term holiday-lunar cal-china-x-birthday-from-chinese)
-;;;;;;  "cal-china-x" "xwl-elisp/cal-china-x.el" (19265 26124))
+;;;;;;  "cal-china-x" "xwl-elisp/cal-china-x.el" (19344 30152))
 ;;; Generated autoloads from xwl-elisp/cal-china-x.el
 
 (autoload 'cal-china-x-birthday-from-chinese "cal-china-x" "\
@@ -999,7 +999,7 @@ See `cal-china-x-solar-term-name' for a list of solar term names .
 ;;;***
 
 ;;;### (autoloads (buffer-action-run buffer-action-compile) "buffer-action"
-;;;;;;  "xwl-elisp/buffer-action.el" (19274 48083))
+;;;;;;  "xwl-elisp/buffer-action.el" (19350 13719))
 ;;; Generated autoloads from xwl-elisp/buffer-action.el
 
 (autoload 'buffer-action-compile "buffer-action" "\
@@ -1507,6 +1507,17 @@ Kill thread from here using leafnode.
 Update the vcard Contacts directory from the bbdb database
 
 \(fn OUTPUT-DIR CODING-SYSTEM)" t nil)
+
+;;;***
+
+;;;### (autoloads (twit) "twittering-mode" "twittering-mode/twittering-mode.el"
+;;;;;;  (19359 25783))
+;;; Generated autoloads from twittering-mode/twittering-mode.el
+
+(autoload 'twit "twittering-mode" "\
+Start twittering-mode.
+
+\(fn)" t nil)
 
 ;;;***
 

@@ -417,9 +417,6 @@ prompts for name field."
     ((w32)
      (w32-send-sys-command #xf030)))
 
-  ;; NOTE: We have to call `frame-width' when window has been maximized.
-  ;; (setq erc-fill-column (- (round (/ (frame-width) 2)) 5))
-
   (unless noninteractive
     ;; (shell-command "sudo ~/bin/.xwl-after-start-hook")
     ;; (setq display-time-mail-file 'no-check)
@@ -448,6 +445,16 @@ prompts for name field."
     ;;              nil
     ;;              '(lambda ()
     (color-theme-xwl-console)
+
+    ;; FIXME: how to set this only after window has been maximized?
+    (run-at-time 1
+                 nil
+                 '(lambda ()
+                    ;; (add-hook 'after-make-frame-functions
+                    ;;           (lambda ()
+                    (let ((col (- (round (/ (frame-width) 2)) 2)))
+                      (setq erc-fill-column col
+                            twittering-fill-column col))))
 
     (when window-system
       (require 'highlight-tail)
@@ -578,6 +585,8 @@ prompts for name field."
 
 ;; redo and undo
 (winner-mode 1)
+(global-set-key (kbd "C-c <") 'winner-undo)
+(global-set-key (kbd "C-c >") 'winner-redo)
 
 ;; jump by name
 ;; (require 'winring)
@@ -750,6 +759,34 @@ passphrase cache or user."
 (add-hook 'log-edit-mode-hook (lambda () (smart-operator-mode -1)))
 
 (add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
+
+;; twittering-mode
+(setq twittering-username "xwl")
+
+(setq twittering-proxy-use t
+      twittering-proxy-server "172.16.42.137"
+      twittering-proxy-port 8080)
+
+(setq twittering-status-format
+      "%i %s, %@, from %f%L%r%R:\n%FILL{%T}\n")
+
+(add-hook 'twittering-mode-hook 'less-minor-mode-on)
+(add-hook 'twittering-mode-hook (lambda ()
+                                  (twittering-icon-mode 1)
+                                  (setq twittering-reverse-mode t)
+                                  ))
+
+(eval-after-load 'twittering-mode
+  '(progn
+     (define-key twittering-mode-map "c" 'twittering-current-timeline)
+
+     (define-key twittering-mode-map "n" 'twittering-goto-next-status)
+     (define-key twittering-mode-map "p" 'twittering-goto-previous-status)
+     (define-key twittering-mode-map "N" 'twittering-goto-next-status-of-user)
+     (define-key twittering-mode-map "P" 'twittering-goto-previous-status-of-user)
+
+     ))
+
 
 (provide 'xwl-misc)
 

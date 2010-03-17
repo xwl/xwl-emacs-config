@@ -45,7 +45,7 @@
 
 ;; 'org-agenda-list
 (global-set-key (kbd "<f8>") (lambda ()
-                               (interactive) 
+                               (interactive)
                                ;;   ;; (find-file "~/notes/todo.org")
                                ;;   (case system-type
                                ;;     ((darwin)
@@ -57,14 +57,17 @@
                                ;;      (delete-other-windows)
                                ;;      (find-file "~/notes/todo")
                                ;;      (split-window-horizontally)
-                               ;;      (find-file "~/notes/todo-nokia"))) 
+                               ;;      (find-file "~/notes/todo-nokia")))
                                (org-agenda 1 "h")
                                (command-execute (kbd "C-x 1"))
                                ;; 'org-agenda
                                ))
 
 (global-set-key (kbd "<f9>") 'shell) ;'eshell) ;xwl-term ;xwl-run-scsh
-;; (global-set-key (kbd "<f11>") 'repeat)
+(global-set-key (kbd "<f11>") (lambda ()
+                                (interactive)
+                                (xwl-switch-or-create "*twittering*" 'twit)))
+
 (global-set-key (kbd "<f13>") 'kill-this-buffer)
 
 ;; operators
@@ -92,11 +95,11 @@
   (interactive)
   (global-set-key (kbd "<right>") (kbd "C-f"))
   (global-set-key (kbd "<left>")  (kbd "C-b"))
-  (global-set-key (kbd "<up>")    (kbd "C-p"))  
+  (global-set-key (kbd "<up>")    (kbd "C-p"))
   (global-set-key (kbd "<down>")  (kbd "C-n")))
 
 (xwl-heaven)
-  
+
 ;; (global-set-key (kbd "C-c l") 'windmove-right)
 ;; (global-set-key (kbd "C-c h")  'windmove-left)
 ;; (global-set-key (kbd "C-c k")    'windmove-up)

@@ -34,6 +34,9 @@
 ;; 211.92.88.40:7000 #linuxfire
 ;; irc.debian.org #debian-zh
 
+;; Send offline message to registered user on freenode:
+;;   /msg MemoServ send ID message
+
 (setq erc-track-enable-keybindings t)
 
 (require 'erc)

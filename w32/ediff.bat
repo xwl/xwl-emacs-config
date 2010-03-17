@@ -6,4 +6,5 @@
 @set f2=%f2:\=/% 
 
 emacsclient.exe -n -e "(progn (ediff-files \"%f1%\" \"%f2%\") (raise-frame))" 
-rem bcomp %f1% %f2%
+@rem bcomp %f1% %f2%
+

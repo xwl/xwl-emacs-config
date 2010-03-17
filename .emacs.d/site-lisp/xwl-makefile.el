@@ -1,6 +1,6 @@
 ;;; xwl-makefile.el --- For Makefile                -*- emacs-lisp -*-
 
-;; Copyright (C) 2009 William Xu
+;; Copyright (C) 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 ;; Version: 0.1
@@ -31,10 +31,10 @@
       ;; (format "xwl-autoloads-%S" window-system)
       xwl-makefile-autoloads-file (concat xwl-makefile-autoloads-file-base ".el")
       xwl-makefile-subdir-list
-      ;; "22" 
-      '("." "wget-el" "ruby" "qterm" "dictionary-el" "debian" 
+      ;; "22"
+      '("." "wget-el" "ruby" "qterm" "dictionary-el" "debian"
         "xwl-elisp" "xwl-elisp/ga" "xwl-elisp/dashboard" "haskell-mode-2.4"
-        "slightly-modified" "xwl-elisp/wubi"
+        "slightly-modified" "xwl-elisp/wubi" "twittering-mode"
         ))
 
 (setq xwl-makefile-files
