@@ -438,8 +438,8 @@
 (global-set-key (kbd "<wheel-down>") 'less-scroll-up-line)
 
 ;; am i weird or Emacs is weird ?
-(global-set-key (kbd "C-x ,") 'next-buffer)
-(global-set-key (kbd "C-x .") 'previous-buffer)
+(global-set-key (kbd "C-c ,") 'next-buffer)
+(global-set-key (kbd "C-c .") 'previous-buffer)
 
 (global-set-key (kbd "C-<left>")  'previous-error)
 (global-set-key (kbd "C-<right>") 'next-error)
