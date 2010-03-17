@@ -118,13 +118,13 @@
 ;; `----
 
 ;; (add-hook 'text-mode-hook 'turn-on-auto-fill)
-(setq-default auto-fill-function 'do-auto-fill)
+(setq-default auto-fill-function 'do-auto-fill
+              ;; fill-column 70 ; default is 70
+              )
 ;; (setq default-justification 'full)
-(setq default-fill-column 80 ; 72
-      adaptive-fill-regexp
+(setq adaptive-fill-regexp
       "[	]*\\([-|#;>*]+[	]*\\|(?[0-9]+[.)][	]*\\)*"
-      adaptive-fill-first-line-regexp "\\`[	]*\\'"
-      fill-column 80); 72)
+      adaptive-fill-first-line-regexp "\\`[	]*\\'")
 
 ;;(unless window-system
 ;;  (set-face-background 'highlight "red")
@@ -438,8 +438,8 @@
 (global-set-key (kbd "<wheel-down>") 'less-scroll-up-line)
 
 ;; am i weird or Emacs is weird ?
-(global-set-key (kbd "C-x <left>") 'next-buffer)
-(global-set-key (kbd "C-x <right>") 'previous-buffer)
+(global-set-key (kbd "C-x ,") 'next-buffer)
+(global-set-key (kbd "C-x .") 'previous-buffer)
 
 (global-set-key (kbd "C-<left>")  'previous-error)
 (global-set-key (kbd "C-<right>") 'next-error)

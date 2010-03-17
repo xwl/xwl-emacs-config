@@ -1,4 +1,4 @@
-;;; xwl-buffer.el --- Buffer level operations like switching or listing 
+;;; xwl-buffer.el --- Buffer level operations like switching or listing
 
 ;; Copyright (C) 2009, 2010 William Xu
 
@@ -24,7 +24,7 @@
 ;;; ibuffer --- "dired + gnus" for buffers
 
 (setq ibuffer-formats
-      '((mark 
+      '((mark
          modified
          read-only
          " " (name 25)
@@ -39,7 +39,7 @@
      (define-key ibuffer-mode-map (kbd "N") '(lambda () (interactive)
                                                (end-of-line)
                                                (re-search-forward "^\\[" nil t 1)
-                                               (beginning-of-line)                                               
+                                               (beginning-of-line)
                                                ))
 
      (define-key ibuffer-mode-map (kbd "P") '(lambda () (interactive)
@@ -65,7 +65,7 @@
                   (name . "^\\.bbdb$")
                   (name . "^\\.newsrc-dribble"))))))
 
-(add-hook 'ibuffer-mode-hook 
+(add-hook 'ibuffer-mode-hook
           (lambda () (ibuffer-switch-to-saved-filter-groups "default")))
 
 ;; limit
@@ -83,7 +83,7 @@ point.  Especially useful for w32."
                                (buffer-local-value 'default-directory buf)))
                       (string-match qualifier it)))
 
-     (define-key ibuffer-mode-map (kbd "/ R") 'ibuffer-filter-by-reference) 
+     (define-key ibuffer-mode-map (kbd "/ R") 'ibuffer-filter-by-reference)
      ))
 
 ;;; ido
@@ -107,6 +107,7 @@ point.  Especially useful for w32."
       `("/sf/mw/hapticsservices"
         "/sf/os/devicesrv/hwrmhaptics"
         "/sf/mw/classicui/uifw/avkon/src"
+        "/sf/mw/hapticsservices/tactilefeedback/tactilefeedbackresolver/plugins/tactilehapticsplugin/src/"
 
         "/s60/mw/classicui/uifw/avkon/src"
         "/s60/mw/classicui/uifw/tactilefeedback"
@@ -119,7 +120,7 @@ point.  Especially useful for w32."
         "~/.emacs.d/site-lisp/config"
         "~/.emacs.d/site-lisp/xwl-elisp"
         "~/notes"
-        
+
         ,@(when xwl-w32?
             (mapcar (lambda (d) (concat (car d) "=" (cdr d))) xwl-w32-drives))
         ))
@@ -133,11 +134,11 @@ point.  Especially useful for w32."
                                                    xwl-frequent-directories))))
           ;; Use shell's current dir as default-directory on w32.
           ((and xwl-w32? (eq major-mode 'shell-mode))
-           (save-excursion 
+           (save-excursion
              (goto-char (point-max))
              (let ((end (progn (search-backward ">" nil t 1)
                                (point))))
-               (setq d (buffer-substring-no-properties 
+               (setq d (buffer-substring-no-properties
                         (line-beginning-position) end))))))
     (let ((default-directory (expand-file-name d)))
       ad-do-it)))
