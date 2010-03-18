@@ -82,6 +82,8 @@
   (local-unset-key (kbd "."))
   (local-unset-key (kbd "%"))
 
+  (local-unset-key (kbd "C-c ."))
+
   (local-set-key (kbd "C-c m a") 'align)
   (local-set-key (kbd "ESC TAB") 'semantic-ia-complete-symbol)
   (local-set-key (kbd "<C-home>") 'gdb)
@@ -902,6 +904,25 @@ Useful for packing c/c++ functions with one line or empty body."
 
 ;; Ignore whitespace-only diffs.
 (setq-default ediff-ignore-similar-regions t)
+
+(defadvice ediff-quit (around do-not-bother-me activate)
+  "Just quit, please."
+  (interactive "P")
+  (ediff-barf-if-not-control-buffer)
+  (let ((ctl-buf (current-buffer))
+	(ctl-frm (selected-frame))
+	(minibuffer-auto-raise t))
+    ;; (if (y-or-n-p (format "Quit this Ediff session%s? "
+    ;;     		  (if (ediff-buffer-live-p ediff-meta-buffer)
+    ;;     		      " & show containing session group" "")))
+	(progn
+	  (message "")
+	  (set-buffer ctl-buf)
+	  (ediff-really-quit reverse-default-keep-variants))
+      ;; (select-frame ctl-frm)
+      ;; (raise-frame ctl-frm)
+      ;; (message ""))
+        ))
 
 ;; git
 
