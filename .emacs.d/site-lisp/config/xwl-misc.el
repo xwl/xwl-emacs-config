@@ -773,8 +773,7 @@ passphrase cache or user."
 (add-hook 'twittering-mode-hook 'less-minor-mode-on)
 (add-hook 'twittering-mode-hook (lambda ()
                                   (twittering-icon-mode 1)
-                                  (setq twittering-reverse-mode t)
-                                  ))
+                                  (setq twittering-reverse-mode t)))
 
 (eval-after-load 'twittering-mode
   '(progn
