@@ -453,8 +453,8 @@ prompts for name field."
                     ;; (add-hook 'after-make-frame-functions
                     ;;           (lambda ()
                     (let ((col (- (round (/ (frame-width) 2)) 2)))
-                      (setq erc-fill-column col
-                            twittering-fill-column col))))
+                      (setq erc-fill-column (- col 6)) ; 6 for leading timestamp.
+                      (setq twittering-fill-column col))))
 
     (when window-system
       (require 'highlight-tail)
