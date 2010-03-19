@@ -1,13 +1,13 @@
 ;;; xwl-web.el --- w3m config
 
-;; Copyright (C) 2007 William Xu
+;; Copyright (C) 2007, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 ;; Version: 0.1
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation; either version 2, or (at your option)
+;; the Free Software Foundation; either version 3, or (at your option)
 ;; any later version.
 ;;
 ;; This program is distributed in the hope that it will be useful,
@@ -109,6 +109,16 @@ end tell"
      (xwl-shell-command-asynchronously
       (concat "firefox -new-tab \"" url "\"")))))
 
+(defun xwl-browse-url-chrome (url &optional new-window)
+  (case system-type
+    ((windows-nt)
+     (xwl-shell-command-asynchronously
+      (concat
+       "\"c:/Documents and Settings/wixu/Local Settings/Application Data/Google/Chrome/Application/chrome.exe\""
+       " \"" url "\"")))
+    (t
+     (error "where is chrome?"))))
+
 (defun xwl-browse-url-camino (url &optional new-window)
   (do-applescript
    (format
@@ -129,8 +139,9 @@ end tell"
       (if window-system
 ;;;           (if (eq window-system 'mac)
 ;;;               'xwl-browse-url-camino
-            'xwl-browse-url-firefox-tab-only
+            ;; 'xwl-browse-url-firefox-tab-only
             ;; 'xwl-browse-url-safari
+          'xwl-browse-url-chrome
 ;;;         )
         'w3m-browse-url))
 
