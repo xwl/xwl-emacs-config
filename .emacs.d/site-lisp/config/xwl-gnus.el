@@ -707,7 +707,7 @@
 
 ;;(setq gnus-summary-line-format "%U%R%z%-6d  %5k  %-20f%B%s\n")
 (setq gnus-summary-line-format
-      "%U%R%z%10&user-date; %u&ct; %5k  %u&from; %B(%t) %s\n")
+      "%U%R%z%10&user-date; %u&ct; %5k  %4i  %u&from; %B(%t) %s\n")
 
 (defun xwl-gnus-summary-tree-plain ()
   "My old plain summary tree."
