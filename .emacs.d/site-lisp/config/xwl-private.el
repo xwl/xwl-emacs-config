@@ -18,6 +18,7 @@
 (defvar pwce "")
 (defvar pwlastfm "")
 (defvar pwbitlbee "")
+(defvar pwtwitter "")
 
 (ignore-errors (require 'xwl-private-setup))
 

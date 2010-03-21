@@ -767,11 +767,16 @@ passphrase cache or user."
 (add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
 
 ;; twittering-mode
-(setq twittering-username "xwl")
+(setq twittering-username "xwl"
+      twittering-password pwtwitter)
 
-(setq twittering-proxy-use t
-      twittering-proxy-server "172.16.42.137"
-      twittering-proxy-port 8080)
+(if xwl-at-company?
+    (setq twittering-proxy-use t
+          twittering-proxy-server "172.16.42.137"
+          twittering-proxy-port 8080)
+  (setq twittering-host-url (xds "\\?[jCOI*XOI'QO@lPO9nZ*9m[:,aY)'=")
+        twittering-api-url (xds "\\?[jCOI*XOI'QO@lPO9nZ*9m[:,aY)'mPO9g")
+        twittering-search-url (xds "\\?[jCOI*XOI'QO@lPO9nZ*9m[:,aY)'mZ)M_ZdEf")))
 
 (setq twittering-status-format
       "%i %s, %@, from %f%L%r%R:\n%FILL{%T}\n")
