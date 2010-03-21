@@ -756,6 +756,12 @@ passphrase cache or user."
            )
       (auto-complete-mode 1)))
 
+(eval-after-load 'auto-complete
+  '(progn
+     (define-key ac-completing-map "\M-n" 'ac-next)
+     (define-key ac-completing-map "\M-p" 'ac-previous)
+     ))
+
 (add-hook 'log-edit-mode-hook (lambda () (smart-operator-mode -1)))
 
 (add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
