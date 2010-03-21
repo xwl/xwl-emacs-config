@@ -119,12 +119,16 @@
 
 ;; (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (setq-default auto-fill-function 'do-auto-fill
-              ;; fill-column 70 ; default is 70
+              fill-column 80 ; default is 70
               )
 ;; (setq default-justification 'full)
 (setq adaptive-fill-regexp
       "[	]*\\([-|#;>*]+[	]*\\|(?[0-9]+[.)][	]*\\)*"
       adaptive-fill-first-line-regexp "\\`[	]*\\'")
+
+(add-hook 'log-edit-mode-hook
+          (lambda ()
+            (setq fill-column 70)))
 
 ;;(unless window-system
 ;;  (set-face-background 'highlight "red")
