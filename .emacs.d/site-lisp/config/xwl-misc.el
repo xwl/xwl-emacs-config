@@ -778,8 +778,9 @@ passphrase cache or user."
         twittering-api-url (xds "\\?[jCOI*XOI'QO@lPO9nZ*9m[:,aY)'mPO9g")
         twittering-search-url (xds "\\?[jCOI*XOI'QO@lPO9nZ*9m[:,aY)'mZ)M_ZdEf")))
 
-(setq twittering-status-format
-      "%i %s, %@, from %f%L%r%R:\n%FILL{%T}\n")
+(setq twittering-time-format "%a %m.%d/%H:%M:%S"
+      twittering-status-format
+      "%i %@ %s, from %f%L%r%R:\n%FILL{%T}\n")
 
 (add-hook 'twittering-mode-hook 'less-minor-mode-on)
 (add-hook 'twittering-mode-hook (lambda ()
@@ -796,6 +797,19 @@ passphrase cache or user."
      (define-key twittering-mode-map "P" 'twittering-goto-previous-status-of-user)
 
      ))
+
+
+;; ,----
+;; | Track cahnges for some buffer
+;; `----
+(defadvice switch-to-buffer (before
+                             highlight-changes-for-some-buffer
+                             activate)
+  (when (memq major-mode (list 'erc-mode 'twittering-mode))
+    (let ((buffer-read-only nil)
+          (inhibit-read-only t))
+      (highlight-changes-mode -1)
+      (highlight-changes-mode 1))))
 
 
 (provide 'xwl-misc)
