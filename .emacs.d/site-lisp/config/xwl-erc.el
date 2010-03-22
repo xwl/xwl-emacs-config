@@ -338,7 +338,7 @@ If the buffer is currently not visible, makes it sticky."
 (defun xwl-erc-select ()
   (interactive)
 
-  (when (string= pwbitlbee "")
+  (unless pwbitlbee
     (setq pwbitlbee (read-passwd "irc password: "))
     (setq pwerc pwbitlbee
           pwdeb pwbitlbee))
