@@ -136,14 +136,14 @@ end tell"
     url)))
 
 (setq browse-url-browser-function
-      (if window-system
+      (case window-system
 ;;;           (if (eq window-system 'mac)
 ;;;               'xwl-browse-url-camino
-            ;; 'xwl-browse-url-firefox-tab-only
-            ;; 'xwl-browse-url-safari
-          'xwl-browse-url-chrome
-;;;         )
-        'w3m-browse-url))
+        ;; 'xwl-browse-url-firefox-tab-only
+        ;; 'xwl-browse-url-safari
+        ((windows-nt) 'xwl-browse-url-chrome)
+        ((ns) 'xwl-browse-url-firefox-tab-only)
+        (t 'w3m-browse-url)))
 
 (global-set-key (kbd "C-c n b") 'browse-url)
 
