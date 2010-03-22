@@ -98,12 +98,14 @@
 
         ))
 
-(defun xwl-erc-auto-identify (server nick)
-  (unless (string-match "localhost" server) ; bitlbee
-    (erc-message "PRIVMSG"
-                 (format "NickServ identify %s" pwbitlbee))))
+;; Password has already been provided in erc-select call:
+;;
+;; (defun xwl-erc-auto-identify (server nick)
+;;   (unless (string-match "localhost" server) ; bitlbee
+;;     (erc-message "PRIVMSG"
+;;                  (format "NickServ identify %s" pwbitlbee))))
 
-(add-hook 'erc-after-connect 'xwl-erc-auto-identify)
+;; (add-hook 'erc-after-connect 'xwl-erc-auto-identify)
 
 (defun his-bitlbee-identify ()
    "If we're on the bitlbee server, send the identify command to the
