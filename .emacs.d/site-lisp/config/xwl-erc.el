@@ -180,10 +180,10 @@ so as to keep an eye on work when necessarily."
 
 (setq erc-track-priority-faces-only 'all)
 
-(defadvice erc-track-switch-buffer (before place-point-to-bottom activate)
-  (when (memq (current-buffer) (erc-buffer-list))
-    (goto-char (point-max))
-    (forward-line -1)))
+;; (defadvice erc-track-switch-buffer (before place-point-to-bottom activate)
+;;   (when (memq (current-buffer) (erc-buffer-list))
+;;     (goto-char (point-max))
+;;     (forward-line -1)))
 
 (require 'erc-fill)
 (erc-fill-mode 1)

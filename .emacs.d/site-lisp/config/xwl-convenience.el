@@ -185,7 +185,7 @@
 ;; (global-visual-line-mode 1)
 
 ;; (setq display-time-format "<%V-%u> %m/%d/%H:%M")
-(setq display-time-format "%a(%V) %m/%d/%H:%M")
+(setq display-time-format "%a(%V) %m.%d/%H:%M")
 
 (display-time)
 

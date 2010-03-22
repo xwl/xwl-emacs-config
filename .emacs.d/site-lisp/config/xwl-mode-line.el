@@ -110,13 +110,14 @@
   (setq global-mode-string
         '("" appt-mode-string " "
           display-time-string " "
+         ;;erc-modified-channels-object
           ;; xwl-memory-usage-string " "
           ;; xwl-week-at-school-string " "
           ;; battery-mode-line-string " "
           ;; xwl-mail-notify-string " "
 
           ;; cwit-mode-line-string " "
-          ;; erc-modified-channels-object
+
 	  ;; rcirc-activity-string
 
           ;; xwl-weather-string

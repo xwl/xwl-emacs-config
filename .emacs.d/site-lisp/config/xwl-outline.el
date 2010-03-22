@@ -3,7 +3,7 @@
 ;; Copyright (C) 2007, 2008, 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
-;; Last updated: 2010/02/25
+;; Last updated: 2010/03/22
 
 (require 'outline)
 
@@ -14,9 +14,6 @@
 (defadvice outline-minor-mode (after hide-sublevels)
   "Enter overview after start up `outline-minor-mode'."
   (hide-sublevels 2))
-
-;; (ad-deactivate 'outline-mode)
-;; (ad-deactivate 'outline-minor-mode)
 
 (setq outline-font-lock-keywords
       '((eval list

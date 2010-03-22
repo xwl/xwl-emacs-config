@@ -1,6 +1,6 @@
 ;;; xwl-emms.el --- emms config file
 
-;; Copyright (C) 2007, 2008, 2009 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -546,5 +546,10 @@
     (kill-buffer (current-buffer))))
 
 (provide 'xwl-emms)
+
+
+;;; Local Variables: ***
+;;; outline-regexp: ";; | " ***
+;;; End: ***
 
 ;;; xwl-emms.el ends here
