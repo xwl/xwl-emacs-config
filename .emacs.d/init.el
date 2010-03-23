@@ -12,7 +12,6 @@
  '(dired-dwim-target t)
  '(dired-isearch-filenames t)
  '(enable-recursive-minibuffers t)
- '(erc-track-showcount t)
  '(file-template-insert-automatically t)
  '(file-template-paths (quote ("~/insert/" "/usr/share/emacs/insert/" "~/.emacs.d/templates/")))
  '(file-template-search-current-dir nil)

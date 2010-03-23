@@ -447,7 +447,7 @@ prompts for name field."
     (color-theme-xwl-console)
 
     ;; FIXME: how to set this only after window has been maximized?
-    (run-at-time 1
+    (run-at-time 5
                  nil
                  '(lambda ()
                     ;; (add-hook 'after-make-frame-functions

@@ -1,4 +1,3 @@
 (("from"
-  ("YAMAMOTO Mitsuharu <mituharu@math\\.s\\.chiba-u\\.ac\\.jp>" nil nil r)
-  ("Richard Stallman <rms@gnu\\.org>" nil nil r)
- ("references"))
+  ("YAMAMOTO Mitsuharu <mituharu@math.s.chiba-u.ac.jp>" nil nil e)
+  ("Richard Stallman <rms@gnu.org>" nil nil e)))
