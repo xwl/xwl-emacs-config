@@ -773,7 +773,8 @@ passphrase cache or user."
 (if xwl-at-company?
     (setq twittering-proxy-use t
           twittering-proxy-server "172.16.42.137"
-          twittering-proxy-port 8080)
+          twittering-proxy-port 8080
+          twittering-use-ssl nil)
   (setq twittering-host-url (xds "\\?[jCOI*XOI'QO@lPO9nZ*9m[:,aY)'=")
         twittering-api-url (xds "\\?[jCOI*XOI'QO@lPO9nZ*9m[:,aY)'mPO9g")
         twittering-search-url (xds "\\?[jCOI*XOI'QO@lPO9nZ*9m[:,aY)'mZ)M_ZdEf")))
@@ -810,6 +811,46 @@ passphrase cache or user."
           (inhibit-read-only t))
       (highlight-changes-mode -1)
       (highlight-changes-mode 1))))
+
+;; ,----
+;; | s60lxr
+;; `----
+
+(global-set-key (kbd "C-c s") 'xwl-s60lxr-search)
+
+(defun xwl-s60lxr-search (filename str)
+  (interactive "s(s60lxr) File named: \ns(s60lxr) Containing: ")
+  (unless xwl-s60lxr-release
+    (xwl-s60lxr-generate-releases))
+  (xwl-browse-url-firefox-tab-only
+   (format "http://s60lxr/search?v=%s&filestring=%s&string=%s"
+           xwl-s60lxr-release filename str)))
+
+(setq xwl-s60lxr-release nil)
+
+(defun xwl-s60lxr-generate-releases ()
+  "Also set default `xwl-s60lxr-release'."
+  (with-current-buffer
+      (let ((url-proxy-services nil))
+        (url-retrieve-synchronously "http://s60lxr"))
+    (goto-char (point-min))
+    (let ((releases '()))
+      (when (re-search-forward
+             "<span class=\"var-sel\">\\(.+\\)</span>" nil t 1)
+        (push (match-string 1) releases)
+        ;; Set default release
+        (setq xwl-s60lxr-release (match-string 1)))
+      (while (re-search-forward
+              "<a class='varlink' href=.*>\\(.+\\)</a>" nil t 1)
+        (push (match-string 1) releases))
+      (kill-buffer (current-buffer))
+      releases)))
+
+(defun xwl-s60lxr-select-release (release)
+  (interactive
+   (ido-completing-read "Use release: "
+                        (xwl-s60lxr-generate-releases)))
+  (setq xwl-s60lxr-release release))
 
 
 (provide 'xwl-misc)
