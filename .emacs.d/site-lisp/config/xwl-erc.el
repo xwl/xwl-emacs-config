@@ -170,6 +170,8 @@ so as to keep an eye on work when necessarily."
 
 (require 'erc-track)
 
+(setq erc-track-showcount t)
+
 (setq erc-track-switch-direction 'importance)
 
 (setq erc-track-faces-priority-list

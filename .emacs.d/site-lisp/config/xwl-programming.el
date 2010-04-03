@@ -397,14 +397,25 @@ Thus generate a TAGs file."
       '(php-mode java-mode c-mode c++-mode emacs-lisp-mode scheme-mode
 	text-mode outline-mode))
 
+(when (eq system-type 'windows-nt)
+  (setq find-program "cmd /c c:/usr/git/bin/find"))
+
 ;; FIXME: seems this only has effects before first run of `grep'.
 (setq grep-use-null-device nil
       grep-command "grep -nH -i "
-      grep-find-command (concat "find . -type f -print0 | xargs -0 "
+      grep-find-command (format "%s . -type f -print0 | xargs -0 %s"
+                                find-program
                                 grep-command))
 
 (global-set-key (kbd "C-c g") 'grep)
 (global-set-key (kbd "C-c m G") 'grep-find)
+(global-set-key (kbd "C-c G")
+                (lambda (cmd)
+                  (interactive
+                   (list (read-shell-command
+                          "Grep filename: "
+                          (concat find-program " . -type f | grep -nH "))))
+                  (shell-command cmd)))
 
 (make-face 'font-lock-fixme-face)
 (make-face 'font-lock-todo-face)
