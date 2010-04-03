@@ -66,7 +66,7 @@
 (global-set-key (kbd "<f9>") 'shell) ;'eshell) ;xwl-term ;xwl-run-scsh
 (global-set-key (kbd "<f11>") (lambda ()
                                 (interactive)
-                                (xwl-switch-or-create "*twittering*" 'twit)))
+                                (xwl-switch-or-create ":home" 'twit)))
 
 (global-set-key (kbd "<f13>") 'kill-this-buffer)
 
@@ -141,6 +141,9 @@
 (global-set-key (kbd "C-c j") 'imenu)
 
 (global-set-key (kbd "C-c m a") 'his-align-cols)
+;; `a' will be rebind in c++ mode, so bind `A' also.
+(global-set-key (kbd "C-c m A") 'his-align-cols)
+
 ;; (global-set-key (kbd "C-c m m") 'apply-macro-to-region-lines)
 (global-set-key (kbd "C-c m q") 'query-replace-regexp)
 (global-set-key (kbd "C-c m h") 'htmlize-file)
@@ -177,7 +180,6 @@
 (global-set-key (kbd "C-c m r") 'revert-buffer)
 
 (global-set-key (kbd "M-S") 'xwl-search-jp)
-
 
 (provide 'xwl-bindings)
 
