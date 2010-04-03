@@ -109,13 +109,18 @@ end tell"
      (xwl-shell-command-asynchronously
       (concat "firefox -new-tab \"" url "\"")))))
 
+;; FIXME: why chrome needs this?
+(defun xwl-chrome-quote (url)
+  "url-hexify-string `&'."
+  (replace-regexp-in-string "&" "%26" url))
+
 (defun xwl-browse-url-chrome (url &optional new-window)
   (case system-type
     ((windows-nt)
      (xwl-shell-command-asynchronously
       (concat
        "\"c:/Documents and Settings/wixu/Local Settings/Application Data/Google/Chrome/Application/chrome.exe\""
-       " \"" url "\"")))
+       " \"" (xwl-chrome-quote url) "\"")))
     (t
      (error "where is chrome?"))))
 
