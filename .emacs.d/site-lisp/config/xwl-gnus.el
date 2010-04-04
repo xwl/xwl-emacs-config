@@ -652,10 +652,8 @@
 (global-set-key (kbd "<f6>") '(lambda ()
                                 (interactive)
                                 (if xwl-at-company?
-                                    (xwl-gnus)
-                                  (message "Hmm, only run when at company")
-                                  )
-                                ))
+                                    (message "Hmm, only run at home")
+                                  (xwl-gnus))))
 
 (setq gnus-permanently-visible-groups
       (regexp-opt `(;; "savings"
