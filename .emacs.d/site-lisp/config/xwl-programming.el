@@ -110,7 +110,7 @@
         (local-set-key ")" (lambda ()
                              (interactive)
                              (just-one-space)
-                             (insert ")\n")
+                             (insert ")")
                              (indent-according-to-mode)))
         ;; FIXME: this shouldn't be necessary.
         (local-set-key "}"  (lambda ()
@@ -829,6 +829,7 @@ If SCHEME?, `run-scheme'."
 (add-to-list 'auto-mode-alist '("\\.loc\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.mmp\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.inf\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.rls\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.pro\\'" . makefile-mode))
 
 ;; 'ffap won't work as ffap is `provide' at the top.

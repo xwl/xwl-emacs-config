@@ -525,7 +525,6 @@
 
 ;; (setq inhibit-eol-conversion t)
 
-
 (provide 'xwl-convenience)
 
 ;;; xwl-convenience.el ends here
