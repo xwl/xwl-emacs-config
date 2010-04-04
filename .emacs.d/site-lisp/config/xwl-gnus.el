@@ -818,7 +818,8 @@
 
 ;; (add-hook 'gnus-article-prepare-hook 'xwl-gnus-article-mode-hook)
 
-(setq message-yank-prefix "> ")         ; t
+(setq message-yank-prefix nil)
+;; "> ")
 
 ;; TODO
 ;; (fset 'w3m-safe-view-this-url (symbol-function 'w3m-safe-view-this-url))
