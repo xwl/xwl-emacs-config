@@ -132,7 +132,7 @@ each OS has different set of tools. "
         "objc" "ocaml" "ocaml-brief" "oobas" "oracle8" "pascal" "perl" "php" "php-brief"
         "python" "qbasic" "robots" "ruby" "sas" "scheme" "sdlbasic" "smarty" "sql"
         "tsql" "vb" "vbnet" "vhdl" "visualfoxpro" "xml"))
-        
+
 (defun xwl-paste-ubuntu-cn (beg end &optional class)
   "Paste region between BEG and END to http://paste.ubuntu.org.cn.
 
@@ -144,7 +144,7 @@ simply yank it when needed."
         (setq class (ido-completing-read "Use mode: " xwl-wgetpaste-ubuntu-cn-classes))
       (setq class (xwl-paste-match-mode))))
   (let ((url "http://paste.ubuntu.org.cn"))
-    (with-current-buffer 
+    (with-current-buffer
         (url-extra-http-post url
                        `((poster . ,xwl-paste-username)
                          (class . ,class)
@@ -154,7 +154,7 @@ simply yank it when needed."
                          ;; (x . "---xwl\r\nContent-Disposition: form-data;name=screenshot;filename=\"c:/Users/My Pictures/orgmode.PNG\"\r\n---xwl")
                          ))
       (goto-char (point-min))
-      (if (re-search-forward 
+      (if (re-search-forward
            (concat "<li class=\"highlight\"><a href=\"\/\\([0-9]+\\)\">" xwl-paste-username)
            nil t 1)
           (let ((s (concat url "/" (match-string 1))))
@@ -172,7 +172,7 @@ simply yank it when needed."
   "Find a suituable mode on the paste host based on current `major-mode'."
   ;; FIXME: No plain text?? I will just use lisp then.
   (let ((mode "lisp"))
-    (cond 
+    (cond
      ((member (replace-regexp-in-string "-mode" "" (symbol-name major-mode))
               xwl-paste-ubuntu-cn-classes)
       (replace-regexp-in-string "-mode" "" (symbol-name major-mode)))
@@ -201,8 +201,8 @@ simply yank it when needed."
          (items
           (append (mapcar (lambda (i) (* (min salary cap) i)) '(0.08 0.02 0.005 0.12))
                   (list 3))))
-    (list (round (apply '+ items)) 
-          (mapcar* 'cons 
+    (list (round (apply '+ items))
+          (mapcar* 'cons
                    '("养老 8%" "医疗 2%" "失业 0.5%" "公积金 12%" "医疗額外 3")
                    items))))
 
@@ -225,8 +225,8 @@ simply yank it when needed."
 (defun salary-tax (salary)
   (let ((table salary-tax-table)
         (i nil)
-        (exceeded (- salary 
-                     salary-tax-base 
+        (exceeded (- salary
+                     salary-tax-base
                      (car (salary-insurances salary))))
         (rate 0)
         (to-substract 0))
@@ -420,6 +420,7 @@ is all)"
 (defun xwl-hide-buffer ()
   "Hide current buffer, and enlarge the other one if exists."
   (interactive)
+  (xwl-highlight-changes-for-some-buffer)
   (delete-windows-on (buffer-name)))
 
 (defun xwl-list-ref (list ref)
@@ -720,7 +721,7 @@ This should not affect `buffer-undo-list'."
     "172.28.206.207"))
 
 ;; Well, as Gnus and other components depend on this, we have to eval this much earlier.
-  
+
 (when (and xwl-at-company? xwl-w32?)
   (setq xwl-proxy-server "172.16.42.137"
         xwl-proxy-port 8080)

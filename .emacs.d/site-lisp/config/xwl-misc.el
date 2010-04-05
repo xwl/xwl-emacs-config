@@ -807,6 +807,9 @@ passphrase cache or user."
 (defadvice switch-to-buffer (before
                              highlight-changes-for-some-buffer
                              activate)
+  (xwl-highlight-changes-for-some-buffer))
+
+(defun xwl-highlight-changes-for-some-buffer ()
   (when (memq major-mode (list 'erc-mode 'twittering-mode))
     (let ((buffer-read-only nil)
           (inhibit-read-only t))
