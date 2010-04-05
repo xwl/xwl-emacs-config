@@ -141,7 +141,7 @@ end tell"
     url)))
 
 (setq browse-url-browser-function
-      (case window-system
+      (case system-type
 ;;;           (if (eq window-system 'mac)
 ;;;               'xwl-browse-url-camino
         ;; 'xwl-browse-url-firefox-tab-only
