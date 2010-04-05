@@ -444,7 +444,8 @@ prompts for name field."
     ;; (run-at-time 3
     ;;              nil
     ;;              '(lambda ()
-    (color-theme-xwl-console)
+    (when (fboundp 'color-theme-xwl-console)
+      (color-theme-xwl-console))
 
     ;; FIXME: how to set this only after window has been maximized?
     (run-at-time 5
@@ -810,11 +811,16 @@ passphrase cache or user."
   (xwl-highlight-changes-for-some-buffer))
 
 (defun xwl-highlight-changes-for-some-buffer ()
-  (when (memq major-mode (list 'erc-mode 'twittering-mode))
-    (let ((buffer-read-only nil)
-          (inhibit-read-only t))
-      (highlight-changes-mode -1)
-      (highlight-changes-mode 1))))
+  (cond ((memq major-mode (list ;; 'erc-mode
+                           'twittering-mode))
+         (let ((buffer-read-only nil)
+               (inhibit-read-only t))
+           (highlight-changes-mode -1)
+           (highlight-changes-mode 1)))
+        ((memq major-mode (list 'erc-mode))
+           (when (memq (current-buffer) (erc-buffer-list))
+             (goto-char (point-max))
+             (forward-line -1)))))
 
 ;; ,----
 ;; | s60lxr

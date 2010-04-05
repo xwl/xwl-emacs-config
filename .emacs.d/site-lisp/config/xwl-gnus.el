@@ -72,7 +72,7 @@
         ;;   http://www.arcorhome.de/newshamster/tgl/misc/hamster_en.html
 
         ,@(if xwl-at-company?
-              `(;; (nnimap "imap.gmail.com"
+              `( ;; (nnimap "imap.gmail.com"
                 ;;         (nnimap-address ,(xwl-redirect-host))
                 ;;         (nnimap-server-port 10993)
                 ;;         (nnimap-stream ssl))
@@ -81,10 +81,10 @@
                       (nntp-address ,(xwl-redirect-host))
                       (nntp-port-number 11119))
                 )
-            '(;; (nnimap "imap.gmail.com"
-              ;;         (nnimap-server-port 993)
-              ;;         (nnimap-stream ssl))
-              ;; (nntp "news.cn99.com")
+            '((nnimap "imap.gmail.com"
+                      (nnimap-server-port 993)
+                      (nnimap-stream ssl))
+              (nntp "news.cn99.com")
               ))
         ))
 
@@ -333,8 +333,8 @@
          ;; to remove
 
          ;; "cocoa-dev@lists.apple.com"
-;;          "pongba@googlegroups.com"
-;;          "python-cn@googlegroups.com"
+         "pongba@googlegroups.com"
+         "python-cn@googlegroups.com"
          )))
 
 
@@ -502,7 +502,7 @@
 
 (defun xwl-split-mailing-lists ()
   "e.g., foo@googlegroups.com -> foo"
-  (let ((re (concat "^List-Post: <mailto:\\([-a-zA-Z._]+\\)@"
+  (let ((re (concat "^List-Post:.*<mailto:\\([-a-zA-Z._]+\\)@"
                     (regexp-opt '("googlegroups.com"
                                   "lists.apple.com"
                                   ;; "gnu.org"
@@ -635,7 +635,8 @@
         ;; )
 
       (gnus-demon-init)
-      (color-theme-xwl-console)
+      (when (fboundp 'color-theme-xwl-console)
+        (color-theme-xwl-console))
 
       (unless gnus-plugged
         (unless xwl-gnus-agent-timer

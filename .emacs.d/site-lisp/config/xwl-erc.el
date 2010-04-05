@@ -335,7 +335,14 @@ If the buffer is currently not visible, makes it sticky."
   (define-key erc-mode-map (kbd "C-c C-w") 'xwl-erc-cmd-WHOIS)
   (define-key erc-mode-map (kbd "C-c C-b") 'xwl-erc-cmd-bitlbee-blist)
 
-  (define-key erc-mode-map (kbd "M-m") 'erc-bol))
+  (define-key erc-mode-map (kbd "M-m") 'erc-bol)
+
+  (define-key erc-mode-map (kbd "q") (lambda ()
+                                       (interactive)
+                                       (if less-minor-mode
+                                           (xwl-hide-buffer)
+                                         (insert "q"))))
+  )
 
 (add-hook 'erc-mode-hook 'xwl-erc-mode-hook)
 
@@ -354,15 +361,15 @@ If the buffer is currently not visible, makes it sticky."
           (setq sv (xwl-redirect-host))
           (setq nick "xwl_"))
 
-        (erc-select :server sv :port 16667 :nick nick :password pwerc)
-        (erc-select :server sv :port 16669 :nick nick :password pwdeb)
-        (erc-select :server sv :port 16668 :nick nick :password pwerc))
+        (erc :server sv :port 16667 :nick nick :password pwerc)
+        (erc :server sv :port 16669 :nick nick :password pwdeb)
+        (erc :server sv :port 16668 :nick nick :password pwerc))
 
-    (erc-select :server "irc.debian.org"       :port 6669 :nick "xwl" :password pwdeb)
-    (erc-select :server "irc.freenode.net"     :port 6667 :nick "xwl" :password pwerc)
+    (erc :server "irc.debian.org"       :port 6669 :nick "xwl" :password pwdeb)
+    (erc :server "irc.freenode.net"     :port 6667 :nick "xwl" :password pwerc)
 
-    ;; (erc-select :server "irc.linuxfire.com.cn" :port 6667 :nick "xwl" :password "")
-    ;; (erc-select :server "irc.mozilla.org"      :port 6667 :nick "xwl" :password "")
+    ;; (erc :server "irc.linuxfire.com.cn" :port 6667 :nick "xwl" :password "")
+    ;; (erc :server "irc.mozilla.org"      :port 6667 :nick "xwl" :password "")
     ))
 
 (defun xwl-erc-select-bitlbee ()
