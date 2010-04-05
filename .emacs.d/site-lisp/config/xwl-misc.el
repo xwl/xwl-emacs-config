@@ -797,6 +797,7 @@ passphrase cache or user."
      (define-key twittering-mode-map "N" 'twittering-goto-next-status-of-user)
      (define-key twittering-mode-map "P" 'twittering-goto-previous-status-of-user)
 
+     (define-key twittering-mode-map "q" 'xwl-hide-buffer)
      ))
 
 
