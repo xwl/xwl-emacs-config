@@ -1,6 +1,6 @@
 
 ;;;### (autoloads (xwl-makefile-clean xwl-makefile-byte-compile xwl-makefile-all)
-;;;;;;  "xwl-makefile" "xwl-makefile.el" (19359 10727))
+;;;;;;  "xwl-makefile" "xwl-makefile.el" (19387 23874))
 ;;; Generated autoloads from xwl-makefile.el
 
 (autoload 'xwl-makefile-all "xwl-makefile" "\
@@ -25,7 +25,7 @@ Not documented
 ;;;;;;  sawfish-info-function sawfish-describe-variable sawfish-describe-function
 ;;;;;;  sawfish-eval-print-last-sexp sawfish-eval-last-sexp sawfish-eval-expression
 ;;;;;;  sawfish-eval-defun sawfish-eval-buffer sawfish-eval-region
-;;;;;;  sawfish-mode) "sawfish" "sawfish.el" (19265 25913))
+;;;;;;  sawfish-mode) "sawfish" "sawfish.el" (18862 33836))
 ;;; Generated autoloads from sawfish.el
 
 (autoload 'sawfish-mode "sawfish" "\
@@ -129,7 +129,7 @@ Create a sawfish interaction buffer.
 ;;;***
 
 ;;;### (autoloads (pack-windows) "pack-windows" "pack-windows.el"
-;;;;;;  (19265 25913))
+;;;;;;  (18862 33836))
 ;;; Generated autoloads from pack-windows.el
 
 (autoload 'pack-windows "pack-windows" "\
@@ -157,7 +157,7 @@ displayed in the echo area if `pack-windows-verbose' is non-nil.
 ;;;### (autoloads (oddmuse-kill-url oddmuse-browse-this-page oddmuse-browse-page
 ;;;;;;  emacswiki-post oddmuse-insert-pagename oddmuse-revert oddmuse-post
 ;;;;;;  oddmuse-follow oddmuse-edit oddmuse-toggle-minor) "oddmuse"
-;;;;;;  "oddmuse.el" (19265 25913))
+;;;;;;  "oddmuse.el" (18862 33836))
 ;;; Generated autoloads from oddmuse.el
 
 (autoload 'oddmuse-toggle-minor "oddmuse" "\
@@ -224,7 +224,7 @@ Make the URL of current oddmuse page the latest kill in the kill ring.
 ;;;***
 
 ;;;### (autoloads (nuke-trailing-whitespace) "nuke-trailing-whitespace"
-;;;;;;  "nuke-trailing-whitespace.el" (19265 25913))
+;;;;;;  "nuke-trailing-whitespace.el" (18862 33836))
 ;;; Generated autoloads from nuke-trailing-whitespace.el
 
 (autoload 'nuke-trailing-whitespace "nuke-trailing-whitespace" "\
@@ -242,8 +242,8 @@ replacement if the buffer is read-only.
 ;;;***
 
 ;;;### (autoloads (htmlize-many-files-dired htmlize-many-files htmlize-file
-;;;;;;  htmlize-region htmlize-buffer) "htmlize" "htmlize.el" (19265
-;;;;;;  25913))
+;;;;;;  htmlize-region htmlize-buffer) "htmlize" "htmlize.el" (19245
+;;;;;;  65113))
 ;;; Generated autoloads from htmlize.el
 
 (autoload 'htmlize-buffer "htmlize" "\
@@ -309,7 +309,7 @@ HTMLize dired-marked files.
 ;;;***
 
 ;;;### (autoloads (graphviz-dot-mode) "graphviz-dot-mode" "graphviz-dot-mode.el"
-;;;;;;  (19265 25913))
+;;;;;;  (18862 33836))
 ;;; Generated autoloads from graphviz-dot-mode.el
 
 (autoload 'graphviz-dot-mode "graphviz-dot-mode" "\
@@ -339,11 +339,11 @@ Variables specific to this mode:
   graphviz-dot-preview-extension      (default `png')
        File type to use for `graphviz-dot-preview'.
   graphviz-dot-auto-indent-on-newline (default t)
-       Whether to run `electric-graphviz-dot-terminate-line' when 
+       Whether to run `electric-graphviz-dot-terminate-line' when
        newline is entered.
   graphviz-dot-auto-indent-on-braces (default t)
        Whether to run `electric-graphviz-dot-open-brace' and
-       `electric-graphviz-dot-close-brace' when braces are 
+       `electric-graphviz-dot-close-brace' when braces are
        entered.
   graphviz-dot-auto-indent-on-semi (default t)
        Whether to run `electric-graphviz-dot-semi' when semi colon
@@ -355,7 +355,7 @@ Variables specific to this mode:
 
 This mode can be customized by running \\[graphviz-dot-customize].
 
-Turning on Graphviz Dot mode calls the value of the variable 
+Turning on Graphviz Dot mode calls the value of the variable
 `graphviz-dot-mode-hook' with no args, if that value is non-nil.
 
 \(fn)" t nil)
@@ -365,7 +365,7 @@ Turning on Graphviz Dot mode calls the value of the variable
 ;;;***
 
 ;;;### (autoloads (goto-last-change) "goto-last-change" "goto-last-change.el"
-;;;;;;  (19265 25913))
+;;;;;;  (18964 12702))
 ;;; Generated autoloads from goto-last-change.el
 
 (autoload 'goto-last-change "goto-last-change" "\
@@ -380,7 +380,7 @@ will return point to the current position.
 
 ;;;### (autoloads (file-template-find-file-not-found-hook file-template-auto-insert
 ;;;;;;  file-template-insert) "file-template" "file-template.el"
-;;;;;;  (19265 25913))
+;;;;;;  (18911 33708))
 ;;; Generated autoloads from file-template.el
 
 (autoload 'file-template-insert "file-template" "\
@@ -409,8 +409,8 @@ Hook to (optionally) insert the default template when a new file is created.
 ;;;;;;  etags-select-go-if-unambiguous etags-select-use-short-name-completion
 ;;;;;;  etags-select-highlight-delay etags-select-highlight-tag-after-jump
 ;;;;;;  etags-select-mode-hook etags-select-no-select-for-one-match
-;;;;;;  etags-select-mode) "etags-select" "etags-select.el" (19265
-;;;;;;  25913))
+;;;;;;  etags-select-mode) "etags-select" "etags-select.el" (19166
+;;;;;;  65062))
 ;;; Generated autoloads from etags-select.el
 
 (let ((loads (get 'etags-select-mode 'custom-loads))) (if (member '"etags-select" loads) nil (put 'etags-select-mode 'custom-loads (cons '"etags-select" loads))))
@@ -472,7 +472,7 @@ to do.
 
 ;;;***
 
-;;;### (autoloads (dos-mode) "dos" "dos.el" (19284 4834))
+;;;### (autoloads (dos-mode) "dos" "dos.el" (19284 32504))
 ;;; Generated autoloads from dos.el
 
 (autoload 'dos-mode "dos" "\
@@ -492,7 +492,7 @@ save keystrokes. Read help for Dos command with `dos-help-cmd'. Run script using
 ;;;***
 
 ;;;### (autoloads (color-theme-select) "color-theme" "color-theme.el"
-;;;;;;  (19265 25913))
+;;;;;;  (18862 33836))
 ;;; Generated autoloads from color-theme.el
 
 (autoload 'color-theme-select "color-theme" "\
@@ -512,7 +512,7 @@ libraries are mainly useful for color theme authors.
 ;;;;;;  boxquote-describe-variable boxquote-describe-function boxquote-boxquote
 ;;;;;;  boxquote-paragraph boxquote-defun boxquote-yank boxquote-kill-ring-save
 ;;;;;;  boxquote-insert-file boxquote-buffer boxquote-region boxquote-title)
-;;;;;;  "boxquote" "boxquote.el" (19265 25913))
+;;;;;;  "boxquote" "boxquote.el" (18919 23358))
 ;;; Generated autoloads from boxquote.el
 
 (autoload 'boxquote-title "boxquote" "\
@@ -638,117 +638,12 @@ Remove the boxquote that contains `point'.
 
 ;;;***
 
-;;;### (autoloads (wget-web-page wget) "wget" "wget-el/wget.el" (19265
-;;;;;;  25913))
-;;; Generated autoloads from wget-el/wget.el
-
-(autoload 'wget "wget" "\
-Wget interface to download URI asynchronously.
-If argument ARG is non-nil, ask some options.
-Called with prefix argument, turn argument ARG t.
-
-If you are in dired mode which is seeing ftp directory,
-`wget' regard current line file name as URI.
-
-\(fn URI &optional ARG)" t nil)
-
-(autoload 'wget-web-page "wget" "\
-Wget interface to download whole Web page.
-If argument ARG is non-nil, ask options.
-Called with prefix argument, turn argument ARG t.
-
-Second argument URI is string.
-wget-web-page downlod whole Web page from it following relative link.
-
-\(fn URI &optional ARG)" t nil)
-
-;;;***
-
-;;;### (autoloads (ruby-mode) "ruby-mode" "ruby/ruby-mode.el" (19265
-;;;;;;  25913))
-;;; Generated autoloads from ruby/ruby-mode.el
-
-(autoload 'ruby-mode "ruby-mode" "\
-Major mode for editing ruby scripts.
-\\[ruby-indent-command] properly indents subexpressions of multi-line
-class, module, def, if, while, for, do, and case statements, taking
-nesting into account.
-
-The variable ruby-indent-level controls the amount of indentation.
-\\{ruby-mode-map}
-
-\(fn)" t nil)
-
-;;;***
-
-;;;### (autoloads (dictionary-popup-matching-words dictionary-mouse-popup-matching-words
-;;;;;;  dictionary-match-words dictionary-lookup-definition dictionary-search
-;;;;;;  dictionary dictionary-mode) "dictionary" "dictionary-el/dictionary.el"
-;;;;;;  (19265 25913))
-;;; Generated autoloads from dictionary-el/dictionary.el
-
-(autoload 'dictionary-mode "dictionary" "\
-This is a mode for searching a dictionary server implementing
- the protocol defined in RFC 2229.
-
- This is a quick reference to this mode describing the default key bindings:
-
- * q close the dictionary buffer
- * h display this help information
- * s ask for a new word to search
- * d search the word at point
- * n or Tab place point to the next link
- * p or S-Tab place point to the prev link
-
- * m ask for a pattern and list all matching words.
- * D select the default dictionary
- * M select the default search strategy
-
- * Return or Button2 visit that link
- * M-Return or M-Button2 search the word beneath link in all dictionaries
- 
-
-\(fn)" nil nil)
-
-(autoload 'dictionary "dictionary" "\
-Create a new dictonary buffer and install dictionary-mode
-
-\(fn)" t nil)
-
-(autoload 'dictionary-search "dictionary" "\
-Search the `word' in `dictionary' if given or in all if nil.  
-It presents the word at point as default input and allows editing it.
-
-\(fn WORD &optional DICTIONARY)" t nil)
-
-(autoload 'dictionary-lookup-definition "dictionary" "\
-Unconditionally lookup the word at point.
-
-\(fn)" t nil)
-
-(autoload 'dictionary-match-words "dictionary" "\
-Search `pattern' in current default dictionary using default strategy.
-
-\(fn &optional PATTERN &rest IGNORED)" t nil)
-
-(autoload 'dictionary-mouse-popup-matching-words "dictionary" "\
-Display entries matching the word at the cursor
-
-\(fn EVENT)" t nil)
-
-(autoload 'dictionary-popup-matching-words "dictionary" "\
-Display entries matching the word at the point
-
-\(fn &optional WORD)" t nil)
-
-;;;***
-
 ;;;### (autoloads (debian-bug debian-bug-get-bug-as-email debian-bug-get-bug-as-file
 ;;;;;;  debian-bug-web-package debian-bug-web-packages debian-bug-web-this-bug-under-mouse
 ;;;;;;  debian-bug-web-bug debian-bug-web-developer-page debian-bug-web-bugs
 ;;;;;;  debian-bug-intent-to-package debian-bug-request-for-package
-;;;;;;  debian-bug-wnpp) "debian-bug" "debian/debian-bug.el" (19265
-;;;;;;  25913))
+;;;;;;  debian-bug-wnpp) "debian-bug" "debian/debian-bug.el" (18862
+;;;;;;  33836))
 ;;; Generated autoloads from debian/debian-bug.el
 
 (autoload 'debian-bug-wnpp "debian-bug" "\
@@ -817,7 +712,7 @@ Submit a Debian bug report.
 ;;;***
 
 ;;;### (autoloads (deb-find deb-view-mode deb-view deb-view-dired-view)
-;;;;;;  "deb-view" "debian/deb-view.el" (19265 25913))
+;;;;;;  "deb-view" "debian/deb-view.el" (18862 33836))
 ;;; Generated autoloads from debian/deb-view.el
 
 (autoload 'deb-view-dired-view "deb-view" "\
@@ -855,7 +750,7 @@ easily repeat a `deb-find' command.
 ;;;***
 
 ;;;### (autoloads (apt-sources-mode) "apt-sources" "debian/apt-sources.el"
-;;;;;;  (19265 25913))
+;;;;;;  (18862 33836))
 ;;; Generated autoloads from debian/apt-sources.el
 
 (autoload 'apt-sources-mode "apt-sources" "\
@@ -868,186 +763,72 @@ Sets up command `font-lock-mode'.
 
 ;;;***
 
-;;;### (autoloads (smart-operator-self-insert-command smart-operator-mode)
-;;;;;;  "smart-operator" "xwl-elisp/smart-operator.el" (19276 9360))
-;;; Generated autoloads from xwl-elisp/smart-operator.el
+;;;### (autoloads (dictionary-popup-matching-words dictionary-mouse-popup-matching-words
+;;;;;;  dictionary-match-words dictionary-lookup-definition dictionary-search
+;;;;;;  dictionary dictionary-mode) "dictionary" "dictionary-el/dictionary.el"
+;;;;;;  (18862 33836))
+;;; Generated autoloads from dictionary-el/dictionary.el
 
-(autoload 'smart-operator-mode "smart-operator" "\
-Insert operators with surrounding spaces smartly.
+(autoload 'dictionary-mode "dictionary" "\
+This is a mode for searching a dictionary server implementing
+ the protocol defined in RFC 2229.
 
-\(fn &optional ARG)" t nil)
+ This is a quick reference to this mode describing the default key bindings:
 
-(autoload 'smart-operator-self-insert-command "smart-operator" "\
-Insert the entered operator plus surrounding spaces.
+ * q close the dictionary buffer
+ * h display this help information
+ * s ask for a new word to search
+ * d search the word at point
+ * n or Tab place point to the next link
+ * p or S-Tab place point to the prev link
 
-\(fn ARG)" t nil)
+ * m ask for a pattern and list all matching words.
+ * D select the default dictionary
+ * M select the default search strategy
 
-;;;***
-
-;;;### (autoloads (less-minor-mode-off less-minor-mode-on auto-less-minor-mode
-;;;;;;  less-quit less-scroll-down-line less-scroll-up-line less-minor-mode)
-;;;;;;  "less" "xwl-elisp/less.el" (19265 26124))
-;;; Generated autoloads from xwl-elisp/less.el
+ * Return or Button2 visit that link
+ * M-Return or M-Button2 search the word beneath link in all dictionaries
 
-(autoload 'less-minor-mode "less" "\
-Toggle less-minor-mode.
-
-With less-minor-mode enabled, you could use `less' like keys to view files.
-\\{less-minor-mode-map}.
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'less-scroll-up-line "less" "\
-Scroll up one line.
-
-\(fn)" t nil)
-
-(autoload 'less-scroll-down-line "less" "\
-Scroll down one line.
-
-\(fn)" t nil)
-
-(autoload 'less-quit "less" "\
-Quit `less-minor-mode'.
-
-\(fn)" t nil)
-
-(autoload 'auto-less-minor-mode "less" "\
-Turn on `less-minor-mode' for files not matching `auto-less-exclude-regexp'.
-
-This is a useful hook to add to `find-file-hook'.
 
 \(fn)" nil nil)
 
-(autoload 'less-minor-mode-on "less" "\
-Turn on `less-minor-mode'.
-
-\(fn)" nil nil)
-
-(autoload 'less-minor-mode-off "less" "\
-Turn off `less-minor-mode'.
-
-\(fn)" nil nil)
-
-;;;***
-
-;;;### (autoloads (finkinfo-mode) "finkinfo-mode" "xwl-elisp/finkinfo-mode.el"
-;;;;;;  (19265 26124))
-;;; Generated autoloads from xwl-elisp/finkinfo-mode.el
-
-(autoload 'finkinfo-mode "finkinfo-mode" "\
-Major mode for fink info files in Mac OS X.
-\\{finkinfo-mode-map}
+(autoload 'dictionary "dictionary" "\
+Create a new dictonary buffer and install dictionary-mode
 
 \(fn)" t nil)
 
-;;;***
-
-;;;### (autoloads (easy-todo-mode) "easy-todo" "xwl-elisp/easy-todo.el"
-;;;;;;  (19265 26124))
-;;; Generated autoloads from xwl-elisp/easy-todo.el
+(autoload 'dictionary-search "dictionary" "\
+Search the `word' in `dictionary' if given or in all if nil.
+It presents the word at point as default input and allows editing it.
 
-(autoload 'easy-todo-mode "easy-todo" "\
-Major mode for managing todos.
-\\{easy-todo-mode-map}
+\(fn WORD &optional DICTIONARY)" t nil)
 
-\(fn)" t nil)
-
-;;;***
-
-;;;### (autoloads (cwit) "cwit" "xwl-elisp/cwit.el" (19265 26124))
-;;; Generated autoloads from xwl-elisp/cwit.el
-
-(autoload 'cwit "cwit" "\
-Create a *Cwit* buffer.
+(autoload 'dictionary-lookup-definition "dictionary" "\
+Unconditionally lookup the word at point.
 
 \(fn)" t nil)
 
-;;;***
-
-;;;### (autoloads (holiday-solar-term holiday-lunar cal-china-x-birthday-from-chinese)
-;;;;;;  "cal-china-x" "xwl-elisp/cal-china-x.el" (19344 30152))
-;;; Generated autoloads from xwl-elisp/cal-china-x.el
+(autoload 'dictionary-match-words "dictionary" "\
+Search `pattern' in current default dictionary using default strategy.
 
-(autoload 'cal-china-x-birthday-from-chinese "cal-china-x" "\
-Return birthday date this year in Gregorian form.
+\(fn &optional PATTERN &rest IGNORED)" t nil)
 
-LUNAR-MONTH and LUNAR-DAY are date number used in chinese lunar
-calendar.
+(autoload 'dictionary-mouse-popup-matching-words "dictionary" "\
+Display entries matching the word at the cursor
 
-\(fn LUNAR-MONTH LUNAR-DAY)" t nil)
+\(fn EVENT)" t nil)
 
-(autoload 'holiday-lunar "cal-china-x" "\
-Like `holiday-fixed', but with LUNAR-MONTH and LUNAR-DAY.
+(autoload 'dictionary-popup-matching-words "dictionary" "\
+Display entries matching the word at the point
 
-When there are multiple days(like Run Yue or 闰月, e.g.,
-2006-08-30), we use NUM to define which day(s) as holidays. The
-rules are:
-
-NUM = 0, only the earlier day.
-NUM = 1, only the later day.
-NUM with other values(default), all days(maybe one or two).
-
-\(fn LUNAR-MONTH LUNAR-DAY STRING &optional NUM)" nil nil)
-
-(autoload 'holiday-solar-term "cal-china-x" "\
-A holiday(STR) on SOLAR-TERM day.
-See `cal-china-x-solar-term-name' for a list of solar term names .
-
-\(fn SOLAR-TERM STR)" nil nil)
-
-;;;***
-
-;;;### (autoloads (buffer-action-run buffer-action-compile) "buffer-action"
-;;;;;;  "xwl-elisp/buffer-action.el" (19350 13719))
-;;; Generated autoloads from xwl-elisp/buffer-action.el
-
-(autoload 'buffer-action-compile "buffer-action" "\
-Run `compile' by checking project builders and `buffer-action-table'.
-
-Project builders are like make, ant, etc.  When running for the
-first time, you can edit the command in minibuffer, then it would
-use last command without bothering you any more.  If you want to
-edit it again, please add C-u prefix.
-
-\(fn)" t nil)
-
-(autoload 'buffer-action-run "buffer-action" "\
-Run the binary file according to `buffer-action-table'.
-
-When running for the first time, you can edit the command in
-minibuffer, else use last command without bothering you any
-more. If you want to edit it again, please add C-u prefix.
-
-\(fn)" t nil)
-
-;;;***
-
-;;;### (autoloads (ga) "ga" "xwl-elisp/ga/ga.el" (19265 26124))
-;;; Generated autoloads from xwl-elisp/ga/ga.el
-
-(autoload 'ga "ga" "\
-Create or switch to a ga buffer.
-
-\(fn &optional BACKEND)" t nil)
-
-;;;***
-
-;;;### (autoloads (dashboard) "dashboard" "xwl-elisp/dashboard/dashboard.el"
-;;;;;;  (19265 26124))
-;;; Generated autoloads from xwl-elisp/dashboard/dashboard.el
-
-(autoload 'dashboard "dashboard" "\
-Create a *Dashboard* buffer.
-
-\(fn)" t nil)
+\(fn &optional WORD)" t nil)
 
 ;;;***
 
 ;;;### (autoloads (inferior-haskell-find-haddock inferior-haskell-find-definition
 ;;;;;;  inferior-haskell-info inferior-haskell-type inferior-haskell-load-file
 ;;;;;;  switch-to-haskell) "inf-haskell" "haskell-mode-2.4/inf-haskell.el"
-;;;;;;  (19265 25913))
+;;;;;;  (18231 1814))
 ;;; Generated autoloads from haskell-mode-2.4/inf-haskell.el
 
 (defalias 'run-haskell 'switch-to-haskell)
@@ -1101,8 +882,8 @@ we load it.
 ;;;***
 
 ;;;### (autoloads (haskell-hoogle literate-haskell-mode haskell-mode)
-;;;;;;  "haskell-mode" "haskell-mode-2.4/haskell-mode.el" (19265
-;;;;;;  25913))
+;;;;;;  "haskell-mode" "haskell-mode-2.4/haskell-mode.el" (18271
+;;;;;;  25098))
 ;;; Generated autoloads from haskell-mode-2.4/haskell-mode.el
 
 (autoload 'haskell-mode "haskell-mode" "\
@@ -1157,7 +938,7 @@ Do a Hoogle search for QUERY.
 ;;;***
 
 ;;;### (autoloads (haskell-indent-mode) "haskell-indent" "haskell-mode-2.4/haskell-indent.el"
-;;;;;;  (19265 25913))
+;;;;;;  (18271 24057))
 ;;; Generated autoloads from haskell-mode-2.4/haskell-indent.el
 
 (autoload 'haskell-indent-mode "haskell-indent" "\
@@ -1194,7 +975,7 @@ Invokes `haskell-indent-hook' if not nil.
 ;;;***
 
 ;;;### (autoloads (haskell-doc-show-type haskell-doc-mode) "haskell-doc"
-;;;;;;  "haskell-mode-2.4/haskell-doc.el" (19265 25913))
+;;;;;;  "haskell-mode-2.4/haskell-doc.el" (18271 24003))
 ;;; Generated autoloads from haskell-mode-2.4/haskell-doc.el
 
 (autoload 'haskell-doc-mode "haskell-doc" "\
@@ -1217,7 +998,7 @@ current buffer.
 ;;;***
 
 ;;;### (autoloads (haskell-decl-scan-mode) "haskell-decl-scan" "haskell-mode-2.4/haskell-decl-scan.el"
-;;;;;;  (19265 25913))
+;;;;;;  (18271 24057))
 ;;; Generated autoloads from haskell-mode-2.4/haskell-decl-scan.el
 
 (autoload 'haskell-decl-scan-mode "haskell-decl-scan" "\
@@ -1267,7 +1048,7 @@ Invokes `haskell-decl-scan-mode-hook'.
 ;;;***
 
 ;;;### (autoloads (haskell-cabal-mode) "haskell-cabal" "haskell-mode-2.4/haskell-cabal.el"
-;;;;;;  (19265 25913))
+;;;;;;  (18231 1867))
 ;;; Generated autoloads from haskell-mode-2.4/haskell-cabal.el
 
 (add-to-list 'auto-mode-alist '("\\.cabal\\'" . haskell-cabal-mode))
@@ -1280,13 +1061,30 @@ Major mode for Cabal package description files.
 ;;;***
 
 ;;;### (autoloads (haskell-c-mode) "haskell-c" "haskell-mode-2.4/haskell-c.el"
-;;;;;;  (19265 25913))
+;;;;;;  (18170 47169))
 ;;; Generated autoloads from haskell-mode-2.4/haskell-c.el
 
 (add-to-list 'auto-mode-alist '("\\.hsc\\'" . haskell-c-mode))
 
 (autoload 'haskell-c-mode "haskell-c" "\
 Major mode for Haskell FFI files.
+
+\(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads (ruby-mode) "ruby-mode" "ruby/ruby-mode.el" (18862
+;;;;;;  33836))
+;;; Generated autoloads from ruby/ruby-mode.el
+
+(autoload 'ruby-mode "ruby-mode" "\
+Major mode for editing ruby scripts.
+\\[ruby-indent-command] properly indents subexpressions of multi-line
+class, module, def, if, while, for, do, and case statements, taking
+nesting into account.
+
+The variable ruby-indent-level controls the amount of indentation.
+\\{ruby-mode-map}
 
 \(fn)" t nil)
 
@@ -1306,7 +1104,7 @@ Major mode for Haskell FFI files.
 ;;;;;;  rs-gnus-summary-tree-arrows-test rs-gnus-summary-tree-arrows-wide
 ;;;;;;  rs-gnus-summary-tree-arrows-latin rs-gnus-summary-tree-arrows-ascii
 ;;;;;;  rs-gnus-summary-tree-arrows-ascii-default) "rs-gnus-summary"
-;;;;;;  "slightly-modified/rs-gnus-summary.el" (19265 25913))
+;;;;;;  "slightly-modified/rs-gnus-summary.el" (18867 57586))
 ;;; Generated autoloads from slightly-modified/rs-gnus-summary.el
 
 (autoload 'rs-gnus-summary-tree-arrows-ascii-default "rs-gnus-summary" "\
@@ -1500,7 +1298,7 @@ Kill thread from here using leafnode.
 ;;;***
 
 ;;;### (autoloads (bbdb-vcard-export-update-all) "bbdb-vcard-export"
-;;;;;;  "slightly-modified/bbdb-vcard-export.el" (19265 25913))
+;;;;;;  "slightly-modified/bbdb-vcard-export.el" (19037 54896))
 ;;; Generated autoloads from slightly-modified/bbdb-vcard-export.el
 
 (autoload 'bbdb-vcard-export-update-all "bbdb-vcard-export" "\
@@ -1511,13 +1309,219 @@ Update the vcard Contacts directory from the bbdb database
 ;;;***
 
 ;;;### (autoloads (twit) "twittering-mode" "twittering-mode/twittering-mode.el"
-;;;;;;  (19359 25783))
+;;;;;;  (19387 22687))
 ;;; Generated autoloads from twittering-mode/twittering-mode.el
 
 (autoload 'twit "twittering-mode" "\
 Start twittering-mode.
 
 \(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads (wget-web-page wget) "wget" "wget-el/wget.el" (18862
+;;;;;;  33836))
+;;; Generated autoloads from wget-el/wget.el
+
+(autoload 'wget "wget" "\
+Wget interface to download URI asynchronously.
+If argument ARG is non-nil, ask some options.
+Called with prefix argument, turn argument ARG t.
+
+If you are in dired mode which is seeing ftp directory,
+`wget' regard current line file name as URI.
+
+\(fn URI &optional ARG)" t nil)
+
+(autoload 'wget-web-page "wget" "\
+Wget interface to download whole Web page.
+If argument ARG is non-nil, ask options.
+Called with prefix argument, turn argument ARG t.
+
+Second argument URI is string.
+wget-web-page downlod whole Web page from it following relative link.
+
+\(fn URI &optional ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads (smart-operator-self-insert-command smart-operator-mode)
+;;;;;;  "smart-operator" "xwl-elisp/smart-operator.el" (19276 26976))
+;;; Generated autoloads from xwl-elisp/smart-operator.el
+
+(autoload 'smart-operator-mode "smart-operator" "\
+Insert operators with surrounding spaces smartly.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'smart-operator-self-insert-command "smart-operator" "\
+Insert the entered operator plus surrounding spaces.
+
+\(fn ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads (less-minor-mode-off less-minor-mode-on auto-less-minor-mode
+;;;;;;  less-quit less-scroll-down-line less-scroll-up-line less-minor-mode)
+;;;;;;  "less" "xwl-elisp/less.el" (19261 56902))
+;;; Generated autoloads from xwl-elisp/less.el
+
+(autoload 'less-minor-mode "less" "\
+Toggle less-minor-mode.
+
+With less-minor-mode enabled, you could use `less' like keys to view files.
+\\{less-minor-mode-map}.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'less-scroll-up-line "less" "\
+Scroll up one line.
+
+\(fn)" t nil)
+
+(autoload 'less-scroll-down-line "less" "\
+Scroll down one line.
+
+\(fn)" t nil)
+
+(autoload 'less-quit "less" "\
+Quit `less-minor-mode'.
+
+\(fn)" t nil)
+
+(autoload 'auto-less-minor-mode "less" "\
+Turn on `less-minor-mode' for files not matching `auto-less-exclude-regexp'.
+
+This is a useful hook to add to `find-file-hook'.
+
+\(fn)" nil nil)
+
+(autoload 'less-minor-mode-on "less" "\
+Turn on `less-minor-mode'.
+
+\(fn)" nil nil)
+
+(autoload 'less-minor-mode-off "less" "\
+Turn off `less-minor-mode'.
+
+\(fn)" nil nil)
+
+;;;***
+
+;;;### (autoloads (finkinfo-mode) "finkinfo-mode" "xwl-elisp/finkinfo-mode.el"
+;;;;;;  (18867 57586))
+;;; Generated autoloads from xwl-elisp/finkinfo-mode.el
+
+(autoload 'finkinfo-mode "finkinfo-mode" "\
+Major mode for fink info files in Mac OS X.
+\\{finkinfo-mode-map}
+
+\(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads (easy-todo-mode) "easy-todo" "xwl-elisp/easy-todo.el"
+;;;;;;  (19120 65217))
+;;; Generated autoloads from xwl-elisp/easy-todo.el
+
+(autoload 'easy-todo-mode "easy-todo" "\
+Major mode for managing todos.
+\\{easy-todo-mode-map}
+
+\(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads (cwit) "cwit" "xwl-elisp/cwit.el" (19264 47723))
+;;; Generated autoloads from xwl-elisp/cwit.el
+
+(autoload 'cwit "cwit" "\
+Create a *Cwit* buffer.
+
+\(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads (holiday-solar-term holiday-lunar cal-china-x-birthday-from-chinese)
+;;;;;;  "cal-china-x" "xwl-elisp/cal-china-x.el" (19368 45037))
+;;; Generated autoloads from xwl-elisp/cal-china-x.el
+
+(autoload 'cal-china-x-birthday-from-chinese "cal-china-x" "\
+Return birthday date this year in Gregorian form.
+
+LUNAR-MONTH and LUNAR-DAY are date number used in chinese lunar
+calendar.
+
+\(fn LUNAR-MONTH LUNAR-DAY)" t nil)
+
+(autoload 'holiday-lunar "cal-china-x" "\
+Like `holiday-fixed', but with LUNAR-MONTH and LUNAR-DAY.
+
+When there are multiple days(like Run Yue or 闰月, e.g.,
+2006-08-30, which is 07-07 in lunar calendar, the chinese
+valentine's day), we use NUM to define which day(s) as
+holidays. The rules are:
+
+NUM = 0, only the earlier day.
+NUM = 1, only the later day.
+NUM with other values(default), all days(maybe one or two).
+
+emacs23 introduces a similar `holiday-chinese', a quick test
+shows that it does not recognize Run Yue at all.
+
+\(fn LUNAR-MONTH LUNAR-DAY STRING &optional NUM)" nil nil)
+
+(autoload 'holiday-solar-term "cal-china-x" "\
+A holiday(STR) on SOLAR-TERM day.
+See `cal-china-x-solar-term-name' for a list of solar term names .
+
+\(fn SOLAR-TERM STR)" nil nil)
+
+;;;***
+
+;;;### (autoloads (buffer-action-run buffer-action-compile) "buffer-action"
+;;;;;;  "xwl-elisp/buffer-action.el" (19360 59338))
+;;; Generated autoloads from xwl-elisp/buffer-action.el
+
+(autoload 'buffer-action-compile "buffer-action" "\
+Run `compile' by checking project builders and `buffer-action-table'.
+
+Project builders are like make, ant, etc.  When running for the
+first time, you can edit the command in minibuffer, then it would
+use last command without bothering you any more.  If you want to
+edit it again, please add C-u prefix.
+
+\(fn)" t nil)
+
+(autoload 'buffer-action-run "buffer-action" "\
+Run the binary file according to `buffer-action-table'.
+
+When running for the first time, you can edit the command in
+minibuffer, else use last command without bothering you any
+more. If you want to edit it again, please add C-u prefix.
+
+\(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads (dashboard) "dashboard" "xwl-elisp/dashboard/dashboard.el"
+;;;;;;  (19214 33075))
+;;; Generated autoloads from xwl-elisp/dashboard/dashboard.el
+
+(autoload 'dashboard "dashboard" "\
+Create a *Dashboard* buffer.
+
+\(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads (ga) "ga" "xwl-elisp/ga/ga.el" (19214 33075))
+;;; Generated autoloads from xwl-elisp/ga/ga.el
+
+(autoload 'ga "ga" "\
+Create or switch to a ga buffer.
+
+\(fn &optional BACKEND)" t nil)
 
 ;;;***
 
