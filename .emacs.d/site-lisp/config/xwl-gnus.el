@@ -631,8 +631,8 @@
 
       ;; (if (not (eq window-system 'ns))
       ;;     (call-interactively 'gnus)
-        (call-interactively 'gnus-unplugged)
-        ;; )
+      (call-interactively 'gnus-unplugged)
+      ;; )
 
       (gnus-demon-init)
       (when (fboundp 'color-theme-xwl-console)
@@ -641,12 +641,18 @@
       (unless gnus-plugged
         (unless xwl-gnus-agent-timer
           (setq xwl-gnus-agent-timer
-                (run-with-timer 0
-                                (* 3600 1)
-                                (lambda ()
-                                  (xwl-shell-command-asynchronously
-                                   "emacs --eval \"(progn (suspend-frame) (gnus-agent-batch) (gnus-group-save-newsrc t) (save-buffers-kill-terminal t))\""
-                                   )))))
+                (run-with-timer
+                 0 (* 3600 1) (lambda ()
+                                (xwl-shell-command-asynchronously
+                                 (concat
+                                  ;; Company PC is always on, so we won't have
+                                  ;; too many instances running at the same
+                                  ;; time...
+                                  (if xwl-at-company?
+                                      ""
+                                    "(ps -ef|grep \"emacs --eval\" | grep -v grep) || ")
+                                  "emacs --eval \"(progn (suspend-frame) (gnus-agent-batch) (gnus-group-save-newsrc t) (save-buffers-kill-terminal t))\""
+                                  ))))))
         (message "Gnus agent timer started"))
       )))
 
@@ -762,8 +768,8 @@
 ;; - `*': put it in the cache, and use `Y c' to show it later
 (setq gnus-use-cache 'passive)
 
-;; (xwl-gnus-summary-tree-plain)
-(rs-gnus-summary-tree-arrows-wide)
+(xwl-gnus-summary-tree-plain)
+;; (rs-gnus-summary-tree-arrows-wide)
 
 ;; ,----
 ;; | threading
