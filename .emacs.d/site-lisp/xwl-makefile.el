@@ -30,18 +30,11 @@
 (setq xwl-makefile-autoloads-file-base "xwl-autoloads"
       ;; (format "xwl-autoloads-%S" window-system)
       xwl-makefile-autoloads-file (concat xwl-makefile-autoloads-file-base ".el")
-      xwl-makefile-subdir-list
-      ;; "22"
-      '("." "wget-el" "ruby" "qterm" "dictionary-el" "debian"
-        "xwl-elisp" "xwl-elisp/ga" "xwl-elisp/dashboard" "haskell-mode-2.4"
-        "slightly-modified" "xwl-elisp/wubi" "twittering-mode"
-        ))
+      )
 
 (setq xwl-makefile-files
-      (xs-flatmap
-       (lambda (d)
-         (directory-files d t "^[^.]+\\.el\\'" t))
-       xwl-makefile-subdir-list))
+      (xs-flatmap (lambda (d) (directory-files d t "^[^.]+\\.el\\'" t))
+                  xwl-makefile-subdir-list))
 
 (defun xwl-makefile-ensure-directory ()
   (unless (file-exists-p "xwl-makefile.el")
@@ -58,7 +51,6 @@
 ;;           (mapcar (lambda (f)
 ;;                     (file-newer-than-file-p f xwl-makefile-autoloads-file))
 ;;                   xwl-makefile-files))))
-
     ;; autoloads
     (when autoloads-not-up2date
       (with-current-buffer (find-file-noselect xwl-makefile-autoloads-file)

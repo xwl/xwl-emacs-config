@@ -6,36 +6,50 @@
 
 ;;; Code:
 
-;; ,----
-;; | load-path
-;; `----
+(setq xwl-site-lisp "~/.emacs.d/site-lisp")
 
-(setq xwl-load-path "~/.emacs.d/site-lisp")
-
-;; (load "~/.emacs.d/site-lisp/xwl-elisp/xwl-subr.el")
+(setq xwl-makefile-subdir-list
+      (mapcar (lambda (f) (concat xwl-site-lisp "/" f))
+              '("."
+                "auto-complete-1.0"
+                "debian"
+                "dictionary-el"
+                "haskell-mode-2.4"
+                "qterm"
+                "ruby"
+                "slightly-modified"
+                "twittering-mode"
+                "wget-el"
+                "xwl-elisp"
+                "xwl-elisp/dashboard"
+                "xwl-elisp/ga"
+                "xwl-elisp/wubi"
+                )))
 
 (mapc (lambda (path) (add-to-list 'load-path path))
-      (list xwl-load-path
-            "~/repo/cvs/mmm-mode"
-            "~/repo/misc/auctex-11.84"
-            "~/repo/cvs/bbdb/lisp"
-            "~/repo/git/emms/lisp"
+      (append
+       ;; essential
+       (list xwl-site-lisp
+             (concat xwl-site-lisp "/config"))
+       ;; others in site-lisp
+       xwl-makefile-subdir-list
+       ;; optional
+       (list "~/repo/cvs/mmm-mode"
+             "~/repo/misc/auctex-11.84"
+             "~/repo/cvs/bbdb/lisp"
+             "~/repo/git/emms/lisp"
 
-            "~/repo/git/xwl-elisp"
-            "~/repo/git/xwl-elisp/dashboard"
-            "~/repo/git/xwl-elisp/ga"
+             "~/repo/git/dvc/lisp"
 
-            "~/repo/git/dvc/lisp"
+             ;; Weird w3m! Without this, `emacs -batch' will complain.
+             ;; "~/share/emacs/site-lisp/w3m"
 
-            ;; Weird w3m! Without this, `emacs -batch' will complain.
-            ;; "~/share/emacs/site-lisp/w3m"
+             "~/repo/cvs/emacs-w3m"
+             "~/repo/svn/chicken-eggs"
 
-            "~/repo/cvs/emacs-w3m"
-            "~/repo/svn/chicken-eggs"
+             "~/etc"
 
-            "~/etc"
-                    
-            "~/repo/cvs/cedet/common"))
+             "~/repo/cvs/cedet/common")))
 
 (setenv "INFOPATH"
         (mapconcat 'identity
@@ -43,7 +57,7 @@
                      "~/info/"
 
                      ;; nextstep stores build in a bundle.
-                     ,@(unless (eq system-type 'darwin) 
+                     ,@(unless (eq system-type 'darwin)
                          '("~/share/info" ))
 
                      "/sw/share/info"
@@ -51,14 +65,9 @@
 
                      "/sw/lib/chicken/1/"
 
-                     ,(getenv "INFOPATH")             
+                     ,(getenv "INFOPATH")
                      )
                    ":"))
-
-(let ((orig default-directory))
-  (cd xwl-load-path)
-  (normal-top-level-add-subdirs-to-load-path)
-  (cd orig))
 
 ;; ,----
 ;; | PATH & exec-path
@@ -71,14 +80,14 @@
 	  (mapconcat 'identity
 		     '("/Users/william/bin" "/Users/william/bin/scripts"
 		       "/usr/bin" "/bin" "/usr/sbin" "/sbin" "/usr/local/bin"
-		       "/usr/texbin" "/usr/X11/bin" 
+		       "/usr/texbin" "/usr/X11/bin"
 		       "/usr/pkg/bin" "/usr/pkg/sbin"
 		       "/sw/bin" "/sw/sbin"
 		       "/usr/X11R6/bin" )
 		     ":")))
 
 (if (eq system-type 'windows-nt)
-    (progn 
+    (progn
       ;; (setenv "PATH" (concat (getenv "PATH") ";C:/OpenSSL/bin;C:/Program Files/Haskell/bin;C:/ghc/ghc-6.12.1/bin"))
       ;; (setq exec-path (split-string (getenv "PATH") ";"))
       nil)
