@@ -21,7 +21,7 @@
 
 ;;; Code:
 
-;;; C, C++
+;;; C Mode Common
 
 ;; (require 'cc-mode)
 ;; M-x semanticdb-save-all-db
@@ -33,23 +33,15 @@
 ;; C-c C-\ (indent beautifully)
 
 (defun xwl-c-mode-common-hook ()
-  (if (file-exists-p "../group")
-      (c-set-style "whitesmith")        ; symbian c++
-    (c-set-style "k&r"))
+  (setq c-cleanup-list '( ;;brace-else-brace
+                         scope-operator
+                         empty-defun-braces
+                         defun-close-semi
 
-  (if (string= c-indentation-style "whitesmith")
-      (setq c-cleanup-list '())
-    (setq c-cleanup-list '( ;;brace-else-brace
-                           scope-operator
-                           empty-defun-braces
-                           defun-close-semi
+                         space-before-funcall
+                         compact-empty-funcall
 
-                           space-before-funcall
-                           compact-empty-funcall
-
-                           one-liner-defun
-                           )))
-
+                         one-liner-defun))
   (setq tab-width 4)
   (setq indent-tabs-mode nil)
 
@@ -57,8 +49,6 @@
   (when (and (buffer-file-name) ; mmm-mode submodes don't have a  valid buffer name.
              (not (string-match "\\.l$\\|\\.y$" (buffer-file-name))))
     (c-toggle-auto-hungry-state 1))
-
-  ;; submodes
 
   ;; (glasses-mode 1)
   ;; (hs-minor-mode 1)
@@ -122,10 +112,57 @@
                                 (indent-according-to-mode)))))
     (local-set-key "(" 'c-electric-paren)
     (local-set-key ")" 'c-electric-paren)
-    (local-set-key "}" 'c-electric-brace))
-  )
+    (local-set-key "}" 'c-electric-brace)))
 
 (add-hook 'c-mode-common-hook 'xwl-c-mode-common-hook)
+
+;;; Java
+;; ------
+
+;; (require 'jde)
+
+;;; C, C++
+
+(defun xwl-set-c-c++-style ()
+  (if (file-exists-p "../group")
+      ;; symbian c++
+      (progn
+        (c-set-style "whitesmith")
+        (setq c-cleanup-list '()))
+    (c-set-style "k&r")))
+
+(add-hook 'c-mode-hook 'xwl-set-c-c++-style)
+(add-hook 'c++-mode-hook 'xwl-set-c-c++-style)
+
+(add-hook 'c++-mode-hook (lambda ()
+                           (setq comment-start "/* "
+                                 comment-end "*/")))
+
+(add-to-list 'auto-mode-alist '("\\.hrh\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.rss\\'" . c++-mode))
+
+;; ,----
+;; | symbian
+;; `----
+
+(add-to-list 'auto-mode-alist '("\\.loc\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.mmp\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.inf\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.rls\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.pro\\'" . makefile-mode))
+
+;; 'ffap won't work as ffap is `provide' at the top.
+(eval-after-load "ffap"
+  '(progn
+     (setq ffap-c-path `("../inc"
+
+                         "../coctlinc"
+                         "/epoc32/include"
+                         "/epoc32/include/mw"
+                         "/epoc32/include/platform/mw"
+
+                         ,@ffap-c-path))
+     ))
 ;;; Tags, code browsing
 
 ;; imenu, cscope, etags
@@ -207,7 +244,7 @@ Thus generate a TAGs file."
 
 ;;TODO, add same to conf mode
 
-;;;; sql
+;;; sql
 ;; -----
 
 (eval-after-load 'sql
@@ -239,28 +276,24 @@ Thus generate a TAGs file."
            sql-database      "foo"
            sql-server        "")))
 
-;;;; debug
+;;; debug
 ;; -------
 
 (setq gdb-many-windows t)
 (global-set-key (kbd "<C-end>") 'gdb-restore-windows)
 
-;;;; changlog entry
+;;; changlog entry
 ;; ----------------
 
 (setq add-log-full-name nil
       add-log-mailing-address nil)
 
-;;;; c/c++/java
-;; ------------
-
-;; doxymacs
+;;; doxymacs
 ;; TODO
 ;; (require 'doxymacs)
-
 (require 'lisp-mnt)
 
-;;;; version systems
+;;; version systems
 ;; -----------------
 
 (add-hook 'log-view-mode-hook 'less-minor-mode-on)
@@ -315,7 +348,7 @@ Thus generate a TAGs file."
              (setq crt prev)))))
      ))
 
-;;;; skeletons
+;;; skeletons
 ;; -----------
 
 ;;  c
@@ -392,7 +425,7 @@ Thus generate a TAGs file."
 ;;  (define-key hs-minor-mode-map (kbd "C-c @ ESC DEL") 'hs-hide-all))
 
 
-;;;; highlight special keywords
+;;; highlight special keywords
 (setq xwl-keyword-highlight-modes
       '(php-mode java-mode c-mode c++-mode emacs-lisp-mode scheme-mode
 	text-mode outline-mode))
@@ -434,7 +467,7 @@ Thus generate a TAGs file."
 
 (xwl-highlight-special-keywords)
 
-;;;; lex, yacc
+;;; lex, yacc
 ;; -----------
 
 (defun xwl-lex-yacc-mode ()
@@ -459,12 +492,7 @@ yacc source files."
   (local-set-key (kbd "|") 'insert-little-line)
   (local-set-key (kbd ":") 'insert-semicolon))
 
-;;;; java
-;; ------
-
-;; (require 'jde)
-
-;;;; elisp
+;;; elisp
 ;; -------
 
 (defun xwl-lisp-mode-hook ()
@@ -483,7 +511,7 @@ yacc source files."
 (add-hook 'lisp-interaction-mode-hook 'xwl-lisp-mode-hook)
 (add-hook 'emacs-lisp-mode-hook 'xwl-lisp-mode-hook)
 
-;;;; scheme
+;;; scheme
 ;; --------
 
 (require 'scheme)
@@ -804,8 +832,6 @@ If SCHEME?, `run-scheme'."
 (error "cscope not found"))
 
 
-;;; Misc
-
 ;;; Ruby
 
 (require 'ruby-mode)
@@ -813,37 +839,6 @@ If SCHEME?, `run-scheme'."
 
 (require 'ruby-electric)
 
-;;; C++
-
-(add-hook 'c++-mode-hook (lambda ()
-                           (setq comment-start "/* "
-                                 comment-end "*/")))
-
-(add-to-list 'auto-mode-alist '("\\.hrh\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.rss\\'" . c++-mode))
-
-;; ,----
-;; | symbian
-;; `----
-
-(add-to-list 'auto-mode-alist '("\\.loc\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.mmp\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.inf\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.rls\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.pro\\'" . makefile-mode))
-
-;; 'ffap won't work as ffap is `provide' at the top.
-(eval-after-load "ffap"
-  '(progn
-     (setq ffap-c-path `("../inc"
-
-                         "../coctlinc"
-                         "/epoc32/include"
-                         "/epoc32/include/mw"
-                         "/epoc32/include/platform/mw"
-
-                         ,@ffap-c-path))
-     ))
 
 ;;; sgml, html, xml...
 
