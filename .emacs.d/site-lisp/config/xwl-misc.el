@@ -774,8 +774,7 @@ passphrase cache or user."
 (if xwl-at-company?
     (setq twittering-proxy-use t
           twittering-proxy-server "172.16.42.137"
-          twittering-proxy-port 8080
-          twittering-use-ssl nil)
+          twittering-proxy-port 8080)
   (setq twittering-host-url (xds "\\?[jCOI*XOI'QO@lPO9nZ*9m[:,aY)'=")
         twittering-api-url (xds "\\?[jCOI*XOI'QO@lPO9nZ*9m[:,aY)'mPO9g")
         twittering-search-url (xds "\\?[jCOI*XOI'QO@lPO9nZ*9m[:,aY)'mZ)M_ZdEf")))
