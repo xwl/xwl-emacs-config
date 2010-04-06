@@ -346,7 +346,7 @@ prompts for name field."
     ;; (defun xwl-write-file-functions ()
     ;;   (xwl-update-date)
 
-    (when (string-match (regexp-opt (list (file-truename xwl-load-path))) f)
+    (when (string-match (regexp-opt (list (file-truename xwl-site-lisp))) f)
       (copyright-update)
 
       (unless (and (boundp 'qterm-log-file)
