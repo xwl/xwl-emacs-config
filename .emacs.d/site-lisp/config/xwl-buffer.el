@@ -24,11 +24,11 @@
 ;;; ibuffer --- "dired + gnus" for buffers
 
 (setq ibuffer-formats
-      '((mark
+      `((mark
          modified
          read-only
-         " " (name 25)
-         " " (mode 20)
+         " " (name ,(if xwl-at-company? 40 25))
+         " " (mode ,(if xwl-at-company? 30 20))
          ;; " " (size 6 -1 :right)
          " " filename)))
 
