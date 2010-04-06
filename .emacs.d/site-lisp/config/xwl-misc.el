@@ -784,6 +784,8 @@ passphrase cache or user."
       twittering-status-format
       "%i %@ %s, from %f%L%r%R:\n%FILL{%T}\n")
 
+(setq twittering-mode-string "twittering")
+
 (add-hook 'twittering-mode-hook 'less-minor-mode-on)
 (add-hook 'twittering-mode-hook (lambda ()
                                   (twittering-icon-mode 1)
