@@ -893,13 +893,14 @@ passphrase cache or user."
                                     (eq (car node) 'fullcount))
                            (car (reverse node))))
                        (cdar xml-list))))
-    (when unread
-      (setq xwl-gmail-notify-string (format "g(%s)" unread))
-      (force-mode-line-update))))
+    (if (zerop (string-to-number unread))
+        (setq xwl-gmail-notify-string "")
+      (setq xwl-gmail-notify-string (format "g(%s) " unread)))
+    (force-mode-line-update)))
 
 (unless (boundp 'xwl-gmail-notify-timer)
   (setq xwl-gmail-notify-timer
-        (run-with-timer 0 (* 60 15) 'xwl-gmail-notify)))
+        (run-with-timer 0 (* 60 5) 'xwl-gmail-notify)))
 
 
 (provide 'xwl-misc)

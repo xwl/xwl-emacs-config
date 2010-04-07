@@ -122,7 +122,7 @@
 
           ;; xwl-weather-string
 
-          xwl-gmail-notify-string " "
+          xwl-gmail-notify-string
           twittering-unread-mode-line-string " "
 
           emms-mode-line-string
