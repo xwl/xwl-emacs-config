@@ -871,14 +871,21 @@ passphrase cache or user."
 (setq xwl-gmail-user "william.xwl"
       xwl-gmail-password pwgmail)
 
+(unless xwl-gmail-password
+  (setq xwl-gmail-password (read-passwd "Gmail password: ")))
+
 (setq xwl-gmail-notify-string "")
 
 (defun xwl-gmail-notify ()
   (let* ((xml-list
           (with-temp-buffer
             (shell-command
-             (format "curl -s --user \"%s:%s\" https://mail.google.com/mail/feed/atom"
-                     xwl-gmail-user xwl-gmail-password)
+             (format "curl -s --user \"%s:%s\" %s https://mail.google.com/mail/feed/atom"
+                     xwl-gmail-user
+                     xwl-gmail-password
+                     (if (boundp 'xwl-proxy-server)
+                         (format "-x %s:%d" xwl-proxy-server xwl-proxy-port)
+                       ""))
              t)
             (xml-parse-region (point-min) (point-max))))
          (unread (some (lambda (node)
