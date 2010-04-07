@@ -859,8 +859,9 @@ passphrase cache or user."
 
 (defun xwl-s60lxr-select-release (release)
   (interactive
-   (ido-completing-read "Use release: "
-                        (xwl-s60lxr-generate-releases)))
+   (list
+    (ido-completing-read "Use release: "
+                        (xwl-s60lxr-generate-releases))))
   (setq xwl-s60lxr-release release))
 
 
