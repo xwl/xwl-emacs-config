@@ -864,6 +864,36 @@ passphrase cache or user."
                         (xwl-s60lxr-generate-releases))))
   (setq xwl-s60lxr-release release))
 
+;;; Gmail Notify
+
+(require 'xml)
+
+(setq xwl-gmail-user "william.xwl"
+      xwl-gmail-password pwgmail)
+
+(setq xwl-gmail-notify-string "")
+
+(defun xwl-gmail-notify ()
+  (let* ((xml-list
+          (with-temp-buffer
+            (shell-command
+             (format "curl -s --user \"%s:%s\" https://mail.google.com/mail/feed/atom"
+                     xwl-gmail-user xwl-gmail-password)
+             t)
+            (xml-parse-region (point-min) (point-max))))
+         (unread (some (lambda (node)
+                         (when (and (listp node)
+                                    (eq (car node) 'fullcount))
+                           (car (reverse node))))
+                       (cdar xml-list))))
+    (when unread
+      (setq xwl-gmail-notify-string (format "g(%s)" unread))
+      (force-mode-line-update))))
+
+(unless (boundp 'xwl-gmail-notify-timer)
+  (setq xwl-gmail-notify-timer
+        (run-with-timer 0 (* 60 15) 'xwl-gmail-notify)))
+
 
 (provide 'xwl-misc)
 
