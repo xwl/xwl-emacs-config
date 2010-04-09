@@ -782,6 +782,8 @@ If SCHEME?, `run-scheme'."
 (add-to-list 'interpreter-mode-alist '("perl5" . cperl-mode))
 (add-to-list 'interpreter-mode-alist '("miniperl" . cperl-mode))
 
+(setq cperl-invalid-face nil)
+
 (eval-after-load "cperl-mode"
   '(progn
      (add-hook 'cperl-mode-hook 'smart-operator-mode-on)
