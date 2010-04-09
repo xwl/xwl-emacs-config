@@ -72,8 +72,8 @@
     (wubi-load-local-phrases)))
 
 (global-set-key (kbd "C-SPC") 'toggle-input-method)
-(global-set-key (kbd "C-?") 'toggle-input-method)
-(global-set-key (kbd "C-/") 'xwl-cycle-input-method)
+(global-set-key (kbd "C-/") 'toggle-input-method)
+(global-set-key (kbd "C-?") 'xwl-cycle-input-method)
 
 ;; (global-set-key (kbd "C-?") 'xwl-cycle-input-method)
 (global-set-key (kbd "C-,") 'wubi-toggle-quanjiao-banjiao)
@@ -800,8 +800,8 @@ passphrase cache or user."
      (define-key twittering-mode-map "P" 'twittering-goto-previous-status-of-user)
 
      (define-key twittering-mode-map "q" 'xwl-hide-buffer)
-     ))
 
+     ))
 
 ;; ,----
 ;; | Track cahnges for some buffer
@@ -876,16 +876,14 @@ passphrase cache or user."
 
 (setq xwl-gmail-notify-string "")
 
-(defun xwl-gmail-notify ()
+(defun xwl-gmail-get-unread (user password)
   (let* ((xml-list
           (with-temp-buffer
             (shell-command
              (format "curl -s --user \"%s:%s\" %s https://mail.google.com/mail/feed/atom"
-                     xwl-gmail-user
-                     xwl-gmail-password
-                     (if (boundp 'xwl-proxy-server)
-                         (format "-x %s:%d" xwl-proxy-server xwl-proxy-port)
-                       ""))
+                     user password (if (boundp 'xwl-proxy-server)
+                                       (format "-x %s:%d" xwl-proxy-server xwl-proxy-port)
+                                     ""))
              t)
             (xml-parse-region (point-min) (point-max))))
          (unread (some (lambda (node)
@@ -893,9 +891,18 @@ passphrase cache or user."
                                     (eq (car node) 'fullcount))
                            (car (reverse node))))
                        (cdar xml-list))))
-    (if (zerop (string-to-number unread))
+    (string-to-number unread)))
+
+(defun xwl-gmail-notify ()
+  (let ((unreads (mapcar* 'xwl-gmail-get-unread
+                          (list xwl-gmail-user xwl-gmail-user1)
+                          (list xwl-gmail-password xwl-gmail-password1))))
+
+    (if (every 'zerop unreads)
         (setq xwl-gmail-notify-string "")
-      (setq xwl-gmail-notify-string (format "g(%s) " unread)))
+      (setq xwl-gmail-notify-string
+            (format "g(%s) "
+                    (mapconcat (lambda (n) (number-to-string n)) unreads ","))))
     (force-mode-line-update)))
 
 (unless (boundp 'xwl-gmail-notify-timer)
