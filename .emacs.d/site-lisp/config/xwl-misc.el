@@ -864,52 +864,6 @@ passphrase cache or user."
                         (xwl-s60lxr-generate-releases))))
   (setq xwl-s60lxr-release release))
 
-;;; Gmail Notify
-
-(require 'xml)
-
-(setq xwl-gmail-user "william.xwl"
-      xwl-gmail-password pwgmail)
-
-(unless xwl-gmail-password
-  (setq xwl-gmail-password (read-passwd "Gmail password: ")))
-
-(setq xwl-gmail-notify-string "")
-
-(defun xwl-gmail-get-unread (user password)
-  (let* ((xml-list
-          (with-temp-buffer
-            (unless (zerop (shell-command
-                            (format "curl -s --user \"%s:%s\" %s https://mail.google.com/mail/feed/atom"
-                                    user password (if (boundp 'xwl-proxy-server)
-                                                      (format "-x %s:%d" xwl-proxy-server xwl-proxy-port)
-                                                    ""))
-                            t))
-              (error "xwl-gmail-get-unread failed"))
-            (xml-parse-region (point-min) (point-max))))
-         (unread (some (lambda (node)
-                         (when (and (listp node)
-                                    (eq (car node) 'fullcount))
-                           (car (reverse node))))
-                       (cdar xml-list))))
-    (string-to-number unread)))
-
-(defun xwl-gmail-notify ()
-  (let ((unreads (mapcar* 'xwl-gmail-get-unread
-                          (list xwl-gmail-user xwl-gmail-user1)
-                          (list xwl-gmail-password xwl-gmail-password1))))
-
-    (if (every 'zerop unreads)
-        (setq xwl-gmail-notify-string "")
-      (setq xwl-gmail-notify-string
-            (format "g(%s) "
-                    (mapconcat (lambda (n) (number-to-string n)) unreads ","))))
-    (force-mode-line-update)))
-
-(unless (boundp 'xwl-gmail-notify-timer)
-  (setq xwl-gmail-notify-timer
-        (run-with-timer 0 (* 60 5) 'xwl-gmail-notify)))
-
 ;;; Redefine shell-command to return exit status when running synchronously.
 
 (eval-after-load 'simple

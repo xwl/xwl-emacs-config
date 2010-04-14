@@ -66,6 +66,11 @@
 
      ))
 
+(eval-after-load 'org
+  '(progn
+     (org-defkey org-mode-map "\C-c," 'next-buffer)
+     (org-defkey org-mode-map "\C-c." 'previous-buffer)))
+
 (defun xwl-org-archive-all-done-item ()
   "Archive all items with prefix in `org-done-keywords'."
   (interactive)
