@@ -147,7 +147,7 @@ end tell"
         ;; 'xwl-browse-url-firefox-tab-only
         ;; 'xwl-browse-url-safari
         ((windows-nt) 'xwl-browse-url-chrome)
-        ((ns) 'xwl-browse-url-firefox-tab-only)
+        ((darwin) 'xwl-browse-url-firefox-tab-only)
         (t 'w3m-browse-url)))
 
 (global-set-key (kbd "C-c n b") 'browse-url)

@@ -505,6 +505,7 @@
   (let ((re (concat "^List-Post:.*<mailto:\\([-a-zA-Z._]+\\)@"
                     (regexp-opt '("googlegroups.com"
                                   "lists.apple.com"
+                                  "lists.sourceforge.net"
                                   ;; "gnu.org"
                                   )))))
     (save-excursion
@@ -642,7 +643,7 @@
         (unless xwl-gnus-agent-timer
           (setq xwl-gnus-agent-timer
                 (run-with-timer
-                 0 (* 3600 1) (lambda ()
+                 0 (* 3600 2) (lambda ()
                                 (xwl-shell-command-asynchronously
                                  (concat
                                   ;; Company PC is always on, so we won't have

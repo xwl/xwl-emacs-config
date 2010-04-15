@@ -253,6 +253,11 @@ so as to keep an eye on work when necessarily."
 ;; | notify
 ;; `----
 
+(defun xwl-notify (title message)
+  (case system-type
+    ((darwin)
+     (xwl-growl title message))))
+
 (setq growlnotify-command (executable-find "growlnotify"))
 
 (defun xwl-growl (title message)
