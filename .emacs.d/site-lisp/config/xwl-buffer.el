@@ -46,7 +46,8 @@
                                                (beginning-of-line)
                                                (re-search-backward "^\\[" nil t 1)
                                                (beginning-of-line)))
-     ))
+
+     (define-key ibuffer-mode-map (kbd "C-x C-f") nil)))
 
 ;; gnus
 
