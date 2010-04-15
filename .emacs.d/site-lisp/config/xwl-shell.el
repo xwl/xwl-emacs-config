@@ -3,7 +3,7 @@
 ;; Copyright (C) 2007, 2008, 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
-;; Last updated: 2010/03/17
+;; Last updated: 2010/04/15
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -109,6 +109,10 @@
 
 (eval-after-load 'shell
   '(progn
+     (when (eq system-type 'windows-nt)
+       (defadvice shell (after insert-one-space activate)
+         (insert " ")))
+
      (define-key shell-mode-map (kbd "C-c m R") ;; 'rename-uniquely)
        'rename-buffer)
 
