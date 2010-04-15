@@ -638,21 +638,17 @@ If SCHEME?, `run-scheme'."
 
 ;;; Compilation Mode
 
+(eval-after-load 'buffer-action
+  '(progn
+     (defadvice buffer-action-compile (before save-layout activate)
+       (setq xwl-layout-before-compilation (current-window-configuration)))))
+
 (defun xwl-compilation-exit-autoclose (status code msg)
-  (if (and (eq status 'exit) (zerop code))
-      (progn
-        (run-at-time 3
-                     nil
-                     (lambda ()
-                       ;; (winner-undo)
-
-                       (delete-window
-                        (get-buffer-window
-                         (get-buffer "*compilation*")))
-
-                       ))
-        (message "Compilation succeed"))
-    (message "Compilation failed"))
+  (if (not (and (eq status 'exit) (zerop code)))
+      (message "Compilation failed")
+    (run-at-time 3 nil (lambda ()
+                         (set-window-configuration xwl-layout-before-compilation)))
+    (message "Compilation succeed"))
   (cons msg code))
 
 (setq compilation-exit-message-function 'xwl-compilation-exit-autoclose)
@@ -777,16 +773,20 @@ If SCHEME?, `run-scheme'."
 
 ;; perl
 
-(add-to-list 'auto-mode-alist '("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode))
-(add-to-list 'interpreter-mode-alist '("perl" . cperl-mode))
-(add-to-list 'interpreter-mode-alist '("perl5" . cperl-mode))
-(add-to-list 'interpreter-mode-alist '("miniperl" . cperl-mode))
+;; TODO: remove this.
 
-(eval-after-load "cperl-mode"
-  '(progn
-     (add-hook 'cperl-mode-hook 'smart-operator-mode-on)
-     (define-key cperl-mode-map (kbd "C-c <f1> f") 'cperl-perldoc)
-     ))
+;; (add-to-list 'auto-mode-alist '("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode))
+;; (add-to-list 'interpreter-mode-alist '("perl" . cperl-mode))
+;; (add-to-list 'interpreter-mode-alist '("perl5" . cperl-mode))
+;; (add-to-list 'interpreter-mode-alist '("miniperl" . cperl-mode))
+
+;; (setq cperl-invalid-face nil)
+
+;; (eval-after-load "cperl-mode"
+;;   '(progn
+;;      (add-hook 'cperl-mode-hook 'smart-operator-mode-on)
+;;      (define-key cperl-mode-map (kbd "C-c <f1> f") 'cperl-perldoc)
+;;      ))
 
 
 ;;; cscope

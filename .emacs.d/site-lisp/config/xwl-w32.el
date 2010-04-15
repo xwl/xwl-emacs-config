@@ -1,4 +1,4 @@
-;;; xwl-vim.el --- w32 specific utilites 
+;;; xwl-vim.el --- w32 specific utilites
 
 ;; Copyright (C) 2010 William Xu
 
@@ -25,17 +25,19 @@
   "Get a list of drive names from get_drives.py."
   (when (executable-find "python")
     (read
-     (shell-command-to-string  
+     (shell-command-to-string
       (concat "python "
 	      (shell-quote-argument
 	       (expand-file-name "~/w32/get_drives.py")))))))
+
+(setq xwl-w32-drive-separator ".")
 
 ;; Prepend drive name on buffer on w32
 (defadvice uniquify-get-proposed-name (after prepend-drive-name activate)
   (let ((d (upcase (substring (ad-get-arg 1) 0 1))))
     (setq ad-return-value
-          (concat d "="
-                  (cdr (or (assoc d xwl-w32-drives) 
+          (concat d xwl-w32-drive-separator
+                  (cdr (or (assoc d xwl-w32-drives)
                            (assoc (downcase d) xwl-w32-drives)))
                   ":/" ad-return-value))))
 

@@ -353,12 +353,6 @@ If the buffer is currently not visible, makes it sticky."
 
 (defun xwl-erc-select ()
   (interactive)
-
-  (unless pwbitlbee
-    (setq pwbitlbee (read-passwd "irc password: "))
-    (setq pwerc pwbitlbee
-          pwdeb pwbitlbee))
-
   (if xwl-at-company?
       (let ((sv "localhost")
             (nick "xwl__"))

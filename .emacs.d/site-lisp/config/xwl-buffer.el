@@ -122,7 +122,11 @@ point.  Especially useful for w32."
         "~/notes"
 
         ,@(when xwl-w32?
-            (mapcar (lambda (d) (concat (car d) "=" (cdr d))) xwl-w32-drives))
+            (mapcar (lambda (d)
+                      (concat (car d)
+                              xwl-w32-drive-separator
+                              (cdr d)))
+                    xwl-w32-drives))
         ))
 
 (defadvice ido-find-file (around change-default-directory activate)
@@ -130,8 +134,10 @@ point.  Especially useful for w32."
   (let ((d default-directory))
     (cond (current-prefix-arg
            (setq d (replace-regexp-in-string
-                    "=.*" ":" (ido-completing-read "let default-directory with: "
-                                                   xwl-frequent-directories))))
+                    (format "^\\([a-zA-Z]\\)%s.*" (regexp-quote xwl-w32-drive-separator))
+                    "\\1:"
+                    (ido-completing-read "let default-directory with: "
+                                         xwl-frequent-directories))))
           ;; Use shell's current dir as default-directory on w32.
           ((and xwl-w32? (eq major-mode 'shell-mode))
            (save-excursion
