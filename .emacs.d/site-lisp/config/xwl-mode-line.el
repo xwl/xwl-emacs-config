@@ -79,9 +79,6 @@
 (setq xwl-gmail-user "william.xwl"
       xwl-gmail-password pwgmail)
 
-(unless xwl-gmail-password
-  (setq xwl-gmail-password (read-passwd "Gmail password: ")))
-
 (setq xwl-gmail-notify-string "")
 
 (defun xwl-gmail-get-unread (user password)
@@ -95,7 +92,7 @@
                             t))
               (error "xwl-gmail-get-unread failed"))
             (xml-parse-region (point-min) (point-max))))
-         (unread (find-if (lambda (node)
+         (unread (some (lambda (node)
                             (when (and (listp node)
                                        (eq (car node) 'fullcount))
                               (car (reverse node))))
@@ -103,6 +100,8 @@
     (string-to-number unread)))
 
 (defun xwl-gmail-notify ()
+  (unless xwl-gmail-password
+    (setq xwl-gmail-password (read-passwd "Gmail password: ")))
   (let ((unreads (mapcar* 'xwl-gmail-get-unread
                           (list xwl-gmail-user xwl-gmail-user1)
                           (list xwl-gmail-password xwl-gmail-password1))))
@@ -114,7 +113,8 @@
                     (mapconcat (lambda (n) (number-to-string n)) unreads ","))))
     (force-mode-line-update)))
 
-(unless (boundp 'xwl-gmail-notify-timer)
+(when (and (not (boundp 'xwl-gmail-notify-timer))
+           (not noninteractive))
   (setq xwl-gmail-notify-timer
         (run-with-timer 0 (* 60 5) 'xwl-gmail-notify)))
 
