@@ -63,7 +63,16 @@
                                ;; 'org-agenda
                                ))
 
-(global-set-key (kbd "<f9>") 'shell) ;'eshell) ;xwl-term ;xwl-run-scsh
+;;'eshell) ;xwl-term ;xwl-run-scsh
+(global-set-key (kbd "<f9>") 'xwl-shell)
+
+;; FIXME, why lambda would not work here?
+(defun xwl-shell ()
+  (interactive)
+  (if current-prefix-arg
+      (call-interactively 'shell)
+    (xwl-switch-or-create "*shell*" 'shell)))
+
 (global-set-key (kbd "<f11>") (lambda ()
                                 (interactive)
                                 (xwl-switch-or-create ":home" 'twit)))

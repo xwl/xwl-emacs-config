@@ -114,7 +114,7 @@
     (force-mode-line-update)))
 
 (when (and (not (boundp 'xwl-gmail-notify-timer))
-           (not noninteractive))
+           (not (boundp 'xwl-gnus-updating?)))
   (setq xwl-gmail-notify-timer
         (run-with-timer 0 (* 60 5) 'xwl-gmail-notify)))
 

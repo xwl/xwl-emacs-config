@@ -652,15 +652,15 @@
                                   (if xwl-at-company?
                                       ""
                                     "(ps -ef|grep \"emacs --eval\" | grep -v grep) || ")
-                                  "emacs --eval \"(progn (suspend-frame) (gnus-agent-batch) (gnus-group-save-newsrc t) (save-buffers-kill-terminal t))\""
+                                  "emacs --eval \"(progn (setq xwl-gnus-updating? t) (suspend-frame) (gnus-agent-batch) (gnus-group-save-newsrc t) (save-buffers-kill-terminal t))\""
                                   ))))))
         (message "Gnus agent timer started"))
       )))
 
 (global-set-key (kbd "<f6>") '(lambda ()
                                 (interactive)
-                                (if xwl-at-company?
-                                    (message "Hmm, only run at home")
+                                (if (not xwl-at-company?)
+                                    (message "Hmm, only run at company")
                                   (xwl-gnus))))
 
 (setq gnus-permanently-visible-groups
@@ -769,8 +769,11 @@
 ;; - `*': put it in the cache, and use `Y c' to show it later
 (setq gnus-use-cache 'passive)
 
-(xwl-gnus-summary-tree-plain)
-;; (rs-gnus-summary-tree-arrows-wide)
+(case window-system
+  ((w32)
+   (rs-gnus-summary-tree-arrows-wide))
+  (t
+   (xwl-gnus-summary-tree-plain)))
 
 ;; ,----
 ;; | threading

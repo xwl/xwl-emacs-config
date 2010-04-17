@@ -768,6 +768,7 @@ passphrase cache or user."
 (add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
 
 ;; twittering-mode
+
 (setq twittering-username "xwl"
       twittering-password pwtwitter)
 
@@ -799,9 +800,7 @@ passphrase cache or user."
      (define-key twittering-mode-map "N" 'twittering-goto-next-status-of-user)
      (define-key twittering-mode-map "P" 'twittering-goto-previous-status-of-user)
 
-     (define-key twittering-mode-map "q" 'xwl-hide-buffer)
-
-     ))
+     (define-key twittering-mode-map "q" 'xwl-hide-buffer)))
 
 ;; ,----
 ;; | Track cahnges for some buffer
