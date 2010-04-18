@@ -134,11 +134,15 @@ point.  Especially useful for w32."
   "Set `default-directory' on the fly."
   (let ((d default-directory))
     (cond (current-prefix-arg
-           (setq d (replace-regexp-in-string
-                    (format "^\\([a-zA-Z]\\)%s.*" (regexp-quote xwl-w32-drive-separator))
-                    "\\1:"
-                    (ido-completing-read "let default-directory with: "
-                                         xwl-frequent-directories))))
+           (setq d (ido-completing-read "let default-directory with: "
+                                        xwl-frequent-directories))
+           (when xwl-w32?
+             (setq d (replace-regexp-in-string
+                      (format "^\\([a-zA-Z]\\)%s.*"
+                              (regexp-quote xwl-w32-drive-separator))
+                      "\\1:"
+                      d))))
+
           ;; Use shell's current dir as default-directory on w32.
           ((and xwl-w32? (eq major-mode 'shell-mode))
            (save-excursion
