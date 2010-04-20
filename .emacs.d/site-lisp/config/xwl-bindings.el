@@ -75,7 +75,10 @@
 
 (global-set-key (kbd "<f11>") (lambda ()
                                 (interactive)
-                                (xwl-switch-or-create ":home" 'twit)))
+                                (xwl-switch-or-create ":home" 'twit)
+                                (unless xwl-timers-hook-started?
+                                  (run-hooks 'xwl-timers-hook)
+                                  (setq xwl-timers-hook-started? t))))
 
 (global-set-key (kbd "<f13>") 'kill-this-buffer)
 
@@ -150,7 +153,7 @@
 (global-set-key (kbd "C-c j") 'imenu)
 
 (global-set-key (kbd "C-c m a") 'his-align-cols)
-;; `a' will be rebind in c++ mode, so bind `A' also.
+;; `a' will be rebinded in c++ mode, so bind `A' also.
 (global-set-key (kbd "C-c m A") 'his-align-cols)
 
 ;; (global-set-key (kbd "C-c m m") 'apply-macro-to-region-lines)
