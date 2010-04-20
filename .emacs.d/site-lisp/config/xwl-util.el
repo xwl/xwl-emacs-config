@@ -734,6 +734,29 @@ This should not affect `buffer-undo-list'."
                            xwl-proxy-server
                            xwl-proxy-port))))
 
+
+(setq xwl-timers-hook-started? nil)
+
+(defun xwl-timers-hook ()
+  "Timers to invoke on the fly.
+Run it at an appropriate time, like when we twittering?"
+  )
+
+(defmacro xwl-shell-command-asynchronously-with-callback (cmd callback)
+  "Run CMD asynchronously and apply CALLBACK in the output buffer.
+Note: you are suggested to kill process buffer at the end of CALLBACK. "
+  `(let* ((buf (generate-new-buffer (concat "*" (replace-regexp-in-string " .*" "" ,cmd) "*")))
+          (p (start-process-shell-command ,cmd buf ,cmd)))
+     (set-process-sentinel p
+                           (lambda (process event)
+                             (with-current-buffer (process-buffer process)
+                               (when (eq (process-status  process) 'exit)
+                                 (let ((inhibit-read-only t)
+                                       (err (process-exit-status process)))
+                                   (if (zerop err)
+                                       (funcall ,callback)
+                                     (error "`%s' failed: %d" ,cmd err)))))))))
+
 (provide 'xwl-util)
 
 ;;; xwl-util.el ends here
