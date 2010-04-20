@@ -81,42 +81,55 @@
 
 (setq xwl-gmail-notify-string "")
 
-(defun xwl-gmail-get-unread (user password)
-  (let* ((xml-list
-          (with-temp-buffer
-            (unless (zerop (shell-command
-                            (format "curl -s --user \"%s:%s\" %s https://mail.google.com/mail/feed/atom"
-                                    user password (if (boundp 'xwl-proxy-server)
-                                                      (format "-x %s:%d" xwl-proxy-server xwl-proxy-port)
-                                                    ""))
-                            t))
-              (error "xwl-gmail-get-unread failed"))
-            (xml-parse-region (point-min) (point-max))))
-         (unread (some (lambda (node)
-                            (when (and (listp node)
-                                       (eq (car node) 'fullcount))
-                              (car (reverse node))))
-                          (cdar xml-list))))
-    (string-to-number unread)))
-
 (defun xwl-gmail-notify ()
   (unless xwl-gmail-password
     (setq xwl-gmail-password (read-passwd "Gmail password: ")))
-  (let ((unreads (mapcar* 'xwl-gmail-get-unread
-                          (list xwl-gmail-user xwl-gmail-user1)
-                          (list xwl-gmail-password xwl-gmail-password1))))
+  (mapcar* 'xwl-gmail-get-unread
+           (list xwl-gmail-user xwl-gmail-user1)
+           (list xwl-gmail-password xwl-gmail-password1)))
 
-    (if (every 'zerop unreads)
-        (setq xwl-gmail-notify-string "")
-      (setq xwl-gmail-notify-string
-            (format "g(%s) "
-                    (mapconcat (lambda (n) (number-to-string n)) unreads ","))))
-    (force-mode-line-update)))
+(defun xwl-gmail-get-unread (user password)
+  (xwl-shell-command-asynchronously-with-callback
+   (format "curl -s --user \"%s:%s\" %s https://mail.google.com/mail/feed/atom"
+           user password (if (boundp 'xwl-proxy-server)
+                             (format "-x %s:%d" xwl-proxy-server xwl-proxy-port)
+                           ""))
+   'xwl-gmail-notify-callback))
 
-(when (and (not (boundp 'xwl-gmail-notify-timer))
-           (not (boundp 'xwl-gnus-updating?)))
-  (setq xwl-gmail-notify-timer
-        (run-with-timer 0 (* 60 5) 'xwl-gmail-notify)))
+(defun xwl-gmail-notify-callback ()
+  (let* ((xml-list (xml-parse-region (point-min) (point-max)))
+         (get-node-value (lambda (node)
+                           (some (lambda (n)
+                                   (when (and (listp n) (eq (car n) node))
+                                     (car (reverse n))))
+                                 (cdar xml-list))))
+         (account (replace-regexp-in-string
+                   ".* +\\([^ ]+\\)@.*" "\\1" (funcall get-node-value 'title)))
+         (unread (string-to-number (funcall get-node-value 'fullcount))))
+    (xwl-gmail-notify-format account unread)
+    (kill-buffer)))
+
+;; FIXME: this is toooo tedious..
+(defun xwl-gmail-notify-format (account unread)
+  (cond ((string= account xwl-gmail-user)
+         (if (string= xwl-gmail-notify-string "")
+             (setq xwl-gmail-notify-string (format "g(%d,0) " unread))
+           (setq xwl-gmail-notify-string
+                 (replace-regexp-in-string
+                  "([0-9]+," (format "(%d," unread) xwl-gmail-notify-string))))
+        ((string= account xwl-gmail-user1)
+         (if (string= xwl-gmail-notify-string "")
+             (setq xwl-gmail-notify-string (format "g(0,%d) " unread))
+           (setq xwl-gmail-notify-string
+                 (replace-regexp-in-string
+                  ",[0-9]+" (format ",%d" unread) xwl-gmail-notify-string)))))
+  (when (string-match "g(0,0)" xwl-gmail-notify-string)
+    (setq xwl-gmail-notify-string ""))
+  (force-mode-line-update))
+
+(add-hook 'xwl-timers-hook (lambda ()
+                             (setq xwl-gmail-notify-timer
+                                   (run-with-timer 0 (* 60 5) 'xwl-gmail-notify))))
 
 ;;; Misc
 
