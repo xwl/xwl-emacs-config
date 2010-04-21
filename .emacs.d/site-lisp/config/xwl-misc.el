@@ -746,8 +746,12 @@ passphrase cache or user."
 
 (require 'auto-complete)
 (require 'auto-complete-config)
+
 (global-auto-complete-mode 1)
 (setq ac-auto-start 3)
+
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/site-lisp/auto-complete/dict")
+(ac-config-default)
 
 (defun auto-complete-mode-maybe ()
   "What buffer `auto-complete-mode' prefers."
@@ -863,7 +867,7 @@ passphrase cache or user."
                         (xwl-s60lxr-generate-releases))))
   (setq xwl-s60lxr-release release))
 
-;;; Redefine shell-command to return exit status when running synchronously.
+;;; Redefine shell-command to *always* return exit status when running synchronously.
 
 (eval-after-load 'simple
   '(progn

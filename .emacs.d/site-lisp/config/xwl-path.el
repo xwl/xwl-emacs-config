@@ -11,7 +11,7 @@
 (setq xwl-makefile-subdir-list
       (mapcar (lambda (f) (concat xwl-site-lisp "/" f))
               '("."
-                "auto-complete-1.0"
+                "auto-complete"
                 "debian"
                 "dictionary-el"
                 "haskell-mode-2.4"
