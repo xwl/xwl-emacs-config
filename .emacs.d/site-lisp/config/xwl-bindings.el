@@ -193,6 +193,11 @@
 
 (global-set-key (kbd "M-S") 'xwl-search-jp)
 
+(global-set-key (kbd "C-c n E") '(lambda ()
+                                   (interactive)
+                                   (require 'xwl-erc)
+                                   (xwl-erc-select)))
+
 (provide 'xwl-bindings)
 
 ;;; xwl-bindings.el ends here

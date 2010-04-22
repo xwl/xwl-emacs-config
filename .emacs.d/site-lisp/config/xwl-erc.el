@@ -22,24 +22,13 @@
 ;;; Code:
 
 ;; ,----
-;; | Erc - irc client, bitlbee
+;; | General
 ;; `----
 
-;; ERC (M-x erc-select)
-;; Set system locale to zh_CN.utf-8 first!
-;; /me do sth; /ctcp xwl version
-;; http://rafb.net/paste
-
 ;; irc.pchome.net:7000
-;; 211.92.88.40:7000 #linuxfire
-;; irc.debian.org #debian-zh
 
 ;; Send offline message to registered user on freenode:
 ;;   /msg MemoServ send ID message
-
-(setq erc-track-enable-keybindings t)
-
-(require 'erc)
 
 (setq erc-echo-notices-in-minibuffer-flag t
       erc-default-coding-system '(utf-8 . utf-8)
@@ -68,44 +57,13 @@
       '(("rootdir.de"
          "&bitlbee")
         ("freenode.net"
-         "#osxchat"
-         ;; "#bsdchat"
-         ;; "#sxemacs"
-         "#emacs" ;; "#guile" "#sawfish" "#haskell"
-         ;; "#org-mode"
-         ;; "#gnus"
-         "#scheme"
-         "#chicken"
-         ;; "#gentoo-alt"
-         ; "#gentoo-cn" ;; "#gentoo-ppc" "#conkeror"
-         "#cpp-tw"
-         ;; "#fink"
-         ;; "#macdev"
-         ;; "#macosx"
-         ;; "#pkgsrc"
-         "#beijinglug"
-         )
+         "#osxchat" "#emacs" "#scheme" "#chicken" "#cpp-tw" "#beijinglug" )
         ("oftc.net"
-         "#debian-zh"
-         "#emacs-cn"
-         ;; "#bitlbee"
-         )
-;;         ("linuxfire"
-;;          "#linuxfire")
-
+         "#debian-zh" "#emacs-cn")      ; "#bitlbee"
+        ;; ("linuxfire"
+        ;;  "#linuxfire")
         ("irc.lnx.nokia.com"
-         "#avkon" "#orbit" "#mac" "#linux" "#symbianperformance" "#qt")
-
-        ))
-
-;; Password has already been provided in erc-select call:
-;;
-;; (defun xwl-erc-auto-identify (server nick)
-;;   (unless (string-match "localhost" server) ; bitlbee
-;;     (erc-message "PRIVMSG"
-;;                  (format "NickServ identify %s" pwbitlbee))))
-
-;; (add-hook 'erc-after-connect 'xwl-erc-auto-identify)
+         "#avkon" "#orbit" "#mac" "#linux" "#symbianperformance" "#qt")))
 
 (defun his-bitlbee-identify ()
    "If we're on the bitlbee server, send the identify command to the
@@ -133,7 +91,6 @@
 ;; | match, ignore
 ;; `----
 
-(require 'erc-match)
 (erc-match-mode 1)
 (setq erc-current-nick-highlight-type 'nick-or-keyword)
 (setq erc-keywords '("xwl" "emms"))
@@ -168,19 +125,18 @@ so as to keep an eye on work when necessarily."
 ;; | track, fill
 ;; `----
 
-(require 'erc-track)
+(erc-track-mode 1)
 
-(setq erc-track-showcount t)
+(setq erc-track-showcount t
+      erc-track-enable-keybindings t)
 
-(setq erc-track-switch-direction 'importance)
-
-(setq erc-track-faces-priority-list
+(setq erc-track-switch-direction 'importance
+      erc-track-faces-priority-list
       '(erc-query-buffer-face
         erc-current-nick-face
 	erc-keyword-face
 	erc-pal-face
-	erc-default-face
-	))
+	erc-default-face))
 
 (setq erc-track-priority-faces-only 'all)
 
@@ -189,7 +145,6 @@ so as to keep an eye on work when necessarily."
 ;;     (goto-char (point-max))
 ;;     (forward-line -1)))
 
-(require 'erc-fill)
 (erc-fill-mode 1)
 (setq erc-fill-function 'erc-fill-static
       erc-fill-static-center 10
@@ -211,7 +166,6 @@ so as to keep an eye on work when necessarily."
 ;; | timestamp
 ;; `----
 
-(require 'erc-stamp)
 (erc-timestamp-mode 1)
 
 (setq erc-timestamp-only-if-changed-flag t
@@ -238,7 +192,6 @@ so as to keep an eye on work when necessarily."
 ;; | log
 ;; `----
 
-(require 'erc-log)
 (erc-log-mode 1)
 (setq erc-log-channels-directory "~/var/erc/"
       erc-save-buffer-on-part t
@@ -379,8 +332,6 @@ If the buffer is currently not visible, makes it sticky."
                 :port (if xwl-at-company? 26667 6667)
                 :nick "william"
                 :password pwbitlbee)))
-
-(global-set-key (kbd "C-c n E") 'xwl-erc-select)
 
 (add-hook 'erc-join-hook 'less-minor-mode-on)
 

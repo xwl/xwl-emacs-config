@@ -73,7 +73,7 @@
 (require 'xwl-gnus)
 (require 'xwl-dictionary)
 (require 'xwl-web)
-(require 'xwl-erc)
+;; (require 'xwl-erc)
 (ignore-errors (require 'xwl-emms))
 (require 'xwl-org)
 ;; (require 'xwl-muse)
