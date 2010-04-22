@@ -93,20 +93,6 @@
 
 (setq org-agenda-show-all-dates nil)
 
-(defun xwl-org-todo (todo)
-  "Read TODO from minibuffer and append it to car of `org-agenda-files'. "
-  (interactive "sTODO: ")
-  (let ((f (car org-agenda-files)))
-    (with-current-buffer (find-file-noselect f)
-      (goto-char (point-max))
-      (unless (bolp)
-        (newline))
-      (insert "** TODO " todo)
-      (newline)
-      (save-buffer))))
-
-(global-set-key (kbd "C-c t") 'xwl-org-todo)
-
 (add-hook 'org-mode-hook
           (lambda ()
             (modify-syntax-entry ?- "w" org-mode-syntax-table)

@@ -620,49 +620,6 @@
 
 (add-hook 'gnus-group-mode-hook 'xwl-gnus-group-mode-hook)
 
-(setq xwl-gnus-agent-timer nil)
-
-(defun xwl-gnus ()
-  (interactive)
-  (let ((buf (get-buffer "*Group*")))
-    (if buf
-        (progn
-          (switch-to-buffer buf)
-          (setq xwl-mail-notify-string ""))
-
-      ;; (if (not (eq window-system 'ns))
-      ;;     (call-interactively 'gnus)
-      (call-interactively 'gnus-unplugged)
-      ;; )
-
-      (gnus-demon-init)
-      (when (fboundp 'color-theme-xwl-console)
-        (color-theme-xwl-console))
-
-      (unless gnus-plugged
-        (unless xwl-gnus-agent-timer
-          (setq xwl-gnus-agent-timer
-                (run-with-timer
-                 0 (* 3600 2) (lambda ()
-                                (xwl-shell-command-asynchronously
-                                 (concat
-                                  ;; Company PC is always on, so we won't have
-                                  ;; too many instances running at the same
-                                  ;; time...
-                                  (if xwl-at-company?
-                                      ""
-                                    "(ps -ef|grep \"emacs --eval\" | grep -v grep) || ")
-                                  "emacs --eval \"(progn (setq xwl-gnus-updating? t) (suspend-frame) (gnus-agent-batch) (gnus-group-save-newsrc t) (save-buffers-kill-terminal t))\""
-                                  ))))))
-        (message "Gnus agent timer started"))
-      )))
-
-(global-set-key (kbd "<f6>") '(lambda ()
-                                (interactive)
-                                (if (not xwl-at-company?)
-                                    (message "Hmm, only run at company")
-                                  (xwl-gnus))))
-
 (setq gnus-permanently-visible-groups
       (regexp-opt `(;; "savings"
                     ;; "outgoing"

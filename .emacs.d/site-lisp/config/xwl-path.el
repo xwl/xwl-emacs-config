@@ -20,6 +20,8 @@
                 "slightly-modified"
                 "twittering-mode"
                 "wget-el"
+                "emms/lisp"
+
                 "xwl-elisp"
                 "xwl-elisp/dashboard"
                 "xwl-elisp/ga"
@@ -37,8 +39,6 @@
        (list "~/repo/cvs/mmm-mode"
              "~/repo/misc/auctex-11.84"
              "~/repo/cvs/bbdb/lisp"
-             "~/repo/git/emms/lisp"
-
              "~/repo/git/dvc/lisp"
 
              ;; Weird w3m! Without this, `emacs -batch' will complain.

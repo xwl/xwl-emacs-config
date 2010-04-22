@@ -43,26 +43,6 @@
 (global-set-key (kbd "<f5>") 'ibuffer) ;'dashboard) ;'w3m)
 (global-set-key (kbd "<f7>") 'xwl-bbdb)
 
-;; 'org-agenda-list
-(global-set-key (kbd "<f8>") (lambda ()
-                               (interactive)
-                               ;;   ;; (find-file "~/notes/todo.org")
-                               ;;   (case system-type
-                               ;;     ((darwin)
-                               ;;      (delete-other-windows)
-                               ;;      (find-file "~/notes/todo")
-                               ;;      (split-window-horizontally)
-                               ;;      (find-file "~/notes/todo-finland"))
-                               ;;     (t
-                               ;;      (delete-other-windows)
-                               ;;      (find-file "~/notes/todo")
-                               ;;      (split-window-horizontally)
-                               ;;      (find-file "~/notes/todo-nokia")))
-                               (org-agenda 1 "h")
-                               (command-execute (kbd "C-x 1"))
-                               ;; 'org-agenda
-                               ))
-
 ;;'eshell) ;xwl-term ;xwl-run-scsh
 (global-set-key (kbd "<f9>") 'xwl-shell)
 
@@ -124,7 +104,6 @@
 (global-set-key (kbd "M-%") 'replace-regexp)
 (global-set-key (kbd "M-_") 'highlight-changes-previous-change)
 (global-set-key (kbd "M-+") 'highlight-changes-next-change)
-(global-set-key (kbd "M-s") 'dictionary-search)
 (global-set-key (kbd "C-M-k") 'kill-paragraph)
 (global-set-key (kbd "M-K") 'kill-sexp)
 ;; (global-set-key (kbd "M-H") 'mark-sexp)
@@ -176,7 +155,6 @@
 ;;                                 (let ((inhibit-read-only t))
 ;;                                   (delete-region (point-min) (point-max)))))
 
-
 ;; deal with japanese keyboard
 (keyboard-translate ?\¥ ?\\)
 (global-set-key (kbd "M-¥") (kbd "M-\\"))
@@ -191,7 +169,148 @@
 (global-set-key (kbd "C-c m s") '(lambda () (interactive) (find-file "~/.scratch")))
 (global-set-key (kbd "C-c m r") 'revert-buffer)
 
-(global-set-key (kbd "M-S") 'xwl-search-jp)
+;;; These Will Load Some Modules Dynamically.
+
+(global-set-key (kbd "M-s") '(lambda ()
+                               (interactive)
+                               (require 'xwl-dictionary)
+                               (call-interactively 'dictionary-search)))
+
+(global-set-key (kbd "M-S") '(lambda ()
+                               (interactive)
+                               (require 'xwl-dictionary)
+                               (call-interactively 'xwl-search-jp)))
+
+(global-set-key (kbd "C-c n E") ' xwl-erc-select)
+
+(defun xwl-erc-select ()
+  (interactive)
+  (if xwl-at-company?
+      (let ((sv "localhost")
+            (nick "xwl__"))
+        (when (eq system-type 'windows-nt)
+          (setq sv (xwl-redirect-host))
+          (setq nick "xwl_"))
+
+        (erc :server sv :port 16667 :nick nick :password pwerc)
+        (erc :server sv :port 16669 :nick nick :password pwdeb)
+        (erc :server sv :port 16668 :nick nick :password pwerc))
+
+    (erc :server "irc.debian.org"       :port 6669 :nick "xwl" :password pwdeb)
+    (erc :server "irc.freenode.net"     :port 6667 :nick "xwl" :password pwerc)
+
+    ;; (erc :server "irc.linuxfire.com.cn" :port 6667 :nick "xwl" :password "")
+    ;; (erc :server "irc.mozilla.org"      :port 6667 :nick "xwl" :password "")
+    ))
+
+(global-set-key (kbd "<f3>") '(lambda ()
+                                (interactive)
+                                (if (and (boundp 'emms-playlist-buffer)
+                                         (buffer-live-p emms-playlist-buffer))
+                                    (emms-playlist-mode-go)
+                                  ;; (emms-playlist-mode-go-popup)
+                                  (when (y-or-n-p "EMMS not started, start it now? ")
+                                    (require 'xwl-emms)
+                                    (emms-add-directory-tree
+                                     emms-source-file-default-directory)))))
+
+(global-set-key (kbd "C-c e a") 'xwl-emms-add-directory-tree)
+
+(defun xwl-emms-add-directory-tree ()
+  (interactive)
+  (unless (fboundp 'emms-add-directory-tree)
+    (require 'xwl-emms))
+  (call-interactively
+   'emms-add-directory-tree))
+
+(global-set-key (kbd "<f6>") '(lambda ()
+                                (interactive)
+                                (if (not xwl-at-company?)
+                                    (message "Hmm, only run at company")
+                                  (xwl-gnus))))
+
+(setq xwl-gnus-agent-timer nil)
+
+(defun xwl-gnus ()
+  (interactive)
+  (let ((buf (get-buffer "*Group*")))
+    (if buf
+        (progn
+          (switch-to-buffer buf)
+          (setq xwl-mail-notify-string ""))
+
+      ;; (if (not (eq window-system 'ns))
+      ;;     (call-interactively 'gnus)
+      (call-interactively 'gnus-unplugged)
+      ;; )
+
+      (gnus-demon-init)
+      (when (fboundp 'color-theme-xwl-console)
+        (color-theme-xwl-console))
+
+      (unless gnus-plugged
+        (unless xwl-gnus-agent-timer
+          (setq xwl-gnus-agent-timer
+                (run-with-timer
+                 0 (* 3600 2) (lambda ()
+                                (xwl-shell-command-asynchronously
+                                 (concat
+                                  ;; Company PC is always on, so we won't have
+                                  ;; too many instances running at the same
+                                  ;; time...
+                                  (if xwl-at-company?
+                                      ""
+                                    "(ps -ef|grep \"emacs --eval\" | grep -v grep) || ")
+                                  "emacs --eval \"(progn (require 'xwl-gnus) (suspend-frame) (gnus-agent-batch) (gnus-group-save-newsrc t) (save-buffers-kill-terminal t))\""
+                                  ))))))
+        (message "Gnus agent timer started"))
+      )))
+
+(global-set-key (kbd "<f8>") (lambda ()
+                               (interactive)
+                               ;;   ;; (find-file "~/notes/todo.org")
+                               ;;   (case system-type
+                               ;;     ((darwin)
+                               ;;      (delete-other-windows)
+                               ;;      (find-file "~/notes/todo")
+                               ;;      (split-window-horizontally)
+                               ;;      (find-file "~/notes/todo-finland"))
+                               ;;     (t
+                               ;;      (delete-other-windows)
+                               ;;      (find-file "~/notes/todo")
+                               ;;      (split-window-horizontally)
+                               ;;      (find-file "~/notes/todo-nokia")))
+                               (org-agenda 1 "h")
+                               (command-execute (kbd "C-x 1"))
+                               ;; 'org-agenda
+                               ))
+
+(global-set-key (kbd "C-c t") '(lambda ()
+                                 (interactive)
+                                 (require 'xwl-org)
+                                 (call-interactively 'xwl-org-todo)))
+
+(defun xwl-org-todo (todo)
+  "Read TODO from minibuffer and append it to car of `org-agenda-files'. "
+  (interactive "sTODO: ")
+  (let ((f (car org-agenda-files)))
+    (with-current-buffer (find-file-noselect f)
+      (goto-char (point-max))
+      (unless (bolp)
+        (newline))
+      (insert "** TODO " todo)
+      (newline)
+      (save-buffer))))
+
+(global-set-key (kbd "C-/") 'toggle-input-method)
+
+(defadvice toggle-input-method (before load-wubi activate)
+  (require 'xwl-wubi))
+
+(define-key global-map "\C-x\C-j" '(lambda ()
+                                     (interactive)
+                                     (require 'xwl-dired)
+                                     (call-interactively 'dired-jump)))
 
 (provide 'xwl-bindings)
 

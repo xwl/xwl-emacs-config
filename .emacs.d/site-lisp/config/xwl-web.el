@@ -80,16 +80,8 @@
 
   )
 
-
-;;; wget
-
-(autoload 'wget "wget" "wget interface for Emacs." t)
-(autoload 'wget-web-page "wget" "wget interface to download whole web page." t)
-;; (load "w3m-wget")
-
 (setq wget-download-directory "~/Downloads")
 
-
 ;;; External Browser
 
 (defun xwl-browse-url-firefox-tab-only (url &optional new-window)

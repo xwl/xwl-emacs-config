@@ -21,67 +21,10 @@
 
 ;;; Code:
 
-;;; Chinese Wubi Input Method
+;; ,----
+;; | BBDB
+;; `----
 
-;; FIXME: how to make it autoload?
-(require 'wubi)
-(register-input-method
- "chinese-wubi" "Chinese" 'quail-use-package "wubi" "wubi")
-
-(setq wubi-phrases-file "~/.wubi-phrases.el")
-
-(eval-after-load 'wubi
-  '(progn
-     (ignore-errors (wubi-load-local-phrases))
-     ))
-
-(setq default-input-method "chinese-wubi")
-
-(setq xwl-input-methods
-      '("chinese-wubi"
-        "japanese"
-        "japanese-katakana"
-        "chinese-py")
-      xwl-current-input-methods xwl-input-methods)
-
-(defun xwl-cycle-input-method ()
-  "Cycle `xwl-input-method-alist'."
-  (interactive)
-  (if (null (cdr xwl-current-input-methods))
-      (setq xwl-current-input-methods xwl-input-methods)
-    (setq xwl-current-input-methods (cdr xwl-current-input-methods)))
-  (set-input-method (car xwl-current-input-methods)))
-
-(setq xwl-traditional-p t)
-
-;; (load "wubi")
-;; (load "wubi-rules")
-
-(defun xwl-toggle-simplified/traditional-input-method ()
-  (interactive)
-  (setq xwl-traditional-p (not xwl-traditional-p))
-  (if xwl-traditional-p
-      (progn
-        (load "wubi-b5")
-        (load "wubi-rules-b5")
-        (setq wubi-phrases-file "~/.wubi-phrases-b5.el")
-        (wubi-load-local-phrases))
-    (load "wubi")
-    (load "wubi-rules")
-    (setq wubi-phrases-file "~/.wubi-phrases.el")
-    (wubi-load-local-phrases)))
-
-(global-set-key (kbd "C-SPC") 'toggle-input-method)
-(global-set-key (kbd "C-/") 'toggle-input-method)
-(global-set-key (kbd "C-?") 'xwl-cycle-input-method)
-
-;; (global-set-key (kbd "C-?") 'xwl-cycle-input-method)
-(global-set-key (kbd "C-,") 'wubi-toggle-quanjiao-banjiao)
-(global-set-key (kbd "C-c m W") 'wubi-load-local-phrases)
-
-;;; BBDB
-
-;; bbdb TODO
 (ignore-errors
   (progn
 (require 'bbdb)
@@ -498,9 +441,7 @@ prompts for name field."
                                less-scroll-up-line
                                less-scroll-down-line
                                ))
-         (scroll-all-function-all this-command nil)))
-
-     ))
+         (scroll-all-function-all this-command nil)))))
 
 (add-hook 'kill-emacs-hook
           (lambda ()
@@ -533,27 +474,29 @@ prompts for name field."
 ;; | battery
 ;; `----
 
-(require 'battery)
-(setq battery-mode-line-format "[%b%p%% %t]")
+(when (eq system-type 'gnu/linux)
+  (require 'battery)
+  (setq battery-mode-line-format "[%b%p%% %t]")
 
-(when (fboundp 'battery-status-function)
-  (setq battery-mode-line-string
-        (battery-format battery-mode-line-format
-                        (funcall battery-status-function)))
+  (when (fboundp battery-status-function)
+    (setq battery-mode-line-string
+          (battery-format battery-mode-line-format
+                          (funcall battery-status-function)))
 
-  (defadvice battery-update-handler (around check-on-line)
-    "If on-line (not using battery), don't display on mode line."
-    (if (>=  (string-to-number
-              (battery-format "%p" (funcall battery-status-function)))
-             90)
-        (progn
-          (setq battery-mode-line-string "")
-          (force-mode-line-update))
-      ad-do-it))
+    (defadvice battery-update-handler (around check-on-line)
+      "If on-line (not using battery), don't display on mode line."
+      (if (>=  (string-to-number
+                (battery-format "%p" (funcall battery-status-function)))
+               90)
+          (progn
+            (setq battery-mode-line-string "")
+            (force-mode-line-update))
+        ad-do-it))
 
-  (ad-activate 'battery-update-handler)
+    (ad-activate 'battery-update-handler)
 
-  (run-with-timer 0 battery-update-interval 'battery-update-handler))
+    (run-with-timer 0 battery-update-interval 'battery-update-handler))
+  )
 
 ;; ,----
 ;; | occur
@@ -597,18 +540,12 @@ prompts for name field."
 ;; (define-key winring-map "n" 'winring-next-configuration)
 ;; (define-key winring-map "o" 'winring-new-configuration)
 
-;; jump by registers
-;; C-x r w
-;; C-x r j
-
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
 ;; ,----
 ;; | sawfish
 ;; `----
 
-; (load-file "/usr/share/emacs/site-lisp/sawfish/sawfish.el") ; oops
-(autoload 'sawfish-mode "sawfish" "sawfish-mode" t)
 (defun xwl-sawfish-mode-hook ()
   (local-set-key (kbd "C-c <f1>  i")   'sawfish-info)
   (local-set-key (kbd "C-c <f1>  C-v") 'sawfish-info-variable)
@@ -634,9 +571,6 @@ prompts for name field."
 ;; | misc
 ;; `----
 
-;; fvwm-mode
-(autoload 'fvwm-mode "fvwm-mode" "Mode for editing fvwm files" t)
-
 ;; visual blank, tab, end-of-line ?
 ;(require 'blank-mode)
 
@@ -653,9 +587,6 @@ prompts for name field."
     (shell-command-to-string "fortune-zh"))))
 
 (global-set-key (kbd "C-c m f") 'xwl-fortune-of-the-day)
-
-;; octave
-(autoload 'octave-help "octave-hlp" nil t)
 
 ;; ,----
 ;; | ispell, flyspell
@@ -867,160 +798,10 @@ passphrase cache or user."
                         (xwl-s60lxr-generate-releases))))
   (setq xwl-s60lxr-release release))
 
-;;; Redefine shell-command to *always* return exit status when running synchronously.
-
-(eval-after-load 'simple
-  '(progn
-     (defun shell-command (command &optional output-buffer error-buffer)
-       "Execute string COMMAND in inferior shell; display output, if any.
-With prefix argument, insert the COMMAND's output at point.
-
-If COMMAND ends in ampersand, execute it asynchronously.
-The output appears in the buffer `*Async Shell Command*'.
-That buffer is in shell mode.
-
-Otherwise, COMMAND is executed synchronously.  The output appears in
-the buffer `*Shell Command Output*'.  If the output is short enough to
-display in the echo area (which is determined by the variables
-`resize-mini-windows' and `max-mini-window-height'), it is shown
-there, but it is nonetheless available in buffer `*Shell Command
-Output*' even though that buffer is not automatically displayed.
-
-To specify a coding system for converting non-ASCII characters
-in the shell command output, use \\[universal-coding-system-argument] \
-before this command.
-
-Noninteractive callers can specify coding systems by binding
-`coding-system-for-read' and `coding-system-for-write'.
-
-The optional second argument OUTPUT-BUFFER, if non-nil,
-says to put the output in some other buffer.
-If OUTPUT-BUFFER is a buffer or buffer name, put the output there.
-If OUTPUT-BUFFER is not a buffer and not nil,
-insert output in current buffer.  (This cannot be done asynchronously.)
-In either case, the buffer is first erased, and the output is
-inserted after point (leaving mark after it).
-
-If the command terminates without error, but generates output,
-and you did not specify \"insert it in the current buffer\",
-the output can be displayed in the echo area or in its buffer.
-If the output is short enough to display in the echo area
-\(determined by the variable `max-mini-window-height' if
-`resize-mini-windows' is non-nil), it is shown there.
-Otherwise,the buffer containing the output is displayed.
-
-If there is output and an error, and you did not specify \"insert it
-in the current buffer\", a message about the error goes at the end
-of the output.
-
-If there is no output, or if output is inserted in the current buffer,
-then `*Shell Command Output*' is deleted.
-
-If the optional third argument ERROR-BUFFER is non-nil, it is a buffer
-or buffer name to which to direct the command's standard error output.
-If it is nil, error output is mingled with regular output.
-In an interactive call, the variable `shell-command-default-error-buffer'
-specifies the value of ERROR-BUFFER."
-
-       (interactive
-        (list
-         (read-shell-command "Shell command: " nil nil
-                             (let ((filename
-                                    (cond
-                                     (buffer-file-name)
-                                     ((eq major-mode 'dired-mode)
-                                      (dired-get-filename nil t)))))
-                               (and filename (file-relative-name filename))))
-         current-prefix-arg
-         shell-command-default-error-buffer))
-       ;; Look for a handler in case default-directory is a remote file name.
-       (let ((handler
-              (find-file-name-handler (directory-file-name default-directory)
-                                      'shell-command))
-             exit-status)
-         (if handler
-             (funcall handler 'shell-command command output-buffer error-buffer)
-           (if (and output-buffer
-                    (not (or (bufferp output-buffer)  (stringp output-buffer))))
-               ;; Output goes in current buffer.
-               (let ((error-file
-                      (if error-buffer
-                          (make-temp-file
-                           (expand-file-name "scor"
-                                             (or small-temporary-file-directory
-                                                 temporary-file-directory)))
-                        nil)))
-                 (barf-if-buffer-read-only)
-                 (push-mark nil t)
-                 ;; We do not use -f for csh; we will not support broken use of
-                 ;; .cshrcs.  Even the BSD csh manual says to use
-                 ;; "if ($?prompt) exit" before things which are not useful
-                 ;; non-interactively.  Besides, if someone wants their other
-                 ;; aliases for shell commands then they can still have them.
-                 (setq exit-status (call-process shell-file-name nil
-                                                 (if error-file
-                                                     (list t error-file)
-                                                   t)
-                                                 nil shell-command-switch command))
-                 (when (and error-file (file-exists-p error-file))
-                   (if (< 0 (nth 7 (file-attributes error-file)))
-                       (with-current-buffer (get-buffer-create error-buffer)
-                         (let ((pos-from-end (- (point-max) (point))))
-                           (or (bobp)
-                               (insert "\f\n"))
-                           ;; Do no formatting while reading error file,
-                           ;; because that can run a shell command, and we
-                           ;; don't want that to cause an infinite recursion.
-                           (format-insert-file error-file nil)
-                           ;; Put point after the inserted errors.
-                           (goto-char (- (point-max) pos-from-end)))
-                         (display-buffer (current-buffer))))
-                   (delete-file error-file))
-                 ;; This is like exchange-point-and-mark, but doesn't
-                 ;; activate the mark.  It is cleaner to avoid activation,
-                 ;; even though the command loop would deactivate the mark
-                 ;; because we inserted text.
-                 (goto-char (prog1 (mark t)
-                              (set-marker (mark-marker) (point)
-                                          (current-buffer))))
-                 exit-status)
-             ;; Output goes in a separate buffer.
-             ;; Preserve the match data in case called from a program.
-             (save-match-data
-               (if (string-match "[ \t]*&[ \t]*\\'" command)
-                   ;; Command ending with ampersand means asynchronous.
-                   (let ((buffer (get-buffer-create
-                                  (or output-buffer "*Async Shell Command*")))
-                         (directory default-directory)
-                         proc)
-                     ;; Remove the ampersand.
-                     (setq command (substring command 0 (match-beginning 0)))
-                     ;; If will kill a process, query first.
-                     (setq proc (get-buffer-process buffer))
-                     (if proc
-                         (if (yes-or-no-p "A command is running.  Kill it? ")
-                             (kill-process proc)
-                           (error "Shell command in progress")))
-                     (with-current-buffer buffer
-                       (setq buffer-read-only nil)
-                       (erase-buffer)
-                       (display-buffer buffer)
-                       (setq default-directory directory)
-                       (setq proc (start-process "Shell" buffer shell-file-name
-                                                 shell-command-switch command))
-                       (setq mode-line-process '(":%s"))
-                       (require 'shell) (shell-mode)
-                       (set-process-sentinel proc 'shell-command-sentinel)
-                       ;; Use the comint filter for proper handling of carriage motion
-                       ;; (see `comint-inhibit-carriage-motion'),.
-                       (set-process-filter proc 'comint-output-filter)
-                       ))
-                 ;; Otherwise, command is executed synchronously.
-                 (shell-command-on-region (point) (point) command
-                                          output-buffer nil error-buffer)))))))))
-
-
-
 (provide 'xwl-misc)
+
+;;; Local Variables: ***
+;;; outline-regexp: ";; | " ***
+;;; End: ***
 
 ;;; xwl-misc.el ends here
