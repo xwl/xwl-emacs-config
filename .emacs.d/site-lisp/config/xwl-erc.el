@@ -148,7 +148,7 @@ so as to keep an eye on work when necessarily."
 (erc-fill-mode 1)
 (setq erc-fill-function 'erc-fill-static
       erc-fill-static-center 10
-      erc-fill-prefix "      ")
+      erc-fill-prefix nil)
 
 ;; trim erc nicks
 (setq erc-format-nick-function 'xwl-erc-format-nick)
@@ -171,21 +171,20 @@ so as to keep an eye on work when necessarily."
 (setq erc-timestamp-only-if-changed-flag t
       erc-timestamp-format "%H:%M ")
 
-(setq erc-insert-timestamp-function
-      ;; 'erc-insert-timestamp-left
-      'ks-timestamp)
+(setq erc-insert-timestamp-function 'erc-insert-timestamp-left)
 
 (setq xwl-erc-datestamp-format " === [%a(%V) %Y/%m/%d] ===\n")
 
 (defvar xwl-erc-last-datestamp nil)
 (make-variable-buffer-local 'xwl-erc-last-datestamp)
 
-(defun ks-timestamp (string)
-  (erc-insert-timestamp-left string)
+(defadvice erc-insert-timestamp-left (around insert-datestamp activate)
+  ad-do-it
   (let ((datestamp (erc-format-timestamp (current-time)
                                          xwl-erc-datestamp-format)))
     (unless (string= datestamp xwl-erc-last-datestamp)
-      (erc-insert-timestamp-left datestamp)
+      (ad-set-arg 0 datestamp)
+      ad-do-it
       (setq xwl-erc-last-datestamp datestamp))))
 
 ;; ,----
