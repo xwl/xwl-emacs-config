@@ -67,17 +67,6 @@
 ;; (set-face-foreground 'emms-playlist-selected-face "magenta")
 ;; (set-face-foreground 'emms-playlist-track-face  "green")
 
-(global-set-key (kbd "<f3>")
-                (lambda ()
-                  (interactive)
-                  (if (buffer-live-p emms-playlist-buffer)
-                      (emms-playlist-mode-go)
-                      ;; (emms-playlist-mode-go-popup)
-                    (when (y-or-n-p "EMMS not started, start it now? ")
-                      (emms-add-directory-tree
-                       emms-source-file-default-directory)
-                      (command-execute (kbd "<f3>"))))))
-
 (unless (memq system-type '(darwin windows-nt))
   (setq emms-volume-amixer-control "PCM")
 
@@ -322,7 +311,6 @@
 (global-set-key (kbd "C-c e SPC") 'emms-pause)
 (global-set-key (kbd "C-c e f")   'emms-no-next)
 (global-set-key (kbd "C-c e F")   'emms-no-next-and-sleep)
-(global-set-key (kbd "C-c e a")   'emms-add-directory-tree)
 (global-set-key (kbd "C-c e d")   'emms-playlist-mode-delete-selected-track)
 (global-set-key (kbd "C-c e r")   'emms-toggle-repeat-track)
 (global-set-key (kbd "C-c e R")   'emms-toggle-repeat-playlist)

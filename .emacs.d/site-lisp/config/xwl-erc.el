@@ -303,26 +303,6 @@ If the buffer is currently not visible, makes it sticky."
 
 (add-hook 'erc-mode-hook 'xwl-erc-mode-hook)
 
-(defun xwl-erc-select ()
-  (interactive)
-  (if xwl-at-company?
-      (let ((sv "localhost")
-            (nick "xwl__"))
-        (when (eq system-type 'windows-nt)
-          (setq sv (xwl-redirect-host))
-          (setq nick "xwl_"))
-
-        (erc :server sv :port 16667 :nick nick :password pwerc)
-        (erc :server sv :port 16669 :nick nick :password pwdeb)
-        (erc :server sv :port 16668 :nick nick :password pwerc))
-
-    (erc :server "irc.debian.org"       :port 6669 :nick "xwl" :password pwdeb)
-    (erc :server "irc.freenode.net"     :port 6667 :nick "xwl" :password pwerc)
-
-    ;; (erc :server "irc.linuxfire.com.cn" :port 6667 :nick "xwl" :password "")
-    ;; (erc :server "irc.mozilla.org"      :port 6667 :nick "xwl" :password "")
-    ))
-
 (defun xwl-erc-select-bitlbee ()
   (interactive)
   (if (get-buffer "&bitlbee")

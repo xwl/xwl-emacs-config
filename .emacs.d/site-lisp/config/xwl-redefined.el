@@ -1,12 +1,12 @@
 ;;; xwl-redefined.el --- Redefined functions from GNU Emacs
 
-;; Copyright (C) 2007, 2008 William Xu
+;; Copyright (C) 2007, 2008, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation; either version 2, or (at your option)
+;; the Free Software Foundation; either version 3, or (at your option)
 ;; any later version.
 ;;
 ;; This program is distributed in the hope that it will be useful,
@@ -34,23 +34,24 @@
 
 ;;; Erc
 
-(require 'erc-track)
-(defun erc-faces-in (str)
-  "Return a list of all faces used in STR."
-  (let ((i 0)
-	(m (length str))
-	(faces (erc-list (get-text-property 0 'face str))))
-    (while (and (setq i (next-single-property-change i 'face str m))
-		(not (= i m)))
-      (dolist (face (erc-list (get-text-property i 'face str)))
-	(add-to-list 'faces face)))
-    ;; special faces for query & group(like msn groups) buffers
-    (when (or (erc-query-buffer-p)
-              (string-match "&" (buffer-name)))
-      (add-to-list 'faces 'erc-query-buffer-face))
-    faces))
+(eval-after-load 'erc-track
+  '(progn
+     (defun erc-faces-in (str)
+       "Return a list of all faces used in STR."
+       (let ((i 0)
+             (m (length str))
+             (faces (erc-list (get-text-property 0 'face str))))
+         (while (and (setq i (next-single-property-change i 'face str m))
+                     (not (= i m)))
+           (dolist (face (erc-list (get-text-property i 'face str)))
+             (add-to-list 'faces face)))
+         ;; special faces for query & group(like msn groups) buffers
+         (when (or (erc-query-buffer-p)
+                   (string-match "&" (buffer-name)))
+           (add-to-list 'faces 'erc-query-buffer-face))
+         faces))
+     ))
 
-
 
 ;;; If woman fails, call man.
 
@@ -583,7 +584,7 @@ If buffer exists and a process is running, just switch to buffer
           (let ((default (grep-default-command)))
             (list (read-shell-command
                    "Run grep (like this): "
-                   (let ((init (concat (if current-prefix-arg 
+                   (let ((init (concat (if current-prefix-arg
                                            default
                                          grep-command)
                                        " *")))
@@ -699,11 +700,10 @@ If buffer exists and a process is running, just switch to buffer
                   (vector firstname lastname nil company nil nil net nil
                           (make-vector bbdb-cache-length nil))))
 
-             record))))     
+             record))))
      ))
 
 
 (provide 'xwl-redefined)
 
 ;;; xwl-redefined.el ends here
-

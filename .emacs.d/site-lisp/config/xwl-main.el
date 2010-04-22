@@ -68,19 +68,29 @@
 (require 'xwl-calendar)
 (require 'xwl-programming)
 (require 'xwl-shell)
-(require 'xwl-dired)
 (require 'xwl-redefined)
-(require 'xwl-gnus)
-(require 'xwl-dictionary)
 (require 'xwl-web)
-;; (require 'xwl-erc)
-(ignore-errors (require 'xwl-emms))
-(require 'xwl-org)
-;; (require 'xwl-muse)
+
+;; ,----
+;; | loaded on the fly
+;; `----
+
+(eval-after-load 'dired '(progn (require 'xwl-dired)))
+(eval-after-load 'gnus  '(progn (require 'xwl-gnus)))
+(eval-after-load 'erc   '(progn (require 'xwl-erc)))
+(eval-after-load 'org   '(progn (require 'xwl-org)))
+
+;; (require 'xwl-dictionary)
+;; (require 'xwl-emms)
+;; (require 'xwl-wubi)
+
 (require 'xwl-tex)
 (require 'xwl-misc)
 (when window-system
   (require 'xwl-window)
   (require 'xwl-color-theme))
+
+;; not used
+;; (require 'xwl-muse)
 
 ;;; xwl-main.el ends here

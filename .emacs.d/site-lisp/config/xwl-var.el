@@ -26,7 +26,7 @@
 (setq xwl-w32-redirect-locally? nil)
 
 (defun xwl-at-company ()
-  (message "瞅瞅我们是不是在公司网络呢…")
+  ;; (message "瞅瞅我们是不是在公司网络呢…")
   ;;   (zerop (shell-command
   ;;          "traceroute -w 2 -m 2 www.google.com  | grep abc"))
 

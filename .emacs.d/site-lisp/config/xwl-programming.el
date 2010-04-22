@@ -708,10 +708,9 @@ If SCHEME?, `run-scheme'."
              ;; keep the compilation window for now.
              ("\\.mmp$\\|\\.inf$"
               ;; "((dir | grep ABLD.BAT) || bldmake bldfiles) && abld build winscw udeb && xxx"
-              "sbs -c winscw_udeb && yy"
+              "sbs -c winscw_udeb"
               nil
-              "epoc"
-              )
+              "epoc" )
 
              ;; qt
              ((lambda () (not (null (directory-files-and-attributes "." nil "\\.pro$" t))))
@@ -735,7 +734,6 @@ If SCHEME?, `run-scheme'."
              (c++-mode "g++ -O2 \"%f\" -lm -I/sw/include -o %n" ,@(if (eq system-type 'windows-nt)
                                                                       '("%n.exe" "%n.exe")
                                                                     '("%n" "./%n")))
-
              ,@buffer-action-table))
      ))
 
