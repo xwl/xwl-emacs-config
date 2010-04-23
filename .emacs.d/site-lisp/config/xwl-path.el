@@ -21,6 +21,7 @@
                 "twittering-mode"
                 "wget-el"
                 "emms/lisp"
+                "bbdb-vcard"
 
                 "xwl-elisp"
                 "xwl-elisp/dashboard"
