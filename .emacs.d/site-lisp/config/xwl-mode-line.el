@@ -84,9 +84,9 @@
 (defun xwl-gmail-notify ()
   (unless xwl-gmail-password
     (setq xwl-gmail-password (read-passwd "Gmail password: ")))
-  (mapcar* 'xwl-gmail-get-unread
-           (list xwl-gmail-user xwl-gmail-user1)
-           (list xwl-gmail-password xwl-gmail-password1)))
+  (xwl-gmail-get-unread xwl-gmail-user xwl-gmail-password)
+  (when xwl-at-company?
+    (xwl-gmail-get-unread xwl-gmail-user1 xwl-gmail-password1)))
 
 (defun xwl-gmail-get-unread (user password)
   (xwl-shell-command-asynchronously-with-callback
@@ -111,20 +111,25 @@
 
 ;; FIXME: this is toooo tedious..
 (defun xwl-gmail-notify-format (account unread)
-  (cond ((string= account xwl-gmail-user)
-         (if (string= xwl-gmail-notify-string "")
-             (setq xwl-gmail-notify-string (format "g(%d,0) " unread))
-           (setq xwl-gmail-notify-string
-                 (replace-regexp-in-string
-                  "([0-9]+," (format "(%d," unread) xwl-gmail-notify-string))))
-        ((string= account xwl-gmail-user1)
-         (if (string= xwl-gmail-notify-string "")
-             (setq xwl-gmail-notify-string (format "g(0,%d) " unread))
-           (setq xwl-gmail-notify-string
-                 (replace-regexp-in-string
-                  ",[0-9]+" (format ",%d" unread) xwl-gmail-notify-string)))))
-  (when (string-match "g(0,0)" xwl-gmail-notify-string)
-    (setq xwl-gmail-notify-string ""))
+  (if xwl-at-company?
+      (progn
+        (cond ((string= account xwl-gmail-user)
+               (if (string= xwl-gmail-notify-string "")
+                   (setq xwl-gmail-notify-string (format "g(%d,0) " unread))
+                 (setq xwl-gmail-notify-string
+                       (replace-regexp-in-string
+                        "([0-9]+," (format "(%d," unread) xwl-gmail-notify-string))))
+              ((string= account xwl-gmail-user1)
+               (if (string= xwl-gmail-notify-string "")
+                   (setq xwl-gmail-notify-string (format "g(0,%d) " unread))
+                 (setq xwl-gmail-notify-string
+                       (replace-regexp-in-string
+                        ",[0-9]+" (format ",%d" unread) xwl-gmail-notify-string)))))
+        (when (string-match "g(0,0)" xwl-gmail-notify-string)
+          (setq xwl-gmail-notify-string "")))
+    (if (zerop unread)
+        (setq xwl-gmail-notify-string "")
+      (setq xwl-gmail-notify-string (format "g(%d) " unread))))
   (force-mode-line-update))
 
 (add-hook 'xwl-timers-hook (lambda ()
