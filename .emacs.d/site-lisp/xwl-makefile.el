@@ -22,6 +22,10 @@
 
 ;;; Code:
 
+(unless (eq system-type 'darwin)
+  (error "Only generate autoloads on mac, because we have most complete packages
+available there"))
+
 (require 'autoload)
 
 (load "xwl-path.el")
