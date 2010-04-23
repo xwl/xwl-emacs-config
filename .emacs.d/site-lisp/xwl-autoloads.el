@@ -313,8 +313,8 @@ HTMLize dired-marked files.
 ;;; Generated autoloads from graphviz-dot-mode.el
 
 (autoload 'graphviz-dot-mode "graphviz-dot-mode" "\
-Major mode for the dot language. \\<graphviz-dot-mode-map>
-TAB indents for graph lines.
+Major mode for the dot language. \\<graphviz-dot-mode-map> 
+TAB indents for graph lines. 
 
 \\[graphviz-dot-indent-graph]	- Indentaion function.
 \\[graphviz-dot-preview]	- Previews graph in a buffer.
@@ -339,11 +339,11 @@ Variables specific to this mode:
   graphviz-dot-preview-extension      (default `png')
        File type to use for `graphviz-dot-preview'.
   graphviz-dot-auto-indent-on-newline (default t)
-       Whether to run `electric-graphviz-dot-terminate-line' when
+       Whether to run `electric-graphviz-dot-terminate-line' when 
        newline is entered.
   graphviz-dot-auto-indent-on-braces (default t)
        Whether to run `electric-graphviz-dot-open-brace' and
-       `electric-graphviz-dot-close-brace' when braces are
+       `electric-graphviz-dot-close-brace' when braces are 
        entered.
   graphviz-dot-auto-indent-on-semi (default t)
        Whether to run `electric-graphviz-dot-semi' when semi colon
@@ -355,7 +355,7 @@ Variables specific to this mode:
 
 This mode can be customized by running \\[graphviz-dot-customize].
 
-Turning on Graphviz Dot mode calls the value of the variable
+Turning on Graphviz Dot mode calls the value of the variable 
 `graphviz-dot-mode-hook' with no args, if that value is non-nil.
 
 \(fn)" t nil)
@@ -788,7 +788,7 @@ This is a mode for searching a dictionary server implementing
 
  * Return or Button2 visit that link
  * M-Return or M-Button2 search the word beneath link in all dictionaries
-
+ 
 
 \(fn)" nil nil)
 
@@ -798,7 +798,7 @@ Create a new dictonary buffer and install dictionary-mode
 \(fn)" t nil)
 
 (autoload 'dictionary-search "dictionary" "\
-Search the `word' in `dictionary' if given or in all if nil.
+Search the `word' in `dictionary' if given or in all if nil.  
 It presents the word at point as default input and allows editing it.
 
 \(fn WORD &optional DICTIONARY)" t nil)
@@ -1297,19 +1297,8 @@ Kill thread from here using leafnode.
 
 ;;;***
 
-;;;### (autoloads (bbdb-vcard-export-update-all) "bbdb-vcard-export"
-;;;;;;  "slightly-modified/bbdb-vcard-export.el" (19037 54896))
-;;; Generated autoloads from slightly-modified/bbdb-vcard-export.el
-
-(autoload 'bbdb-vcard-export-update-all "bbdb-vcard-export" "\
-Update the vcard Contacts directory from the bbdb database
-
-\(fn OUTPUT-DIR CODING-SYSTEM)" t nil)
-
-;;;***
-
 ;;;### (autoloads (twit) "twittering-mode" "twittering-mode/twittering-mode.el"
-;;;;;;  (19387 22687))
+;;;;;;  (19399 2919))
 ;;; Generated autoloads from twittering-mode/twittering-mode.el
 
 (autoload 'twit "twittering-mode" "\
@@ -1342,6 +1331,472 @@ Second argument URI is string.
 wget-web-page downlod whole Web page from it following relative link.
 
 \(fn URI &optional ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads (tq-create) "tq" "emms/lisp/tq.el" (18850 41578))
+;;; Generated autoloads from emms/lisp/tq.el
+
+(autoload 'tq-create "tq" "\
+Create and return a transaction queue communicating with PROCESS.
+PROCESS should be a subprocess capable of sending and receiving
+streams of bytes.  It may be a local process, or it may be connected
+to a tcp server on another machine.
+
+\(fn PROCESS)" nil nil)
+
+;;;***
+
+;;;### (autoloads (oggc-show-header) "ogg-comment" "emms/lisp/ogg-comment.el"
+;;;;;;  (18850 41578))
+;;; Generated autoloads from emms/lisp/ogg-comment.el
+
+(autoload 'oggc-show-header "ogg-comment" "\
+Show a pretty printed representation of the Ogg Comments in FILE.
+
+\(fn FILE)" t nil)
+
+;;;***
+
+;;;### (autoloads (emms-volume-mode-minus emms-volume-mode-plus emms-volume-lower
+;;;;;;  emms-volume-raise) "emms-volume" "emms/lisp/emms-volume.el"
+;;;;;;  (18850 41578))
+;;; Generated autoloads from emms/lisp/emms-volume.el
+
+(autoload 'emms-volume-raise "emms-volume" "\
+Raise the speaker volume.
+
+\(fn)" t nil)
+
+(autoload 'emms-volume-lower "emms-volume" "\
+Lower the speaker volume.
+
+\(fn)" t nil)
+
+(autoload 'emms-volume-mode-plus "emms-volume" "\
+Raise volume and enable or extend the `emms-volume-minor-mode' timeout.
+
+\(fn)" t nil)
+
+(autoload 'emms-volume-mode-minus "emms-volume" "\
+Lower volume and enable or extend the `emms-volume-minor-mode' timeout.
+
+\(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads (emms-volume-amixer-change) "emms-volume-amixer"
+;;;;;;  "emms/lisp/emms-volume-amixer.el" (18850 41578))
+;;; Generated autoloads from emms/lisp/emms-volume-amixer.el
+
+(autoload 'emms-volume-amixer-change "emms-volume-amixer" "\
+Change amixer master volume by AMOUNT.
+
+\(fn AMOUNT)" nil nil)
+
+;;;***
+
+;;;### (autoloads (emms-streams) "emms-streams" "emms/lisp/emms-streams.el"
+;;;;;;  (19210 38117))
+;;; Generated autoloads from emms/lisp/emms-streams.el
+
+(autoload 'emms-streams "emms-streams" "\
+Opens the EMMS Streams interface.
+
+\(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads nil "emms-source-playlist" "emms/lisp/emms-source-playlist.el"
+;;;;;;  (19066 46444))
+;;; Generated autoloads from emms/lisp/emms-source-playlist.el
+ (autoload 'emms-play-playlist "emms-source-playlist" nil t)
+ (autoload 'emms-add-playlist "emms-source-playlist" nil t)
+ (autoload 'emms-play-native-playlist "emms-source-playlist" nil t)
+ (autoload 'emms-add-native-playlist "emms-source-playlist" nil t)
+ (autoload 'emms-play-m3u-playlist "emms-source-playlist" nil t)
+ (autoload 'emms-add-m3u-playlist "emms-source-playlist" nil t)
+ (autoload 'emms-play-pls-playlist "emms-source-playlist" nil t)
+ (autoload 'emms-add-pls-playlist "emms-source-playlist" nil t)
+ (autoload 'emms-play-playlist-file "emms-source-playlist" nil t)
+ (autoload 'emms-add-playlist-file "emms-source-playlist" nil t)
+ (autoload 'emms-play-playlist-directory
+          "emms-source-playlist" nil t)
+ (autoload 'emms-add-playlist-directory
+          "emms-source-playlist" nil t)
+ (autoload 'emms-play-playlist-directory-tree
+          "emms-source-playlist" nil t)
+ (autoload 'emms-add-playlist-directory-tree
+          "emms-source-file" nil t)
+
+;;;***
+
+;;;### (autoloads (emms-locate emms-source-file-regex emms-source-file-directory-tree)
+;;;;;;  "emms-source-file" "emms/lisp/emms-source-file.el" (19352
+;;;;;;  56198))
+;;; Generated autoloads from emms/lisp/emms-source-file.el
+ (autoload 'emms-play-file "emms-source-file" nil t)
+ (autoload 'emms-add-file "emms-source-file" nil t)
+ (autoload 'emms-play-directory "emms-source-file" nil t)
+ (autoload 'emms-add-directory "emms-source-file" nil t)
+ (autoload 'emms-play-directory-tree "emms-source-file" nil t)
+ (autoload 'emms-add-directory-tree "emms-source-file" nil t)
+ (autoload 'emms-play-find "emms-source-file" nil t)
+ (autoload 'emms-add-find "emms-source-file" nil t)
+ (autoload 'emms-play-dired "emms-source-file" nil t)
+ (autoload 'emms-add-dired "emms-source-file" nil t)
+
+(autoload 'emms-source-file-directory-tree "emms-source-file" "\
+Return a list of all files under DIR that match REGEX.
+This function uses `emms-source-file-directory-tree-function'.
+
+\(fn DIR REGEX)" nil nil)
+
+(autoload 'emms-source-file-regex "emms-source-file" "\
+Return a regexp that matches everything any player (that supports
+files) can play.
+
+\(fn)" nil nil)
+
+(autoload 'emms-locate "emms-source-file" "\
+Search for REGEXP and display the results in a locate buffer
+
+\(fn REGEXP)" t nil)
+ (autoload 'emms-play-url "emms-source-file" nil t)
+ (autoload 'emms-add-url "emms-source-file" nil t)
+ (autoload 'emms-play-streamlist "emms-source-file" nil t)
+ (autoload 'emms-add-streamlist "emms-source-file" nil t)
+ (autoload 'emms-play-lastfm "emms-lastfm" nil t)
+ (autoload 'emms-add-lastfm "emms-lastfm" nil t)
+
+;;;***
+
+;;;### (autoloads (emms-default-players emms-devel emms-all emms-standard
+;;;;;;  emms-minimalistic) "emms-setup" "emms/lisp/emms-setup.el"
+;;;;;;  (19363 36294))
+;;; Generated autoloads from emms/lisp/emms-setup.el
+
+(autoload 'emms-minimalistic "emms-setup" "\
+An Emms setup script.
+Invisible playlists and all the basics for playing media.
+
+\(fn)" nil nil)
+
+(autoload 'emms-standard "emms-setup" "\
+An Emms setup script.
+Everything included in the `emms-minimalistic' setup, the Emms
+interactive playlist mode, reading information from tagged
+audio files, and a metadata cache.
+
+\(fn)" nil nil)
+
+(autoload 'emms-all "emms-setup" "\
+An Emms setup script.
+Everything included in the `emms-standard' setup and adds all the
+stable features which come with the Emms distribution.
+
+\(fn)" nil nil)
+
+(autoload 'emms-devel "emms-setup" "\
+An Emms setup script.
+Everything included in the `emms-all' setup and adds all the
+features which come with the Emms distribution regardless of if
+they are considered stable or not.  Use this if you like living
+on the edge.
+
+\(fn)" nil nil)
+
+(autoload 'emms-default-players "emms-setup" "\
+Set `emms-player-list' to `emms-setup-default-player-list'.
+
+\(fn)" nil nil)
+
+;;;***
+
+;;;### (autoloads (emms-score-toggle emms-score-disable emms-score-enable)
+;;;;;;  "emms-score" "emms/lisp/emms-score.el" (19141 57200))
+;;; Generated autoloads from emms/lisp/emms-score.el
+
+(autoload 'emms-score-enable "emms-score" "\
+Turn on emms-score.
+
+\(fn)" t nil)
+
+(autoload 'emms-score-disable "emms-score" "\
+Turn off emms-score.
+
+\(fn)" t nil)
+
+(autoload 'emms-score-toggle "emms-score" "\
+Toggle emms-score.
+
+\(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads (emms-playlist-mode) "emms-playlist-mode" "emms/lisp/emms-playlist-mode.el"
+;;;;;;  (19066 46444))
+;;; Generated autoloads from emms/lisp/emms-playlist-mode.el
+
+(autoload 'emms-playlist-mode "emms-playlist-mode" "\
+A major mode for Emms playlists.
+\\{emms-playlist-mode-map}
+
+\(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads (emms-playlist-limit-toggle emms-playlist-limit-disable
+;;;;;;  emms-playlist-limit-enable) "emms-playlist-limit" "emms/lisp/emms-playlist-limit.el"
+;;;;;;  (18850 41578))
+;;; Generated autoloads from emms/lisp/emms-playlist-limit.el
+
+(autoload 'emms-playlist-limit-enable "emms-playlist-limit" "\
+Turn on emms playlist limit.
+
+\(fn)" t nil)
+
+(autoload 'emms-playlist-limit-disable "emms-playlist-limit" "\
+Turn off emms playlist limit.
+
+\(fn)" t nil)
+
+(autoload 'emms-playlist-limit-toggle "emms-playlist-limit" "\
+Toggle emms playlist limit.
+
+\(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads (emms-playing-time-disable-display emms-playing-time-enable-display)
+;;;;;;  "emms-playing-time" "emms/lisp/emms-playing-time.el" (19209
+;;;;;;  15766))
+;;; Generated autoloads from emms/lisp/emms-playing-time.el
+
+(autoload 'emms-playing-time-enable-display "emms-playing-time" "\
+Display playing time on mode line.
+
+\(fn)" t nil)
+
+(autoload 'emms-playing-time-disable-display "emms-playing-time" "\
+Remove playing time from mode line.
+
+\(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads (emms-player-mpd-show emms-player-mpd-connect emms-player-mpd-clear)
+;;;;;;  "emms-player-mpd" "emms/lisp/emms-player-mpd.el" (19352 56198))
+;;; Generated autoloads from emms/lisp/emms-player-mpd.el
+
+(autoload 'emms-player-mpd-clear "emms-player-mpd" "\
+Clear the MusicPD playlist.
+
+\(fn)" t nil)
+
+(autoload 'emms-player-mpd-connect "emms-player-mpd" "\
+Connect to MusicPD and retrieve its current playlist.
+
+Afterward, the status of MusicPD will be tracked.
+
+This also has the effect of changing the current EMMS playlist to
+be the same as the current MusicPD playlist.  Thus, this
+function is useful to call if the contents of the EMMS playlist
+buffer get out-of-sync for some reason.
+
+\(fn)" t nil)
+
+(autoload 'emms-player-mpd-show "emms-player-mpd" "\
+Describe the current EMMS track in the minibuffer.
+
+If INSERTP is non-nil, insert the description into the current
+buffer instead.
+
+If CALLBACK is a function, call it with the current buffer and
+description as arguments instead of displaying the description or
+inserting it.
+
+This function uses `emms-show-format' to format the current track.
+It differs from `emms-show' in that it asks MusicPD for the current track,
+rather than EMMS.
+
+\(fn &optional INSERTP CALLBACK)" t nil)
+
+;;;***
+
+;;;### (autoloads (emms-mode-line-toggle emms-mode-line-disable emms-mode-line-enable)
+;;;;;;  "emms-mode-line" "emms/lisp/emms-mode-line.el" (18850 41578))
+;;; Generated autoloads from emms/lisp/emms-mode-line.el
+
+(autoload 'emms-mode-line-enable "emms-mode-line" "\
+Turn on `emms-mode-line'.
+
+\(fn)" t nil)
+
+(autoload 'emms-mode-line-disable "emms-mode-line" "\
+Turn off `emms-mode-line'.
+
+\(fn)" t nil)
+
+(autoload 'emms-mode-line-toggle "emms-mode-line" "\
+Toggle `emms-mode-line'.
+
+\(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads (emms-lyrics-toggle emms-lyrics-disable emms-lyrics-enable)
+;;;;;;  "emms-lyrics" "emms/lisp/emms-lyrics.el" (19210 37819))
+;;; Generated autoloads from emms/lisp/emms-lyrics.el
+
+(autoload 'emms-lyrics-enable "emms-lyrics" "\
+Enable displaying emms lyrics.
+
+\(fn)" t nil)
+
+(autoload 'emms-lyrics-disable "emms-lyrics" "\
+Disable displaying emms lyrics.
+
+\(fn)" t nil)
+
+(autoload 'emms-lyrics-toggle "emms-lyrics" "\
+Toggle displaying emms lyrics.
+
+\(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads (emms-cache-toggle emms-cache-disable emms-cache-enable)
+;;;;;;  "emms-cache" "emms/lisp/emms-cache.el" (19363 36055))
+;;; Generated autoloads from emms/lisp/emms-cache.el
+
+(autoload 'emms-cache-enable "emms-cache" "\
+Enable caching of Emms track data.
+
+\(fn)" t nil)
+
+(autoload 'emms-cache-disable "emms-cache" "\
+Disable caching of Emms track data.
+
+\(fn)" t nil)
+
+(autoload 'emms-cache-toggle "emms-cache" "\
+Toggle caching of Emms track data.
+
+\(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads (vcard-parse-region vcard-parse-string vcard-pretty-print
+;;;;;;  vcard-standard-filters vcard-pretty-print-function) "vcard"
+;;;;;;  "bbdb-vcard/vcard.el" (19409 51306))
+;;; Generated autoloads from bbdb-vcard/vcard.el
+
+(defvar vcard-pretty-print-function 'vcard-format-sample-box "\
+*Formatting function used by `vcard-pretty-print'.")
+
+(custom-autoload 'vcard-pretty-print-function "vcard" t)
+
+(defvar vcard-standard-filters '(vcard-filter-html vcard-filter-adr-newlines vcard-filter-tel-normalize vcard-filter-textprop-cr) "\
+*Standard list of filters to apply to parsed vcard data.
+These filters are applied sequentially to vcard attributes when
+the function `vcard-standard-filter' is supplied as the second argument to
+`vcard-parse'.")
+
+(custom-autoload 'vcard-standard-filters "vcard" t)
+
+(autoload 'vcard-pretty-print "vcard" "\
+Format VCARD into a string suitable for display to user.
+VCARD can be an unparsed string containing raw VCF vcard data
+or a parsed vcard alist as returned by `vcard-parse-string'.
+
+The result is a string with formatted vcard information suitable for
+insertion into a mime presentation buffer.
+
+The function specified by the variable `vcard-pretty-print-function'
+actually performs the formatting.  That function will always receive a
+parsed vcard alist.
+
+\(fn VCARD)" nil nil)
+
+(autoload 'vcard-parse-string "vcard" "\
+Parse RAW vcard data as a string, and return an alist representing data.
+
+If the optional function FILTER is specified, apply that filter to each
+attribute.  If no filter is specified, `vcard-standard-filter' is used.
+
+Filters should accept two arguments: the property list and the value list.
+Modifying in place the property or value list will affect the resulting
+attribute in the vcard alist.
+
+Vcard data is normally in the form
+
+    begin:                        vcard
+    prop1a:                       value1a
+    prop2a;prop2b;prop2c=param2c: value2a
+    prop3a;prop3b:                value3a;value3b;value3c
+    end:                          vcard
+
+\(Whitespace around the `:' separating properties and values is optional.)
+If supplied to this function an alist of the form
+
+    (((\"prop1a\") \"value1a\")
+     ((\"prop2a\" \"prop2b\" (\"prop2c\" . \"param2c\")) \"value2a\")
+     ((\"prop3a\" \"prop3b\") \"value3a\" \"value3b\" \"value3c\"))
+
+would be returned.
+
+\(fn RAW &optional FILTER)" nil nil)
+
+(autoload 'vcard-parse-region "vcard" "\
+Parse the raw vcard data in region, and return an alist representing data.
+This function is just like `vcard-parse-string' except that it operates on
+a region of the current buffer rather than taking a string as an argument.
+
+Note: this function modifies the buffer!
+
+\(fn BEG END &optional FILTER)" nil nil)
+
+;;;***
+
+;;;### (autoloads (bbdb-vcard-export-to-kill-ring bbdb-vcard-export
+;;;;;;  bbdb-vcard-import-file bbdb-vcard-import-buffer bbdb-vcard-import-region)
+;;;;;;  "bbdb-vcard" "bbdb-vcard/bbdb-vcard.el" (19409 54155))
+;;; Generated autoloads from bbdb-vcard/bbdb-vcard.el
+
+(autoload 'bbdb-vcard-import-region "bbdb-vcard" "\
+Import the vCards between BEGIN and END into BBDB.
+Existing BBDB records may be altered.
+
+\(fn BEGIN END)" t nil)
+
+(autoload 'bbdb-vcard-import-buffer "bbdb-vcard" "\
+Import vCards from VCARD-BUFFER into BBDB.
+Existing BBDB records may be altered.
+
+\(fn VCARD-BUFFER)" t nil)
+
+(autoload 'bbdb-vcard-import-file "bbdb-vcard" "\
+Import vCards from VCARD-FILE into BBDB.
+If VCARD-FILE is a wildcard, import each matching file.  Existing BBDB
+records may be altered.
+
+\(fn VCARD-FILE)" t nil)
+
+(autoload 'bbdb-vcard-export "bbdb-vcard" "\
+From Buffer *BBDB*, write one or more record(s) as vCard(s) to file(s).
+\\<bbdb-mode-map>If \"\\[bbdb-apply-next-command-to-all-records]\\[bbdb-vcard-export]\"is used instead of simply \"\\[bbdb-vcard-export]\", then export all records currently
+in the *BBDB* buffer.  If used with prefix argument, store records
+in individual files.
+
+\(fn FILENAME-OR-DIRECTORY ALL-RECORDS-P ONE-FILE-PER-RECORD-P)" t nil)
+
+(autoload 'bbdb-vcard-export-to-kill-ring "bbdb-vcard" "\
+From Buffer *BBDB*, copy one or more record(s) as vCard(s) to the kill ring.
+\\<bbdb-mode-map>If \"\\[bbdb-apply-next-command-to-all-records]\\[bbdb-vcard-export-to-kill-ring]\"is used instead of simply \"\\[bbdb-vcard-export-to-kill-ring]\", then export all records currently in
+the *BBDB* buffer.
+
+\(fn ALL-RECORDS-P)" t nil)
 
 ;;;***
 
