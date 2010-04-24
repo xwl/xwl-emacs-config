@@ -22,10 +22,6 @@
 
 ;;; Code:
 
-(unless (eq system-type 'darwin)
-  (error "Only generate autoloads on mac, because we have most complete packages
-available there"))
-
 (require 'autoload)
 
 (load "xwl-path.el")
@@ -49,20 +45,21 @@ available there"))
   (xwl-makefile-ensure-directory)
 
   (let ((autoloads-not-up2date t))
-         ;; (xs-accumulate
-;;           (lambda (a b) (or a b))
-;;           nil
-;;           (mapcar (lambda (f)
-;;                     (file-newer-than-file-p f xwl-makefile-autoloads-file))
-;;                   xwl-makefile-files))))
+    ;; (xs-accumulate
+    ;;           (lambda (a b) (or a b))
+    ;;           nil
+    ;;           (mapcar (lambda (f)
+    ;;                     (file-newer-than-file-p f xwl-makefile-autoloads-file))
+    ;;                   xwl-makefile-files))))
     ;; autoloads
-    (when autoloads-not-up2date
-      (with-current-buffer (find-file-noselect xwl-makefile-autoloads-file)
-        (let ((inhibit-read-only t))
-          (erase-buffer)
-          (mapc (lambda (f) (generate-file-autoloads f)) xwl-makefile-files)
-          (insert (format "\n(provide '%s)\n" xwl-makefile-autoloads-file-base))
-          (save-buffer))))
+    (when (eq system-type 'darwin)
+      (when autoloads-not-up2date
+        (with-current-buffer (find-file-noselect xwl-makefile-autoloads-file)
+          (let ((inhibit-read-only t))
+            (erase-buffer)
+            (mapc (lambda (f) (generate-file-autoloads f)) xwl-makefile-files)
+            (insert (format "\n(provide '%s)\n" xwl-makefile-autoloads-file-base))
+            (save-buffer)))))
 
     (xwl-makefile-byte-compile)
 

@@ -6,28 +6,32 @@
 
 ;;; Code:
 
+(require 'cl)
+
 (setq xwl-site-lisp "~/.emacs.d/site-lisp")
 
 (setq xwl-makefile-subdir-list
-      (mapcar (lambda (f) (concat xwl-site-lisp "/" f))
-              '("."
-                "auto-complete"
-                "debian"
-                "dictionary-el"
-                "haskell-mode-2.4"
-                "qterm"
-                "ruby"
-                "slightly-modified"
-                "twittering-mode"
-                "wget-el"
-                "emms/lisp"
-                "bbdb-vcard"
+      (remove-if-not
+       'file-exists-p
+       (mapcar (lambda (f) (concat xwl-site-lisp "/" f))
+               '("."
+                 "auto-complete"
+                 "debian"
+                 "dictionary-el"
+                 "haskell-mode-2.4"
+                 "qterm"
+                 "ruby"
+                 "slightly-modified"
+                 "twittering-mode"
+                 "wget-el"
+                 "emms/lisp"
+                 "bbdb-vcard"
 
-                "xwl-elisp"
-                "xwl-elisp/dashboard"
-                "xwl-elisp/ga"
-                "xwl-elisp/wubi"
-                )))
+                 "xwl-elisp"
+                 "xwl-elisp/dashboard"
+                 "xwl-elisp/ga"
+                 "xwl-elisp/wubi"
+                 ))))
 
 (mapc (lambda (path) (add-to-list 'load-path path))
       (append
