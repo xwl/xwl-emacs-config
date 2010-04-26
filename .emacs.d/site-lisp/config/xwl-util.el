@@ -164,6 +164,14 @@ simply yank it when needed."
         (message "paste failed")
         (switch-to-buffer (current-buffer))))))
 
+(defun xwl-paste-ubuntu-cn-image (filename)
+  (interactive "fUpload image: ")
+  (let ((cmd (format "curl -F screenshot=\"@%s\" -F paste=1 http://paste.ubuntu.org.cn"
+                     filename)))
+    (when xwl-proxy-server
+      (setq cmd (format "%s -x %s:%d" cmd xwl-proxy-server xwl-proxy-port)))
+    (shell-commnad cmd)))
+
 (setq xwl-paste-match-table
       '(((emacs-lisp-mode lisp-interaction-mode) . "lisp")
         ((c++-mode) . "cpp")))
