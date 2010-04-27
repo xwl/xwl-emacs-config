@@ -398,7 +398,7 @@ prompts for name field."
                     ;;           (lambda ()
                     (let ((col (round (/ (frame-width) 2))))
                       (setq erc-fill-column (- col 2)) ; 6 for leading timestamp.
-                      (setq twittering-fill-column (- col 2)))))
+                      (setq twittering-fill-column col))))
 
     (when window-system
       (require 'highlight-tail)
@@ -711,20 +711,20 @@ passphrase cache or user."
     (setq twittering-proxy-use t
           twittering-proxy-server "172.16.42.137"
           twittering-proxy-port 8080)
-  (setq twittering-host-url (xds "\\?[jCOI*XOI'QO@lPO9nZ*9m[:,aY)'=")
-        twittering-api-url (xds "\\?[jCOI*XOI'QO@lPO9nZ*9m[:,aY)'mPO9g")
-        twittering-search-url (xds "\\?[jCOI*XOI'QO@lPO9nZ*9m[:,aY)'mZ)M_ZdEf")))
+  (setq twittering-web-host (xds "\\?[jCOI*XOI'QO@lPO9nZ*9m[:,aY)'=")
+        twittering-api-host (xds "\\?[jCOI*XOI'QO@lPO9nZ*9m[:,aY)'mPO9g")
+        twittering-api-search-host (xds "\\?[jCOI*XOI'QO@lPO9nZ*9m[:,aY)'mZ)M_ZdEf")))
 
-(setq twittering-time-format "%a %m.%d/%H:%M:%S"
-      twittering-status-format
-      "%i %@ %s, from %f%L%r%R:\n%FILL{%T}\n")
+(setq twittering-status-format
+      "%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FILL{       %T}\n")
 
 (setq twittering-mode-string "twittering")
 
 (add-hook 'twittering-mode-hook 'less-minor-mode-on)
 (add-hook 'twittering-mode-hook (lambda ()
                                   (twittering-icon-mode 1)
-                                  (setq twittering-reverse-mode t)))
+                                  (setq twittering-reverse-mode t)
+                                  (twittering-enable-unread-status-notifier)))
 
 (eval-after-load 'twittering-mode
   '(progn
