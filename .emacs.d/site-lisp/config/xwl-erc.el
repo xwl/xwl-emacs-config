@@ -57,7 +57,7 @@
       '(("rootdir.de"
          "&bitlbee")
         ("freenode.net"
-         "#osxchat" "#emacs" "#scheme" "#chicken" "#cpp-tw" "#beijinglug" )
+         "#osxchat" "#emacs" "#scheme" "#chicken" "#cpp-tw" "#chinalug" )
         ("oftc.net"
          "#debian-zh" "#emacs-cn")      ; "#bitlbee"
         ;; ("linuxfire"
