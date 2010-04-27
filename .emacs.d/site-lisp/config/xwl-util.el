@@ -168,9 +168,9 @@ simply yank it when needed."
   (interactive "fUpload image: ")
   (let ((cmd (format "curl -F screenshot=\"@%s\" -F paste=1 http://paste.ubuntu.org.cn"
                      filename)))
-    (when xwl-proxy-server
+    (when (and (boundp 'xwl-proxy-server) xwl-proxy-server)
       (setq cmd (format "%s -x %s:%d" cmd xwl-proxy-server xwl-proxy-port)))
-    (shell-commnad cmd)))
+    (shell-command cmd)))
 
 (setq xwl-paste-match-table
       '(((emacs-lisp-mode lisp-interaction-mode) . "lisp")
