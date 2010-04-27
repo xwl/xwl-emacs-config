@@ -728,14 +728,17 @@ passphrase cache or user."
 
 (eval-after-load 'twittering-mode
   '(progn
-     (define-key twittering-mode-map "c" 'twittering-current-timeline)
+     (define-key twittering-mode-map (kbd "c") 'twittering-current-timeline)
 
-     (define-key twittering-mode-map "n" 'twittering-goto-next-status)
-     (define-key twittering-mode-map "p" 'twittering-goto-previous-status)
-     (define-key twittering-mode-map "N" 'twittering-goto-next-status-of-user)
-     (define-key twittering-mode-map "P" 'twittering-goto-previous-status-of-user)
+     (define-key twittering-mode-map (kbd "n") 'twittering-goto-next-status)
+     (define-key twittering-mode-map (kbd "p") 'twittering-goto-previous-status)
+     (define-key twittering-mode-map (kbd "N") 'twittering-goto-next-status-of-user)
+     (define-key twittering-mode-map (kbd "P") 'twittering-goto-previous-status-of-user)
 
-     (define-key twittering-mode-map "q" 'xwl-hide-buffer)))
+     (define-key twittering-mode-map (kbd "q") 'xwl-hide-buffer)
+
+     (define-key twittering-mode-map (kbd "C-c C-g") nil)
+     ))
 
 ;; ,----
 ;; | Track cahnges for some buffer
