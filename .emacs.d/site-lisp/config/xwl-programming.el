@@ -110,7 +110,13 @@
                               (save-excursion
                                 (forward-line -1)
                                 (indent-according-to-mode)))))
-    (local-set-key "(" 'c-electric-paren)
+
+    (local-set-key "(" '(lambda ()
+                          (interactive)
+                          (call-interactively 'c-electric-paren)
+                          (insert ")")
+                          (backward-char)))
+
     (local-set-key ")" 'c-electric-paren)
     (local-set-key "}" 'c-electric-brace)))
 
