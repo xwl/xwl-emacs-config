@@ -702,7 +702,9 @@ passphrase cache or user."
 
 (add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
 
-;; twittering-mode
+;; ,----
+;; | twittering-mode
+;; `----
 
 (setq twittering-username "xwl"
       twittering-password pwtwitter)
@@ -718,7 +720,8 @@ passphrase cache or user."
 (setq twittering-status-format
       "%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FILL{       %T}\n")
 
-(setq twittering-mode-string "twittering")
+(setq twittering-update-status-function
+      'twittering-update-status-from-pop-up-buffer)
 
 (add-hook 'twittering-mode-hook 'less-minor-mode-on)
 (add-hook 'twittering-mode-hook (lambda ()
