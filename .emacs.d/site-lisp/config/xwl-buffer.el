@@ -104,31 +104,39 @@ point.  Especially useful for w32."
 (ido-mode 1)
 (ido-everywhere 1)
 
-(setq xwl-frequent-directories
-      `("/sf/mw/hapticsservices"
-        "/sf/os/devicesrv/hwrmhaptics"
-        "/sf/mw/classicui/uifw/avkon/src"
-        "/sf/mw/hapticsservices/tactilefeedback/tactilefeedbackresolver/plugins/tactilehapticsplugin/src/"
+(defun xwl-update-frequent-directories ()
+  (interactive)
 
-        "/s60/mw/classicui/uifw/avkon/src"
-        "/s60/mw/classicui/uifw/tactilefeedback"
+  (when xwl-w32?
+    (setq xwl-w32-drives (xwl-w32-get-drives)))
 
-        "/epoc32/release/winscw/udeb"
-        "/epoc32/data"
+  (setq xwl-frequent-directories
+        `("/sf/mw/hapticsservices"
+          "/sf/os/devicesrv/hwrmhaptics"
+          "/sf/mw/classicui/uifw/avkon/src"
+          "/sf/mw/hapticsservices/tactilefeedback/tactilefeedbackresolver/plugins/tactilehapticsplugin/src/"
 
-        "~/"
-        "/sudo::/"
-        "~/.emacs.d/site-lisp/config"
-        "~/.emacs.d/site-lisp/xwl-elisp"
-        "~/notes"
+          "/s60/mw/classicui/uifw/avkon/src"
+          "/s60/mw/classicui/uifw/tactilefeedback"
 
-        ,@(when xwl-w32?
-            (mapcar (lambda (d)
-                      (concat (car d)
-                              xwl-w32-drive-separator
-                              (cdr d)))
-                    xwl-w32-drives))
-        ))
+          "/epoc32/release/winscw/udeb"
+          "/epoc32/data"
+
+          "~/"
+          "/sudo::/"
+          "~/.emacs.d/site-lisp/config"
+          "~/.emacs.d/site-lisp/xwl-elisp"
+          "~/notes"
+
+          ,@(when xwl-w32?
+              (mapcar (lambda (d)
+                        (concat (car d)
+                                xwl-w32-drive-separator
+                                (cdr d)))
+                      xwl-w32-drives))
+          )))
+
+(xwl-update-frequent-directories)
 
 (defadvice ido-find-file (around change-default-directory activate)
   "Set `default-directory' on the fly."
