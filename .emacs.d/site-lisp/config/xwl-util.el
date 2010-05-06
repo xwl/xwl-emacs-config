@@ -153,6 +153,7 @@ simply yank it when needed."
                          ;; (screenshot . "c:/Users/My Pictures/orgmode.PNG")
                          ;; (x . "---xwl\r\nContent-Disposition: form-data;name=screenshot;filename=\"c:/Users/My Pictures/orgmode.PNG\"\r\n---xwl")
                          ))
+      (setq deactivate-mark t)
       (goto-char (point-min))
       (if (re-search-forward
            (concat "<li class=\"highlight\"><a href=\"\/\\([0-9]+\\)\">" xwl-paste-username)
