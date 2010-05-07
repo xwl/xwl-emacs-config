@@ -129,7 +129,9 @@
           (setq xwl-gmail-notify-string "")))
     (if (zerop unread)
         (setq xwl-gmail-notify-string "")
-      (setq xwl-gmail-notify-string (format "g(%d) " unread))))
+      (setq xwl-gmail-notify-string (format "g(%d) " unread))
+      (xwl-notify "Gmail" (format "You've got %d new mails" unread))
+      ))
   (force-mode-line-update))
 
 (add-hook 'xwl-timers-hook (lambda ()

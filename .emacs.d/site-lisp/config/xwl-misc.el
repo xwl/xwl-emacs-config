@@ -688,7 +688,7 @@ passphrase cache or user."
   "What buffer `auto-complete-mode' prefers."
   (if (and (not (minibufferp (current-buffer)))
            ;; xwl: Enable for all mode.
-           ;; (memq major-mode ac-modes)
+           (memq major-mode ac-modes)
            )
       (auto-complete-mode 1)))
 
