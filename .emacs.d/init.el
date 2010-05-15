@@ -46,7 +46,7 @@
  '(gnus-signature ((t (:slant italic))))
  '(gnus-summary-high-read ((t (:foreground "magenta"))))
  '(gnus-summary-high-unread ((t (:foreground "magenta"))))
- '(highlight-changes ((((min-colors 88) (class color)) (:background "grey19"))))
+ '(highlight-changes ((((min-colors 88) (class color)) (:background "gray89"))))
  '(holiday ((((class color) (background light)) (:background "RoyalBlue"))))
  '(mmm-default-submode-face ((t (:background "gray18"))))
  '(org-agenda-done ((((class color) (min-colors 16) (background dark)) (:foreground "blue2" :overline t))))
@@ -54,6 +54,9 @@
  '(org-scheduled-today ((nil (:foreground "Magenta"))))
  '(org-todo ((t (:foreground "orange1" :weight bold)))))
 
+
+;; For dark background.
+;;  '(highlight-changes ((((min-colors 88) (class color)) (:background "grey19"))))
 
 ;; Keep this after custom-set-faces !
 (load "~/.emacs.d/site-lisp/config/xwl-main.el")
