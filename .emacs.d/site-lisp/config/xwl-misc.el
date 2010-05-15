@@ -357,6 +357,8 @@ prompts for name field."
      ;; (add-hook 'window-setup-hook 'maximize-frame t)
      ;; (maximize-frame)
      )
+    (ns ;; FIXME
+     (run-at-time 2 nil 'ns-toggle-fullscreen))
     ((w32)
      (w32-send-sys-command #xf030)))
 
@@ -402,8 +404,8 @@ prompts for name field."
 
     (when window-system
       (require 'highlight-tail)
-      (setq highlight-tail-colors  '(("#bc2525" . 0)))
-      ;; '(("#d8971d" . 0)))
+      (setq highlight-tail-colors ; '(("#bc2525" . 0)))
+      '(("#d8971d" . 0)))
       (highlight-tail-reload))
     ;; ))
     ))
