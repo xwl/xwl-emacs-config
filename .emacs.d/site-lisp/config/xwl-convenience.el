@@ -336,7 +336,9 @@
      ))
 
 ;; FIXME: conflict with ido-hacks.el
-(partial-completion-mode 1)
+;; (setq completion-styles '(partial-completion initials))
+;; (setq completion-pcm-complete-word-inserts-delimiters t)
+
 
 ;;; Extra libs
 
