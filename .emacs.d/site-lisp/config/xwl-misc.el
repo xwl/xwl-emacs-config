@@ -689,8 +689,10 @@ passphrase cache or user."
 (defun auto-complete-mode-maybe ()
   "What buffer `auto-complete-mode' prefers."
   (if (and (not (minibufferp (current-buffer)))
+           (not (memq major-mode '(erc-mode shell-mode)))
+
            ;; xwl: Enable for all mode.
-           (memq major-mode ac-modes)
+           ;; (memq major-mode ac-modes)
            )
       (auto-complete-mode 1)))
 
