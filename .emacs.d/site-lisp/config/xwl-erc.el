@@ -290,8 +290,6 @@ If the buffer is currently not visible, makes it sticky."
                 :nick "william"
                 :password pwbitlbee)))
 
-(add-hook 'erc-join-hook 'less-minor-mode-on)
-
 (erc-truncate-mode 1)
 
 (add-hook 'erc-mode-hook (lambda () (abbrev-mode 1)))

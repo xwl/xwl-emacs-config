@@ -41,7 +41,11 @@
 
 (global-set-key (kbd "<f2>") 'woman)
 (global-set-key (kbd "<f5>") 'ibuffer) ;'dashboard) ;'w3m)
-(global-set-key (kbd "<f7>") 'xwl-bbdb)
+
+(global-set-key (kbd "<f7>") '(lambda ()
+                                (interactive)
+                                (require 'xwl-bbdb)
+                                (call-interactively 'xwl-bbdb)))
 
 ;;'eshell) ;xwl-term ;xwl-run-scsh
 (global-set-key (kbd "<f9>") 'xwl-shell)
@@ -311,6 +315,11 @@
                                      (interactive)
                                      (require 'xwl-dired)
                                      (call-interactively 'dired-jump)))
+
+(global-set-key (kbd "C-c n r") '(lambda ()
+                                   (interactive)
+                                   (revert-buffer-with-coding-system 'gb18030)))
+
 
 (provide 'xwl-bindings)
 

@@ -1,12 +1,12 @@
 ;;; xwl-dictionary.el --- dictionary config
 
-;; Copyright (C) 2007, 2008, 2009 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation; either version 2, or (at your option)
+;; the Free Software Foundation; either version 3, or (at your option)
 ;; any later version.
 ;;
 ;; This program is distributed in the hope that it will be useful,
@@ -136,7 +136,7 @@
   ;; faces
   (highlight-regexp ".*検索結果$" 'dictionary-word-entry-face)
   ;; hooks
-  (less-minor-mode-on))
+  )
 
 
 (provide 'xwl-dictionary)

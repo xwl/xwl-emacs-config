@@ -51,7 +51,6 @@
     (define-key w3m-mode-map (kbd "O") 'w3m-goto-url-new-session))
 
   (add-hook 'w3m-mode-hook 'xwl-w3m-mode-hook)
-  (add-hook 'w3m-mode-hook 'less-minor-mode-on)
 
   (setq 未临-看图-命令
         (xwl-compat-select-by-executable
@@ -81,6 +80,17 @@
   )
 
 (setq wget-download-directory "~/Downloads")
+
+(add-hook 'w3m-mode-hook
+	  (lambda ()
+	    (local-set-key (kbd "M-n") 'less-scroll-up-line)
+	    (local-set-key (kbd "M-p") 'less-scroll-down-line)
+	    (local-set-key (kbd "<left>") 'w3m-previous-buffer)
+	    (local-set-key (kbd "<right>") 'w3m-next-buffer)
+	    (local-set-key (kbd "p") 'w3m-previous-buffer)
+	    (local-set-key (kbd "n") 'w3m-next-buffer)
+	    (local-set-key (kbd "c") 'w3m-delete-buffer)))
+
 
 ;;; External Browser
 

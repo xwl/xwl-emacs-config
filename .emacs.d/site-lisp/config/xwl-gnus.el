@@ -756,8 +756,6 @@
 ;; 用 `C-u g' 显示原始文章样式。W w, W Q
 (add-hook 'gnus-article-prepare-hook 'gnus-article-fill-long-lines)
 
-(add-hook 'gnus-article-prepare-hook 'less-minor-mode-on)
-
 (setq xwl-enter-first-article t)
 (add-hook 'gnus-article-prepare-hook
           '(lambda ()

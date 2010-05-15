@@ -169,7 +169,7 @@
                                    dframe-attached-frame nil
                                    speedbar-buffer nil)
                              (speedbar-set-timer nil)))))
-    (set-window-buffer (selected-window) 
+    (set-window-buffer (selected-window)
                        (get-buffer my-speedbar-buffer-name)))
 
 
@@ -535,7 +535,7 @@ is called with \\[universal-argument]."
 ))
 
 
-(setq xwl-wgetpaste-command 
+(setq xwl-wgetpaste-command
       (if (eq system-type 'windows-nt)
           ;; "c:/cygwin/bin/wget.exe"
           "SET WGETRC=c:/Documents and Settings/wixu/.wgetrc; wget-real.exe"
@@ -551,7 +551,7 @@ is called with \\[universal-argument]."
         (data-file "wget.post")
         (host "http://paste.ubuntu.org.cn"))
     ;; 1. Prepare content
-    (with-temp-buffer 
+    (with-temp-buffer
       (insert
        (format "poster=%s&class=%s&paste=1&code2=%s"
                xwl-wgetpaste-username class (xwl-wgetpaste-escape content)))
@@ -560,7 +560,7 @@ is called with \\[universal-argument]."
     ;; (cmd (format "%s --post-data=\"poster=%s&class=%s&paste=1&code2=%s\" http://paste.ubuntu.org.cn -P /tmp"
     (let* ((cmd (format "%s --post-file=%s %s -P /tmp"
                         xwl-wgetpaste-command data-file host))
-           (ret (concat host 
+           (ret (concat host
                         "/"
                         (replace-regexp-in-string
                          ".*Saving to: `[^0-9]*\\([0-9]\\{4,\\}\\)'.*"
@@ -758,12 +758,12 @@ If FOCUS-REV is non-nil, leave the point at that revision."
                                 ',focus-rev)
                (set-buffer-modified-p nil)
                (change-log-mode)
-               (less-minor-mode-on)
+
                (goto-char (point-min)))))))))
 
   ;; ;; redirect
-  ;; (let ((cmd (apply 'shell-quote-argument 
-  ;;                   (remove-if-not 
+  ;; (let ((cmd (apply 'shell-quote-argument
+  ;;                   (remove-if-not
   ;;                    'file-exists-p
   ;;                    (mapcar 'expand-file-name
   ;;                            '("~/usr/desproxy/desproxy.exe"
@@ -809,5 +809,65 @@ If FOCUS-REV is non-nil, leave the point at that revision."
               ;; ("www.call-with-current-continuation.org" 80 10080)
               ;; )))
 
-;;; xwl-depreated.el ends here
+;; disabled now
 
+(when nil
+  ;; msf-abbrev
+  (require 'msf-abbrev)
+  (setq msf-abbrev-verbose nil)
+  (setq msf-abbrev-root "~/.emacs.d/mode-abbrevs")
+  (msf-abbrev-load)
+  )
+
+
+;; conflicts
+
+(dolist (hook '(dired-mode-hook
+                calendar-move-hook
+                gnus-summary-mode-hook
+                gnus-group-mode-hook
+                clone-buffer-hook))
+  (add-hook hook
+            (lambda ()
+		   (if (not (one-window-p))
+		       (local-set-key (kbd "<end>")
+                                      'less-scroll-other-window-up-one-line))
+		   (local-set-key (kbd "M-n") 'less-scroll-up-line)
+		   (local-set-key (kbd "M-p") 'less-scroll-down-line))))
+
+
+(setq adaptive-fill-regexp
+      "[	]*\\([-|#;>*]+[	]*\\|(?[0-9]+[.)][	]*\\)*"
+      adaptive-fill-first-line-regexp "\\`[	]*\\'")
+
+(when (fboundp 'browse-kill-ring)
+  (require 'browse-kill-ring)
+  (browse-kill-ring-default-keybindings)
+  (global-set-key (kbd "M-y") 'browse-kill-ring))
+
+(eval-after-load 'cedetx
+  '(progn
+     (global-ede-mode 1)
+     (semantic-load-enable-gaudy-code-helpers)
+     ;; FIXME: this looks like screwing my cursor!
+     (global-semantic-idle-scheduler-mode -1)
+     ;; sticky title on the top.
+     (global-semantic-stickyfunc-mode -1)
+
+     ))
+
+;; Show semantic tags in speedbar.
+;; (require 'semantic-sb)
+
+    ((mac)
+     (require 'maxframe)
+     (setq mf-display-padding-width 0)
+     (setq mf-display-padding-height (- mf-display-padding-height 10))
+
+     (setq mf-max-width 1900)
+
+     ;; (add-hook 'window-setup-hook 'maximize-frame t)
+     ;; (maximize-frame)
+     )
+
+;;; xwl-depreated.el ends here

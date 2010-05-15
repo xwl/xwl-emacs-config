@@ -1,6 +1,6 @@
 
 ;;;### (autoloads (xwl-makefile-clean xwl-makefile-byte-compile xwl-makefile-all)
-;;;;;;  "xwl-makefile" "xwl-makefile.el" (19387 23874))
+;;;;;;  "xwl-makefile" "xwl-makefile.el" (19410 56591))
 ;;; Generated autoloads from xwl-makefile.el
 
 (autoload 'xwl-makefile-all "xwl-makefile" "\
@@ -313,7 +313,7 @@ HTMLize dired-marked files.
 ;;; Generated autoloads from graphviz-dot-mode.el
 
 (autoload 'graphviz-dot-mode "graphviz-dot-mode" "\
-Major mode for the dot language. \\<graphviz-dot-mode-map> 
+Major mode for the dot language. \\<graphviz-dot-mode-map>
 TAB indents for graph lines. 
 
 \\[graphviz-dot-indent-graph]	- Indentaion function.
@@ -1298,10 +1298,20 @@ Kill thread from here using leafnode.
 ;;;***
 
 ;;;### (autoloads (twit) "twittering-mode" "twittering-mode/twittering-mode.el"
-;;;;;;  (19399 2919))
+;;;;;;  (19430 47466))
 ;;; Generated autoloads from twittering-mode/twittering-mode.el
 
 (autoload 'twit "twittering-mode" "\
+Start twittering-mode.
+
+\(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads (twit) "a" "twittering-mode/a.el" (19414 57117))
+;;; Generated autoloads from twittering-mode/a.el
+
+(autoload 'twit "a" "\
 Start twittering-mode.
 
 \(fn)" t nil)
@@ -1817,9 +1827,29 @@ Insert the entered operator plus surrounding spaces.
 ;;;***
 
 ;;;### (autoloads (less-minor-mode-off less-minor-mode-on auto-less-minor-mode
-;;;;;;  less-quit less-scroll-down-line less-scroll-up-line less-minor-mode)
-;;;;;;  "less" "xwl-elisp/less.el" (19261 56902))
+;;;;;;  less-quit less-scroll-down-line less-scroll-up-line less-minor-mode
+;;;;;;  global-less-minor-mode) "less" "xwl-elisp/less.el" (19438
+;;;;;;  19885))
 ;;; Generated autoloads from xwl-elisp/less.el
+
+(defvar global-less-minor-mode nil "\
+Non-nil if Global-Less minor mode is enabled.
+See the command `global-less-minor-mode' for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `global-less-minor-mode'.")
+
+(custom-autoload 'global-less-minor-mode "less" nil)
+
+(autoload 'global-less-minor-mode "less" "\
+Toggle Less minor mode in every possible buffer.
+With prefix ARG, turn Global-Less minor mode on if and only if
+ARG is positive.
+Less minor mode is enabled in all buffers where
+`auto-less-minor-mode' would do it.
+See `less-minor-mode' for more information on Less minor mode.
+
+\(fn &optional ARG)" t nil)
 
 (autoload 'less-minor-mode "less" "\
 Toggle less-minor-mode.
@@ -1898,7 +1928,7 @@ Create a *Cwit* buffer.
 ;;;***
 
 ;;;### (autoloads (holiday-solar-term holiday-lunar cal-china-x-birthday-from-chinese)
-;;;;;;  "cal-china-x" "xwl-elisp/cal-china-x.el" (19368 45037))
+;;;;;;  "cal-china-x" "xwl-elisp/cal-china-x.el" (19437 17952))
 ;;; Generated autoloads from xwl-elisp/cal-china-x.el
 
 (autoload 'cal-china-x-birthday-from-chinese "cal-china-x" "\
@@ -1935,7 +1965,7 @@ See `cal-china-x-solar-term-name' for a list of solar term names .
 ;;;***
 
 ;;;### (autoloads (buffer-action-run buffer-action-compile) "buffer-action"
-;;;;;;  "xwl-elisp/buffer-action.el" (19360 59338))
+;;;;;;  "xwl-elisp/buffer-action.el" (19435 65395))
 ;;; Generated autoloads from xwl-elisp/buffer-action.el
 
 (autoload 'buffer-action-compile "buffer-action" "\

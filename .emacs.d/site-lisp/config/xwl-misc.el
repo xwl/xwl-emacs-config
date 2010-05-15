@@ -22,91 +22,8 @@
 ;;; Code:
 
 ;; ,----
-;; | BBDB
+;; | Misc misc
 ;; `----
-
-(ignore-errors
-  (progn
-(require 'bbdb)
-(bbdb-initialize)
-
-(setq bbdb-north-american-phone-numbers-p nil)
-(setq bbdb-user-mail-names
-      (regexp-opt '("willam.xwl@gmail.com"
-                    "willam.xwl@hotmail.com")))
-(add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
-(add-hook 'mail-setup-hook 'bbdb-insinuate-sendmail)
-
-(setq bbdb-complete-name-allow-cycling t
-      bbdb-use-pop-up nil
-      bbdb-file-coding-system 'utf-8
-      ;; bbdb-quiet-about-name-mismatches t
-      )
-
-(define-key bbdb-mode-map (kbd "TAB") 'bbdb-toggle-records-display-layout)
-
-(defun xwl-bbdb ()
-  (interactive)
-  (if (get-buffer "*BBDB*")
-      (switch-to-buffer "*BBDB*")
-    (bbdb "" nil)
-    (other-window 1)
-    (delete-other-windows)))
-
-(defun my-bbdb-search (field str)
-  "Search records whose FIELD matches STR."
-  (interactive
-   (list
-    (ido-completing-read
-     "Search: "
-     (append (mapcar (lambda (el) (car el)) (bbdb-propnames))
-             '("name")))
-    (read-string "Match: ")))
-  (if (string= field "name")
-      (bbdb-name str nil)
-    (let ((matches '())
-          (case-fold-search bbdb-case-fold-search)
-          (invert (bbdb-search-invert-p)))
-      (when (stringp field)
-        (setq field (intern field)))
-      (mapc
-       (lambda (record)
-         (condition-case nil
-             (let ((matchedp
-                    (string-match
-                     str
-                     (cdr (assoc field (bbdb-record-raw-notes record))))))
-               (when (or (and (not invert) matchedp)
-                         (and invert (not matchedp)))
-                 (setq matches (append matches (list record)))))
-           (error nil)))
-       (bbdb-records))
-      (bbdb-display-records matches))))
-
-(defun my-bbdb-create (name)
-  "Add a new entry to the bbdb database.
-
-This is different from `bbdb-create', where `my-bbdb-create' only
-prompts for name field."
-  (interactive "sName: ")
-  (let ((record
-         (vector name "" nil nil nil nil nil nil
-                 (make-vector bbdb-cache-length nil))))
-    (bbdb-invoke-hook 'bbdb-create-hook record)
-    (bbdb-change-record record t)
-    (bbdb-display-records (list record))))
-
-(defun my-bbdb-display-all ()
-  (interactive)
-  (bbdb-display-records (bbdb-records)))
-
-(define-key bbdb-mode-map (kbd "a") 'my-bbdb-display-all)
-(define-key bbdb-mode-map (kbd "\/") 'my-bbdb-search)
-
-))
-
-
-;;; Misc misc
 
 (global-set-key (kbd "C-c b r") 'boxquote-region)
 (global-set-key (kbd "C-c b t") 'boxquote-title)
@@ -129,8 +46,6 @@ prompts for name field."
 ;; (unless xwl-at-company?
 ;;   (add-hook 'write-file-functions 'xwl-write-file-functions))
 
-(add-hook 'wordnet-mode-hook 'less-minor-mode-on)
-
 
 ;; qterm
 (setq qterm-faces '(""
@@ -148,64 +63,59 @@ prompts for name field."
 
 ;; (add-to-list 'auto-mode-alist '("todo" . easy-todo-mode))
 
-(eval-after-load 'doc-view
-  (add-hook 'doc-view-mode-hook 'less-minor-mode-on))
-
 ;; (load "/sw/share/emacs/site-lisp/ledger/ledger.el")
 
 ;; (global-set-key (kbd "<f4>") 'cwit)
 ;; (setq cwit-update-interval 120)
 ;; (setq cwit-use-local t)
 
-
-(add-hook 'dashboard-mode-hook 'less-minor-mode-on)
-
 ;; (setq tramp-verbose 10)
 ;; "M-x tramp-submit-bug".
 ;; (setq tramp-debug-buffer t)
-(ignore-errors
-  (progn
 
-(require 'mmm-auto)
-(require 'mmm-sample)
-(setq mmm-global-mode 'maybe)
+;; (ignore-errors
+;;   (progn
 
-(setq mmm-classes-alist
-      `((text-html :submode html-mode
-                   :front "<html>"
-                   :front-offset (beginning-of-line 0)
-                   :back "</html>"
-                   :back-offset (end-of-line 1)
-                   :face mmm-code-submode-face)
+;; (require 'mmm-auto)
+;; (require 'mmm-sample)
+;; (setq mmm-global-mode 'maybe)
 
-        (c-in-scheme :submode c-mode    ; in chicken scheme
-                     :front "#>"
-                     :front-offset (beginning-of-line 0)
-                     :back "<#"
-                     :back-offset (end-of-line 1)
-                     :face mmm-code-submode-face)
+;; (setq mmm-classes-alist
+;;       `((text-html :submode html-mode
+;;                    :front "<html>"
+;;                    :front-offset (beginning-of-line 0)
+;;                    :back "</html>"
+;;                    :back-offset (end-of-line 1)
+;;                    :face mmm-code-submode-face)
 
-        ,@mmm-classes-alist))
+;;         (c-in-scheme :submode c-mode    ; in chicken scheme
+;;                      :front "#>"
+;;                      :front-offset (beginning-of-line 0)
+;;                      :back "<#"
+;;                      :back-offset (end-of-line 1)
+;;                      :face mmm-code-submode-face)
 
-(setq mmm-mode-ext-classes-alist
-      '((message-mode nil text-html)
-        (gnus-article-edit-mode nil text-html)
-        (text-mode nil text-html)
-        ;; (scheme-mode nil c-in-scheme)
-        ))
+;;         ,@mmm-classes-alist))
 
-;; (setq mmm-global-classes
-;;       (append '(text-html)
-;;               mmm-global-classes))
+;; (setq mmm-mode-ext-classes-alist
+;;       '((message-mode nil text-html)
+;;         (gnus-article-edit-mode nil text-html)
+;;         (text-mode nil text-html)
+;;         ;; (scheme-mode nil c-in-scheme)
+;;         ))
 
-(defun xwl-mmm-refresh ()
-  "Re-apply mmm-mode when buffer contents have been modified."
-  (when (and mmm-mode (buffer-modified-p))
-    (mmm-apply-all)))
+;; ;; (setq mmm-global-classes
+;; ;;       (append '(text-html)
+;; ;;               mmm-global-classes))
 
-(add-hook 'post-command-hook 'xwl-mmm-refresh)
+;; (defun xwl-mmm-refresh ()
+;;   "Re-apply mmm-mode when buffer contents have been modified."
+;;   (when (and mmm-mode (buffer-modified-p))
+;;     (mmm-apply-all)))
 
-))
+;; (add-hook 'post-command-hook 'xwl-mmm-refresh)
+
+;; ))
 
 ;; wikipedia-mode
 (add-to-list 'auto-mode-alist '(".wikipedia" . wikipedia-mode))
@@ -248,6 +158,138 @@ prompts for name field."
 
     ad-do-it))
 
+;; visual blank, tab, end-of-line ?
+;(require 'blank-mode)
+
+;; mmm-mode
+;; (set-face-background 'mmm-code-submode-face nil)
+;; (set-face-background 'mmm-default-submode-face nil)
+
+;; fortune
+(defun xwl-fortune-of-the-day ()
+  "$ fortune-zh"
+  (interactive)
+  (message
+   (ansi-color-filter-apply
+    (shell-command-to-string "fortune-zh"))))
+
+(global-set-key (kbd "C-c m f") 'xwl-fortune-of-the-day)
+
+;; webjump
+(global-set-key (kbd "C-c m w") 'webjump)
+
+(eval-after-load 'webjump
+  '(progn
+     (mapc (lambda (el)
+             (add-to-list 'webjump-sites el))
+           '(;; ("gentoo software search" . "http://www.rommel.stw.uni-erlangen.de/~fejf/pfs/")
+             ("douban"                 . "http://www.douban.com")
+             ("gmail"                  . "http://www.gmail.com")
+             ;; ("bloglines"              . "http://www.bloglines.com/feeds")
+             ("gitweb"                 . "http://git.savannah.gnu.org/gitweb/")
+             ("remember the milk"      . "http://www.rememberthemilk.com")
+             ))
+     ))
+
+;; bookmark
+(eval-after-load 'bookmark
+  '(progn
+     (defadvice bookmark-default-handler (around just-switch-to-already-opened-file activate)
+       (let ((done nil)
+             (f (bookmark-get-filename bmk-record)))
+         (when (not (file-directory-p f))
+           (let ((b (get-buffer (file-name-nondirectory f))))
+             (when (and b (string= (buffer-file-name b) f))
+               (switch-to-buffer b)
+               (setq done t))))
+         (unless done
+           ad-do-it)))
+     ))
+
+;; imenu
+(eval-after-load 'imenu
+  '(progn
+     (defadvice imenu-default-create-index-function (around add-more-default-index activate)
+       (let ((imenu-generic-expression
+              (cons (list "Outlines"
+                          (format "\\(%s\\|%s\\)\\(%s\\)"
+                                  outline-regexp
+                                  (concat "^" comment-start "+ | ")
+                                  ".*")
+                          2)
+                    imenu-generic-expression)))
+         ad-do-it))
+     ))
+
+(setq auto-mode-alist
+      `(("\\.h$"               . c++-mode)
+        ("\\.lrc$"             . emms-lyrics-mode)
+        ("\\.sh$"              . shell-script-mode)
+        ("\\.m$"               . objc-mode)
+         ;; octave-mode)
+        ("\\.java$"            . java-mode)
+        ("\\.l$"               . c-mode)
+        ("\\.jl$"              . sawfish-mode)
+        ("\\.hs$"              . haskell-mode)
+        ("fonts.conf"          . xml-mode)
+        ("\\(rc\\|.conf\\)$"   . conf-mode)
+        ("\\(.mac\\|.lst\\)$"  . asm-mode)
+        ("\\(.html\\|.htm\\)$" . html-mode)
+        ("[sS][cC]onstruct"    . python-mode)
+        ("Makefile.*"          . makefile-mode)
+        ("^/etc/conf.d"        . conf-mode)
+        ("\\.cnf$"             . conf-mode)
+        ("\\.ebuild$"          . shell-script-mode)
+        ("\\.d$"               . shell-script-mode)
+        ("CMakeLists\\.txt\\'" . cmake-mode)
+        ("\\.cmake\\'"         . cmake-mode)
+
+        ,@auto-mode-alist))
+
+(when (fboundp 'tramp-cleanup-all-buffers)
+  (add-hook 'kill-emacs-hook 'tramp-cleanup-all-buffers))
+
+(setq mac-pass-command-to-system nil)
+
+(require 'smart-operator)
+
+(defun xwl-text-mode-hook ()
+  (auto-compression-mode 1)
+  (abbrev-mode 1)
+  ;; (flyspell-mode 1)
+
+  (smart-operator-mode 1)
+  (local-unset-key (kbd "."))
+  ;; (local-set-key (kbd "M-S") 'wordnet-search)
+  (local-set-key (kbd "M-s") 'dictionary-search)
+
+  (local-unset-key (kbd "M-S")))
+;; (local-set-key (kbd "TAB") 'ispell-complete-word))
+
+(add-hook 'text-mode-hook 'xwl-text-mode-hook)
+
+(defun xwl-kill-emacs-hook ()
+  (when (fboundp 'gnus-group-exit)
+    (gnus-group-exit)))
+
+(add-hook 'kill-emacs-hook 'xwl-kill-emacs-hook)
+
+(defadvice forward-page (after forward-page-and-first-column activate)
+  (move-beginning-of-line nil))
+
+(recentf-mode 1)
+(add-to-list 'recentf-keep 'file-remote-p)
+
+(defun xwl-recentf-open-files ()
+  (interactive)
+  (let* ((alist (mapcar '(lambda (el)
+                           (cons (file-name-nondirectory el) el))
+                        recentf-list))
+         (filename (ido-completing-read "Open recent file: "
+                                        (mapcar 'car alist))))
+    (find-file (cdr (assoc filename alist)))))
+
+(global-set-key (kbd "C-c F") 'xwl-recentf-open-files)
 
 ;; ,----
 ;; | file hooks
@@ -323,8 +365,6 @@ prompts for name field."
   (add-to-list 'tramp-default-proxies-alist
                '("localhost" "\\`root\\'" "/ssh:%h#2222:")))
 
-(add-hook 'ga-mode-hook 'less-minor-mode-on)
-
 (setq ga-pkgsrc-dir "~/repo/cvs/pkgsrc")
 
 (global-set-key (kbd "<f10>") 'ga)
@@ -345,72 +385,51 @@ prompts for name field."
 ;; (remove-hook 'find-file-hook 'bracketphobia-hide)
 
 (defun xwl-after-init-hook ()
-  ;; maximize frame
   (case window-system
-    ((mac)
-     (require 'maxframe)
-     (setq mf-display-padding-width 0)
-     (setq mf-display-padding-height (- mf-display-padding-height 10))
-
-     (setq mf-max-width 1900)
-
-     ;; (add-hook 'window-setup-hook 'maximize-frame t)
-     ;; (maximize-frame)
-     )
     (ns ;; FIXME
      (run-at-time 2 nil 'ns-toggle-fullscreen))
     ((w32)
      (w32-send-sys-command #xf030)))
 
-  (unless noninteractive
-    ;; (shell-command "sudo ~/bin/.xwl-after-start-hook")
-    ;; (setq display-time-mail-file 'no-check)
+  ;; FIXME: how to set this only after window has been maximized?
+  (run-at-time 5
+               nil
+               '(lambda ()
+                  (let ((col (round (/ (frame-width) 2))))
+                    (setq erc-fill-column (- col 2)) ; 6 for leading timestamp.
+                    (setq twittering-fill-column col))))
 
-    ;; On w32: `emacsclient.exe --server-file c:\repo\xwl-emacs-environment\.emacs.d\server\server -n %*'
-    (ignore-errors (server-start))
+  ;; (shell-command "sudo ~/bin/.xwl-after-start-hook")
+  ;; (setq display-time-mail-file 'no-check)
 
-    (when (executable-find "fortune-zh")
-      (setq xwl-idle-timer
-            (run-with-idle-timer 300 t 'xwl-run-when-idle-hook)))
+  ;; On w32: `emacsclient.exe --server-file c:\repo\xwl-emacs-environment\.emacs.d\server\server -n %*'
+  (ignore-errors (server-start))
 
-    ;; EMMS
-    ;; (emms-add-directory-tree emms-source-file-default-directory)
-    ;; (emms-playlist-sort-by-score)
-    ;; (xwl-erc-select)
-    (unless (xwl-check-holidays)
-      (find-file "~/.scratch")
-      ;; (xwl-todo-find-do)
-      (delete-other-windows)
-      (message (substring (emacs-version) 0 16)))
-    ;; (run-with-timer 0 86400 'xwl-running-daily) ; dialy stuffs
-    ;; (xwl-weather-update)
+  (when (executable-find "fortune-zh")
+    (setq xwl-idle-timer
+          (run-with-idle-timer 300 t 'xwl-run-when-idle-hook)))
 
-    ;; Run this as the last step.
-    ;; (run-at-time 3
-    ;;              nil
-    ;;              '(lambda ()
-    (when (fboundp 'color-theme-xwl-console)
-      (color-theme-xwl-console))
+  ;; (run-with-timer 0 86400 'xwl-running-daily) ; dialy stuffs
+  ;; (xwl-weather-update)
 
-    ;; FIXME: how to set this only after window has been maximized?
-    (run-at-time 5
-                 nil
-                 '(lambda ()
-                    ;; (add-hook 'after-make-frame-functions
-                    ;;           (lambda ()
-                    (let ((col (round (/ (frame-width) 2))))
-                      (setq erc-fill-column (- col 2)) ; 6 for leading timestamp.
-                      (setq twittering-fill-column col))))
+  (when (fboundp 'color-theme-xwl-console)
+    (color-theme-xwl-console))
 
-    (when window-system
-      (require 'highlight-tail)
-      (setq highlight-tail-colors ; '(("#bc2525" . 0)))
-      '(("#d8971d" . 0)))
-      (highlight-tail-reload))
-    ;; ))
-    ))
+  (when window-system
+    (require 'highlight-tail)
+    (setq highlight-tail-colors
+          ;; '(("#bc2525" . 0)))
+          '(("#d8971d" . 0)))
+    (highlight-tail-reload))
 
-(add-hook 'after-init-hook 'xwl-after-init-hook)
+  (unless (xwl-check-holidays)
+    (find-file "~/.scratch")
+    ;; (xwl-todo-find-do)
+    (delete-other-windows)
+    (message (substring (emacs-version) 0 16))))
+
+(unless noninteractive
+  (add-hook 'after-init-hook 'xwl-after-init-hook))
 
 (autoload 'file-template-find-file-not-found-hook "file-template" nil t)
 (add-hook 'find-file-not-found-hooks 'file-template-find-file-not-found-hook 'append)
@@ -529,11 +548,6 @@ prompts for name field."
 ;; | Window
 ;; `----
 
-;; redo and undo
-(winner-mode 1)
-(global-set-key (kbd "C-c <") 'winner-undo)
-(global-set-key (kbd "C-c >") 'winner-redo)
-
 ;; jump by name
 ;; (require 'winring)
 ;; (winring-initialize)
@@ -570,27 +584,6 @@ prompts for name field."
 ;;   (load "kn-prefix-autoloads"))
 
 ;; ,----
-;; | misc
-;; `----
-
-;; visual blank, tab, end-of-line ?
-;(require 'blank-mode)
-
-;; mmm-mode
-;; (set-face-background 'mmm-code-submode-face nil)
-;; (set-face-background 'mmm-default-submode-face nil)
-
-;; fortune
-(defun xwl-fortune-of-the-day ()
-  "$ fortune-zh"
-  (interactive)
-  (message
-   (ansi-color-filter-apply
-    (shell-command-to-string "fortune-zh"))))
-
-(global-set-key (kbd "C-c m f") 'xwl-fortune-of-the-day)
-
-;; ,----
 ;; | ispell, flyspell
 ;; `----
 
@@ -613,8 +606,6 @@ prompts for name field."
 ;; 	("newsmth-blog" "http://www.newsmth.com/pc/rssrec.php")))
 
 ;; (global-set-key (kbd "C-c m n") 'newsticker-show-news)
-
-;; (add-hook 'newsticker-mode-hook 'less-minor-mode-on)
 
 ;; (setq inhibit-eol-conversion nil)
 
@@ -722,12 +713,12 @@ passphrase cache or user."
         twittering-api-search-host (xds "\\?[jCOI*XOI'QO@lPO9nZ*9m[:,aY)'mZ)M_ZdEf")))
 
 (setq twittering-status-format
-      "%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FILL{       %T}\n")
+      ;; "%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FILL{       %T}\n"
+      "%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FILL{%T}\n")
 
 (setq twittering-update-status-function
       'twittering-update-status-from-pop-up-buffer)
 
-(add-hook 'twittering-mode-hook 'less-minor-mode-on)
 (add-hook 'twittering-mode-hook (lambda ()
                                   (twittering-icon-mode 1)
                                   (setq twittering-reverse-mode t)
@@ -807,6 +798,61 @@ passphrase cache or user."
     (ido-completing-read "Use release: "
                         (xwl-s60lxr-generate-releases))))
   (setq xwl-s60lxr-release release))
+
+;; ,----
+;; | weather
+;; `----
+
+(setq xwl-weather-string "")
+(setq xwl-weather-list nil)
+(setq xwl-weather-checked-day nil)
+
+(defun xwl-weather-update (&optional force)
+  (interactive)
+  (if (or force
+          (null xwl-weather-checked-day)
+          (> (string-to-number (format-time-string "%d" (current-time)))
+             xwl-weather-checked-day))
+      (progn
+        (message "updating weather info...")
+        (setq xwl-weather-checked-day
+              (string-to-number (format-time-string "%d" (current-time))))
+        (setq xwl-weather-list
+              (remove
+               ""
+               (split-string
+                (shell-command-to-string
+                 "/home/william/repo/darcs/guile/scripts/weather-man.scm 北京")
+                "\n")))
+        (setq xwl-weather-string
+              (replace-regexp-in-string
+               "风力："
+               ""
+               (concat "["
+                       (mapconcat (lambda (el) el)
+                                  (remove
+                                   ""
+                                   (cdr (split-string (car xwl-weather-list) ";")))
+                                  "")
+                       "/"
+                       (mapconcat (lambda (el) el)
+                                  (remove
+                                   ""
+                                   (cdr (split-string (cadr xwl-weather-list) ";")))
+                                  "")
+                       "]")))
+        (message "done"))
+    (message "weather already up-to-date")))
+
+;; (run-with-idle-timer (* 10 60) (* 24 60 60) 'xwl-weather-update)
+
+(defun xwl-weather-show ()
+  (interactive)
+  (let ((str ""))
+    (mapc (lambda (day) (setq str (concat str day "\n")))
+          xwl-weather-list)
+    (message str)))
+
 
 (provide 'xwl-misc)
 

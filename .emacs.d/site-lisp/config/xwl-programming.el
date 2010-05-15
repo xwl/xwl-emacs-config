@@ -302,8 +302,6 @@ Thus generate a TAGs file."
 ;;; version systems
 ;; -----------------
 
-(add-hook 'log-view-mode-hook 'less-minor-mode-on)
-
 (add-to-list 'vc-handled-backends 'DARCS)
 (setq vc-darcs-mail-address "William Xu <william.xwl@gmail.com>")
 
@@ -312,14 +310,14 @@ Thus generate a TAGs file."
 (global-set-key (kbd "C-c k")
                 (lambda ()
                   (interactive)
-                  (kill-new (file-name-nondirectory (buffer-file-name)))
-                  (message "Filenamed copied")))
+                  (kill-new (buffer-name))
+                  (message "Buffer name copied")))
 
 (global-set-key (kbd "C-c K")
                 (lambda ()
                   (interactive)
                   (kill-new (buffer-file-name))
-                  (message "Full filenamed copied")))
+                  (message "Full file name copied")))
 
 (eval-after-load 'vc-dir
   '(progn
@@ -586,7 +584,7 @@ yacc source files."
 
 ;; (defadvice gds-help-symbol (after jump-to-help)
 ;;   (other-window 1))
-;;   (less-minor-mode-on))
+;;   )
 
 ;; (ad-activate 'gds-help-symbol)
 
@@ -946,32 +944,14 @@ Useful for packing c/c++ functions with one line or empty body."
 ;; ,----
 ;; | cedet
 ;; `----
-(unless (eq system-type 'windows-nt)
 
-(ignore-errors (require 'cedet))
-
-;; TODO fix this on linux
-(eval-after-load 'cedetx
-  '(progn
-     (global-ede-mode 1)
-     (semantic-load-enable-gaudy-code-helpers)
-     ;; FIXME: this looks like screwing my cursor!
-     (global-semantic-idle-scheduler-mode -1)
-     ;; sticky title on the top.
-     (global-semantic-stickyfunc-mode -1)
-
-     ))
-
-;; Show semantic tags in speedbar.
-;; (require 'semantic-sb)
+;; (semantic-mode 1)
 
 (eval-after-load 'semantic-imenu
   '(progn
      (defadvice semantic-create-imenu-index (after combine-with-default activate)
        (setq ad-return-value (append (imenu-default-create-index-function)
                                      ad-return-value)))))
-
-)
 
 (provide 'xwl-programming)
 
