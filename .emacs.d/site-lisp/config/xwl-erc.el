@@ -50,6 +50,8 @@
 (setq erc-join-buffer 'bury
       erc-auto-query 'bury)
 
+(add-hook 'erc-join-hook 'less-minor-mode-on)
+
 ;; ,----
 ;; | autojoin, identify, op
 ;; ----
@@ -292,7 +294,9 @@ If the buffer is currently not visible, makes it sticky."
 
 (erc-truncate-mode 1)
 
-(add-hook 'erc-mode-hook (lambda () (abbrev-mode 1)))
+(add-hook 'erc-mode-hook (lambda ()
+                           (abbrev-mode 1)
+                           (less-minor-mode-on)))
 
 ;; spelling, TODO, fix this.
 ;; (require 'erc-spelling)
