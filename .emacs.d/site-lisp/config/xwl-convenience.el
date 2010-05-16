@@ -146,8 +146,7 @@
 (setq session-globals-exclude '(load-history
                                 register-alist
                                 vc-comment-ring
-                                flyspell-auto-correct-ring
-                                planner-browser-file-display-rule-ring))
+                                flyspell-auto-correct-ring))
 
 (setq session-globals-regexp "-\\(ring\\|history\\)\\'")
 
@@ -164,8 +163,7 @@
 	     (local-set-key (kbd "M-n") 'less-scroll-up-line)
 	     (local-set-key (kbd "M-p") 'less-scroll-down-line)))
 
-(global-set-key (kbd "<wheel-up>") 'less-scroll-down-line)
-(global-set-key (kbd "<wheel-down>") 'less-scroll-up-line)
+(setq mouse-wheel-scroll-amount (list 1))
 
 ;; Am i weird or Emacs is weird ?
 (global-set-key (kbd "C-c ,") 'next-buffer)
