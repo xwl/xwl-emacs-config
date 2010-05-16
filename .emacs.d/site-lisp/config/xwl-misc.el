@@ -369,13 +369,15 @@
 
 (setq ga-pkgsrc-dir "~/repo/cvs/pkgsrc")
 
-(global-set-key (kbd "<f10>") (lambda ()
-                                (interactive)
-                                (or (some (lambda (b)
-                                            (when (string-match "\\`\\*Ga/" (buffer-name b))
-                                              (switch-to-buffer b)))
-                                          (buffer-list))
-                                    (call-interactively 'ga))))
+(global-set-key (kbd "<f10>") 'xwl-ga)
+
+(defun xwl-ga ()
+  (interactive)
+  (or (some (lambda (b)
+              (when (string-match "\\`\\*Ga/" (buffer-name b))
+                (switch-to-buffer b)))
+            (buffer-list))
+      (call-interactively 'ga)))
 
 (setq ga-backend-methods
       '((apt-get ;; "ssh william@localhost -p 2222 sudo apt-get")
