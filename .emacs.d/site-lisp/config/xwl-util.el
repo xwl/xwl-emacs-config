@@ -274,6 +274,8 @@ simply yank it when needed."
 
 ;;; notify
 
+(setq xwl-notify-emacs-image (file-truename "~/w32/emacs_4_48x48x32.png"))
+
 (defun xwl-notify (title message)
   (case system-type
     ((darwin)
@@ -283,20 +285,17 @@ simply yank it when needed."
     ((gnu/linux)
      (xwwl-zenity title message))))
 
-(setq growlnotify-command (executable-find "growlnotify"))
-
 (defun xwl-growl (title message)
-  (start-process "growl" " growl" growlnotify-command title "-a" "Emacs")
-  (process-send-string " growl" message)
-  (process-send-string " growl" "\n")
-  (process-send-eof " growl"))
+  (xwl-shell-command-asynchronously
+   (format "growlnotify --image %s -t \"%s\" -m \"%s\""
+           xwl-notify-emacs-image title message)))
 
 ;; http://www.fullphat.net/index.php
 ;; http://tlhan-ghun.de/?q=node/59
 (defun xwl-snarl (title message)
   (xwl-shell-command-asynchronously
    (format "Snarl_CMD.exe snShowMessage 5 \"%s\" \"%s\" \"%s\""
-           title message (file-truename "~/w32/emacs_4_48x48x32.png"))))
+           title message xwl-notify-emacs-image)))
 
 (defun xwl-zenity (title message)
   (xwl-shell-command-asynchronously
