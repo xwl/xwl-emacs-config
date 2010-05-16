@@ -52,7 +52,6 @@
   (setq diary-file "~/.diary")
   (setq mark-diary-entries-in-calendar t))
 
-(appt-activate 1)
 (setq appt-message-warning-time 1)
 
 (setq appt-disp-window-function

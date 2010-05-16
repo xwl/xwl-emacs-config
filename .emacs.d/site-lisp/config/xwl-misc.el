@@ -369,7 +369,13 @@
 
 (setq ga-pkgsrc-dir "~/repo/cvs/pkgsrc")
 
-(global-set-key (kbd "<f10>") 'ga)
+(global-set-key (kbd "<f10>") (lambda ()
+                                (interactive)
+                                (or (some (lambda (b)
+                                            (when (string-match "\\`\\*Ga/" (buffer-name b))
+                                              (switch-to-buffer b)))
+                                          (buffer-list))
+                                    (call-interactively 'ga))))
 
 (setq ga-backend-methods
       '((apt-get ;; "ssh william@localhost -p 2222 sudo apt-get")
@@ -423,6 +429,8 @@
           ;; '(("#bc2525" . 0)))
           '(("#d8971d" . 0)))
     (highlight-tail-reload))
+
+  (appt-activate 1)
 
   (unless (xwl-check-holidays)
     (find-file "~/.scratch")
@@ -854,7 +862,6 @@ passphrase cache or user."
     (mapc (lambda (day) (setq str (concat str day "\n")))
           xwl-weather-list)
     (message str)))
-
 
 (provide 'xwl-misc)
 
