@@ -437,15 +437,14 @@ Thus generate a TAGs file."
 (when (eq system-type 'windows-nt)
   (setq find-program "cmd /c c:/usr/git/bin/find"))
 
-;; FIXME: seems this only has effects before first run of `grep'.
-(setq grep-use-null-device nil
-      grep-command "grep -nH -i "
-      grep-find-command (format "%s . -type f -print0 | xargs -0 %s"
-                                find-program
-                                grep-command))
+(global-set-key (kbd "C-c g")
+                (lambda ()
+                  (interactive)
+                  (if (string-match "\\.gz" (shell-command-to-string "ls | head -1"))
+                      (grep-apply-setting 'grep-command "zgrep -nH ")
+                    (grep-apply-setting 'grep-command "grep -nH "))
+                  (call-interactively 'grep)))
 
-(global-set-key (kbd "C-c g") 'grep)
-(global-set-key (kbd "C-c m G") 'grep-find)
 (global-set-key (kbd "C-c G")
                 (lambda (cmd)
                   (interactive
