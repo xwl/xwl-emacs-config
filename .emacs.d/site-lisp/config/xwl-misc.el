@@ -291,6 +291,8 @@
 
 (global-set-key (kbd "C-c F") 'xwl-recentf-open-files)
 
+(setq ns-show-menu-bar-p t)
+
 ;; ,----
 ;; | file hooks
 ;; `----
