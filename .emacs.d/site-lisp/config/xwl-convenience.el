@@ -190,7 +190,13 @@
      (setq auto-less-exclude-regexp
            (concat auto-less-exclude-regexp
                    "\\|"
-                   (regexp-opt '("todo.org"))))))
+                   (regexp-opt '("todo.org"
+                                 ))))
+     (setq auto-less-exclude-modes
+           (append auto-less-exclude-modes
+                   '(twittering-edit-mode
+                     calendar-mode
+                     log-edit-mode)))))
 (global-less-minor-mode 1)
 
 (provide 'xwl-convenience)
