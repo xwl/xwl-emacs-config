@@ -870,4 +870,12 @@ If FOCUS-REV is non-nil, leave the point at that revision."
      ;; (maximize-frame)
      )
 
+
+      grep-find-command (format "%s . -type f -print0 | xargs -0 %s"
+                                find-program
+                                grep-command))
+
+;; (global-set-key (kbd "C-c G") 'grep-find)
+
+
 ;;; xwl-depreated.el ends here

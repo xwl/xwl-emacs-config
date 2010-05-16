@@ -440,6 +440,7 @@ Thus generate a TAGs file."
 (global-set-key (kbd "C-c g")
                 (lambda ()
                   (interactive)
+                  (require 'grep)
                   (if (string-match "\\.gz" (shell-command-to-string "ls | head -1"))
                       (grep-apply-setting 'grep-command "zgrep -nH ")
                     (grep-apply-setting 'grep-command "grep -nH "))
