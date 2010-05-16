@@ -86,7 +86,8 @@
 (require 'xwl-misc)
 (when window-system
   (require 'xwl-window)
-  (require 'xwl-color-theme))
+  ;; (require 'xwl-color-theme)
+  )
 
 ;; not used
 ;; (require 'xwl-muse)
