@@ -315,15 +315,23 @@
 (defadvice toggle-input-method (before load-wubi activate)
   (require 'xwl-wubi))
 
-(define-key global-map "\C-x\C-j" '(lambda ()
-                                     (interactive)
-                                     (require 'xwl-dired)
-                                     (call-interactively 'dired-jump)))
+(global-set-key (kbd "C-x C-j") '(lambda ()
+                                   (interactive)
+                                   (require 'xwl-dired)
+                                   (call-interactively 'dired-jump)))
 
 (global-set-key (kbd "C-c n r") '(lambda ()
                                    (interactive)
                                    (revert-buffer-with-coding-system 'gb18030)))
 
+(global-set-key (kbd "<f4>") '(lambda ()
+                                (interactive)
+                                (let* ((n "*top*")
+                                       (b (get-buffer n)))
+                                  (if b
+                                      (switch-to-buffer b)
+                                    (ansi-term "top")
+                                    (rename-buffer n)))))
 
 (provide 'xwl-bindings)
 
