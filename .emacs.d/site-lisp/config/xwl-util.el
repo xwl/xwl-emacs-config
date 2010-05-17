@@ -295,7 +295,9 @@ simply yank it when needed."
 (defun xwl-snarl (title message)
   (xwl-shell-command-asynchronously
    (format "Snarl_CMD.exe snShowMessage 5 \"%s\" \"%s\" \"%s\""
-           title message xwl-notify-emacs-image)))
+           (emms-i18n-iconv 'utf-8 'gb18030 title)
+           (emms-i18n-iconv 'utf-8 'gb18030 message)
+           xwl-notify-emacs-image)))
 
 (defun xwl-zenity (title message)
   (xwl-shell-command-asynchronously
