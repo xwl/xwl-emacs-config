@@ -189,12 +189,17 @@
            (concat auto-less-exclude-regexp
                    "\\|"
                    (regexp-opt '("todo.org"
+                                 "*nntpd*"
                                  ))))
      (setq auto-less-exclude-modes
            (append auto-less-exclude-modes
                    '(twittering-edit-mode
                      calendar-mode
-                     log-edit-mode)))))
+                     log-edit-mode
+                     gnus-summary-mode
+                     gnus-group-mode
+                     dired-mode
+                     apropos-mode)))))
 (global-less-minor-mode 1)
 
 (provide 'xwl-convenience)
