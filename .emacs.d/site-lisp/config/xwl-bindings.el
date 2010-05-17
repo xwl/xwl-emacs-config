@@ -58,7 +58,11 @@
                                 (xwl-switch-or-create ":home" 'twit)
                                 (unless xwl-timers-hook-started?
                                   (run-hooks 'xwl-timers-hook)
-                                  (setq xwl-timers-hook-started? t))))
+                                  (setq xwl-timers-hook-started? t)
+
+                                  (command-execute (kbd "<f6>"))
+                                  (command-execute (kbd "C-c n E"))
+                                  )))
 
 (global-set-key (kbd "<f13>") 'kill-this-buffer)
 
