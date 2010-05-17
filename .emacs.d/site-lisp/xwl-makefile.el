@@ -42,28 +42,31 @@
 
 ;;;###autoload
 (defun xwl-makefile-all ()
-  (xwl-makefile-ensure-directory)
+  (let ((less-p global-less-minor-mode))
+    (global-less-minor-mode -1)
+    (xwl-makefile-ensure-directory)
 
-  (let ((autoloads-not-up2date t))
-    ;; (xs-accumulate
-    ;;           (lambda (a b) (or a b))
-    ;;           nil
-    ;;           (mapcar (lambda (f)
-    ;;                     (file-newer-than-file-p f xwl-makefile-autoloads-file))
-    ;;                   xwl-makefile-files))))
-    ;; autoloads
-    (when (eq system-type 'darwin)
-      (when autoloads-not-up2date
-        (with-current-buffer (find-file-noselect xwl-makefile-autoloads-file)
-          (let ((inhibit-read-only t))
-            (erase-buffer)
-            (mapc (lambda (f) (generate-file-autoloads f)) xwl-makefile-files)
-            (insert (format "\n(provide '%s)\n" xwl-makefile-autoloads-file-base))
-            (save-buffer)))))
+    (let ((autoloads-not-up2date t))
+      ;; (xs-accumulate
+      ;;           (lambda (a b) (or a b))
+      ;;           nil
+      ;;           (mapcar (lambda (f)
+      ;;                     (file-newer-than-file-p f xwl-makefile-autoloads-file))
+      ;;                   xwl-makefile-files))))
+      ;; autoloads
+      (when (eq system-type 'darwin)
+        (when autoloads-not-up2date
+          (with-current-buffer (find-file-noselect xwl-makefile-autoloads-file)
+            (let ((inhibit-read-only t))
+              (erase-buffer)
+              (mapc (lambda (f) (generate-file-autoloads f)) xwl-makefile-files)
+              (insert (format "\n(provide '%s)\n" xwl-makefile-autoloads-file-base))
+              (save-buffer)))))
 
-    (xwl-makefile-byte-compile)
+      (xwl-makefile-byte-compile)
 
-    (message "xwl-makefile-all done")))
+      (global-less-minor-mode less-p)
+      (message "xwl-makefile-all done"))))
 
 ;;;###autoload
 (defun xwl-makefile-byte-compile ()
