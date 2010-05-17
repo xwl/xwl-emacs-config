@@ -211,18 +211,14 @@ so as to keep an eye on work when necessarily."
   "Shows a growl notification, when user's nick was mentioned.
 If the buffer is currently not visible, makes it sticky."
   (when (and (erc-match-current-nick-p nickuserhost message)
-             (not (string-match (regexp-opt '("Users"
-                                              "User"
-                                              "topic set by"
-                                              "Welcome to "
-                                              "nickname"
-                                              "identified"
-                                              "invalid"
-                                              ))
-                                message)))
+             (not (string-match
+                   (regexp-opt
+                    '("Users" "User" "topic set by" "Welcome to " "nickname"
+                      "identified" "invalid" "your unique"))
+                   message)))
     (xwl-notify (concat "ERC: " (buffer-name (current-buffer))) message)))
 
-;; (add-hook 'erc-text-matched-hook 'xwl-erc-text-matched-hook)
+(add-hook 'erc-text-matched-hook 'xwl-erc-text-matched-hook)
 
 (defun xwl-erc-PRIVMSG (proc parsed)
   (let ((buf (buffer-name (current-buffer))))
@@ -289,8 +285,6 @@ If the buffer is currently not visible, makes it sticky."
                 :port (if xwl-at-company? 26667 6667)
                 :nick "william"
                 :password pwbitlbee)))
-
-(add-hook 'erc-join-hook 'less-minor-mode-on)
 
 (erc-truncate-mode 1)
 

@@ -71,15 +71,13 @@
 (require 'xwl-redefined)
 (require 'xwl-web)
 
-;; ,----
-;; | loaded on the fly
-;; `----
-
+;; eval-after-load
 (eval-after-load 'dired '(progn (require 'xwl-dired)))
 (eval-after-load 'gnus  '(progn (require 'xwl-gnus)))
 (eval-after-load 'erc   '(progn (require 'xwl-erc)))
 (eval-after-load 'org   '(progn (require 'xwl-org)))
 
+;; Loaded on the fly
 ;; (require 'xwl-dictionary)
 ;; (require 'xwl-emms)
 ;; (require 'xwl-wubi)
@@ -88,7 +86,8 @@
 (require 'xwl-misc)
 (when window-system
   (require 'xwl-window)
-  (require 'xwl-color-theme))
+  ;; (require 'xwl-color-theme)
+  )
 
 ;; not used
 ;; (require 'xwl-muse)

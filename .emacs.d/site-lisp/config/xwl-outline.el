@@ -3,7 +3,7 @@
 ;; Copyright (C) 2007, 2008, 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
-;; Last updated: 2010/03/22
+;; Last updated: 2010/05/16
 
 (require 'outline)
 
@@ -80,9 +80,9 @@
   "Narrow to current outline level."
   (interactive)
   (save-excursion
-    (call-interactively 'outline-forward-same-level)
+    (call-interactively 'outline-next-visible-heading)
     (let ((end (point)))
-      (call-interactively 'outline-backward-same-level)
+      (call-interactively 'outline-previous-visible-heading)
       (narrow-to-region (point) end))))
 
 (global-set-key (kbd "C-x n o") 'xwl-narrow-to-outline-level)

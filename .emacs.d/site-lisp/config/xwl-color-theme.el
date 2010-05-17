@@ -1,9 +1,8 @@
 ;;; xwl-color-theme.el --- color theme setup
 
-;; Copyright (C) 2009 William Xu
+;; Copyright (C) 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
-;; Version: 0.1
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -29,8 +28,11 @@
 ;; (color-theme-xwl-console)
 ;; color-theme-robin-hood
 ;; color-theme-standard
+;; color-theme-vim-colors
 
-(defun color-theme-xwl-console ()
+(defalias 'color-theme-xwl-console 'color-theme-vim-colors)
+
+(defun color-theme-xwl-console-orig ()
   "Color theme base on console colors with `color-theme-print'.
 Created on 2005-05-13."
   (interactive)

@@ -23,6 +23,8 @@
 
 (require 'cal-china-x)
 
+(require 'xwl-util)
+
 ;; (setq calendar-week-start-day 1)
 
 (setq calendar-latitude +39.55
@@ -50,8 +52,12 @@
   (setq diary-file "~/.diary")
   (setq mark-diary-entries-in-calendar t))
 
-(appt-activate 1)
 (setq appt-message-warning-time 1)
+
+(setq appt-disp-window-function
+      (lambda (min-to-app new-time appt-msg)
+        (xwl-notify "appt" (format "距約會 %s 還有 %s 分鍾" appt-msg min-to-app))
+        (appt-disp-window min-to-app new-time appt-msg)))
 
 (defun xwl-current-year ()
   (string-to-number (format-time-string "%Y" (current-time))))

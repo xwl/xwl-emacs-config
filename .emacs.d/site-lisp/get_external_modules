@@ -1,7 +1,8 @@
 #!/bin/sh
 
-for i in ssh://git@github.com:xwl/twittering-mode.git \
-         http://github.com/trebb/bbdb-vcard.git       \
+for i in git@github.com:xwl/xwl-elisp.git \
+         git@github.com:xwl/twittering-mode.git \
+         http://github.com/trebb/bbdb-vcard.git \
          ssh://xwl@git.sv.gnu.org/srv/git/emms.git
 do
     git clone $i

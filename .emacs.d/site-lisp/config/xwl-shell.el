@@ -3,7 +3,6 @@
 ;; Copyright (C) 2007, 2008, 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
-;; Last updated: 2010/04/17
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -32,34 +31,6 @@
 (add-hook 'comint-output-filter-functions 'shell-strip-ctrl-m)
 (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
 
-;; xterm's isearch alike
-(setq xwl-shell-shell-search-keyword "")
-(make-local-variable 'xwl-shell-shell-search-keyword)
-
-(defun xwl-shell-shell-search-backward (&optional keyword)
-  (interactive
-   (list (read-from-minibuffer
-          (if (and xwl-shell-shell-search-keyword
-                   (not (string= xwl-shell-shell-search-keyword "")))
-              (format "Search backward shell command (regexp = %s): "
-                      xwl-shell-shell-search-keyword)
-            "Search backward shell command (regexp): "))))
-  (unless (string= keyword "")
-    (setq xwl-shell-shell-search-keyword keyword))
-  (comint-previous-matching-input xwl-shell-shell-search-keyword 1))
-
-(defun xwl-shell-shell-search-forward (&optional keyword)
-  (interactive
-   (list (read-from-minibuffer
-          (if (and xwl-shell-shell-search-keyword
-                   (not (string= xwl-shell-shell-search-keyword "")))
-              (format "Search forward shell command (regexp = %s): "
-                      xwl-shell-shell-search-keyword)
-            "Search forward shell command (regexp): "))))
-  (unless (string= keyword "")
-    (setq xwl-shell-shell-search-keyword keyword))
-  (comint-next-matching-input xwl-shell-shell-search-keyword 1))
-
 (eval-after-load 'comint
   '(progn
      (define-key comint-mode-map (kbd "M-p") (lambda ()
@@ -68,8 +39,6 @@
      (define-key comint-mode-map (kbd "M-n") (lambda ()
                                                (interactive)
                                                (comint-next-input 1)))
-     (define-key comint-mode-map (kbd "M-r") 'xwl-shell-shell-search-backward)
-     (define-key comint-mode-map (kbd "M-s") 'xwl-shell-shell-search-forward)
 
      (define-key comint-mode-map (kbd "C-l") (lambda ()
                                                (interactive)
