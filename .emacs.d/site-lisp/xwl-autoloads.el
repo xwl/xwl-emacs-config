@@ -1,6 +1,6 @@
 
 ;;;### (autoloads (xwl-makefile-clean xwl-makefile-byte-compile xwl-makefile-all)
-;;;;;;  "xwl-makefile" "xwl-makefile.el" (19410 56591))
+;;;;;;  "xwl-makefile" "xwl-makefile.el" (19441 17583))
 ;;; Generated autoloads from xwl-makefile.el
 
 (autoload 'xwl-makefile-all "xwl-makefile" "\
@@ -1298,7 +1298,7 @@ Kill thread from here using leafnode.
 ;;;***
 
 ;;;### (autoloads (twit) "twittering-mode" "twittering-mode/twittering-mode.el"
-;;;;;;  (19430 47466))
+;;;;;;  (19438 20656))
 ;;; Generated autoloads from twittering-mode/twittering-mode.el
 
 (autoload 'twit "twittering-mode" "\
@@ -1816,10 +1816,22 @@ Insert the entered operator plus surrounding spaces.
 
 ;;;***
 
+;;;### (autoloads (salary-show) "salary" "xwl-elisp/salary.el" (19441
+;;;;;;  17140))
+;;; Generated autoloads from xwl-elisp/salary.el
+
+(autoload 'salary-show "salary" "\
+Calculate how much we finally get in our pocket.
+SALARY is before tax.  With prefix argument, insert result at point.
+
+\(fn SALARY)" t nil)
+
+;;;***
+
 ;;;### (autoloads (less-minor-mode-off less-minor-mode-on auto-less-minor-mode
 ;;;;;;  less-quit less-scroll-down-line less-scroll-up-line less-minor-mode
-;;;;;;  global-less-minor-mode) "less" "xwl-elisp/less.el" (19438
-;;;;;;  19885))
+;;;;;;  global-less-minor-mode) "less" "xwl-elisp/less.el" (19439
+;;;;;;  43015))
 ;;; Generated autoloads from xwl-elisp/less.el
 
 (defvar global-less-minor-mode nil "\
@@ -1990,7 +2002,7 @@ Create a *Dashboard* buffer.
 
 ;;;***
 
-;;;### (autoloads (ga) "ga" "xwl-elisp/ga/ga.el" (19214 33075))
+;;;### (autoloads (ga) "ga" "xwl-elisp/ga/ga.el" (19439 61740))
 ;;; Generated autoloads from xwl-elisp/ga/ga.el
 
 (autoload 'ga "ga" "\
