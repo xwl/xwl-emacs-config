@@ -331,7 +331,10 @@
                                   (if b
                                       (switch-to-buffer b)
                                     (ansi-term "top")
-                                    (rename-buffer n)))))
+                                    (rename-buffer n)
+                                    (local-set-key "q" '(lambda ()
+                                                          (interactive)
+                                                          (kill-buffer (current-buffer))))))))
 
 (provide 'xwl-bindings)
 
