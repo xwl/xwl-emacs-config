@@ -24,7 +24,7 @@
 (require 'xwl-util)
 
 ;; ,----
-;; | General
+;; | general
 ;; `----
 
 ;; irc.pchome.net:7000
@@ -216,17 +216,17 @@ If the buffer is currently not visible, makes it sticky."
                     '("Users" "User" "topic set by" "Welcome to " "nickname"
                       "identified" "invalid" "your unique"))
                    message)))
-    (xwl-notify (concat "ERC: " (buffer-name (current-buffer))) message)))
+    (xwl-notify (concat "ERC: " (buffer-name)) message)))
 
 (add-hook 'erc-text-matched-hook 'xwl-erc-text-matched-hook)
 
-(defun xwl-erc-PRIVMSG (proc parsed)
-  (let ((buf (buffer-name (current-buffer))))
-    (unless (string-match ":\\|&" buf)
-      (xwl-notify (concat "ERC: " (buffer-name (current-buffer))) message))))
+;; (defun xwl-erc-PRIVMSG (proc parsed)
+;;   (let ((b (buffer-name)))
+;;     (unless (string-match ":\\|&" b)
+;;       (xwl-notify (concat "****** ERC: " b) message))))
 
-(unless (eq system-type 'windows-nt)
-  (add-hook 'erc-server-PRIVMSG-functions 'xwl-erc-PRIVMSG))
+;; (unless (eq system-type 'windows-nt)
+;;   (add-hook 'erc-server-PRIVMSG-functions 'xwl-erc-PRIVMSG))
 
 ;; ,----
 ;; | misc

@@ -19,10 +19,6 @@
 ;; Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 ;; 02110-1301 USA
 
-;;; Commentary:
-
-;; Things that has very few or no dependencies to other elisp extensions.
-
 ;;; Code:
 
 (require 'cl)
@@ -85,41 +81,6 @@ each OS has different set of tools. "
     (toggle-read-only 1)))
 
 
-;;; 随机签名档
-
-(defun xwl-qiushibaike-random ()
-  "从 qiushibaike.com 获取一条随机笑话。"
-  (let* ((n (random 30000))
-         (url (format "http://www.qiushibaike.com/qiushi/number/%d" n))
-         (buf (url-retrieve-synchronously url))
-         (valid? nil)
-         (ret ""))
-    (with-current-buffer buf
-      ;; (switch-to-buffer buf)
-      (url-extra-html-decode-buffer)
-      (goto-char (point-min))
-      (when (re-search-forward "<div class=\"content\">" nil t 1)
-        (let ((start (+ (point) 1))     ;跳到下一行开头
-              (content ""))
-          (when (or (and (re-search-forward "<div class=\"tag\"" nil t 1)
-                         (re-search-backward "<div class=\"tag\"" nil t 1))
-                    (and (re-search-forward "<\\/div>" nil t 1)
-                         (re-search-backward "<\\/div>" nil t 1)))
-            (setq valid? t)
-            (setq ret
-                  (concat
-                   "<p>"
-                   (replace-regexp-in-string
-                    "<br \\/>\\|^ +\\| +$\\|\\|\n"
-                    ""
-                    (delete-and-extract-region start (point)))
-                   "</p>"
-                   (format "\n<a href=\"%s\">糗事#%d</a>" url n)))))))
-    (kill-buffer buf)
-    (if valid?
-        ret
-      (xwl-qiushibaike-random))))
-
 ;;; paste in IRC
 
 (setq xwl-paste-username "xwl")
@@ -196,82 +157,6 @@ simply yank it when needed."
             (setq tbl nil)))
         mode)))))
 
-;;; salary
-
-;; http://www.tekken.com.cn/m/money.html
-
-;; 保险
-(defun salary-insurances (salary)
-  ;; 养老(每年4月更新)、医疗（另加3元）、失业、公积金(每年7月更新)
-  ;; 北京人均工资: 3322 (2008-2009), 3726 (2009-)
-  (let* ((bj-avg 3726)
-         (cap (* bj-avg 3))
-    ;; (round (+ (* (min salary cap) (+ 0.08 0.02 0.005 0.12)) 3))))
-         (items
-          (append (mapcar (lambda (i) (* (min salary cap) i)) '(0.08 0.02 0.005 0.12))
-                  (list 3))))
-    (list (round (apply '+ items))
-          (mapcar* 'cons
-                   '("养老 8%" "医疗 2%" "失业 0.5%" "公积金 12%" "医疗額外 3")
-                   items))))
-
-;; 个税起征点
-(setq salary-tax-base 2000)             ; 北京
-
-(defconst salary-tax-table
-  ;; from  to     rate 扣除额?
-  '((0     500    0.10 0)               ; (0, 500]
-    (500   2000   0.10 25)
-    (2000  5000   0.15 125)
-    (5000  20000  0.20 375)
-    (20000 40000  0.25 1375)
-    (40000 60000  0.30 3375)
-    (60000 80000  0.35 6375)
-    (80000 100000 0.40 10375)
-
-    (10000 0.45 15375)))
-
-(defun salary-tax (salary)
-  (let ((table salary-tax-table)
-        (i nil)
-        (exceeded (- salary
-                     salary-tax-base
-                     (car (salary-insurances salary))))
-        (rate 0)
-        (to-substract 0))
-    (while table
-      (setq i (car table))
-      (setq table (cdr table))
-      (if (= (list-length i) 3)
-          (when (> exceeded (car i))
-            (setq rate (nth 1 i)
-                  to-substract (nth 2 i))
-            (setq table nil))
-        (let ((low (nth 0 i))
-              (high (nth 1 i)))
-          (when (and (> exceeded low) (<= exceeded high))
-            (setq rate (nth 2 i)
-                  to-substract (nth 3 i))
-            (setq table nil)))))
-    (cons (round (- (* exceeded rate) to-substract))
-          (format "%d%% base %d" (* rate 100) salary-tax-base))))
-
-(defun salary-at-hand (salary)
-  "除掉个税、保险后真正到手的钱。"
-  (- salary (car (salary-insurances salary)) (car (salary-tax salary))))
-
-(defun salary-show (salary)
-  (interactive "n税前：")
-  (let ((s (format "税前(%d) - 个税%S - 四险一金%S = 最后到手(%d)"
-                   salary
-                   (salary-tax salary)
-                   (salary-insurances salary)
-                   (salary-at-hand salary))))
-    (if current-prefix-arg
-        (insert s)
-      (message "%s" s))))
-
-
 ;;; notify
 
 (setq xwl-notify-emacs-image (file-truename "~/w32/emacs_4_48x48x32.png"))
@@ -293,6 +178,7 @@ simply yank it when needed."
 ;; http://www.fullphat.net/index.php
 ;; http://tlhan-ghun.de/?q=node/59
 (defun xwl-snarl (title message)
+  (require 'xwl-emms)
   (xwl-shell-command-asynchronously
    (format "Snarl_CMD.exe snShowMessage 5 \"%s\" \"%s\" \"%s\""
            (emms-i18n-iconv 'utf-8 'gb18030 title)
@@ -462,12 +348,6 @@ is all)"
   (xwl-highlight-changes-for-some-buffer)
   (delete-windows-on (buffer-name)))
 
-(defun xwl-list-ref (list ref)
-  "Return the ref-th element of list."
-  (if (= ref 0)
-      (car list)
-    (xwl-list-ref (cdr list) (1- ref))))
-
 (defun xwl-info (file)
   (interactive
    (list (read-file-name "info: ")))
@@ -611,12 +491,6 @@ websites.  It also keeps original empty line for separating paragraphs."
           (move-beginning-of-line 2)))
       (copy-region-as-kill (point-min) (point-max)))))
 
-;; FIXME: any undefine-key corresponding to define-key?
-(defun xwl-disable-key ()
-  (interactive)
-  (message "This key is disabled in current mode")
-  )
-
 ;; Should be re-defun later.
 (defun xds (any) "abcdefg")
 (defun xes (any) "abcdefg")
@@ -719,7 +593,6 @@ This should not affect `buffer-undo-list'."
         (xwl-insert-date)))
     (setq buffer-undo-list old-list))
   nil)
-
 
 (global-set-key (kbd "C-c m d") 'xwl-insert-date)
 

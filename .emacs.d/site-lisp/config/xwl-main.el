@@ -54,6 +54,7 @@
 (load "~/.emacs.d/site-lisp/config/xwl-path.el")
 
 (require 'xwl-autoloads)
+(require 'xwl-convenience)
 (require 'xwl-var)
 (when xwl-w32? (require 'xwl-w32))
 (require 'xwl-util)
@@ -62,7 +63,6 @@
 (require 'xwl-mode-line)
 (require 'xwl-help)
 (require 'xwl-buffer)
-(require 'xwl-convenience)
 (require 'xwl-bindings)
 (require 'xwl-outline)
 (require 'xwl-calendar)
@@ -81,6 +81,7 @@
 ;; (require 'xwl-dictionary)
 ;; (require 'xwl-emms)
 ;; (require 'xwl-wubi)
+;; (require 'xwl-bbdb)
 
 (require 'xwl-tex)
 (require 'xwl-misc)

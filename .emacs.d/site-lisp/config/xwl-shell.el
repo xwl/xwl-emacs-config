@@ -86,7 +86,7 @@
        'rename-buffer)
 
      (define-key shell-mode-map (kbd "C-d") 'delete-char)
-     (define-key shell-mode-map (kbd "C-c C-c") 'xwl-disable-key)
+     (define-key shell-mode-map (kbd "C-c C-c") nil)
      ))
 
 

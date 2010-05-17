@@ -590,7 +590,7 @@
      (define-key gnus-group-mode-map (kbd "g") 'xwl-gnus-group-get-new-news)
      ;; (define-key gnus-group-mode-map (kbd "g") 'xwl-disable-key)
 
-     (define-key gnus-group-mode-map (kbd "m") 'xwl-disable-key)
+     (define-key gnus-group-mode-map (kbd "m") nil)
 
 ;;      (define-key gnus-group-mode-map (kbd "m") (lambda ()
 ;;                                                  (interactive)
@@ -761,7 +761,8 @@
           '(lambda ()
              ;; FIXME, why do i have to re-eval?
              (when  (and xwl-enter-first-article window-system)
-               (color-theme-xwl-console)
+               (when (fboundp 'color-theme-xwl-console)
+                 (color-theme-xwl-console))
                (setq xwl-enter-first-article nil))))
 
 (defun xwl-gnus-article-show-ip ()

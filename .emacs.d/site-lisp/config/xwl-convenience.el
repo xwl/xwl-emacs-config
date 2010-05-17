@@ -199,7 +199,8 @@
                      gnus-summary-mode
                      gnus-group-mode
                      dired-mode
-                     apropos-mode)))))
+                     apropos-mode
+                     completion-list-mode)))))
 (global-less-minor-mode 1)
 
 (provide 'xwl-convenience)

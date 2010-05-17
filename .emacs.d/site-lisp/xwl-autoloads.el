@@ -314,7 +314,7 @@ HTMLize dired-marked files.
 
 (autoload 'graphviz-dot-mode "graphviz-dot-mode" "\
 Major mode for the dot language. \\<graphviz-dot-mode-map>
-TAB indents for graph lines. 
+TAB indents for graph lines.
 
 \\[graphviz-dot-indent-graph]	- Indentaion function.
 \\[graphviz-dot-preview]	- Previews graph in a buffer.
@@ -339,11 +339,11 @@ Variables specific to this mode:
   graphviz-dot-preview-extension      (default `png')
        File type to use for `graphviz-dot-preview'.
   graphviz-dot-auto-indent-on-newline (default t)
-       Whether to run `electric-graphviz-dot-terminate-line' when 
+       Whether to run `electric-graphviz-dot-terminate-line' when
        newline is entered.
   graphviz-dot-auto-indent-on-braces (default t)
        Whether to run `electric-graphviz-dot-open-brace' and
-       `electric-graphviz-dot-close-brace' when braces are 
+       `electric-graphviz-dot-close-brace' when braces are
        entered.
   graphviz-dot-auto-indent-on-semi (default t)
        Whether to run `electric-graphviz-dot-semi' when semi colon
@@ -355,7 +355,7 @@ Variables specific to this mode:
 
 This mode can be customized by running \\[graphviz-dot-customize].
 
-Turning on Graphviz Dot mode calls the value of the variable 
+Turning on Graphviz Dot mode calls the value of the variable
 `graphviz-dot-mode-hook' with no args, if that value is non-nil.
 
 \(fn)" t nil)
@@ -788,7 +788,7 @@ This is a mode for searching a dictionary server implementing
 
  * Return or Button2 visit that link
  * M-Return or M-Button2 search the word beneath link in all dictionaries
- 
+
 
 \(fn)" nil nil)
 
@@ -798,7 +798,7 @@ Create a new dictonary buffer and install dictionary-mode
 \(fn)" t nil)
 
 (autoload 'dictionary-search "dictionary" "\
-Search the `word' in `dictionary' if given or in all if nil.  
+Search the `word' in `dictionary' if given or in all if nil.
 It presents the word at point as default input and allows editing it.
 
 \(fn WORD &optional DICTIONARY)" t nil)
@@ -1302,16 +1302,6 @@ Kill thread from here using leafnode.
 ;;; Generated autoloads from twittering-mode/twittering-mode.el
 
 (autoload 'twit "twittering-mode" "\
-Start twittering-mode.
-
-\(fn)" t nil)
-
-;;;***
-
-;;;### (autoloads (twit) "a" "twittering-mode/a.el" (19414 57117))
-;;; Generated autoloads from twittering-mode/a.el
-
-(autoload 'twit "a" "\
 Start twittering-mode.
 
 \(fn)" t nil)
