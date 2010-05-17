@@ -190,6 +190,7 @@
                    "\\|"
                    (regexp-opt '("todo.org"
                                  "*nntpd*"
+                                 " *Compiler Input*"
                                  ))))
      (setq auto-less-exclude-modes
            (append auto-less-exclude-modes
