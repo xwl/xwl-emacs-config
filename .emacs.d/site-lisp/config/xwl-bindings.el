@@ -59,14 +59,21 @@
 
 (global-set-key (kbd "<f11>") (lambda ()
                                 (interactive)
-                                (xwl-switch-or-create ":home" 'twit)
+                                (xwl-switch-or-create
+                                 ":home"
+                                 (lambda ()
+                                   (interactive)
+                                   (call-interactively 'twit)
+                                   (twittering-replies-timeline)
+                                   (twittering-direct-messages-timeline)
+                                   (switch-to-buffer ":home")))
+
                                 (unless xwl-timers-hook-started?
                                   (run-hooks 'xwl-timers-hook)
                                   (setq xwl-timers-hook-started? t)
 
                                   (command-execute (kbd "<f6>"))
-                                  (command-execute (kbd "C-c n E"))
-                                  )))
+                                  (command-execute (kbd "C-c n E")))))
 
 (global-set-key (kbd "<f13>") 'kill-this-buffer)
 
