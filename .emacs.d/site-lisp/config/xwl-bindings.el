@@ -276,7 +276,7 @@
                                   (if xwl-at-company?
                                       ""
                                     "(ps -ef|grep \"emacs --eval\" | grep -v grep) || ")
-                                  "emacs --eval \"(progn (require 'xwl-gnus) (suspend-frame) (gnus-agent-batch) (gnus-group-save-newsrc t) (save-buffers-kill-terminal t))\""
+                                  "emacs --eval \"(progn (require 'xwl-gnus-agent))\""
                                   ))))))
         (message "Gnus agent timer started"))
       )))
