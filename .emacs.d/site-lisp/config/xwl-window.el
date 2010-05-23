@@ -21,7 +21,7 @@
 
 ;;; Code:
 
-(unless window-system 
+(unless window-system
   (error "This config only makes sense for a window-system"))
 
 ;;; Fonts
@@ -31,15 +31,15 @@
 ;; 2. fc-cache -rf
 
 ;; http://www.gringod.com/2006/02/24/return-of-monacottf/
-(setq xwl-window-fonts
-      `((mac . ("Monaco-14" "stheiti*" "hiragino maru gothic pro"))
-        (ns  . ("Monaco-14" "Hiragino Sans GB" "Hiragino_Kaku_Gothic_ProN"))
-        (w32 . ("Monaco-10" "NSimSun" "NSimSun"))
-        (x   . ,(if (string= system-name "debian..xwl")
-                   '("DejaVu Sans Mono-11" "wenquanyi" "wenquanyi")
-                 '("DejaVu LGC Sans Mono-14" "SimSun" "SimSun")))))
 
-(let* ((fonts (cdr (assoc window-system xwl-window-fonts)))
+(let* ((all-fonts
+        `((mac . ("Monaco-14" "stheiti*" "hiragino maru gothic pro"))
+          (ns  . ("Monaco-14" "Hiragino Sans GB" "Hiragino_Kaku_Gothic_ProN"))
+          (w32 . ("Monaco-10" "NSimSun" "NSimSun"))
+          (x   . ,(if (string= system-name "debian..xwl")
+                      '("DejaVu Sans Mono-11" "wenquanyi" "wenquanyi")
+                    '("DejaVu LGC Sans Mono-14" "SimSun" "SimSun")))))
+       (fonts (cdr (assoc window-system all-fonts)))
        (default-font (nth 0 fonts))
        (cn-font (nth 1 fonts))
        (jp-font (nth 2 fonts))
@@ -57,6 +57,7 @@
                             (car cf)
                             (font-spec :family (cdr cf) :size 14)))
         charset-fonts))
+
 
 ;;; Misc
 
@@ -80,10 +81,13 @@
 ;;     (setq explicit-shell-file-name "c:/cygwin/bin/bash.exe")
 ;;     (setq shell-file-name explicit-shell-file-name)))
 
-(setq ns-pop-up-frames nil)
-
 ;; control+英数(jis_esiuu)+p is missing on my macbook! :(
 (global-set-key (kbd "C-M-@") (kbd "C-M-p"))
+
+(when (eq window-system 'ns)
+  (setq ns-pop-up-frames nil)
+  (set-cursor-color "Magenta")
+  (setq ns-show-menu-bar-p t))
 
 (provide 'xwl-window)
 

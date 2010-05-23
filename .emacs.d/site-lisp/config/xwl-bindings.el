@@ -66,6 +66,7 @@
                                    (call-interactively 'twit)
                                    (twittering-replies-timeline)
                                    (twittering-direct-messages-timeline)
+                                   (twittering-visit-timeline ":followers")
                                    (switch-to-buffer ":home")))
 
                                 (unless xwl-timers-hook-started?
