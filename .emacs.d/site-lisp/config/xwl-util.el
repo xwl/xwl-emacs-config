@@ -189,19 +189,6 @@ simply yank it when needed."
   (xwl-shell-command-asynchronously
    (format "zenity --info --text \"%s\"" message)))
 
-;;; noninteractive setup
-
-(when noninteractive
-  (setq vc-follow-symlinks t)
-
-  (defun yes-or-no-p (p)
-    t)
-
-  (defun y-or-n-p (p)
-    t)
-  )
-
-
 ;;; Misc
 
 (defun xwl-strip-blank-lines-buffer ()
@@ -668,6 +655,17 @@ Note: you are suggested to kill process buffer at the end of CALLBACK. "
                                    (if (zerop err)
                                        (funcall ,callback)
                                      (error "`%s' failed: %d" ,cmd err)))))))))
+
+(defun forward-ascii-symbol (arg)
+  "New thing for `thingapt'."
+  (interactive "p")
+  (let ((re "\\([a-zA-Z0-9]\\(\\sw\\|\\s_\\)+[a-zA-Z0-9]\\)" ))
+    (if (natnump arg)
+        (re-search-forward re nil 'move arg)
+      (while (< arg 0)
+        (if (re-search-backward re nil 'move)
+            (skip-syntax-backward "w_"))
+        (setq arg (1+ arg))))))
 
 (provide 'xwl-util)
 

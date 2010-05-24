@@ -124,16 +124,6 @@
 (global-set-key (kbd "M-K") 'kill-sexp)
 ;; (global-set-key (kbd "M-H") 'mark-sexp)
 
-(defun forward-ascii-symbol (arg)
-  (interactive "p")
-  (let ((re "\\([a-zA-Z0-9]\\(\\sw\\|\\s_\\)+[a-zA-Z0-9]\\)" ))
-    (if (natnump arg)
-        (re-search-forward re nil 'move arg)
-      (while (< arg 0)
-        (if (re-search-backward re nil 'move)
-            (skip-syntax-backward "w_"))
-        (setq arg (1+ arg))))))
-
 (defun xwl-mark-ascii-symbol ()
   "Mark ascii-symbol by `thing-at-point'."
   (interactive)
