@@ -72,7 +72,7 @@
 (global-set-key (kbd "C-?") 'xwl-cycle-input-method)
 
 ;; (global-set-key (kbd "C-?") 'xwl-cycle-input-method)
-(global-set-key (kbd "C-,") 'wubi-toggle-quanjiao-banjiao)
+;; (global-set-key (kbd "C-,") 'wubi-toggle-quanjiao-banjiao)
 (global-set-key (kbd "C-c m W") 'wubi-load-local-phrases)
 
 (provide 'xwl-wubi)
