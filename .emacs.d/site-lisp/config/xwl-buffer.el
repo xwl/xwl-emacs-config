@@ -56,6 +56,7 @@
          ("text" (filename . ".*"))
          ("dired" (mode . dired-mode))
          ("erc" (mode . erc-mode))
+         ("twittering" (mode . twittering-mode))
          ("gnus" (or
                   (mode . message-mode)
                   (mode . bbdb-mode)

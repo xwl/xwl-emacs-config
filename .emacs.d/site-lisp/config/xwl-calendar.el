@@ -56,7 +56,7 @@
 
 (setq appt-disp-window-function
       (lambda (min-to-app new-time appt-msg)
-        (xwl-notify "appt" (format "距約會 %s 還有 %s 分鍾" appt-msg min-to-app))
+        (xwl-notify "appt" (format "\"距約會 %s 還有 %s 分鍾\"" appt-msg min-to-app))
         (appt-disp-window min-to-app new-time appt-msg)))
 
 (defun xwl-current-year ()
