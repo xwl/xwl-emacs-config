@@ -124,13 +124,23 @@
 (global-set-key (kbd "M-K") 'kill-sexp)
 ;; (global-set-key (kbd "M-H") 'mark-sexp)
 
-(defun sl-mark-symbol ()
-  "Like `mark-sexp' but smarter."
-  (interactive)
-  (set-mark (beginning-of-thing 'symbol))
-  (goto-char (end-of-thing 'symbol)))
+(defun forward-ascii-symbol (arg)
+  (interactive "p")
+  (let ((re "\\([a-zA-Z0-9]\\(\\sw\\|\\s_\\)+[a-zA-Z0-9]\\)" ))
+    (if (natnump arg)
+        (re-search-forward re nil 'move arg)
+      (while (< arg 0)
+        (if (re-search-backward re nil 'move)
+            (skip-syntax-backward "w_"))
+        (setq arg (1+ arg))))))
 
-(global-set-key (kbd "M-H") 'sl-mark-symbol)
+(defun xwl-mark-ascii-symbol ()
+  "Mark ascii-symbol by `thing-at-point'."
+  (interactive)
+  (set-mark (beginning-of-thing 'ascii-symbol))
+  (goto-char (end-of-thing 'ascii-symbol)))
+
+(global-set-key (kbd "M-H") 'xwl-mark-ascii-symbol)
 
 (global-set-key (kbd "M-D") 'backward-kill-word)
 (global-set-key (kbd "M-C") 'capitalize-region)
