@@ -574,33 +574,6 @@ If buffer exists and a process is running, just switch to buffer
 
        )))
 
-(eval-after-load 'grep
-  '(progn
-
-     (defadvice grep (around append-star activate)
-       (interactive
-        (progn
-          (grep-compute-defaults)
-          (let ((default (grep-default-command)))
-            (list (read-shell-command
-                   "Run grep (like this): "
-                   (let ((init (concat (if current-prefix-arg
-                                           default
-                                         grep-command)
-                                       " *")))
-                     (cons init (- (length init) 1)))
-
-                   'grep-history
-                   (if current-prefix-arg nil default))))))
-
-       ;; Setting process-setup-function makes exit-message-function work
-       ;; even when async processes aren't supported.
-       (compilation-start (if (and grep-use-null-device null-device)
-                              (concat command-args " " null-device)
-                            command-args)
-                          'grep-mode))
-     ))
-
 (eval-after-load 'ede-emacs
   '(progn
      (defadvice ede-emacs-version (around redefined activate)

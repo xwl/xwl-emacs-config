@@ -50,6 +50,8 @@
              (not (string-match "\\.l$\\|\\.y$" (buffer-file-name))))
     (c-toggle-auto-hungry-state 1))
 
+  (add-to-list 'c-hanging-braces-alist '(brace-list-close))
+
   ;; (glasses-mode 1)
   ;; (hs-minor-mode 1)
   ;; (hs-hide-all)
@@ -310,14 +312,24 @@ Thus generate a TAGs file."
 (global-set-key (kbd "C-c k")
                 (lambda ()
                   (interactive)
-                  (kill-new (buffer-name))
-                  (message "Buffer name copied")))
+                  (let ((s (if (buffer-file-name)
+                               (file-name-nondirectory (buffer-file-name))
+                             (buffer-name))))
+                    (kill-new s)
+                    (message "Copied: `%s'" s))))
 
 (global-set-key (kbd "C-c K")
                 (lambda ()
                   (interactive)
-                  (kill-new (buffer-file-name))
-                  (message "Full file name copied")))
+                  (let ((s
+                         (if (eq major-mode 'gnus-article-mode)
+                             (save-excursion
+                               (goto-char (point-min))
+                               (when (search-forward-regexp "Archived-At: <\\(.+\\)>" nil t 1)
+                                 (match-string 1)))
+                           (buffer-file-name))))
+                    (kill-new s)
+                    (message "Copied: `%s'" s))))
 
 (eval-after-load 'vc-dir
   '(progn
@@ -437,14 +449,40 @@ Thus generate a TAGs file."
 (when (eq system-type 'windows-nt)
   (setq find-program "cmd /c c:/usr/git/bin/find"))
 
+(eval-after-load 'grep
+  '(progn
+     (defadvice grep (around append-star activate)
+       (interactive
+        (progn
+          (grep-compute-defaults)
+          (let ((default (grep-default-command)))
+            (list
+             (read-shell-command
+              "Run grep (like this): "
+              (let ((init
+                     (concat (if current-prefix-arg default grep-command)
+                             (concat "\"" (thing-at-point 'ascii-symbol) "\" *"))))
+                (cons init (- (length init) 2)))
+              'grep-history
+              (if current-prefix-arg nil default))))))
+
+       ;; Setting process-setup-function makes exit-message-function work
+       ;; even when async processes aren't supported.
+       (compilation-start (if (and grep-use-null-device null-device)
+                              (concat command-args " " null-device)
+                            command-args)
+                          'grep-mode))
+     ))
+
 (global-set-key (kbd "C-c g")
                 (lambda ()
                   (interactive)
                   (require 'grep)
-                  (if (string-match "\\.gz" (shell-command-to-string "ls | head -1"))
-                      (grep-apply-setting 'grep-command "zgrep -nH ")
-                    (grep-apply-setting 'grep-command "grep -nH "))
-                  (call-interactively 'grep)))
+                  (let ((cmd
+                         (if (string-match "\\.gz" (shell-command-to-string "ls | head -1"))
+                             "zgrep -nH " "grep -nH ")))
+                    (grep-apply-setting 'grep-command cmd)
+                    (call-interactively 'grep))))
 
 (global-set-key (kbd "C-c G")
                 (lambda (cmd)
