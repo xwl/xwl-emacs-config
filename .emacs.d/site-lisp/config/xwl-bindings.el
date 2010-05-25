@@ -344,6 +344,9 @@
                                                           (interactive)
                                                           (kill-buffer (current-buffer))))))))
 
+;; set-fill-column
+(global-unset-key (kbd "C-x f"))
+
 (provide 'xwl-bindings)
 
 ;;; xwl-bindings.el ends here
