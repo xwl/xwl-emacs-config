@@ -153,13 +153,14 @@ point.  Especially useful for w32."
                       d))))
 
           ;; Use shell's current dir as default-directory on w32.
-          ((and xwl-w32? (eq major-mode 'shell-mode))
-           (save-excursion
-             (goto-char (point-max))
-             (let ((end (progn (search-backward ">" nil t 1)
-                               (point))))
-               (setq d (buffer-substring-no-properties
-                        (line-beginning-position) end))))))
+          ;; ((and xwl-w32? (eq major-mode 'shell-mode))
+          ;;  (save-excursion
+          ;;    (goto-char (point-max))
+          ;;    (let ((end (progn (search-backward ">" nil t 1)
+          ;;                      (point))))
+          ;;      (setq d (buffer-substring-no-properties
+          ;;               (line-beginning-position) end)))))
+          )
     (let ((default-directory (expand-file-name d)))
       ad-do-it)))
 
