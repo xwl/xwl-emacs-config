@@ -87,6 +87,83 @@
 
      (define-key shell-mode-map (kbd "C-d") 'delete-char)
      (define-key shell-mode-map (kbd "C-c C-c") nil)
+
+(defvar xwl-w32-disk-directory-cache nil
+  "Store last visited directory for each disk.
+e.g.,
+  '((\"j:\" . \"j:/sf/mw\"))")
+
+(make-variable-buffer-local 'xwl-w32-disk-directory-cache)
+
+(defun shell-directory-tracker (str)
+  "Tracks cd, pushd and popd commands issued to the shell.
+This function is called on each input passed to the shell.
+It watches for cd, pushd and popd commands and sets the buffer's
+default directory to track these commands.
+
+You may toggle this tracking on and off with \\[shell-dirtrack-mode].
+If Emacs gets confused, you can resync with the shell with \\[dirs].
+\(The `dirtrack' package provides an alternative implementation of this
+feature - see the function `dirtrack-mode'.)
+
+See variables `shell-cd-regexp', `shell-chdrive-regexp', `shell-pushd-regexp',
+and  `shell-popd-regexp', while `shell-pushd-tohome', `shell-pushd-dextract',
+and `shell-pushd-dunique' control the behavior of the relevant command.
+
+Environment variables are expanded, see function `substitute-in-file-name'."
+  (if shell-dirtrackp
+      ;; We fail gracefully if we think the command will fail in the shell.
+      (condition-case chdir-failure
+	  (let ((start (progn (string-match
+			       (concat "^" shell-command-separator-regexp)
+			       str) ; skip whitespace
+			      (match-end 0)))
+		end cmd arg1)
+	    (while (string-match shell-command-regexp str start)
+	      (setq end (match-end 0)
+		    cmd (comint-arguments (substring str start end) 0 0)
+		    arg1 (comint-arguments (substring str start end) 1 1))
+	      (if arg1
+		  (setq arg1 (shell-unquote-argument arg1)))
+              ;; Set default-directory correctly such that the TAB
+              ;; completion could still work when changing disk on w32
+              ;; by, e.g., typing "k:" on the command line. (xwl)
+              (when (and (eq system-type 'windows-nt)
+                         (string= ":" (substring cmd (1- (length cmd)))))
+                (let* ((d (expand-file-name default-directory))
+                       (drive (substring d 0 2)))
+                  (setq xwl-w32-disk-directory-cache
+                        (cons (cons drive d)
+                              (remove-if (lambda (el) (string= (car el) drive))
+                                         xwl-w32-disk-directory-cache))))
+                (setq arg1 (or (some (lambda (el)
+                                       (when (string= (car el) cmd) (cdr el)))
+                                     xwl-w32-disk-directory-cache)
+                               (concat cmd "/"))
+                      cmd "cd"))
+	      (cond ((string-match (concat "\\`\\(" shell-popd-regexp
+					   "\\)\\($\\|[ \t]\\)")
+				   cmd)
+		     (shell-process-popd (comint-substitute-in-file-name arg1)))
+		    ((string-match (concat "\\`\\(" shell-pushd-regexp
+					   "\\)\\($\\|[ \t]\\)")
+				   cmd)
+		     (shell-process-pushd (comint-substitute-in-file-name arg1)))
+		    ((string-match (concat "\\`\\(" shell-cd-regexp
+					   "\\)\\($\\|[ \t]\\)")
+				   cmd)
+		     (shell-process-cd (comint-substitute-in-file-name arg1)))
+		    ((and shell-chdrive-regexp
+			  (string-match (concat "\\`\\(" shell-chdrive-regexp
+						"\\)\\($\\|[ \t]\\)")
+					cmd))
+		     (shell-process-cd (comint-substitute-in-file-name cmd))))
+	      (setq start (progn (string-match shell-command-separator-regexp
+					       str end)
+				 ;; skip again
+				 (match-end 0)))))
+	(error "Couldn't cd"))))
+
      ))
 
 
