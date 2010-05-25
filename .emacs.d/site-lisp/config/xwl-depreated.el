@@ -877,5 +877,13 @@ If FOCUS-REV is non-nil, leave the point at that revision."
 
 ;; (global-set-key (kbd "C-c G") 'grep-find)
 
+(add-hook 'find-file-not-found-hooks 'file-template-find-file-not-found-hook 'append)
+
+(eval-after-load 'file-template
+  '(progn
+     (setq file-template-mapping-alist
+           (append file-template-mapping-alist
+                   '(("\\.texinfo$" . "template.texinfo"))))))
+
 
 ;;; xwl-depreated.el ends here

@@ -291,6 +291,8 @@
 
 (global-set-key (kbd "C-c F") 'xwl-recentf-open-files)
 
+(add-hook 'find-file-hook 'auto-insert)
+
 ;; ,----
 ;; | file hooks
 ;; `----
@@ -440,15 +442,6 @@
 
 (unless noninteractive
   (add-hook 'after-init-hook 'xwl-after-init-hook))
-
-(autoload 'file-template-find-file-not-found-hook "file-template" nil t)
-(add-hook 'find-file-not-found-hooks 'file-template-find-file-not-found-hook 'append)
-
-(eval-after-load 'file-template
-  '(progn
-     (setq file-template-mapping-alist
-           (append file-template-mapping-alist
-                   '(("\\.texinfo$" . "template.texinfo"))))))
 
 (savehist-mode 1)
 
@@ -752,22 +745,22 @@ passphrase cache or user."
 ;; ,----
 ;; | Track cahnges for some buffer
 ;; `----
-(defadvice switch-to-buffer (before
-                             highlight-changes-for-some-buffer
-                             activate)
-  (xwl-highlight-changes-for-some-buffer))
+;; (defadvice switch-to-buffer (before
+;;                              highlight-changes-for-some-buffer
+;;                              activate)
+;;   (xwl-highlight-changes-for-some-buffer))
 
-(defun xwl-highlight-changes-for-some-buffer ()
-  (cond ((memq major-mode (list ;; 'erc-mode
-                           'twittering-mode))
-         (let ((buffer-read-only nil)
-               (inhibit-read-only t))
-           (highlight-changes-mode -1)
-           (highlight-changes-mode 1)))
-        ((memq major-mode (list 'erc-mode))
-           (when (memq (current-buffer) (erc-buffer-list))
-             (goto-char (point-max))
-             (forward-line -1)))))
+;; (defun xwl-highlight-changes-for-some-buffer ()
+;;   (cond ((memq major-mode (list ;; 'erc-mode
+;;                            'twittering-mode))
+;;          (let ((buffer-read-only nil)
+;;                (inhibit-read-only t))
+;;            (highlight-changes-mode -1)
+;;            (highlight-changes-mode 1)))
+;;         ((memq major-mode (list 'erc-mode))
+;;            (when (memq (current-buffer) (erc-buffer-list))
+;;              (goto-char (point-max))
+;;              (forward-line -1)))))
 
 ;; ,----
 ;; | s60lxr
