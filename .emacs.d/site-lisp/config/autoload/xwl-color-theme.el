@@ -21,8 +21,6 @@
 
 ;;; Code:
 
-(require 'color-theme)
-
 ;;; color-theme, `list-colors-display', `color-theme-print'.
 
 ;; (color-theme-xwl-console)
@@ -30,12 +28,14 @@
 ;; color-theme-standard
 ;; color-theme-vim-colors
 
-(defalias 'color-theme-xwl-console 'color-theme-vim-colors)
-
-(defun color-theme-xwl-console-orig ()
+;;;###autoload
+(defun color-theme-xwl-console-disabled ()
   "Color theme base on console colors with `color-theme-print'.
 Created on 2005-05-13."
   (interactive)
+  (unless window-system
+    (error "Better not use color theme on console"))
+  (require 'color-theme)
   (color-theme-install
    '(color-theme-xwl-console
      (
@@ -310,6 +310,6 @@ Created on 2005-05-13."
      (woman-italic-face ((t (:italic t :underline t :slant italic))))
      (woman-unknown-face ((t (:foreground "cyan")))))))
 
-(provide 'xwl-color-theme)
 
+(provide 'xwl-color-theme)
 ;;; xwl-color-theme.el ends here

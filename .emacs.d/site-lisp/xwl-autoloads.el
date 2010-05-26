@@ -378,33 +378,6 @@ will return point to the current position.
 
 ;;;***
 
-;;;### (autoloads (file-template-find-file-not-found-hook file-template-auto-insert
-;;;;;;  file-template-insert) "file-template" "file-template.el"
-;;;;;;  (18911 33708))
-;;; Generated autoloads from file-template.el
-
-(autoload 'file-template-insert "file-template" "\
-Insert template into buffer, performing tag expansions.
-See `file-template-tag-alist' for list of predefined tags.
-
-Use this function when you don't want to insert the default template
-associated with the file type in `file-template-mapping-alist'.
-Otherwise, use `file-template-auto-insert'.
-
-\(fn TEMPLATE)" t nil)
-
-(autoload 'file-template-auto-insert "file-template" "\
-Insert default template into buffer.
-
-\(fn)" t nil)
-
-(autoload 'file-template-find-file-not-found-hook "file-template" "\
-Hook to (optionally) insert the default template when a new file is created.
-
-\(fn)" nil nil)
-
-;;;***
-
 ;;;### (autoloads (etags-select-find-tag etags-select-find-tag-at-point
 ;;;;;;  etags-select-go-if-unambiguous etags-select-use-short-name-completion
 ;;;;;;  etags-select-highlight-delay etags-select-highlight-tag-after-jump
@@ -1298,7 +1271,7 @@ Kill thread from here using leafnode.
 ;;;***
 
 ;;;### (autoloads (twit) "twittering-mode" "twittering-mode/twittering-mode.el"
-;;;;;;  (19438 20656))
+;;;;;;  (19453 15144))
 ;;; Generated autoloads from twittering-mode/twittering-mode.el
 
 (autoload 'twit "twittering-mode" "\
@@ -1830,8 +1803,8 @@ SALARY is before tax.  With prefix argument, insert result at point.
 
 ;;;### (autoloads (less-minor-mode-off less-minor-mode-on auto-less-minor-mode
 ;;;;;;  less-quit less-scroll-down-line less-scroll-up-line less-minor-mode
-;;;;;;  global-less-minor-mode) "less" "xwl-elisp/less.el" (19439
-;;;;;;  43015))
+;;;;;;  global-less-minor-mode) "less" "xwl-elisp/less.el" (19451
+;;;;;;  54875))
 ;;; Generated autoloads from xwl-elisp/less.el
 
 (defvar global-less-minor-mode nil "\
@@ -1857,7 +1830,7 @@ See `less-minor-mode' for more information on Less minor mode.
 Toggle less-minor-mode.
 
 With less-minor-mode enabled, you could use `less' like keys to view files.
-\\{less-minor-mode-map}.
+\\{less-minor-mode-map}
 
 \(fn &optional ARG)" t nil)
 
@@ -2009,6 +1982,246 @@ Create a *Dashboard* buffer.
 Create or switch to a ga buffer.
 
 \(fn &optional BACKEND)" t nil)
+
+;;;***
+
+;;;### (autoloads (xwl-backward-char xwl-forward-char his-isearch-backward-current-symbol
+;;;;;;  his-isearch-current-symbol his-isearch-yank-symbol) "xwl-vim"
+;;;;;;  "config/autoload/xwl-vim.el" (19453 18479))
+;;; Generated autoloads from config/autoload/xwl-vim.el
+
+(autoload 'his-isearch-yank-symbol "xwl-vim" "\
+Put symbol at current point into search string.
+
+  If PARTIALP is non-nil, find all partial matches.
+
+\(fn &optional PARTIALP)" t nil)
+
+(autoload 'his-isearch-current-symbol "xwl-vim" "\
+Incremental search forward with symbol under point.
+
+  Prefixed with \\[universal-argument] will find all partial
+  matches.
+
+\(fn &optional PARTIALP)" t nil)
+
+(autoload 'his-isearch-backward-current-symbol "xwl-vim" "\
+Incremental search backward with symbol under point.
+
+  Prefixed with \\[universal-argument] will find all partial
+  matches.
+
+\(fn &optional PARTIALP)" t nil)
+
+(autoload 'xwl-forward-char "xwl-vim" "\
+Not documented
+
+\(fn N CHAR)" t nil)
+
+(autoload 'xwl-backward-char "xwl-vim" "\
+Not documented
+
+\(fn N CHAR)" t nil)
+
+;;;***
+
+;;;### (autoloads (xwl-paste-ubuntu-cn-image xwl-paste-ubuntu-cn)
+;;;;;;  "xwl-paste" "config/autoload/xwl-paste.el" (19453 16411))
+;;; Generated autoloads from config/autoload/xwl-paste.el
+
+(autoload 'xwl-paste-ubuntu-cn "xwl-paste" "\
+Paste region between BEG and END to http://paste.ubuntu.org.cn.
+
+Resulted post url will be appended to your kill ring, so you can
+simply yank it when needed.
+
+\(fn BEG END &optional CLASS)" t nil)
+
+(autoload 'xwl-paste-ubuntu-cn-image "xwl-paste" "\
+Not documented
+
+\(fn FILENAME)" t nil)
+
+;;;***
+
+;;;### (autoloads (xwl-zenity xwl-snarl xwl-growl xwl-notify) "xwl-notify"
+;;;;;;  "config/autoload/xwl-notify.el" (19453 16844))
+;;; Generated autoloads from config/autoload/xwl-notify.el
+
+(autoload 'xwl-notify "xwl-notify" "\
+Not documented
+
+\(fn TITLE MESSAGE)" nil nil)
+
+(autoload 'xwl-growl "xwl-notify" "\
+Not documented
+
+\(fn TITLE MESSAGE)" nil nil)
+
+(autoload 'xwl-snarl "xwl-notify" "\
+Not documented
+
+\(fn TITLE MESSAGE)" nil nil)
+
+(autoload 'xwl-zenity "xwl-notify" "\
+Not documented
+
+\(fn TITLE MESSAGE)" nil nil)
+
+;;;***
+
+;;;### (autoloads (xwl-info his-unix2dos his-dos2unix xwl-fortune-favorites
+;;;;;;  xwl-fortune-favorites-vertically xwl-fortune-laozi forward-ascii-symbol
+;;;;;;  xwl-shell-command-asynchronously-with-callback xwl-generate-password
+;;;;;;  xwl-download-book xwl-delete-line his-transpose-windows his-one-whitespace-between-ce
+;;;;;;  xwl-soft-kill-ring-save xwl-word-count-analysis xwl-count-ce-word
+;;;;;;  his-align-cols xwl-numerate-lines xwl-strip-blank-lines-region
+;;;;;;  xwl-strip-blank-lines-buffer ascii-table-show) "xwl-extra-util"
+;;;;;;  "config/autoload/xwl-extra-util.el" (19453 18299))
+;;; Generated autoloads from config/autoload/xwl-extra-util.el
+
+(autoload 'ascii-table-show "xwl-extra-util" "\
+Print the ascii table, by crazycool@smth.
+
+\(fn)" t nil)
+
+(autoload 'xwl-strip-blank-lines-buffer "xwl-extra-util" "\
+Strip all blank lines in current buffer.
+
+\(fn)" t nil)
+
+(autoload 'xwl-strip-blank-lines-region "xwl-extra-util" "\
+Strip all blank lines in region.
+
+\(fn START END)" t nil)
+
+(autoload 'xwl-numerate-lines "xwl-extra-util" "\
+Insert line number before each line.
+
+\(fn)" t nil)
+
+(autoload 'his-align-cols "xwl-extra-util" "\
+Align text between point and mark as columns.  Columns are separated by
+whitespace characters.  Prefix arg means align that many columns. (default
+is all)
+
+\(fn START END MAX-COLS)" t nil)
+
+(autoload 'xwl-count-ce-word "xwl-extra-util" "\
+Count Chinese and English words in marked region.
+
+\(fn BEG END)" t nil)
+
+(autoload 'xwl-word-count-analysis "xwl-extra-util" "\
+Count how many times each word is used in the region.
+Punctuation is ignored.
+
+\(fn START END)" t nil)
+
+(autoload 'xwl-soft-kill-ring-save "xwl-extra-util" "\
+Same as `kill-ring-save' except it will convert hard newlines to soft newlines.
+This could be useful for copying texts from Emacs and pasting it to blog
+websites.  It also keeps original empty line for separating paragraphs.
+
+\(fn BEG END)" t nil)
+
+(autoload 'his-one-whitespace-between-ce "xwl-extra-util" "\
+Automatically insert a whitespace between Chinese and English,
+Chinese and digits, which is useful when editing TeX files.
+
+\(fn &optional START END)" t nil)
+
+(autoload 'his-transpose-windows "xwl-extra-util" "\
+Transpose the buffers shown in two windows.
+
+\(fn ARG)" t nil)
+
+(autoload 'xwl-delete-line "xwl-extra-util" "\
+Delete the rest of the current line; if no nonblanks there, delete thru newline.
+With prefix argument, delete that many lines from point.
+Negative arguments delete lines backward.
+With zero argument, deletes the text before point on the current line.
+
+Note its difference between `xwl-delete-line' and `kill-line' is
+that, the deleted contents won't be inserted to the `kill-ring'.
+
+\(fn &optional ARG)" nil nil)
+
+(autoload 'xwl-download-book "xwl-extra-util" "\
+Download link formed of `PRE + index + POST', where `index' belongs to [BEG, END).
+`index' is formated by FMT using `format'. BEG and END are integers. The
+downloaded contents will be saved under \"~/Downloads/SUBDIR\".
+e.g.,
+
+  (xwl-get-book \"http://book.sina.com.cn/longbook/1071818529_qingcheng\"
+                13
+                24
+                \".shtml\"
+                \"%02d\"
+                \"qczl\")
+
+\(fn PRE BEG END POST FMT SUBDIR)" nil nil)
+
+(autoload 'xwl-generate-password "xwl-extra-util" "\
+[33, 126] is range for printable characters.
+
+\(fn LEN)" nil nil)
+
+(autoload 'xwl-shell-command-asynchronously-with-callback "xwl-extra-util" "\
+Run CMD asynchronously and apply CALLBACK in the output buffer.
+Note: you are suggested to kill process buffer at the end of CALLBACK.
+
+\(fn CMD CALLBACK)" nil (quote macro))
+
+(autoload 'forward-ascii-symbol "xwl-extra-util" "\
+New thing for `thingapt'.
+
+\(fn ARG)" t nil)
+
+(autoload 'xwl-fortune-laozi "xwl-extra-util" "\
+Return a random chapter from laozi.
+
+\(fn)" t nil)
+
+(autoload 'xwl-fortune-favorites-vertically "xwl-extra-util" "\
+Not documented
+
+\(fn &optional FILE)" t nil)
+
+(autoload 'xwl-fortune-favorites "xwl-extra-util" "\
+Return a random chapter from ~/notes/favorites.
+
+\(fn &optional FILE)" t nil)
+
+(autoload 'his-dos2unix "xwl-extra-util" "\
+
+ --> .
+
+\(fn)" t nil)
+
+(autoload 'his-unix2dos "xwl-extra-util" "\
+
+ --> 
+.
+
+\(fn)" t nil)
+
+(autoload 'xwl-info "xwl-extra-util" "\
+Not documented
+
+\(fn FILE)" t nil)
+
+;;;***
+
+;;;### (autoloads (color-theme-xwl-console-disabled) "xwl-color-theme"
+;;;;;;  "config/autoload/xwl-color-theme.el" (19453 19208))
+;;; Generated autoloads from config/autoload/xwl-color-theme.el
+
+(autoload 'color-theme-xwl-console-disabled "xwl-color-theme" "\
+Color theme base on console colors with `color-theme-print'.
+Created on 2005-05-13.
+
+\(fn)" t nil)
 
 ;;;***
 

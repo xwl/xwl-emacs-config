@@ -58,7 +58,6 @@
 (require 'xwl-var)
 (when xwl-w32? (require 'xwl-w32))
 (require 'xwl-util)
-(require 'xwl-vim)
 (require 'xwl-private)
 (require 'xwl-mode-line)
 (require 'xwl-help)
@@ -87,7 +86,6 @@
 (require 'xwl-misc)
 (when window-system
   (require 'xwl-window)
-  ;; (require 'xwl-color-theme)
   )
 
 ;; not used
