@@ -1,6 +1,6 @@
 ;;; xwl-vim.el --- Some nifty vim emulations
 
-;; Copyright (C) 2009 William Xu
+;; Copyright (C) 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -26,14 +26,15 @@
 ;; http://www.emacswiki.org/emacs/SearchAtPoint#toc2
 
 (defun his-isearch-yank-regexp (regexp)
-  "Pull REGEXP into search regexp." 
+  "Pull REGEXP into search regexp."
   (let ((isearch-regexp nil)) ;; Dynamic binding of global.
     (isearch-yank-string regexp))
   (isearch-search-and-update))
 
+;;;###autoload
 (defun his-isearch-yank-symbol (&optional partialp)
   "Put symbol at current point into search string.
-  
+
   If PARTIALP is non-nil, find all partial matches."
   (interactive "P")
   (let* ((sym (find-tag-default))
@@ -52,9 +53,10 @@
         (his-isearch-yank-regexp
          (concat "\\_<" (regexp-quote sym) "\\_>"))))))
 
+;;;###autoload
 (defun his-isearch-current-symbol (&optional partialp)
   "Incremental search forward with symbol under point.
-  
+
   Prefixed with \\[universal-argument] will find all partial
   matches."
   (interactive "P")
@@ -62,9 +64,10 @@
     (isearch-forward-regexp nil 1)
     (his-isearch-yank-symbol partialp)))
 
+;;;###autoload
 (defun his-isearch-backward-current-symbol (&optional partialp)
   "Incremental search backward with symbol under point.
-  
+
   Prefixed with \\[universal-argument] will find all partial
   matches."
   (interactive "P")
@@ -72,20 +75,9 @@
     (isearch-backward-regexp nil 1)
     (his-isearch-yank-symbol partialp)))
 
-(global-set-key (kbd "C-s") '(lambda ()
-                                    (interactive)
-                                    (if current-prefix-arg
-                                        (call-interactively 'his-isearch-current-symbol)
-                                      (call-interactively 'isearch-forward))))
-
-(global-set-key (kbd "C-r") '(lambda ()
-                               (interactive)
-                               (if current-prefix-arg
-                                   (call-interactively 'his-isearch-current-symbol)
-                                 (call-interactively 'isearch-backward))))
-
 ;;; f, F
 
+;;;###autoload
 (defun xwl-forward-char (n char)
   (interactive "p\ncForward to char: ")
   (search-forward (string char) nil nil n)
@@ -93,6 +85,7 @@
     (search-forward (string char) nil nil n))
   (setq unread-command-events (list last-input-event)))
 
+;;;###autoload
 (defun xwl-backward-char (n char)
   (interactive "p\ncBackward to char: ")
   (search-backward (string char) nil nil n)
@@ -100,8 +93,6 @@
     (search-backward (string char) nil nil n))
   (setq unread-command-events (list last-input-event)))
 
-(global-set-key (kbd "C-o") 'xwl-forward-char)
-(global-set-key (kbd "M-o") 'xwl-backward-char)
 
 (provide 'xwl-vim)
 
