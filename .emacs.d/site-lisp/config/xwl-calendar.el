@@ -52,7 +52,7 @@
   (setq diary-file "~/.diary")
   (setq mark-diary-entries-in-calendar t))
 
-(setq appt-message-warning-time 1)
+(setq appt-message-warning-time 5)
 
 (setq appt-disp-window-function
       (lambda (min-to-app new-time appt-msg)

@@ -31,6 +31,8 @@
                  "xwl-elisp/dashboard"
                  "xwl-elisp/ga"
                  "xwl-elisp/wubi"
+
+                 "config/autoload"
                  ))))
 
 (mapc (lambda (path) (add-to-list 'load-path path))

@@ -21,8 +21,6 @@
 
 ;;; Code:
 
-(require 'xwl-util)
-
 ;;; `C-c i *': Invoke external programs, e.g., scheme, mysql.
 
 (setq 未临-外部命令-映射 (make-sparse-keymap))
@@ -346,6 +344,25 @@
 
 ;; set-fill-column
 (global-unset-key (kbd "C-x f"))
+
+(global-set-key (kbd "C-c m R") 'xwl-revert-buffer-with-sudo)
+(global-set-key (kbd "C-c m o") 'his-one-whitespace-between-ce)
+(global-set-key (kbd "C-c m t") 'his-transpose-windows)
+
+
+(global-set-key (kbd "C-s") '(lambda ()
+                                    (interactive)
+                                    (if current-prefix-arg
+                                        (call-interactively 'his-isearch-current-symbol)
+                                      (call-interactively 'isearch-forward))))
+(global-set-key (kbd "C-r") '(lambda ()
+                               (interactive)
+                               (if current-prefix-arg
+                                   (call-interactively 'his-isearch-current-symbol)
+                                 (call-interactively 'isearch-backward))))
+
+(global-set-key (kbd "C-o") 'xwl-forward-char)
+(global-set-key (kbd "M-o") 'xwl-backward-char)
 
 (provide 'xwl-bindings)
 
