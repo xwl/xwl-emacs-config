@@ -723,6 +723,8 @@ passphrase cache or user."
 (setq twittering-update-status-function
       'twittering-update-status-from-pop-up-buffer)
 
+(setq twittering-url-show-status nil)
+
 (add-hook 'twittering-mode-hook (lambda ()
                                   (twittering-icon-mode 1)
                                   (setq twittering-reverse-mode t)
