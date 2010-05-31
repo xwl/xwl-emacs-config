@@ -86,8 +86,9 @@
 
 (when (eq window-system 'ns)
   (setq ns-pop-up-frames nil)
-  (set-cursor-color "Magenta")
   (setq ns-show-menu-bar-p t))
+
+(set-cursor-color "Magenta")
 
 (provide 'xwl-window)
 

@@ -191,6 +191,7 @@
                    (regexp-opt '("todo.org"
                                  "*nntpd*"
                                  " *Compiler Input*"
+                                 " *gnus work*"
                                  ))))
      (setq auto-less-exclude-modes
            (append auto-less-exclude-modes

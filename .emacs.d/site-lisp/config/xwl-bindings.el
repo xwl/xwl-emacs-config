@@ -58,7 +58,7 @@
 (global-set-key (kbd "<f11>") (lambda ()
                                 (interactive)
                                 (xwl-switch-or-create
-                                 ":public"
+                                 ":home"
                                  (lambda ()
                                    (interactive)
                                    (call-interactively 'twit)
@@ -72,10 +72,13 @@
                                    (twittering-visit-timeline ":followers")
                                    (twittering-current-timeline)
 
-                                   (twittering-visit-timeline ":public")
+                                   (twittering-visit-timeline ":retweets_of_me")
                                    (twittering-current-timeline)
 
-                                   ;; (switch-to-buffer ":home")
+                                   ;; (twittering-visit-timeline ":public")
+                                   ;; (twittering-current-timeline)
+
+                                   (switch-to-buffer ":home")
                                    ))
 
                                 (unless xwl-timers-hook-started?
