@@ -22,17 +22,10 @@
 ;;; Code:
 
 ;; FIXME: how to make it autoload?
+(setq wubi-traditional-p t)
 (require 'wubi)
 (register-input-method
  "chinese-wubi" "Chinese" 'quail-use-package "wubi" "wubi")
-
-(setq wubi-phrases-file "~/.wubi-phrases.el")
-
-(eval-after-load 'wubi
-  '(progn
-     (ignore-errors (wubi-load-local-phrases))
-     ))
-
 (setq default-input-method "chinese-wubi")
 
 (setq xwl-input-methods
@@ -50,28 +43,7 @@
     (setq xwl-current-input-methods (cdr xwl-current-input-methods)))
   (set-input-method (car xwl-current-input-methods)))
 
-(setq xwl-traditional-p t)
-
-;; (load "wubi")
-;; (load "wubi-rules")
-
-(defun xwl-toggle-simplified/traditional-input-method ()
-  (interactive)
-  (setq xwl-traditional-p (not xwl-traditional-p))
-  (if xwl-traditional-p
-      (progn
-        (load "wubi-b5")
-        (load "wubi-rules-b5")
-        (setq wubi-phrases-file "~/.wubi-phrases-b5.el")
-        (wubi-load-local-phrases))
-    (load "wubi")
-    (load "wubi-rules")
-    (setq wubi-phrases-file "~/.wubi-phrases.el")
-    (wubi-load-local-phrases)))
-
 (global-set-key (kbd "C-?") 'xwl-cycle-input-method)
-
-;; (global-set-key (kbd "C-?") 'xwl-cycle-input-method)
 ;; (global-set-key (kbd "C-,") 'wubi-toggle-quanjiao-banjiao)
 (global-set-key (kbd "C-c m W") 'wubi-load-local-phrases)
 

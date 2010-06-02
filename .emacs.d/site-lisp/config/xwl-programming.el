@@ -481,7 +481,8 @@ Thus generate a TAGs file."
                   (let ((cmd
                          (if (string-match "\\.gz" (shell-command-to-string "ls | head -1"))
                              "zgrep -nH " "grep -nH ")))
-                    (grep-apply-setting 'grep-command cmd)
+                    ;; TODO, fix this.
+                    ;;(grep-apply-setting 'grep-command cmd)
                     (call-interactively 'grep))))
 
 (global-set-key (kbd "C-c G")
@@ -680,16 +681,25 @@ If SCHEME?, `run-scheme'."
 
 ;;; Compilation Mode
 
-(eval-after-load 'buffer-action
-  '(progn
-     (defadvice buffer-action-compile (before save-layout activate)
-       (setq xwl-layout-before-compilation (current-window-configuration)))))
+;; (eval-after-load 'buffer-action
+;;   '(progn
+;;      (defadvice buffer-action-compile (before save-layout activate)
+;;        (setq xwl-layout-before-compilation (current-window-configuration)))
+;;      ))
+
+(defadvice compile (around output-to-new-frame activate)
+  (let ((pop-up-frames t))
+    ad-do-it))
 
 (defun xwl-compilation-exit-autoclose (status code msg)
   (if (not (and (eq status 'exit) (zerop code)))
       (message "Compilation failed")
-    (run-at-time 3 nil (lambda ()
-                         (set-window-configuration xwl-layout-before-compilation)))
+    (run-at-time 1 nil (lambda ()
+                         ;; (set-window-configuration
+                         ;; xwl-layout-before-compilation)
+                         ;; (delete-windows-on "*compilation*")
+                         (delete-frame)
+                         ))
     (message "Compilation succeed"))
   (cons msg code))
 

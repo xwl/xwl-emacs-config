@@ -75,8 +75,8 @@
                                    (twittering-visit-timeline ":retweets_of_me")
                                    (twittering-current-timeline)
 
-                                   ;; (twittering-visit-timeline ":public")
-                                   ;; (twittering-current-timeline)
+                                   (twittering-visit-timeline ":public")
+                                   (twittering-current-timeline)
 
                                    (switch-to-buffer ":home")
                                    ))
@@ -330,10 +330,10 @@
       (newline)
       (save-buffer))))
 
-(global-set-key (kbd "C-/") 'toggle-input-method)
-
-(defadvice toggle-input-method (before load-wubi activate)
-  (require 'xwl-wubi))
+(global-set-key (kbd "C-/") '(lambda ()
+                               (interactive)
+                               (require 'xwl-wubi)
+                               (toggle-input-method)))
 
 (global-set-key (kbd "C-x C-j") '(lambda ()
                                    (interactive)
