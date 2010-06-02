@@ -104,27 +104,6 @@
   (keyboard-translate ?\C-h ?\C-?)
   (keyboard-translate ?\C-? ?\C-d))
 
-(defun xwl-heaven ()
-  (interactive)
-  (global-set-key (kbd "<right>") 'windmove-right)
-  (global-set-key (kbd "<left>")  'windmove-left)
-  (global-set-key (kbd "<up>")    'windmove-up)
-  (global-set-key (kbd "<down>")  'windmove-down))
-
-(defun xwl-modern ()
-  (interactive)
-  (global-set-key (kbd "<right>") (kbd "C-f"))
-  (global-set-key (kbd "<left>")  (kbd "C-b"))
-  (global-set-key (kbd "<up>")    (kbd "C-p"))
-  (global-set-key (kbd "<down>")  (kbd "C-n")))
-
-(xwl-heaven)
-
-;; (global-set-key (kbd "C-c l") 'windmove-right)
-;; (global-set-key (kbd "C-c h")  'windmove-left)
-;; (global-set-key (kbd "C-c k")    'windmove-up)
-;; (global-set-key (kbd "C-c j")  'windmove-down)
-
 (global-set-key (kbd "ESC C-s") 'isearch-forward)
 (global-set-key (kbd "ESC C-r") 'isearch-backward)
 (global-set-key (kbd "ESC \\") 'just-one-space)
@@ -375,8 +354,13 @@
                                    (call-interactively 'his-isearch-current-symbol)
                                  (call-interactively 'isearch-backward))))
 
-(global-set-key (kbd "C-o") 'xwl-forward-char)
-(global-set-key (kbd "M-o") 'xwl-backward-char)
+(global-set-key (kbd "C-o") 'other-window)
+(global-set-key (kbd "M-o") '(lambda ()
+                               (interactive)
+                               (other-window -1)))
+
+(global-set-key (kbd "C-x o") 'xwl-forward-char)
+(global-set-key (kbd "C-x O") 'xwl-backward-char)
 
 (provide 'xwl-bindings)
 

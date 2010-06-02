@@ -296,6 +296,15 @@ Thus generate a TAGs file."
 (setq add-log-full-name nil
       add-log-mailing-address nil)
 
+;; FIXME: why this won't work?
+;; (add-hook 'log-edit-done-hook 'delete-frame)
+
+(eval-after-load 'log-edit
+  '(progn
+     (defadvice log-edit-done (after delete-frame activate)
+       (delete-frame))
+     ))
+
 ;;; doxymacs
 ;; TODO
 ;; (require 'doxymacs)

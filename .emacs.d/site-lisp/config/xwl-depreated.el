@@ -886,4 +886,28 @@ If FOCUS-REV is non-nil, leave the point at that revision."
                    '(("\\.texinfo$" . "template.texinfo"))))))
 
 
+
+(defun xwl-heaven ()
+  (interactive)
+  (global-set-key (kbd "<right>") 'windmove-right)
+  (global-set-key (kbd "<left>")  'windmove-left)
+  (global-set-key (kbd "<up>")    'windmove-up)
+  (global-set-key (kbd "<down>")  'windmove-down))
+
+(defun xwl-modern ()
+  (interactive)
+  (global-set-key (kbd "<right>") (kbd "C-f"))
+  (global-set-key (kbd "<left>")  (kbd "C-b"))
+  (global-set-key (kbd "<up>")    (kbd "C-p"))
+  (global-set-key (kbd "<down>")  (kbd "C-n")))
+
+(xwl-heaven)
+
+;; (global-set-key (kbd "C-c l") 'windmove-right)
+;; (global-set-key (kbd "C-c h")  'windmove-left)
+;; (global-set-key (kbd "C-c k")    'windmove-up)
+;; (global-set-key (kbd "C-c j")  'windmove-down)
+
+
+
 ;;; xwl-depreated.el ends here
