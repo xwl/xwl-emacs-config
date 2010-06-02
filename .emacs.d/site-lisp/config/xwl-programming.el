@@ -301,8 +301,8 @@ Thus generate a TAGs file."
 ;; (require 'doxymacs)
 (require 'lisp-mnt)
 
-;;; version systems
-;; -----------------
+;;; VC: version control
+;; --------------------
 
 (add-to-list 'vc-handled-backends 'DARCS)
 (setq vc-darcs-mail-address "William Xu <william.xwl@gmail.com>")
@@ -362,6 +362,13 @@ Thus generate a TAGs file."
                     )
                (ewoc-delete vc-ewoc crt))
              (setq crt prev)))))
+     ))
+
+(eval-after-load 'vc
+  '(progn
+     (defadvice vc-next-action (around use-new-frame activate)
+       (let ((pop-up-frames t))
+         ad-do-it))
      ))
 
 ;;; skeletons
@@ -687,7 +694,7 @@ If SCHEME?, `run-scheme'."
 ;;        (setq xwl-layout-before-compilation (current-window-configuration)))
 ;;      ))
 
-(defadvice compile (around output-to-new-frame activate)
+(defadvice compile (around use-new-frame activate)
   (let ((pop-up-frames t))
     ad-do-it))
 
