@@ -90,6 +90,8 @@
 
 (set-cursor-color "Magenta")
 
+(setq frame-inherited-parameters '(font))
+
 (provide 'xwl-window)
 
 ;;; xwl-window.el ends here
