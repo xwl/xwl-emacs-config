@@ -711,9 +711,9 @@ passphrase cache or user."
     (setq twittering-proxy-use t
           twittering-proxy-server "172.16.42.137"
           twittering-proxy-port 8080)
-  (setq twittering-web-host (xds "\\?[jCOI*XOI'QO@lPO9nZ*9m[:,aY)'=")
-        twittering-api-host (xds "\\?[jCOI*XOI'QO@lPO9nZ*9m[:,aY)'mPO9g")
-        twittering-api-search-host (xds "\\?[jCOI*XOI'QO@lPO9nZ*9m[:,aY)'mZ)M_ZdEf")))
+  (setq twittering-web-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0k")
+        twittering-api-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC)FnXH==")
+        twittering-api-search-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*EcPOAaX8==")))
 
 (setq twittering-status-format
       "%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FILL{       %T}\n"
