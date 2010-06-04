@@ -64,19 +64,10 @@
                                    (call-interactively 'twit)
 
                                    (twittering-replies-timeline)
-                                   (twittering-current-timeline)
-
                                    (twittering-direct-messages-timeline)
-                                   (twittering-current-timeline)
-
                                    (twittering-visit-timeline ":followers")
-                                   (twittering-current-timeline)
-
                                    (twittering-visit-timeline ":retweets_of_me")
-                                   (twittering-current-timeline)
-
                                    (twittering-visit-timeline ":public")
-                                   (twittering-current-timeline)
 
                                    (switch-to-buffer ":home")
                                    ))
