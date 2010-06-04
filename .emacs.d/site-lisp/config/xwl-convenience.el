@@ -176,7 +176,7 @@
 (global-set-key (kbd "C-<") 'winner-undo)
 (global-set-key (kbd "C->") 'winner-redo)
 
-(global-set-key (kbd "C-c n t") 'toggle-truncate-lines)
+(global-set-key (kbd "C-c n t") 'visual-line-mode)
 (global-set-key (kbd "C-c m D") 'toggle-debug-on-error)
 
 ;; (setq inhibit-eol-conversion t)
