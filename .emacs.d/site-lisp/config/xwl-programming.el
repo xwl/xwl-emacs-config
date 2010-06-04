@@ -302,7 +302,11 @@ Thus generate a TAGs file."
 (eval-after-load 'log-edit
   '(progn
      (defadvice log-edit-done (after delete-frame activate)
-       (delete-frame))
+       ;; Delete smallest one.  Ideally, should delete the one running this log
+       ;; command. But how? FIXME
+       (delete-frame
+        (sort (frame-list)
+              (lambda (f1 f2) (< (frame-width f1) (frame-width f2))))))
      ))
 
 ;;; doxymacs

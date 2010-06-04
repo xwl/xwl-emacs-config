@@ -359,6 +359,12 @@
                                (interactive)
                                (other-window -1)))
 
+(eval-after-load 'dired
+  '(progn
+     (define-key dired-mode-map (kbd "C-o") nil)
+     (define-key dired-mode-map (kbd "M-o") nil)
+     ))
+
 (global-set-key (kbd "C-x o") 'xwl-forward-char)
 (global-set-key (kbd "C-x O") 'xwl-backward-char)
 
