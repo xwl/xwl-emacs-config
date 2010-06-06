@@ -279,6 +279,7 @@
 
 (recentf-mode 1)
 (add-to-list 'recentf-keep 'file-remote-p)
+(setq recentf-max-saved-items 100)
 
 (defun xwl-recentf-open-files ()
   (interactive)
@@ -711,6 +712,9 @@ passphrase cache or user."
     (setq twittering-proxy-use t
           twittering-proxy-server "172.16.42.137"
           twittering-proxy-port 8080)
+  ;; Also in `gtap', disable "secure: always".
+  (setq twittering-use-ssl nil)
+
   (setq twittering-web-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0k")
         twittering-api-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC)FnXH==")
         twittering-api-search-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*EcPOAaX8==")))
@@ -740,6 +744,8 @@ passphrase cache or user."
      (define-key twittering-mode-map (kbd "P") 'twittering-goto-previous-status-of-user)
 
      (define-key twittering-mode-map (kbd "q") 'xwl-hide-buffer)
+     (define-key twittering-mode-map (kbd "F") 'twittering-follow)
+     (define-key twittering-mode-map (kbd "U") 'twittering-unfollow)
 
      (define-key twittering-mode-map (kbd "C-c C-g") nil)
      ))
