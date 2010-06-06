@@ -299,6 +299,8 @@ Thus generate a TAGs file."
 ;; FIXME: why this won't work?
 ;; (add-hook 'log-edit-done-hook 'delete-frame)
 
+(add-hook 'log-edit-mode-hook (lambda () (flyspell-mode 1)))
+
 (eval-after-load 'log-edit
   '(progn
      (defadvice log-edit-done (after delete-frame activate)
