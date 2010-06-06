@@ -350,6 +350,11 @@
                                (interactive)
                                (other-window -1)))
 
+(global-set-key (kbd "C-S-o") 'other-frame)
+(global-set-key (kbd "M-O") '(lambda ()
+                               (interactive)
+                               (other-frame -1)))
+
 (eval-after-load 'dired
   '(progn
      (define-key dired-mode-map (kbd "C-o") nil)
