@@ -191,18 +191,29 @@
                    (regexp-opt '("todo.org"
                                  "*nntpd*"
                                  " *Compiler Input*"
+
                                  " *gnus work*"
+                                 " *gnus article copy*"
+                                 " *extract address components*"
+                                 " *canonical address*"
+                                 "*followup to"
+                                 "*mail*"
                                  ))))
      (setq auto-less-exclude-modes
            (append auto-less-exclude-modes
                    '(twittering-edit-mode
                      calendar-mode
                      log-edit-mode
+
                      gnus-summary-mode
                      gnus-group-mode
+                     message-mode
+
                      dired-mode
                      apropos-mode
-                     completion-list-mode)))))
+                     completion-list-mode)))
+     ))
+
 (global-less-minor-mode 1)
 
 (defadvice save-buffers-kill-terminal (around disable-less activate)

@@ -153,6 +153,13 @@ This should not affect `buffer-undo-list'."
 Run it at an appropriate time, like when we twittering?"
   )
 
+(defun xwl-delete-frame ()
+  "Delete frames created by compilation-mode or log-edit-mode. "
+  (delete-frame
+   (car (sort (frame-list)
+              (lambda (f1 f2) (< (frame-width f1) (frame-width f2)))))))
+
+
 (provide 'xwl-util)
 
 ;;; xwl-util.el ends here
