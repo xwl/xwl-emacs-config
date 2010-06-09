@@ -105,7 +105,7 @@
         (holiday-lunar 5 11 (xds ",f`I,,h<,,J],g\\c..p9"))
         (holiday-lunar 12 30 "過年啦！")
         ;; (holiday-lunar 4 13  (xds "Xd0hYp;edfKecA&dc-Omm@<="))
-        (holiday-lunar 6 7 (xds "\\>c_Y*E_XJ9`XOA'X>I_\\J<="))
+        ;; (holiday-lunar 6 7 (xds "\\>c_Y*E_XJ9`XOA'X>I_\\J<="))
 
         (holiday-lunar 7 28 (xds"Xdc_Y`9,[J[q@>AgZeIfQ>F,"))
 

@@ -397,10 +397,12 @@
 
 (defun xwl-after-init-hook ()
   (case window-system
-    (ns ;; FIXME
+    ((ns) ;; FIXME
      (run-at-time 2 nil 'ns-toggle-fullscreen))
     ((w32)
-     (w32-send-sys-command #xf030)))
+     (w32-send-sys-command #xf030))
+    ((mac)
+     (set-frame-parameter (selected-frame) 'fullscreen 'maximized)))
 
   ;; FIXME: how to set this only after window has been maximized?
   (run-at-time 5
@@ -749,6 +751,11 @@ passphrase cache or user."
 
      (define-key twittering-mode-map (kbd "C-c C-g") nil)
      ))
+
+;; FIXME: in 23.2, who the hell autoload create-animated-image?? this exists in
+;; 24 only.
+(when (eq window-system 'mac)
+  (defalias  'create-animated-image 'create-image))
 
 ;; ,----
 ;; | Track cahnges for some buffer

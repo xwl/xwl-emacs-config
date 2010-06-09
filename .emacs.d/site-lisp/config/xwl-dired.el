@@ -43,10 +43,13 @@
   '(lambda ()
      (interactive)
      (let ((d (dired-current-directory)))
-       (xwl-compat-select-by-window-system
-        '((w32 (w32-shell-execute "open" d))
-          (ns (xwl-shell-command-asynchronously (format "open -a Finder %s" d)))
-          (x (xwl-shell-command-asynchronously (concat "nautilus --browser " d))))))))
+       (case window-system
+         ((w32)
+          (w32-shell-execute "open" d))
+         ((ns mac)
+          (xwl-shell-command-asynchronously (format "open -a Finder %s" d)))
+         ((x)
+          (xwl-shell-command-asynchronously (concat "nautilus --browser " d)))))))
 
 ;; open current directory in a console/terminal
 (define-key dired-mode-map (kbd "c")
@@ -56,7 +59,7 @@
        (case window-system
          ((w32)
           (xwl-shell-command-asynchronously "start cmd.exe"))
-         ((ns)
+         ((ns mac)
           (do-applescript (format "
 tell application \"Terminal\"
   activate
