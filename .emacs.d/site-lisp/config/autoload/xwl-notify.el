@@ -32,7 +32,7 @@
     ((windows-nt)
      (xwl-snarl title message))
     ((gnu/linux)
-     (xwwl-zenity title message))))
+     (xwl-zenity title message))))
 
 ;;;###autoload
 (defun xwl-growl (title message)
