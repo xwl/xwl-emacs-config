@@ -62,8 +62,8 @@
 	  ;; rcirc-activity-string
           ;; xwl-weather-string
 
-          xwl-gmail-notify-string
-          twittering-unread-mode-line-string " "
+          ;; xwl-gmail-notify-string
+          ;; twittering-unread-mode-line-string " "
 
           emms-mode-line-string
           emms-playing-time-string
@@ -80,6 +80,45 @@
       xwl-gmail-password pwgmail)
 
 (setq xwl-gmail-notify-string "")
+(defconst gmail-logo-image
+  (when (image-type-available-p 'xpm)
+    '(image :type xpm
+	    :ascent center
+	    :data
+            "/* XPM */
+static char * gmail_xpm[] = {
+\"16 16 8 1\",
+\" 	c None\",
+\".	c #DA3838\",
+\"+	c #E95A5A\",
+\"@	c #F28181\",
+\"#	c #F9A7A7\",
+\"$	c #FFB6B6\",
+\"%	c #FFE2E2\",
+\"&	c #FFFFFF\",
+\"                \",
+\"                \",
+\"                \",
+\"...@########@...\",
+\"....$&&&&&&$....\",
+\"..@+.$&&&&$.+@..\",
+\"..&@+.$&&$.+@&..\",
+\"..&&@+.$$.+@&&..\",
+\"..&&$@+..+@$&&..\",
+\"..&%#$@++@$#%&..\",
+\"..%#%&&@@&&%#%..\",
+\"..#%&&&&&&&&%#..\",
+\"..%&&&&&&&&&&%..\",
+\"..############..\",
+\"                \",
+\"                \"};
+"))
+  "Image for twitter logo.")
+
+(defconst gmail-logo
+  (if gmail-logo-image
+      (apply 'propertize " " `(display ,gmail-logo-image))
+    "G"))
 
 (defun xwl-gmail-notify ()
   (unless xwl-gmail-password
@@ -115,28 +154,35 @@
       (progn
         (cond ((string= account xwl-gmail-user)
                (if (string= xwl-gmail-notify-string "")
-                   (setq xwl-gmail-notify-string (format "g(%d,0) " unread))
+                   (setq xwl-gmail-notify-string (format "(%d,0) " unread))
                  (setq xwl-gmail-notify-string
                        (replace-regexp-in-string
                         "([0-9]+," (format "(%d," unread) xwl-gmail-notify-string))))
               ((string= account xwl-gmail-user1)
                (if (string= xwl-gmail-notify-string "")
-                   (setq xwl-gmail-notify-string (format "g(0,%d) " unread))
+                   (setq xwl-gmail-notify-string (format "(0,%d) " unread))
                  (setq xwl-gmail-notify-string
                        (replace-regexp-in-string
                         ",[0-9]+" (format ",%d" unread) xwl-gmail-notify-string)))))
-        (when (string-match "g(0,0)" xwl-gmail-notify-string)
+        (when (string-match "(0,0)" xwl-gmail-notify-string)
           (setq xwl-gmail-notify-string "")))
     (if (zerop unread)
         (setq xwl-gmail-notify-string "")
-      (setq xwl-gmail-notify-string (format "g(%d) " unread))
+      (setq xwl-gmail-notify-string (format "(%d) " unread))
       (xwl-notify "Gmail" (format "You've got %d new mails" unread))
       ))
   (force-mode-line-update))
 
 (add-hook 'xwl-timers-hook (lambda ()
                              (setq xwl-gmail-notify-timer
-                                   (run-with-timer 0 (* 60 5) 'xwl-gmail-notify))))
+                                   (run-with-timer 0 (* 60 5) 'xwl-gmail-notify))
+
+                             (add-to-list 'global-mode-string
+                                          '(:eval (if (string= xwl-gmail-notify-string "")
+                                                      ""
+                                                    (concat gmail-logo xwl-gmail-notify-string)))
+                                          t)
+                             ))
 
 ;;; Misc
 

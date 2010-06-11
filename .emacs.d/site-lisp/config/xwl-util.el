@@ -153,6 +153,34 @@ This should not affect `buffer-undo-list'."
 Run it at an appropriate time, like when we twittering?"
   )
 
+(defun xwl-delete-frame ()
+  "Delete frames created by compilation-mode or log-edit-mode. "
+  (delete-frame
+   (car (sort (frame-list)
+              (lambda (f1 f2) (< (frame-width f1) (frame-width f2)))))))
+
+(defun xwl-fullscreen ()
+  (interactive)
+  (case window-system
+    ((x)
+     (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+                            '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
+     (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+                            '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0)))
+    ((w32)
+     (w32-send-sys-command #xf030))
+    ((ns)
+     ;; FIXME
+     (run-at-time 2 nil 'ns-toggle-fullscreen))))
+
+(defun xwl-pure-fullscreen (&optional exit-fullscreen)
+  (interactive "P")
+  (case window-system
+    ((x)
+     (set-frame-parameter nil 'fullscreen (and (not exit-fullscreen) 'fullboth)))
+     ))
+
+
 (provide 'xwl-util)
 
 ;;; xwl-util.el ends here

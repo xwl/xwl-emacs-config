@@ -306,9 +306,7 @@ Thus generate a TAGs file."
      (defadvice log-edit-done (after delete-frame activate)
        ;; Delete smallest one.  Ideally, should delete the one running this log
        ;; command. But how? FIXME
-       (delete-frame
-        (car (sort (frame-list)
-                   (lambda (f1 f2) (< (frame-width f1) (frame-width f2)))))))
+       (xwl-delete-frame))
      ))
 
 ;;; doxymacs
@@ -720,7 +718,7 @@ If SCHEME?, `run-scheme'."
                          ;; (set-window-configuration
                          ;; xwl-layout-before-compilation)
                          ;; (delete-windows-on "*compilation*")
-                         (delete-frame)
+                         (xwl-delete-frame)
                          ))
     (message "Compilation succeed"))
   (cons msg code))

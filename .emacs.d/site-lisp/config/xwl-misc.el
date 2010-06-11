@@ -396,13 +396,8 @@
 ;; (remove-hook 'find-file-hook 'bracketphobia-hide)
 
 (defun xwl-after-init-hook ()
-  (case window-system
-    ((ns) ;; FIXME
-     (run-at-time 2 nil 'ns-toggle-fullscreen))
-    ((w32)
-     (w32-send-sys-command #xf030))
-    ((mac)
-     (set-frame-parameter (selected-frame) 'fullscreen 'maximized)))
+  (when window-system
+    (xwl-fullscreen))
 
   ;; FIXME: how to set this only after window has been maximized?
   (run-at-time 5

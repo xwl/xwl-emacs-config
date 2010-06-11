@@ -38,7 +38,7 @@
           (w32 . ("Monaco-10" "NSimSun" "NSimSun"))
           (x   . ,(if (string= system-name "debian..xwl")
                       '("DejaVu Sans Mono-11" "wenquanyi" "wenquanyi")
-                    '("DejaVu LGC Sans Mono-14" "SimSun" "SimSun")))))
+                    '("DejaVu LGC Sans Mono-13" "SimSun" "SimSun")))))
        (fonts (cdr (assoc window-system all-fonts)))
        (default-font (nth 0 fonts))
        (cn-font (nth 1 fonts))
