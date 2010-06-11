@@ -21,8 +21,6 @@
 
 ;;; Code:
 
-;;; common
-
 (setq xwl-help-modes '(help-mode woman-mode Man-mode))
 
 ;;; describe-*

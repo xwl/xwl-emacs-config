@@ -180,7 +180,7 @@ static char * gmail_xpm[] = {
                              (add-to-list 'global-mode-string
                                           '(:eval (if (string= xwl-gmail-notify-string "")
                                                       ""
-                                                    (concat gmail-logo xwl-gmail-notify-string)))
+                                                    (concat " " gmail-logo xwl-gmail-notify-string)))
                                           t)
                              ))
 

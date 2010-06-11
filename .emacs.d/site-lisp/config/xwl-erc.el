@@ -164,6 +164,12 @@ so as to keep an eye on work when necessarily."
                          (substring (substring nick 7) -1))))
     nick))
 
+(defadvice erc-faces-in (around add-query-faces activate)
+  (let ((faces ad-do-it))
+    (when (or (erc-query-buffer-p) (string-match "&" (buffer-name)))
+      (add-to-list 'faces 'erc-query-buffer-face))
+    faces))
+
 ;; ,----
 ;; | timestamp
 ;; `----
