@@ -171,7 +171,9 @@ Run it at an appropriate time, like when we twittering?"
      (w32-send-sys-command #xf030))
     ((ns)
      ;; FIXME
-     (run-at-time 2 nil 'ns-toggle-fullscreen))))
+     (run-at-time 2 nil 'ns-toggle-fullscreen))
+    ((mac)
+     (set-frame-parameter (selected-frame) 'fullscreen 'maximized))))
 
 (defun xwl-pure-fullscreen (&optional exit-fullscreen)
   (interactive "P")
