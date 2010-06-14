@@ -30,7 +30,6 @@
                  "xwl-elisp"
                  "xwl-elisp/dashboard"
                  "xwl-elisp/ga"
-                 "xwl-elisp/wubi"
 
                  "config/autoload"
                  ))))
@@ -39,7 +38,9 @@
       (append
        ;; essential
        (list xwl-site-lisp
-             (concat xwl-site-lisp "/config"))
+             (concat xwl-site-lisp "/config")
+             ;; FIXME: byte-compile never stops?
+             (concat xwl-site-lisp "/xwl-elisp/wubi"))
        ;; others in site-lisp
        xwl-makefile-subdir-list
        ;; optional
