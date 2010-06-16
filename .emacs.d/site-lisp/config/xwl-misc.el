@@ -334,7 +334,8 @@
     ;; (defun xwl-write-file-functions ()
     ;;   (xwl-update-date)
 
-    (when (string-match (regexp-opt (list (file-truename xwl-site-lisp))) f)
+    (when (and (string-match (regexp-opt (list (file-truename xwl-site-lisp))) f)
+               (not (string-match "twittering-mode" f)))
       (copyright-update)
 
       (unless (and (boundp 'qterm-log-file)
@@ -725,10 +726,10 @@ passphrase cache or user."
       'twittering-update-status-from-pop-up-buffer)
 
 (setq twittering-url-show-status nil)
+(setq twittering-reverse-mode t)
 
 (add-hook 'twittering-mode-hook (lambda ()
                                   (twittering-icon-mode 1)
-                                  (setq twittering-reverse-mode t)
                                   (twittering-enable-unread-status-notifier)))
 
 (eval-after-load 'twittering-mode
@@ -866,6 +867,8 @@ passphrase cache or user."
     (mapc (lambda (day) (setq str (concat str day "\n")))
           xwl-weather-list)
     (message str)))
+
+(setq eval-expression-print-length 100)
 
 (provide 'xwl-misc)
 

@@ -36,6 +36,8 @@
   '(progn
      (define-key ibuffer-mode-map (kbd "q") 'xwl-hide-buffer)
 
+     (define-key ibuffer-mode-map (kbd "C-o") nil)
+
      (define-key ibuffer-mode-map (kbd "N") '(lambda () (interactive)
                                                (end-of-line)
                                                (re-search-forward "^\\[" nil t 1)
@@ -46,6 +48,12 @@
                                                (beginning-of-line)
                                                (re-search-backward "^\\[" nil t 1)
                                                (beginning-of-line)))
+     (define-key ibuffer-mode-map (kbd "g")
+       (lambda ()
+         (interactive)
+         (let ((pos (point)))
+           (ibuffer-update nil)
+           (goto-char pos))))
 
      (define-key ibuffer-mode-map (kbd "C-x C-f") nil)))
 
@@ -96,9 +104,10 @@ point.  Especially useful for w32."
 ;; 1. if no visible match, will match against ignored buffers.
 ;; 2. one can also toggle this by C-a
 (setq ido-ignore-buffers
-      '("\\*.+\\*" ".diary" ".scratch"
-        "^#" "^localhost:" "&bitlbee"
-        "\\.newsrc"))
+      (list
+       (regexp-opt '(".diary" ".scratch"  "&bitlbee" ".newsrc" "~master~" ":"
+                     ".bbdb" "todo.org"))
+       "\\*.+\\*" "^#" "^localhost:"))
 
 ;; C-k: killing buffers/files while idoing
 
