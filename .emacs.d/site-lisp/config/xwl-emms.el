@@ -94,6 +94,9 @@
       (emms-playlist-mode-center-current)
       (emms-playlist-update-track))))
 
+(emms-mode-line-disable)
+(emms-playing-time-disable-display)
+
 ;; ,----
 ;; | playlist mode
 ;; `----

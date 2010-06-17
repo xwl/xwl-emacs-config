@@ -210,6 +210,7 @@
                      message-mode
 
                      dired-mode
+                     ibuffer-mode
                      apropos-mode
                      completion-list-mode)))
      ))

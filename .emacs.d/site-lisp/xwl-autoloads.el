@@ -739,7 +739,7 @@ Sets up command `font-lock-mode'.
 ;;;### (autoloads (dictionary-popup-matching-words dictionary-mouse-popup-matching-words
 ;;;;;;  dictionary-match-words dictionary-lookup-definition dictionary-search
 ;;;;;;  dictionary dictionary-mode) "dictionary" "dictionary-el/dictionary.el"
-;;;;;;  (18862 33836))
+;;;;;;  (19462 28258))
 ;;; Generated autoloads from dictionary-el/dictionary.el
 
 (autoload 'dictionary-mode "dictionary" "\
@@ -1271,7 +1271,7 @@ Kill thread from here using leafnode.
 ;;;***
 
 ;;;### (autoloads (twit) "twittering-mode" "twittering-mode/twittering-mode.el"
-;;;;;;  (19453 15144))
+;;;;;;  (19470 10098))
 ;;; Generated autoloads from twittering-mode/twittering-mode.el
 
 (autoload 'twit "twittering-mode" "\
