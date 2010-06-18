@@ -69,6 +69,8 @@
                                    (twittering-visit-timeline ":retweets_of_me")
                                    (twittering-visit-timeline ":public")
 
+                                   (twittering-visit-timeline "xwl/hualao")
+
                                    (switch-to-buffer ":home")
                                    ))
 
