@@ -725,12 +725,12 @@ passphrase cache or user."
 (setq twittering-update-status-function
       'twittering-update-status-from-pop-up-buffer)
 
-(setq twittering-url-show-status nil)
-(setq twittering-reverse-mode t)
+(setq twittering-url-show-status nil
+      twittering-notify-successful-http-get nil)
 
-(add-hook 'twittering-mode-hook (lambda ()
-                                  (twittering-icon-mode 1)
-                                  (twittering-enable-unread-status-notifier)))
+;; Local variables, set this with caution. :)
+(setq twittering-reverse-mode t
+      twittering-icon-mode t)
 
 (eval-after-load 'twittering-mode
   '(progn
@@ -746,6 +746,12 @@ passphrase cache or user."
      (define-key twittering-mode-map (kbd "U") 'twittering-unfollow)
 
      (define-key twittering-mode-map (kbd "C-c C-g") nil)
+
+     (setq twittering-timeline-most-active-spec-strings
+           (cons ":replies"
+                 twittering-timeline-most-active-spec-strings))
+
+     (twittering-enable-unread-status-notifier)
      ))
 
 ;; FIXME: in 23.2, who the hell autoload create-animated-image?? this exists in
@@ -868,7 +874,8 @@ passphrase cache or user."
           xwl-weather-list)
     (message str)))
 
-(setq eval-expression-print-length 100)
+(setq eval-expression-print-length 100
+      print-length eval-expression-print-length)
 
 (provide 'xwl-misc)
 

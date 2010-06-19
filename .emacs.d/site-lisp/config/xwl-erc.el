@@ -142,10 +142,16 @@ so as to keep an eye on work when necessarily."
 
 (setq erc-track-priority-faces-only 'all)
 
-;; (defadvice erc-track-switch-buffer (before place-point-to-bottom activate)
-;;   (when (memq (current-buffer) (erc-buffer-list))
-;;     (goto-char (point-max))
-;;     (forward-line -1)))
+(defadvice erc-track-switch-buffer (around place-point-to-bottom activate)
+  (cond
+   ((memq (current-buffer) (erc-buffer-list))
+    (goto-char (point-max))
+    (forward-line -1)
+    ad-do-it)
+   ((and (twittering-buffer-p) twittering-unread-status-info)
+    (switch-to-buffer (caar twittering-unread-status-info)))
+   (t
+    ad-do-it)))
 
 (erc-fill-mode 1)
 (setq erc-fill-function 'erc-fill-static
