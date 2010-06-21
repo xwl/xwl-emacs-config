@@ -61,13 +61,16 @@
                                  ":home"
                                  (lambda ()
                                    (interactive)
-                                   (call-interactively 'twit)
+                                   (twit)
 
-                                   (twittering-replies-timeline)
-                                   (twittering-direct-messages-timeline)
-                                   (twittering-visit-timeline ":followers")
-                                   (twittering-visit-timeline ":retweets_of_me")
-                                   (twittering-visit-timeline ":public")
+                                   (mapc 'twittering-visit-timeline
+                                         '(":replies"
+                                           ":direct_messages"
+                                           ":followers"
+                                           ":retweets_of_me"
+                                           ":public"
+                                           "xwl/hualao"
+                                           "hayamiz/twmode-users"))
 
                                    (switch-to-buffer ":home")
                                    ))
