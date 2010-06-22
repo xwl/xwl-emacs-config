@@ -1271,7 +1271,7 @@ Kill thread from here using leafnode.
 ;;;***
 
 ;;;### (autoloads (twit) "twittering-mode" "twittering-mode/twittering-mode.el"
-;;;;;;  (19470 10098))
+;;;;;;  (19487 29000))
 ;;; Generated autoloads from twittering-mode/twittering-mode.el
 
 (autoload 'twit "twittering-mode" "\
@@ -1868,6 +1868,17 @@ Turn off `less-minor-mode'.
 
 ;;;***
 
+;;;### (autoloads (gmail-notifier-start) "gmail-notifier" "xwl-elisp/gmail-notifier.el"
+;;;;;;  (19487 30690))
+;;; Generated autoloads from xwl-elisp/gmail-notifier.el
+
+(autoload 'gmail-notifier-start "gmail-notifier" "\
+Not documented
+
+\(fn)" t nil)
+
+;;;***
+
 ;;;### (autoloads (finkinfo-mode) "finkinfo-mode" "xwl-elisp/finkinfo-mode.el"
 ;;;;;;  (18867 57586))
 ;;; Generated autoloads from xwl-elisp/finkinfo-mode.el
@@ -2045,7 +2056,7 @@ Not documented
 ;;;***
 
 ;;;### (autoloads (xwl-zenity xwl-snarl xwl-growl xwl-notify) "xwl-notify"
-;;;;;;  "config/autoload/xwl-notify.el" (19453 16844))
+;;;;;;  "config/autoload/xwl-notify.el" (19474 19900))
 ;;; Generated autoloads from config/autoload/xwl-notify.el
 
 (autoload 'xwl-notify "xwl-notify" "\
