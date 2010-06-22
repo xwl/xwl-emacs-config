@@ -64,8 +64,9 @@
          "#debian-zh" "#emacs-cn")      ; "#bitlbee"
         ;; ("linuxfire"
         ;;  "#linuxfire")
-        ("irc.lnx.nokia.com"
-         "#avkon" "#orbit" "#mac" "#linux" "#symbianperformance" "#qt")))
+        ;; ("irc.lnx.nokia.com"
+        ;;  "#avkon" "#orbit" "#mac" "#linux" "#symbianperformance" "#qt")
+        ))
 
 (defun his-bitlbee-identify ()
    "If we're on the bitlbee server, send the identify command to the
