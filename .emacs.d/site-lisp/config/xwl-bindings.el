@@ -55,32 +55,41 @@
       (call-interactively 'shell)
     (xwl-switch-or-create "*shell*" 'shell)))
 
-(global-set-key (kbd "<f11>") (lambda ()
-                                (interactive)
-                                (xwl-switch-or-create
-                                 ":home"
-                                 (lambda ()
-                                   (interactive)
-                                   (twit)
+(global-set-key (kbd "<f11>")
+                (lambda ()
+                  (interactive)
+                  (xwl-switch-or-create
+                   ":home"
+                   (lambda ()
+                     (interactive)
+                     (twit)
 
-                                   (mapc 'twittering-visit-timeline
-                                         '(":replies"
-                                           ":direct_messages"
-                                           ":followers"
-                                           ":retweets_of_me"
-                                           ":public"
-                                           "xwl/hualao"
-                                           "hayamiz/twmode-users"))
+                     (mapc 'twittering-visit-timeline
+                           `(":replies"
+                             ":direct_messages"
+                             ":followers"
+                             ":retweets_of_me"
+                             ":public"
 
-                                   (switch-to-buffer ":home")
-                                   ))
+                             ,@(or (twittering-get-simple-sync
+                                    'get-list-index
+                                    `((username . ,twittering-username)))
+                                   '("xwl/tianxiashi" "xwl/hualao"))
 
-                                (unless xwl-timers-hook-started?
-                                  (run-hooks 'xwl-timers-hook)
-                                  (setq xwl-timers-hook-started? t)
+                             ,@(or (twittering-get-simple-sync
+                                    'get-list-subscriptions
+                                    `((username . ,twittering-username)))
+                                   '("hayamiz/twmode-users"))))
 
-                                  (command-execute (kbd "<f6>"))
-                                  (command-execute (kbd "C-c n E")))))
+                     (switch-to-buffer ":home")
+                     ))
+
+                  (unless xwl-timers-hook-started?
+                    (run-hooks 'xwl-timers-hook)
+                    (setq xwl-timers-hook-started? t)
+
+                    (command-execute (kbd "<f6>"))
+                    (command-execute (kbd "C-c n E")))))
 
 (global-set-key (kbd "<f13>") 'kill-this-buffer)
 
@@ -112,6 +121,7 @@
 (defun xwl-mark-ascii-symbol ()
   "Mark ascii-symbol by `thing-at-point'."
   (interactive)
+  (require 'thingatpt)
   (set-mark (beginning-of-thing 'ascii-symbol))
   (goto-char (end-of-thing 'ascii-symbol)))
 

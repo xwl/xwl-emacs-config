@@ -733,6 +733,8 @@ passphrase cache or user."
 (setq twittering-reverse-mode t
       twittering-icon-mode t)
 
+(setq twittering-new-tweets-count-excluding-me t)
+
 (eval-after-load 'twittering-mode
   '(progn
      (define-key twittering-mode-map (kbd "c") 'twittering-current-timeline)
