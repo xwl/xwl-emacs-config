@@ -77,6 +77,18 @@
 (setq gmail-notifier-username "william.xwl"
       gmail-notifier-password pwgmail)
 
+(when xwl-at-company?
+  (setq gmail-notifier-curl-command
+        (concat "curl "
+                (if (boundp 'xwl-proxy-server)
+                    (format "-x %s:%d" xwl-proxy-server xwl-proxy-port)
+                  ""))))
+
+(add-hook 'gmail-notifier-new-mails-hook
+          (lambda ()
+            (xwl-notify "Gmail" (format "You've got %d new mails"
+                                        (length gmail-notifier-unread-entries)))))
+
 (add-hook 'xwl-timers-hook 'gmail-notifier-start)
 
 ;;; Misc
@@ -120,7 +132,7 @@
 ;;       (run-with-timer 0 120 'xwl-mail-notify-update-handler))
 
 ;; frame title
-(setq frame-title-format "菩提本无树 明镜亦非台 本来无一物 何处惹尘埃")
+(setq frame-title-format "菩提本無樹 明鏡亦非台 本來無一物 何處惹塵埃")
 
 (defun xwl-frame-fortune-of-day ()
   (setq frame-title-format
