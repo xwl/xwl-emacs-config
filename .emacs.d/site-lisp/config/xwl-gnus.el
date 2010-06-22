@@ -642,7 +642,7 @@
 
 ;; date
 (setq gnus-user-date-format-alist
-      '(((gnus-seconds-today) . "%a %H:%M")
+      '(((gnus-seconds-today) . "%H:%M")
 	(604800               . "%a %H:%M") ; this week
 	((gnus-seconds-month) . "%d")
 	((gnus-seconds-year)  . "%m/%d")

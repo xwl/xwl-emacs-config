@@ -48,12 +48,13 @@
                                                (beginning-of-line)
                                                (re-search-backward "^\\[" nil t 1)
                                                (beginning-of-line)))
-     (define-key ibuffer-mode-map (kbd "g")
-       (lambda ()
-         (interactive)
-         (let ((pos (point)))
-           (ibuffer-update nil)
-           (goto-char pos))))
+
+     (define-key ibuffer-mode-map (kbd "g") (lambda ()
+                                              (interactive)
+                                              (let ((pos (point)))
+                                                (ibuffer-update nil)
+                                                (goto-char pos)
+                                                (recenter))))
 
      (define-key ibuffer-mode-map (kbd "C-x C-f") nil)))
 
@@ -105,9 +106,9 @@ point.  Especially useful for w32."
 ;; 2. one can also toggle this by C-a
 (setq ido-ignore-buffers
       (list
-       (regexp-opt '(".diary" ".scratch"  "&bitlbee" ".newsrc" "~master~" ":"
+       (regexp-opt '(".diary" ".scratch"  "&bitlbee" ".newsrc" "~master~"
                      ".bbdb" "todo.org"))
-       "\\*.+\\*" "^#" "^localhost:"))
+       "\\*.+\\*" "^#" "^localhost:" "^:"))
 
 ;; C-k: killing buffers/files while idoing
 
