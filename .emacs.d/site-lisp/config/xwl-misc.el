@@ -882,6 +882,12 @@ passphrase cache or user."
 (setq eval-expression-print-length 100
       print-length eval-expression-print-length)
 
+(defadvice shell-command (after enable-less activate)
+  (let ((b "*Shell Command Output*"))
+    (when (get-buffer b)
+      (with-current-buffer b
+        (less-minor-mode-on)))))
+
 (provide 'xwl-misc)
 
 ;;; Local Variables: ***

@@ -379,9 +379,20 @@ Thus generate a TAGs file."
 
 (eval-after-load 'vc
   '(progn
-     (defadvice vc-next-action (around use-new-frame activate)
-       (let ((pop-up-frames t))
-         ad-do-it))
+     ;; (defadvice vc-next-action (around use-new-frame activate)
+     ;;   (let ((pop-up-frames t))
+     ;;     ad-do-it))
+
+     (defadvice vc-next-action (around setup-source-log-diff-view activate)
+       (let ((b (current-buffer))
+             (f buffer-file-name))
+         ad-do-it
+         (when (eq (vc-backend f) 'Git)
+           (delete-other-windows)
+           (shell-command "git diff -w")
+           (split-window-vertically)
+           (switch-to-buffer b)
+           (other-window -1))))
      ))
 
 ;;; skeletons
@@ -499,10 +510,10 @@ Thus generate a TAGs file."
                   (interactive)
                   (require 'grep)
                   (let ((cmd
-                         (if (string-match "\\.gz" (shell-command-to-string "ls | head -1"))
+                         (if (string-match "\\.gz" (shell-command-to-string "ls *.gz | head -1"))
                              "zgrep -nH " "grep -nH ")))
                     ;; TODO, fix this.
-                    ;;(grep-apply-setting 'grep-command cmd)
+                    (grep-apply-setting 'grep-command cmd)
                     (call-interactively 'grep))))
 
 (global-set-key (kbd "C-c G")
