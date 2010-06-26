@@ -306,7 +306,12 @@ Thus generate a TAGs file."
      (defadvice log-edit-done (after delete-frame activate)
        ;; Delete smallest one.  Ideally, should delete the one running this log
        ;; command. But how? FIXME
-       (xwl-delete-frame))
+       (unless (xwl-delete-frame)
+         (mapc (lambda (w)
+                 (when (string= (buffer-name (window-buffer w))
+                                "*Shell Command Output*")
+                   (delete-window w)))
+               (window-list))))
      ))
 
 ;;; doxymacs
@@ -379,11 +384,11 @@ Thus generate a TAGs file."
 
 (eval-after-load 'vc
   '(progn
-     ;; (defadvice vc-next-action (around use-new-frame activate)
+     ;; (defadvice vc-checkin (around use-new-frame activate)
      ;;   (let ((pop-up-frames t))
      ;;     ad-do-it))
 
-     (defadvice vc-next-action (around setup-source-log-diff-view activate)
+     (defadvice vc-checkin (around setup-source-log-diff-view activate)
        (let ((b (current-buffer))
              (f buffer-file-name))
          ad-do-it
@@ -392,7 +397,7 @@ Thus generate a TAGs file."
            (shell-command "git diff -w")
            (split-window-vertically)
            (switch-to-buffer b)
-           (other-window -1))))
+           (other-window 1))))
      ))
 
 ;;; skeletons
