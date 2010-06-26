@@ -750,6 +750,8 @@ passphrase cache or user."
 
      (define-key twittering-mode-map (kbd "C-c C-g") nil)
 
+     (define-key twittering-mode-map (kbd "<S-tab>") 'twittering-goto-previous-thing)
+
      (setq twittering-timeline-most-active-spec-strings
            (cons ":replies"
                  twittering-timeline-most-active-spec-strings))
