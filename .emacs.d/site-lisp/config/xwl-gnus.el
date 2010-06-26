@@ -714,7 +714,8 @@
   (define-key gnus-summary-mode-map (kbd "RET") (lambda () (interactive)
 			       (gnus-summary-show-article)
 			       (other-window 1)))
-  )
+
+  (define-key gnus-summary-mode-map (kbd "C-o") nil))
 
 (add-hook 'gnus-summary-mode-hook 'xwl-gnus-summary-mode-hook)
 
