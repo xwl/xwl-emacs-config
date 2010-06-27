@@ -237,8 +237,8 @@
 
 (global-set-key (kbd "<f6>") '(lambda ()
                                 (interactive)
-                                (if (not xwl-at-company?)
-                                    (message "Hmm, only run at company")
+                                (if xwl-at-company?
+                                    (message "Hmm, only run at home")
                                   (xwl-gnus))))
 
 (setq xwl-gnus-agent-timer nil)
