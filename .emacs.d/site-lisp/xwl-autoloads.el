@@ -128,6 +128,18 @@ Create a sawfish interaction buffer.
 
 ;;;***
 
+;;;### (autoloads (rainbow-mode) "rainbow-mode" "rainbow-mode.el"
+;;;;;;  (19497 54902))
+;;; Generated autoloads from rainbow-mode.el
+
+(autoload 'rainbow-mode "rainbow-mode" "\
+Colorize strings that represent colors.
+This will fontify with colors the string like \"#aabbcc\" or \"blue\"
+
+\(fn &optional ARG)" t nil)
+
+;;;***
+
 ;;;### (autoloads (pack-windows) "pack-windows" "pack-windows.el"
 ;;;;;;  (18862 33836))
 ;;; Generated autoloads from pack-windows.el
@@ -1271,7 +1283,7 @@ Kill thread from here using leafnode.
 ;;;***
 
 ;;;### (autoloads (twit) "twittering-mode" "twittering-mode/twittering-mode.el"
-;;;;;;  (19487 29000))
+;;;;;;  (19497 55343))
 ;;; Generated autoloads from twittering-mode/twittering-mode.el
 
 (autoload 'twit "twittering-mode" "\
@@ -1789,8 +1801,8 @@ Insert the entered operator plus surrounding spaces.
 
 ;;;***
 
-;;;### (autoloads (salary-show) "salary" "xwl-elisp/salary.el" (19441
-;;;;;;  17140))
+;;;### (autoloads (salary-show) "salary" "xwl-elisp/salary.el" (19493
+;;;;;;  41873))
 ;;; Generated autoloads from xwl-elisp/salary.el
 
 (autoload 'salary-show "salary" "\
@@ -1803,8 +1815,8 @@ SALARY is before tax.  With prefix argument, insert result at point.
 
 ;;;### (autoloads (less-minor-mode-off less-minor-mode-on auto-less-minor-mode
 ;;;;;;  less-quit less-scroll-down-line less-scroll-up-line less-minor-mode
-;;;;;;  global-less-minor-mode) "less" "xwl-elisp/less.el" (19451
-;;;;;;  54875))
+;;;;;;  global-less-minor-mode) "less" "xwl-elisp/less.el" (19497
+;;;;;;  55559))
 ;;; Generated autoloads from xwl-elisp/less.el
 
 (defvar global-less-minor-mode nil "\
@@ -1869,7 +1881,7 @@ Turn off `less-minor-mode'.
 ;;;***
 
 ;;;### (autoloads (gmail-notifier-start) "gmail-notifier" "xwl-elisp/gmail-notifier.el"
-;;;;;;  (19487 30690))
+;;;;;;  (19497 55392))
 ;;; Generated autoloads from xwl-elisp/gmail-notifier.el
 
 (autoload 'gmail-notifier-start "gmail-notifier" "\
@@ -1914,7 +1926,7 @@ Create a *Cwit* buffer.
 ;;;***
 
 ;;;### (autoloads (holiday-solar-term holiday-lunar cal-china-x-birthday-from-chinese)
-;;;;;;  "cal-china-x" "xwl-elisp/cal-china-x.el" (19437 17952))
+;;;;;;  "cal-china-x" "xwl-elisp/cal-china-x.el" (19493 41734))
 ;;; Generated autoloads from xwl-elisp/cal-china-x.el
 
 (autoload 'cal-china-x-birthday-from-chinese "cal-china-x" "\
@@ -2086,9 +2098,9 @@ Not documented
 ;;;;;;  xwl-shell-command-asynchronously-with-callback xwl-generate-password
 ;;;;;;  xwl-download-book xwl-delete-line his-transpose-windows his-one-whitespace-between-ce
 ;;;;;;  xwl-soft-kill-ring-save xwl-word-count-analysis xwl-count-ce-word
-;;;;;;  his-align-cols xwl-numerate-lines xwl-strip-blank-lines-region
-;;;;;;  xwl-strip-blank-lines-buffer ascii-table-show) "xwl-extra-util"
-;;;;;;  "config/autoload/xwl-extra-util.el" (19453 18299))
+;;;;;;  his-align-cols xwl-numerate-lines xwl-delete-blank-lines-region
+;;;;;;  xwl-delete-blank-lines-buffer ascii-table-show) "xwl-extra-util"
+;;;;;;  "config/autoload/xwl-extra-util.el" (19495 33750))
 ;;; Generated autoloads from config/autoload/xwl-extra-util.el
 
 (autoload 'ascii-table-show "xwl-extra-util" "\
@@ -2096,12 +2108,12 @@ Print the ascii table, by crazycool@smth.
 
 \(fn)" t nil)
 
-(autoload 'xwl-strip-blank-lines-buffer "xwl-extra-util" "\
+(autoload 'xwl-delete-blank-lines-buffer "xwl-extra-util" "\
 Strip all blank lines in current buffer.
 
 \(fn)" t nil)
 
-(autoload 'xwl-strip-blank-lines-region "xwl-extra-util" "\
+(autoload 'xwl-delete-blank-lines-region "xwl-extra-util" "\
 Strip all blank lines in region.
 
 \(fn START END)" t nil)

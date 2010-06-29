@@ -264,22 +264,23 @@
       (when (fboundp 'color-theme-xwl-console)
         (color-theme-xwl-console))
 
-      (unless gnus-plugged
-        (unless xwl-gnus-agent-timer
-          (setq xwl-gnus-agent-timer
-                (run-with-timer
-                 0 (* 3600 2) (lambda ()
-                                (xwl-shell-command-asynchronously
-                                 (concat
-                                  ;; Company PC is always on, so we won't have
-                                  ;; too many instances running at the same
-                                  ;; time...
-                                  (if xwl-at-company?
-                                      ""
-                                    "(ps -ef|grep \"emacs --eval\" | grep -v grep) || ")
-                                  "emacs --eval \"(progn (require 'xwl-gnus-agent))\""
-                                  ))))))
-        (message "Gnus agent timer started"))
+      ;; TODO: 23.1 mac port doesn't work with this.
+      ;; (unless gnus-plugged
+      ;;   (unless xwl-gnus-agent-timer
+      ;;     (setq xwl-gnus-agent-timer
+      ;;           (run-with-timer
+      ;;            0 (* 3600 24) (lambda ()
+      ;;                           (xwl-shell-command-asynchronously
+      ;;                            (concat
+      ;;                             ;; Company PC is always on, so we won't have
+      ;;                             ;; too many instances running at the same
+      ;;                             ;; time...
+      ;;                             (if xwl-at-company?
+      ;;                                 ""
+      ;;                               "(ps -ef|grep \"emacs --eval\" | grep -v grep) || ")
+      ;;                             "emacs --eval \"(progn (require 'xwl-gnus-agent))\""
+      ;;                             ))))))
+      ;;   (message "Gnus agent timer started"))
       )))
 
 (global-set-key (kbd "<f8>") (lambda ()

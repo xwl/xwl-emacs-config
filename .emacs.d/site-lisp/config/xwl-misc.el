@@ -735,6 +735,8 @@ passphrase cache or user."
 
 (setq twittering-new-tweets-count-excluding-me t)
 
+(setq twittering-retweet-format "RT @%s: %t")
+
 (eval-after-load 'twittering-mode
   '(progn
      (define-key twittering-mode-map (kbd "c") 'twittering-current-timeline)
@@ -887,6 +889,10 @@ passphrase cache or user."
     (when (get-buffer b)
       (with-current-buffer b
         (less-minor-mode-on)))))
+
+(setq auth-sources
+      (cons '(:source "~/.authinfo" :host t :protocol t)
+            auth-sources))
 
 (provide 'xwl-misc)
 

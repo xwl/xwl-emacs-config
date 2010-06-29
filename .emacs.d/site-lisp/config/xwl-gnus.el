@@ -81,9 +81,9 @@
                       (nntp-address ,(xwl-redirect-host))
                       (nntp-port-number 11119))
                 )
-            '((nnimap "imap.gmail.com"
-                      (nnimap-server-port 993)
-                      (nnimap-stream ssl))
+            '(;; (nnimap "imap.gmail.com"
+              ;;         (nnimap-server-port 993)
+              ;;         (nnimap-stream ssl))
               (nntp "news.cn99.com")
               ))
         ))

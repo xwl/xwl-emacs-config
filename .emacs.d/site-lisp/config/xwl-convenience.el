@@ -189,6 +189,7 @@
            (concat auto-less-exclude-regexp
                    "\\|"
                    (regexp-opt '("todo.org"
+                                 "outgoing"
                                  ))))
      (setq auto-less-exclude-modes
            (append auto-less-exclude-modes
