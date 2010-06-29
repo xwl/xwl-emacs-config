@@ -79,7 +79,11 @@
                              ,@(or (twittering-get-simple-sync
                                     'get-list-subscriptions
                                     `((username . ,twittering-username)))
-                                   '("hayamiz/twmode-users"))))
+                                   '("hayamiz/twmode-users"))
+
+                             ":search/emacs/"
+                             ":search/twittering-mode/"
+                             ))
 
                      (switch-to-buffer ":home")
                      ))
@@ -377,6 +381,8 @@
 
 (global-set-key (kbd "C-x o") 'xwl-forward-char)
 (global-set-key (kbd "C-x O") 'xwl-backward-char)
+
+(global-set-key (kbd "C-c m u") 'twittering-update-status-interactive)
 
 (provide 'xwl-bindings)
 

@@ -198,12 +198,14 @@
                                  " *canonical address*"
                                  "*followup to"
                                  "*mail*"
+                                 "*posting on"
                                  ))))
      (setq auto-less-exclude-modes
            (append auto-less-exclude-modes
                    '(twittering-edit-mode
                      calendar-mode
                      log-edit-mode
+                     ediff-mode
 
                      gnus-summary-mode
                      gnus-group-mode
