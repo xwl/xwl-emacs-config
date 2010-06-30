@@ -710,6 +710,7 @@ passphrase cache or user."
     (setq twittering-proxy-use t
           twittering-proxy-server "172.16.42.137"
           twittering-proxy-port 8080)
+  (setq twittering-auth-method 'basic)
   ;; Also in `gtap', disable "secure: always".
   (setq twittering-use-ssl nil)
 
@@ -718,7 +719,7 @@ passphrase cache or user."
         twittering-api-search-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*EcPOAaX8==")))
 
 (setq twittering-status-format
-      "%i %g %s, from %f%L%r%R:\n%FILL{       %T}\n"
+      "%i %g %s, from %f%L%r%R:\n%FILL[       ]{%T}\n"
       ;; "%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FILL{       %T}\n"
       ;; "%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FILL{%T}\n"
       )
@@ -729,7 +730,8 @@ passphrase cache or user."
 (setq twittering-url-show-status nil
       twittering-notify-successful-http-get nil)
 
-;; Local variables, set this with caution. :)
+;; Local variables, set this with caution. :)  Should be set before loading
+;; twittering-mode.
 (setq twittering-reverse-mode t
       twittering-icon-mode t)
 
