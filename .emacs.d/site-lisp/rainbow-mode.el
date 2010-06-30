@@ -1,6 +1,6 @@
 ;;; rainbow-mode.el --- prints color strings with colored background
 
-;; Copyright (C) 2010 Free Software Foundation, Inc.
+;; Copyright (C) 2010 Julien Danjou
 
 ;; Author: Julien Danjou <julien@danjou.info>
 ;; Keywords: strings, faces
@@ -48,8 +48,10 @@
 
 ;; rgb() colors
 (defvar rainbow-html-rgb-colors-font-lock-keywords
-  '("rgb(\s*\\([0-9]\\{1,3\\}\\(?:\s*%\\)?\\)\s*,\s*\\([0-9]\\{1,3\\}\\(?:\s*%\\)?\\)\s*,\s*\\([0-9]\\{1,3\\}\\(?:\s*%\\)?\\)\s*)"
-    (0 (rainbow-colorize-rgb)))
+  '(("rgb(\s*\\([0-9]\\{1,3\\}\\(?:\s*%\\)?\\)\s*,\s*\\([0-9]\\{1,3\\}\\(?:\s*%\\)?\\)\s*,\s*\\([0-9]\\{1,3\\}\\(?:\s*%\\)?\\)\s*)"
+     (0 (rainbow-colorize-rgb)))
+    ("rgba(\s*\\([0-9]\\{1,3\\}\\(?:\s*%\\)?\\)\s*,\s*\\([0-9]\\{1,3\\}\\(?:\s*%\\)?\\)\s*,\s*\\([0-9]\\{1,3\\}\\(?:\s*%\\)?\\)\s*,\s*[0-9]\\{1,3\\}\s*%?\s*)"
+     (0 (rainbow-colorize-rgb))))
   "Font-lock keywords to add for RGB colors.")
 
 ;; HTML colors name
@@ -107,9 +109,9 @@ will be enabled if a major mode has been detected from the
 (defcustom rainbow-x-colors 'auto
   "When to enable X colors.
 If set to t, the X colors will be enabled.  If set to nil, the
-X colors will not be enabled.  If set to auto, the HTML colors
+X colors will not be enabled.  If set to auto, the X colors
 will be enabled if a major mode has been detected from the
-`rainbow-html-colors-major-mode-list'."
+`rainbow-x-colors-major-mode-list'."
   :group 'rainbow)
 
 ;; Functions
@@ -177,8 +179,8 @@ This will convert \"80 %\" to 204, \"100 %\" to 255 but \"123\" to \"123\""
           `(,(regexp-opt (mapcar 'car rainbow-html-colors-alist) 'words)
             (0 (rainbow-colorize-by-assoc rainbow-html-colors-alist))))
     (font-lock-add-keywords nil
-                            (list rainbow-html-colors-font-lock-keywords
-                                  rainbow-html-rgb-colors-font-lock-keywords))))
+                            `(,rainbow-html-colors-font-lock-keywords
+                              ,@rainbow-html-rgb-colors-font-lock-keywords))))
 
 (defun rainbow-turn-off ()
   "Turn off rainbow-mode."
