@@ -515,9 +515,9 @@ Thus generate a TAGs file."
                   (interactive)
                   (require 'grep)
                   (let ((cmd
-                         (if (string-match "\\.gz" (shell-command-to-string "ls *.gz | head -1"))
+                         (if (string-match "[^*]\\.gz" (shell-command-to-string
+                                                        "ls *.gz | head -1"))
                              "zgrep -nH " "grep -nH ")))
-                    ;; TODO, fix this.
                     (grep-apply-setting 'grep-command cmd)
                     (call-interactively 'grep))))
 
