@@ -105,10 +105,12 @@ point.  Especially useful for w32."
 ;; 1. if no visible match, will match against ignored buffers.
 ;; 2. one can also toggle this by C-a
 (setq ido-ignore-buffers
-      (list
-       (regexp-opt '(".diary" ".scratch"  "&bitlbee" ".newsrc" "~master~"
-                     ".bbdb" "todo.org"))
-       "\\*.+\\*" "^#" "^localhost:" "^:"))
+      `(,(regexp-opt '(".diary" ".scratch"  "&bitlbee" ".newsrc"
+                       ".bbdb" "todo.org"))
+        "\\*.+\\*" "^#" "^localhost:" "^:"
+        ,@ido-ignore-files))
+
+(setq ido-ignore-files '("~master~"))
 
 ;; C-k: killing buffers/files while idoing
 
