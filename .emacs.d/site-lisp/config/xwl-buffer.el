@@ -99,6 +99,9 @@ point.  Especially useful for w32."
 
 ;;; ido
 
+(ido-mode 1)
+(ido-everywhere 1)
+
 (setq ido-create-new-buffer 'never
       ido-enable-regexp nil)
 
@@ -111,11 +114,6 @@ point.  Especially useful for w32."
         ,@ido-ignore-files))
 
 (setq ido-ignore-files '("~master~"))
-
-;; C-k: killing buffers/files while idoing
-
-(ido-mode 1)
-(ido-everywhere 1)
 
 (defun xwl-update-frequent-directories ()
   (interactive)

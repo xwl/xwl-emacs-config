@@ -926,11 +926,10 @@ If SCHEME?, `run-scheme'."
 (require 'ruby-electric)
 
 
-;;; sgml, html, xml...
+;;; sgml, html, xml, css
 
-(add-hook 'html-mode-hook
-          (lambda ()
-            (smart-operator-mode -1)))
+(add-hook 'html-mode-hook (lambda () (smart-operator-mode -1)))
+(add-hook 'css-mode-hook 'rainbow-mode)
 
 ;; dvc
 
