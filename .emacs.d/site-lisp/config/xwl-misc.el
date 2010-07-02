@@ -742,6 +742,8 @@ passphrase cache or user."
 (setq twittering-cache-spec-strings
       '(":home" ":retweets_of_me" ":replies" ":direct_messages"))
 
+(add-hook 'twittering-edit-mode-hook 'flyspell-mode-on)
+
 (eval-after-load 'twittering-mode
   '(progn
      (define-key twittering-mode-map (kbd "c") 'twittering-current-timeline)
