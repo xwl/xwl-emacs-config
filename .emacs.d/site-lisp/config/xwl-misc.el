@@ -739,6 +739,9 @@ passphrase cache or user."
 
 (setq twittering-retweet-format "RT @%s: %t")
 
+(setq twittering-cache-spec-strings
+      '(":home" ":retweets_of_me" ":replies" ":direct_messages"))
+
 (eval-after-load 'twittering-mode
   '(progn
      (define-key twittering-mode-map (kbd "c") 'twittering-current-timeline)

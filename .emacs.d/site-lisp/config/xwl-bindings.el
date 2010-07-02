@@ -79,7 +79,7 @@
                              ,@(or (twittering-get-simple-sync
                                     'get-list-subscriptions
                                     `((username . ,twittering-username)))
-                                   '("hayamiz/twmode-users"))
+                                   '())
 
                              ":search/emacs/"
                              ":search/twittering-mode/"
