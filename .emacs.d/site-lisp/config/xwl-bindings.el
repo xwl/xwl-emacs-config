@@ -333,17 +333,20 @@
                                    (interactive)
                                    (revert-buffer-with-coding-system 'gb18030)))
 
-(global-set-key (kbd "<f4>") '(lambda ()
-                                (interactive)
-                                (let* ((n "*top*")
-                                       (b (get-buffer n)))
-                                  (if b
-                                      (switch-to-buffer b)
-                                    (ansi-term "top")
-                                    (rename-buffer n)
-                                    (local-set-key "q" '(lambda ()
-                                                          (interactive)
-                                                          (kill-buffer (current-buffer))))))))
+(global-set-key (kbd "<f4>")
+                (lambda ()
+                  (interactive)
+                  (let* ((n "*top*")
+                         (b (get-buffer n)))
+                    (if b
+                        (switch-to-buffer b)
+                      (ansi-term "top")
+                      (rename-buffer n)
+                      (local-set-key "q" '(lambda ()
+                                            (interactive)
+                                            (kill-buffer (current-buffer))))
+                      (hl-line-mode 1)))))
+
 
 ;; set-fill-column
 (global-unset-key (kbd "C-x f"))

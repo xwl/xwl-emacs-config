@@ -742,7 +742,7 @@ passphrase cache or user."
 (setq twittering-cache-spec-strings
       '(":home" ":retweets_of_me" ":replies" ":direct_messages"))
 
-(add-hook 'twittering-edit-mode-hook 'flyspell-mode-on)
+(add-hook 'twittering-edit-mode-hook (lambda () (flyspell-mode 1)))
 
 (eval-after-load 'twittering-mode
   '(progn
