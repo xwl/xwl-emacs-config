@@ -720,12 +720,7 @@ passphrase cache or user."
 
 (setq twittering-status-format
       "%i %g %s, from %f%L%r%R:\n%FILL[       ]{%T}\n"
-      ;; "%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FILL{       %T}\n"
-      ;; "%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FILL{%T}\n"
-      )
-
-(setq twittering-update-status-function
-      'twittering-update-status-from-pop-up-buffer)
+      twittering-retweet-format "RT @%s: %t")
 
 (setq twittering-url-show-status nil
       twittering-notify-successful-http-get nil)
@@ -735,12 +730,11 @@ passphrase cache or user."
 (setq twittering-reverse-mode t
       twittering-icon-mode t)
 
-(setq twittering-new-tweets-count-excluding-me t)
-
-(setq twittering-retweet-format "RT @%s: %t")
-
-(setq twittering-cache-spec-strings
-      '(":home" ":retweets_of_me" ":replies" ":direct_messages"))
+(setq twittering-new-tweets-count-excluding-me t
+      twittering-timer-interval 300
+      twittering-cache-spec-strings
+      '(":home" ":retweets_of_me" ":replies" ":direct_messages")
+      twittering-use-master-password t)
 
 (add-hook 'twittering-edit-mode-hook (lambda () (flyspell-mode 1)))
 
@@ -771,7 +765,7 @@ passphrase cache or user."
 ;; FIXME: in 23.2, who the hell autoload create-animated-image?? this exists in
 ;; 24 only.
 (when (eq window-system 'mac)
-  (defalias  'create-animated-image 'create-image))
+  (defalias 'create-animated-image 'create-image))
 
 ;; ,----
 ;; | Track cahnges for some buffer

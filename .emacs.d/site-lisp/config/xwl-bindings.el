@@ -71,15 +71,8 @@
                              ":retweets_of_me"
                              ":public"
 
-                             ,@(or (twittering-get-simple-sync
-                                    'get-list-index
-                                    `((username . ,twittering-username)))
-                                   '("xwl/tianxiashi" "xwl/hualao"))
-
-                             ,@(or (twittering-get-simple-sync
-                                    'get-list-subscriptions
-                                    `((username . ,twittering-username)))
-                                   '())
+                             "xwl/tianxiashi"
+                             "xwl/hualao"
 
                              ":search/emacs/"
                              ":search/twittering-mode/"

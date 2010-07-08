@@ -394,7 +394,12 @@ Thus generate a TAGs file."
          ad-do-it
          (when (eq (vc-backend f) 'Git)
            (delete-other-windows)
+
            (shell-command "git diff -w")
+           (other-window 1)
+           (diff-mode)
+           (other-window 1)
+
            (split-window-vertically)
            (switch-to-buffer b)
            (other-window 1))))
@@ -1035,6 +1040,11 @@ Useful for packing c/c++ functions with one line or empty body."
      (defadvice semantic-create-imenu-index (after combine-with-default activate)
        (setq ad-return-value (append (imenu-default-create-index-function)
                                      ad-return-value)))))
+
+(eval-after-load 'diff-mode
+  '(progn
+     (define-key diff-mode-shared-map "k" nil)))
+
 
 (provide 'xwl-programming)
 
