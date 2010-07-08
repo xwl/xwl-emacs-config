@@ -718,9 +718,12 @@ passphrase cache or user."
         twittering-api-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC)FnXH==")
         twittering-api-search-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*EcPOAaX8==")))
 
-(setq twittering-status-format
-      "%i %g %s, from %f%L%r%R:\n%FILL[       ]{%T}\n"
-      twittering-retweet-format "RT @%s: %t")
+(let ((padding-size 8))
+  (setq twittering-status-format (concat "%i %g %s, from %f%L%r%R:\n%FILL["
+                                         (make-string padding-size ? )
+                                         "]{%T}\n")
+        twittering-my-status-format "%g %s, from %f%L%r%R: %i\n%FILL[]{%T}\n"
+        twittering-fill-column (- twittering-my-fill-column padding-size)))
 
 (setq twittering-url-show-status nil
       twittering-notify-successful-http-get nil)
