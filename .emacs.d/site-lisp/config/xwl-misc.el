@@ -736,7 +736,11 @@ passphrase cache or user."
       '(":home" ":retweets_of_me" ":replies" ":direct_messages")
       twittering-use-master-password t)
 
-(add-hook 'twittering-edit-mode-hook (lambda () (flyspell-mode 1)))
+(setq twittering-use-native-retweet t)
+
+(add-hook 'twittering-edit-mode-hook (lambda ()
+                                       (flyspell-mode 1)
+                                       (visual-line-mode 1)))
 
 (eval-after-load 'twittering-mode
   '(progn
@@ -748,16 +752,25 @@ passphrase cache or user."
      (define-key twittering-mode-map (kbd "P") 'twittering-goto-previous-status-of-user)
 
      (define-key twittering-mode-map (kbd "q") 'xwl-hide-buffer)
+
      (define-key twittering-mode-map (kbd "F") 'twittering-follow)
      (define-key twittering-mode-map (kbd "U") 'twittering-unfollow)
+     (define-key twittering-mode-map (kbd "R") 'twittering-retweet)
+     (define-key twittering-mode-map (kbd "@") 'twittering-reply-to-user)
+     (define-key twittering-mode-map (kbd "D") 'twittering-direct-message)
 
      (define-key twittering-mode-map (kbd "C-c C-g") nil)
+     (define-key twittering-mode-map (kbd "RET") nil)
+     (define-key twittering-mode-map (kbd "d") nil)
+     (define-key twittering-mode-map (kbd "i") nil)
+     (define-key twittering-mode-map (kbd "t") nil)
+     (define-key twittering-mode-map (kbd "s") nil)
 
      (define-key twittering-mode-map (kbd "<S-tab>") 'twittering-goto-previous-thing)
 
-     (setq twittering-timeline-most-active-spec-strings
-           (cons ":replies"
-                 twittering-timeline-most-active-spec-strings))
+     ;; (setq twittering-timeline-most-active-spec-strings
+     ;;       (cons ":replies"
+     ;;             twittering-timeline-most-active-spec-strings))
 
      (twittering-enable-unread-status-notifier)
      ))

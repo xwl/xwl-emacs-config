@@ -1043,7 +1043,8 @@ Useful for packing c/c++ functions with one line or empty body."
 
 (eval-after-load 'diff-mode
   '(progn
-     (define-key diff-mode-shared-map "k" nil)))
+     (define-key diff-mode-shared-map (kbd "k") nil)
+     (define-key diff-mode-shared-map (kbd "M-o") nil)))))
 
 
 (provide 'xwl-programming)
