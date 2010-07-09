@@ -723,7 +723,7 @@ passphrase cache or user."
                                          (make-string padding-size ? )
                                          "]{%T}\n")
         twittering-my-status-format "%g %s, from %f%L%r%R: %i\n%FILL[]{%T}\n"
-        twittering-fill-column (- twittering-my-fill-column padding-size)))
+        twittering-my-fill-column (- twittering-fill-column padding-size)))
 
 (setq twittering-url-show-status nil
       twittering-notify-successful-http-get nil)
