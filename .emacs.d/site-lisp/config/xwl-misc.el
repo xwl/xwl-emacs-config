@@ -403,10 +403,13 @@
   ;; FIXME: how to set this only after window has been maximized?
   (run-at-time 5
                nil
+               ;; (add-hook 'window-configuration-change-hook
                '(lambda ()
                   (let ((col (round (/ (frame-width) 2))))
                     (setq erc-fill-column (- col 2)) ; 6 for leading timestamp.
-                    (setq twittering-fill-column col))))
+                    (setq twittering-fill-column col
+                          twittering-my-fill-column (- twittering-fill-column
+                                                       xwl-twittering-padding-size)))))
 
   ;; (shell-command "sudo ~/bin/.xwl-after-start-hook")
   ;; (setq display-time-mail-file 'no-check)
@@ -718,12 +721,14 @@ passphrase cache or user."
         twittering-api-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC)FnXH==")
         twittering-api-search-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*EcPOAaX8==")))
 
-(let ((padding-size 8))
-  (setq twittering-status-format (concat "%i %g %s, from %f%L%r%R:\n%FILL["
-                                         (make-string padding-size ? )
-                                         "]{%T}\n")
-        twittering-my-status-format "%g %s, from %f%L%r%R: %i\n%FILL[]{%T}\n"
-        twittering-fill-column (- twittering-my-fill-column padding-size)))
+(setq xwl-twittering-padding-size 8)
+
+(setq twittering-status-format (concat "%i %g %s, from %f%L%r%R:\n%FILL["
+                                       (make-string xwl-twittering-padding-size ? )
+                                       "]{%T}\n")
+      twittering-my-status-format "%g %s, from %f%L%r%R: %i\n%FILL[]{%T}\n")
+
+(setq twittering-retweet-format "RT @%s: %t")
 
 (setq twittering-url-show-status nil
       twittering-notify-successful-http-get nil)
@@ -744,6 +749,9 @@ passphrase cache or user."
 (add-hook 'twittering-edit-mode-hook (lambda ()
                                        (flyspell-mode 1)
                                        (visual-line-mode 1)))
+
+;; (add-hook 'twittering-mode-hook (lambda ()
+;;                                   (hl-line-mode 1)))
 
 (eval-after-load 'twittering-mode
   '(progn
