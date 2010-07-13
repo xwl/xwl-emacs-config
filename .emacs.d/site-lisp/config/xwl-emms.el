@@ -97,6 +97,9 @@
 (emms-mode-line-disable)
 (emms-playing-time-disable-display)
 
+(setq emms-lyrics-display-on-modeline nil
+      emms-lyrics-display-buffer t)
+
 ;; ,----
 ;; | playlist mode
 ;; `----
@@ -317,7 +320,8 @@
 (global-set-key (kbd "C-c e d")   'emms-playlist-mode-delete-selected-track)
 (global-set-key (kbd "C-c e r")   'emms-toggle-repeat-track)
 (global-set-key (kbd "C-c e R")   'emms-toggle-repeat-playlist)
-(global-set-key (kbd "C-c e l")   'emms-lyrics-visit-lyric)
+(global-set-key (kbd "C-c e l")   'emms-lyrics-toggle-display-buffer)
+(global-set-key (kbd "C-c e L")   'emms-lyrics-visit-lyric)
 
 (global-set-key (kbd "C-c e s")   'emms-lastfm-radio-similar-artists)
 (global-set-key (kbd "C-c e k")   'emms-lastfm-radio-skip)
