@@ -67,7 +67,7 @@
                      (mapc 'twittering-visit-timeline
                            `(":replies"
                              ":direct_messages"
-                             ":followers"
+                             "xwl/followers"
                              ":retweets_of_me"
                              ":public"
 
