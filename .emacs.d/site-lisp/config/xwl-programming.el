@@ -394,7 +394,7 @@ Thus generate a TAGs file."
          ad-do-it
          (when (eq (vc-backend f) 'Git)
            (delete-other-windows)
-           (shell-command (concat "git diff -w " f))
+           (shell-command (concat "git diff -w " (shell-quote-argument f)))
            (let ((b (get-buffer "*Shell Command Output*")))
              (with-current-buffer b
                (diff-mode)))
