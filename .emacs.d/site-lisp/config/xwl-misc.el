@@ -403,10 +403,13 @@
   ;; FIXME: how to set this only after window has been maximized?
   (run-at-time 5
                nil
+               ;; (add-hook 'window-configuration-change-hook
                '(lambda ()
                   (let ((col (round (/ (frame-width) 2))))
                     (setq erc-fill-column (- col 2)) ; 6 for leading timestamp.
-                    (setq twittering-fill-column col))))
+                    (setq twittering-fill-column col
+                          twittering-my-fill-column (- twittering-fill-column
+                                                       xwl-twittering-padding-size)))))
 
   ;; (shell-command "sudo ~/bin/.xwl-after-start-hook")
   ;; (setq display-time-mail-file 'no-check)
@@ -711,19 +714,26 @@ passphrase cache or user."
           twittering-proxy-server "172.16.42.137"
           twittering-proxy-port 8080)
   (setq twittering-auth-method 'basic)
+
   ;; Also in `gtap', disable "secure: always".
-  (setq twittering-use-ssl nil)
+  ;; (setq twittering-use-ssl nil)
 
-  (setq twittering-web-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0k")
-        twittering-api-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC)FnXH==")
-        twittering-api-search-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*EcPOAaX8==")))
+  ;; (setq twittering-web-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0k")
+  ;;       twittering-api-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC)FnXH==")
+  ;;       twittering-api-search-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*EcPOAaX8=="))
 
-(let ((padding-size 8))
-  (setq twittering-status-format (concat "%i %g %s, from %f%L%r%R:\n%FILL["
-                                         (make-string padding-size ? )
-                                         "]{%T}\n")
-        twittering-my-status-format "%g %s, from %f%L%r%R: %i\n%FILL[]{%T}\n"
-        twittering-my-fill-column (- twittering-fill-column padding-size)))
+  (setq twittering-web-host (xds "[?[g[?IcZ`,+[)nlPO9gQ)McCdEmYH==")
+        twittering-api-host (xds "[?[g[?IcZ`(_Z>bl\\?[jCdFnXN[cQJ,aY)'=")
+        twittering-api-search-host (xds "[?[g[?IcZ`(qQNFpP)^l\\?[jCdFnXN[cQJ,aY)'=")))
+
+(setq xwl-twittering-padding-size 8)
+
+(setq twittering-status-format (concat "%i %g %s, from %f%L%r%R:\n%FILL["
+                                       (make-string xwl-twittering-padding-size ? )
+                                       "]{%T}\n")
+      twittering-my-status-format "%g %s, from %f%L%r%R: %i\n%FILL[]{%T}\n")
+
+(setq twittering-retweet-format "RT @%s: %t")
 
 (setq twittering-url-show-status nil
       twittering-notify-successful-http-get nil)
@@ -736,7 +746,7 @@ passphrase cache or user."
 (setq twittering-new-tweets-count-excluding-me t
       twittering-timer-interval 300
       twittering-cache-spec-strings
-      '(":home" ":retweets_of_me" ":replies" ":direct_messages")
+      '(":home" ":retweets_of_me" ":replies" ":direct_messages" "xwl/followers")
       twittering-use-master-password t)
 
 (setq twittering-use-native-retweet t)
@@ -744,6 +754,9 @@ passphrase cache or user."
 (add-hook 'twittering-edit-mode-hook (lambda ()
                                        (flyspell-mode 1)
                                        (visual-line-mode 1)))
+
+;; (add-hook 'twittering-mode-hook (lambda ()
+;;                                   (hl-line-mode 1)))
 
 (eval-after-load 'twittering-mode
   '(progn

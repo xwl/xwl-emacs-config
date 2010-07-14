@@ -394,12 +394,10 @@ Thus generate a TAGs file."
          ad-do-it
          (when (eq (vc-backend f) 'Git)
            (delete-other-windows)
-
-           (shell-command "git diff -w")
-           (other-window 1)
-           (diff-mode)
-           (other-window 1)
-
+           (shell-command (concat "git diff -w " f))
+           (let ((b (get-buffer "*Shell Command Output*")))
+             (with-current-buffer b
+               (diff-mode)))
            (split-window-vertically)
            (switch-to-buffer b)
            (other-window 1))))
@@ -1044,7 +1042,8 @@ Useful for packing c/c++ functions with one line or empty body."
 (eval-after-load 'diff-mode
   '(progn
      (define-key diff-mode-shared-map (kbd "k") nil)
-     (define-key diff-mode-shared-map (kbd "M-o") nil)))))
+     (define-key diff-mode-shared-map (kbd "M-o") nil)
+     ))
 
 
 (provide 'xwl-programming)
