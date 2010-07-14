@@ -781,6 +781,7 @@ passphrase cache or user."
      (define-key twittering-mode-map (kbd "i") nil)
      (define-key twittering-mode-map (kbd "t") nil)
      (define-key twittering-mode-map (kbd "s") nil)
+     (define-key twittering-mode-map (kbd "d") nil)
 
      (define-key twittering-mode-map (kbd "<S-tab>") 'twittering-goto-previous-thing)
 
