@@ -87,7 +87,7 @@
                     (setq xwl-timers-hook-started? t)
 
                     (command-execute (kbd "<f6>"))
-                    (command-execute (kbd "C-c n E"))
+                    ;; (command-execute (kbd "C-c n E"))
                     )))
 
 (global-set-key (kbd "<f13>") 'kill-this-buffer)
