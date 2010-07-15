@@ -49,9 +49,7 @@
 
 (setq twittering-retweet-format "RT @%s: %t")
 
-(setq twittering-url-show-status nil
-      ;; twittering-notify-successful-http-get nil
-      )
+(setq twittering-url-show-status nil)
 
 ;; Local variables, set this with caution. :)  Should be set before loading
 ;; twittering-mode.
