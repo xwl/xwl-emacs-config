@@ -62,6 +62,10 @@
 
 (setq ibuffer-saved-filter-groups
       '(("default"
+         ("elisp" (or (mode . emacs-lisp-mode)
+                      (mode . lisp-interaction-mode)))
+         ("c/c++" (or (mode . c-mode)
+                      (mode . c++-mode)))
          ("text" (filename . ".*"))
          ("dired" (mode . dired-mode))
          ("erc" (mode . erc-mode))

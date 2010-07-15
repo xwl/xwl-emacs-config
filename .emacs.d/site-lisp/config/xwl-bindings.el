@@ -62,6 +62,7 @@
                    ":home"
                    (lambda ()
                      (interactive)
+                     (require 'xwl-twittering)
                      (twit)
 
                      (mapc 'twittering-visit-timeline
@@ -135,6 +136,8 @@
 
 ;; C-c
 (global-set-key (kbd "C-c f") 'ffap)
+(global-set-key (kbd "C-c 4 f") 'ffap-other-window)
+
 (global-set-key (kbd "C-c o") '(lambda () (interactive)
 				 (call-interactively 'occur)
 				 (other-window 1)))
