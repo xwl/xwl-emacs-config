@@ -110,6 +110,11 @@
      ;;             twittering-timeline-most-active-spec-strings))
 
      (twittering-enable-unread-status-notifier)
+
+     (when xwl-black-background?
+       (set-face-background twittering-zebra-1-face "gray26")
+       (set-face-background twittering-zebra-2-face "gray18"))
+
      ))
 
 ;; FIXME: in 23.2, who the hell autoload create-animated-image?? this exists in

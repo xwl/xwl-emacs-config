@@ -44,6 +44,8 @@
 
 (setq xwl-w3m-arguments '())
 
+(setq xwl-black-background? nil)
+
 (provide 'xwl-var)
 
 ;;; xwl-var.el ends here
