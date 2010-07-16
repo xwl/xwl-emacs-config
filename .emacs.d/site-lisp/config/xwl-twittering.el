@@ -104,6 +104,7 @@
      (define-key twittering-mode-map (kbd "d") nil)
 
      (define-key twittering-mode-map (kbd "<S-tab>") 'twittering-goto-previous-thing)
+     (define-key twittering-mode-map (kbd "C-c C-SPC") 'twittering-switch-to-unread-timeline)
 
      ;; (setq twittering-timeline-most-active-spec-strings
      ;;       (cons ":replies"
@@ -112,7 +113,7 @@
      (twittering-enable-unread-status-notifier)
 
      (when xwl-black-background?
-       (set-face-background twittering-zebra-1-face "gray26")
+       (set-face-background twittering-zebra-1-face "gray24")
        (set-face-background twittering-zebra-2-face "gray18"))
 
      ))

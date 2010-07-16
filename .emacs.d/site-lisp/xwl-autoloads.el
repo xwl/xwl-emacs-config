@@ -129,7 +129,7 @@ Create a sawfish interaction buffer.
 ;;;***
 
 ;;;### (autoloads (rainbow-mode) "rainbow-mode" "rainbow-mode.el"
-;;;;;;  (19497 54902))
+;;;;;;  (19499 24852))
 ;;; Generated autoloads from rainbow-mode.el
 
 (autoload 'rainbow-mode "rainbow-mode" "\
@@ -1283,7 +1283,7 @@ Kill thread from here using leafnode.
 ;;;***
 
 ;;;### (autoloads (twit) "twittering-mode" "twittering-mode/twittering-mode.el"
-;;;;;;  (19497 55343))
+;;;;;;  (19519 4665))
 ;;; Generated autoloads from twittering-mode/twittering-mode.el
 
 (autoload 'twit "twittering-mode" "\
@@ -1417,8 +1417,8 @@ Opens the EMMS Streams interface.
 ;;;***
 
 ;;;### (autoloads (emms-locate emms-source-file-regex emms-source-file-directory-tree)
-;;;;;;  "emms-source-file" "emms/lisp/emms-source-file.el" (19352
-;;;;;;  56198))
+;;;;;;  "emms-source-file" "emms/lisp/emms-source-file.el" (19514
+;;;;;;  2638))
 ;;; Generated autoloads from emms/lisp/emms-source-file.el
  (autoload 'emms-play-file "emms-source-file" nil t)
  (autoload 'emms-add-file "emms-source-file" nil t)
@@ -1458,7 +1458,7 @@ Search for REGEXP and display the results in a locate buffer
 
 ;;;### (autoloads (emms-default-players emms-devel emms-all emms-standard
 ;;;;;;  emms-minimalistic) "emms-setup" "emms/lisp/emms-setup.el"
-;;;;;;  (19363 36294))
+;;;;;;  (19514 2638))
 ;;; Generated autoloads from emms/lisp/emms-setup.el
 
 (autoload 'emms-minimalistic "emms-setup" "\
@@ -1571,7 +1571,7 @@ Remove playing time from mode line.
 ;;;***
 
 ;;;### (autoloads (emms-player-mpd-show emms-player-mpd-connect emms-player-mpd-clear)
-;;;;;;  "emms-player-mpd" "emms/lisp/emms-player-mpd.el" (19352 56198))
+;;;;;;  "emms-player-mpd" "emms/lisp/emms-player-mpd.el" (19514 2638))
 ;;; Generated autoloads from emms/lisp/emms-player-mpd.el
 
 (autoload 'emms-player-mpd-clear "emms-player-mpd" "\
@@ -1631,7 +1631,7 @@ Toggle `emms-mode-line'.
 ;;;***
 
 ;;;### (autoloads (emms-lyrics-toggle emms-lyrics-disable emms-lyrics-enable)
-;;;;;;  "emms-lyrics" "emms/lisp/emms-lyrics.el" (19210 37819))
+;;;;;;  "emms-lyrics" "emms/lisp/emms-lyrics.el" (19514 2553))
 ;;; Generated autoloads from emms/lisp/emms-lyrics.el
 
 (autoload 'emms-lyrics-enable "emms-lyrics" "\
@@ -1652,7 +1652,7 @@ Toggle displaying emms lyrics.
 ;;;***
 
 ;;;### (autoloads (emms-cache-toggle emms-cache-disable emms-cache-enable)
-;;;;;;  "emms-cache" "emms/lisp/emms-cache.el" (19363 36055))
+;;;;;;  "emms-cache" "emms/lisp/emms-cache.el" (19514 2638))
 ;;; Generated autoloads from emms/lisp/emms-cache.el
 
 (autoload 'emms-cache-enable "emms-cache" "\
@@ -1816,7 +1816,7 @@ SALARY is before tax.  With prefix argument, insert result at point.
 ;;;### (autoloads (less-minor-mode-off less-minor-mode-on auto-less-minor-mode
 ;;;;;;  less-quit less-scroll-down-line less-scroll-up-line less-minor-mode
 ;;;;;;  global-less-minor-mode) "less" "xwl-elisp/less.el" (19497
-;;;;;;  55559))
+;;;;;;  60055))
 ;;; Generated autoloads from xwl-elisp/less.el
 
 (defvar global-less-minor-mode nil "\
@@ -1881,7 +1881,7 @@ Turn off `less-minor-mode'.
 ;;;***
 
 ;;;### (autoloads (gmail-notifier-start) "gmail-notifier" "xwl-elisp/gmail-notifier.el"
-;;;;;;  (19497 55392))
+;;;;;;  (19516 32808))
 ;;; Generated autoloads from xwl-elisp/gmail-notifier.el
 
 (autoload 'gmail-notifier-start "gmail-notifier" "\
@@ -2236,11 +2236,11 @@ Not documented
 
 ;;;***
 
-;;;### (autoloads (color-theme-xwl-console-disabled) "xwl-color-theme"
-;;;;;;  "config/autoload/xwl-color-theme.el" (19453 19208))
+;;;### (autoloads (color-theme-xwl-console) "xwl-color-theme" "config/autoload/xwl-color-theme.el"
+;;;;;;  (19520 17761))
 ;;; Generated autoloads from config/autoload/xwl-color-theme.el
 
-(autoload 'color-theme-xwl-console-disabled "xwl-color-theme" "\
+(autoload 'color-theme-xwl-console "xwl-color-theme" "\
 Color theme base on console colors with `color-theme-print'.
 Created on 2005-05-13.
 

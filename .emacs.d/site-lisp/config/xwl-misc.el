@@ -822,6 +822,13 @@ passphrase cache or user."
       (cons '(:source "~/.authinfo" :host t :protocol t)
             auth-sources))
 
+(eval-after-load 'hl-line
+  '(progn
+     (when xwl-black-background?
+       (set-face-background hl-line-face "magenta4"))
+     ))
+
+
 (provide 'xwl-misc)
 
 ;;; Local Variables: ***
