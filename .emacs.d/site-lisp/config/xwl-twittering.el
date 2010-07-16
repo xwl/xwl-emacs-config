@@ -70,7 +70,9 @@
 
 (add-hook 'twittering-edit-mode-hook (lambda ()
                                        (flyspell-mode 1)
-                                       (visual-line-mode 1)))
+                                       ;; (visual-line-mode 1)
+                                       (save-excursion
+                                         (fill-region (point-min) (point-max)))))
 
 (add-hook 'twittering-mode-hook (lambda ()
                                   (setq cursor-type nil)
