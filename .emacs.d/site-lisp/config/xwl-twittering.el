@@ -42,6 +42,9 @@
 
 (setq xwl-twittering-padding-size 8)
 
+(setq twittering-my-fill-column (- twittering-fill-column
+                                   xwl-twittering-padding-size))
+
 (setq twittering-status-format (concat "%i %g %s, from %f%L%r%R:\n%FILL["
                                        (make-string xwl-twittering-padding-size ? )
                                        "]{%T}\n")

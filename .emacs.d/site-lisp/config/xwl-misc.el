@@ -401,7 +401,7 @@
     (xwl-fullscreen))
 
   ;; FIXME: how to set this only after window has been maximized?
-  (run-at-time 5
+  (run-at-time 2
                nil
                ;; (add-hook 'window-configuration-change-hook
                '(lambda ()

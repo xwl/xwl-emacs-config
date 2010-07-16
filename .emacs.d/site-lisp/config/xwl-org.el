@@ -46,6 +46,7 @@
 (eval-after-load 'org-agenda
   '(progn
      (org-defkey org-agenda-mode-map "m" 'org-agenda-month-view)
+     (org-defkey org-agenda-mode-map "q" 'xwl-hide-buffer)
 
      (setq org-calendar-agenda-action-key [?K])
      (define-key calendar-mode-map [?k] 'calendar-backward-week)

@@ -46,14 +46,11 @@
                                 (call-interactively 'xwl-bbdb)))
 
 ;;'eshell) ;xwl-term ;xwl-run-scsh
-(global-set-key (kbd "<f9>") 'xwl-shell)
-
-;; FIXME, why lambda would not work here?
-(defun xwl-shell ()
-  (interactive)
-  (if current-prefix-arg
-      (call-interactively 'shell)
-    (xwl-switch-or-create "*shell*" 'shell)))
+(global-set-key (kbd "<f9>") (lambda ()
+                               (interactive)
+                               (if current-prefix-arg
+                                   (call-interactively 'shell)
+                                 (xwl-switch-or-create "*shell*" 'shell))))
 
 (global-set-key (kbd "<f11>")
                 (lambda ()
@@ -294,10 +291,13 @@
                                ;;      (find-file "~/notes/todo")
                                ;;      (split-window-horizontally)
                                ;;      (find-file "~/notes/todo-nokia")))
-                               (org-agenda 1 "h")
-                               (command-execute (kbd "C-x 1"))
-                               ;; 'org-agenda
-                               ))
+                               (xwl-switch-or-create
+                                "*Org Agenda*"
+                                '(lambda ()
+                                   (org-agenda 1 "h")
+                                   (delete-other-windows)
+                                   ;; 'org-agenda
+                                   ))))
 
 (global-set-key (kbd "C-c t") '(lambda ()
                                  (interactive)
