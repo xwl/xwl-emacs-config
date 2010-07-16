@@ -70,7 +70,7 @@
                              ":public"
 
                              "xwl/tianxiashi"
-                             "xwl/hualao"
+                             "xwl/hl"
 
                              ;; ":search/emacs/"
                              ":search/twittering-mode/"
