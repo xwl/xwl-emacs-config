@@ -71,7 +71,7 @@ each OS has different set of tools. "
   (let ((b (get-buffer buffer)))
     (if b
         (switch-to-buffer b)
-      (call-interactively fun))))
+      (funcall fun))))
 
 (defun xwl-check-holidays ()
   (calendar)

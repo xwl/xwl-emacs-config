@@ -29,7 +29,7 @@
 ;; color-theme-vim-colors
 
 ;;;###autoload
-(defun color-theme-xwl-console-disabled ()
+(defun color-theme-xwl-console ()
   "Color theme base on console colors with `color-theme-print'.
 Created on 2005-05-13."
   (interactive)
@@ -308,7 +308,11 @@ Created on 2005-05-13."
      (woman-addition-face ((t (:foreground "orange"))))
      (woman-bold-face ((t (:bold t :foreground "green2" :weight bold))))
      (woman-italic-face ((t (:italic t :underline t :slant italic))))
-     (woman-unknown-face ((t (:foreground "cyan")))))))
+     (woman-unknown-face ((t (:foreground "cyan"))))
+
+     ))
+
+  (setq xwl-black-background? t))
 
 
 (provide 'xwl-color-theme)

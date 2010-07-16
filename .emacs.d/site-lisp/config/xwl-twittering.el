@@ -42,6 +42,9 @@
 
 (setq xwl-twittering-padding-size 8)
 
+(setq twittering-my-fill-column (- twittering-fill-column
+                                   xwl-twittering-padding-size))
+
 (setq twittering-status-format (concat "%i %g %s, from %f%L%r%R:\n%FILL["
                                        (make-string xwl-twittering-padding-size ? )
                                        "]{%T}\n")
@@ -67,7 +70,9 @@
 
 (add-hook 'twittering-edit-mode-hook (lambda ()
                                        (flyspell-mode 1)
-                                       (visual-line-mode 1)))
+                                       ;; (visual-line-mode 1)
+                                       (save-excursion
+                                         (fill-region (point-min) (point-max)))))
 
 (add-hook 'twittering-mode-hook (lambda ()
                                   (setq cursor-type nil)
@@ -105,6 +110,11 @@
      ;;             twittering-timeline-most-active-spec-strings))
 
      (twittering-enable-unread-status-notifier)
+
+     (when xwl-black-background?
+       (set-face-background twittering-zebra-1-face "gray26")
+       (set-face-background twittering-zebra-2-face "gray18"))
+
      ))
 
 ;; FIXME: in 23.2, who the hell autoload create-animated-image?? this exists in
