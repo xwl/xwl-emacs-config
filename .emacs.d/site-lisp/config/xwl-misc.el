@@ -401,7 +401,7 @@
     (xwl-fullscreen))
 
   ;; FIXME: how to set this only after window has been maximized?
-  (run-at-time 2
+  (run-at-time 1
                nil
                ;; (add-hook 'window-configuration-change-hook
                '(lambda ()
@@ -409,7 +409,8 @@
                     (setq erc-fill-column (- col 2)) ; 6 for leading timestamp.
                     (setq twittering-fill-column col
                           twittering-my-fill-column (- twittering-fill-column
-                                                       xwl-twittering-padding-size)))))
+                                                       xwl-twittering-padding-size)))
+                  ))
 
   ;; (shell-command "sudo ~/bin/.xwl-after-start-hook")
   ;; (setq display-time-mail-file 'no-check)
