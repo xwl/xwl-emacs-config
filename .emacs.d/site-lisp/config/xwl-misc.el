@@ -397,14 +397,14 @@
 ;; (remove-hook 'find-file-hook 'bracketphobia-hide)
 
 (defun xwl-after-init-hook ()
-  (when window-system
-    (xwl-fullscreen))
-
   ;; FIXME: how to set this only after window has been maximized?
   (run-at-time 1
                nil
                ;; (add-hook 'window-configuration-change-hook
                '(lambda ()
+                  (when window-system
+                     (xwl-fullscreen))
+                  (sit-for 0.5)
                   (let ((col (round (/ (frame-width) 2))))
                     (setq erc-fill-column (- col 2)) ; 6 for leading timestamp.
                     (setq twittering-fill-column col
@@ -821,6 +821,13 @@ passphrase cache or user."
 (setq auth-sources
       (cons '(:source "~/.authinfo" :host t :protocol t)
             auth-sources))
+
+(define-global-minor-mode global-goto-address-mode
+  goto-address-mode goto-address-mode
+  :group 'convenience)
+
+(global-goto-address-mode 1)
+
 
 (provide 'xwl-misc)
 

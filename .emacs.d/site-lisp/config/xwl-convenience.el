@@ -191,6 +191,7 @@
                    (regexp-opt '("todo.org"
                                  "outgoing"
                                  "*gud"
+                                 "*anything"
                                  ))))
      (setq auto-less-exclude-modes
            (append auto-less-exclude-modes
@@ -202,6 +203,9 @@
 (defadvice save-buffers-kill-terminal (around disable-less activate)
   (global-less-minor-mode -1)
   ad-do-it)
+
+(cua-mode 1)
+;; (global-unset-key (kbd "C-z"))
 
 (provide 'xwl-convenience)
 
