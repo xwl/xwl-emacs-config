@@ -20,6 +20,11 @@
 
 ;;; Code:
 
+;; Local variables, set this with caution. :)  Should be set before loading
+;; twittering-mode.
+(setq twittering-reverse-mode t
+      twittering-icon-mode t)
+
 (setq twittering-username "xwl"
       twittering-password pwtwitter)
 
@@ -54,11 +59,6 @@
 
 (setq twittering-url-show-status nil)
 
-;; Local variables, set this with caution. :)  Should be set before loading
-;; twittering-mode.
-(setq twittering-reverse-mode t
-      twittering-icon-mode t)
-
 (setq twittering-new-tweets-count-excluding-me t
       twittering-new-tweets-count-excluding-replies-in-home t
       twittering-timer-interval 300
@@ -68,6 +68,8 @@
 
 (setq twittering-use-native-retweet t)
 
+(setq twittering-allow-insecure-server-cert t)
+
 (add-hook 'twittering-edit-mode-hook (lambda ()
                                        (flyspell-mode 1)
                                        ;; (visual-line-mode 1)
@@ -76,7 +78,10 @@
 
 (add-hook 'twittering-mode-hook (lambda ()
                                   (setq cursor-type nil)
-                                  (hl-line-mode 1)))
+                                  ;; (hl-line-mode 1)
+                                  ))
+;; Disable URI handling in twittering, let's use goto-address-mode instead.
+(setq twittering-regexp-uri nil)
 
 (eval-after-load 'twittering-mode
   '(progn
@@ -113,8 +118,8 @@
      (twittering-enable-unread-status-notifier)
 
      (when xwl-black-background?
-       (set-face-background twittering-zebra-1-face "gray24")
-       (set-face-background twittering-zebra-2-face "gray18"))
+       (set-face-background twittering-zebra-1-face "gray28")
+       (set-face-background twittering-zebra-2-face "gray24"))
 
      ))
 
