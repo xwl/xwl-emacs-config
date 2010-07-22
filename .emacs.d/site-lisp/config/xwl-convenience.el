@@ -204,8 +204,15 @@
   (global-less-minor-mode -1)
   ad-do-it)
 
+(setq cua-enable-cua-keys nil)
 (cua-mode 1)
+
 ;; (global-unset-key (kbd "C-z"))
+;; (global-unset-key (kbd "C-w"))
+;; (global-unset-key (kbd "M-w"))
+;; (global-set-key (kbd "C-S-v") 'scroll-up)
+;; (global-set-key (kbd "M-V") 'scroll-down)
+
 
 (provide 'xwl-convenience)
 

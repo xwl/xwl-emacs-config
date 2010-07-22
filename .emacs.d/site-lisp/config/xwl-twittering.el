@@ -20,6 +20,11 @@
 
 ;;; Code:
 
+;; Local variables, set this with caution. :)  Should be set before loading
+;; twittering-mode.
+(setq twittering-reverse-mode t
+      twittering-icon-mode t)
+
 (setq twittering-username "xwl"
       twittering-password pwtwitter)
 
@@ -54,11 +59,6 @@
 
 (setq twittering-url-show-status nil)
 
-;; Local variables, set this with caution. :)  Should be set before loading
-;; twittering-mode.
-(setq twittering-reverse-mode t
-      twittering-icon-mode t)
-
 (setq twittering-new-tweets-count-excluding-me t
       twittering-new-tweets-count-excluding-replies-in-home t
       twittering-timer-interval 300
@@ -80,6 +80,8 @@
                                   (setq cursor-type nil)
                                   ;; (hl-line-mode 1)
                                   ))
+;; Disable URI handling in twittering, let's use goto-address-mode instead.
+(setq twittering-regexp-uri nil)
 
 (eval-after-load 'twittering-mode
   '(progn
