@@ -63,7 +63,8 @@
       twittering-new-tweets-count-excluding-replies-in-home t
       twittering-timer-interval 300
       twittering-cache-spec-strings
-      '(":home" ":retweets_of_me" ":replies" ":direct_messages" "xwl/followers")
+      '(":home" ":retweets_of_me" ":replies" ":direct_messages" "xwl/followers"
+        ":search/twittering-mode/")
       twittering-use-master-password t)
 
 (setq twittering-use-native-retweet t)

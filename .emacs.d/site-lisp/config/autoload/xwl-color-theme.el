@@ -40,7 +40,7 @@ Created on 2005-05-13."
    '(color-theme-xwl-console
      (
       (foreground-color  . "#c0c0c0")
-      (background-color  .              ;"black"
+      (background-color  . ;; "black"
                          ;; "#202020"
                          ;; "#2d2d2d"
                          ;; "#2e3436"
@@ -204,7 +204,7 @@ Created on 2005-05-13."
      (gnus-summary-normal-ancient-face ((t (:foreground "RoyalBlue"))))
      (gnus-summary-normal-read-face ((t (:foreground "khaki4"))))
      (gnus-summary-normal-ticked-face ((t (:foreground "khaki3"))))
-     (gnus-summary-normal-unread-face ((t (:foreground "khaki"))))
+     ;; (gnus-summary-normal-unread-face ((t (:foreground "khaki"))))
 
      ;; highlight current post and posts related with me
      (gnus-summary-selected-face ((t (:foreground "yellow" :background "blue4"))))
