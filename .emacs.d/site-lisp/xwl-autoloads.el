@@ -2238,6 +2238,7 @@ Not documented
 
 ;;;### (autoloads (color-theme-xwl-console) "xwl-color-theme" "config/autoload/xwl-color-theme.el"
 ;;;;;;  (19520 17761))
+
 ;;; Generated autoloads from config/autoload/xwl-color-theme.el
 
 (autoload 'color-theme-xwl-console "xwl-color-theme" "\
