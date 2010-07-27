@@ -397,16 +397,20 @@
 ;; (remove-hook 'find-file-hook 'bracketphobia-hide)
 
 (defun xwl-after-init-hook ()
-  (when window-system
-    (xwl-fullscreen))
-
   ;; FIXME: how to set this only after window has been maximized?
-  (run-at-time 5
+  (run-at-time 1
                nil
+               ;; (add-hook 'window-configuration-change-hook
                '(lambda ()
+                  (when window-system
+                     (xwl-fullscreen))
+                  (sit-for 0.5)
                   (let ((col (round (/ (frame-width) 2))))
                     (setq erc-fill-column (- col 2)) ; 6 for leading timestamp.
-                    (setq twittering-fill-column col))))
+                    (setq twittering-fill-column col
+                          twittering-my-fill-column (- twittering-fill-column
+                                                       xwl-twittering-padding-size)))
+                  ))
 
   ;; (shell-command "sudo ~/bin/.xwl-after-start-hook")
   ;; (setq display-time-mail-file 'no-check)
@@ -446,16 +450,6 @@
 
 (eval-after-load 'scroll-all
   '(progn
-     (defun less-scroll-up-line (&optional dummy)
-       "Scroll up one line."
-       (interactive)
-       (scroll-up 1))
-
-     (defun less-scroll-down-line  (&optional dummy)
-       "Scroll down one line."
-       (interactive)
-       (scroll-down 1))
-
      (defun scroll-all-check-to-scroll ()
        "Check `this-command' to see if a scroll is to be done."
        (when (memq this-command
@@ -464,7 +458,8 @@
                                less-scroll-up-line
                                less-scroll-down-line
                                ))
-         (scroll-all-function-all this-command nil)))))
+         (scroll-all-function-all this-command nil)))
+     ))
 
 (add-hook 'kill-emacs-hook
           (lambda ()
@@ -700,60 +695,6 @@ passphrase cache or user."
 (add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
 
 ;; ,----
-;; | twittering-mode
-;; `----
-
-(setq twittering-username "xwl"
-      twittering-password pwtwitter)
-
-(if xwl-at-company?
-    (setq twittering-proxy-use t
-          twittering-proxy-server "172.16.42.137"
-          twittering-proxy-port 8080)
-  ;; Also in `gtap', disable "secure: always".
-  (setq twittering-use-ssl nil)
-
-  (setq twittering-web-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0k")
-        twittering-api-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC)FnXH==")
-        twittering-api-search-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*EcPOAaX8==")))
-
-(setq twittering-status-format
-      "%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FILL{       %T}\n"
-      ;; "%i %C{%a %m.%d/%H:%M:%S} %s, from %f%L%r%R:\n%FILL{%T}\n"
-      )
-
-(setq twittering-update-status-function
-      'twittering-update-status-from-pop-up-buffer)
-
-(setq twittering-url-show-status nil)
-(setq twittering-reverse-mode t)
-
-(add-hook 'twittering-mode-hook (lambda ()
-                                  (twittering-icon-mode 1)
-                                  (twittering-enable-unread-status-notifier)))
-
-(eval-after-load 'twittering-mode
-  '(progn
-     (define-key twittering-mode-map (kbd "c") 'twittering-current-timeline)
-
-     (define-key twittering-mode-map (kbd "n") 'twittering-goto-next-status)
-     (define-key twittering-mode-map (kbd "p") 'twittering-goto-previous-status)
-     (define-key twittering-mode-map (kbd "N") 'twittering-goto-next-status-of-user)
-     (define-key twittering-mode-map (kbd "P") 'twittering-goto-previous-status-of-user)
-
-     (define-key twittering-mode-map (kbd "q") 'xwl-hide-buffer)
-     (define-key twittering-mode-map (kbd "F") 'twittering-follow)
-     (define-key twittering-mode-map (kbd "U") 'twittering-unfollow)
-
-     (define-key twittering-mode-map (kbd "C-c C-g") nil)
-     ))
-
-;; FIXME: in 23.2, who the hell autoload create-animated-image?? this exists in
-;; 24 only.
-(when (eq window-system 'mac)
-  (defalias  'create-animated-image 'create-image))
-
-;; ,----
 ;; | Track cahnges for some buffer
 ;; `----
 ;; (defadvice switch-to-buffer (before
@@ -868,7 +809,31 @@ passphrase cache or user."
           xwl-weather-list)
     (message str)))
 
-(setq eval-expression-print-length 100)
+(setq eval-expression-print-length 100
+      print-length eval-expression-print-length)
+
+(defadvice shell-command (after enable-less activate)
+  (let ((b "*Shell Command Output*"))
+    (when (get-buffer b)
+      (with-current-buffer b
+        (less-minor-mode-on)))))
+
+(setq auth-sources
+      (cons '(:source "~/.authinfo" :host t :protocol t)
+            auth-sources))
+
+(eval-after-load 'hl-line
+  '(progn
+     (when xwl-black-background?
+       (set-face-background hl-line-face "magenta4"))
+     ))
+
+(define-global-minor-mode global-goto-address-mode
+  goto-address-mode goto-address-mode
+  :group 'convenience)
+
+(global-goto-address-mode 1)
+
 
 (provide 'xwl-misc)
 

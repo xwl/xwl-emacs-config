@@ -29,7 +29,7 @@
 ;; color-theme-vim-colors
 
 ;;;###autoload
-(defun color-theme-xwl-console-disabled ()
+(defun color-theme-xwl-console ()
   "Color theme base on console colors with `color-theme-print'.
 Created on 2005-05-13."
   (interactive)
@@ -40,12 +40,12 @@ Created on 2005-05-13."
    '(color-theme-xwl-console
      (
       (foreground-color  . "#c0c0c0")
-      (background-color  .              ;"black"
+      (background-color  . ;; "black"
                          ;; "#202020"
                          ;; "#2d2d2d"
                          ;; "#2e3436"
                          ;; "#111111"
-                         "#222222"
+                         "#333333"
                          )
 
       ;; (foreground-color  . "black")
@@ -60,7 +60,7 @@ Created on 2005-05-13."
       (Man-underline-face . underline)
       (browse-kill-ring-separator-face . bold)
       (display-time-mail-face . mode-line)
-      (erc-button-face . bold)
+      ;; (erc-button-face . bold)
       (erc-button-mouse-face . highlight)
       (gnus-article-button-face . bold)
       (gnus-article-mouse-face . highlight)
@@ -75,7 +75,7 @@ Created on 2005-05-13."
       (gnus-summary-selected-face . gnus-summary-selected-face)
       (gnus-treat-display-face . head)
       (help-highlight-face . underline)
-      (hl-line-face . highlight)
+      ;; (hl-line-face . highlight)
       (ibuffer-dired-buffer-face . font-lock-function-name-face)
       (ibuffer-help-buffer-face . font-lock-comment-face)
       (ibuffer-hidden-buffer-face . font-lock-warning-face)
@@ -204,7 +204,7 @@ Created on 2005-05-13."
      (gnus-summary-normal-ancient-face ((t (:foreground "RoyalBlue"))))
      (gnus-summary-normal-read-face ((t (:foreground "khaki4"))))
      (gnus-summary-normal-ticked-face ((t (:foreground "khaki3"))))
-     (gnus-summary-normal-unread-face ((t (:foreground "khaki"))))
+     ;; (gnus-summary-normal-unread-face ((t (:foreground "khaki"))))
 
      ;; highlight current post and posts related with me
      (gnus-summary-selected-face ((t (:foreground "yellow" :background "blue4"))))
@@ -308,7 +308,11 @@ Created on 2005-05-13."
      (woman-addition-face ((t (:foreground "orange"))))
      (woman-bold-face ((t (:bold t :foreground "green2" :weight bold))))
      (woman-italic-face ((t (:italic t :underline t :slant italic))))
-     (woman-unknown-face ((t (:foreground "cyan")))))))
+     (woman-unknown-face ((t (:foreground "cyan"))))
+
+     ))
+
+  (setq xwl-black-background? t))
 
 
 (provide 'xwl-color-theme)

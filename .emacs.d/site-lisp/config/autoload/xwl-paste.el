@@ -20,6 +20,8 @@
 
 ;;; Code:
 
+(require 'url-extra)
+
 (setq xwl-paste-username "xwl")
 
 (setq xwl-paste-ubuntu-cn-classes

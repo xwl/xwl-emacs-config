@@ -46,38 +46,46 @@
                                 (call-interactively 'xwl-bbdb)))
 
 ;;'eshell) ;xwl-term ;xwl-run-scsh
-(global-set-key (kbd "<f9>") 'xwl-shell)
+(global-set-key (kbd "<f9>") (lambda ()
+                               (interactive)
+                               (if current-prefix-arg
+                                   (call-interactively 'shell)
+                                 (xwl-switch-or-create "*shell*" 'shell))))
 
-;; FIXME, why lambda would not work here?
-(defun xwl-shell ()
-  (interactive)
-  (if current-prefix-arg
-      (call-interactively 'shell)
-    (xwl-switch-or-create "*shell*" 'shell)))
+(global-set-key (kbd "<f11>")
+                (lambda ()
+                  (interactive)
+                  (xwl-switch-or-create
+                   ":home"
+                   (lambda ()
+                     (interactive)
+                     (require 'xwl-twittering)
+                     (twit)
 
-(global-set-key (kbd "<f11>") (lambda ()
-                                (interactive)
-                                (xwl-switch-or-create
-                                 ":home"
-                                 (lambda ()
-                                   (interactive)
-                                   (call-interactively 'twit)
+                     (mapc 'twittering-visit-timeline
+                           `(":replies"
+                             ":direct_messages"
+                             "xwl/followers"
+                             ":retweets_of_me"
+                             ":public"
 
-                                   (twittering-replies-timeline)
-                                   (twittering-direct-messages-timeline)
-                                   (twittering-visit-timeline ":followers")
-                                   (twittering-visit-timeline ":retweets_of_me")
-                                   (twittering-visit-timeline ":public")
+                             "xwl/tianxiashi"
+                             "xwl/hl"
 
-                                   (switch-to-buffer ":home")
-                                   ))
+                             ;; ":search/emacs/"
+                             ":search/twittering-mode/"
+                             ))
 
-                                (unless xwl-timers-hook-started?
-                                  (run-hooks 'xwl-timers-hook)
-                                  (setq xwl-timers-hook-started? t)
+                     (switch-to-buffer ":home")
+                     ))
 
-                                  (command-execute (kbd "<f6>"))
-                                  (command-execute (kbd "C-c n E")))))
+                  (unless xwl-timers-hook-started?
+                    (run-hooks 'xwl-timers-hook)
+                    (setq xwl-timers-hook-started? t)
+
+                    (command-execute (kbd "<f6>"))
+                    ;; (command-execute (kbd "C-c n E"))
+                    )))
 
 (global-set-key (kbd "<f13>") 'kill-this-buffer)
 
@@ -109,6 +117,7 @@
 (defun xwl-mark-ascii-symbol ()
   "Mark ascii-symbol by `thing-at-point'."
   (interactive)
+  (require 'thingatpt)
   (set-mark (beginning-of-thing 'ascii-symbol))
   (goto-char (end-of-thing 'ascii-symbol)))
 
@@ -124,6 +133,8 @@
 
 ;; C-c
 (global-set-key (kbd "C-c f") 'ffap)
+(global-set-key (kbd "C-c 4 f") 'ffap-other-window)
+
 (global-set-key (kbd "C-c o") '(lambda () (interactive)
 				 (call-interactively 'occur)
 				 (other-window 1)))
@@ -192,7 +203,8 @@
 
         (erc :server sv :port 16667 :nick nick :password pwerc)
         (erc :server sv :port 16669 :nick nick :password pwdeb)
-        (erc :server sv :port 16668 :nick nick :password pwerc))
+        ;; (erc :server sv :port 16668 :nick nick :password pwerc)
+        )
 
     (erc :server "irc.debian.org"       :port 6669 :nick "xwl" :password pwdeb)
     (erc :server "irc.freenode.net"     :port 6667 :nick "xwl" :password pwerc)
@@ -223,8 +235,8 @@
 
 (global-set-key (kbd "<f6>") '(lambda ()
                                 (interactive)
-                                (if (not xwl-at-company?)
-                                    (message "Hmm, only run at company")
+                                (if xwl-at-company?
+                                    (message "Hmm, only run at home")
                                   (xwl-gnus))))
 
 (setq xwl-gnus-agent-timer nil)
@@ -246,22 +258,23 @@
       (when (fboundp 'color-theme-xwl-console)
         (color-theme-xwl-console))
 
-      (unless gnus-plugged
-        (unless xwl-gnus-agent-timer
-          (setq xwl-gnus-agent-timer
-                (run-with-timer
-                 0 (* 3600 2) (lambda ()
-                                (xwl-shell-command-asynchronously
-                                 (concat
-                                  ;; Company PC is always on, so we won't have
-                                  ;; too many instances running at the same
-                                  ;; time...
-                                  (if xwl-at-company?
-                                      ""
-                                    "(ps -ef|grep \"emacs --eval\" | grep -v grep) || ")
-                                  "emacs --eval \"(progn (require 'xwl-gnus-agent))\""
-                                  ))))))
-        (message "Gnus agent timer started"))
+      ;; TODO: 23.1 mac port doesn't work with this.
+      ;; (unless gnus-plugged
+      ;;   (unless xwl-gnus-agent-timer
+      ;;     (setq xwl-gnus-agent-timer
+      ;;           (run-with-timer
+      ;;            0 (* 3600 24) (lambda ()
+      ;;                           (xwl-shell-command-asynchronously
+      ;;                            (concat
+      ;;                             ;; Company PC is always on, so we won't have
+      ;;                             ;; too many instances running at the same
+      ;;                             ;; time...
+      ;;                             (if xwl-at-company?
+      ;;                                 ""
+      ;;                               "(ps -ef|grep \"emacs --eval\" | grep -v grep) || ")
+      ;;                             "emacs --eval \"(progn (require 'xwl-gnus-agent))\""
+      ;;                             ))))))
+      ;;   (message "Gnus agent timer started"))
       )))
 
 (global-set-key (kbd "<f8>") (lambda ()
@@ -278,10 +291,13 @@
                                ;;      (find-file "~/notes/todo")
                                ;;      (split-window-horizontally)
                                ;;      (find-file "~/notes/todo-nokia")))
-                               (org-agenda 1 "h")
-                               (command-execute (kbd "C-x 1"))
-                               ;; 'org-agenda
-                               ))
+                               (xwl-switch-or-create
+                                "*Org Agenda*"
+                                '(lambda ()
+                                   (org-agenda 1 "h")
+                                   (delete-other-windows)
+                                   ;; 'org-agenda
+                                   ))))
 
 (global-set-key (kbd "C-c t") '(lambda ()
                                  (interactive)
@@ -314,17 +330,20 @@
                                    (interactive)
                                    (revert-buffer-with-coding-system 'gb18030)))
 
-(global-set-key (kbd "<f4>") '(lambda ()
-                                (interactive)
-                                (let* ((n "*top*")
-                                       (b (get-buffer n)))
-                                  (if b
-                                      (switch-to-buffer b)
-                                    (ansi-term "top")
-                                    (rename-buffer n)
-                                    (local-set-key "q" '(lambda ()
-                                                          (interactive)
-                                                          (kill-buffer (current-buffer))))))))
+(global-set-key (kbd "<f4>")
+                (lambda ()
+                  (interactive)
+                  (let* ((n "*top*")
+                         (b (get-buffer n)))
+                    (if b
+                        (switch-to-buffer b)
+                      (ansi-term "top")
+                      (rename-buffer n)
+                      (local-set-key "q" '(lambda ()
+                                            (interactive)
+                                            (kill-buffer (current-buffer))))
+                      (hl-line-mode 1)))))
+
 
 ;; set-fill-column
 (global-unset-key (kbd "C-x f"))
@@ -363,6 +382,8 @@
 
 (global-set-key (kbd "C-x o") 'xwl-forward-char)
 (global-set-key (kbd "C-x O") 'xwl-backward-char)
+
+(global-set-key (kbd "C-c m u") 'twittering-update-status-interactive)
 
 (provide 'xwl-bindings)
 

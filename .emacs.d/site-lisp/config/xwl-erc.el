@@ -59,13 +59,15 @@
       '(("rootdir.de"
          "&bitlbee")
         ("freenode.net"
-         "#osxchat" "#emacs" "#scheme" "#chicken" "#cpp-tw" "#chinalug" )
+         "#osxchat" "#emacs" "#scheme" "#chicken" "#cpp-tw" ;; "#chinalug"
+         )
         ("oftc.net"
          "#debian-zh" "#emacs-cn")      ; "#bitlbee"
         ;; ("linuxfire"
         ;;  "#linuxfire")
-        ("irc.lnx.nokia.com"
-         "#avkon" "#orbit" "#mac" "#linux" "#symbianperformance" "#qt")))
+        ;; ("irc.lnx.nokia.com"
+        ;;  "#avkon" "#orbit" "#mac" "#linux" "#symbianperformance" "#qt")
+        ))
 
 (defun his-bitlbee-identify ()
    "If we're on the bitlbee server, send the identify command to the
@@ -142,10 +144,16 @@ so as to keep an eye on work when necessarily."
 
 (setq erc-track-priority-faces-only 'all)
 
-;; (defadvice erc-track-switch-buffer (before place-point-to-bottom activate)
-;;   (when (memq (current-buffer) (erc-buffer-list))
-;;     (goto-char (point-max))
-;;     (forward-line -1)))
+(defadvice erc-track-switch-buffer (around place-point-to-bottom activate)
+  (cond
+   ((memq (current-buffer) (erc-buffer-list))
+    (goto-char (point-max))
+    (forward-line -1)
+    ad-do-it)
+   ((and (twittering-buffer-p) twittering-unread-status-info)
+    (switch-to-buffer (caar twittering-unread-status-info)))
+   (t
+    ad-do-it)))
 
 (erc-fill-mode 1)
 (setq erc-fill-function 'erc-fill-static
@@ -163,6 +171,12 @@ so as to keep an eye on work when necessarily."
                          ".."
                          (substring (substring nick 7) -1))))
     nick))
+
+(defadvice erc-faces-in (around add-query-faces activate)
+  (let ((faces ad-do-it))
+    (when (or (erc-query-buffer-p) (string-match "&" (buffer-name)))
+      (add-to-list 'faces 'erc-query-buffer-face))
+    faces))
 
 ;; ,----
 ;; | timestamp

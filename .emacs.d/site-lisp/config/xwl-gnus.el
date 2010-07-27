@@ -81,9 +81,9 @@
                       (nntp-address ,(xwl-redirect-host))
                       (nntp-port-number 11119))
                 )
-            '((nnimap "imap.gmail.com"
-                      (nnimap-server-port 993)
-                      (nnimap-stream ssl))
+            '(;; (nnimap "imap.gmail.com"
+              ;;         (nnimap-server-port 993)
+              ;;         (nnimap-stream ssl))
               (nntp "news.cn99.com")
               ))
         ))
@@ -642,7 +642,7 @@
 
 ;; date
 (setq gnus-user-date-format-alist
-      '(((gnus-seconds-today) . "%a %H:%M")
+      '(((gnus-seconds-today) . "%H:%M")
 	(604800               . "%a %H:%M") ; this week
 	((gnus-seconds-month) . "%d")
 	((gnus-seconds-year)  . "%m/%d")
@@ -714,7 +714,8 @@
   (define-key gnus-summary-mode-map (kbd "RET") (lambda () (interactive)
 			       (gnus-summary-show-article)
 			       (other-window 1)))
-  )
+
+  (define-key gnus-summary-mode-map (kbd "C-o") nil))
 
 (add-hook 'gnus-summary-mode-hook 'xwl-gnus-summary-mode-hook)
 

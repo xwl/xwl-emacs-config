@@ -3,7 +3,6 @@
 ;; Copyright (C) 2008, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
-;; Version: 0.1
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -22,88 +21,33 @@
 
 ;;; Code:
 
-;;; common
-
 (setq xwl-help-modes '(help-mode woman-mode Man-mode))
 
 ;;; describe-*
 
+(defmacro xwl-advice-jumping-to-help-buffer (function)
+  `(defadvice ,function (around jump-to-help activate)
+     (cond
+      ((eq major-mode 'help-mode)
+       ad-do-it)
+      ((memq major-mode xwl-help-modes)
+       (other-window 1)
+       ad-do-it
+       (other-window 1))
+      ((>= (length (window-list)) 2)
+       ad-do-it
+       (other-window 1))
+      (t
+       ad-do-it
+       (other-window 1)))))
+
 (eval-after-load "help-fns"
   '(progn
-     (defadvice describe-function (around jump-to-help activate)
-       (cond
-        ((eq major-mode 'help-mode)
-         ad-do-it)
-        ((memq major-mode xwl-help-modes)
-         (other-window 1)
-         ad-do-it
-         (other-window 1))
-        ((>= (length (window-list)) 2)
-         ad-do-it
-         (other-window 1))
-        (t
-         ad-do-it
-         (other-window 1))))
-
-     (defadvice describe-variable (around jump-to-help activate)
-       (cond
-        ((eq major-mode 'help-mode)
-         ad-do-it)
-        ((memq major-mode xwl-help-modes)
-         (other-window 1)
-         ad-do-it
-         (other-window 1))
-        ((>= (length (window-list)) 2)
-         ad-do-it
-         (other-window 1))
-        (t
-         ad-do-it
-         (other-window 1))))
-
-     (defadvice describe-bindings (around jump-to-help activate)
-       (cond
-        ((eq major-mode 'help-mode)
-         ad-do-it)
-        ((memq major-mode xwl-help-modes)
-         (other-window 1)
-         ad-do-it
-         (other-window 1))
-        ((>= (length (window-list)) 2)
-         ad-do-it
-         (other-window 1))
-        (t
-         ad-do-it
-         (other-window 1))))
-
-     (defadvice describe-key (around jump-to-help activate)
-       (cond
-        ((eq major-mode 'help-mode)
-         ad-do-it)
-        ((memq major-mode xwl-help-modes)
-         (other-window 1)
-         ad-do-it
-         (other-window 1))
-        ((>= (length (window-list)) 2)
-         ad-do-it
-         (other-window 1))
-        (t
-         ad-do-it
-         (other-window 1))))
-
-     (defadvice describe-mode (around jump-to-help activate)
-       (cond
-        ((eq major-mode 'help-mode)
-         ad-do-it)
-        ((memq major-mode xwl-help-modes)
-         (other-window 1)
-         ad-do-it
-         (other-window 1))
-        ((>= (length (window-list)) 2)
-         ad-do-it
-         (other-window 1))
-        (t
-         ad-do-it
-         (other-window 1))))
+     (xwl-advice-jumping-to-help-buffer describe-function)
+     (xwl-advice-jumping-to-help-buffer describe-variable)
+     (xwl-advice-jumping-to-help-buffer describe-bindings)
+     (xwl-advice-jumping-to-help-buffer describe-key)
+     (xwl-advice-jumping-to-help-buffer describe-mode)
      ))
 
 (eval-after-load "help-mode"

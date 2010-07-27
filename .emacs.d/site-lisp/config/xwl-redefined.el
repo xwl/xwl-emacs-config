@@ -32,27 +32,6 @@
 
 (require 'xwl-util)
 
-;;; Erc
-
-(eval-after-load 'erc-track
-  '(progn
-     (defun erc-faces-in (str)
-       "Return a list of all faces used in STR."
-       (let ((i 0)
-             (m (length str))
-             (faces (erc-list (get-text-property 0 'face str))))
-         (while (and (setq i (next-single-property-change i 'face str m))
-                     (not (= i m)))
-           (dolist (face (erc-list (get-text-property i 'face str)))
-             (add-to-list 'faces face)))
-         ;; special faces for query & group(like msn groups) buffers
-         (when (or (erc-query-buffer-p)
-                   (string-match "&" (buffer-name)))
-           (add-to-list 'faces 'erc-query-buffer-face))
-         faces))
-     ))
-
-
 ;;; If woman fails, call man.
 
 (eval-after-load "man"

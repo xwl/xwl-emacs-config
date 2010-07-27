@@ -1,4 +1,5 @@
 (("references")
  ("from"
+  ("David Kastrup <dak@gnu.org>" nil nil e)
   ("YAMAMOTO Mitsuharu <mituharu@math.s.chiba-u.ac.jp>" nil nil e)
   ("Richard Stallman <rms@gnu.org>" nil nil e)))

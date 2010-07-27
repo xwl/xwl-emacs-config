@@ -74,115 +74,22 @@
 
 ;;; Gmail Notify
 
-(require 'xml)
+(setq gmail-notifier-username "william.xwl"
+      gmail-notifier-password pwgmail)
 
-(setq xwl-gmail-user "william.xwl"
-      xwl-gmail-password pwgmail)
+(when xwl-at-company?
+  (setq gmail-notifier-curl-command
+        (concat "curl "
+                (if (boundp 'xwl-proxy-server)
+                    (format "-x %s:%d" xwl-proxy-server xwl-proxy-port)
+                  ""))))
 
-(setq xwl-gmail-notify-string "")
-(defconst gmail-logo-image
-  (when (image-type-available-p 'xpm)
-    '(image :type xpm
-	    :ascent center
-	    :data
-            "/* XPM */
-static char * gmail_xpm[] = {
-\"16 16 8 1\",
-\" 	c None\",
-\".	c #DA3838\",
-\"+	c #E95A5A\",
-\"@	c #F28181\",
-\"#	c #F9A7A7\",
-\"$	c #FFB6B6\",
-\"%	c #FFE2E2\",
-\"&	c #FFFFFF\",
-\"                \",
-\"                \",
-\"                \",
-\"...@########@...\",
-\"....$&&&&&&$....\",
-\"..@+.$&&&&$.+@..\",
-\"..&@+.$&&$.+@&..\",
-\"..&&@+.$$.+@&&..\",
-\"..&&$@+..+@$&&..\",
-\"..&%#$@++@$#%&..\",
-\"..%#%&&@@&&%#%..\",
-\"..#%&&&&&&&&%#..\",
-\"..%&&&&&&&&&&%..\",
-\"..############..\",
-\"                \",
-\"                \"};
-"))
-  "Image for twitter logo.")
+(add-hook 'gmail-notifier-new-mails-hook
+          (lambda ()
+            (xwl-notify "Gmail" (format "You've got %d new mails"
+                                        (length gmail-notifier-unread-entries)))))
 
-(defconst gmail-logo
-  (if gmail-logo-image
-      (apply 'propertize " " `(display ,gmail-logo-image))
-    "G"))
-
-(defun xwl-gmail-notify ()
-  (unless xwl-gmail-password
-    (setq xwl-gmail-password (read-passwd "Gmail password: ")))
-  (xwl-gmail-get-unread xwl-gmail-user xwl-gmail-password)
-  (when xwl-at-company?
-    (xwl-gmail-get-unread xwl-gmail-user1 xwl-gmail-password1)))
-
-(defun xwl-gmail-get-unread (user password)
-  (xwl-shell-command-asynchronously-with-callback
-   (format "curl -s --user \"%s:%s\" %s https://mail.google.com/mail/feed/atom"
-           user password (if (boundp 'xwl-proxy-server)
-                             (format "-x %s:%d" xwl-proxy-server xwl-proxy-port)
-                           ""))
-   'xwl-gmail-notify-callback))
-
-(defun xwl-gmail-notify-callback ()
-  (let* ((xml-list (xml-parse-region (point-min) (point-max)))
-         (get-node-value (lambda (node)
-                           (some (lambda (n)
-                                   (when (and (listp n) (eq (car n) node))
-                                     (car (reverse n))))
-                                 (cdar xml-list))))
-         (account (replace-regexp-in-string
-                   ".* +\\([^ ]+\\)@.*" "\\1" (funcall get-node-value 'title)))
-         (unread (string-to-number (funcall get-node-value 'fullcount))))
-    (xwl-gmail-notify-format account unread)
-    (kill-buffer)))
-
-;; FIXME: this is toooo tedious..
-(defun xwl-gmail-notify-format (account unread)
-  (if xwl-at-company?
-      (progn
-        (cond ((string= account xwl-gmail-user)
-               (if (string= xwl-gmail-notify-string "")
-                   (setq xwl-gmail-notify-string (format "(%d,0) " unread))
-                 (setq xwl-gmail-notify-string
-                       (replace-regexp-in-string
-                        "([0-9]+," (format "(%d," unread) xwl-gmail-notify-string))))
-              ((string= account xwl-gmail-user1)
-               (if (string= xwl-gmail-notify-string "")
-                   (setq xwl-gmail-notify-string (format "(0,%d) " unread))
-                 (setq xwl-gmail-notify-string
-                       (replace-regexp-in-string
-                        ",[0-9]+" (format ",%d" unread) xwl-gmail-notify-string)))))
-        (when (string-match "(0,0)" xwl-gmail-notify-string)
-          (setq xwl-gmail-notify-string "")))
-    (if (zerop unread)
-        (setq xwl-gmail-notify-string "")
-      (setq xwl-gmail-notify-string (format "(%d) " unread))
-      (xwl-notify "Gmail" (format "You've got %d new mails" unread))
-      ))
-  (force-mode-line-update))
-
-(add-hook 'xwl-timers-hook (lambda ()
-                             (setq xwl-gmail-notify-timer
-                                   (run-with-timer 0 (* 60 5) 'xwl-gmail-notify))
-
-                             (add-to-list 'global-mode-string
-                                          '(:eval (if (string= xwl-gmail-notify-string "")
-                                                      ""
-                                                    (concat gmail-logo xwl-gmail-notify-string)))
-                                          t)
-                             ))
+(add-hook 'xwl-timers-hook 'gmail-notifier-start)
 
 ;;; Misc
 
@@ -225,7 +132,7 @@ static char * gmail_xpm[] = {
 ;;       (run-with-timer 0 120 'xwl-mail-notify-update-handler))
 
 ;; frame title
-(setq frame-title-format "菩提本无树 明镜亦非台 本来无一物 何处惹尘埃")
+(setq frame-title-format "菩提本無樹 明鏡亦非台 本來無一物 何處惹塵埃")
 
 (defun xwl-frame-fortune-of-day ()
   (setq frame-title-format

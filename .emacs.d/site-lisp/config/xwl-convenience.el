@@ -189,30 +189,13 @@
            (concat auto-less-exclude-regexp
                    "\\|"
                    (regexp-opt '("todo.org"
-                                 "*nntpd*"
-                                 " *Compiler Input*"
-
-                                 " *gnus work*"
-                                 " *gnus article copy*"
-                                 " *extract address components*"
-                                 " *canonical address*"
-                                 "*followup to"
-                                 "*mail*"
+                                 "outgoing"
+                                 "*gud"
+                                 "*anything"
                                  ))))
      (setq auto-less-exclude-modes
            (append auto-less-exclude-modes
-                   '(twittering-edit-mode
-                     calendar-mode
-                     log-edit-mode
-
-                     gnus-summary-mode
-                     gnus-group-mode
-                     message-mode
-
-                     dired-mode
-                     ibuffer-mode
-                     apropos-mode
-                     completion-list-mode)))
+                   '()))
      ))
 
 (global-less-minor-mode 1)
@@ -220,6 +203,16 @@
 (defadvice save-buffers-kill-terminal (around disable-less activate)
   (global-less-minor-mode -1)
   ad-do-it)
+
+(setq cua-enable-cua-keys nil)
+(cua-mode 1)
+
+;; (global-unset-key (kbd "C-z"))
+;; (global-unset-key (kbd "C-w"))
+;; (global-unset-key (kbd "M-w"))
+;; (global-set-key (kbd "C-S-v") 'scroll-up)
+;; (global-set-key (kbd "M-V") 'scroll-down)
+
 
 (provide 'xwl-convenience)
 

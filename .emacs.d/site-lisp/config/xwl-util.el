@@ -71,7 +71,7 @@ each OS has different set of tools. "
   (let ((b (get-buffer buffer)))
     (if b
         (switch-to-buffer b)
-      (call-interactively fun))))
+      (funcall fun))))
 
 (defun xwl-check-holidays ()
   (calendar)
@@ -155,9 +155,10 @@ Run it at an appropriate time, like when we twittering?"
 
 (defun xwl-delete-frame ()
   "Delete frames created by compilation-mode or log-edit-mode. "
-  (delete-frame
-   (car (sort (frame-list)
-              (lambda (f1 f2) (< (frame-width f1) (frame-width f2)))))))
+  (when (cdr (frame-list))
+    (delete-frame
+     (car (sort (frame-list)
+                (lambda (f1 f2) (< (frame-width f1) (frame-width f2))))))))
 
 (defun xwl-fullscreen ()
   (interactive)

@@ -128,6 +128,18 @@ Create a sawfish interaction buffer.
 
 ;;;***
 
+;;;### (autoloads (rainbow-mode) "rainbow-mode" "rainbow-mode.el"
+;;;;;;  (19499 24852))
+;;; Generated autoloads from rainbow-mode.el
+
+(autoload 'rainbow-mode "rainbow-mode" "\
+Colorize strings that represent colors.
+This will fontify with colors the string like \"#aabbcc\" or \"blue\"
+
+\(fn &optional ARG)" t nil)
+
+;;;***
+
 ;;;### (autoloads (pack-windows) "pack-windows" "pack-windows.el"
 ;;;;;;  (18862 33836))
 ;;; Generated autoloads from pack-windows.el
@@ -1271,7 +1283,7 @@ Kill thread from here using leafnode.
 ;;;***
 
 ;;;### (autoloads (twit) "twittering-mode" "twittering-mode/twittering-mode.el"
-;;;;;;  (19470 10098))
+;;;;;;  (19519 4665))
 ;;; Generated autoloads from twittering-mode/twittering-mode.el
 
 (autoload 'twit "twittering-mode" "\
@@ -1405,8 +1417,8 @@ Opens the EMMS Streams interface.
 ;;;***
 
 ;;;### (autoloads (emms-locate emms-source-file-regex emms-source-file-directory-tree)
-;;;;;;  "emms-source-file" "emms/lisp/emms-source-file.el" (19352
-;;;;;;  56198))
+;;;;;;  "emms-source-file" "emms/lisp/emms-source-file.el" (19514
+;;;;;;  2638))
 ;;; Generated autoloads from emms/lisp/emms-source-file.el
  (autoload 'emms-play-file "emms-source-file" nil t)
  (autoload 'emms-add-file "emms-source-file" nil t)
@@ -1446,7 +1458,7 @@ Search for REGEXP and display the results in a locate buffer
 
 ;;;### (autoloads (emms-default-players emms-devel emms-all emms-standard
 ;;;;;;  emms-minimalistic) "emms-setup" "emms/lisp/emms-setup.el"
-;;;;;;  (19363 36294))
+;;;;;;  (19514 2638))
 ;;; Generated autoloads from emms/lisp/emms-setup.el
 
 (autoload 'emms-minimalistic "emms-setup" "\
@@ -1559,7 +1571,7 @@ Remove playing time from mode line.
 ;;;***
 
 ;;;### (autoloads (emms-player-mpd-show emms-player-mpd-connect emms-player-mpd-clear)
-;;;;;;  "emms-player-mpd" "emms/lisp/emms-player-mpd.el" (19352 56198))
+;;;;;;  "emms-player-mpd" "emms/lisp/emms-player-mpd.el" (19514 2638))
 ;;; Generated autoloads from emms/lisp/emms-player-mpd.el
 
 (autoload 'emms-player-mpd-clear "emms-player-mpd" "\
@@ -1619,7 +1631,7 @@ Toggle `emms-mode-line'.
 ;;;***
 
 ;;;### (autoloads (emms-lyrics-toggle emms-lyrics-disable emms-lyrics-enable)
-;;;;;;  "emms-lyrics" "emms/lisp/emms-lyrics.el" (19210 37819))
+;;;;;;  "emms-lyrics" "emms/lisp/emms-lyrics.el" (19514 2553))
 ;;; Generated autoloads from emms/lisp/emms-lyrics.el
 
 (autoload 'emms-lyrics-enable "emms-lyrics" "\
@@ -1640,7 +1652,7 @@ Toggle displaying emms lyrics.
 ;;;***
 
 ;;;### (autoloads (emms-cache-toggle emms-cache-disable emms-cache-enable)
-;;;;;;  "emms-cache" "emms/lisp/emms-cache.el" (19363 36055))
+;;;;;;  "emms-cache" "emms/lisp/emms-cache.el" (19514 2638))
 ;;; Generated autoloads from emms/lisp/emms-cache.el
 
 (autoload 'emms-cache-enable "emms-cache" "\
@@ -1789,8 +1801,8 @@ Insert the entered operator plus surrounding spaces.
 
 ;;;***
 
-;;;### (autoloads (salary-show) "salary" "xwl-elisp/salary.el" (19441
-;;;;;;  17140))
+;;;### (autoloads (salary-show) "salary" "xwl-elisp/salary.el" (19493
+;;;;;;  41873))
 ;;; Generated autoloads from xwl-elisp/salary.el
 
 (autoload 'salary-show "salary" "\
@@ -1803,8 +1815,8 @@ SALARY is before tax.  With prefix argument, insert result at point.
 
 ;;;### (autoloads (less-minor-mode-off less-minor-mode-on auto-less-minor-mode
 ;;;;;;  less-quit less-scroll-down-line less-scroll-up-line less-minor-mode
-;;;;;;  global-less-minor-mode) "less" "xwl-elisp/less.el" (19451
-;;;;;;  54875))
+;;;;;;  global-less-minor-mode) "less" "xwl-elisp/less.el" (19497
+;;;;;;  60055))
 ;;; Generated autoloads from xwl-elisp/less.el
 
 (defvar global-less-minor-mode nil "\
@@ -1868,6 +1880,17 @@ Turn off `less-minor-mode'.
 
 ;;;***
 
+;;;### (autoloads (gmail-notifier-start) "gmail-notifier" "xwl-elisp/gmail-notifier.el"
+;;;;;;  (19516 32808))
+;;; Generated autoloads from xwl-elisp/gmail-notifier.el
+
+(autoload 'gmail-notifier-start "gmail-notifier" "\
+Not documented
+
+\(fn)" t nil)
+
+;;;***
+
 ;;;### (autoloads (finkinfo-mode) "finkinfo-mode" "xwl-elisp/finkinfo-mode.el"
 ;;;;;;  (18867 57586))
 ;;; Generated autoloads from xwl-elisp/finkinfo-mode.el
@@ -1903,7 +1926,7 @@ Create a *Cwit* buffer.
 ;;;***
 
 ;;;### (autoloads (holiday-solar-term holiday-lunar cal-china-x-birthday-from-chinese)
-;;;;;;  "cal-china-x" "xwl-elisp/cal-china-x.el" (19437 17952))
+;;;;;;  "cal-china-x" "xwl-elisp/cal-china-x.el" (19493 41734))
 ;;; Generated autoloads from xwl-elisp/cal-china-x.el
 
 (autoload 'cal-china-x-birthday-from-chinese "cal-china-x" "\
@@ -2045,7 +2068,7 @@ Not documented
 ;;;***
 
 ;;;### (autoloads (xwl-zenity xwl-snarl xwl-growl xwl-notify) "xwl-notify"
-;;;;;;  "config/autoload/xwl-notify.el" (19453 16844))
+;;;;;;  "config/autoload/xwl-notify.el" (19474 19900))
 ;;; Generated autoloads from config/autoload/xwl-notify.el
 
 (autoload 'xwl-notify "xwl-notify" "\
@@ -2075,9 +2098,9 @@ Not documented
 ;;;;;;  xwl-shell-command-asynchronously-with-callback xwl-generate-password
 ;;;;;;  xwl-download-book xwl-delete-line his-transpose-windows his-one-whitespace-between-ce
 ;;;;;;  xwl-soft-kill-ring-save xwl-word-count-analysis xwl-count-ce-word
-;;;;;;  his-align-cols xwl-numerate-lines xwl-strip-blank-lines-region
-;;;;;;  xwl-strip-blank-lines-buffer ascii-table-show) "xwl-extra-util"
-;;;;;;  "config/autoload/xwl-extra-util.el" (19453 18299))
+;;;;;;  his-align-cols xwl-numerate-lines xwl-delete-blank-lines-region
+;;;;;;  xwl-delete-blank-lines-buffer ascii-table-show) "xwl-extra-util"
+;;;;;;  "config/autoload/xwl-extra-util.el" (19495 33750))
 ;;; Generated autoloads from config/autoload/xwl-extra-util.el
 
 (autoload 'ascii-table-show "xwl-extra-util" "\
@@ -2085,12 +2108,12 @@ Print the ascii table, by crazycool@smth.
 
 \(fn)" t nil)
 
-(autoload 'xwl-strip-blank-lines-buffer "xwl-extra-util" "\
+(autoload 'xwl-delete-blank-lines-buffer "xwl-extra-util" "\
 Strip all blank lines in current buffer.
 
 \(fn)" t nil)
 
-(autoload 'xwl-strip-blank-lines-region "xwl-extra-util" "\
+(autoload 'xwl-delete-blank-lines-region "xwl-extra-util" "\
 Strip all blank lines in region.
 
 \(fn START END)" t nil)
@@ -2213,11 +2236,11 @@ Not documented
 
 ;;;***
 
-;;;### (autoloads (color-theme-xwl-console-disabled) "xwl-color-theme"
-;;;;;;  "config/autoload/xwl-color-theme.el" (19453 19208))
+;;;### (autoloads (color-theme-xwl-console) "xwl-color-theme" "config/autoload/xwl-color-theme.el"
+;;;;;;  (19520 17761))
 ;;; Generated autoloads from config/autoload/xwl-color-theme.el
 
-(autoload 'color-theme-xwl-console-disabled "xwl-color-theme" "\
+(autoload 'color-theme-xwl-console "xwl-color-theme" "\
 Color theme base on console colors with `color-theme-print'.
 Created on 2005-05-13.
 

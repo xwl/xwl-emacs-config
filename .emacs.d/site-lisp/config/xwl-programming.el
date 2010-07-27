@@ -306,7 +306,12 @@ Thus generate a TAGs file."
      (defadvice log-edit-done (after delete-frame activate)
        ;; Delete smallest one.  Ideally, should delete the one running this log
        ;; command. But how? FIXME
-       (xwl-delete-frame))
+       (unless (xwl-delete-frame)
+         (mapc (lambda (w)
+                 (when (string= (buffer-name (window-buffer w))
+                                "*Shell Command Output*")
+                   (delete-window w)))
+               (window-list))))
      ))
 
 ;;; doxymacs
@@ -379,9 +384,23 @@ Thus generate a TAGs file."
 
 (eval-after-load 'vc
   '(progn
-     (defadvice vc-next-action (around use-new-frame activate)
-       (let ((pop-up-frames t))
-         ad-do-it))
+     ;; (defadvice vc-checkin (around use-new-frame activate)
+     ;;   (let ((pop-up-frames t))
+     ;;     ad-do-it))
+
+     (defadvice vc-checkin (around setup-source-log-diff-view activate)
+       (let ((b (current-buffer))
+             (f buffer-file-name))
+         ad-do-it
+         (when (eq (vc-backend f) 'Git)
+           (delete-other-windows)
+           (shell-command (concat "git diff -w " (shell-quote-argument f)))
+           (let ((b (get-buffer "*Shell Command Output*")))
+             (with-current-buffer b
+               (diff-mode)))
+           (split-window-vertically)
+           (switch-to-buffer b)
+           (other-window 1))))
      ))
 
 ;;; skeletons
@@ -499,10 +518,10 @@ Thus generate a TAGs file."
                   (interactive)
                   (require 'grep)
                   (let ((cmd
-                         (if (string-match "\\.gz" (shell-command-to-string "ls | head -1"))
+                         (if (string-match "[^*]\\.gz" (shell-command-to-string
+                                                        "ls *.gz | head -1"))
                              "zgrep -nH " "grep -nH ")))
-                    ;; TODO, fix this.
-                    ;;(grep-apply-setting 'grep-command cmd)
+                    (grep-apply-setting 'grep-command cmd)
                     (call-interactively 'grep))))
 
 (global-set-key (kbd "C-c G")
@@ -910,11 +929,10 @@ If SCHEME?, `run-scheme'."
 (require 'ruby-electric)
 
 
-;;; sgml, html, xml...
+;;; sgml, html, xml, css
 
-(add-hook 'html-mode-hook
-          (lambda ()
-            (smart-operator-mode -1)))
+(add-hook 'html-mode-hook (lambda () (smart-operator-mode -1)))
+(add-hook 'css-mode-hook 'rainbow-mode)
 
 ;; dvc
 
@@ -1020,6 +1038,13 @@ Useful for packing c/c++ functions with one line or empty body."
      (defadvice semantic-create-imenu-index (after combine-with-default activate)
        (setq ad-return-value (append (imenu-default-create-index-function)
                                      ad-return-value)))))
+
+(eval-after-load 'diff-mode
+  '(progn
+     (define-key diff-mode-shared-map (kbd "k") nil)
+     (define-key diff-mode-shared-map (kbd "M-o") nil)
+     ))
+
 
 (provide 'xwl-programming)
 

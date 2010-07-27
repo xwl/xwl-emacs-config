@@ -50,22 +50,20 @@
     (toggle-read-only 1)))
 
 ;;;###autoload
-(defun xwl-strip-blank-lines-buffer ()
+(defun xwl-delete-blank-lines-buffer ()
   "Strip all blank lines in current buffer."
   (interactive)
   (xwl-strip-blank-lines-region (point-min) (point-max)))
 
 ;;;###autoload
-(defun xwl-strip-blank-lines-region (start end)
+(defun xwl-delete-blank-lines-region (start end)
   "Strip all blank lines in region."
   (interactive "r")
   (save-excursion
     (save-restriction
       (narrow-to-region start end)
       (goto-char (point-min))
-      (while (re-search-forward "^[[:space:]]*\n" nil t)
-        (replace-match "" t t))
-      (widen))))
+      (flush-lines "^$"))))
 
 ;;;###autoload
 (defun xwl-numerate-lines ()

@@ -48,12 +48,13 @@
                                                (beginning-of-line)
                                                (re-search-backward "^\\[" nil t 1)
                                                (beginning-of-line)))
-     (define-key ibuffer-mode-map (kbd "g")
-       (lambda ()
-         (interactive)
-         (let ((pos (point)))
-           (ibuffer-update nil)
-           (goto-char pos))))
+
+     (define-key ibuffer-mode-map (kbd "g") (lambda ()
+                                              (interactive)
+                                              (let ((pos (point)))
+                                                (ibuffer-update nil)
+                                                (goto-char pos)
+                                                (recenter))))
 
      (define-key ibuffer-mode-map (kbd "C-x C-f") nil)))
 
@@ -61,6 +62,10 @@
 
 (setq ibuffer-saved-filter-groups
       '(("default"
+         ("elisp" (or (mode . emacs-lisp-mode)
+                      (mode . lisp-interaction-mode)))
+         ("c/c++" (or (mode . c-mode)
+                      (mode . c++-mode)))
          ("text" (filename . ".*"))
          ("dired" (mode . dired-mode))
          ("erc" (mode . erc-mode))
@@ -98,21 +103,21 @@ point.  Especially useful for w32."
 
 ;;; ido
 
+(ido-mode 1)
+(ido-everywhere 1)
+
 (setq ido-create-new-buffer 'never
       ido-enable-regexp nil)
 
 ;; 1. if no visible match, will match against ignored buffers.
 ;; 2. one can also toggle this by C-a
 (setq ido-ignore-buffers
-      (list
-       (regexp-opt '(".diary" ".scratch"  "&bitlbee" ".newsrc" "~master~" ":"
-                     ".bbdb" "todo.org"))
-       "\\*.+\\*" "^#" "^localhost:"))
+      `(,(regexp-opt '(".diary" ".scratch"  "&bitlbee" ".newsrc"
+                       ".bbdb" "todo.org"))
+        "\\*.+\\*" "^#" "^localhost:" "^:"
+        ,@ido-ignore-files))
 
-;; C-k: killing buffers/files while idoing
-
-(ido-mode 1)
-(ido-everywhere 1)
+(setq ido-ignore-files '("~master~"))
 
 (defun xwl-update-frequent-directories ()
   (interactive)
