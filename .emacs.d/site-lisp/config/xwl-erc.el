@@ -172,11 +172,29 @@ so as to keep an eye on work when necessarily."
                          (substring (substring nick 7) -1))))
     nick))
 
-(defadvice erc-faces-in (around add-query-faces activate)
-  (let ((faces ad-do-it))
-    (when (or (erc-query-buffer-p) (string-match "&" (buffer-name)))
-      (add-to-list 'faces 'erc-query-buffer-face))
-    faces))
+;; (defadvice erc-faces-in (around add-query-faces activate)
+;;   (let ((faces ad-do-it))
+;;     (when (or (erc-query-buffer-p) (string-match "&" (buffer-name)))
+;;       (add-to-list 'faces 'erc-query-buffer-face))
+;;     faces))
+
+(eval-after-load 'erc-track
+  '(progn
+     (defun erc-faces-in (str)
+       "Return a list of all faces used in STR."
+       (let ((i 0)
+             (m (length str))
+             (faces (erc-list (get-text-property 0 'face str))))
+         (while (and (setq i (next-single-property-change i 'face str m))
+                     (not (= i m)))
+           (dolist (face (erc-list (get-text-property i 'face str)))
+             (add-to-list 'faces face)))
+         ;; special faces for query & group(like msn groups) buffers
+         (when (or (erc-query-buffer-p)
+                   (string-match "&" (buffer-name)))
+           (add-to-list 'faces 'erc-query-buffer-face))
+         faces))
+     ))
 
 ;; ,----
 ;; | timestamp
