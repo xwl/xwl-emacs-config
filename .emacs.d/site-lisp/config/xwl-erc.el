@@ -338,6 +338,36 @@ If the buffer is currently not visible, makes it sticky."
 ;; (erc-bbdb-mode 1)
 ;; (setq erc-bbdb-popup-type nil)
 
+;; "<nick>" => "nick | "
+
+(defun erc-format-privmessage (nick msg privp msgp)
+  "Format a PRIVMSG in an insertible fashion."
+  (let* ((mark-s (if msgp (if privp "*" "") "-"))
+	 (mark-e (if msgp (if privp "*" " |") "-"))
+	 (str	 (format "%s%s%s %s" mark-s nick mark-e msg))
+	 (nick-face (if privp 'erc-nick-msg-face 'erc-nick-default-face))
+	 (msg-face (if privp 'erc-direct-msg-face 'erc-default-face)))
+    ;; add text properties to text before the nick, the nick and after the nick
+    (erc-put-text-property 0 (length mark-s) 'face msg-face str)
+    (erc-put-text-property (length mark-s) (+ (length mark-s) (length nick))
+			   'face nick-face str)
+    (erc-put-text-property (+ (length mark-s) (length nick)) (length str)
+			   'face msg-face str)
+    str))
+
+(defun erc-format-my-nick ()
+  "Return the beginning of this user's message, correctly propertized."
+  (if erc-show-my-nick
+      (let ((open "")
+	    (close " | ")
+	    (nick (erc-current-nick)))
+	(concat
+	 (erc-propertize open 'face 'erc-default-face)
+	 (erc-propertize nick 'face 'erc-my-nick-face)
+	 (erc-propertize close 'face 'erc-default-face)))
+    (let ((prefix " | "))
+      (erc-propertize prefix 'face 'erc-default-face))))
+
 ;;; Local Variables: ***
 ;;; outline-regexp: ";; | " ***
 ;;; End: ***
