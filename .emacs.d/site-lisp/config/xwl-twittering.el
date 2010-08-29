@@ -82,7 +82,7 @@
                                   ;; (hl-line-mode 1)
                                   ))
 ;; Disable URI handling in twittering, let's use goto-address-mode instead.
-(setq twittering-regexp-uri nil)
+(setq twittering-regexp-uri "^^$")
 
 (eval-after-load 'twittering-mode
   '(progn

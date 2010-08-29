@@ -368,6 +368,23 @@ If the buffer is currently not visible, makes it sticky."
     (let ((prefix " | "))
       (erc-propertize prefix 'face 'erc-default-face))))
 
+(defun erc-fill-static ()
+  "Fills a text such that messages start at column `erc-fill-static-center'."
+  (save-match-data
+    (goto-char (point-min))
+    (looking-at "^\\(\\S-+\\)")
+    (let ((nick (match-string 1)))
+        (let ((fill-column (- erc-fill-column (erc-timestamp-offset)))
+              (fill-prefix (make-string erc-fill-static-center 32)))
+          (insert (make-string (max 0 (- erc-fill-static-center
+                                         (length nick)
+                                         1
+                                         2 ; "| "
+                                         ))
+                               32))
+          (erc-fill-regarding-timestamp))
+        (erc-restore-text-properties))))
+
 ;;; Local Variables: ***
 ;;; outline-regexp: ";; | " ***
 ;;; End: ***

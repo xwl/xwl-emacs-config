@@ -35,7 +35,10 @@
 (let* ((all-fonts
         `((mac . ("Monaco-14" "stheiti*" "hiragino maru gothic pro"))
           (ns  . ("Monaco-14" "Hiragino Sans GB" "Hiragino_Kaku_Gothic_ProN"))
-          (w32 . ("Monaco-10" "NSimSun" "NSimSun"))
+          (w32 . ("Monaco-10" "NSimSun" "NSimSun"
+                  ;; "ºº¶¦·±ÖÐ±ä" "ºº¶¦·±ÖÐ±ä" "ºº¶¦·±ÖÐ±ä"
+                  ;; "Î¢ÈíÑÅºÚ" "Î¢ÈíÑÅºÚ"
+                  ))
           (x   . ,(if (string= system-name "debian..xwl")
                       '("DejaVu Sans Mono-11" "wenquanyi" "wenquanyi")
                     '("DejaVu LGC Sans Mono-13" "SimSun" "SimSun")))))

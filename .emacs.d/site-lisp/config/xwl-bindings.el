@@ -72,7 +72,7 @@
                              "xwl/tianxiashi"
                              "xwl/hl"
 
-                             ;; ":search/emacs/"
+                             ":search/emacs/"
                              ":search/twittering-mode/"
                              ))
 
