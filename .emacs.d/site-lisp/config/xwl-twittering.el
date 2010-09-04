@@ -35,15 +35,16 @@
   (setq twittering-auth-method 'basic)
 
   ;; Also in `gtap', disable "secure: always".
-  ;; (setq twittering-use-ssl nil)
+  (setq twittering-use-ssl nil)
 
-  ;; (setq twittering-web-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0k")
-  ;;       twittering-api-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC)FnXH==")
-  ;;       twittering-api-search-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*EcPOAaX8=="))
+  (setq twittering-web-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0k")
+        twittering-api-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC)FnXH==")
+        twittering-api-search-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*EcPOAaX8=="))
 
-  (setq twittering-web-host (xds "[?[g[?IcZ`,+[)nlPO9gQ)McCdEmYH==")
-        twittering-api-host (xds "[?[g[?IcZ`(_Z>bl\\?[jCdFnXN[cQJ,aY)'=")
-        twittering-api-search-host (xds "[?[g[?IcZ`(qQNFpP)^l\\?[jCdFnXN[cQJ,aY)'=")))
+  ;; (setq twittering-web-host (xds "[?[g[?IcZ`,+[)nlPO9gQ)McCdEmYH==")
+  ;;       twittering-api-host (xds "[?[g[?IcZ`(_Z>bl\\?[jCdFnXN[cQJ,aY)'=")
+  ;;       twittering-api-search-host (xds "[?[g[?IcZ`(qQNFpP)^l\\?[jCdFnXN[cQJ,aY)'="))
+  )
 
 (setq xwl-twittering-padding-size 8)
 
@@ -119,8 +120,8 @@
      (twittering-enable-unread-status-notifier)
 
      (when xwl-black-background?
-       (set-face-background twittering-zebra-1-face "gray28")
-       (set-face-background twittering-zebra-2-face "gray24"))
+       (set-face-background twittering-zebra-1-face "gray24")
+       (set-face-background twittering-zebra-2-face "gray22"))
 
      ))
 
