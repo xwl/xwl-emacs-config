@@ -137,7 +137,9 @@
       (progn
         (c-set-style "whitesmith")
         (setq c-cleanup-list '()))
-    (c-set-style "k&r")))
+    (c-set-style "k&r")
+    ;; TODO, check this.
+    (setq c-basic-offset 4)))
 
 (add-hook 'c-mode-hook 'xwl-set-c-c++-style)
 (add-hook 'c++-mode-hook 'xwl-set-c-c++-style)
