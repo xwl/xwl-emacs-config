@@ -38,8 +38,9 @@
                           "@travel" "@buy" "@study" "@misc"))
 
 (setq org-agenda-custom-commands
-      '(("h" "My Agenda & TODO" ((alltodo "")
-                                 (agenda "")))))
+      '(("h" "My Agenda & TODO" ((agenda "")
+                                 (alltodo "")
+                                 ))))
 
 (setq org-agenda-ndays 15)
 

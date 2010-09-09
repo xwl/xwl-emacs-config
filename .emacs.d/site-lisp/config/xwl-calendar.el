@@ -109,6 +109,8 @@
 
         (holiday-lunar 7 28 (xds"Xdc_Y`9,[J[q@>AgZeIfQ>F,"))
 
+        (holiday-fixed 4 16 (xds ",Y:G,C`+,X)HA*D^Q>F,@H=="))
+
         ,@xwl-company-holidays))
 
 (setq rockets-schedule

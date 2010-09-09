@@ -166,6 +166,18 @@ displayed in the echo area if `pack-windows-verbose' is non-nil.
 
 ;;;***
 
+;;;### (autoloads (org-google-weather) "org-google-weather" "org-google-weather.el"
+;;;;;;  (19592 51899))
+;;; Generated autoloads from org-google-weather.el
+
+(autoload 'org-google-weather "org-google-weather" "\
+Return Org entry with the weather for LOCATION in LANGUAGE.
+If LOCATION is not set, use org-google-weather-location.
+
+\(fn &optional LOCATION LANGUAGE)" nil nil)
+
+;;;***
+
 ;;;### (autoloads (oddmuse-kill-url oddmuse-browse-this-page oddmuse-browse-page
 ;;;;;;  emacswiki-post oddmuse-insert-pagename oddmuse-revert oddmuse-post
 ;;;;;;  oddmuse-follow oddmuse-edit oddmuse-toggle-minor) "oddmuse"
@@ -1283,7 +1295,7 @@ Kill thread from here using leafnode.
 ;;;***
 
 ;;;### (autoloads (twit) "twittering-mode" "twittering-mode/twittering-mode.el"
-;;;;;;  (19519 4665))
+;;;;;;  (19567 20146))
 ;;; Generated autoloads from twittering-mode/twittering-mode.el
 
 (autoload 'twit "twittering-mode" "\
@@ -1329,17 +1341,6 @@ streams of bytes.  It may be a local process, or it may be connected
 to a tcp server on another machine.
 
 \(fn PROCESS)" nil nil)
-
-;;;***
-
-;;;### (autoloads (oggc-show-header) "ogg-comment" "emms/lisp/ogg-comment.el"
-;;;;;;  (18850 41578))
-;;; Generated autoloads from emms/lisp/ogg-comment.el
-
-(autoload 'oggc-show-header "ogg-comment" "\
-Show a pretty printed representation of the Ogg Comments in FILE.
-
-\(fn FILE)" t nil)
 
 ;;;***
 
@@ -1814,9 +1815,9 @@ SALARY is before tax.  With prefix argument, insert result at point.
 ;;;***
 
 ;;;### (autoloads (less-minor-mode-off less-minor-mode-on auto-less-minor-mode
-;;;;;;  less-quit less-scroll-down-line less-scroll-up-line less-minor-mode
-;;;;;;  global-less-minor-mode) "less" "xwl-elisp/less.el" (19497
-;;;;;;  60055))
+;;;;;;  less-quit less-end-of-buffer less-beginning-of-buffer less-scroll-down-line
+;;;;;;  less-scroll-up-line less-minor-mode global-less-minor-mode)
+;;;;;;  "less" "xwl-elisp/less.el" (19531 38699))
 ;;; Generated autoloads from xwl-elisp/less.el
 
 (defvar global-less-minor-mode nil "\
@@ -1853,6 +1854,16 @@ Scroll up one line.
 
 (autoload 'less-scroll-down-line "less" "\
 Scroll down one line.
+
+\(fn)" t nil)
+
+(autoload 'less-beginning-of-buffer "less" "\
+Not documented
+
+\(fn)" t nil)
+
+(autoload 'less-end-of-buffer "less" "\
+Not documented
 
 \(fn)" t nil)
 
@@ -2049,7 +2060,7 @@ Not documented
 ;;;***
 
 ;;;### (autoloads (xwl-paste-ubuntu-cn-image xwl-paste-ubuntu-cn)
-;;;;;;  "xwl-paste" "config/autoload/xwl-paste.el" (19453 16411))
+;;;;;;  "xwl-paste" "config/autoload/xwl-paste.el" (19528 10773))
 ;;; Generated autoloads from config/autoload/xwl-paste.el
 
 (autoload 'xwl-paste-ubuntu-cn "xwl-paste" "\
@@ -2237,8 +2248,7 @@ Not documented
 ;;;***
 
 ;;;### (autoloads (color-theme-xwl-console) "xwl-color-theme" "config/autoload/xwl-color-theme.el"
-;;;;;;  (19520 17761))
-
+;;;;;;  (19528 10868))
 ;;; Generated autoloads from config/autoload/xwl-color-theme.el
 
 (autoload 'color-theme-xwl-console "xwl-color-theme" "\
