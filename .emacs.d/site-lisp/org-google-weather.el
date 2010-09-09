@@ -96,13 +96,15 @@ If LOCATION is not set, use org-google-weather-location."
             (low (cadr (assoc 'low forecast)))
             (high (cadr (assoc 'high forecast)))
             ;; But *they* told me it's just about calling functions!
-            (icon (cdr
-                   (assoc
-                    (intern
-                     (file-name-sans-extension
-                      (file-name-nondirectory
-                       (cadr (assoc 'icon forecast)))))
-                    org-google-weather-icon-alist)))
+            (icon (let ((localized-weather ; e.g., cn_cloudy when LANGUAGE is zh-cn
+                         (file-name-sans-extension
+                          (file-name-nondirectory
+                           (cadr (assoc 'icon forecast))))))
+                    (some (lambda (w)
+                            (when (string-match (symbol-name (car w))
+                                                localized-weather)
+                              (cdr w)))
+                          org-google-weather-icon-alist)))
             (temp-symbol (google-weather-data->temperature-symbol data)))
         (concat
          (if org-google-weather-display-icon-p
