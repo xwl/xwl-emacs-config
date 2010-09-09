@@ -834,6 +834,8 @@ passphrase cache or user."
 
 (global-goto-address-mode 1)
 
+(setq org-google-weather-icon-directory
+      "~/w32/GNOME_Weather_Icons_by_DarKobra/48x48/status")
 
 (provide 'xwl-misc)
 

@@ -213,6 +213,7 @@
 ;; (global-set-key (kbd "C-S-v") 'scroll-up)
 ;; (global-set-key (kbd "M-V") 'scroll-down)
 
+(setq-default tab-width 4)
 
 (provide 'xwl-convenience)
 
