@@ -67,7 +67,7 @@
                              ":direct_messages"
                              "xwl/followers"
                              ":retweets_of_me"
-                             ":public"
+                             ;; ":public"
 
                              "xwl/tianxiashi"
                              "xwl/hl"
