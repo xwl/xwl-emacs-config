@@ -400,14 +400,14 @@
          (name "未临")
          (signature
           (format "William\n\nhttp://xwl.appspot.com\n\n%s\n"
-                  (if (file-exists-p "~/notes/favorites_now")
-                      (xwl-fortune-favorites-vertically "~/notes/favorites_now")
+                  (if (file-exists-p "~/.notes/favorites_now")
+                      (xwl-fortune-favorites-vertically "~/.notes/favorites_now")
                     ""))))
 
         ("blog-*"
          (signature nil
 ;;           (format "William\n</pre>\n\n%s"
-;;                   ;; (xwl-fortune-favorites-vertically "~/notes/favorites_now")
+;;                   ;; (xwl-fortune-favorites-vertically "~/.notes/favorites_now")
 ;;                   (xwl-qiushibaike-random)
 ;;                   )
           ))

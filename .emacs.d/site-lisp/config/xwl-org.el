@@ -25,7 +25,7 @@
 
 (add-to-list 'auto-mode-alist '("\\.org$\\|todo\\.org_archive" . org-mode))
 
-(setq org-agenda-files '("~/notes/todo.org"))
+(setq org-agenda-files '("~/.notes/todo.org"))
 
 (setq org-todo-keywords
       '(;; (sequence "-" ">" "o" "|" "x" "|" "w" "o")
@@ -37,10 +37,10 @@
 (setq xwl-org-tag-alist '("@nokia" "@hacking" "@life" "@reading" "@watching"
                           "@travel" "@buy" "@study" "@misc"))
 
-(setq org-agenda-custom-commands
-      '(("h" "My Agenda & TODO" ((agenda "")
-                                 (alltodo "")
-                                 ))))
+;; (setq org-agenda-custom-commands
+;;       '(("h" "My Agenda & TODO" ((agenda "")
+;;                                  (alltodo "")
+;;                                  ))))
 
 (setq org-agenda-ndays 15)
 
@@ -84,10 +84,14 @@
       (if (search-forward-regexp match nil t 1)
           (progn
             (setq matches (1+ matches))
-            (org-advertized-archive-subtree)
+            ;; (org-advertized-archive-subtree)
+            (org-archive-set-tag)
+            (forward-line 1)
             (while (search-forward-regexp match nil t 1)
               (setq matches (1+ matches))
-              (org-advertized-archive-subtree))
+              ;; (org-advertized-archive-subtree)
+              (org-archive-set-tag)
+              (forward-line 1))
             (message "%d items archived" matches))
         (message "Nothing to archive")))))
 
@@ -108,8 +112,8 @@
 ;; (global-set-key (kbd "C-c r") 'remember)
 
 (setq org-remember-templates
-      '((?t "* - %?\n  %u" "~/notes/todo.org")
-        ;; (?n "* %u %?" "~/.notes")
+      '((?t "* - %?\n  %u" "~/.notes/todo.org")
+        ;; (?n "* %u %?" "~/..notes")
         ))
 
 (when nil
@@ -162,8 +166,8 @@
 (global-set-key (kbd "C-c r") 'remember)
 
 (setq org-remember-templates
-      '((?t "* - %?\n  %u" "~/notes/todo.org")
-        ;; (?n "* %u %?" "~/.notes")
+      '((?t "* - %?\n  %u" "~/.notes/todo.org")
+        ;; (?n "* %u %?" "~/..notes")
         ))
 
 )

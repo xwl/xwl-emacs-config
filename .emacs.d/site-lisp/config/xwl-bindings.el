@@ -46,11 +46,12 @@
                                 (call-interactively 'xwl-bbdb)))
 
 ;;'eshell) ;xwl-term ;xwl-run-scsh
-(global-set-key (kbd "<f9>") (lambda ()
-                               (interactive)
-                               (if current-prefix-arg
-                                   (call-interactively 'shell)
-                                 (xwl-switch-or-create "*shell*" 'shell))))
+(global-set-key (kbd "<f9>")
+                (lambda ()
+                  (interactive)
+                  (if current-prefix-arg
+                      (call-interactively 'shell)
+                    (xwl-switch-or-create "*shell*" 'shell))))
 
 (global-set-key (kbd "<f11>")
                 (lambda ()
@@ -83,7 +84,7 @@
                     (run-hooks 'xwl-timers-hook)
                     (setq xwl-timers-hook-started? t)
 
-                    (command-execute (kbd "<f6>"))
+                    ;; (xwl-gnus)
                     ;; (command-execute (kbd "C-c n E"))
                     )))
 
@@ -233,71 +234,57 @@
   (call-interactively
    'emms-add-directory-tree))
 
-(global-set-key (kbd "<f6>") '(lambda ()
-                                (interactive)
-                                (if xwl-at-company?
-                                    (message "Hmm, only run at home")
-                                  (xwl-gnus))))
+(global-set-key (kbd "<f6>") 'xwl-gnus)
 
 (setq xwl-gnus-agent-timer nil)
 
 (defun xwl-gnus ()
   (interactive)
-  (let ((buf (get-buffer "*Group*")))
-    (if buf
-        (progn
-          (switch-to-buffer buf)
-          (setq xwl-mail-notify-string ""))
+  (if xwl-at-company?
+      (message "Hmm, only run at home")
+    (let ((buf (get-buffer "*Group*")))
+      (if buf
+          (progn
+            (switch-to-buffer buf)
+            (setq xwl-mail-notify-string ""))
 
-      ;; (if (not (eq window-system 'ns))
-      ;;     (call-interactively 'gnus)
-      (call-interactively 'gnus-unplugged)
-      ;; )
+        ;; (if (not (eq window-system 'ns))
+        ;;     (call-interactively 'gnus)
+        (call-interactively 'gnus-unplugged)
+        ;; )
 
-      (gnus-demon-init)
-      (when (fboundp 'color-theme-xwl-console)
-        (color-theme-xwl-console))
+        (gnus-demon-init)
+        (when (fboundp 'color-theme-xwl-console)
+          (color-theme-xwl-console))
 
-      ;; TODO: 23.1 mac port doesn't work with this.
-      ;; (unless gnus-plugged
-      ;;   (unless xwl-gnus-agent-timer
-      ;;     (setq xwl-gnus-agent-timer
-      ;;           (run-with-timer
-      ;;            0 (* 3600 24) (lambda ()
-      ;;                           (xwl-shell-command-asynchronously
-      ;;                            (concat
-      ;;                             ;; Company PC is always on, so we won't have
-      ;;                             ;; too many instances running at the same
-      ;;                             ;; time...
-      ;;                             (if xwl-at-company?
-      ;;                                 ""
-      ;;                               "(ps -ef|grep \"emacs --eval\" | grep -v grep) || ")
-      ;;                             "emacs --eval \"(progn (require 'xwl-gnus-agent))\""
-      ;;                             ))))))
-      ;;   (message "Gnus agent timer started"))
-      )))
+        ;; TODO: 23.1 mac port doesn't work with this.
+        ;; (unless gnus-plugged
+        ;;   (unless xwl-gnus-agent-timer
+        ;;     (setq xwl-gnus-agent-timer
+        ;;           (run-with-timer
+        ;;            0 (* 3600 24) (lambda ()
+        ;;                           (xwl-shell-command-asynchronously
+        ;;                            (concat
+        ;;                             ;; Company PC is always on, so we won't have
+        ;;                             ;; too many instances running at the same
+        ;;                             ;; time...
+        ;;                             (if xwl-at-company?
+        ;;                                 ""
+        ;;                               "(ps -ef|grep \"emacs --eval\" | grep -v grep) || ")
+        ;;                             "emacs --eval \"(progn (require 'xwl-gnus-agent))\""
+        ;;                             ))))))
+        ;;   (message "Gnus agent timer started"))
+        ))))
 
-(global-set-key (kbd "<f8>") (lambda ()
-                               (interactive)
-                               ;;   ;; (find-file "~/notes/todo.org")
-                               ;;   (case system-type
-                               ;;     ((darwin)
-                               ;;      (delete-other-windows)
-                               ;;      (find-file "~/notes/todo")
-                               ;;      (split-window-horizontally)
-                               ;;      (find-file "~/notes/todo-finland"))
-                               ;;     (t
-                               ;;      (delete-other-windows)
-                               ;;      (find-file "~/notes/todo")
-                               ;;      (split-window-horizontally)
-                               ;;      (find-file "~/notes/todo-nokia")))
-                               (xwl-switch-or-create
-                                "*Org Agenda*"
-                                '(lambda ()
-                                   (org-agenda 1 "h")
-                                   (delete-other-windows)
-                                   ;; 'org-agenda
-                                   ))))
+(global-set-key (kbd "<f8>")
+                (lambda ()
+                  (interactive)
+                  (xwl-switch-or-create
+                   "*Org Agenda*"
+                   '(lambda ()
+                      ;; (org-agenda 1 "h")
+                      (org-agenda-list)
+                      (delete-other-windows)))))
 
 (global-set-key (kbd "C-c t") '(lambda ()
                                  (interactive)

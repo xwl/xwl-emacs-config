@@ -65,7 +65,7 @@
       twittering-timer-interval 300
       twittering-cache-spec-strings
       '(":home" ":retweets_of_me" ":replies" ":direct_messages" "xwl/followers"
-        ":search/twittering-mode/" ":search/emacs/")
+        ":search/twittering-mode/" ":search/emacs/" "xwl/tianxiashi" "xwl/hl")
       twittering-use-master-password t)
 
 (setq twittering-use-native-retweet t)
