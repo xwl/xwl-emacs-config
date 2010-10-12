@@ -171,10 +171,17 @@ Run it at an appropriate time, like when we twittering?"
     ((w32)
      (w32-send-sys-command #xf030))
     ((ns)
-     ;; FIXME
-     (run-at-time 2 nil 'ns-toggle-fullscreen))
+     (if (string= system-name "tokyolove.local")
+         (progn
+           (set-frame-width nil 170)
+           (set-frame-height nil 48))
+       (ns-toggle-fullscreen)))
     ((mac)
-     (set-frame-parameter (selected-frame) 'fullscreen 'maximized))))
+     (if (string= system-name "tokyolove.local")
+         (progn
+           (set-frame-width nil 170)
+           (set-frame-height nil 48))
+       (set-frame-parameter (selected-frame) 'fullscreen 'maximized)))))
 
 (defun xwl-pure-fullscreen (&optional exit-fullscreen)
   (interactive "P")

@@ -300,8 +300,8 @@
 
 (setq xwl-sensitive-files
       (mapcar 'expand-file-name
-              '("/Users/william/notes/todo.org"
-                "~/notes/life_blog")))
+              '("/Users/william/.notes/todo.org"
+                "~/.notes/life_blog")))
 
 (defun xwl-find-file-hook ()
   (let ((file (expand-file-name (buffer-file-name))))
@@ -381,13 +381,16 @@
             (buffer-list))
       (call-interactively 'ga)))
 
+(setq ga-chicken-repository "/Users/william/repo/svn/chicken-eggs")
+
 (setq ga-backend-methods
       '((apt-get ;; "ssh william@localhost -p 2222 sudo apt-get")
          "sudo apt-get")
-        (fink "sudo fink")
+        (fink "fink")
         (pkgsrc "sudo")
         (apt-cyg "c:/cygwin/bin/sh.exe '/home/william/w32/apt-cyg'")
-        (yum "sudo yum")))
+        (yum "sudo yum")
+        (chicken "chicken-install")))
 
 (add-to-list 'auto-mode-alist
              '("macbluetelnet.*\\(\\.h\\|\\.mm\\|\\.m\\)$" . objc-mode))
@@ -426,7 +429,9 @@
   ;; (xwl-weather-update)
 
   (when (fboundp 'color-theme-xwl-console)
-    (color-theme-xwl-console))
+    (run-at-time 1
+                 nil
+                 'color-theme-xwl-console))
 
   (when window-system
     (require 'highlight-tail)
