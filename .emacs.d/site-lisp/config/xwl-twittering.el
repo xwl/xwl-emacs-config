@@ -101,13 +101,14 @@
      (define-key twittering-mode-map (kbd "R") 'twittering-retweet)
      (define-key twittering-mode-map (kbd "@") 'twittering-reply-to-user)
      (define-key twittering-mode-map (kbd "D") 'twittering-direct-message)
+     (define-key twittering-mode-map (kbd "C") 'twittering-erase-all)
 
      (define-key twittering-mode-map (kbd "C-c C-g") nil)
      (define-key twittering-mode-map (kbd "RET") nil)
      (define-key twittering-mode-map (kbd "d") nil)
      (define-key twittering-mode-map (kbd "i") nil)
      (define-key twittering-mode-map (kbd "t") nil)
-     (define-key twittering-mode-map (kbd "s") nil)
+     (define-key twittering-mode-map (kbd "s") 'twittering-search)
      (define-key twittering-mode-map (kbd "d") nil)
 
      (define-key twittering-mode-map (kbd "<S-tab>") 'twittering-goto-previous-thing)
