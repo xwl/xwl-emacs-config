@@ -62,7 +62,8 @@
          "#osxchat" "#emacs" "#scheme" "#chicken" "#cpp-tw" ;; "#chinalug"
          )
         ("oftc.net"
-         "#debian-zh" "#emacs-cn")      ; "#bitlbee"
+         ;; "#debian-zh"
+         "#emacs-cn")      ; "#bitlbee"
         ;; ("linuxfire"
         ;;  "#linuxfire")
         ;; ("irc.lnx.nokia.com"
@@ -246,7 +247,8 @@ If the buffer is currently not visible, makes it sticky."
              (not (string-match
                    (regexp-opt
                     '("Users" "User" "topic set by" "Welcome to " "nickname"
-                      "identified" "invalid" "your unique"))
+                      "identified" "invalid" "your unique" "now you hidden"
+                      "identified for" "nickname" "your hidden host"))
                    message)))
     (xwl-notify (concat "ERC: " (buffer-name)) message)))
 

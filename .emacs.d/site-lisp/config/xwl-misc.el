@@ -399,9 +399,11 @@
 
 ;; (remove-hook 'find-file-hook 'bracketphobia-hide)
 
+(setq xwl-twittering-padding-size 8)
+
 (defun xwl-after-init-hook ()
   ;; FIXME: how to set this only after window has been maximized?
-  (run-at-time 1
+  (run-at-time 3
                nil
                ;; (add-hook 'window-configuration-change-hook
                '(lambda ()
@@ -544,6 +546,7 @@
 (define-key occur-mode-map (kbd "M-p") 'less-scroll-down-line)
 (define-key occur-mode-map (kbd "M-n") 'less-scroll-up-line)
 (define-key occur-mode-map (kbd "q") 'xwl-hide-buffer)
+(define-key occur-mode-map (kbd "C-o") nil)
 ;; ))
 
 ;; ,----
