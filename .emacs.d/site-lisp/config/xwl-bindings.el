@@ -240,7 +240,7 @@
 
 (defun xwl-gnus ()
   (interactive)
-  (if xwl-at-company?
+  (if nil ;xwl-at-company?
       (message "Hmm, only run at home")
     (let ((buf (get-buffer "*Group*")))
       (if buf
@@ -258,22 +258,23 @@
           (color-theme-xwl-console))
 
         ;; TODO: 23.1 mac port doesn't work with this.
-        ;; (unless gnus-plugged
-        ;;   (unless xwl-gnus-agent-timer
-        ;;     (setq xwl-gnus-agent-timer
-        ;;           (run-with-timer
-        ;;            0 (* 3600 24) (lambda ()
-        ;;                           (xwl-shell-command-asynchronously
-        ;;                            (concat
-        ;;                             ;; Company PC is always on, so we won't have
-        ;;                             ;; too many instances running at the same
-        ;;                             ;; time...
-        ;;                             (if xwl-at-company?
-        ;;                                 ""
-        ;;                               "(ps -ef|grep \"emacs --eval\" | grep -v grep) || ")
-        ;;                             "emacs --eval \"(progn (require 'xwl-gnus-agent))\""
-        ;;                             ))))))
-        ;;   (message "Gnus agent timer started"))
+        (when (eq system-type 'windows-nt)
+          (unless gnus-plugged
+            (unless xwl-gnus-agent-timer
+              (setq xwl-gnus-agent-timer
+                    (run-with-timer
+                     0 (* 3600 24) (lambda ()
+                                     (xwl-shell-command-asynchronously
+                                      (concat
+                                       ;; Company PC is always on, so we won't have
+                                       ;; too many instances running at the same
+                                       ;; time...
+                                       (if xwl-at-company?
+                                           ""
+                                         "(ps -ef|grep \"emacs --eval\" | grep -v grep) || ")
+                                       "emacs --eval \"(progn (require 'xwl-gnus-agent))\""
+                                       ))))))
+            (message "Gnus agent timer started")))
         ))))
 
 (global-set-key (kbd "<f8>")

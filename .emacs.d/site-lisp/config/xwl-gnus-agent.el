@@ -40,7 +40,7 @@
 (suspend-frame)
 (gnus-agent-batch)
 (gnus-group-save-newsrc t)
-;; (save-buffers-kill-terminal t)
+(save-buffers-kill-terminal t)
 
 (provide 'xwl-gnus-agent)
 

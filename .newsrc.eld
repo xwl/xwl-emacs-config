@@ -1,4 +1,4 @@
-;; -*- mode:emacs-lisp; coding: utf-8-emacs; -*-
+;; -*- mode:emacs-lisp; coding: utf-8-emacs-dos; -*-
 ;; Gnus startup file.
 ;; Never delete this file -- if you want to force Gnus to read the
 ;; .newsrc file (if you have one), touch .newsrc instead.

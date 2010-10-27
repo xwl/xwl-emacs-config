@@ -46,8 +46,6 @@
   ;;       twittering-api-search-host (xds "[?[g[?IcZ`(qQNFpP)^l\\?[jCdFnXN[cQJ,aY)'="))
   )
 
-(setq xwl-twittering-padding-size 8)
-
 (setq twittering-my-fill-column (- twittering-fill-column
                                    xwl-twittering-padding-size))
 
@@ -135,6 +133,7 @@
 (when (eq window-system 'mac)
   (defalias 'create-animated-image 'create-image))
 
+(setq twittering-tinyurl-service 'toly)
 
 (provide 'xwl-twittering)
 ;;; xwl-twittering.el ends here
