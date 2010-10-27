@@ -124,6 +124,10 @@
        (set-face-background twittering-zebra-1-face "gray24")
        (set-face-background twittering-zebra-2-face "gray22"))
 
+     (defadvice twit (before reset-url-resolving-flag activate)
+       "To avoid possible deadlock caused by resovling url."
+       (setq twittering-url-request-resolving-p nil))
+
      ))
 
 ;; FIXME: in 23.2, who the hell autoload create-animated-image?? this exists in

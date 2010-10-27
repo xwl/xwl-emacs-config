@@ -1,6 +1,6 @@
 
 ;;;### (autoloads (xwl-makefile-clean xwl-makefile-byte-compile xwl-makefile-all)
-;;;;;;  "xwl-makefile" "xwl-makefile.el" (19441 17583))
+;;;;;;  "xwl-makefile" "xwl-makefile.el" (19650 15443))
 ;;; Generated autoloads from xwl-makefile.el
 
 (autoload 'xwl-makefile-all "xwl-makefile" "\
@@ -167,7 +167,7 @@ displayed in the echo area if `pack-windows-verbose' is non-nil.
 ;;;***
 
 ;;;### (autoloads (org-google-weather) "org-google-weather" "org-google-weather.el"
-;;;;;;  (19592 51899))
+;;;;;;  (19594 15727))
 ;;; Generated autoloads from org-google-weather.el
 
 (autoload 'org-google-weather "org-google-weather" "\
@@ -1295,7 +1295,7 @@ Kill thread from here using leafnode.
 ;;;***
 
 ;;;### (autoloads (twit) "twittering-mode" "twittering-mode/twittering-mode.el"
-;;;;;;  (19567 20146))
+;;;;;;  (19645 45706))
 ;;; Generated autoloads from twittering-mode/twittering-mode.el
 
 (autoload 'twit "twittering-mode" "\
@@ -1632,7 +1632,7 @@ Toggle `emms-mode-line'.
 ;;;***
 
 ;;;### (autoloads (emms-lyrics-toggle emms-lyrics-disable emms-lyrics-enable)
-;;;;;;  "emms-lyrics" "emms/lisp/emms-lyrics.el" (19514 2553))
+;;;;;;  "emms-lyrics" "emms/lisp/emms-lyrics.el" (19612 47508))
 ;;; Generated autoloads from emms/lisp/emms-lyrics.el
 
 (autoload 'emms-lyrics-enable "emms-lyrics" "\
@@ -2009,7 +2009,7 @@ Create a *Dashboard* buffer.
 
 ;;;***
 
-;;;### (autoloads (ga) "ga" "xwl-elisp/ga/ga.el" (19439 61740))
+;;;### (autoloads (ga) "ga" "xwl-elisp/ga/ga.el" (19596 62004))
 ;;; Generated autoloads from xwl-elisp/ga/ga.el
 
 (autoload 'ga "ga" "\
