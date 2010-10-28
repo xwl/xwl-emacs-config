@@ -86,6 +86,8 @@
               ;;         (nnimap-stream ssl))
               (nntp "news.cn99.com")
               ))
+
+        (nntp "news.gwene.org")
         ))
 
 

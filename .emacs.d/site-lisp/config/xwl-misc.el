@@ -438,8 +438,8 @@
   (when window-system
     (require 'highlight-tail)
     (setq highlight-tail-colors
-          ;; '(("#bc2525" . 0)))
-          '(("#d8971d" . 0)))
+          '(("#bc2525" . 0)))
+          ;; '(("#d8971d" . 0)))
     (highlight-tail-reload))
 
   (appt-activate 1)
@@ -849,6 +849,9 @@ passphrase cache or user."
   '(progn
      (define-key hexl-mode-map (kbd "C-o") nil)
      ))
+
+;; trunk temp fix
+(setq package-enable-at-startup nil)
 
 (provide 'xwl-misc)
 
