@@ -845,6 +845,11 @@ passphrase cache or user."
 (setq org-google-weather-icon-directory
       "~/w32/GNOME_Weather_Icons_by_DarKobra/48x48/status")
 
+(eval-after-load 'hexl-mode
+  '(progn
+     (define-key hexl-mode-map (kbd "C-o") nil)
+     ))
+
 (provide 'xwl-misc)
 
 ;;; Local Variables: ***
