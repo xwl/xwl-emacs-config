@@ -100,6 +100,15 @@
 (setq emms-lyrics-display-on-modeline nil
       emms-lyrics-display-buffer t)
 
+(defadvice emms-player-mplayer-start (around decide-caching-or-not activate)
+  "Cache 8M first when playing remote files."
+  (let* ((f (emms-track-name (ad-get-arg 0)))
+         (emms-player-mplayer-parameters
+          (if (or (file-remote-p f) (string-match "^/Volumes/" f))
+              (append emms-player-mplayer-parameters '("-cache" "8192"))
+            emms-player-mplayer-parameters)))
+    ad-do-it))
+
 ;; ,----
 ;; | playlist mode
 ;; `----
