@@ -204,8 +204,8 @@
   (global-less-minor-mode -1)
   ad-do-it)
 
-(setq cua-enable-cua-keys nil)
-(cua-mode 1)
+;; (setq cua-enable-cua-keys nil)
+;; (cua-mode 1)
 
 ;; (global-unset-key (kbd "C-z"))
 ;; (global-unset-key (kbd "C-w"))
