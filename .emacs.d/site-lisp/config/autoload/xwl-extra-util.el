@@ -418,6 +418,33 @@ Note: you are suggested to kill process buffer at the end of CALLBACK. "
    (list (read-file-name "info: ")))
   (info file))
 
+;;;###autoload
+(defun xwl-kill-buffer-name ()
+  (interactive)
+  (let ((s (if (buffer-file-name)
+               (file-name-nondirectory (buffer-file-name))
+             (buffer-name))))
+    (kill-new s)
+    (message "Copied: `%s'" s)))
+
+(global-set-key (kbd "C-c k") 'xwl-kill-buffer-name)
+
+;;;###autoload
+(defun xwl-kill-buffer-full-name ()
+  (interactive)
+  (let (s)
+    (if (eq major-mode 'gnus-article-mode)
+        (save-excursion
+          (gnus-summary-toggle-header 1)
+          (goto-char (point-min))
+          (when (search-forward-regexp "Archived-At: <\\(.+\\)>" nil t 1)
+            (setq s (match-string 1)))
+          (gnus-summary-toggle-header -1))
+      (buffer-file-name))
+    (kill-new s)
+    (message "Copied: `%s'" s)))
+
+(global-set-key (kbd "C-c K") 'xwl-kill-buffer-full-name)
 
 (provide 'xwl-extra-util)
 ;;; xwl-extra-util.el ends here

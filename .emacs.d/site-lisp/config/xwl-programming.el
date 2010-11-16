@@ -329,28 +329,6 @@ Thus generate a TAGs file."
 
 (global-set-key (kbd "C-x v p") (lambda () (interactive) (compile "git push")))
 
-(global-set-key (kbd "C-c k")
-                (lambda ()
-                  (interactive)
-                  (let ((s (if (buffer-file-name)
-                               (file-name-nondirectory (buffer-file-name))
-                             (buffer-name))))
-                    (kill-new s)
-                    (message "Copied: `%s'" s))))
-
-(global-set-key (kbd "C-c K")
-                (lambda ()
-                  (interactive)
-                  (let ((s
-                         (if (eq major-mode 'gnus-article-mode)
-                             (save-excursion
-                               (goto-char (point-min))
-                               (when (search-forward-regexp "Archived-At: <\\(.+\\)>" nil t 1)
-                                 (match-string 1)))
-                           (buffer-file-name))))
-                    (kill-new s)
-                    (message "Copied: `%s'" s))))
-
 (eval-after-load 'vc-dir
   '(progn
      (defun vc-dir-hide-up-to-date ()
@@ -1046,6 +1024,10 @@ Useful for packing c/c++ functions with one line or empty body."
      (define-key diff-mode-shared-map (kbd "k") nil)
      (define-key diff-mode-shared-map (kbd "M-o") nil)
      ))
+
+;;; misc
+
+(add-to-list 'auto-mode-alist '("\\.qml\\'" . css-mode))
 
 
 (provide 'xwl-programming)
