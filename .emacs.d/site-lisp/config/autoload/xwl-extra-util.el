@@ -440,7 +440,7 @@ Note: you are suggested to kill process buffer at the end of CALLBACK. "
           (when (search-forward-regexp "Archived-At: <\\(.+\\)>" nil t 1)
             (setq s (match-string 1)))
           (gnus-summary-toggle-header -1))
-      (buffer-file-name))
+      (setq s (buffer-file-name)))
     (kill-new s)
     (message "Copied: `%s'" s)))
 
