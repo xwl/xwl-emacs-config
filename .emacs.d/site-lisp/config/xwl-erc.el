@@ -60,14 +60,15 @@
          "&bitlbee")
         ("freenode.net"
          "#osxchat" "#emacs" "#scheme" "#chicken" "#cpp-tw" ;; "#chinalug"
+         "#qt-qml"
          )
         ("oftc.net"
          ;; "#debian-zh"
          "#emacs-cn")      ; "#bitlbee"
         ;; ("linuxfire"
         ;;  "#linuxfire")
-        ;; ("irc.lnx.nokia.com"
-        ;;  "#avkon" "#orbit" "#mac" "#linux" "#symbianperformance" "#qt")
+        ("irc.lnx.nokia.com"
+         "#mac" "#linux" "#symbianperformance" "#qt")
         ))
 
 (defun his-bitlbee-identify ()

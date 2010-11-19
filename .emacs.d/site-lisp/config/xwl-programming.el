@@ -1027,7 +1027,7 @@ Useful for packing c/c++ functions with one line or empty body."
 
 ;;; misc
 
-(add-to-list 'auto-mode-alist '("\\.qml\\'" . css-mode))
+(add-to-list 'auto-mode-alist '("\\.qml\\'" . qml-mode))
 
 
 (provide 'xwl-programming)

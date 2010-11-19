@@ -77,9 +77,9 @@
                 ;;         (nnimap-server-port 10993)
                 ;;         (nnimap-stream ssl))
 
-                (nntp "news.cn99.com"
-                      (nntp-address ,(xwl-redirect-host))
-                      (nntp-port-number 11119))
+                ;; (nntp "news.cn99.com"
+                ;;       (nntp-address ,(xwl-redirect-host))
+                ;;       (nntp-port-number 11119))
                 )
             '(;; (nnimap "imap.gmail.com"
               ;;         (nnimap-server-port 993)
@@ -87,7 +87,7 @@
               (nntp "news.cn99.com")
               ))
 
-        (nntp "news.gwene.org")
+        ;; (nntp "news.gwene.org")
         ))
 
 

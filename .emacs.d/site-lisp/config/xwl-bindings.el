@@ -205,6 +205,8 @@
         (erc :server sv :port 16667 :nick nick :password pwerc)
         (erc :server sv :port 16669 :nick nick :password pwdeb)
         ;; (erc :server sv :port 16668 :nick nick :password pwerc)
+
+        (erc :server "irc.lnx.nokia.com" :port 6667 :nick "xwl" :password pwdeb)
         )
 
     (erc :server "irc.debian.org"       :port 6669 :nick "xwl" :password pwdeb)
@@ -325,7 +327,11 @@
                          (b (get-buffer n)))
                     (if b
                         (switch-to-buffer b)
-                      (ansi-term "top")
+                      (if (eq system-type 'windows-nt)
+                         (progn
+                           (proced)
+                           (proced-toggle-tree 1))
+                        (ansi-term "top"))
                       (rename-buffer n)
                       (local-set-key "q" '(lambda ()
                                             (interactive)
