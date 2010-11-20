@@ -27,6 +27,9 @@
 
 ;;; Code:
 
+;; trunk temp fix
+(setq package-enable-at-startup nil)
+
 (require 'xwl-gnus)
 
 (setq vc-follow-symlinks t)

@@ -281,7 +281,7 @@ that, the deleted contents won't be inserted to the `kill-ring'."
 downloaded contents will be saved under \"~/Downloads/SUBDIR\".
 e.g.,
 
-  (xwl-get-book \"http://book.sina.com.cn/longbook/1071818529_qingcheng\"
+  (xwl-download-book \"http://book.sina.com.cn/longbook/1071818529_qingcheng\"
                 13
                 24
                 \".shtml\"

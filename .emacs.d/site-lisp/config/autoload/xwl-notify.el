@@ -32,7 +32,10 @@
     ((windows-nt)
      (xwl-snarl title message))
     ((gnu/linux)
-     (xwl-zenity title message))))
+     (xwl-zenity title message)))
+  ;; (xwl-shell-command-asynchronously
+  ;;  (concat "mplayer " (file-truename "~/Music/emms-test/白狐狸.mp3")))
+  )
 
 ;;;###autoload
 (defun xwl-growl (title message)

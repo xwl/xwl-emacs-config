@@ -74,7 +74,7 @@
 
 (setq history-delete-duplicates t)
 
-(setq default-major-mode 'text-mode)
+(setq default-major-mode 'org-mode)
 
 (setq split-width-threshold 150)
 
