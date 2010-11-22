@@ -763,7 +763,7 @@ Sets up command `font-lock-mode'.
 ;;;### (autoloads (dictionary-popup-matching-words dictionary-mouse-popup-matching-words
 ;;;;;;  dictionary-match-words dictionary-lookup-definition dictionary-search
 ;;;;;;  dictionary dictionary-mode) "dictionary" "dictionary-el/dictionary.el"
-;;;;;;  (19462 28258))
+;;;;;;  (19662 52628))
 ;;; Generated autoloads from dictionary-el/dictionary.el
 
 (autoload 'dictionary-mode "dictionary" "\
@@ -1295,7 +1295,7 @@ Kill thread from here using leafnode.
 ;;;***
 
 ;;;### (autoloads (twit) "twittering-mode" "twittering-mode/twittering-mode.el"
-;;;;;;  (19645 45706))
+;;;;;;  (19688 35535))
 ;;; Generated autoloads from twittering-mode/twittering-mode.el
 
 (autoload 'twit "twittering-mode" "\
@@ -1802,8 +1802,8 @@ Insert the entered operator plus surrounding spaces.
 
 ;;;***
 
-;;;### (autoloads (salary-show) "salary" "xwl-elisp/salary.el" (19493
-;;;;;;  41873))
+;;;### (autoloads (salary-show) "salary" "xwl-elisp/salary.el" (19656
+;;;;;;  15431))
 ;;; Generated autoloads from xwl-elisp/salary.el
 
 (autoload 'salary-show "salary" "\
@@ -1814,10 +1814,22 @@ SALARY is before tax.  With prefix argument, insert result at point.
 
 ;;;***
 
+;;;### (autoloads (qml-mode) "qml-mode" "xwl-elisp/qml-mode.el" (19690
+;;;;;;  34367))
+;;; Generated autoloads from xwl-elisp/qml-mode.el
+
+(autoload 'qml-mode "qml-mode" "\
+Major mode for editing Qt QML files.
+\\{qml-mode-map}
+
+\(fn)" t nil)
+
+;;;***
+
 ;;;### (autoloads (less-minor-mode-off less-minor-mode-on auto-less-minor-mode
 ;;;;;;  less-quit less-end-of-buffer less-beginning-of-buffer less-scroll-down-line
 ;;;;;;  less-scroll-up-line less-minor-mode global-less-minor-mode)
-;;;;;;  "less" "xwl-elisp/less.el" (19531 38699))
+;;;;;;  "less" "xwl-elisp/less.el" (19656 15431))
 ;;; Generated autoloads from xwl-elisp/less.el
 
 (defvar global-less-minor-mode nil "\
@@ -2079,7 +2091,7 @@ Not documented
 ;;;***
 
 ;;;### (autoloads (xwl-zenity xwl-snarl xwl-growl xwl-notify) "xwl-notify"
-;;;;;;  "config/autoload/xwl-notify.el" (19474 19900))
+;;;;;;  "config/autoload/xwl-notify.el" (19670 41577))
 ;;; Generated autoloads from config/autoload/xwl-notify.el
 
 (autoload 'xwl-notify "xwl-notify" "\
@@ -2104,14 +2116,15 @@ Not documented
 
 ;;;***
 
-;;;### (autoloads (xwl-info his-unix2dos his-dos2unix xwl-fortune-favorites
+;;;### (autoloads (xwl-kill-buffer-full-name xwl-kill-buffer-name
+;;;;;;  xwl-info his-unix2dos his-dos2unix xwl-fortune-favorites
 ;;;;;;  xwl-fortune-favorites-vertically xwl-fortune-laozi forward-ascii-symbol
 ;;;;;;  xwl-shell-command-asynchronously-with-callback xwl-generate-password
 ;;;;;;  xwl-download-book xwl-delete-line his-transpose-windows his-one-whitespace-between-ce
 ;;;;;;  xwl-soft-kill-ring-save xwl-word-count-analysis xwl-count-ce-word
 ;;;;;;  his-align-cols xwl-numerate-lines xwl-delete-blank-lines-region
 ;;;;;;  xwl-delete-blank-lines-buffer ascii-table-show) "xwl-extra-util"
-;;;;;;  "config/autoload/xwl-extra-util.el" (19495 33750))
+;;;;;;  "config/autoload/xwl-extra-util.el" (19690 34347))
 ;;; Generated autoloads from config/autoload/xwl-extra-util.el
 
 (autoload 'ascii-table-show "xwl-extra-util" "\
@@ -2187,7 +2200,7 @@ Download link formed of `PRE + index + POST', where `index' belongs to [BEG, END
 downloaded contents will be saved under \"~/Downloads/SUBDIR\".
 e.g.,
 
-  (xwl-get-book \"http://book.sina.com.cn/longbook/1071818529_qingcheng\"
+  (xwl-download-book \"http://book.sina.com.cn/longbook/1071818529_qingcheng\"
                 13
                 24
                 \".shtml\"
@@ -2244,6 +2257,16 @@ Return a random chapter from ~/notes/favorites.
 Not documented
 
 \(fn FILE)" t nil)
+
+(autoload 'xwl-kill-buffer-name "xwl-extra-util" "\
+Not documented
+
+\(fn)" t nil)
+
+(autoload 'xwl-kill-buffer-full-name "xwl-extra-util" "\
+Not documented
+
+\(fn)" t nil)
 
 ;;;***
 
