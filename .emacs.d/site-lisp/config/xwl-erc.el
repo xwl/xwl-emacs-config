@@ -60,7 +60,7 @@
          "&bitlbee")
         ("freenode.net"
          "#osxchat" "#emacs" "#scheme" "#chicken" "#cpp-tw" ;; "#chinalug"
-         "#qt-qml"
+         "#qt-qml" "#qt"
          )
         ("oftc.net"
          ;; "#debian-zh"
@@ -68,7 +68,7 @@
         ;; ("linuxfire"
         ;;  "#linuxfire")
         ("irc.lnx.nokia.com"
-         "#mac" "#linux" "#symbianperformance" "#qt")
+         "#mac" "#linux" "#symbianperformance")
         ))
 
 (defun his-bitlbee-identify ()

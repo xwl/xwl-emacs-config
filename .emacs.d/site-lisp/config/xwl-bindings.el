@@ -287,7 +287,12 @@
                    '(lambda ()
                       ;; (org-agenda 1 "h")
                       (org-agenda-list)
-                      (delete-other-windows)))))
+                      (delete-other-windows)))
+                  (split-window-horizontally)
+                  (other-window 1)
+                  (find-file "~/.notes/todo.org")
+                  (org-show-todo-tree nil)
+                  (other-window 1)))
 
 (global-set-key (kbd "C-c t") '(lambda ()
                                  (interactive)

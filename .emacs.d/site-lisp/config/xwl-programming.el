@@ -466,7 +466,8 @@ Thus generate a TAGs file."
 	text-mode outline-mode))
 
 (when (eq system-type 'windows-nt)
-  (setq find-program "cmd /c c:/usr/git/bin/find"))
+  (setq find-program "cmd /c c:/usr/git/bin/find"
+        grep-program "cmd /c c:/usr/git/bin/grep"))
 
 (eval-after-load 'grep
   '(progn
@@ -500,7 +501,8 @@ Thus generate a TAGs file."
                   (let ((cmd
                          (if (string-match "[^*]\\.gz" (shell-command-to-string
                                                         "ls *.gz | head -1"))
-                             "zgrep -nH " "grep -nH ")))
+                             "zgrep -nH "
+                           (concat grep-program " -nH "))))
                     (grep-apply-setting 'grep-command cmd)
                     (call-interactively 'grep))))
 
