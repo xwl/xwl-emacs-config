@@ -836,7 +836,7 @@ passphrase cache or user."
        (set-face-background hl-line-face "magenta4"))
      ))
 
-(setq thing-at-point-url-path-regexp "[a-zA-Z0-9.?=%,&/:_#@+-]+")
+(setq thing-at-point-url-path-regexp "[a-zA-Z0-9.?=%,&/:_#@+~-]+")
 
 (define-global-minor-mode global-goto-address-mode
   goto-address-mode goto-address-mode
