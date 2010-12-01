@@ -1,6 +1,6 @@
 
 ;;;### (autoloads (xwl-makefile-clean xwl-makefile-byte-compile xwl-makefile-all)
-;;;;;;  "xwl-makefile" "xwl-makefile.el" (19441 17583))
+;;;;;;  "xwl-makefile" "xwl-makefile.el" (19650 15443))
 ;;; Generated autoloads from xwl-makefile.el
 
 (autoload 'xwl-makefile-all "xwl-makefile" "\
@@ -163,6 +163,18 @@ iterations. The number of iterations really performed will be
 displayed in the echo area if `pack-windows-verbose' is non-nil.
 
 \(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads (org-google-weather) "org-google-weather" "org-google-weather.el"
+;;;;;;  (19594 15727))
+;;; Generated autoloads from org-google-weather.el
+
+(autoload 'org-google-weather "org-google-weather" "\
+Return Org entry with the weather for LOCATION in LANGUAGE.
+If LOCATION is not set, use org-google-weather-location.
+
+\(fn &optional LOCATION LANGUAGE)" nil nil)
 
 ;;;***
 
@@ -751,7 +763,7 @@ Sets up command `font-lock-mode'.
 ;;;### (autoloads (dictionary-popup-matching-words dictionary-mouse-popup-matching-words
 ;;;;;;  dictionary-match-words dictionary-lookup-definition dictionary-search
 ;;;;;;  dictionary dictionary-mode) "dictionary" "dictionary-el/dictionary.el"
-;;;;;;  (19462 28258))
+;;;;;;  (19662 52628))
 ;;; Generated autoloads from dictionary-el/dictionary.el
 
 (autoload 'dictionary-mode "dictionary" "\
@@ -1283,7 +1295,7 @@ Kill thread from here using leafnode.
 ;;;***
 
 ;;;### (autoloads (twit) "twittering-mode" "twittering-mode/twittering-mode.el"
-;;;;;;  (19519 4665))
+;;;;;;  (19688 35535))
 ;;; Generated autoloads from twittering-mode/twittering-mode.el
 
 (autoload 'twit "twittering-mode" "\
@@ -1329,17 +1341,6 @@ streams of bytes.  It may be a local process, or it may be connected
 to a tcp server on another machine.
 
 \(fn PROCESS)" nil nil)
-
-;;;***
-
-;;;### (autoloads (oggc-show-header) "ogg-comment" "emms/lisp/ogg-comment.el"
-;;;;;;  (18850 41578))
-;;; Generated autoloads from emms/lisp/ogg-comment.el
-
-(autoload 'oggc-show-header "ogg-comment" "\
-Show a pretty printed representation of the Ogg Comments in FILE.
-
-\(fn FILE)" t nil)
 
 ;;;***
 
@@ -1631,7 +1632,7 @@ Toggle `emms-mode-line'.
 ;;;***
 
 ;;;### (autoloads (emms-lyrics-toggle emms-lyrics-disable emms-lyrics-enable)
-;;;;;;  "emms-lyrics" "emms/lisp/emms-lyrics.el" (19514 2553))
+;;;;;;  "emms-lyrics" "emms/lisp/emms-lyrics.el" (19612 47508))
 ;;; Generated autoloads from emms/lisp/emms-lyrics.el
 
 (autoload 'emms-lyrics-enable "emms-lyrics" "\
@@ -1801,8 +1802,8 @@ Insert the entered operator plus surrounding spaces.
 
 ;;;***
 
-;;;### (autoloads (salary-show) "salary" "xwl-elisp/salary.el" (19493
-;;;;;;  41873))
+;;;### (autoloads (salary-show) "salary" "xwl-elisp/salary.el" (19656
+;;;;;;  15431))
 ;;; Generated autoloads from xwl-elisp/salary.el
 
 (autoload 'salary-show "salary" "\
@@ -1813,10 +1814,22 @@ SALARY is before tax.  With prefix argument, insert result at point.
 
 ;;;***
 
+;;;### (autoloads (qml-mode) "qml-mode" "xwl-elisp/qml-mode.el" (19690
+;;;;;;  34367))
+;;; Generated autoloads from xwl-elisp/qml-mode.el
+
+(autoload 'qml-mode "qml-mode" "\
+Major mode for editing Qt QML files.
+\\{qml-mode-map}
+
+\(fn)" t nil)
+
+;;;***
+
 ;;;### (autoloads (less-minor-mode-off less-minor-mode-on auto-less-minor-mode
-;;;;;;  less-quit less-scroll-down-line less-scroll-up-line less-minor-mode
-;;;;;;  global-less-minor-mode) "less" "xwl-elisp/less.el" (19497
-;;;;;;  60055))
+;;;;;;  less-quit less-end-of-buffer less-beginning-of-buffer less-scroll-down-line
+;;;;;;  less-scroll-up-line less-minor-mode global-less-minor-mode)
+;;;;;;  "less" "xwl-elisp/less.el" (19656 15431))
 ;;; Generated autoloads from xwl-elisp/less.el
 
 (defvar global-less-minor-mode nil "\
@@ -1853,6 +1866,16 @@ Scroll up one line.
 
 (autoload 'less-scroll-down-line "less" "\
 Scroll down one line.
+
+\(fn)" t nil)
+
+(autoload 'less-beginning-of-buffer "less" "\
+Not documented
+
+\(fn)" t nil)
+
+(autoload 'less-end-of-buffer "less" "\
+Not documented
 
 \(fn)" t nil)
 
@@ -1998,7 +2021,7 @@ Create a *Dashboard* buffer.
 
 ;;;***
 
-;;;### (autoloads (ga) "ga" "xwl-elisp/ga/ga.el" (19439 61740))
+;;;### (autoloads (ga) "ga" "xwl-elisp/ga/ga.el" (19596 62004))
 ;;; Generated autoloads from xwl-elisp/ga/ga.el
 
 (autoload 'ga "ga" "\
@@ -2049,7 +2072,7 @@ Not documented
 ;;;***
 
 ;;;### (autoloads (xwl-paste-ubuntu-cn-image xwl-paste-ubuntu-cn)
-;;;;;;  "xwl-paste" "config/autoload/xwl-paste.el" (19453 16411))
+;;;;;;  "xwl-paste" "config/autoload/xwl-paste.el" (19528 10773))
 ;;; Generated autoloads from config/autoload/xwl-paste.el
 
 (autoload 'xwl-paste-ubuntu-cn "xwl-paste" "\
@@ -2068,7 +2091,7 @@ Not documented
 ;;;***
 
 ;;;### (autoloads (xwl-zenity xwl-snarl xwl-growl xwl-notify) "xwl-notify"
-;;;;;;  "config/autoload/xwl-notify.el" (19474 19900))
+;;;;;;  "config/autoload/xwl-notify.el" (19670 41577))
 ;;; Generated autoloads from config/autoload/xwl-notify.el
 
 (autoload 'xwl-notify "xwl-notify" "\
@@ -2093,14 +2116,15 @@ Not documented
 
 ;;;***
 
-;;;### (autoloads (xwl-info his-unix2dos his-dos2unix xwl-fortune-favorites
+;;;### (autoloads (xwl-kill-buffer-full-name xwl-kill-buffer-name
+;;;;;;  xwl-info his-unix2dos his-dos2unix xwl-fortune-favorites
 ;;;;;;  xwl-fortune-favorites-vertically xwl-fortune-laozi forward-ascii-symbol
 ;;;;;;  xwl-shell-command-asynchronously-with-callback xwl-generate-password
 ;;;;;;  xwl-download-book xwl-delete-line his-transpose-windows his-one-whitespace-between-ce
 ;;;;;;  xwl-soft-kill-ring-save xwl-word-count-analysis xwl-count-ce-word
 ;;;;;;  his-align-cols xwl-numerate-lines xwl-delete-blank-lines-region
 ;;;;;;  xwl-delete-blank-lines-buffer ascii-table-show) "xwl-extra-util"
-;;;;;;  "config/autoload/xwl-extra-util.el" (19495 33750))
+;;;;;;  "config/autoload/xwl-extra-util.el" (19690 34347))
 ;;; Generated autoloads from config/autoload/xwl-extra-util.el
 
 (autoload 'ascii-table-show "xwl-extra-util" "\
@@ -2176,7 +2200,7 @@ Download link formed of `PRE + index + POST', where `index' belongs to [BEG, END
 downloaded contents will be saved under \"~/Downloads/SUBDIR\".
 e.g.,
 
-  (xwl-get-book \"http://book.sina.com.cn/longbook/1071818529_qingcheng\"
+  (xwl-download-book \"http://book.sina.com.cn/longbook/1071818529_qingcheng\"
                 13
                 24
                 \".shtml\"
@@ -2234,10 +2258,20 @@ Not documented
 
 \(fn FILE)" t nil)
 
+(autoload 'xwl-kill-buffer-name "xwl-extra-util" "\
+Not documented
+
+\(fn)" t nil)
+
+(autoload 'xwl-kill-buffer-full-name "xwl-extra-util" "\
+Not documented
+
+\(fn)" t nil)
+
 ;;;***
 
 ;;;### (autoloads (color-theme-xwl-console) "xwl-color-theme" "config/autoload/xwl-color-theme.el"
-;;;;;;  (19520 17761))
+;;;;;;  (19528 10868))
 ;;; Generated autoloads from config/autoload/xwl-color-theme.el
 
 (autoload 'color-theme-xwl-console "xwl-color-theme" "\

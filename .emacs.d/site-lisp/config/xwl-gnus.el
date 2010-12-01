@@ -77,15 +77,17 @@
                 ;;         (nnimap-server-port 10993)
                 ;;         (nnimap-stream ssl))
 
-                (nntp "news.cn99.com"
-                      (nntp-address ,(xwl-redirect-host))
-                      (nntp-port-number 11119))
+                ;; (nntp "news.cn99.com"
+                ;;       (nntp-address ,(xwl-redirect-host))
+                ;;       (nntp-port-number 11119))
                 )
             '(;; (nnimap "imap.gmail.com"
               ;;         (nnimap-server-port 993)
               ;;         (nnimap-stream ssl))
               (nntp "news.cn99.com")
               ))
+
+        ;; (nntp "news.gwene.org")
         ))
 
 
@@ -400,14 +402,14 @@
          (name "未临")
          (signature
           (format "William\n\nhttp://xwl.appspot.com\n\n%s\n"
-                  (if (file-exists-p "~/notes/favorites_now")
-                      (xwl-fortune-favorites-vertically "~/notes/favorites_now")
+                  (if (file-exists-p "~/.notes/favorites_now")
+                      (xwl-fortune-favorites-vertically "~/.notes/favorites_now")
                     ""))))
 
         ("blog-*"
          (signature nil
 ;;           (format "William\n</pre>\n\n%s"
-;;                   ;; (xwl-fortune-favorites-vertically "~/notes/favorites_now")
+;;                   ;; (xwl-fortune-favorites-vertically "~/.notes/favorites_now")
 ;;                   (xwl-qiushibaike-random)
 ;;                   )
           ))

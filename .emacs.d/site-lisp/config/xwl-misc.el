@@ -300,8 +300,8 @@
 
 (setq xwl-sensitive-files
       (mapcar 'expand-file-name
-              '("/Users/william/notes/todo.org"
-                "~/notes/life_blog")))
+              '("/Users/william/.notes/todo.org"
+                "~/.notes/life_blog")))
 
 (defun xwl-find-file-hook ()
   (let ((file (expand-file-name (buffer-file-name))))
@@ -381,13 +381,16 @@
             (buffer-list))
       (call-interactively 'ga)))
 
+(setq ga-chicken-repository "/Users/william/repo/svn/chicken-eggs")
+
 (setq ga-backend-methods
       '((apt-get ;; "ssh william@localhost -p 2222 sudo apt-get")
          "sudo apt-get")
-        (fink "sudo fink")
+        (fink "fink")
         (pkgsrc "sudo")
         (apt-cyg "c:/cygwin/bin/sh.exe '/home/william/w32/apt-cyg'")
-        (yum "sudo yum")))
+        (yum "sudo yum")
+        (chicken "chicken-install")))
 
 (add-to-list 'auto-mode-alist
              '("macbluetelnet.*\\(\\.h\\|\\.mm\\|\\.m\\)$" . objc-mode))
@@ -396,9 +399,11 @@
 
 ;; (remove-hook 'find-file-hook 'bracketphobia-hide)
 
+(setq xwl-twittering-padding-size 8)
+
 (defun xwl-after-init-hook ()
   ;; FIXME: how to set this only after window has been maximized?
-  (run-at-time 1
+  (run-at-time 3
                nil
                ;; (add-hook 'window-configuration-change-hook
                '(lambda ()
@@ -426,13 +431,15 @@
   ;; (xwl-weather-update)
 
   (when (fboundp 'color-theme-xwl-console)
-    (color-theme-xwl-console))
+    (run-at-time 1
+                 nil
+                 'color-theme-xwl-console))
 
   (when window-system
     (require 'highlight-tail)
     (setq highlight-tail-colors
-          ;; '(("#bc2525" . 0)))
-          '(("#d8971d" . 0)))
+          '(("#bc2525" . 0)))
+          ;; '(("#d8971d" . 0)))
     (highlight-tail-reload))
 
   (appt-activate 1)
@@ -539,6 +546,7 @@
 (define-key occur-mode-map (kbd "M-p") 'less-scroll-down-line)
 (define-key occur-mode-map (kbd "M-n") 'less-scroll-up-line)
 (define-key occur-mode-map (kbd "q") 'xwl-hide-buffer)
+(define-key occur-mode-map (kbd "C-o") nil)
 ;; ))
 
 ;; ,----
@@ -828,12 +836,24 @@ passphrase cache or user."
        (set-face-background hl-line-face "magenta4"))
      ))
 
+(setq thing-at-point-url-path-regexp "[a-zA-Z0-9.?=%,&/:_@+-]+")
+
 (define-global-minor-mode global-goto-address-mode
   goto-address-mode goto-address-mode
   :group 'convenience)
 
 (global-goto-address-mode 1)
 
+(setq org-google-weather-icon-directory
+      "~/w32/GNOME_Weather_Icons_by_DarKobra/48x48/status")
+
+(eval-after-load 'hexl-mode
+  '(progn
+     (define-key hexl-mode-map (kbd "C-o") nil)
+     ))
+
+;; trunk temp fix
+(setq package-enable-at-startup nil)
 
 (provide 'xwl-misc)
 

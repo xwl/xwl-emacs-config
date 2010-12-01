@@ -25,7 +25,7 @@
 
 (add-to-list 'auto-mode-alist '("\\.org$\\|todo\\.org_archive" . org-mode))
 
-(setq org-agenda-files '("~/notes/todo.org"))
+(setq org-agenda-files '("~/.notes/todo.org"))
 
 (setq org-todo-keywords
       '(;; (sequence "-" ">" "o" "|" "x" "|" "w" "o")
@@ -37,9 +37,10 @@
 (setq xwl-org-tag-alist '("@nokia" "@hacking" "@life" "@reading" "@watching"
                           "@travel" "@buy" "@study" "@misc"))
 
-(setq org-agenda-custom-commands
-      '(("h" "My Agenda & TODO" ((alltodo "")
-                                 (agenda "")))))
+;; (setq org-agenda-custom-commands
+;;       '(("h" "My Agenda & TODO" ((agenda "")
+;;                                  (alltodo "")
+;;                                  ))))
 
 (setq org-agenda-ndays 15)
 
@@ -72,6 +73,7 @@
      (org-defkey org-mode-map "\C-c," 'next-buffer)
      (org-defkey org-mode-map "\C-c." 'previous-buffer)))
 
+(require 'org-archive)
 (defun xwl-org-archive-all-done-item ()
   "Archive all items with prefix in `org-done-keywords'."
   (interactive)
@@ -83,10 +85,14 @@
       (if (search-forward-regexp match nil t 1)
           (progn
             (setq matches (1+ matches))
-            (org-advertized-archive-subtree)
+            ;; (org-advertized-archive-subtree)
+            (org-archive-set-tag)
+            (forward-line 1)
             (while (search-forward-regexp match nil t 1)
               (setq matches (1+ matches))
-              (org-advertized-archive-subtree))
+              ;; (org-advertized-archive-subtree)
+              (org-archive-set-tag)
+              (forward-line 1))
             (message "%d items archived" matches))
         (message "Nothing to archive")))))
 
@@ -107,65 +113,89 @@
 ;; (global-set-key (kbd "C-c r") 'remember)
 
 (setq org-remember-templates
-      '((?t "* - %?\n  %u" "~/notes/todo.org")
-        ;; (?n "* %u %?" "~/.notes")
+      '((?t "* - %?\n  %u" "~/.notes/todo.org")
+        ;; (?n "* %u %?" "~/..notes")
         ))
 
-(when nil
+;; latex export
 
-(setq org-todo-keywords
-      '(
-        (sequence "-" ">" "o")
-        (sequence "TODO" "DONE")
-        (sequence "STARTED" "WAITING" "LATER" "CANCELLED")
-        (sequence "x")
-        ))
-
-(defun xwl-org-set-tags (tag)
-  "Insert TAG under point."
-  (interactive
-   (list (ido-completing-read "Set tag: " xwl-org-tag-alist)))
-  (let ((inhibit-read-only t))
-    (save-excursion
-      (move-end-of-line 1)
-      (insert (format "  :%s:" tag)))))
-
-(eval-after-load 'org
+(eval-after-load 'org-export
   '(progn
-     (define-key org-mode-map (kbd "C-c C-g") 'xwl-org-set-tags)
+     (defadvice org-export (around disable-less activate)
+       (let ((orig global-less-minor-mode))
+         (global-less-minor-mode -1)
+         ad-do-it
+         (global-less-minor-mode 1)))
      ))
 
-(eval-after-load 'org-agenda
-  '(progn
+(setq org-export-latex-packages-alist
+      '(("" "fontspec" t)
+        ("" "xltxtra" t)
+        ("" "xunicode" t)
+        ("" "indentfirst" t)
+        "\\setmainfont[Mapping=tex-text]{Hiragino Sans GB}
+\\XeTeXlinebreaklocale ``zh''
+\\XeTeXlinebreakskip = 0pt plus 1pt
+\setlength{\parindent}{2.1em}"))
 
-     (define-key org-agenda-mode-map (kbd "N") (lambda ()
-                                                 (interactive)
-                                                 (forward-char 1)
-                                                 (re-search-forward "^[a-zA-Z]" nil t 1)
-                                                 (backward-char 1)))
+;; Run two times to generate `Contents' table.
+(setq org-latex-to-pdf-process '("xelatex %s" "xelatex %s"))
 
-     (define-key org-agenda-mode-map (kbd "P") (lambda ()
-                                                 (interactive)
-                                                 (re-search-backward "^[a-zA-Z]" nil t 1)))
+;; (when nil
 
-     (defadvice org-agenda-list (after maximize-window activate)
-       (delete-other-windows))
-     ))
+;; (setq org-todo-keywords
+;;       '(
+;;         (sequence "-" ">" "o")
+;;         (sequence "TODO" "DONE")
+;;         (sequence "STARTED" "WAITING" "LATER" "CANCELLED")
+;;         (sequence "x")
+;;         ))
 
-;; remember
-(require 'remember)
-(add-hook 'remember-mode-hook 'org-remember-apply-template)
+;; (defun xwl-org-set-tags (tag)
+;;   "Insert TAG under point."
+;;   (interactive
+;;    (list (ido-completing-read "Set tag: " xwl-org-tag-alist)))
+;;   (let ((inhibit-read-only t))
+;;     (save-excursion
+;;       (move-end-of-line 1)
+;;       (insert (format "  :%s:" tag)))))
 
-(setq remember-handler-functions '(org-remember-handler))
+;; (eval-after-load 'org
+;;   '(progn
+;;      (define-key org-mode-map (kbd "C-c C-g") 'xwl-org-set-tags)
+;;      ))
 
-(global-set-key (kbd "C-c r") 'remember)
+;; (eval-after-load 'org-agenda
+;;   '(progn
 
-(setq org-remember-templates
-      '((?t "* - %?\n  %u" "~/notes/todo.org")
-        ;; (?n "* %u %?" "~/.notes")
-        ))
+;;      (define-key org-agenda-mode-map (kbd "N") (lambda ()
+;;                                                  (interactive)
+;;                                                  (forward-char 1)
+;;                                                  (re-search-forward "^[a-zA-Z]" nil t 1)
+;;                                                  (backward-char 1)))
 
-)
+;;      (define-key org-agenda-mode-map (kbd "P") (lambda ()
+;;                                                  (interactive)
+;;                                                  (re-search-backward "^[a-zA-Z]" nil t 1)))
+
+;;      (defadvice org-agenda-list (after maximize-window activate)
+;;        (delete-other-windows))
+;;      ))
+
+;; ;; remember
+;; (require 'remember)
+;; (add-hook 'remember-mode-hook 'org-remember-apply-template)
+
+;; (setq remember-handler-functions '(org-remember-handler))
+
+;; (global-set-key (kbd "C-c r") 'remember)
+
+;; (setq org-remember-templates
+;;       '((?t "* - %?\n  %u" "~/.notes/todo.org")
+;;         ;; (?n "* %u %?" "~/..notes")
+;;         ))
+
+;; )
 
 (provide 'xwl-org)
 

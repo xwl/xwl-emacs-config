@@ -310,10 +310,9 @@ be with length 3 extentions !"
 (setq dired-guess-shell-alist-user
       (case system-type
         ((windows-nt)
-         '((".*"
-            (progn
-              (w32-shell-execute "open" file)
-              'ignore-me))))
+         '(("\\.qml$" "c:/Qt/2010.05/qt/bin/qmlviewer.exe")
+           (".*" (progn (w32-shell-execute "open" file)
+                        'ignore-me))))
         (t
          `((,(if (fboundp 'emms-player-get)
                  (emms-player-get emms-player-mplayer 'regex)

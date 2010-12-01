@@ -32,17 +32,18 @@
       calendar-location-name "Beijing")
 ;; changting(+25.52, +116.20)
 
-(global-set-key (kbd "<f12>") (lambda () (interactive)
-                                (let ((cal "*Calendar*"))
-                                  (if (get-buffer cal)
-                                      (progn
-                                        (split-window-vertically -9)
-                                        (other-window 1))
-                                    ;; 禁用垂直分割。
-                                    (let ((split-width-threshold 9999))
-                                      (calendar)))
-                                  (switch-to-buffer cal)
-                                  (calendar-cursor-holidays))))
+(global-set-key (kbd "<f12>")
+                (lambda () (interactive)
+                  (let ((cal "*Calendar*"))
+                    (if (get-buffer cal)
+                        (progn
+                          (split-window-vertically -9)
+                          (other-window 1))
+                      ;; 禁用垂直分割。
+                      (let ((split-width-threshold 9999))
+                        (calendar)))
+                    (switch-to-buffer cal)
+                    (calendar-cursor-holidays))))
 
 (setq appt-issue-message t
       mark-holidays-in-calendar t
@@ -108,6 +109,8 @@
         ;; (holiday-lunar 6 7 (xds "\\>c_Y*E_XJ9`XOA'X>I_\\J<="))
 
         (holiday-lunar 7 28 (xds"Xdc_Y`9,[J[q@>AgZeIfQ>F,"))
+
+        (holiday-fixed 4 16 (xds ",Y:G,C`+,X)HA*D^Q>F,@H=="))
 
         ,@xwl-company-holidays))
 

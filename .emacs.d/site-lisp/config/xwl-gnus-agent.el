@@ -27,6 +27,9 @@
 
 ;;; Code:
 
+;; trunk temp fix
+(setq package-enable-at-startup nil)
+
 (require 'xwl-gnus)
 
 (setq vc-follow-symlinks t)
@@ -40,7 +43,7 @@
 (suspend-frame)
 (gnus-agent-batch)
 (gnus-group-save-newsrc t)
-;; (save-buffers-kill-terminal t)
+(save-buffers-kill-terminal t)
 
 (provide 'xwl-gnus-agent)
 

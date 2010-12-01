@@ -141,7 +141,7 @@ point.  Especially useful for w32."
           "/sudo::/"
           "~/.emacs.d/site-lisp/config"
           "~/.emacs.d/site-lisp/xwl-elisp"
-          "~/notes"
+          "~/.notes"
 
           ,@(when xwl-w32?
               (mapcar (lambda (d)

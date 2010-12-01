@@ -60,13 +60,15 @@
          "&bitlbee")
         ("freenode.net"
          "#osxchat" "#emacs" "#scheme" "#chicken" "#cpp-tw" ;; "#chinalug"
+         "#qt-qml"
          )
         ("oftc.net"
-         "#debian-zh" "#emacs-cn")      ; "#bitlbee"
+         ;; "#debian-zh"
+         "#emacs-cn")      ; "#bitlbee"
         ;; ("linuxfire"
         ;;  "#linuxfire")
-        ;; ("irc.lnx.nokia.com"
-        ;;  "#avkon" "#orbit" "#mac" "#linux" "#symbianperformance" "#qt")
+        ("irc.lnx.nokia.com"
+         "#mac" "#linux" "#symbianperformance" "#qt")
         ))
 
 (defun his-bitlbee-identify ()
@@ -172,11 +174,29 @@ so as to keep an eye on work when necessarily."
                          (substring (substring nick 7) -1))))
     nick))
 
-(defadvice erc-faces-in (around add-query-faces activate)
-  (let ((faces ad-do-it))
-    (when (or (erc-query-buffer-p) (string-match "&" (buffer-name)))
-      (add-to-list 'faces 'erc-query-buffer-face))
-    faces))
+;; (defadvice erc-faces-in (around add-query-faces activate)
+;;   (let ((faces ad-do-it))
+;;     (when (or (erc-query-buffer-p) (string-match "&" (buffer-name)))
+;;       (add-to-list 'faces 'erc-query-buffer-face))
+;;     faces))
+
+(eval-after-load 'erc-track
+  '(progn
+     (defun erc-faces-in (str)
+       "Return a list of all faces used in STR."
+       (let ((i 0)
+             (m (length str))
+             (faces (erc-list (get-text-property 0 'face str))))
+         (while (and (setq i (next-single-property-change i 'face str m))
+                     (not (= i m)))
+           (dolist (face (erc-list (get-text-property i 'face str)))
+             (add-to-list 'faces face)))
+         ;; special faces for query & group(like msn groups) buffers
+         (when (or (erc-query-buffer-p)
+                   (string-match "&" (buffer-name)))
+           (add-to-list 'faces 'erc-query-buffer-face))
+         faces))
+     ))
 
 ;; ,----
 ;; | timestamp
@@ -228,7 +248,8 @@ If the buffer is currently not visible, makes it sticky."
              (not (string-match
                    (regexp-opt
                     '("Users" "User" "topic set by" "Welcome to " "nickname"
-                      "identified" "invalid" "your unique"))
+                      "identified" "invalid" "your unique" "now you hidden"
+                      "identified for" "nickname" "your hidden host"))
                    message)))
     (xwl-notify (concat "ERC: " (buffer-name)) message)))
 
@@ -319,6 +340,53 @@ If the buffer is currently not visible, makes it sticky."
 ;; (require 'erc-bbdb)
 ;; (erc-bbdb-mode 1)
 ;; (setq erc-bbdb-popup-type nil)
+
+;; "<nick>" => "nick | "
+
+(defun erc-format-privmessage (nick msg privp msgp)
+  "Format a PRIVMSG in an insertible fashion."
+  (let* ((mark-s (if msgp (if privp "*" "") "-"))
+	 (mark-e (if msgp (if privp "*" " |") "-"))
+	 (str	 (format "%s%s%s %s" mark-s nick mark-e msg))
+	 (nick-face (if privp 'erc-nick-msg-face 'erc-nick-default-face))
+	 (msg-face (if privp 'erc-direct-msg-face 'erc-default-face)))
+    ;; add text properties to text before the nick, the nick and after the nick
+    (erc-put-text-property 0 (length mark-s) 'face msg-face str)
+    (erc-put-text-property (length mark-s) (+ (length mark-s) (length nick))
+			   'face nick-face str)
+    (erc-put-text-property (+ (length mark-s) (length nick)) (length str)
+			   'face msg-face str)
+    str))
+
+(defun erc-format-my-nick ()
+  "Return the beginning of this user's message, correctly propertized."
+  (if erc-show-my-nick
+      (let ((open "")
+	    (close " | ")
+	    (nick (erc-current-nick)))
+	(concat
+	 (erc-propertize open 'face 'erc-default-face)
+	 (erc-propertize nick 'face 'erc-my-nick-face)
+	 (erc-propertize close 'face 'erc-default-face)))
+    (let ((prefix " | "))
+      (erc-propertize prefix 'face 'erc-default-face))))
+
+(defun erc-fill-static ()
+  "Fills a text such that messages start at column `erc-fill-static-center'."
+  (save-match-data
+    (goto-char (point-min))
+    (looking-at "^\\(\\S-+\\)")
+    (let ((nick (match-string 1)))
+        (let ((fill-column (- erc-fill-column (erc-timestamp-offset)))
+              (fill-prefix (make-string erc-fill-static-center 32)))
+          (insert (make-string (max 0 (- erc-fill-static-center
+                                         (length nick)
+                                         1
+                                         2 ; "| "
+                                         ))
+                               32))
+          (erc-fill-regarding-timestamp))
+        (erc-restore-text-properties))))
 
 ;;; Local Variables: ***
 ;;; outline-regexp: ";; | " ***

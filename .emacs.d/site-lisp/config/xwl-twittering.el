@@ -35,17 +35,16 @@
   (setq twittering-auth-method 'basic)
 
   ;; Also in `gtap', disable "secure: always".
-  ;; (setq twittering-use-ssl nil)
+  (setq twittering-use-ssl nil)
 
-  ;; (setq twittering-web-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0k")
-  ;;       twittering-api-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC)FnXH==")
-  ;;       twittering-api-search-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*EcPOAaX8=="))
+  (setq twittering-web-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0k")
+        twittering-api-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC)FnXH==")
+        twittering-api-search-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*EcPOAaX8=="))
 
-  (setq twittering-web-host (xds "[?[g[?IcZ`,+[)nlPO9gQ)McCdEmYH==")
-        twittering-api-host (xds "[?[g[?IcZ`(_Z>bl\\?[jCdFnXN[cQJ,aY)'=")
-        twittering-api-search-host (xds "[?[g[?IcZ`(qQNFpP)^l\\?[jCdFnXN[cQJ,aY)'=")))
-
-(setq xwl-twittering-padding-size 8)
+  ;; (setq twittering-web-host (xds "[?[g[?IcZ`,+[)nlPO9gQ)McCdEmYH==")
+  ;;       twittering-api-host (xds "[?[g[?IcZ`(_Z>bl\\?[jCdFnXN[cQJ,aY)'=")
+  ;;       twittering-api-search-host (xds "[?[g[?IcZ`(qQNFpP)^l\\?[jCdFnXN[cQJ,aY)'="))
+  )
 
 (setq twittering-my-fill-column (- twittering-fill-column
                                    xwl-twittering-padding-size))
@@ -64,7 +63,7 @@
       twittering-timer-interval 300
       twittering-cache-spec-strings
       '(":home" ":retweets_of_me" ":replies" ":direct_messages" "xwl/followers"
-        ":search/twittering-mode/")
+        "xwl/tianxiashi" "xwl/hl")
       twittering-use-master-password t)
 
 (setq twittering-use-native-retweet t)
@@ -82,7 +81,7 @@
                                   ;; (hl-line-mode 1)
                                   ))
 ;; Disable URI handling in twittering, let's use goto-address-mode instead.
-(setq twittering-regexp-uri nil)
+(setq twittering-regexp-uri "^^$")
 
 (eval-after-load 'twittering-mode
   '(progn
@@ -100,13 +99,14 @@
      (define-key twittering-mode-map (kbd "R") 'twittering-retweet)
      (define-key twittering-mode-map (kbd "@") 'twittering-reply-to-user)
      (define-key twittering-mode-map (kbd "D") 'twittering-direct-message)
+     (define-key twittering-mode-map (kbd "C") 'twittering-erase-all)
 
      (define-key twittering-mode-map (kbd "C-c C-g") nil)
      (define-key twittering-mode-map (kbd "RET") nil)
      (define-key twittering-mode-map (kbd "d") nil)
      (define-key twittering-mode-map (kbd "i") nil)
      (define-key twittering-mode-map (kbd "t") nil)
-     (define-key twittering-mode-map (kbd "s") nil)
+     (define-key twittering-mode-map (kbd "s") 'twittering-search)
      (define-key twittering-mode-map (kbd "d") nil)
 
      (define-key twittering-mode-map (kbd "<S-tab>") 'twittering-goto-previous-thing)
@@ -119,8 +119,12 @@
      (twittering-enable-unread-status-notifier)
 
      (when xwl-black-background?
-       (set-face-background twittering-zebra-1-face "gray28")
-       (set-face-background twittering-zebra-2-face "gray24"))
+       (set-face-background twittering-zebra-1-face "gray24")
+       (set-face-background twittering-zebra-2-face "gray22"))
+
+     (defadvice twit (before reset-url-resolving-flag activate)
+       "To avoid possible deadlock caused by resovling url."
+       (setq twittering-url-request-resolving-p nil))
 
      ))
 
@@ -129,6 +133,7 @@
 (when (eq window-system 'mac)
   (defalias 'create-animated-image 'create-image))
 
+(setq twittering-tinyurl-service 'toly)
 
 (provide 'xwl-twittering)
 ;;; xwl-twittering.el ends here
