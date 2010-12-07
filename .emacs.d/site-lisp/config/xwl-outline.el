@@ -3,7 +3,7 @@
 ;; Copyright (C) 2007, 2008, 2009, 2010 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
-;; Last updated: 2010/05/16
+;; Last updated: 2010/12/04
 
 (require 'outline)
 
@@ -80,10 +80,20 @@
   "Narrow to current outline level."
   (interactive)
   (save-excursion
-    (call-interactively 'outline-next-visible-heading)
-    (let ((end (point)))
-      (call-interactively 'outline-previous-visible-heading)
-      (narrow-to-region (point) end))))
+    ;; (call-interactively 'outline-next-visible-heading)
+    ;; (let ((end (point)))
+    ;;   (call-interactively 'outline-previous-visible-heading)
+    ;;   (narrow-to-region (point) end))
+
+    (hide-subtree)
+    (narrow-to-region (progn
+                        (move-beginning-of-line 1)
+                        (point))
+                      (progn
+                        (call-interactively 'outline-next-visible-heading)
+                        (point)))
+    (show-subtree)))
+
 
 (global-set-key (kbd "C-x n o") 'xwl-narrow-to-outline-level)
 
