@@ -419,28 +419,32 @@ Note: you are suggested to kill process buffer at the end of CALLBACK. "
   (info file))
 
 ;;;###autoload
-(defun xwl-kill-buffer-name ()
-  (interactive)
-  (let ((s (if (buffer-file-name)
-               (file-name-nondirectory (buffer-file-name))
-             (buffer-name))))
+(defun xwl-kill-buffer-name (&optional kill-directory)
+  (interactive "P")
+  (let ((s (if kill-directory
+               default-directory
+             (if (buffer-file-name)
+                 (file-name-nondirectory (buffer-file-name))
+               (buffer-name)))))
     (kill-new s)
     (message "Copied: `%s'" s)))
 
 (global-set-key (kbd "C-c k") 'xwl-kill-buffer-name)
 
 ;;;###autoload
-(defun xwl-kill-buffer-full-name ()
-  (interactive)
+(defun xwl-kill-buffer-full-name (&optional kill-directory)
+  (interactive "P")
   (let (s)
-    (if (eq major-mode 'gnus-article-mode)
-        (save-excursion
-          (gnus-summary-toggle-header 1)
-          (goto-char (point-min))
-          (when (search-forward-regexp "Archived-At: <\\(.+\\)>" nil t 1)
-            (setq s (match-string 1)))
-          (gnus-summary-toggle-header -1))
-      (setq s (buffer-file-name)))
+    (if kill-directory
+        (setq s default-directory)
+      (if (eq major-mode 'gnus-article-mode)
+          (save-excursion
+            (gnus-summary-toggle-header 1)
+            (goto-char (point-min))
+            (when (search-forward-regexp "Archived-At: <\\(.+\\)>" nil t 1)
+              (setq s (match-string 1)))
+            (gnus-summary-toggle-header -1))
+        (setq s (buffer-file-name))))
     (kill-new s)
     (message "Copied: `%s'" s)))
 
