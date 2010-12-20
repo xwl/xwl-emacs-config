@@ -227,7 +227,7 @@ save keystrokes. Read help for Dos command with `dos-help-cmd'. Run script using
 
 \\{dos-mode-map}"
   (interactive)(kill-all-local-variables)(setq major-mode 'dos-mode)(setq mode-name "Dos")
-  (set (make-local-variable 'comment-start) "rem")
+  (set (make-local-variable 'comment-start) "@rem")
   (set (make-local-variable 'imenu-generic-expression) '((nil "^:[^:].*" 0)))
   (set (make-local-variable 'font-lock-defaults) '(dos-font-lock-keywords nil t))
   (set (make-local-variable 'outline-regexp) ":[^:]")
