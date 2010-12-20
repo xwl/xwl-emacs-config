@@ -479,6 +479,14 @@ e.g., (xwl-dircolors-get-escape-seq \"*.gz\") => \"01;31\""
                       nil (0 dired-ignored-face))))))
 
 
+(when (eq system-type 'windows-nt)
+  ;; FIXME: This could avoid following bug?
+  ;;   dired-move-to-filename: No file on this line
+  ;;
+  ;; when copying files from A directory to B directory side by side in dired,
+  ;; where B is initially empty.
+  (setq ls-lisp-use-insert-directory-program t))
+
 (provide 'xwl-dired)
 
 ;;; xwl-dired.el ends here
