@@ -852,6 +852,10 @@ passphrase cache or user."
      (define-key hexl-mode-map (kbd "C-o") nil)
      ))
 
+(global-set-key (kbd "C-c k") 'xwl-kill-buffer-name)
+(global-set-key (kbd "C-c K") 'xwl-kill-buffer-full-name)
+(global-set-key (kbd "C-c m x") 'xwl-w32-start-program)
+
 ;; trunk temp fix
 (setq package-enable-at-startup nil)
 

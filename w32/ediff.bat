@@ -5,6 +5,6 @@
 @set f1=%f1:\=/% 
 @set f2=%f2:\=/% 
 
-emacsclient.exe -n -e "(progn (ediff-files \"%f1%\" \"%f2%\") (raise-frame))" 
-rem bcomp %f1% %f2%
+@rem emacsclient.exe -n -e "(progn (ediff-files \"%f1%\" \"%f2%\") (raise-frame))" 
+bcomp %f1% %f2%
 

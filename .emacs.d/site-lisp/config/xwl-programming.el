@@ -155,11 +155,13 @@
 ;; | symbian
 ;; `----
 
-(add-to-list 'auto-mode-alist '("\\.loc\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.mmp\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.inf\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.rls\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.loc\\'" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.mmp\\'" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.inf\\'" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.rls\\'" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.pro\\'" . makefile-mode))
+(add-to-list 'auto-mode-alist '("\\.iby\\'" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.pkg\\'" . lisp-mode))
 
 ;; 'ffap won't work as ffap is `provide' at the top.
 (eval-after-load "ffap"
@@ -914,7 +916,7 @@ If SCHEME?, `run-scheme'."
 ;;; sgml, html, xml, css
 
 (add-hook 'html-mode-hook (lambda () (smart-operator-mode -1)))
-(add-hook 'css-mode-hook 'rainbow-mode)
+(add-hook 'css-mode-hook 'rainbow-turn-on)
 
 ;; dvc
 
@@ -1030,7 +1032,6 @@ Useful for packing c/c++ functions with one line or empty body."
 ;;; misc
 
 (add-to-list 'auto-mode-alist '("\\.qml\\'" . qml-mode))
-
 
 (provide 'xwl-programming)
 

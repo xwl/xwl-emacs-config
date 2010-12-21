@@ -53,7 +53,7 @@
 (defun xwl-delete-blank-lines-buffer ()
   "Strip all blank lines in current buffer."
   (interactive)
-  (xwl-strip-blank-lines-region (point-min) (point-max)))
+  (xwl-delete-blank-lines-region (point-min) (point-max)))
 
 ;;;###autoload
 (defun xwl-delete-blank-lines-region (start end)
@@ -429,8 +429,6 @@ Note: you are suggested to kill process buffer at the end of CALLBACK. "
     (kill-new s)
     (message "Copied: `%s'" s)))
 
-(global-set-key (kbd "C-c k") 'xwl-kill-buffer-name)
-
 ;;;###autoload
 (defun xwl-kill-buffer-full-name (&optional kill-directory)
   (interactive "P")
@@ -448,7 +446,17 @@ Note: you are suggested to kill process buffer at the end of CALLBACK. "
     (kill-new s)
     (message "Copied: `%s'" s)))
 
-(global-set-key (kbd "C-c K") 'xwl-kill-buffer-full-name)
+;;;###autoload
+(defun xwl-w32-start-program (program)
+  (interactive
+   (list
+    (ido-completing-read
+     "Start: "
+     (with-temp-buffer
+       ;; c:/usr/git/bin/find.exe -type f -iregex ".*\.exe$"
+       (insert-file-contents (file-truename "~/etc/programs"))
+       (split-string (buffer-string) "\n" t)))))
+  (xwl-shell-command-asynchronously (concat "\"" program "\"")))
 
 (provide 'xwl-extra-util)
 ;;; xwl-extra-util.el ends here

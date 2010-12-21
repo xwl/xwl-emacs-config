@@ -73,8 +73,8 @@
                              "xwl/tianxiashi"
                              "xwl/hl"
 
-                             ":search/emacs/"
-                             ":search/twittering-mode/"
+                             ;; ":search/emacs/"
+                             ;; ":search/twittering-mode/"
                              ))
 
                      (switch-to-buffer ":home")
@@ -282,12 +282,14 @@
 (global-set-key (kbd "<f8>")
                 (lambda ()
                   (interactive)
+                  (delete-other-windows)
                   (xwl-switch-or-create
                    "*Org Agenda*"
                    '(lambda ()
                       ;; (org-agenda 1 "h")
                       (org-agenda-list)
                       (delete-other-windows)))
+
                   (split-window-horizontally)
                   (other-window 1)
                   (find-file "~/.notes/todo.org")

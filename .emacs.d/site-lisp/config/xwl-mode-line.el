@@ -41,7 +41,7 @@
           ;; xwl-mail-notify-string " "
 
           ;; cwit-mode-line-string " "
-	  ;; rcirc-activity-string
+          ;; rcirc-activity-string
           ;; xwl-weather-string
 
           ;; xwl-gmail-notify-string

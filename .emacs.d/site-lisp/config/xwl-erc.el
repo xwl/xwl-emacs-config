@@ -38,8 +38,8 @@
       erc-kill-buffer-on-part t
       erc-auto-query t)
 
-(setq erc-nick "xwl"
-      erc-user-full-name "William Xu")
+(setq erc-anonymous-login nil)
+(setq erc-nick "xwl")
 
 (setq erc-common-server-suffixes nil
       erc-mode-line-format "%t %a")
@@ -343,10 +343,12 @@ If the buffer is currently not visible, makes it sticky."
 
 ;; "<nick>" => "nick | "
 
+(setq xwl-vertical-bar "｜") ; "|"
+
 (defun erc-format-privmessage (nick msg privp msgp)
   "Format a PRIVMSG in an insertible fashion."
   (let* ((mark-s (if msgp (if privp "*" "") "-"))
-	 (mark-e (if msgp (if privp "*" " |") "-"))
+	 (mark-e (if msgp (if privp "*" (concat " " xwl-vertical-bar)) "-"))
 	 (str	 (format "%s%s%s %s" mark-s nick mark-e msg))
 	 (nick-face (if privp 'erc-nick-msg-face 'erc-nick-default-face))
 	 (msg-face (if privp 'erc-direct-msg-face 'erc-default-face)))
@@ -362,13 +364,13 @@ If the buffer is currently not visible, makes it sticky."
   "Return the beginning of this user's message, correctly propertized."
   (if erc-show-my-nick
       (let ((open "")
-	    (close " | ")
+	    (close (concat " " xwl-vertical-bar " "))
 	    (nick (erc-current-nick)))
 	(concat
 	 (erc-propertize open 'face 'erc-default-face)
 	 (erc-propertize nick 'face 'erc-my-nick-face)
 	 (erc-propertize close 'face 'erc-default-face)))
-    (let ((prefix " | "))
+    (let ((prefix (concat " " xwl-vertical-bar " ")))
       (erc-propertize prefix 'face 'erc-default-face))))
 
 (defun erc-fill-static ()
@@ -378,7 +380,7 @@ If the buffer is currently not visible, makes it sticky."
     (looking-at "^\\(\\S-+\\)")
     (let ((nick (match-string 1)))
         (let ((fill-column (- erc-fill-column (erc-timestamp-offset)))
-              (fill-prefix (make-string erc-fill-static-center 32)))
+              (fill-prefix (make-string (+ 1 erc-fill-static-center) 32)))
           (insert (make-string (max 0 (- erc-fill-static-center
                                          (length nick)
                                          1
