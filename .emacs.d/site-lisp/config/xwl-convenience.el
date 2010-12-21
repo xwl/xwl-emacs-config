@@ -74,8 +74,6 @@
 
 (setq history-delete-duplicates t)
 
-(setq default-major-mode 'org-mode)
-
 (setq split-width-threshold 150)
 
 ;; (global-visual-line-mode 1)
