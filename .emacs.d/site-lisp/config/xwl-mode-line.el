@@ -23,29 +23,11 @@
 
 ;;; General
 
-(setq xwl-mouse-tooltip "mouse-1: Select (drag to resize)\nmouse-2: Make current window occupy the whole frame\nmouse-3: Remove current window from display")
-
-(setq default-mode-line-format
-      '("%e"
-        #("-" 0 1 (help-echo xwl-mouse-tooltip))
-        mode-line-mule-info
-        mode-line-client
-        mode-line-modified
-        mode-line-remote
-        mode-line-frame-identification
-        mode-line-buffer-identification
-        #("   " 0 3 (help-echo xwl-mouse-tooltip))
-        mode-line-position
-        (vc-mode vc-mode)
-        #("  " 0 2 (help-echo xwl-mouse-tooltip))
-        (which-func-mode
-         ("" which-func-format #("--" 0 2 (help-echo xwl-mouse-tooltip))))
-        (global-mode-string
-         (#("  " 0 2 (help-echo xwl-mouse-tooltip)) global-mode-string))
-        mode-line-modes
-        #("-%-" 0 3 (help-echo xwl-mouse-tooltip)))
-
-      mode-line-format default-mode-line-format)
+(setq-default mode-line-format
+              `(,@(remq 'mode-line-modes
+                        (reverse (cdr (reverse mode-line-format))))
+                mode-line-modes
+                ,@(last mode-line-format)))
 
 (defun xwl-organize-mode-line ()
   (interactive)
