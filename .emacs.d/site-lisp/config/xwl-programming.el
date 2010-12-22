@@ -43,7 +43,6 @@
 
                          one-liner-defun))
   (setq tab-width 4)
-  (setq indent-tabs-mode nil)
 
   ;; Don't enable for lex/yacc files.
   (when (and (buffer-file-name) ; mmm-mode submodes don't have a  valid buffer name.

@@ -135,8 +135,8 @@
         ("" "indentfirst" t)
         "\\setmainfont[Mapping=tex-text]{Hiragino Sans GB}
 \\XeTeXlinebreaklocale ``zh''
-\\XeTeXlinebreakskip = 0pt plus 1pt
-\setlength{\parindent}{2.1em}"))
+\\XeTeXlinebreakskip = 0pt plus 1pt"))
+;; \\setlength{\\parindent}{2.1em}
 
 ;; Run two times to generate `Contents' table.
 (setq org-latex-to-pdf-process '("xelatex %s" "xelatex %s"))

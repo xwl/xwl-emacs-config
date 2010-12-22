@@ -859,6 +859,11 @@ passphrase cache or user."
 ;; trunk temp fix
 (setq package-enable-at-startup nil)
 
+(when (eq system-type 'darwin)
+  (run-at-time "11:00pm" 86400 (lambda ()
+                               (xwl-shell-command-asynchronously
+                                "Get to sleep now!"))))
+
 (provide 'xwl-misc)
 
 ;;; Local Variables: ***

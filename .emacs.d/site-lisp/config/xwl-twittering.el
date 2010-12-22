@@ -32,8 +32,8 @@
     (setq twittering-proxy-use t
           twittering-proxy-server "172.16.42.137"
           twittering-proxy-port 8080)
-  (setq twittering-auth-method 'basic)
 
+  (setq twittering-auth-method 'basic)
   ;; Also in `gtap', disable "secure: always".
   (setq twittering-use-ssl nil)
 
@@ -85,6 +85,9 @@
 
 (eval-after-load 'twittering-mode
   '(progn
+
+     (setq twittering-enabled-services '(twitter sina))
+
      (define-key twittering-mode-map (kbd "c") 'twittering-current-timeline)
 
      (define-key twittering-mode-map (kbd "n") 'twittering-goto-next-status)

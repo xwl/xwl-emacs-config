@@ -313,6 +313,10 @@ be with length 3 extentions !"
          '(("\\.qml$" "c:/Qt/2010.05/qt/bin/qmlviewer.exe")
            (".*" (progn (w32-shell-execute "open" file)
                         'ignore-me))))
+
+        ((darwin)
+         '((".*" "open")))
+
         (t
          `((,(if (fboundp 'emms-player-get)
                  (emms-player-get emms-player-mplayer 'regex)
