@@ -42,7 +42,7 @@ simply yank it when needed."
   (interactive "r")
   (unless class
     (if current-prefix-arg
-        (setq class (ido-completing-read "Use mode: " xwl-wgetpaste-ubuntu-cn-classes))
+        (setq class (ido-completing-read "Use mode: " xwl-paste-ubuntu-cn-classes))
       (setq class (xwl-paste-match-mode))))
   (let ((url "http://paste.ubuntu.org.cn"))
     (with-current-buffer
