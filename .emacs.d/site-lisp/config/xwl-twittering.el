@@ -23,7 +23,8 @@
 ;; Local variables, set this with caution. :)  Should be set before loading
 ;; twittering-mode.
 (setq twittering-reverse-mode t
-      twittering-icon-mode t)
+      ;; twittering-icon-mode t
+      )
 
 (setq twittering-username "xwl"
       twittering-password pwtwitter)
@@ -49,10 +50,10 @@
 (setq twittering-my-fill-column (- twittering-fill-column
                                    xwl-twittering-padding-size))
 
-(setq twittering-status-format (concat "%i %g %s, from %f%L%r%R:\n%FILL["
+(setq twittering-status-format (concat "%i %g %s, from %f%L%r%R:\n%FOLD["
                                        (make-string xwl-twittering-padding-size ? )
-                                       "]{%T}\n")
-      twittering-my-status-format "%g %s, from %f%L%r%R: %i\n%FILL[]{%T}\n")
+                                       "]{%t%T}\n")
+      twittering-my-status-format "%g %s, from %f%L%r%R: %i\n%FOLD[]{%t%T}\n")
 
 (setq twittering-retweet-format "RT @%s: %t")
 
@@ -62,8 +63,11 @@
       twittering-new-tweets-count-excluding-replies-in-home t
       twittering-timer-interval 300
       twittering-cache-spec-strings
-      '(":home" ":retweets_of_me" ":replies" ":direct_messages" "xwl/followers"
-        "xwl/tianxiashi" "xwl/hl")
+      '(":home@twitter" ":retweets_of_me@twitter" ":replies@twitter"
+        ":direct_messages@twitter" "xwl/followers@twitter"
+        "xwl/tianxiashi@twitter" "xwl/hl@twitter"
+
+        ":home@sina" ":mentions@sina" ":replies@sina")
       twittering-use-master-password t)
 
 (setq twittering-use-native-retweet t)
@@ -134,6 +138,21 @@
   (defalias 'create-animated-image 'create-image))
 
 (setq twittering-tinyurl-service 'toly)
+
+
+(setq twittering-oauth-use-ssl nil)
+(setq twittering-use-ssl nil)
+
+(setq twittering-accounts
+      `((sina (username "william.xwl@gmail.com")
+              (auth oauth))
+
+        (twitter (username "xwl")
+                 (password pwtwitter)
+                 (auth ,(if xwl-at-company? 'oauth 'basic)))))
+
+(setq twittering-enabled-services '(twitter sina))
+
 
 (provide 'xwl-twittering)
 ;;; xwl-twittering.el ends here
