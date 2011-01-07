@@ -28,23 +28,22 @@
 (setq twittering-username "xwl"
       twittering-password pwtwitter)
 
-(if xwl-at-company?
-    (setq twittering-proxy-use t
-          twittering-proxy-server "172.16.42.137"
-          twittering-proxy-port 8080)
+(when xwl-at-company?
+  (setq twittering-proxy-use t
+        twittering-proxy-server "172.16.42.137"
+        twittering-proxy-port 8080))
 
-  (setq twittering-auth-method 'basic)
-  ;; Also in `gtap', disable "secure: always".
-  (setq twittering-use-ssl nil)
+;; (setq twittering-auth-method 'basic)
+;; ;; Also in `gtap', disable "secure: always".
+;; (setq twittering-use-ssl nil)
 
-  (setq twittering-web-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0k")
-        twittering-api-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC)FnXH==")
-        twittering-api-search-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*EcPOAaX8=="))
+;; (setq twittering-web-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0k")
+;;       twittering-api-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC)FnXH==")
+;;       twittering-api-search-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*EcPOAaX8=="))
 
-  ;; (setq twittering-web-host (xds "[?[g[?IcZ`,+[)nlPO9gQ)McCdEmYH==")
-  ;;       twittering-api-host (xds "[?[g[?IcZ`(_Z>bl\\?[jCdFnXN[cQJ,aY)'=")
-  ;;       twittering-api-search-host (xds "[?[g[?IcZ`(qQNFpP)^l\\?[jCdFnXN[cQJ,aY)'="))
-  )
+;; (setq twittering-web-host (xds "[?[g[?IcZ`,+[)nlPO9gQ)McCdEmYH==")
+;;       twittering-api-host (xds "[?[g[?IcZ`(_Z>bl\\?[jCdFnXN[cQJ,aY)'=")
+;;       twittering-api-search-host (xds "[?[g[?IcZ`(qQNFpP)^l\\?[jCdFnXN[cQJ,aY)'="))
 
 (setq twittering-my-fill-column (- twittering-fill-column
                                    xwl-twittering-padding-size))
@@ -88,9 +87,6 @@
 
 (eval-after-load 'twittering-mode
   '(progn
-
-     (setq twittering-enabled-services '(twitter sina))
-
      (define-key twittering-mode-map (kbd "c") 'twittering-current-timeline)
 
      (define-key twittering-mode-map (kbd "n") 'twittering-goto-next-status)
@@ -136,8 +132,8 @@
        (let* ((tw (cdr (assq 'twitter twittering-service-method-table))))
          (setq twittering-service-method-table
                `((twitter
-                  (api ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC)FnXH=="))
-                  (web ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0k"))
+                  (api    ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC)FnXH=="))
+                  (web    ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0k"))
                   (search ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*EcPOAaX8=="))
                   ,@(assq-delete-all 'api
                                      (assq-delete-all 'search
@@ -146,20 +142,17 @@
 
      (setq-default twittering-reverse-mode t
                    twittering-icon-mode t)
-
      ))
 
 ;; FIXME: in 23.2, who the hell autoload create-animated-image?? this exists in
 ;; 24 only.
-(when (eq window-system 'mac)
+(when (and (eq window-system 'mac) (< emacs-major-version 24))
   (defalias 'create-animated-image 'create-image))
 
 (setq twittering-tinyurl-service 'toly)
 
-
 (setq twittering-oauth-use-ssl nil)
 (setq twittering-use-ssl nil)
-
 
 (setq twittering-accounts
       `((sina (username "william.xwl@gmail.com")

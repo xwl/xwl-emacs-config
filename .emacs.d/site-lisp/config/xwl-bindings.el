@@ -68,7 +68,6 @@
                              ":direct_messages@twitter"
                              "xwl/followers@twitter"
                              ":retweets_of_me@twitter"
-                             ;; ":public"
 
                              ;; "xwl/tianxiashi@twitter"
                              ;; "xwl/hl@twitter"
@@ -76,6 +75,8 @@
                              ;; ":search/emacs/"
                              ;; ":search/twittering-mode/"
                              ":home@sina"
+                             ":mentions@sina"
+                             ":replies@sina"
                              ))
 
                      (switch-to-buffer ":home@twitter")
