@@ -469,7 +469,7 @@ to do.
 
 ;;;***
 
-;;;### (autoloads (dos-mode) "dos" "dos.el" (19284 32504))
+;;;### (autoloads (dos-mode) "dos" "dos.el" (19730 5191))
 ;;; Generated autoloads from dos.el
 
 (autoload 'dos-mode "dos" "\
@@ -1295,7 +1295,7 @@ Kill thread from here using leafnode.
 ;;;***
 
 ;;;### (autoloads (twit) "twittering-mode" "twittering-mode/twittering-mode.el"
-;;;;;;  (19688 35535))
+;;;;;;  (19751 125))
 ;;; Generated autoloads from twittering-mode/twittering-mode.el
 
 (autoload 'twit "twittering-mode" "\
@@ -1786,14 +1786,20 @@ the *BBDB* buffer.
 
 ;;;***
 
-;;;### (autoloads (smart-operator-self-insert-command smart-operator-mode)
-;;;;;;  "smart-operator" "xwl-elisp/smart-operator.el" (19276 26976))
+;;;### (autoloads (smart-operator-self-insert-command smart-operator-mode-on
+;;;;;;  smart-operator-mode) "smart-operator" "xwl-elisp/smart-operator.el"
+;;;;;;  (19711 41228))
 ;;; Generated autoloads from xwl-elisp/smart-operator.el
 
 (autoload 'smart-operator-mode "smart-operator" "\
 Insert operators with surrounding spaces smartly.
 
 \(fn &optional ARG)" t nil)
+
+(autoload 'smart-operator-mode-on "smart-operator" "\
+Turn on `smart-operator-mode'.
+
+\(fn)" nil nil)
 
 (autoload 'smart-operator-self-insert-command "smart-operator" "\
 Insert the entered operator plus surrounding spaces.
@@ -1814,8 +1820,8 @@ SALARY is before tax.  With prefix argument, insert result at point.
 
 ;;;***
 
-;;;### (autoloads (qml-mode) "qml-mode" "xwl-elisp/qml-mode.el" (19690
-;;;;;;  34367))
+;;;### (autoloads (qml-mode) "qml-mode" "xwl-elisp/qml-mode.el" (19702
+;;;;;;  15603))
 ;;; Generated autoloads from xwl-elisp/qml-mode.el
 
 (autoload 'qml-mode "qml-mode" "\
@@ -1904,7 +1910,7 @@ Turn off `less-minor-mode'.
 ;;;***
 
 ;;;### (autoloads (gmail-notifier-start) "gmail-notifier" "xwl-elisp/gmail-notifier.el"
-;;;;;;  (19516 32808))
+;;;;;;  (19735 17274))
 ;;; Generated autoloads from xwl-elisp/gmail-notifier.el
 
 (autoload 'gmail-notifier-start "gmail-notifier" "\
@@ -2021,7 +2027,7 @@ Create a *Dashboard* buffer.
 
 ;;;***
 
-;;;### (autoloads (ga) "ga" "xwl-elisp/ga/ga.el" (19596 62004))
+;;;### (autoloads (ga) "ga" "xwl-elisp/ga/ga.el" (19699 49032))
 ;;; Generated autoloads from xwl-elisp/ga/ga.el
 
 (autoload 'ga "ga" "\
@@ -2072,7 +2078,7 @@ Not documented
 ;;;***
 
 ;;;### (autoloads (xwl-paste-ubuntu-cn-image xwl-paste-ubuntu-cn)
-;;;;;;  "xwl-paste" "config/autoload/xwl-paste.el" (19528 10773))
+;;;;;;  "xwl-paste" "config/autoload/xwl-paste.el" (19736 30190))
 ;;; Generated autoloads from config/autoload/xwl-paste.el
 
 (autoload 'xwl-paste-ubuntu-cn "xwl-paste" "\
@@ -2091,7 +2097,7 @@ Not documented
 ;;;***
 
 ;;;### (autoloads (xwl-zenity xwl-snarl xwl-growl xwl-notify) "xwl-notify"
-;;;;;;  "config/autoload/xwl-notify.el" (19670 41577))
+;;;;;;  "config/autoload/xwl-notify.el" (19690 34549))
 ;;; Generated autoloads from config/autoload/xwl-notify.el
 
 (autoload 'xwl-notify "xwl-notify" "\
@@ -2116,15 +2122,15 @@ Not documented
 
 ;;;***
 
-;;;### (autoloads (xwl-kill-buffer-full-name xwl-kill-buffer-name
-;;;;;;  xwl-info his-unix2dos his-dos2unix xwl-fortune-favorites
+;;;### (autoloads (xwl-w32-start-program xwl-kill-buffer-full-name
+;;;;;;  xwl-kill-buffer-name xwl-info his-unix2dos his-dos2unix xwl-fortune-favorites
 ;;;;;;  xwl-fortune-favorites-vertically xwl-fortune-laozi forward-ascii-symbol
 ;;;;;;  xwl-shell-command-asynchronously-with-callback xwl-generate-password
 ;;;;;;  xwl-download-book xwl-delete-line his-transpose-windows his-one-whitespace-between-ce
 ;;;;;;  xwl-soft-kill-ring-save xwl-word-count-analysis xwl-count-ce-word
 ;;;;;;  his-align-cols xwl-numerate-lines xwl-delete-blank-lines-region
 ;;;;;;  xwl-delete-blank-lines-buffer ascii-table-show) "xwl-extra-util"
-;;;;;;  "config/autoload/xwl-extra-util.el" (19690 34347))
+;;;;;;  "config/autoload/xwl-extra-util.el" (19730 5190))
 ;;; Generated autoloads from config/autoload/xwl-extra-util.el
 
 (autoload 'ascii-table-show "xwl-extra-util" "\
@@ -2261,12 +2267,17 @@ Not documented
 (autoload 'xwl-kill-buffer-name "xwl-extra-util" "\
 Not documented
 
-\(fn)" t nil)
+\(fn &optional KILL-DIRECTORY)" t nil)
 
 (autoload 'xwl-kill-buffer-full-name "xwl-extra-util" "\
 Not documented
 
-\(fn)" t nil)
+\(fn &optional KILL-DIRECTORY)" t nil)
+
+(autoload 'xwl-w32-start-program "xwl-extra-util" "\
+Not documented
+
+\(fn PROGRAM)" t nil)
 
 ;;;***
 

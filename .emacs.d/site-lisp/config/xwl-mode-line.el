@@ -29,30 +29,25 @@
                 mode-line-modes
                 ,@(last mode-line-format)))
 
-(defun xwl-organize-mode-line ()
-  (interactive)
-  (setq global-mode-string
-        '("" appt-mode-string " "
-          display-time-string " "
-          ;; erc-modified-channels-object
-          ;; xwl-memory-usage-string " "
-          ;; xwl-week-at-school-string " "
-          ;; battery-mode-line-string " "
-          ;; xwl-mail-notify-string " "
+(setq global-mode-string
+      '("" appt-mode-string " "
+        display-time-string " "
+        ;; erc-modified-channels-object ; specified in `mode-line-modes'.
+        ;; xwl-memory-usage-string " "
+        ;; xwl-week-at-school-string " "
+        ;; battery-mode-line-string " "
+        ;; xwl-mail-notify-string " "
 
-          ;; cwit-mode-line-string " "
-          ;; rcirc-activity-string
-          ;; xwl-weather-string
+        ;; cwit-mode-line-string " "
+        ;; rcirc-activity-string
+        ;; xwl-weather-string
 
-          ;; xwl-gmail-notify-string
-          ;; twittering-unread-mode-line-string " "
+        ;; xwl-gmail-notify-string
+        ;; twittering-unread-mode-line-string " "
 
-          emms-mode-line-string
-          emms-playing-time-string
-          emms-lyrics-string))
-  (force-mode-line-update))
-
-(xwl-organize-mode-line)
+        emms-mode-line-string
+        emms-playing-time-string
+        emms-lyrics-string))
 
 ;;; Gmail Notify
 

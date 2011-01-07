@@ -1,6 +1,6 @@
 ;;; xwl-bindings.el --- Key bindings
 
-;; Copyright (C) 2008, 2009, 2010 William Xu
+;; Copyright (C) 2008, 2009, 2010, 2011 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -57,27 +57,28 @@
                 (lambda ()
                   (interactive)
                   (xwl-switch-or-create
-                   ":home"
+                   ":home@twitter"
                    (lambda ()
                      (interactive)
                      (require 'xwl-twittering)
                      (twit)
 
                      (mapc 'twittering-visit-timeline
-                           `(":replies"
-                             ":direct_messages"
-                             "xwl/followers"
-                             ":retweets_of_me"
+                           `(":replies@twitter"
+                             ":direct_messages@twitter"
+                             "xwl/followers@twitter"
+                             ":retweets_of_me@twitter"
                              ;; ":public"
 
-                             "xwl/tianxiashi"
-                             "xwl/hl"
+                             ;; "xwl/tianxiashi@twitter"
+                             ;; "xwl/hl@twitter"
 
                              ;; ":search/emacs/"
                              ;; ":search/twittering-mode/"
+                             ":home@sina"
                              ))
 
-                     (switch-to-buffer ":home")
+                     (switch-to-buffer ":home@twitter")
                      ))
 
                   (unless xwl-timers-hook-started?

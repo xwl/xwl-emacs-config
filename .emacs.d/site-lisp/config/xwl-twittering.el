@@ -1,6 +1,6 @@
 ;;; xwl-twittering.el --- twittering-mode
 
-;; Copyright (C) 2010  William Xu
+;; Copyright (C) 2010, 2011  William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 ;; Keywords: comm
@@ -22,9 +22,8 @@
 
 ;; Local variables, set this with caution. :)  Should be set before loading
 ;; twittering-mode.
-(setq twittering-reverse-mode t
-      ;; twittering-icon-mode t
-      )
+;; (setq-default twittering-reverse-mode t
+;;               twittering-icon-mode t)
 
 (setq twittering-username "xwl"
       twittering-password pwtwitter)
@@ -52,8 +51,8 @@
 
 (setq twittering-status-format (concat "%i %g %s, from %f%L%r%R:\n%FOLD["
                                        (make-string xwl-twittering-padding-size ? )
-                                       "]{%t%T}\n")
-      twittering-my-status-format "%g %s, from %f%L%r%R: %i\n%FOLD[]{%t%T}\n")
+                                       "]{%t %m%T}\n")
+      twittering-my-status-format "%g %s, from %f%L%r%R: %i\n%FOLD[]{%t %m%T}\n")
 
 (setq twittering-retweet-format "RT @%s: %t")
 
@@ -80,10 +79,10 @@
                                        (save-excursion
                                          (fill-region (point-min) (point-max)))))
 
-(add-hook 'twittering-mode-hook (lambda ()
-                                  (setq cursor-type nil)
-                                  ;; (hl-line-mode 1)
-                                  ))
+;; (add-hook 'twittering-mode-hook (lambda ()
+;;                                   (setq cursor-type nil)
+;;                                   ;; (hl-line-mode 1)
+;;                                   ))
 ;; Disable URI handling in twittering, let's use goto-address-mode instead.
 (setq twittering-regexp-uri "^^$")
 
@@ -133,6 +132,21 @@
        "To avoid possible deadlock caused by resovling url."
        (setq twittering-url-request-resolving-p nil))
 
+     (unless xwl-at-company?
+       (let* ((tw (cdr (assq 'twitter twittering-service-method-table))))
+         (setq twittering-service-method-table
+               `((twitter
+                  (api ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC)FnXH=="))
+                  (web ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0k"))
+                  (search ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*EcPOAaX8=="))
+                  ,@(assq-delete-all 'api
+                                     (assq-delete-all 'search
+                                                      (assq-delete-all 'web tw))))
+                 ,@(assq-delete-all 'twitter twittering-service-method-table)))))
+
+     (setq-default twittering-reverse-mode t
+                   twittering-icon-mode t)
+
      ))
 
 ;; FIXME: in 23.2, who the hell autoload create-animated-image?? this exists in
@@ -146,16 +160,16 @@
 (setq twittering-oauth-use-ssl nil)
 (setq twittering-use-ssl nil)
 
+
 (setq twittering-accounts
       `((sina (username "william.xwl@gmail.com")
               (auth oauth))
 
         (twitter (username "xwl")
-                 (password pwtwitter)
+                 (password ,pwtwitter)
                  (auth ,(if xwl-at-company? 'oauth 'basic)))))
 
 (setq twittering-enabled-services '(twitter sina))
-
 
 (provide 'xwl-twittering)
 ;;; xwl-twittering.el ends here

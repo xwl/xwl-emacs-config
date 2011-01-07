@@ -1,6 +1,6 @@
 ;;; xwl-misc.el --- miscellaneous
 
-;; Copyright (C) 2007, 2008, 2009, 2010 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010, 2011 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -734,7 +734,9 @@ passphrase cache or user."
     (xwl-s60lxr-generate-releases))
   (xwl-browse-url-firefox-tab-only
    (format "http://s60lxr/search?v=%s&filestring=%s&string=%s"
-           xwl-s60lxr-release filename str)))
+           xwl-s60lxr-release
+           (url-hexify-string filename)
+           (url-hexify-string str))))
 
 (setq xwl-s60lxr-release nil)
 
@@ -861,8 +863,8 @@ passphrase cache or user."
 
 (when (eq system-type 'darwin)
   (run-at-time "11:00pm" 86400 (lambda ()
-                               (xwl-shell-command-asynchronously
-                                "Get to sleep now!"))))
+                                 (xwl-notify "Time!" "Get to sleep now."))))
+
 
 (provide 'xwl-misc)
 
