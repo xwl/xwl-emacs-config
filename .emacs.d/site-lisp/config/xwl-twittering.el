@@ -25,6 +25,10 @@
 ;; (setq-default twittering-reverse-mode t
 ;;               twittering-icon-mode t)
 
+;; convert seems crashy on w32, or libxpm is problematic??
+(when (eq system-type 'windows-nt)
+  (setq twittering-convert-program nil))
+
 (setq twittering-username "xwl"
       twittering-password pwtwitter)
 
@@ -48,10 +52,12 @@
 (setq twittering-my-fill-column (- twittering-fill-column
                                    xwl-twittering-padding-size))
 
-(setq twittering-status-format (concat "%i %g %s, from %f%L%r%R:\n%FOLD["
-                                       (make-string xwl-twittering-padding-size ? )
-                                       "]{%t %m%T}\n")
-      twittering-my-status-format "%g %s, from %f%L%r%R: %i\n%FOLD[]{%t %m%T}\n")
+(setq twittering-status-format
+      (concat "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%i %g %s, from %f%L%r%R:\n%FOLD["
+              (make-string xwl-twittering-padding-size ? )
+              "]{%t %m%T}\n}")
+      twittering-my-status-format
+      "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%g %s, from %f%L%r%R: %i\n%FOLD[]{%t %m%T}\n}")
 
 (setq twittering-retweet-format "RT @%s: %t")
 
@@ -142,6 +148,19 @@
 
      (setq-default twittering-reverse-mode t
                    twittering-icon-mode t)
+
+     ;; (setq twittering-service-method-table
+     ;;       `((socialcast (api "socialcast.americas.nokia.com")
+     ;;                     (search "search.socialcast.americas.nokia.com")
+     ;;                     (web "socialcast.americas.nokia.com")
+
+     ;;                     (api-prefix "1/")
+     ;;                     (search-method "search")
+     ;;                     (status-url twittering-get-status-url-twitter)
+     ;;                     (search-url twittering-get-search-url-twitter))
+
+     ;;         ,@twittering-service-method-table))
+
      ))
 
 ;; FIXME: in 23.2, who the hell autoload create-animated-image?? this exists in
@@ -156,13 +175,20 @@
 
 (setq twittering-accounts
       `((sina (username "william.xwl@gmail.com")
-              (auth oauth))
+              (auth oauth)
+              (retweet organic))
 
         (twitter (username "xwl")
                  (password ,pwtwitter)
-                 (auth ,(if xwl-at-company? 'oauth 'basic)))))
+                 (auth ,(if xwl-at-company? 'oauth 'basic)))
 
-(setq twittering-enabled-services '(twitter sina))
+        (socialcast (username "WilliamXu")
+                    (auth basic))
+        ))
+
+(setq twittering-enabled-services '(twitter sina
+                                    ;; socialcast
+                                    ))
 
 (provide 'xwl-twittering)
 ;;; xwl-twittering.el ends here
