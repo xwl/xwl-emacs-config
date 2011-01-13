@@ -1,6 +1,6 @@
 ;;; xwl-erc.el --- erc config
 
-;; Copyright (C) 2007, 2008, 2009, 2010 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010, 2011 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -60,7 +60,7 @@
          "&bitlbee")
         ("freenode.net"
          "#osxchat" "#emacs" "#scheme" "#chicken" "#cpp-tw" ;; "#chinalug"
-         "#qt-qml" "#qt"
+         ; "#qt-qml" "#qt"
          )
         ("oftc.net"
          ;; "#debian-zh"
@@ -101,6 +101,11 @@
 (setq erc-current-nick-highlight-type 'nick-or-keyword)
 (setq erc-keywords '("xwl" "emms"))
 (setq erc-pals nil)
+
+;; (eval-after-load 'erc-match
+;;   '(progn
+;;      (set-face-foreground erc-query-buffer-face "magenta")
+;;      ))
 
 (defface erc-query-buffer-face '((t (:bold t :foreground "magenta")))
   "ERC face for your query buffers."
