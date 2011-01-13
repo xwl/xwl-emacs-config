@@ -84,10 +84,10 @@
                                        (save-excursion
                                          (fill-region (point-min) (point-max)))))
 
-;; (add-hook 'twittering-mode-hook (lambda ()
-;;                                   (setq cursor-type nil)
-;;                                   ;; (hl-line-mode 1)
-;;                                   ))
+(add-hook 'twittering-mode-hook (lambda ()
+                                  (setq cursor-type nil)
+                                  ;; (hl-line-mode 1)
+                                  ))
 ;; Disable URI handling in twittering, let's use goto-address-mode instead.
 (setq twittering-regexp-uri "^^$")
 
