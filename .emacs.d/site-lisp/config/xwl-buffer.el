@@ -1,6 +1,6 @@
 ;;; xwl-buffer.el --- Buffer level operations like switching or listing
 
-;; Copyright (C) 2009, 2010 William Xu
+;; Copyright (C) 2009, 2010, 2011 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -114,7 +114,7 @@ point.  Especially useful for w32."
 (setq ido-ignore-buffers
       `(,(regexp-opt '(".diary" ".scratch"  "&bitlbee" ".newsrc"
                        ".bbdb" "todo.org"))
-        "\\*.+\\*" "^#" "^localhost:" "^:"
+        "\\*.+\\*" "^#" "^localhost:" ;; "^:"
         ,@ido-ignore-files))
 
 (setq ido-ignore-files '("~master~"))
