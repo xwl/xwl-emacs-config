@@ -55,9 +55,9 @@
 (setq twittering-status-format
       (concat "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%i %g %s, from %f%L%r%R:\n%FOLD["
               (make-string xwl-twittering-padding-size ? )
-              "]{%t %m%T}\n}")
+              "]{%t%T}\n}")
       twittering-my-status-format
-      "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%g %s, from %f%L%r%R: %i\n%FOLD[]{%t %m%T}\n}")
+      "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%g %s, from %f%L%r%R: %i\n%FOLD[]{%t%T}\n}")
 
 (setq twittering-retweet-format "RT @%s: %t")
 
