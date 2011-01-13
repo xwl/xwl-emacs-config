@@ -1,6 +1,6 @@
 ;;; xwl-path.el --- path setup
 
-;; Copyright (C) 2009, 2010 William Xu
+;; Copyright (C) 2009, 2010, 2011 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -95,11 +95,11 @@
 		     ":")))
 
 (if (eq system-type 'windows-nt)
-    (progn
-      ;; (setenv "PATH" (concat (getenv "PATH") ";C:/OpenSSL/bin;C:/Program Files/Haskell/bin;C:/ghc/ghc-6.12.1/bin"))
-      ;; (setq exec-path (split-string (getenv "PATH") ";"))
-      nil)
-
+    ;; Seems gnuwin32 image library has to be set before emacs starts.
+    (let ((paths '(;; "c:/Program Files/GnuWin32/bin"
+                   )))
+      (setenv "PATH" (mapconcat 'identity `(,(getenv "PATH") ,@paths) ";"))
+      (setq exec-path (split-string (getenv "PATH") ";")))
   (setenv "TERM" "xterm-color")
   (setq exec-path (split-string (getenv "PATH") ":")))
 
