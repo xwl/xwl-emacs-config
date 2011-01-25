@@ -104,6 +104,7 @@
      (define-key twittering-mode-map (kbd "F") 'twittering-follow)
      (define-key twittering-mode-map (kbd "U") 'twittering-unfollow)
      (define-key twittering-mode-map (kbd "R") 'twittering-retweet)
+     (define-key twittering-mode-map (kbd "O") 'twittering-organic-retweet)
      (define-key twittering-mode-map (kbd "@") 'twittering-reply-to-user)
      (define-key twittering-mode-map (kbd "D") 'twittering-direct-message)
      (define-key twittering-mode-map (kbd "C") 'twittering-erase-all)
@@ -175,7 +176,8 @@
 (setq twittering-accounts
       `((sina (username "william.xwl@gmail.com")
               (auth oauth)
-              (retweet organic))
+              ;; (retweet organic)
+              )
 
         (twitter (username "xwl")
                  (password ,pwtwitter)
