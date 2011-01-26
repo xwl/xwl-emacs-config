@@ -113,7 +113,8 @@ point.  Especially useful for w32."
 ;; 2. one can also toggle this by C-a
 (setq ido-ignore-buffers
       `(,(regexp-opt '(".diary" ".scratch"  "&bitlbee" ".newsrc"
-                       ".bbdb" "todo.org"))
+                       ".bbdb" "todo.org" "172.28.206.207" ":6667"
+                       ))
         "\\*.+\\*" "^#" "^localhost:" ;; "^:"
         ,@ido-ignore-files))
 
