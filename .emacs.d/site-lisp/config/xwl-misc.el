@@ -863,8 +863,26 @@ passphrase cache or user."
 
 (when (eq system-type 'darwin)
   (run-at-time "11:00pm" 86400 (lambda ()
-                                 (xwl-notify "Time!" "Get to sleep now."))))
+                                 (let ((s "Get to sleep now."))
+                                   (xwl-notify "Time!" s)
+                                   (xwl-shell-command-asynchronously
+                                    (concat "say " s))))))
 
+(eval-after-load 'ns-win
+  '(progn
+     (defun ns-insert-file ()
+       "(Redefined) Insert contents of file `ns-input-file' like insert-file but with less
+prompting.  If file is a directory perform a `find-file' on it."
+       (interactive)
+       (let ((f))
+         (setq f (car ns-input-file))
+         (setq ns-input-file (cdr ns-input-file))
+         (find-file f)
+         ;; (if (file-directory-p f)
+         ;;     (find-file f)
+         ;;   (push-mark (+ (point) (car (cdr (insert-file-contents f))))))
+         ))
+     ))
 
 (provide 'xwl-misc)
 

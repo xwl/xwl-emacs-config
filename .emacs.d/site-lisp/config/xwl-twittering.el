@@ -86,8 +86,7 @@
 
 (add-hook 'twittering-mode-hook (lambda ()
                                   (setq cursor-type nil)
-                                  ;; (hl-line-mode 1)
-                                  ))
+                                  (hl-line-mode 1)))
 ;; Disable URI handling in twittering, let's use goto-address-mode instead.
 (setq twittering-regexp-uri "^^$")
 
@@ -106,6 +105,7 @@
      (define-key twittering-mode-map (kbd "U") 'twittering-unfollow)
      (define-key twittering-mode-map (kbd "O") 'twittering-organic-retweet)
      (define-key twittering-mode-map (kbd "R") 'twittering-retweet)
+     (define-key twittering-mode-map (kbd "O") 'twittering-organic-retweet)
      (define-key twittering-mode-map (kbd "@") 'twittering-reply-to-user)
      (define-key twittering-mode-map (kbd "D") 'twittering-direct-message)
      (define-key twittering-mode-map (kbd "C") 'twittering-erase-all)
@@ -121,9 +121,9 @@
      (define-key twittering-mode-map (kbd "<S-tab>") 'twittering-goto-previous-thing)
      (define-key twittering-mode-map (kbd "C-c C-SPC") 'twittering-switch-to-unread-timeline)
 
-     ;; (setq twittering-timeline-most-active-spec-strings
-     ;;       (cons ":replies"
-     ;;             twittering-timeline-most-active-spec-strings))
+     (setq twittering-timeline-most-active-spec-strings
+           (cons ":mentions"
+                 twittering-timeline-most-active-spec-strings))
 
      (twittering-enable-unread-status-notifier)
 

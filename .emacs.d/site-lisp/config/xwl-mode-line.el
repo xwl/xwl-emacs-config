@@ -1,6 +1,6 @@
 ;;; xwl-mode-line.el --- mode line display stuffs
 
-;; Copyright (C) 2007, 2008, 2009, 2010 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010, 2011 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -60,6 +60,8 @@
                 (if (boundp 'xwl-proxy-server)
                     (format "-x %s:%d" xwl-proxy-server xwl-proxy-port)
                   ""))))
+
+(setq gmail-notifier-timer-interval (* 30 60))
 
 (add-hook 'gmail-notifier-new-mails-hook
           (lambda ()
