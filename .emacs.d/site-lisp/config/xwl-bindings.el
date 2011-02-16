@@ -67,13 +67,13 @@
                            `(":replies@twitter"
                              ":direct_messages@twitter"
                              "xwl/followers@twitter"
-                             ":retweets_of_me@twitter"
 
+                             ;; ":retweets_of_me@twitter"
                              ;; "xwl/tianxiashi@twitter"
                              ;; "xwl/hl@twitter"
-
                              ;; ":search/emacs/"
                              ;; ":search/twittering-mode/"
+
                              ":home@sina"
                              ":mentions@sina"
                              ":replies@sina"
@@ -82,13 +82,13 @@
                      (switch-to-buffer ":home@twitter")
                      ))
 
-                  (unless xwl-timers-hook-started?
-                    (run-hooks 'xwl-timers-hook)
-                    (setq xwl-timers-hook-started? t)
+                  ;; (unless xwl-timers-hook-started?
+                  ;;   (run-hooks 'xwl-timers-hook)
+                  ;;   (setq xwl-timers-hook-started? t)
 
                     ;; (xwl-gnus)
                     ;; (command-execute (kbd "C-c n E"))
-                    )))
+                    ))
 
 (global-set-key (kbd "<f13>") 'kill-this-buffer)
 
