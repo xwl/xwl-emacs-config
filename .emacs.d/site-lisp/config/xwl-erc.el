@@ -38,7 +38,6 @@
       erc-kill-buffer-on-part t
       erc-auto-query t)
 
-(setq erc-anonymous-login nil)
 (setq erc-nick "xwl")
 
 (setq erc-common-server-suffixes nil
@@ -96,7 +95,6 @@
 ;; ,----
 ;; | match, ignore
 ;; `----
-
 (erc-match-mode 1)
 (setq erc-current-nick-highlight-type 'nick-or-keyword)
 (setq erc-keywords '("xwl" "emms"))
@@ -394,6 +392,11 @@ If the buffer is currently not visible, makes it sticky."
                                32))
           (erc-fill-regarding-timestamp))
         (erc-restore-text-properties))))
+
+(defadvice erc-open (around disable-read-only activate)
+  (let ((inhibit-read-only t))
+    ad-do-it))
+
 
 ;;; Local Variables: ***
 ;;; outline-regexp: ";; | " ***

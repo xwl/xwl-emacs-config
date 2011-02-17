@@ -54,8 +54,9 @@
 
 (setq twittering-status-format
       (concat "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%i %g %s, from %f%L%r%R:\n%FOLD["
-              (make-string xwl-twittering-padding-size ? )
-              "]{%t%T}\n}")
+              (make-string xwl-twittering-padding-size ? ) "]{%t}"
+              ;; put image near center, 20 -- approximately width of image
+              "%FOLD[" (make-string (- (/ twittering-fill-column 2) 20) ? ) "]{%T}\n}")
       twittering-my-status-format
       "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%g %s, from %f%L%r%R: %i\n%FOLD[]{%t%T}\n}")
 
