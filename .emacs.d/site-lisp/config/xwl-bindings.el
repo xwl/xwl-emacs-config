@@ -56,30 +56,13 @@
 (global-set-key (kbd "<f11>")
                 (lambda ()
                   (interactive)
+                  (require 'xwl-twittering)
                   (xwl-switch-or-create
-                   ":home@twitter"
+                   (car twittering-initial-timeline-spec-string)
                    (lambda ()
                      (interactive)
-                     (require 'xwl-twittering)
                      (twit)
-
-                     (mapc 'twittering-visit-timeline
-                           `(":replies@twitter"
-                             ":direct_messages@twitter"
-                             "xwl/followers@twitter"
-
-                             ;; ":retweets_of_me@twitter"
-                             ;; "xwl/tianxiashi@twitter"
-                             ;; "xwl/hl@twitter"
-                             ;; ":search/emacs/"
-                             ;; ":search/twittering-mode/"
-
-                             ":home@sina"
-                             ":mentions@sina"
-                             ":replies@sina"
-                             ))
-
-                     (switch-to-buffer ":home@twitter")
+                     (switch-to-buffer (car twittering-initial-timeline-spec-string))
                      ))
 
                   ;; (unless xwl-timers-hook-started?
