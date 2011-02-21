@@ -1,6 +1,6 @@
 ;;; xwl-notify.el --- growl like notify
 
-;; Copyright (C) 2010  William Xu
+;; Copyright (C) 2010, 2011  William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 ;; Keywords: convenience
@@ -47,12 +47,12 @@
 ;; http://tlhan-ghun.de/?q=node/59
 ;;;###autoload
 (defun xwl-snarl (title message)
-  (require 'xwl-emms)
-  (xwl-shell-command-asynchronously
-   (format "Snarl_CMD.exe snShowMessage 5 \"%s\" \"%s\" \"%s\""
-           (emms-i18n-iconv 'utf-8 'gb18030 title)
-           (emms-i18n-iconv 'utf-8 'gb18030 message)
-           xwl-notify-emacs-image)))
+  (when (featurep 'emms)
+    (xwl-shell-command-asynchronously
+     (format "Snarl_CMD.exe snShowMessage 5 \"%s\" \"%s\" \"%s\""
+             (emms-i18n-iconv 'utf-8 'gb18030 title)
+             (emms-i18n-iconv 'utf-8 'gb18030 message)
+             xwl-notify-emacs-image))))
 
 ;;;###autoload
 (defun xwl-zenity (title message)
