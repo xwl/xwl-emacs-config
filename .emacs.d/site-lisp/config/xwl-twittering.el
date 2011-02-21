@@ -194,7 +194,7 @@
       '(":home@sina" ":replies@sina" ":mentions@sina"))
 
 (unless (eq system-type 'darwin)
-  (setq twittering-enabled-services `(,@twittering-service-method twitter)
+  (setq twittering-enabled-services `(,@twittering-enabled-services twitter)
         twittering-initial-timeline-spec-string
         `(,@twittering-initial-timeline-spec-string
           ":home@twitter" ":replies@twitter" ":direct_messages@twitter")))
