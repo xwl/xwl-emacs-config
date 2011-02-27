@@ -32,11 +32,6 @@
 (setq twittering-username "xwl"
       twittering-password pwtwitter)
 
-(when xwl-at-company?
-  (setq twittering-proxy-use t
-        twittering-proxy-server "172.16.42.137"
-        twittering-proxy-port 8080))
-
 ;; (setq twittering-auth-method 'basic)
 ;; ;; Also in `gtap', disable "secure: always".
 ;; (setq twittering-use-ssl nil)
@@ -80,7 +75,7 @@
 (setq twittering-allow-insecure-server-cert t)
 
 (add-hook 'twittering-edit-mode-hook (lambda ()
-                                       (flyspell-mode 1)
+                                       ;; (flyspell-mode 1)
                                        ;; (visual-line-mode 1)
                                        (save-excursion
                                          (fill-region (point-min) (point-max)))))
@@ -148,6 +143,19 @@
                                                       (assq-delete-all 'web tw))))
                  ,@(assq-delete-all 'twitter twittering-service-method-table)))))
 
+     (setq twittering-proxy-use t)
+
+     (if xwl-at-company?
+         (setq twittering-proxy-server "172.16.42.137"
+               twittering-proxy-port 8080)
+
+       (setq twittering-proxy-server (xds "Q)0mQ)ocCdEl")
+             twittering-proxy-port 80
+             twittering-uri-regexp-to-proxy
+             (car
+              (assqref 'web
+                       (assqref 'twitter twittering-service-method-table)))))
+
      (setq-default twittering-reverse-mode t
                    twittering-icon-mode t)
 
@@ -179,26 +187,23 @@
       `((sina (username "william.xwl@gmail.com")
               (auth oauth)
               ;; (retweet organic)
-              )
+              (use-proxy ,xwl-at-company?))
 
         (twitter (username "xwl")
-                 (password ,pwtwitter)
-                 (auth ,(if xwl-at-company? 'oauth 'basic)))
+                 ,@(if xwl-at-company?
+                       `((auth oauth))
+                     `((auth basic)
+                       (password ,pwtwitter))))
 
-        (socialcast (username "WilliamXu")
-                    (auth basic))
+        ;; (socialcast (username "WilliamXu")
+        ;;             (auth basic))
         ))
 
-(setq twittering-enabled-services '(sina)
+(setq twittering-enabled-services `(sina twitter)
       twittering-initial-timeline-spec-string
-      '(":home@sina" ":replies@sina" ":mentions@sina"))
-
-(unless (eq system-type 'darwin)
-  (setq twittering-enabled-services `(,@twittering-enabled-services twitter)
-        twittering-initial-timeline-spec-string
-        `(,@twittering-initial-timeline-spec-string
-          ":home@twitter" ":replies@twitter" ":direct_messages@twitter")))
-
+      `(":home@sina" ":replies@sina" ":mentions@sina"
+        ":home@twitter" ":replies@twitter" ":direct_messages@twitter"
+        ))
 
 (provide 'xwl-twittering)
 ;;; xwl-twittering.el ends here
