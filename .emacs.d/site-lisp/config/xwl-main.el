@@ -1,6 +1,6 @@
 ;; xwl-main.el --- Main entry for The One True Editor
 
-;; Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010 William Xu
+;; Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -53,6 +53,8 @@
 
 (load "~/.emacs.d/site-lisp/config/xwl-path.el")
 
+;;; Load at startup
+
 (require 'xwl-autoloads)
 (require 'xwl-convenience)
 (require 'xwl-var)
@@ -70,13 +72,15 @@
 (require 'xwl-redefined)
 (require 'xwl-web)
 
-;; eval-after-load
+;;; eval-after-load
+
 (eval-after-load 'dired '(progn (require 'xwl-dired)))
 (eval-after-load 'gnus  '(progn (require 'xwl-gnus)))
 (eval-after-load 'erc   '(progn (require 'xwl-erc)))
 (eval-after-load 'org   '(progn (require 'xwl-org)))
 
-;; Loaded on the fly
+;;; Loaded on the fly
+
 ;; (require 'xwl-dictionary)
 ;; (require 'xwl-emms)
 ;; (require 'xwl-wubi)
@@ -88,7 +92,8 @@
   (require 'xwl-window)
   )
 
-;; not used
+;;; not used
+
 ;; (require 'xwl-muse)
 
 ;;; xwl-main.el ends here
