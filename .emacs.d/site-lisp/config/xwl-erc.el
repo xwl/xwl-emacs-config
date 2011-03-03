@@ -174,7 +174,7 @@ so as to keep an eye on work when necessarily."
     (when (> (length nick) 7)
       (setq nick (concat (substring nick 0 4)
                          ".."
-                         (substring (substring nick 7) -1))))
+                         (substring nick -1))))
     nick))
 
 ;; (defadvice erc-faces-in (around add-query-faces activate)
