@@ -1,6 +1,6 @@
 ;;; xwl-org.el --- configs for org-mode
 
-;; Copyright (C) 2008, 2009, 2010 William Xu
+;; Copyright (C) 2008, 2009, 2010, 2011 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -52,26 +52,27 @@
      (setq org-calendar-agenda-action-key [?K])
      (define-key calendar-mode-map [?k] 'calendar-backward-week)
 
-     (defadvice org-agenda-day-view (around leave-ndays-alone activate)
-       "Do not touch `org-agenda-ndays' please!"
-       (interactive "P")
-       (let ((old org-agenda-ndays))
-         ad-do-it
-         (setq org-agenda-ndays old)))
-
-     (defadvice org-agenda-week-view (around leave-ndays-alone activate)
-       "Do not touch `org-agenda-ndays' please!"
-       (interactive "P")
-       (let ((old org-agenda-ndays))
-         ad-do-it
-         (setq org-agenda-ndays old)))
-
      ))
 
 (eval-after-load 'org
   '(progn
      (org-defkey org-mode-map "\C-c," 'next-buffer)
      (org-defkey org-mode-map "\C-c." 'previous-buffer)))
+
+(require 'org-agenda)
+(defadvice org-agenda-day-view (around leave-ndays-alone activate)
+  "Do not touch `org-agenda-ndays' please!"
+  ;; (interactive "P")
+  (let ((old org-agenda-ndays))
+    ad-do-it
+    (setq org-agenda-ndays old)))
+
+(defadvice org-agenda-week-view (around leave-ndays-alone activate)
+  "Do not touch `org-agenda-ndays' please!"
+  ;; (interactive "P")
+  (let ((old org-agenda-ndays))
+    ad-do-it
+    (setq org-agenda-ndays old)))
 
 (require 'org-archive)
 (defun xwl-org-archive-all-done-item ()
