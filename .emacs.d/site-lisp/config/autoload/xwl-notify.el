@@ -43,8 +43,8 @@
    (format "growlnotify --image %s -t \"%s\" -m \"%s\""
            xwl-notify-emacs-image title message)))
 
-;; http://www.fullphat.net/index.php
-;; http://tlhan-ghun.de/?q=node/59
+;; http://www.fullphat.net
+;; http://tlhan-ghun.de/Projects/SnarlCommandLineTools/Snarl_CMD/
 ;;;###autoload
 (defun xwl-snarl (title message)
   (when (featurep 'emms)
