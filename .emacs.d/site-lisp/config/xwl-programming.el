@@ -1,6 +1,6 @@
 ;;; xwl-programming.el --- programming config
 
-;; Copyright (C) 2007, 2009, 2010 William Xu
+;; Copyright (C) 2007, 2009, 2010, 2011 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -174,6 +174,13 @@
 
                          ,@ffap-c-path))
      ))
+
+
+;;; Obj-C
+
+(add-to-list 'auto-mode-alist
+             '("~/repo/git/MPlayerX/" . objc-mode))
+
 ;;; Tags, code browsing
 
 ;; imenu, cscope, etags
@@ -529,7 +536,6 @@ Thus generate a TAGs file."
 	     ("\\<\\(TODO\\)"  1 'font-lock-todo-face  t))))
 	xwl-keyword-highlight-modes))
 
-
 (xwl-highlight-special-keywords)
 
 ;;; lex, yacc
@@ -562,7 +568,6 @@ yacc source files."
 
 (defun xwl-lisp-mode-hook ()
   ;; (which-func-mode 1)
-  (eldoc-mode 1)
 
   (set (make-local-variable 'outline-regexp) ";;;+ ")
   (outline-minor-mode 1)
@@ -572,9 +577,11 @@ yacc source files."
   (local-set-key (kbd "C-x C-r") 'eval-region)
   (local-set-key (kbd "C-x C-b") 'eval-buffer))
 
-(add-hook 'lisp-mode-hook 'xwl-lisp-mode-hook)
-(add-hook 'lisp-interaction-mode-hook 'xwl-lisp-mode-hook)
-(add-hook 'emacs-lisp-mode-hook 'xwl-lisp-mode-hook)
+(mapc (lambda (hook)
+        (mapc (lambda (func)
+                (add-hook hook func))
+              '(turn-on-eldoc-mode xwl-lisp-mode-hook)))
+      '(lisp-mode-hook emacs-lisp-mode-hook))
 
 ;;; scheme
 ;; --------
