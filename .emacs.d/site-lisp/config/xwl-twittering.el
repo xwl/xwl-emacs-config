@@ -205,5 +205,10 @@
         ":home@twitter" ":replies@twitter" ":direct_messages@twitter"
         ))
 
+(setq twittering-image-external-viewer-command
+      (case system-type
+        ((darwin) "open")
+        ((windows-nt) "start")))
+
 (provide 'xwl-twittering)
 ;;; xwl-twittering.el ends here
