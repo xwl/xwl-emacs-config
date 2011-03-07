@@ -21,10 +21,9 @@
 
 ;;; Code:
 
-;; FIXME: how to make it autoload?
-(setq wubi-traditional-p t
-      wubi-quanjiao-p t)
 (require 'wubi)
+(wubi-toggle-simplified-or-traditional 1)
+
 (register-input-method
  "chinese-wubi" "Chinese" 'quail-use-package "wubi" "wubi")
 (setq default-input-method "chinese-wubi")
