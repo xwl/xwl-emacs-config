@@ -20,30 +20,6 @@
 
 ;;; Code:
 
-;; Local variables, set this with caution. :)  Should be set before loading
-;; twittering-mode.
-;; (setq-default twittering-reverse-mode t
-;;               twittering-icon-mode t)
-
-;; convert seems crashy on w32, or libxpm is problematic??
-;; (when (eq system-type 'windows-nt)
-;;   (setq twittering-convert-program nil))
-
-(setq twittering-username "xwl"
-      twittering-password pwtwitter)
-
-;; (setq twittering-auth-method 'basic)
-;; ;; Also in `gtap', disable "secure: always".
-;; (setq twittering-use-ssl nil)
-
-;; (setq twittering-web-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0k")
-;;       twittering-api-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC)FnXH==")
-;;       twittering-api-search-host (xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*EcPOAaX8=="))
-
-;; (setq twittering-web-host (xds "[?[g[?IcZ`,+[)nlPO9gQ)McCdEmYH==")
-;;       twittering-api-host (xds "[?[g[?IcZ`(_Z>bl\\?[jCdFnXN[cQJ,aY)'=")
-;;       twittering-api-search-host (xds "[?[g[?IcZ`(qQNFpP)^l\\?[jCdFnXN[cQJ,aY)'="))
-
 (setq twittering-my-fill-column (- twittering-fill-column
                                    xwl-twittering-padding-size))
 
@@ -56,8 +32,6 @@
       "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%g %s, from %f%L%r%R: %i\n%FOLD[]{%t%T}\n}")
 
 (setq twittering-retweet-format "RT @%s: %t")
-
-(setq twittering-url-show-status nil)
 
 (setq twittering-new-tweets-count-excluding-me t
       twittering-new-tweets-count-excluding-replies-in-home t
@@ -83,6 +57,7 @@
 (add-hook 'twittering-mode-hook (lambda ()
                                   (setq cursor-type nil)
                                   (hl-line-mode 1)))
+
 ;; Disable URI handling in twittering, let's use goto-address-mode instead.
 (setq twittering-regexp-uri "^^$")
 
@@ -133,7 +108,7 @@
        (setq twittering-url-request-resolving-p nil))
 
      (unless xwl-at-company?
-       (let* ((tw (cdr (assq 'twitter twittering-service-method-table))))
+       (let ((tw (cdr (assq 'twitter twittering-service-method-table))))
          (setq twittering-service-method-table
                `((twitter
                   (api    ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC)FnXH=="))
@@ -147,9 +122,8 @@
      (setq twittering-proxy-use t)
 
      (if xwl-at-company?
-         (setq twittering-proxy-server "172.16.42.137"
+         (setq twittering-proxy-server (xds "DKZpCa<)CaHpCa<qEn==")
                twittering-proxy-port 8080)
-
        (setq twittering-proxy-server (xds "Q)0mQ)ocCdEl")
              twittering-proxy-port 80
              twittering-uri-regexp-to-proxy
@@ -182,13 +156,13 @@
 (setq twittering-tinyurl-service 'toly)
 
 (setq twittering-oauth-use-ssl nil)
+
+;; Also in `gtap', disable "secure: always".
 (setq twittering-use-ssl nil)
 
 (setq twittering-accounts
       `((sina (username "william.xwl@gmail.com")
-              (auth oauth)
-              ;; (retweet organic)
-              (use-proxy ,xwl-at-company?))
+              (auth oauth))
 
         (twitter (username "xwl")
                  ,@(if xwl-at-company?
