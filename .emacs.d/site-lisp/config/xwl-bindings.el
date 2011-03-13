@@ -65,13 +65,13 @@
                      (switch-to-buffer (car twittering-initial-timeline-spec-string))
                      ))
 
-                  ;; (unless xwl-timers-hook-started?
-                  ;;   (run-hooks 'xwl-timers-hook)
-                  ;;   (setq xwl-timers-hook-started? t)
+                  (unless xwl-timers-hook-started?
+                    (run-hooks 'xwl-timers-hook)
+                    (setq xwl-timers-hook-started? t))
 
-                    ;; (xwl-gnus)
-                    ;; (command-execute (kbd "C-c n E"))
-                    ))
+                  ;; (xwl-gnus)
+                  ;; (command-execute (kbd "C-c n E"))
+                  ))
 
 (global-set-key (kbd "<f13>") 'kill-this-buffer)
 
