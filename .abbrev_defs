@@ -27,7 +27,6 @@
     ("_main2" "" skeleton-c++-mode-main-func2 9)
     ("catch" "catch" c-electric-continued-statement 0)
     ("else" "else" c-electric-continued-statement 4)
-    ("fopenx" "" msf-abbrev-generatedfunc-c++-mode-fopenx 1)
     ("ifnd" "" macro-ifndef-skeleton 0)
     ("inc" "" macro-include-skeleton 0)
     ("incq" "" macro-include-quote-skeleton 0)
@@ -48,8 +47,6 @@
 
 (define-abbrev-table 'c-mode-abbrev-table '(
     ("else" "else" c-electric-continued-statement 0)
-    ("fopen" "" msf-abbrev-generatedfunc-c-mode-fopen 5)
-    ("fopenx" "" msf-abbrev-generatedfunc-c-mode-fopenx 0)
     ("main2" "" skeleton-c-mode-main-func2 1)
     ("while" "while" c-electric-continued-statement 0)
     ("wx" "wx" nil 1)

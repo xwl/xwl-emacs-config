@@ -46,7 +46,8 @@
 (setq scroll-step 1
       ;; FIXME: This will cause eshell jumping when at the bottom of the buffer.
       ;; scroll-margin 3
-      scroll-conservatively most-positive-fixnum
+
+      ;; scroll-conservatively most-positive-fixnum
       hscroll-step 1
       hscroll-margin 3)
 

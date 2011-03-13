@@ -1,6 +1,6 @@
 ;;; xwl-window.el --- GUI window related config
 
-;; Copyright (C) 2007, 2008, 2009, 2010 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010, 2011 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -36,8 +36,8 @@
         `((mac . ("Monaco-14" "stheiti*" "hiragino maru gothic pro"))
           (ns  . ("Monaco-14" "Hiragino Sans GB" "Hiragino_Kaku_Gothic_ProN"))
           (w32 . ("Monaco-10" "NSimSun" "NSimSun"
-                  ;; "ºº¶¦·±ÖĞ±ä" "ºº¶¦·±ÖĞ±ä" "ºº¶¦·±ÖĞ±ä"
-                  ;; "Î¢ÈíÑÅºÚ" "Î¢ÈíÑÅºÚ"
+                  ;; "æ±‰é¼ç¹ä¸­å˜" "æ±‰é¼ç¹ä¸­å˜" "æ±‰é¼ç¹ä¸­å˜"
+                  ;; "å¾®è½¯é›…é»‘" "å¾®è½¯é›…é»‘"
                   ))
           (x   . ,(if (string= system-name "debian..xwl")
                       '("DejaVu Sans Mono-11" "wenquanyi" "wenquanyi")
@@ -85,12 +85,27 @@
 ;;     (setq explicit-shell-file-name "c:/cygwin/bin/bash.exe")
 ;;     (setq shell-file-name explicit-shell-file-name)))
 
-;; control+è‹±æ•°(jis_esiuu)+p is missing on my macbook! :(
+;; control+é‘»è¾¨æšŸ(jis_esiuu)+p is missing on my macbook! :(
 (global-set-key (kbd "C-M-@") (kbd "C-M-p"))
 
 (when (eq window-system 'ns)
   (setq ns-pop-up-frames nil)
-  (setq ns-show-menu-bar-p t))
+  (setq ns-show-menu-bar-p t)
+
+  (let ((top (ns-get-resource nil "FrameTop"))
+        (left (ns-get-resource nil "FrameLeft"))
+        (f (selected-frame)))
+    (when (and top left)
+      (set-frame-parameter f 'top (string-to-number top))
+      (set-frame-parameter f 'left (string-to-number left)))))
+
+(add-hook 'kill-emacs-hook
+          (lambda ()
+            (let ((f (selected-frame)))
+              (ns-set-resource nil "FrameTop" (number-to-string
+                                               (frame-parameter f 'top)))
+              (ns-set-resource nil "FrameLeft" (number-to-string
+                                                (frame-parameter f 'left))))))
 
 (set-cursor-color "Magenta")
 
