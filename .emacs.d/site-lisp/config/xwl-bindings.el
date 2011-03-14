@@ -373,4 +373,5 @@
 
 (provide 'xwl-bindings)
 
+;ok
 ;;; xwl-bindings.el ends here
