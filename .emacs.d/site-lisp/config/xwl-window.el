@@ -101,11 +101,12 @@
 
 (add-hook 'kill-emacs-hook
           (lambda ()
-            (let ((f (selected-frame)))
-              (ns-set-resource nil "FrameTop" (number-to-string
-                                               (frame-parameter f 'top)))
-              (ns-set-resource nil "FrameLeft" (number-to-string
-                                                (frame-parameter f 'left))))))
+            (when (eq system-type 'darwin)
+              (let ((f (selected-frame)))
+                (ns-set-resource nil "FrameTop" (number-to-string
+                                                 (frame-parameter f 'top)))
+                (ns-set-resource nil "FrameLeft" (number-to-string
+                                                  (frame-parameter f 'left)))))))
 
 (set-cursor-color "Magenta")
 
