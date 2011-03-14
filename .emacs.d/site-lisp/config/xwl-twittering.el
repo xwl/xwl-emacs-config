@@ -122,7 +122,7 @@
      (setq twittering-proxy-use t)
 
      (if xwl-at-company?
-         (setq twittering-proxy-server (xds "DKZpCa<)CaHpCa<qEn==")
+         (setq twittering-proxy-server "172.16.42.137"
                twittering-proxy-port 8080)
        (setq twittering-proxy-server (xds "Q)0mQ)ocCdEl")
              twittering-proxy-port 80
