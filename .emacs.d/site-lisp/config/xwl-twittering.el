@@ -23,13 +23,15 @@
 (setq twittering-my-fill-column (- twittering-fill-column
                                    xwl-twittering-padding-size))
 
-(setq twittering-status-format
-      (concat "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%i %g %s, from %f%L%r%R:\n%FOLD["
-              (make-string xwl-twittering-padding-size ? ) "]{%t}"
-              ;; put image near center, 20 -- approximately width of image
-              "%FOLD[" (make-string (- (/ twittering-fill-column 2) 20) ? ) "]{%T}\n}")
-      twittering-my-status-format
-      "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%g %s, from %f%L%r%R: %i\n%FOLD[]{%t%T}\n}")
+(let ((text-prefix (make-string xwl-twittering-padding-size ? ))
+      ;; put image near center, 20 -- approximately width of image
+      (image-prefix (make-string (- (/ twittering-fill-column 2) 20) ? )))
+  (setq twittering-status-format
+        (concat "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%i %g %s, from %f%L%r%R:\n%FOLD["
+                text-prefix "]{%t}"  "%FOLD[" image-prefix "]{%T}\n}")
+        twittering-my-status-format
+        (concat "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%g %s, from %f%L%r%R: %i\n%FOLD[]{%t}%FOLD["
+                image-prefix "]{%T}\n}")))
 
 (setq twittering-retweet-format "RT @%s: %t")
 
