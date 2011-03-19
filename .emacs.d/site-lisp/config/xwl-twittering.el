@@ -43,7 +43,9 @@
         ":direct_messages@twitter" "xwl/followers@twitter"
         "xwl/tianxiashi@twitter" "xwl/hl@twitter"
 
-        ":home@sina" ":mentions@sina" ":replies@sina")
+        ":home@sina" ":mentions@sina" ":replies@sina"
+
+        ":home@douban")
       twittering-use-master-password t)
 
 (setq twittering-use-native-retweet t)
@@ -167,19 +169,27 @@
               (auth oauth))
 
         (twitter (username "xwl")
-                 ,@(if xwl-at-company?
-                       `((auth oauth))
-                     `((auth basic)
-                       (password ,pwtwitter))))
+                 ;; For `basic' if you:
+                 ;;   1. Use twittering-use-master-password and don't want enter
+                 ;;      password every time.
+                 ;;   2. Don't specify `password' entry here.
+                 ;;
+                 ;; Then you need to add `password' to .twittering-mode.gpg
+                 ;; manually at present.
+                 (auth ,(if xwl-at-company? 'oauth 'basic)))
+
+        (douban (username "xwl")
+                (auth oauth))
 
         ;; (socialcast (username "WilliamXu")
         ;;             (auth basic))
         ))
 
-(setq twittering-enabled-services `(sina twitter)
+(setq twittering-enabled-services `(sina twitter douban)
       twittering-initial-timeline-spec-string
       `(":home@sina" ":replies@sina" ":mentions@sina"
         ":home@twitter" ":replies@twitter" ":direct_messages@twitter"
+        ":home@douban"
         ))
 
 (setq twittering-image-external-viewer-command
