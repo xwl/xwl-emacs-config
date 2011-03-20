@@ -93,6 +93,7 @@
      (define-key twittering-mode-map (kbd "s") 'twittering-search)
      (define-key twittering-mode-map (kbd "d") nil)
      (define-key twittering-mode-map (kbd "h") 'twittering-refresh)
+     (define-key twittering-mode-map (kbd "t") 'twittering-toggle-thumbnail)
 
      (define-key twittering-mode-map (kbd "<S-tab>") 'twittering-goto-previous-thing)
      (define-key twittering-mode-map (kbd "C-c C-SPC") 'twittering-switch-to-unread-timeline)

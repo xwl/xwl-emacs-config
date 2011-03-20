@@ -48,6 +48,7 @@
 ;;;###autoload
 (defun xwl-snarl (title message)
   (when (featurep 'emms)
+    (require 'xwl-emms)
     (xwl-shell-command-asynchronously
      (format "Snarl_CMD.exe snShowMessage 5 \"%s\" \"%s\" \"%s\""
              (emms-i18n-iconv 'utf-8 'gb18030 title)
