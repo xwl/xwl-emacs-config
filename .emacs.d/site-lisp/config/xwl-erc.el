@@ -155,7 +155,9 @@ so as to keep an eye on work when necessarily."
     (goto-char (point-max))
     (forward-line -1)
     ad-do-it)
-   ((and (twittering-buffer-p) twittering-unread-status-info)
+   ((and (fboundp 'twittering-buffer-p)
+         (twittering-buffer-p)
+         twittering-unread-status-info)
     (switch-to-buffer (caar twittering-unread-status-info)))
    (t
     ad-do-it)))
