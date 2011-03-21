@@ -474,8 +474,11 @@ Thus generate a TAGs file."
 	text-mode outline-mode))
 
 (when (eq system-type 'windows-nt)
-  (setq find-program "cmd /c c:/usr/git/bin/find"
-        grep-program "cmd /c c:/usr/git/bin/grep"))
+  (if (file-exists-p "c:/usr/git/bin/grep.exe")
+      (setq find-program "cmd /c c:/usr/git/bin/find.exe"
+            grep-program "cmd /c c:/usr/git/bin/grep.exe")
+    (setq find-program "cmd /c c:/usr/bin/find"
+          grep-program "cmd /c c:/usr/bin/grep")))
 
 (eval-after-load 'grep
   '(progn

@@ -92,20 +92,39 @@
   (setq ns-pop-up-frames nil)
   (setq ns-show-menu-bar-p t)
 
-  (let ((top (ns-get-resource nil "FrameTop"))
-        (left (ns-get-resource nil "FrameLeft"))
-        (f (selected-frame)))
-    (when (and top left)
-      (set-frame-parameter f 'top (string-to-number top))
-      (set-frame-parameter f 'left (string-to-number left)))))
+  ;; (let ((top (ns-get-resource nil "FrameTop"))
+  ;;       (left (ns-get-resource nil "FrameLeft"))
+  ;;       (f (selected-frame)))
+  ;;   (when (and top left)
+  ;;     (set-frame-parameter f 'top (string-to-number top))
+  ;;     (set-frame-parameter f 'left (string-to-number left))))
+  )
+
+(setq xwl-session-cache-file "~/.emacs.d/session-cache.el")
+
+(when (file-exists-p xwl-session-cache-file)
+  (load xwl-session-cache-file))
 
 (add-hook 'kill-emacs-hook
           (lambda ()
-            (let ((f (selected-frame)))
-              (ns-set-resource nil "FrameTop" (number-to-string
-                                               (frame-parameter f 'top)))
-              (ns-set-resource nil "FrameLeft" (number-to-string
-                                                (frame-parameter f 'left))))))
+            ;; (when (eq system-type 'darwin)
+            ;;   (let ((f (selected-frame)))
+            ;;     (ns-set-resource nil "FrameTop" (number-to-string
+            ;;                                      (frame-parameter f 'top)))
+            ;;     (ns-set-resource nil "FrameLeft" (number-to-string
+            ;;                                       (frame-parameter f 'left)))))
+
+            (with-temp-file xwl-session-cache-file
+              (let (print-length
+                    print-level)
+                (pp `(modify-frame-parameters
+                      (selected-frame)
+                      ',(remove-if-not (lambda (i)
+                                         (memq (type-of (cdr i))
+                                               '(string symbol float integer)))
+                                       (frame-parameters)))
+                    (current-buffer))))
+            ))
 
 (set-cursor-color "Magenta")
 

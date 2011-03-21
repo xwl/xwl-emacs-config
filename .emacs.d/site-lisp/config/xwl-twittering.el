@@ -23,13 +23,15 @@
 (setq twittering-my-fill-column (- twittering-fill-column
                                    xwl-twittering-padding-size))
 
-(setq twittering-status-format
-      (concat "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%i %g %s, from %f%L%r%R:\n%FOLD["
-              (make-string xwl-twittering-padding-size ? ) "]{%t}"
-              ;; put image near center, 20 -- approximately width of image
-              "%FOLD[" (make-string (- (/ twittering-fill-column 2) 20) ? ) "]{%T}\n}")
-      twittering-my-status-format
-      "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%g %s, from %f%L%r%R: %i\n%FOLD[]{%t%T}\n}")
+(let ((text-prefix (make-string xwl-twittering-padding-size ? ))
+      ;; put image near center, 20 -- approximately width of image
+      (image-prefix (make-string (- (/ twittering-fill-column 2) 20) ? )))
+  (setq twittering-status-format
+        (concat "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%i %g %s, from %f%L%r%R:\n%FOLD["
+                text-prefix "]{%t}"  "%FOLD[" image-prefix "]{%T}\n}")
+        twittering-my-status-format
+        (concat "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%g %s, from %f%L%r%R: %i\n%FOLD[]{%t}%FOLD["
+                image-prefix "]{%T}\n}")))
 
 (setq twittering-retweet-format "RT @%s: %t")
 
@@ -41,7 +43,9 @@
         ":direct_messages@twitter" "xwl/followers@twitter"
         "xwl/tianxiashi@twitter" "xwl/hl@twitter"
 
-        ":home@sina" ":mentions@sina" ":replies@sina")
+        ":home@sina" ":mentions@sina" ":replies@sina"
+
+        ":home@douban")
       twittering-use-master-password t)
 
 (setq twittering-use-native-retweet t)
@@ -89,6 +93,7 @@
      (define-key twittering-mode-map (kbd "s") 'twittering-search)
      (define-key twittering-mode-map (kbd "d") nil)
      (define-key twittering-mode-map (kbd "h") 'twittering-refresh)
+     (define-key twittering-mode-map (kbd "t") 'twittering-toggle-thumbnail)
 
      (define-key twittering-mode-map (kbd "<S-tab>") 'twittering-goto-previous-thing)
      (define-key twittering-mode-map (kbd "C-c C-SPC") 'twittering-switch-to-unread-timeline)
@@ -122,7 +127,7 @@
      (setq twittering-proxy-use t)
 
      (if xwl-at-company?
-         (setq twittering-proxy-server (xds "DKZpCa<)CaHpCa<qEn==")
+         (setq twittering-proxy-server "172.16.42.137"
                twittering-proxy-port 8080)
        (setq twittering-proxy-server (xds "Q)0mQ)ocCdEl")
              twittering-proxy-port 80
@@ -165,19 +170,27 @@
               (auth oauth))
 
         (twitter (username "xwl")
-                 ,@(if xwl-at-company?
-                       `((auth oauth))
-                     `((auth basic)
-                       (password ,pwtwitter))))
+                 ;; For `basic' if you:
+                 ;;   1. Use twittering-use-master-password and don't want enter
+                 ;;      password every time.
+                 ;;   2. Don't specify `password' entry here.
+                 ;;
+                 ;; Then you need to add `password' to .twittering-mode.gpg
+                 ;; manually at present.
+                 (auth ,(if xwl-at-company? 'oauth 'basic)))
+
+        (douban (username "xwl")
+                (auth oauth))
 
         ;; (socialcast (username "WilliamXu")
         ;;             (auth basic))
         ))
 
-(setq twittering-enabled-services `(sina twitter)
+(setq twittering-enabled-services `(sina twitter douban)
       twittering-initial-timeline-spec-string
       `(":home@sina" ":replies@sina" ":mentions@sina"
         ":home@twitter" ":replies@twitter" ":direct_messages@twitter"
+        ":home@douban"
         ))
 
 (setq twittering-image-external-viewer-command

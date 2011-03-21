@@ -214,6 +214,8 @@
 
 (setq-default tab-width 4)
 
+(transient-mark-mode -1)
+
 (provide 'xwl-convenience)
 
 ;;; xwl-convenience.el ends here

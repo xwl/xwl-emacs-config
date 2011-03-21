@@ -407,8 +407,8 @@
                nil
                ;; (add-hook 'window-configuration-change-hook
                '(lambda ()
-                  (when window-system
-                     (xwl-fullscreen))
+                  ;; (when window-system
+                  ;;    (xwl-fullscreen))
                   (sit-for 0.5)
                   (let ((col (round (/ (frame-width) 2))))
                     (setq erc-fill-column (- col 2)) ; 6 for leading timestamp.
