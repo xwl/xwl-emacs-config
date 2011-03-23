@@ -170,13 +170,6 @@
               (auth oauth))
 
         (twitter (username "xwl")
-                 ;; For `basic' if you:
-                 ;;   1. Use twittering-use-master-password and don't want enter
-                 ;;      password every time.
-                 ;;   2. Don't specify `password' entry here.
-                 ;;
-                 ;; Then you need to add `password' to .twittering-mode.gpg
-                 ;; manually at present.
                  (auth ,(if xwl-at-company? 'oauth 'basic)))
 
         (douban (username "xwl")
@@ -186,8 +179,7 @@
         ;;             (auth basic))
         ))
 
-(setq twittering-enabled-services `(sina twitter douban)
-      twittering-initial-timeline-spec-string
+(setq twittering-initial-timeline-spec-string
       `(":home@sina" ":replies@sina" ":mentions@sina"
         ":home@twitter" ":replies@twitter" ":direct_messages@twitter"
         ":home@douban"
