@@ -188,7 +188,17 @@
 (setq twittering-image-external-viewer-command
       (case system-type
         ((darwin) "open")
-        ((windows-nt) "start")))
+        ((windows-nt) "")))
+
+
+(setq twittering-status-filter 'xwl-twittering-status-filter)
+
+(defun xwl-twittering-status-filter (status)
+  ;; Hide duplicated retweets
+  (not (let ((rt (twittering-is-retweet? status)))
+         (when rt
+           (gethash (assqref 'id rt)
+                    (twittering-current-timeline-referring-id-table))))))
 
 (provide 'xwl-twittering)
 ;;; xwl-twittering.el ends here
