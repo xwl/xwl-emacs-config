@@ -190,15 +190,17 @@
         ((darwin) "open")
         ((windows-nt) "")))
 
-
 (setq twittering-status-filter 'xwl-twittering-status-filter)
 
 (defun xwl-twittering-status-filter (status)
   ;; Hide duplicated retweets
-  (not (let ((rt (twittering-is-retweet? status)))
-         (when rt
-           (gethash (assqref 'id rt)
-                    (twittering-current-timeline-referring-id-table))))))
+  (not (let ((rt (twittering-is-retweet? status))
+             (table (twittering-current-timeline-referring-id-table)))
+         (when (and rt table (not (string=
+                                   (twittering-current-timeline-spec-string)
+                                   ":mentions@sina")))
+           (not (string= (gethash (assqref 'id rt) table)
+                         (assqref 'id status)))))))
 
 (provide 'xwl-twittering)
 ;;; xwl-twittering.el ends here
