@@ -431,15 +431,13 @@
   ;; (xwl-weather-update)
 
   (when (fboundp 'color-theme-xwl-console)
-    (run-at-time 1
-                 nil
-                 'color-theme-xwl-console))
+    (run-at-time 1 nil 'color-theme-xwl-console))
 
   (when window-system
     (require 'highlight-tail)
     (setq highlight-tail-colors
-          '(("#bc2525" . 0)))
-          ;; '(("#d8971d" . 0)))
+          `((;; ,(if xwl-black-background? "#bc2525" "#d8971d")
+             "#bc2525" . 0)))
     (highlight-tail-reload))
 
   (appt-activate 1)
