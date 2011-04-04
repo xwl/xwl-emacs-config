@@ -34,7 +34,11 @@
 
 (let* ((all-fonts
         `((mac . ("Monaco-14" "stheiti*" "hiragino maru gothic pro"))
-          (ns  . ("Monaco-14" "Hiragino Sans GB" "Hiragino_Kaku_Gothic_ProN"))
+          (ns  . ,(if (equal user-login-name "william")
+                      '("Monaco-18"
+                        "-apple-Hiragino_Sans_GB-medium-normal-normal-*-18-*-*-*-p-0-iso10646-1"
+                        "-apple-Hiragino_Sans_GB-medium-normal-normal-*-18-*-*-*-p-0-iso10646-1")
+                    '("Monaco-14" "Hiragino Sans GB" "Hiragino_Kaku_Gothic_ProN")))
           (w32 . ("Monaco-10" "NSimSun" "NSimSun"
                   ;; "汉鼎繁中变" "汉鼎繁中变" "汉鼎繁中变"
                   ;; "微软雅黑" "微软雅黑"
@@ -42,7 +46,7 @@
           (x   . ,(if (string= system-name "debian..xwl")
                       '("DejaVu Sans Mono-11" "wenquanyi" "wenquanyi")
                     '("DejaVu LGC Sans Mono-14" "wenquanyi" "wenquanyi")
-                    ;'("DejaVu LGC Sans Mono-13" "SimSun" "SimSun")
+                                        ;'("DejaVu LGC Sans Mono-13" "SimSun" "SimSun")
                     ))))
        (fonts (cdr (assoc window-system all-fonts)))
        (default-font (nth 0 fonts))
