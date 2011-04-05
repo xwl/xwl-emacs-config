@@ -724,15 +724,21 @@ If SCHEME?, `run-scheme'."
     ad-do-it))
 
 (defun xwl-compilation-exit-autoclose (status code msg)
-  (if (not (and (eq status 'exit) (zerop code)))
-      (message "Compilation failed")
-    (run-at-time 1 nil (lambda ()
-                         ;; (set-window-configuration
-                         ;; xwl-layout-before-compilation)
-                         ;; (delete-windows-on "*compilation*")
-                         (xwl-delete-frame)
-                         ))
-    (message "Compilation succeed"))
+  (cond ((not (and (eq status 'exit) (zerop code)))
+         (setq msg "failed"))
+        ((with-current-buffer "*compilation*"
+           (save-excursion
+             (goto-char (point-min))
+             (re-search-forward "warning:" nil t 1)))
+         (setq msg "has warnings"))
+        (t
+         (run-at-time 1 nil (lambda ()
+                              ;; (set-window-configuration
+                              ;; xwl-layout-before-compilation)
+                              ;; (delete-windows-on "*compilation*")
+                              (xwl-delete-frame)
+                              ))
+         (setq msg "succeed")))
   (cons msg code))
 
 (setq compilation-exit-message-function 'xwl-compilation-exit-autoclose)
