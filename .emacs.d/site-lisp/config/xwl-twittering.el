@@ -60,7 +60,9 @@
 
 (add-hook 'twittering-mode-hook (lambda ()
                                   (setq cursor-type nil)
-                                  (hl-line-mode 1)))
+                                  (hl-line-mode 1)
+                                  (when (eq system-type 'windows-nt)
+                                    (setq line-spacing 5))))
 
 ;; Disable URI handling in twittering, let's use goto-address-mode instead.
 (setq twittering-regexp-uri "^^$")
@@ -165,19 +167,12 @@
 ;; Also in `gtap', disable "secure: always".
 (setq twittering-use-ssl nil)
 
-(setq twittering-accounts
-      `((sina (username "william.xwl@gmail.com")
-              (auth oauth))
-
-        (twitter (username "xwl")
-                 (auth ,(if xwl-at-company? 'oauth 'basic)))
-
-        (douban (username "xwl")
-                (auth oauth))
-
-        ;; (socialcast (username "WilliamXu")
-        ;;             (auth basic))
-        ))
+(unless xwl-at-company?
+  (setq twittering-accounts
+        `((twitter (auth 'basic))
+          ;; (socialcast (username "WilliamXu")
+          ;;             (auth basic))
+          )))
 
 (setq twittering-initial-timeline-spec-string
       `(":home@sina" ":replies@sina" ":mentions@sina"
