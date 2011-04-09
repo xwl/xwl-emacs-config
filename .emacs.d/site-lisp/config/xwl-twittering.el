@@ -38,14 +38,6 @@
 (setq twittering-new-tweets-count-excluding-me t
       twittering-new-tweets-count-excluding-replies-in-home t
       twittering-timer-interval 300
-      twittering-cache-spec-strings
-      '(":home@twitter" ":retweets_of_me@twitter" ":replies@twitter"
-        ":direct_messages@twitter" "xwl/followers@twitter"
-        "xwl/tianxiashi@twitter" "xwl/hl@twitter"
-
-        ":home@sina" ":mentions@sina" ":replies@sina"
-
-        ":home@douban")
       twittering-use-master-password t)
 
 (setq twittering-use-native-retweet t)
@@ -166,15 +158,7 @@
 (setq twittering-use-ssl nil)
 
 (setq twittering-accounts
-      `((sina (username "william.xwl@gmail.com")
-              (auth oauth))
-
-        (twitter (username "xwl")
-                 (auth ,(if xwl-at-company? 'oauth 'basic)))
-
-        (douban (username "xwl")
-                (auth oauth))
-
+      `((twitter (auth ,(if xwl-at-company? 'oauth 'basic)))
         ;; (socialcast (username "WilliamXu")
         ;;             (auth basic))
         ))
@@ -191,7 +175,6 @@
         ((windows-nt) "")))
 
 (setq twittering-status-filter 'xwl-twittering-status-filter)
-
 (defun xwl-twittering-status-filter (status)
   ;; Hide duplicated retweets
   (not (let ((rt (twittering-is-retweet? status))
