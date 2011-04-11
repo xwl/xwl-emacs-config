@@ -216,6 +216,8 @@
 
 (transient-mark-mode -1)
 
+(setq-default line-spacing 5)
+
 (provide 'xwl-convenience)
 
 ;;; xwl-convenience.el ends here
