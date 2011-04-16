@@ -33,16 +33,19 @@
         (concat "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%g %s, from %f%L%r%R: %i\n%FOLD[]{%t}%FOLD["
                 image-prefix "]{%T}\n}")))
 
-(setq twittering-retweet-format "RT @%s: %t")
+(setq twittering-retweet-format "RT @%s: %t"
+      twittering-use-native-retweet t)
 
 (setq twittering-new-tweets-count-excluding-me t
       twittering-new-tweets-count-excluding-replies-in-home t
       twittering-timer-interval 300
       twittering-use-master-password t)
 
-(setq twittering-use-native-retweet t)
-
 (setq twittering-allow-insecure-server-cert t)
+(setq twittering-oauth-use-ssl nil)
+;; Also in `gtap', don't set `secure' to "secure: always", use "optional" or
+;; "disable", instead.
+(setq twittering-use-ssl nil)
 
 (add-hook 'twittering-edit-mode-hook (lambda ()
                                        ;; (flyspell-mode 1)
@@ -91,8 +94,7 @@
      (define-key twittering-mode-map (kbd "C-c C-SPC") 'twittering-switch-to-unread-timeline)
 
      (setq twittering-timeline-most-active-spec-strings
-           (cons ":mentions"
-                 twittering-timeline-most-active-spec-strings))
+           `(":mentions" ,@twittering-timeline-most-active-spec-strings))
 
      (twittering-enable-unread-status-notifier)
 
@@ -100,33 +102,31 @@
        (set-face-background twittering-zebra-1-face "gray24")
        (set-face-background twittering-zebra-2-face "gray22"))
 
-     (defadvice twit (before reset-url-resolving-flag activate)
-       "To avoid possible deadlock caused by resovling url."
-       (setq twittering-url-request-resolving-p nil))
-
      (unless xwl-at-company?
        (let ((tw (cdr (assq 'twitter twittering-service-method-table))))
          (setq twittering-service-method-table
                `((twitter
-                  (api    ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC)FnXH=="))
-                  (web    ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0k"))
-                  (search ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*EcPOAaX8=="))
-                  ,@(assq-delete-all 'api
-                                     (assq-delete-all 'search
-                                                      (assq-delete-all 'web tw))))
-                 ,@(assq-delete-all 'twitter twittering-service-method-table)))))
+                  (api        ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC)FnXH=="))
+                  (web        ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0k"))
+                  (search     ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*EcPOAaX8=="))
+                  (stream     ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*E'ZdM_YH=="))
+                  (userstream ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*MqQOAq[?AcPN'="))
 
-     (setq twittering-proxy-use t)
+                  ,@(remove-if (lambda (i) (memq (car i) '(api web search stream userstream))) tw))
 
-     (if xwl-at-company?
-         (setq twittering-proxy-server "172.16.42.137"
-               twittering-proxy-port 8080)
-       (setq twittering-proxy-server (xds "Q)0mQ)ocCdEl")
-             twittering-proxy-port 80
-             twittering-uri-regexp-to-proxy
-             (car
-              (assqref 'web
-                       (assqref 'twitter twittering-service-method-table)))))
+                 ,@(remove-if (lambda (i) (eq (car i) 'twitter)) twittering-service-method-table)))))
+
+     (when xwl-at-company?
+       (setq twittering-proxy-use t)
+       (setq twittering-proxy-server "172.16.42.137"
+             twittering-proxy-port 8080))
+
+     ;; (setq twittering-proxy-server (xds "Q)0mQ)ocCdEl")
+     ;;       twittering-proxy-port 80
+     ;;       twittering-uri-regexp-to-proxy
+     ;;       (car
+     ;;        (assqref 'web
+     ;;                 (assqref 'twitter twittering-service-method-table))))
 
      (setq-default twittering-reverse-mode t
                    twittering-icon-mode t)
@@ -151,11 +151,6 @@
   (defalias 'create-animated-image 'create-image))
 
 (setq twittering-tinyurl-service 'toly)
-
-(setq twittering-oauth-use-ssl nil)
-
-;; Also in `gtap', disable "secure: always".
-(setq twittering-use-ssl nil)
 
 (setq twittering-accounts
       `((twitter (auth ,(if xwl-at-company? 'oauth 'basic)))
