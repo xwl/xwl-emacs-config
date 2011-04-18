@@ -399,8 +399,6 @@
 
 ;; (remove-hook 'find-file-hook 'bracketphobia-hide)
 
-(setq xwl-twittering-padding-size 8)
-
 (defun xwl-after-init-hook ()
   ;; FIXME: how to set this only after window has been maximized?
   (run-at-time 3
@@ -411,10 +409,7 @@
                   ;;    (xwl-fullscreen))
                   (sit-for 0.5)
                   (let ((col (round (/ (frame-width) 2))))
-                    (setq erc-fill-column (- col 2)) ; 6 for leading timestamp.
-                    (setq twittering-fill-column col
-                          twittering-my-fill-column (- twittering-fill-column
-                                                       xwl-twittering-padding-size)))
+                    (setq erc-fill-column (- col 2))) ; 6 for leading timestamp.
                   ))
 
   ;; (shell-command "sudo ~/bin/.xwl-after-start-hook")

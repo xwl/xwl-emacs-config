@@ -20,25 +20,17 @@
 
 ;;; Code:
 
-(setq twittering-my-fill-column (- twittering-fill-column
-                                   xwl-twittering-padding-size))
-
-(let ((text-prefix (make-string xwl-twittering-padding-size ? ))
-      ;; put image near center, 20 -- approximately width of image
-      (image-prefix (make-string (- (/ twittering-fill-column 2) 20) ? )))
-  (setq twittering-status-format
-        (concat "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%i %g %s, from %f%L%r%R:\n%FOLD["
-                text-prefix "]{%t}"  "%FOLD[" image-prefix "]{%T}\n}")
-        twittering-my-status-format
-        (concat "%FACE[twittering-zebra-1-face,twittering-zebra-2-face]{%g %s, from %f%L%r%R: %i\n%FOLD[]{%t}%FOLD["
-                image-prefix "]{%T}\n}")))
+(let ((col (round (/ (frame-width) 2)))
+      (padding 8))
+  (setq twittering-fill-column col
+        twittering-my-fill-column (- twittering-fill-column padding)))
 
 (setq twittering-retweet-format "RT @%s: %t"
       twittering-use-native-retweet t)
 
 (setq twittering-new-tweets-count-excluding-me t
       twittering-new-tweets-count-excluding-replies-in-home t
-      twittering-timer-interval 300
+      ; twittering-timer-interval 300
       twittering-use-master-password t)
 
 (setq twittering-allow-insecure-server-cert t)
