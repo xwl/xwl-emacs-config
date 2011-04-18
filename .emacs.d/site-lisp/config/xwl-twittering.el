@@ -96,8 +96,17 @@
        (set-face-background twittering-zebra-1-face "gray24")
        (set-face-background twittering-zebra-2-face "gray22"))
 
-     (unless xwl-at-company?
-       (let ((tw (cdr (assq 'twitter twittering-service-method-table))))
+     (if xwl-at-company?
+         (let ((sc (assqref 'socialcast twittering-service-method-table)))
+           (setq twittering-service-method-table
+                 `((socialcast
+                    (api ,socialcast-api)
+                    (web ,socialcast-web)
+                    ,@(remove-if (lambda (i) (memq (car i) '(api web))) sc))
+
+                   ,@(remove-if (lambda (i) (eq (car i) 'socialcast)) twittering-service-method-table))))
+
+       (let ((tw (assqref 'twitter twittering-service-method-table)))
          (setq twittering-service-method-table
                `((twitter
                   (api        ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC)FnXH=="))
@@ -124,19 +133,6 @@
 
      (setq-default twittering-reverse-mode t
                    twittering-icon-mode t)
-
-     ;; (setq twittering-service-method-table
-     ;;       `((socialcast (api "socialcast.americas.nokia.com")
-     ;;                     (search "search.socialcast.americas.nokia.com")
-     ;;                     (web "socialcast.americas.nokia.com")
-
-     ;;                     (api-prefix "1/")
-     ;;                     (search-method "search")
-     ;;                     (status-url twittering-get-status-url-twitter)
-     ;;                     (search-url twittering-get-search-url-twitter))
-
-     ;;         ,@twittering-service-method-table))
-
      ))
 
 ;; FIXME: in 23.2, who the hell autoload create-animated-image?? this exists in
@@ -148,14 +144,14 @@
 
 (setq twittering-accounts
       `((twitter (auth ,(if xwl-at-company? 'oauth 'basic)))
-        ;; (socialcast (username "WilliamXu")
-        ;;             (auth basic))
-        ))
+        (socialcast (auth basic))))
 
 (setq twittering-initial-timeline-spec-string
       `(":home@sina" ":replies@sina" ":mentions@sina"
         ":home@twitter" ":replies@twitter" ":direct_messages@twitter"
         ":home@douban"
+        ,@(when xwl-at-company?
+            '(":home@socialcast"))
         ))
 
 (setq twittering-image-external-viewer-command
