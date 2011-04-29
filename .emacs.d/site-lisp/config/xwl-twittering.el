@@ -30,14 +30,13 @@
 
 (setq twittering-new-tweets-count-excluding-me t
       twittering-new-tweets-count-excluding-replies-in-home t
-      ; twittering-timer-interval 300
+      twittering-timer-interval 300
       twittering-use-master-password t)
 
 (setq twittering-allow-insecure-server-cert t)
-(setq twittering-oauth-use-ssl nil)
+
 ;; Also in `gtap', don't set `secure' to "secure: always", use "optional" or
 ;; "disable", instead.
-(setq twittering-use-ssl nil)
 
 (add-hook 'twittering-edit-mode-hook (lambda ()
                                        ;; (flyspell-mode 1)
@@ -114,7 +113,6 @@
                   (search     ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*EcPOAaX8=="))
                   (stream     ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*E'ZdM_YH=="))
                   (userstream ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*MqQOAq[?AcPN'="))
-
                   ,@(remove-if (lambda (i) (memq (car i) '(api web search stream userstream))) tw))
 
                  ,@(remove-if (lambda (i) (eq (car i) 'twitter)) twittering-service-method-table)))))
@@ -143,15 +141,20 @@
 (setq twittering-tinyurl-service 'toly)
 
 (setq twittering-accounts
-      `((twitter (auth ,(if xwl-at-company? 'oauth 'basic)))
-        (socialcast (auth basic))))
+      `((twitter
+         ,(if xwl-at-company?
+              '(ssl t)
+            '(auth basic)))
+
+        (socialcast (auth basic)
+                    (ssl t))))
 
 (setq twittering-initial-timeline-spec-string
       `(":home@sina" ":replies@sina" ":mentions@sina"
         ":home@twitter" ":replies@twitter" ":direct_messages@twitter"
         ":home@douban"
         ,@(when xwl-at-company?
-            '(":home@socialcast"))
+            '(":home@socialcast" ":public@socialcast"))
         ))
 
 (setq twittering-image-external-viewer-command
