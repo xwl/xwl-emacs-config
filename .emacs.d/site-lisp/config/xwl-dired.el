@@ -1,6 +1,6 @@
 ;;; xwl-dired.el --- Dired config
 
-;; Copyright (C) 2007, 2008, 2009, 2010 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010, 2011 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -220,6 +220,8 @@ be with length 3 extentions !"
         ".hi" ".p_hi" ".p_o" ".hi-boot" ".o-boot" ".p_o-boot"
         ".p_hi-boot" ".hs-boot" ".obj" ".ncb" ".suo" ".user" ".idb"
         ".pdb" ".moc" ".manifest" ".ilk"))
+
+(setq dired-omit-verbose nil)
 
 ;;; Actions
 
