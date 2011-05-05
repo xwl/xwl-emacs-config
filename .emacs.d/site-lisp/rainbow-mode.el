@@ -161,6 +161,7 @@ This will convert \"80 %\" to 204, \"100 %\" to 255 but \"123\" to \"123\""
 	 (b (caddr values)))
     (rainbow-color-luminance r g b)))
 
+;;;###autoload
 (defun rainbow-turn-on ()
   "Turn on raibow-mode."
   (font-lock-add-keywords nil

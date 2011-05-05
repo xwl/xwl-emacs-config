@@ -96,7 +96,8 @@
 
 (if (eq system-type 'windows-nt)
     ;; Seems gnuwin32 image library has to be set before emacs starts.
-    (let ((paths '(;; "c:/Program Files/GnuWin32/bin"
+    (let ((paths `(;; "c:/Program Files/GnuWin32/bin"
+                  ,(file-truename "~/bin/git/bin")
                    )))
       (setenv "PATH" (mapconcat 'identity `(,(getenv "PATH") ,@paths) ";"))
       (setq exec-path (split-string (getenv "PATH") ";")))
