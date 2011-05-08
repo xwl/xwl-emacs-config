@@ -334,13 +334,17 @@
     ;; (defun xwl-write-file-functions ()
     ;;   (xwl-update-date)
 
-    (when (and (string-match (regexp-opt (list (file-truename xwl-site-lisp))) f)
-               (not (string-match "twittering-mode" f)))
+    (cond
+     ((and (string-match (regexp-opt (list (file-truename xwl-site-lisp))) f)
+           (not (string-match "twittering-mode" f)))
       (copyright-update)
 
       (unless (and (boundp 'qterm-log-file)
                    (string= (file-truename qterm-log-file) f))
         (nuke-trailing-whitespace)))
+     (t
+      (unless xwl-at-company?
+        (nuke-trailing-whitespace))))
 
     ;; should return nil
     nil))
@@ -812,8 +816,8 @@ passphrase cache or user."
           xwl-weather-list)
     (message str)))
 
-(setq eval-expression-print-length 100
-      print-length eval-expression-print-length)
+(setq eval-expression-print-length 100)
+;; print-length eval-expression-print-length)
 
 (defadvice shell-command (after enable-less activate)
   (let ((b "*Shell Command Output*"))
@@ -876,6 +880,17 @@ prompting.  If file is a directory perform a `find-file' on it."
          ;;   (push-mark (+ (point) (car (cdr (insert-file-contents f))))))
          ))
      ))
+
+;; Display eval output in a way similar to shell-command.
+
+(defadvice eval-expression (around display-large-output-other-buffer activate)
+  (let ((inhibit-read-only t))
+    (display-message-or-buffer (pp ad-do-it))))
+
+(defadvice eval-last-sexp (around display-large-output-other-buffer activate)
+  (let ((inhibit-read-only t))
+    (display-message-or-buffer (pp ad-do-it))))
+
 
 (provide 'xwl-misc)
 
