@@ -128,13 +128,18 @@ Create a sawfish interaction buffer.
 
 ;;;***
 
-;;;### (autoloads (rainbow-mode) "rainbow-mode" "rainbow-mode.el"
-;;;;;;  (19499 24852))
+;;;### (autoloads (rainbow-mode rainbow-turn-on) "rainbow-mode" "rainbow-mode.el"
+;;;;;;  (19915 61891))
 ;;; Generated autoloads from rainbow-mode.el
+
+(autoload 'rainbow-turn-on "rainbow-mode" "\
+Turn on raibow-mode.
+
+\(fn)" nil nil)
 
 (autoload 'rainbow-mode "rainbow-mode" "\
 Colorize strings that represent colors.
-This will fontify with colors the string like \"#aabbcc\" or \"blue\"
+This will fontify with colors the string like \"#aabbcc\" or \"blue\".
 
 \(fn &optional ARG)" t nil)
 
@@ -1295,7 +1300,7 @@ Kill thread from here using leafnode.
 ;;;***
 
 ;;;### (autoloads (twit) "twittering-mode" "twittering-mode/twittering-mode.el"
-;;;;;;  (19751 125))
+;;;;;;  (19913 14550))
 ;;; Generated autoloads from twittering-mode/twittering-mode.el
 
 (autoload 'twit "twittering-mode" "\
@@ -1305,8 +1310,8 @@ Start twittering-mode.
 
 ;;;***
 
-;;;### (autoloads (wget-web-page wget) "wget" "wget-el/wget.el" (18862
-;;;;;;  33836))
+;;;### (autoloads (wget-web-page wget) "wget" "wget-el/wget.el" (19818
+;;;;;;  7670))
 ;;; Generated autoloads from wget-el/wget.el
 
 (autoload 'wget "wget" "\
@@ -1788,7 +1793,7 @@ the *BBDB* buffer.
 
 ;;;### (autoloads (smart-operator-self-insert-command smart-operator-mode-on
 ;;;;;;  smart-operator-mode) "smart-operator" "xwl-elisp/smart-operator.el"
-;;;;;;  (19711 41228))
+;;;;;;  (19839 20099))
 ;;; Generated autoloads from xwl-elisp/smart-operator.el
 
 (autoload 'smart-operator-mode "smart-operator" "\
@@ -1808,8 +1813,8 @@ Insert the entered operator plus surrounding spaces.
 
 ;;;***
 
-;;;### (autoloads (salary-show) "salary" "xwl-elisp/salary.el" (19656
-;;;;;;  15431))
+;;;### (autoloads (salary-show) "salary" "xwl-elisp/salary.el" (19886
+;;;;;;  63708))
 ;;; Generated autoloads from xwl-elisp/salary.el
 
 (autoload 'salary-show "salary" "\
@@ -1835,7 +1840,7 @@ Major mode for editing Qt QML files.
 ;;;### (autoloads (less-minor-mode-off less-minor-mode-on auto-less-minor-mode
 ;;;;;;  less-quit less-end-of-buffer less-beginning-of-buffer less-scroll-down-line
 ;;;;;;  less-scroll-up-line less-minor-mode global-less-minor-mode)
-;;;;;;  "less" "xwl-elisp/less.el" (19656 15431))
+;;;;;;  "less" "xwl-elisp/less.el" (19890 60982))
 ;;; Generated autoloads from xwl-elisp/less.el
 
 (defvar global-less-minor-mode nil "\
@@ -1910,7 +1915,7 @@ Turn off `less-minor-mode'.
 ;;;***
 
 ;;;### (autoloads (gmail-notifier-start) "gmail-notifier" "xwl-elisp/gmail-notifier.el"
-;;;;;;  (19735 17274))
+;;;;;;  (19839 20099))
 ;;; Generated autoloads from xwl-elisp/gmail-notifier.el
 
 (autoload 'gmail-notifier-start "gmail-notifier" "\
@@ -2027,7 +2032,7 @@ Create a *Dashboard* buffer.
 
 ;;;***
 
-;;;### (autoloads (ga) "ga" "xwl-elisp/ga/ga.el" (19699 49032))
+;;;### (autoloads (ga) "ga" "xwl-elisp/ga/ga.el" (19881 1234))
 ;;; Generated autoloads from xwl-elisp/ga/ga.el
 
 (autoload 'ga "ga" "\
@@ -2097,7 +2102,7 @@ Not documented
 ;;;***
 
 ;;;### (autoloads (xwl-zenity xwl-snarl xwl-growl xwl-notify) "xwl-notify"
-;;;;;;  "config/autoload/xwl-notify.el" (19690 34549))
+;;;;;;  "config/autoload/xwl-notify.el" (19847 14336))
 ;;; Generated autoloads from config/autoload/xwl-notify.el
 
 (autoload 'xwl-notify "xwl-notify" "\
