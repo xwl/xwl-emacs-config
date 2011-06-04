@@ -1048,6 +1048,7 @@ Useful for packing c/c++ functions with one line or empty body."
 ;;; misc
 
 (add-to-list 'auto-mode-alist '("\\.qml\\'" . qml-mode))
+(add-to-list 'auto-mode-alist '("\\.dot\\'" . graphviz-dot-mode))
 
 (provide 'xwl-programming)
 

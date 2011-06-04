@@ -35,9 +35,9 @@
 (let* ((all-fonts
         `((mac . ("Monaco-14" "stheiti*" "hiragino maru gothic pro"))
           (ns  . ,(if (equal user-login-name "william")
-                      '("Monaco-18"
-                        "-apple-Hiragino_Sans_GB-medium-normal-normal-*-18-*-*-*-p-0-iso10646-1"
-                        "-apple-Hiragino_Sans_GB-medium-normal-normal-*-18-*-*-*-p-0-iso10646-1")
+                      '("Monaco-16"
+                        "-apple-Hiragino_Sans_GB-medium-normal-normal-*-*-*-*-*-p-0-iso10646-1"
+                        "-apple-Hiragino_Sans_GB-medium-normal-normal-*-*-*-*-*-p-0-iso10646-1")
                     '("Monaco-14" "Hiragino Sans GB" "Hiragino_Kaku_Gothic_ProN")))
           (w32 . ("Monaco-10" "NSimSun" "NSimSun"
                   ;; "汉鼎繁中变" "汉鼎繁中变" "汉鼎繁中变"

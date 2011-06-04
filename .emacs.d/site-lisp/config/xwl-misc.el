@@ -37,12 +37,6 @@
 ;; repair some missed keys on console
 ;; (require 'wx-key)
 
-;; (require 'nuke-trailing-whitespace)
-(defun nuke-trailing-whitespace-check-mode ()
-  "Redefinition. Generally don't bother me!"
-  (not (memq major-mode
-             nuke-trailing-whitespace-never-major-modes)))
-
 ;; (unless xwl-at-company?
 ;;   (add-hook 'write-file-functions 'xwl-write-file-functions))
 
@@ -339,17 +333,20 @@
            (not (string-match "twittering-mode" f)))
       (copyright-update)
 
-      (unless (and (boundp 'qterm-log-file)
-                   (string= (file-truename qterm-log-file) f))
-        (nuke-trailing-whitespace)))
-     (t
-      (unless xwl-at-company?
-        (nuke-trailing-whitespace))))
+      ;; (unless (and (boundp 'qterm-log-file)
+      ;;              (string= (file-truename qterm-log-file) f))
+      ;;   (nuke-trailing-whitespace)))
+     ;;(t
+      ;; (unless xwl-at-company?
+      ;;   (nuke-trailing-whitespace))
+      ))
 
     ;; should return nil
     nil))
 
 (add-hook 'write-file-functions 'xwl-write-file-functions)
+
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (defun xwl-kill-buffer-hook ()
   (let ((file (buffer-file-name)))

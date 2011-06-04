@@ -4,17 +4,17 @@
 ;;; Generated autoloads from xwl-makefile.el
 
 (autoload 'xwl-makefile-all "xwl-makefile" "\
-Not documented
+
 
 \(fn)" nil nil)
 
 (autoload 'xwl-makefile-byte-compile "xwl-makefile" "\
-Not documented
+
 
 \(fn)" t nil)
 
 (autoload 'xwl-makefile-clean "xwl-makefile" "\
-Not documented
+
 
 \(fn)" nil nil)
 
@@ -72,7 +72,7 @@ Version of `eval-last-sexp' that interacts with sawfish.
 \(fn TO-BUFFER)" t nil)
 
 (autoload 'sawfish-eval-print-last-sexp "sawfish" "\
-Not documented
+
 
 \(fn)" t nil)
 
@@ -252,24 +252,6 @@ Make the URL of current oddmuse page the latest kill in the kill ring.
 
 ;;;***
 
-;;;### (autoloads (nuke-trailing-whitespace) "nuke-trailing-whitespace"
-;;;;;;  "nuke-trailing-whitespace.el" (18862 33836))
-;;; Generated autoloads from nuke-trailing-whitespace.el
-
-(autoload 'nuke-trailing-whitespace "nuke-trailing-whitespace" "\
-Nuke all trailing whitespace in the buffer.
-Whitespace in this case is just spaces or tabs.
-This is a useful function to put on `write-file-hooks'.
-
-Unless called interactively, this function uses
-`nuke-trailing-whitespace-p' to determine how to behave.
-However, even if this variable is t, this function will query for
-replacement if the buffer is read-only.
-
-\(fn)" t nil)
-
-;;;***
-
 ;;;### (autoloads (htmlize-many-files-dired htmlize-many-files htmlize-file
 ;;;;;;  htmlize-region htmlize-buffer) "htmlize" "htmlize.el" (19245
 ;;;;;;  65113))
@@ -334,62 +316,6 @@ corresponding source file.
 HTMLize dired-marked files.
 
 \(fn ARG &optional TARGET-DIRECTORY)" t nil)
-
-;;;***
-
-;;;### (autoloads (graphviz-dot-mode) "graphviz-dot-mode" "graphviz-dot-mode.el"
-;;;;;;  (18862 33836))
-;;; Generated autoloads from graphviz-dot-mode.el
-
-(autoload 'graphviz-dot-mode "graphviz-dot-mode" "\
-Major mode for the dot language. \\<graphviz-dot-mode-map>
-TAB indents for graph lines.
-
-\\[graphviz-dot-indent-graph]	- Indentaion function.
-\\[graphviz-dot-preview]	- Previews graph in a buffer.
-\\[graphviz-dot-view]	- Views graph in an external viewer.
-\\[graphviz-dot-indent-line]	- Indents current line of code.
-\\[graphviz-dot-complete-word]	- Completes the current word.
-\\[electric-graphviz-dot-terminate-line]	- Electric newline.
-\\[electric-graphviz-dot-open-brace]	- Electric open braces.
-\\[electric-graphviz-dot-close-brace]	- Electric close braces.
-\\[electric-graphviz-dot-semi]	- Electric semi colons.
-
-Variables specific to this mode:
-
-  graphviz-dot-dot-program            (default `dot')
-       Location of the dot program.
-  graphviz-dot-view-command           (default `doted %s')
-       Command to run when `graphviz-dot-view' is executed.
-  graphviz-dot-view-edit-command      (default nil)
-       If the user should be asked to edit the view command.
-  graphviz-dot-save-before-view       (default t)
-       Automatically save current buffer berore `graphviz-dot-view'.
-  graphviz-dot-preview-extension      (default `png')
-       File type to use for `graphviz-dot-preview'.
-  graphviz-dot-auto-indent-on-newline (default t)
-       Whether to run `electric-graphviz-dot-terminate-line' when
-       newline is entered.
-  graphviz-dot-auto-indent-on-braces (default t)
-       Whether to run `electric-graphviz-dot-open-brace' and
-       `electric-graphviz-dot-close-brace' when braces are
-       entered.
-  graphviz-dot-auto-indent-on-semi (default t)
-       Whether to run `electric-graphviz-dot-semi' when semi colon
-       is typed.
-  graphviz-dot-toggle-completions  (default nil)
-       If completions should be displayed in the buffer instead of a
-       completion buffer when \\[graphviz-dot-complete-word] is
-       pressed repeatedly.
-
-This mode can be customized by running \\[graphviz-dot-customize].
-
-Turning on Graphviz Dot mode calls the value of the variable
-`graphviz-dot-mode-hook' with no args, if that value is non-nil.
-
-\(fn)" t nil)
-
-(add-to-list 'auto-mode-alist '("\\.dot\\'" . graphviz-dot-mode))
 
 ;;;***
 
@@ -644,69 +570,69 @@ Remove the boxquote that contains `point'.
 ;;;;;;  debian-bug-web-package debian-bug-web-packages debian-bug-web-this-bug-under-mouse
 ;;;;;;  debian-bug-web-bug debian-bug-web-developer-page debian-bug-web-bugs
 ;;;;;;  debian-bug-intent-to-package debian-bug-request-for-package
-;;;;;;  debian-bug-wnpp) "debian-bug" "debian/debian-bug.el" (18862
-;;;;;;  33836))
+;;;;;;  debian-bug-wnpp) "debian/debian-bug" "debian/debian-bug.el"
+;;;;;;  (18862 33836))
 ;;; Generated autoloads from debian/debian-bug.el
 
-(autoload 'debian-bug-wnpp "debian-bug" "\
+(autoload 'debian-bug-wnpp "debian/debian-bug" "\
 Submit a WNPP bug report to Debian.
 Optional argument ACTION can be provided in programs.
 
 \(fn &optional ACTION)" t nil)
 
-(autoload 'debian-bug-request-for-package "debian-bug" "\
+(autoload 'debian-bug-request-for-package "debian/debian-bug" "\
 Shortcut for `debian-bug-wnpp' with RFP action.
 
 \(fn)" t nil)
 
-(autoload 'debian-bug-intent-to-package "debian-bug" "\
+(autoload 'debian-bug-intent-to-package "debian/debian-bug" "\
 Shortcut for `debian-bug-wnpp' with ITP action (for Debian developers).
 
 \(fn)" t nil)
 
-(autoload 'debian-bug-web-bugs "debian-bug" "\
+(autoload 'debian-bug-web-bugs "debian/debian-bug" "\
 Browse the BTS for this package via `browse-url'.
 With optional argument prefix ARCHIVED, display archived bugs.
 
 \(fn &optional ARCHIVED)" t nil)
 
-(autoload 'debian-bug-web-developer-page "debian-bug" "\
+(autoload 'debian-bug-web-developer-page "debian/debian-bug" "\
 Browse the web for this package's developer page.
 
 \(fn)" t nil)
 
-(autoload 'debian-bug-web-bug "debian-bug" "\
+(autoload 'debian-bug-web-bug "debian/debian-bug" "\
 Browse the BTS for BUG-NUMBER via `browse-url'.
 
 \(fn &optional BUG-NUMBER)" t nil)
 
-(autoload 'debian-bug-web-this-bug-under-mouse "debian-bug" "\
+(autoload 'debian-bug-web-this-bug-under-mouse "debian/debian-bug" "\
 Browse the BTS via `browse-url' for the bug report number under mouse.
 In a program, mouse location is in EVENT.
 
 \(fn EVENT)" t nil)
 
-(autoload 'debian-bug-web-packages "debian-bug" "\
+(autoload 'debian-bug-web-packages "debian/debian-bug" "\
 Search Debian web page for this package via `browse-url'.
 
 \(fn)" t nil)
 
-(autoload 'debian-bug-web-package "debian-bug" "\
+(autoload 'debian-bug-web-package "debian/debian-bug" "\
 Search Debian web page in ARCHIVE for this package via `browse-url'.
 
 \(fn ARCHIVE)" t nil)
 
-(autoload 'debian-bug-get-bug-as-file "debian-bug" "\
+(autoload 'debian-bug-get-bug-as-file "debian/debian-bug" "\
 Read bug report #BUG-NUMBER as a regular file.
 
 \(fn &optional BUG-NUMBER)" t nil)
 
-(autoload 'debian-bug-get-bug-as-email "debian-bug" "\
+(autoload 'debian-bug-get-bug-as-email "debian/debian-bug" "\
 Read bug report #BUG-NUMBER via Email interface.
 
 \(fn &optional BUG-NUMBER)" t nil)
 
-(autoload 'debian-bug "debian-bug" "\
+(autoload 'debian-bug "debian/debian-bug" "\
 Submit a Debian bug report.
 
 \(fn)" t nil)
@@ -714,17 +640,17 @@ Submit a Debian bug report.
 ;;;***
 
 ;;;### (autoloads (deb-find deb-view-mode deb-view deb-view-dired-view)
-;;;;;;  "deb-view" "debian/deb-view.el" (18862 33836))
+;;;;;;  "debian/deb-view" "debian/deb-view.el" (18862 33836))
 ;;; Generated autoloads from debian/deb-view.el
 
-(autoload 'deb-view-dired-view "deb-view" "\
+(autoload 'deb-view-dired-view "debian/deb-view" "\
 View Debian package control and data files.
 Press \"q\" in either window to kill both buffers
 and return to the dired buffer. See deb-view.
 
 \(fn)" t nil)
 
-(autoload 'deb-view "deb-view" "\
+(autoload 'deb-view "debian/deb-view" "\
 View Debian package DEBFILE's control and data files.
 Press \"q\" in either window to kill both buffers.
 
@@ -734,12 +660,12 @@ at the prompt.
 
 \(fn DEBFILE)" t nil)
 
-(autoload 'deb-view-mode "deb-view" "\
+(autoload 'deb-view-mode "debian/deb-view" "\
 View mode for Debian Archive Files.
 
 \(fn)" t nil)
 
-(autoload 'deb-find "deb-view" "\
+(autoload 'deb-find "debian/deb-view" "\
 Search for deb files.
 Use the method specified by the variable deb-find-method, and collect
 output in a buffer.  See also the variable deb-find-directory.
@@ -751,11 +677,11 @@ easily repeat a `deb-find' command.
 
 ;;;***
 
-;;;### (autoloads (apt-sources-mode) "apt-sources" "debian/apt-sources.el"
+;;;### (autoloads (apt-sources-mode) "debian/apt-sources" "debian/apt-sources.el"
 ;;;;;;  (18862 33836))
 ;;; Generated autoloads from debian/apt-sources.el
 
-(autoload 'apt-sources-mode "apt-sources" "\
+(autoload 'apt-sources-mode "debian/apt-sources" "\
 Major mode for editing apt's sources.list file.
 Sets up command `font-lock-mode'.
 
@@ -767,11 +693,11 @@ Sets up command `font-lock-mode'.
 
 ;;;### (autoloads (dictionary-popup-matching-words dictionary-mouse-popup-matching-words
 ;;;;;;  dictionary-match-words dictionary-lookup-definition dictionary-search
-;;;;;;  dictionary dictionary-mode) "dictionary" "dictionary-el/dictionary.el"
+;;;;;;  dictionary dictionary-mode) "dictionary-el/dictionary" "dictionary-el/dictionary.el"
 ;;;;;;  (19662 52628))
 ;;; Generated autoloads from dictionary-el/dictionary.el
 
-(autoload 'dictionary-mode "dictionary" "\
+(autoload 'dictionary-mode "dictionary-el/dictionary" "\
 This is a mode for searching a dictionary server implementing
  the protocol defined in RFC 2229.
 
@@ -794,33 +720,33 @@ This is a mode for searching a dictionary server implementing
 
 \(fn)" nil nil)
 
-(autoload 'dictionary "dictionary" "\
+(autoload 'dictionary "dictionary-el/dictionary" "\
 Create a new dictonary buffer and install dictionary-mode
 
 \(fn)" t nil)
 
-(autoload 'dictionary-search "dictionary" "\
+(autoload 'dictionary-search "dictionary-el/dictionary" "\
 Search the `word' in `dictionary' if given or in all if nil.
 It presents the word at point as default input and allows editing it.
 
 \(fn WORD &optional DICTIONARY)" t nil)
 
-(autoload 'dictionary-lookup-definition "dictionary" "\
+(autoload 'dictionary-lookup-definition "dictionary-el/dictionary" "\
 Unconditionally lookup the word at point.
 
 \(fn)" t nil)
 
-(autoload 'dictionary-match-words "dictionary" "\
+(autoload 'dictionary-match-words "dictionary-el/dictionary" "\
 Search `pattern' in current default dictionary using default strategy.
 
 \(fn &optional PATTERN &rest IGNORED)" t nil)
 
-(autoload 'dictionary-mouse-popup-matching-words "dictionary" "\
+(autoload 'dictionary-mouse-popup-matching-words "dictionary-el/dictionary" "\
 Display entries matching the word at the cursor
 
 \(fn EVENT)" t nil)
 
-(autoload 'dictionary-popup-matching-words "dictionary" "\
+(autoload 'dictionary-popup-matching-words "dictionary-el/dictionary" "\
 Display entries matching the word at the point
 
 \(fn &optional WORD)" t nil)
@@ -829,24 +755,24 @@ Display entries matching the word at the point
 
 ;;;### (autoloads (inferior-haskell-find-haddock inferior-haskell-find-definition
 ;;;;;;  inferior-haskell-info inferior-haskell-type inferior-haskell-load-file
-;;;;;;  switch-to-haskell) "inf-haskell" "haskell-mode-2.4/inf-haskell.el"
+;;;;;;  switch-to-haskell) "haskell-mode-2.4/inf-haskell" "haskell-mode-2.4/inf-haskell.el"
 ;;;;;;  (18231 1814))
 ;;; Generated autoloads from haskell-mode-2.4/inf-haskell.el
 
 (defalias 'run-haskell 'switch-to-haskell)
 
-(autoload 'switch-to-haskell "inf-haskell" "\
+(autoload 'switch-to-haskell "haskell-mode-2.4/inf-haskell" "\
 Show the inferior-haskell buffer.  Start the process if needed.
 
 \(fn &optional ARG)" t nil)
 
-(autoload 'inferior-haskell-load-file "inf-haskell" "\
+(autoload 'inferior-haskell-load-file "haskell-mode-2.4/inf-haskell" "\
 Pass the current buffer's file to the inferior haskell process.
 If prefix arg \\[universal-argument] is given, just reload the previous file.
 
 \(fn &optional RELOAD)" t nil)
 
-(autoload 'inferior-haskell-type "inf-haskell" "\
+(autoload 'inferior-haskell-type "haskell-mode-2.4/inf-haskell" "\
 Query the haskell process for the type of the given expression.
 If optional argument `insert-value' is non-nil, insert the type above point
 in the buffer.  This can be done interactively with the \\[universal-argument] prefix.
@@ -854,17 +780,17 @@ The returned info is cached for reuse by `haskell-doc-mode'.
 
 \(fn EXPR &optional INSERT-VALUE)" t nil)
 
-(autoload 'inferior-haskell-info "inf-haskell" "\
+(autoload 'inferior-haskell-info "haskell-mode-2.4/inf-haskell" "\
 Query the haskell process for the info of the given expression.
 
 \(fn SYM)" t nil)
 
-(autoload 'inferior-haskell-find-definition "inf-haskell" "\
+(autoload 'inferior-haskell-find-definition "haskell-mode-2.4/inf-haskell" "\
 Attempt to locate and jump to the definition of the given expression.
 
 \(fn SYM)" t nil)
 
-(autoload 'inferior-haskell-find-haddock "inf-haskell" "\
+(autoload 'inferior-haskell-find-haddock "haskell-mode-2.4/inf-haskell" "\
 Find and open the Haddock documentation of SYM.
 Make sure to load the file into GHCi or Hugs first by using C-c C-l.
 Only works for functions in a package installed with ghc-pkg, or
@@ -884,11 +810,11 @@ we load it.
 ;;;***
 
 ;;;### (autoloads (haskell-hoogle literate-haskell-mode haskell-mode)
-;;;;;;  "haskell-mode" "haskell-mode-2.4/haskell-mode.el" (18271
-;;;;;;  25098))
+;;;;;;  "haskell-mode-2.4/haskell-mode" "haskell-mode-2.4/haskell-mode.el"
+;;;;;;  (18271 25098))
 ;;; Generated autoloads from haskell-mode-2.4/haskell-mode.el
 
-(autoload 'haskell-mode "haskell-mode" "\
+(autoload 'haskell-mode "haskell-mode-2.4/haskell-mode" "\
 Major mode for editing Haskell programs.
 Blank lines separate paragraphs, comments start with `-- '.
 \\<haskell-mode-map>
@@ -923,7 +849,7 @@ Invokes `haskell-mode-hook'.
 
 \(fn)" t nil)
 
-(autoload 'literate-haskell-mode "haskell-mode" "\
+(autoload 'literate-haskell-mode "haskell-mode-2.4/haskell-mode" "\
 As `haskell-mode' but for literate scripts.
 
 \(fn)" t nil)
@@ -932,18 +858,18 @@ As `haskell-mode' but for literate scripts.
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 
-(autoload 'haskell-hoogle "haskell-mode" "\
+(autoload 'haskell-hoogle "haskell-mode-2.4/haskell-mode" "\
 Do a Hoogle search for QUERY.
 
 \(fn QUERY)" t nil)
 
 ;;;***
 
-;;;### (autoloads (haskell-indent-mode) "haskell-indent" "haskell-mode-2.4/haskell-indent.el"
-;;;;;;  (18271 24057))
+;;;### (autoloads (haskell-indent-mode) "haskell-mode-2.4/haskell-indent"
+;;;;;;  "haskell-mode-2.4/haskell-indent.el" (18271 24057))
 ;;; Generated autoloads from haskell-mode-2.4/haskell-indent.el
 
-(autoload 'haskell-indent-mode "haskell-indent" "\
+(autoload 'haskell-indent-mode "haskell-mode-2.4/haskell-indent" "\
 ``intelligent'' Haskell indentation mode that deals with
 the layout rule of Haskell.  \\[haskell-indent-cycle] starts the cycle
 which proposes new possibilities as long as the TAB key is pressed.
@@ -976,11 +902,11 @@ Invokes `haskell-indent-hook' if not nil.
 
 ;;;***
 
-;;;### (autoloads (haskell-doc-show-type haskell-doc-mode) "haskell-doc"
+;;;### (autoloads (haskell-doc-show-type haskell-doc-mode) "haskell-mode-2.4/haskell-doc"
 ;;;;;;  "haskell-mode-2.4/haskell-doc.el" (18271 24003))
 ;;; Generated autoloads from haskell-mode-2.4/haskell-doc.el
 
-(autoload 'haskell-doc-mode "haskell-doc" "\
+(autoload 'haskell-doc-mode "haskell-mode-2.4/haskell-doc" "\
 Enter `haskell-doc-mode' for showing fct types in the echo area.
 See variable docstring.
 
@@ -988,7 +914,7 @@ See variable docstring.
 
 (defalias 'turn-on-haskell-doc-mode 'haskell-doc-mode)
 
-(autoload 'haskell-doc-show-type "haskell-doc" "\
+(autoload 'haskell-doc-show-type "haskell-mode-2.4/haskell-doc" "\
 Show the type of the function near point.
 For the function under point, show the type in the echo area.
 This information is extracted from the `haskell-doc-prelude-types' alist
@@ -999,11 +925,11 @@ current buffer.
 
 ;;;***
 
-;;;### (autoloads (haskell-decl-scan-mode) "haskell-decl-scan" "haskell-mode-2.4/haskell-decl-scan.el"
-;;;;;;  (18271 24057))
+;;;### (autoloads (haskell-decl-scan-mode) "haskell-mode-2.4/haskell-decl-scan"
+;;;;;;  "haskell-mode-2.4/haskell-decl-scan.el" (18271 24057))
 ;;; Generated autoloads from haskell-mode-2.4/haskell-decl-scan.el
 
-(autoload 'haskell-decl-scan-mode "haskell-decl-scan" "\
+(autoload 'haskell-decl-scan-mode "haskell-mode-2.4/haskell-decl-scan" "\
 Minor mode for declaration scanning for Haskell mode.
 Top-level declarations are scanned and listed in the menu item \"Declarations\".
 Selecting an item from this menu will take point to the start of the
@@ -1049,37 +975,37 @@ Invokes `haskell-decl-scan-mode-hook'.
 
 ;;;***
 
-;;;### (autoloads (haskell-cabal-mode) "haskell-cabal" "haskell-mode-2.4/haskell-cabal.el"
-;;;;;;  (18231 1867))
+;;;### (autoloads (haskell-cabal-mode) "haskell-mode-2.4/haskell-cabal"
+;;;;;;  "haskell-mode-2.4/haskell-cabal.el" (18231 1867))
 ;;; Generated autoloads from haskell-mode-2.4/haskell-cabal.el
 
 (add-to-list 'auto-mode-alist '("\\.cabal\\'" . haskell-cabal-mode))
 
-(autoload 'haskell-cabal-mode "haskell-cabal" "\
+(autoload 'haskell-cabal-mode "haskell-mode-2.4/haskell-cabal" "\
 Major mode for Cabal package description files.
 
 \(fn)" t nil)
 
 ;;;***
 
-;;;### (autoloads (haskell-c-mode) "haskell-c" "haskell-mode-2.4/haskell-c.el"
+;;;### (autoloads (haskell-c-mode) "haskell-mode-2.4/haskell-c" "haskell-mode-2.4/haskell-c.el"
 ;;;;;;  (18170 47169))
 ;;; Generated autoloads from haskell-mode-2.4/haskell-c.el
 
 (add-to-list 'auto-mode-alist '("\\.hsc\\'" . haskell-c-mode))
 
-(autoload 'haskell-c-mode "haskell-c" "\
+(autoload 'haskell-c-mode "haskell-mode-2.4/haskell-c" "\
 Major mode for Haskell FFI files.
 
 \(fn)" t nil)
 
 ;;;***
 
-;;;### (autoloads (ruby-mode) "ruby-mode" "ruby/ruby-mode.el" (18862
-;;;;;;  33836))
+;;;### (autoloads (ruby-mode) "ruby/ruby-mode" "ruby/ruby-mode.el"
+;;;;;;  (18862 33836))
 ;;; Generated autoloads from ruby/ruby-mode.el
 
-(autoload 'ruby-mode "ruby-mode" "\
+(autoload 'ruby-mode "ruby/ruby-mode" "\
 Major mode for editing ruby scripts.
 \\[ruby-indent-command] properly indents subexpressions of multi-line
 class, module, def, if, while, for, do, and case statements, taking
@@ -1105,53 +1031,53 @@ The variable ruby-indent-level controls the amount of indentation.
 ;;;;;;  rs-gnus-summary-tree-lines-rs rs-gnus-summary-tree-arrows-01
 ;;;;;;  rs-gnus-summary-tree-arrows-test rs-gnus-summary-tree-arrows-wide
 ;;;;;;  rs-gnus-summary-tree-arrows-latin rs-gnus-summary-tree-arrows-ascii
-;;;;;;  rs-gnus-summary-tree-arrows-ascii-default) "rs-gnus-summary"
+;;;;;;  rs-gnus-summary-tree-arrows-ascii-default) "slightly-modified/rs-gnus-summary"
 ;;;;;;  "slightly-modified/rs-gnus-summary.el" (18867 57586))
 ;;; Generated autoloads from slightly-modified/rs-gnus-summary.el
 
-(autoload 'rs-gnus-summary-tree-arrows-ascii-default "rs-gnus-summary" "\
+(autoload 'rs-gnus-summary-tree-arrows-ascii-default "slightly-modified/rs-gnus-summary" "\
 Use default tree layout with ascii arrows.
 
 \(fn)" t nil)
 
-(autoload 'rs-gnus-summary-tree-arrows-ascii "rs-gnus-summary" "\
+(autoload 'rs-gnus-summary-tree-arrows-ascii "slightly-modified/rs-gnus-summary" "\
 Use tree layout with ascii arrows.
 
 \(fn)" t nil)
 
-(autoload 'rs-gnus-summary-tree-arrows-latin "rs-gnus-summary" "\
+(autoload 'rs-gnus-summary-tree-arrows-latin "slightly-modified/rs-gnus-summary" "\
 Use default tree layout with ascii arrows (RS).
 
 \(fn)" t nil)
 
 (defalias 'rs-gnus-summary-tree-arrows 'rs-gnus-summary-tree-arrows-wide)
 
-(autoload 'rs-gnus-summary-tree-arrows-wide "rs-gnus-summary" "\
+(autoload 'rs-gnus-summary-tree-arrows-wide "slightly-modified/rs-gnus-summary" "\
 Use tree layout with wide unicode arrows.
 
 \(fn)" t nil)
 
-(autoload 'rs-gnus-summary-tree-arrows-test "rs-gnus-summary" "\
+(autoload 'rs-gnus-summary-tree-arrows-test "slightly-modified/rs-gnus-summary" "\
 Use tree layout with unicode arrows.
 
 \(fn)" t nil)
 
-(autoload 'rs-gnus-summary-tree-arrows-01 "rs-gnus-summary" "\
+(autoload 'rs-gnus-summary-tree-arrows-01 "slightly-modified/rs-gnus-summary" "\
 Use tree layout with unicode arrows.
 
 \(fn)" t nil)
 
-(autoload 'rs-gnus-summary-tree-lines-rs "rs-gnus-summary" "\
+(autoload 'rs-gnus-summary-tree-lines-rs "slightly-modified/rs-gnus-summary" "\
 Use tree layout with unicode lines.
 
 \(fn)" t nil)
 
-(autoload 'rs-gnus-summary-tree-arrows-mt "rs-gnus-summary" "\
+(autoload 'rs-gnus-summary-tree-arrows-mt "slightly-modified/rs-gnus-summary" "\
 Use tree layout with unicode arrows.
 
 \(fn)" t nil)
 
-(autoload 'rs-gnus-summary-tree-lines "rs-gnus-summary" "\
+(autoload 'rs-gnus-summary-tree-lines "slightly-modified/rs-gnus-summary" "\
 Use tree layout with unicode lines.
 
 \(fn)" t nil)
@@ -1159,9 +1085,9 @@ Use tree layout with unicode lines.
 (defvar rs-gnus-summary-line-content-type-alist '(("^text/plain" " ") ("^text/html" "h") ("^multipart/mixed" "m") ("^multipart/alternative" "a") ("^multipart/related" "r") ("^multipart/signed" "s") ("^multipart/encrypted" "e") ("^multipart/report" "t")) "\
 Alist of regular expressions and summary line indicators.")
 
-(custom-autoload 'rs-gnus-summary-line-content-type-alist "rs-gnus-summary" t)
+(custom-autoload 'rs-gnus-summary-line-content-type-alist "slightly-modified/rs-gnus-summary" t)
 
-(autoload 'rs-gnus-summary-line-content-type "rs-gnus-summary" "\
+(autoload 'rs-gnus-summary-line-content-type "slightly-modified/rs-gnus-summary" "\
 Display content type of message in summary line.
 
 This function is intended to be used in `gnus-summary-line-format-alist', with
@@ -1173,7 +1099,7 @@ You need to add `Content-Type' to `nnmail-extra-headers' and
 
 \(fn HEADER)" nil nil)
 
-(autoload 'rs-gnus-summary-line-message-size "rs-gnus-summary" "\
+(autoload 'rs-gnus-summary-line-message-size "slightly-modified/rs-gnus-summary" "\
 Return pretty-printed version of message size.
 
 Like `gnus-summary-line-message-size' but more verbose.  This function is
@@ -1184,14 +1110,14 @@ See (info \"(gnus)Group Line Specification\").
 
 \(fn HEAD)" nil nil)
 
-(autoload 'rs-gnus-summary-line-score "rs-gnus-summary" "\
+(autoload 'rs-gnus-summary-line-score "slightly-modified/rs-gnus-summary" "\
 Return pretty-printed version of article score.
 
 See (info \"(gnus)Group Line Specification\").
 
 \(fn HEAD)" nil nil)
 
-(autoload 'rs-gnus-summary-line-label "rs-gnus-summary" "\
+(autoload 'rs-gnus-summary-line-label "slightly-modified/rs-gnus-summary" "\
 Display label of message in summary line.
 
 This function is intended to be used in `gnus-summary-line-format-alist', with
@@ -1203,12 +1129,12 @@ You need to add `X-Gnus-Label' to `nnmail-extra-headers' and
 
 \(fn HEADER)" nil nil)
 
-(autoload 'rs-gnus-summary-limit-to-label "rs-gnus-summary" "\
+(autoload 'rs-gnus-summary-limit-to-label "slightly-modified/rs-gnus-summary" "\
 Limit the summary buffer to articles that match a label.
 
 \(fn REGEXP &optional NOT-MATCHING)" t nil)
 
-(autoload 'rs-gnus-summary-line-list-subject "rs-gnus-summary" "\
+(autoload 'rs-gnus-summary-line-list-subject "slightly-modified/rs-gnus-summary" "\
 Return modified subject for mailing lists.
 
 This function is intended to be used in `gnus-summary-line-format-alist', with
@@ -1218,56 +1144,56 @@ See (info \"(gnus)Group Line Specification\").
 
 \(fn HEAD)" nil nil)
 
-(autoload 'rs-gnus-balloon-0 "rs-gnus-summary" "\
+(autoload 'rs-gnus-balloon-0 "slightly-modified/rs-gnus-summary" "\
 Show some informations about the current article.
 Informations include size, score, content type and number.
 Used as help echo for the summary buffer.
 
 \(fn WINDOW OBJECT POSITION)" nil nil)
 
-(autoload 'rs-gnus-balloon-1 "rs-gnus-summary" "\
+(autoload 'rs-gnus-balloon-1 "slightly-modified/rs-gnus-summary" "\
 Show full \"From\", \"Subject\", \"To\", and \"Date\" of the current article.
 Used as help echo for the summary buffer.
 
 \(fn WINDOW OBJECT POSITION)" nil nil)
 
-(autoload 'rs-gnus-summary-line-initialize "rs-gnus-summary" "\
+(autoload 'rs-gnus-summary-line-initialize "slightly-modified/rs-gnus-summary" "\
 Setup my summary line.
 
 \(fn)" t nil)
 
-(autoload 'rs-gnus-summary-mark-lists-expirable "rs-gnus-summary" "\
+(autoload 'rs-gnus-summary-mark-lists-expirable "slightly-modified/rs-gnus-summary" "\
 Mark some articles (lists, ...) as expirable.
 
 \(fn)" t nil)
 
-(autoload 'rs-gnus-summary-more-headers "rs-gnus-summary" "\
+(autoload 'rs-gnus-summary-more-headers "slightly-modified/rs-gnus-summary" "\
 Force redisplaying of the current article with ...
 
 \(fn)" t nil)
 
-(autoload 'rs-gnus-summary-non-boring-headers "rs-gnus-summary" "\
+(autoload 'rs-gnus-summary-non-boring-headers "slightly-modified/rs-gnus-summary" "\
 Force redisplaying of the current article with ...
 
 \(fn)" t nil)
 
-(autoload 'rs-gnus-summary-mark-as-expirable-and-next-line "rs-gnus-summary" "\
+(autoload 'rs-gnus-summary-mark-as-expirable-and-next-line "slightly-modified/rs-gnus-summary" "\
 Mark N articles forward as expirable and go to next line.
 Useful in a summary buffer with read articles.
 
 \(fn N)" t nil)
 
-(autoload 'rs-gnus-summary-mark-as-expirable-dont-move "rs-gnus-summary" "\
+(autoload 'rs-gnus-summary-mark-as-expirable-dont-move "slightly-modified/rs-gnus-summary" "\
 Mark this article expirable.  Don't move point.
 
 \(fn)" t nil)
 
-(autoload 'rs-gnus-summary-mark-as-expirable-next-article "rs-gnus-summary" "\
+(autoload 'rs-gnus-summary-mark-as-expirable-next-article "slightly-modified/rs-gnus-summary" "\
 Mark this article expirable.  Move to next article.
 
 \(fn)" t nil)
 
-(autoload 'rs-gnus-summary-limit-to-recipient "rs-gnus-summary" "\
+(autoload 'rs-gnus-summary-limit-to-recipient "slightly-modified/rs-gnus-summary" "\
 Limit the summary buffer to articles with the given RECIPIENT.
 
 If NOT-MATCHING, exclude RECIPIENT.
@@ -1277,14 +1203,14 @@ To and Cc headers are checked.  You need to include them in
 
 \(fn RECIPIENT &optional NOT-MATCHING)" t nil)
 
-(autoload 'rs-gnus-summary-sort-by-recipient "rs-gnus-summary" "\
+(autoload 'rs-gnus-summary-sort-by-recipient "slightly-modified/rs-gnus-summary" "\
 Sort the summary buffer by recipient name alphabetically.
 If `case-fold-search' is non-nil, case of letters is ignored.
 Argument REVERSE means reverse order.
 
 \(fn &optional REVERSE)" t nil)
 
-(autoload 'rs-gnus-summary-score-statistics "rs-gnus-summary" "\
+(autoload 'rs-gnus-summary-score-statistics "slightly-modified/rs-gnus-summary" "\
 Display score statistics for current summary buffer.
 
 If ANCIENT, also count ancient articles.  Returns a list: (high
@@ -1292,29 +1218,29 @@ default low).
 
 \(fn &optional ANCIENT QUIET)" t nil)
 
-(autoload 'rs-gnus-leafnode-kill-thread "rs-gnus-summary" "\
+(autoload 'rs-gnus-leafnode-kill-thread "slightly-modified/rs-gnus-summary" "\
 Kill thread from here using leafnode.
 
 \(fn)" t nil)
 
 ;;;***
 
-;;;### (autoloads (twit) "twittering-mode" "twittering-mode/twittering-mode.el"
-;;;;;;  (19913 14550))
+;;;### (autoloads (twit) "twittering-mode/twittering-mode" "twittering-mode/twittering-mode.el"
+;;;;;;  (19927 9888))
 ;;; Generated autoloads from twittering-mode/twittering-mode.el
 
-(autoload 'twit "twittering-mode" "\
+(autoload 'twit "twittering-mode/twittering-mode" "\
 Start twittering-mode.
 
 \(fn)" t nil)
 
 ;;;***
 
-;;;### (autoloads (wget-web-page wget) "wget" "wget-el/wget.el" (19818
-;;;;;;  7670))
+;;;### (autoloads (wget-web-page wget) "wget-el/wget" "wget-el/wget.el"
+;;;;;;  (19818 7670))
 ;;; Generated autoloads from wget-el/wget.el
 
-(autoload 'wget "wget" "\
+(autoload 'wget "wget-el/wget" "\
 Wget interface to download URI asynchronously.
 If argument ARG is non-nil, ask some options.
 Called with prefix argument, turn argument ARG t.
@@ -1324,7 +1250,7 @@ If you are in dired mode which is seeing ftp directory,
 
 \(fn URI &optional ARG)" t nil)
 
-(autoload 'wget-web-page "wget" "\
+(autoload 'wget-web-page "wget-el/wget" "\
 Wget interface to download whole Web page.
 If argument ARG is non-nil, ask options.
 Called with prefix argument, turn argument ARG t.
@@ -1336,10 +1262,11 @@ wget-web-page downlod whole Web page from it following relative link.
 
 ;;;***
 
-;;;### (autoloads (tq-create) "tq" "emms/lisp/tq.el" (18850 41578))
+;;;### (autoloads (tq-create) "emms/lisp/tq" "emms/lisp/tq.el" (18850
+;;;;;;  41578))
 ;;; Generated autoloads from emms/lisp/tq.el
 
-(autoload 'tq-create "tq" "\
+(autoload 'tq-create "emms/lisp/tq" "\
 Create and return a transaction queue communicating with PROCESS.
 PROCESS should be a subprocess capable of sending and receiving
 streams of bytes.  It may be a local process, or it may be connected
@@ -1350,55 +1277,55 @@ to a tcp server on another machine.
 ;;;***
 
 ;;;### (autoloads (emms-volume-mode-minus emms-volume-mode-plus emms-volume-lower
-;;;;;;  emms-volume-raise) "emms-volume" "emms/lisp/emms-volume.el"
+;;;;;;  emms-volume-raise) "emms/lisp/emms-volume" "emms/lisp/emms-volume.el"
 ;;;;;;  (18850 41578))
 ;;; Generated autoloads from emms/lisp/emms-volume.el
 
-(autoload 'emms-volume-raise "emms-volume" "\
+(autoload 'emms-volume-raise "emms/lisp/emms-volume" "\
 Raise the speaker volume.
 
 \(fn)" t nil)
 
-(autoload 'emms-volume-lower "emms-volume" "\
+(autoload 'emms-volume-lower "emms/lisp/emms-volume" "\
 Lower the speaker volume.
 
 \(fn)" t nil)
 
-(autoload 'emms-volume-mode-plus "emms-volume" "\
+(autoload 'emms-volume-mode-plus "emms/lisp/emms-volume" "\
 Raise volume and enable or extend the `emms-volume-minor-mode' timeout.
 
 \(fn)" t nil)
 
-(autoload 'emms-volume-mode-minus "emms-volume" "\
+(autoload 'emms-volume-mode-minus "emms/lisp/emms-volume" "\
 Lower volume and enable or extend the `emms-volume-minor-mode' timeout.
 
 \(fn)" t nil)
 
 ;;;***
 
-;;;### (autoloads (emms-volume-amixer-change) "emms-volume-amixer"
+;;;### (autoloads (emms-volume-amixer-change) "emms/lisp/emms-volume-amixer"
 ;;;;;;  "emms/lisp/emms-volume-amixer.el" (18850 41578))
 ;;; Generated autoloads from emms/lisp/emms-volume-amixer.el
 
-(autoload 'emms-volume-amixer-change "emms-volume-amixer" "\
+(autoload 'emms-volume-amixer-change "emms/lisp/emms-volume-amixer" "\
 Change amixer master volume by AMOUNT.
 
 \(fn AMOUNT)" nil nil)
 
 ;;;***
 
-;;;### (autoloads (emms-streams) "emms-streams" "emms/lisp/emms-streams.el"
+;;;### (autoloads (emms-streams) "emms/lisp/emms-streams" "emms/lisp/emms-streams.el"
 ;;;;;;  (19210 38117))
 ;;; Generated autoloads from emms/lisp/emms-streams.el
 
-(autoload 'emms-streams "emms-streams" "\
+(autoload 'emms-streams "emms/lisp/emms-streams" "\
 Opens the EMMS Streams interface.
 
 \(fn)" t nil)
 
 ;;;***
 
-;;;### (autoloads nil "emms-source-playlist" "emms/lisp/emms-source-playlist.el"
+;;;### (autoloads nil "emms/lisp/emms-source-playlist" "emms/lisp/emms-source-playlist.el"
 ;;;;;;  (19066 46444))
 ;;; Generated autoloads from emms/lisp/emms-source-playlist.el
  (autoload 'emms-play-playlist "emms-source-playlist" nil t)
@@ -1423,8 +1350,8 @@ Opens the EMMS Streams interface.
 ;;;***
 
 ;;;### (autoloads (emms-locate emms-source-file-regex emms-source-file-directory-tree)
-;;;;;;  "emms-source-file" "emms/lisp/emms-source-file.el" (19514
-;;;;;;  2638))
+;;;;;;  "emms/lisp/emms-source-file" "emms/lisp/emms-source-file.el"
+;;;;;;  (19514 2638))
 ;;; Generated autoloads from emms/lisp/emms-source-file.el
  (autoload 'emms-play-file "emms-source-file" nil t)
  (autoload 'emms-add-file "emms-source-file" nil t)
@@ -1437,19 +1364,19 @@ Opens the EMMS Streams interface.
  (autoload 'emms-play-dired "emms-source-file" nil t)
  (autoload 'emms-add-dired "emms-source-file" nil t)
 
-(autoload 'emms-source-file-directory-tree "emms-source-file" "\
+(autoload 'emms-source-file-directory-tree "emms/lisp/emms-source-file" "\
 Return a list of all files under DIR that match REGEX.
 This function uses `emms-source-file-directory-tree-function'.
 
 \(fn DIR REGEX)" nil nil)
 
-(autoload 'emms-source-file-regex "emms-source-file" "\
+(autoload 'emms-source-file-regex "emms/lisp/emms-source-file" "\
 Return a regexp that matches everything any player (that supports
 files) can play.
 
 \(fn)" nil nil)
 
-(autoload 'emms-locate "emms-source-file" "\
+(autoload 'emms-locate "emms/lisp/emms-source-file" "\
 Search for REGEXP and display the results in a locate buffer
 
 \(fn REGEXP)" t nil)
@@ -1463,17 +1390,17 @@ Search for REGEXP and display the results in a locate buffer
 ;;;***
 
 ;;;### (autoloads (emms-default-players emms-devel emms-all emms-standard
-;;;;;;  emms-minimalistic) "emms-setup" "emms/lisp/emms-setup.el"
+;;;;;;  emms-minimalistic) "emms/lisp/emms-setup" "emms/lisp/emms-setup.el"
 ;;;;;;  (19514 2638))
 ;;; Generated autoloads from emms/lisp/emms-setup.el
 
-(autoload 'emms-minimalistic "emms-setup" "\
+(autoload 'emms-minimalistic "emms/lisp/emms-setup" "\
 An Emms setup script.
 Invisible playlists and all the basics for playing media.
 
 \(fn)" nil nil)
 
-(autoload 'emms-standard "emms-setup" "\
+(autoload 'emms-standard "emms/lisp/emms-setup" "\
 An Emms setup script.
 Everything included in the `emms-minimalistic' setup, the Emms
 interactive playlist mode, reading information from tagged
@@ -1481,14 +1408,14 @@ audio files, and a metadata cache.
 
 \(fn)" nil nil)
 
-(autoload 'emms-all "emms-setup" "\
+(autoload 'emms-all "emms/lisp/emms-setup" "\
 An Emms setup script.
 Everything included in the `emms-standard' setup and adds all the
 stable features which come with the Emms distribution.
 
 \(fn)" nil nil)
 
-(autoload 'emms-devel "emms-setup" "\
+(autoload 'emms-devel "emms/lisp/emms-setup" "\
 An Emms setup script.
 Everything included in the `emms-all' setup and adds all the
 features which come with the Emms distribution regardless of if
@@ -1497,7 +1424,7 @@ on the edge.
 
 \(fn)" nil nil)
 
-(autoload 'emms-default-players "emms-setup" "\
+(autoload 'emms-default-players "emms/lisp/emms-setup" "\
 Set `emms-player-list' to `emms-setup-default-player-list'.
 
 \(fn)" nil nil)
@@ -1505,31 +1432,31 @@ Set `emms-player-list' to `emms-setup-default-player-list'.
 ;;;***
 
 ;;;### (autoloads (emms-score-toggle emms-score-disable emms-score-enable)
-;;;;;;  "emms-score" "emms/lisp/emms-score.el" (19141 57200))
+;;;;;;  "emms/lisp/emms-score" "emms/lisp/emms-score.el" (19141 57200))
 ;;; Generated autoloads from emms/lisp/emms-score.el
 
-(autoload 'emms-score-enable "emms-score" "\
+(autoload 'emms-score-enable "emms/lisp/emms-score" "\
 Turn on emms-score.
 
 \(fn)" t nil)
 
-(autoload 'emms-score-disable "emms-score" "\
+(autoload 'emms-score-disable "emms/lisp/emms-score" "\
 Turn off emms-score.
 
 \(fn)" t nil)
 
-(autoload 'emms-score-toggle "emms-score" "\
+(autoload 'emms-score-toggle "emms/lisp/emms-score" "\
 Toggle emms-score.
 
 \(fn)" t nil)
 
 ;;;***
 
-;;;### (autoloads (emms-playlist-mode) "emms-playlist-mode" "emms/lisp/emms-playlist-mode.el"
-;;;;;;  (19066 46444))
+;;;### (autoloads (emms-playlist-mode) "emms/lisp/emms-playlist-mode"
+;;;;;;  "emms/lisp/emms-playlist-mode.el" (19066 46444))
 ;;; Generated autoloads from emms/lisp/emms-playlist-mode.el
 
-(autoload 'emms-playlist-mode "emms-playlist-mode" "\
+(autoload 'emms-playlist-mode "emms/lisp/emms-playlist-mode" "\
 A major mode for Emms playlists.
 \\{emms-playlist-mode-map}
 
@@ -1538,21 +1465,21 @@ A major mode for Emms playlists.
 ;;;***
 
 ;;;### (autoloads (emms-playlist-limit-toggle emms-playlist-limit-disable
-;;;;;;  emms-playlist-limit-enable) "emms-playlist-limit" "emms/lisp/emms-playlist-limit.el"
-;;;;;;  (18850 41578))
+;;;;;;  emms-playlist-limit-enable) "emms/lisp/emms-playlist-limit"
+;;;;;;  "emms/lisp/emms-playlist-limit.el" (18850 41578))
 ;;; Generated autoloads from emms/lisp/emms-playlist-limit.el
 
-(autoload 'emms-playlist-limit-enable "emms-playlist-limit" "\
+(autoload 'emms-playlist-limit-enable "emms/lisp/emms-playlist-limit" "\
 Turn on emms playlist limit.
 
 \(fn)" t nil)
 
-(autoload 'emms-playlist-limit-disable "emms-playlist-limit" "\
+(autoload 'emms-playlist-limit-disable "emms/lisp/emms-playlist-limit" "\
 Turn off emms playlist limit.
 
 \(fn)" t nil)
 
-(autoload 'emms-playlist-limit-toggle "emms-playlist-limit" "\
+(autoload 'emms-playlist-limit-toggle "emms/lisp/emms-playlist-limit" "\
 Toggle emms playlist limit.
 
 \(fn)" t nil)
@@ -1560,16 +1487,16 @@ Toggle emms playlist limit.
 ;;;***
 
 ;;;### (autoloads (emms-playing-time-disable-display emms-playing-time-enable-display)
-;;;;;;  "emms-playing-time" "emms/lisp/emms-playing-time.el" (19209
-;;;;;;  15766))
+;;;;;;  "emms/lisp/emms-playing-time" "emms/lisp/emms-playing-time.el"
+;;;;;;  (19209 15766))
 ;;; Generated autoloads from emms/lisp/emms-playing-time.el
 
-(autoload 'emms-playing-time-enable-display "emms-playing-time" "\
+(autoload 'emms-playing-time-enable-display "emms/lisp/emms-playing-time" "\
 Display playing time on mode line.
 
 \(fn)" t nil)
 
-(autoload 'emms-playing-time-disable-display "emms-playing-time" "\
+(autoload 'emms-playing-time-disable-display "emms/lisp/emms-playing-time" "\
 Remove playing time from mode line.
 
 \(fn)" t nil)
@@ -1577,15 +1504,16 @@ Remove playing time from mode line.
 ;;;***
 
 ;;;### (autoloads (emms-player-mpd-show emms-player-mpd-connect emms-player-mpd-clear)
-;;;;;;  "emms-player-mpd" "emms/lisp/emms-player-mpd.el" (19514 2638))
+;;;;;;  "emms/lisp/emms-player-mpd" "emms/lisp/emms-player-mpd.el"
+;;;;;;  (19514 2638))
 ;;; Generated autoloads from emms/lisp/emms-player-mpd.el
 
-(autoload 'emms-player-mpd-clear "emms-player-mpd" "\
+(autoload 'emms-player-mpd-clear "emms/lisp/emms-player-mpd" "\
 Clear the MusicPD playlist.
 
 \(fn)" t nil)
 
-(autoload 'emms-player-mpd-connect "emms-player-mpd" "\
+(autoload 'emms-player-mpd-connect "emms/lisp/emms-player-mpd" "\
 Connect to MusicPD and retrieve its current playlist.
 
 Afterward, the status of MusicPD will be tracked.
@@ -1597,7 +1525,7 @@ buffer get out-of-sync for some reason.
 
 \(fn)" t nil)
 
-(autoload 'emms-player-mpd-show "emms-player-mpd" "\
+(autoload 'emms-player-mpd-show "emms/lisp/emms-player-mpd" "\
 Describe the current EMMS track in the minibuffer.
 
 If INSERTP is non-nil, insert the description into the current
@@ -1616,20 +1544,21 @@ rather than EMMS.
 ;;;***
 
 ;;;### (autoloads (emms-mode-line-toggle emms-mode-line-disable emms-mode-line-enable)
-;;;;;;  "emms-mode-line" "emms/lisp/emms-mode-line.el" (18850 41578))
+;;;;;;  "emms/lisp/emms-mode-line" "emms/lisp/emms-mode-line.el"
+;;;;;;  (18850 41578))
 ;;; Generated autoloads from emms/lisp/emms-mode-line.el
 
-(autoload 'emms-mode-line-enable "emms-mode-line" "\
+(autoload 'emms-mode-line-enable "emms/lisp/emms-mode-line" "\
 Turn on `emms-mode-line'.
 
 \(fn)" t nil)
 
-(autoload 'emms-mode-line-disable "emms-mode-line" "\
+(autoload 'emms-mode-line-disable "emms/lisp/emms-mode-line" "\
 Turn off `emms-mode-line'.
 
 \(fn)" t nil)
 
-(autoload 'emms-mode-line-toggle "emms-mode-line" "\
+(autoload 'emms-mode-line-toggle "emms/lisp/emms-mode-line" "\
 Toggle `emms-mode-line'.
 
 \(fn)" t nil)
@@ -1637,20 +1566,21 @@ Toggle `emms-mode-line'.
 ;;;***
 
 ;;;### (autoloads (emms-lyrics-toggle emms-lyrics-disable emms-lyrics-enable)
-;;;;;;  "emms-lyrics" "emms/lisp/emms-lyrics.el" (19612 47508))
+;;;;;;  "emms/lisp/emms-lyrics" "emms/lisp/emms-lyrics.el" (19612
+;;;;;;  47508))
 ;;; Generated autoloads from emms/lisp/emms-lyrics.el
 
-(autoload 'emms-lyrics-enable "emms-lyrics" "\
+(autoload 'emms-lyrics-enable "emms/lisp/emms-lyrics" "\
 Enable displaying emms lyrics.
 
 \(fn)" t nil)
 
-(autoload 'emms-lyrics-disable "emms-lyrics" "\
+(autoload 'emms-lyrics-disable "emms/lisp/emms-lyrics" "\
 Disable displaying emms lyrics.
 
 \(fn)" t nil)
 
-(autoload 'emms-lyrics-toggle "emms-lyrics" "\
+(autoload 'emms-lyrics-toggle "emms/lisp/emms-lyrics" "\
 Toggle displaying emms lyrics.
 
 \(fn)" t nil)
@@ -1658,20 +1588,20 @@ Toggle displaying emms lyrics.
 ;;;***
 
 ;;;### (autoloads (emms-cache-toggle emms-cache-disable emms-cache-enable)
-;;;;;;  "emms-cache" "emms/lisp/emms-cache.el" (19514 2638))
+;;;;;;  "emms/lisp/emms-cache" "emms/lisp/emms-cache.el" (19514 2638))
 ;;; Generated autoloads from emms/lisp/emms-cache.el
 
-(autoload 'emms-cache-enable "emms-cache" "\
+(autoload 'emms-cache-enable "emms/lisp/emms-cache" "\
 Enable caching of Emms track data.
 
 \(fn)" t nil)
 
-(autoload 'emms-cache-disable "emms-cache" "\
+(autoload 'emms-cache-disable "emms/lisp/emms-cache" "\
 Disable caching of Emms track data.
 
 \(fn)" t nil)
 
-(autoload 'emms-cache-toggle "emms-cache" "\
+(autoload 'emms-cache-toggle "emms/lisp/emms-cache" "\
 Toggle caching of Emms track data.
 
 \(fn)" t nil)
@@ -1679,14 +1609,14 @@ Toggle caching of Emms track data.
 ;;;***
 
 ;;;### (autoloads (vcard-parse-region vcard-parse-string vcard-pretty-print
-;;;;;;  vcard-standard-filters vcard-pretty-print-function) "vcard"
+;;;;;;  vcard-standard-filters vcard-pretty-print-function) "bbdb-vcard/vcard"
 ;;;;;;  "bbdb-vcard/vcard.el" (19409 51306))
 ;;; Generated autoloads from bbdb-vcard/vcard.el
 
 (defvar vcard-pretty-print-function 'vcard-format-sample-box "\
 *Formatting function used by `vcard-pretty-print'.")
 
-(custom-autoload 'vcard-pretty-print-function "vcard" t)
+(custom-autoload 'vcard-pretty-print-function "bbdb-vcard/vcard" t)
 
 (defvar vcard-standard-filters '(vcard-filter-html vcard-filter-adr-newlines vcard-filter-tel-normalize vcard-filter-textprop-cr) "\
 *Standard list of filters to apply to parsed vcard data.
@@ -1694,9 +1624,9 @@ These filters are applied sequentially to vcard attributes when
 the function `vcard-standard-filter' is supplied as the second argument to
 `vcard-parse'.")
 
-(custom-autoload 'vcard-standard-filters "vcard" t)
+(custom-autoload 'vcard-standard-filters "bbdb-vcard/vcard" t)
 
-(autoload 'vcard-pretty-print "vcard" "\
+(autoload 'vcard-pretty-print "bbdb-vcard/vcard" "\
 Format VCARD into a string suitable for display to user.
 VCARD can be an unparsed string containing raw VCF vcard data
 or a parsed vcard alist as returned by `vcard-parse-string'.
@@ -1710,7 +1640,7 @@ parsed vcard alist.
 
 \(fn VCARD)" nil nil)
 
-(autoload 'vcard-parse-string "vcard" "\
+(autoload 'vcard-parse-string "bbdb-vcard/vcard" "\
 Parse RAW vcard data as a string, and return an alist representing data.
 
 If the optional function FILTER is specified, apply that filter to each
@@ -1739,7 +1669,7 @@ would be returned.
 
 \(fn RAW &optional FILTER)" nil nil)
 
-(autoload 'vcard-parse-region "vcard" "\
+(autoload 'vcard-parse-region "bbdb-vcard/vcard" "\
 Parse the raw vcard data in region, and return an alist representing data.
 This function is just like `vcard-parse-string' except that it operates on
 a region of the current buffer rather than taking a string as an argument.
@@ -1752,29 +1682,30 @@ Note: this function modifies the buffer!
 
 ;;;### (autoloads (bbdb-vcard-export-to-kill-ring bbdb-vcard-export
 ;;;;;;  bbdb-vcard-import-file bbdb-vcard-import-buffer bbdb-vcard-import-region)
-;;;;;;  "bbdb-vcard" "bbdb-vcard/bbdb-vcard.el" (19409 54155))
+;;;;;;  "bbdb-vcard/bbdb-vcard" "bbdb-vcard/bbdb-vcard.el" (19409
+;;;;;;  54155))
 ;;; Generated autoloads from bbdb-vcard/bbdb-vcard.el
 
-(autoload 'bbdb-vcard-import-region "bbdb-vcard" "\
+(autoload 'bbdb-vcard-import-region "bbdb-vcard/bbdb-vcard" "\
 Import the vCards between BEGIN and END into BBDB.
 Existing BBDB records may be altered.
 
 \(fn BEGIN END)" t nil)
 
-(autoload 'bbdb-vcard-import-buffer "bbdb-vcard" "\
+(autoload 'bbdb-vcard-import-buffer "bbdb-vcard/bbdb-vcard" "\
 Import vCards from VCARD-BUFFER into BBDB.
 Existing BBDB records may be altered.
 
 \(fn VCARD-BUFFER)" t nil)
 
-(autoload 'bbdb-vcard-import-file "bbdb-vcard" "\
+(autoload 'bbdb-vcard-import-file "bbdb-vcard/bbdb-vcard" "\
 Import vCards from VCARD-FILE into BBDB.
 If VCARD-FILE is a wildcard, import each matching file.  Existing BBDB
 records may be altered.
 
 \(fn VCARD-FILE)" t nil)
 
-(autoload 'bbdb-vcard-export "bbdb-vcard" "\
+(autoload 'bbdb-vcard-export "bbdb-vcard/bbdb-vcard" "\
 From Buffer *BBDB*, write one or more record(s) as vCard(s) to file(s).
 \\<bbdb-mode-map>If \"\\[bbdb-apply-next-command-to-all-records]\\[bbdb-vcard-export]\"is used instead of simply \"\\[bbdb-vcard-export]\", then export all records currently
 in the *BBDB* buffer.  If used with prefix argument, store records
@@ -1782,7 +1713,7 @@ in individual files.
 
 \(fn FILENAME-OR-DIRECTORY ALL-RECORDS-P ONE-FILE-PER-RECORD-P)" t nil)
 
-(autoload 'bbdb-vcard-export-to-kill-ring "bbdb-vcard" "\
+(autoload 'bbdb-vcard-export-to-kill-ring "bbdb-vcard/bbdb-vcard" "\
 From Buffer *BBDB*, copy one or more record(s) as vCard(s) to the kill ring.
 \\<bbdb-mode-map>If \"\\[bbdb-apply-next-command-to-all-records]\\[bbdb-vcard-export-to-kill-ring]\"is used instead of simply \"\\[bbdb-vcard-export-to-kill-ring]\", then export all records currently in
 the *BBDB* buffer.
@@ -1792,32 +1723,32 @@ the *BBDB* buffer.
 ;;;***
 
 ;;;### (autoloads (smart-operator-self-insert-command smart-operator-mode-on
-;;;;;;  smart-operator-mode) "smart-operator" "xwl-elisp/smart-operator.el"
+;;;;;;  smart-operator-mode) "xwl-elisp/smart-operator" "xwl-elisp/smart-operator.el"
 ;;;;;;  (19839 20099))
 ;;; Generated autoloads from xwl-elisp/smart-operator.el
 
-(autoload 'smart-operator-mode "smart-operator" "\
+(autoload 'smart-operator-mode "xwl-elisp/smart-operator" "\
 Insert operators with surrounding spaces smartly.
 
 \(fn &optional ARG)" t nil)
 
-(autoload 'smart-operator-mode-on "smart-operator" "\
+(autoload 'smart-operator-mode-on "xwl-elisp/smart-operator" "\
 Turn on `smart-operator-mode'.
 
 \(fn)" nil nil)
 
-(autoload 'smart-operator-self-insert-command "smart-operator" "\
+(autoload 'smart-operator-self-insert-command "xwl-elisp/smart-operator" "\
 Insert the entered operator plus surrounding spaces.
 
 \(fn ARG)" t nil)
 
 ;;;***
 
-;;;### (autoloads (salary-show) "salary" "xwl-elisp/salary.el" (19886
-;;;;;;  63708))
+;;;### (autoloads (salary-show) "xwl-elisp/salary" "xwl-elisp/salary.el"
+;;;;;;  (19886 63708))
 ;;; Generated autoloads from xwl-elisp/salary.el
 
-(autoload 'salary-show "salary" "\
+(autoload 'salary-show "xwl-elisp/salary" "\
 Calculate how much we finally get in our pocket.
 SALARY is before tax.  With prefix argument, insert result at point.
 
@@ -1825,11 +1756,11 @@ SALARY is before tax.  With prefix argument, insert result at point.
 
 ;;;***
 
-;;;### (autoloads (qml-mode) "qml-mode" "xwl-elisp/qml-mode.el" (19702
-;;;;;;  15603))
+;;;### (autoloads (qml-mode) "xwl-elisp/qml-mode" "xwl-elisp/qml-mode.el"
+;;;;;;  (19702 15603))
 ;;; Generated autoloads from xwl-elisp/qml-mode.el
 
-(autoload 'qml-mode "qml-mode" "\
+(autoload 'qml-mode "xwl-elisp/qml-mode" "\
 Major mode for editing Qt QML files.
 \\{qml-mode-map}
 
@@ -1840,7 +1771,7 @@ Major mode for editing Qt QML files.
 ;;;### (autoloads (less-minor-mode-off less-minor-mode-on auto-less-minor-mode
 ;;;;;;  less-quit less-end-of-buffer less-beginning-of-buffer less-scroll-down-line
 ;;;;;;  less-scroll-up-line less-minor-mode global-less-minor-mode)
-;;;;;;  "less" "xwl-elisp/less.el" (19890 60982))
+;;;;;;  "xwl-elisp/less" "xwl-elisp/less.el" (19890 60982))
 ;;; Generated autoloads from xwl-elisp/less.el
 
 (defvar global-less-minor-mode nil "\
@@ -1850,9 +1781,9 @@ Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `global-less-minor-mode'.")
 
-(custom-autoload 'global-less-minor-mode "less" nil)
+(custom-autoload 'global-less-minor-mode "xwl-elisp/less" nil)
 
-(autoload 'global-less-minor-mode "less" "\
+(autoload 'global-less-minor-mode "xwl-elisp/less" "\
 Toggle Less minor mode in every possible buffer.
 With prefix ARG, turn Global-Less minor mode on if and only if
 ARG is positive.
@@ -1862,7 +1793,7 @@ See `less-minor-mode' for more information on Less minor mode.
 
 \(fn &optional ARG)" t nil)
 
-(autoload 'less-minor-mode "less" "\
+(autoload 'less-minor-mode "xwl-elisp/less" "\
 Toggle less-minor-mode.
 
 With less-minor-mode enabled, you could use `less' like keys to view files.
@@ -1870,66 +1801,78 @@ With less-minor-mode enabled, you could use `less' like keys to view files.
 
 \(fn &optional ARG)" t nil)
 
-(autoload 'less-scroll-up-line "less" "\
+(autoload 'less-scroll-up-line "xwl-elisp/less" "\
 Scroll up one line.
 
 \(fn)" t nil)
 
-(autoload 'less-scroll-down-line "less" "\
+(autoload 'less-scroll-down-line "xwl-elisp/less" "\
 Scroll down one line.
 
 \(fn)" t nil)
 
-(autoload 'less-beginning-of-buffer "less" "\
-Not documented
+(autoload 'less-beginning-of-buffer "xwl-elisp/less" "\
+
 
 \(fn)" t nil)
 
-(autoload 'less-end-of-buffer "less" "\
-Not documented
+(autoload 'less-end-of-buffer "xwl-elisp/less" "\
+
 
 \(fn)" t nil)
 
-(autoload 'less-quit "less" "\
+(autoload 'less-quit "xwl-elisp/less" "\
 Quit `less-minor-mode'.
 
 \(fn)" t nil)
 
-(autoload 'auto-less-minor-mode "less" "\
+(autoload 'auto-less-minor-mode "xwl-elisp/less" "\
 Turn on `less-minor-mode' for files not matching `auto-less-exclude-regexp'.
 
 This is a useful hook to add to `find-file-hook'.
 
 \(fn)" nil nil)
 
-(autoload 'less-minor-mode-on "less" "\
+(autoload 'less-minor-mode-on "xwl-elisp/less" "\
 Turn on `less-minor-mode'.
 
 \(fn)" nil nil)
 
-(autoload 'less-minor-mode-off "less" "\
+(autoload 'less-minor-mode-off "xwl-elisp/less" "\
 Turn off `less-minor-mode'.
 
 \(fn)" nil nil)
 
 ;;;***
 
-;;;### (autoloads (gmail-notifier-start) "gmail-notifier" "xwl-elisp/gmail-notifier.el"
-;;;;;;  (19839 20099))
-;;; Generated autoloads from xwl-elisp/gmail-notifier.el
+;;;### (autoloads (graphviz-dot-mode) "xwl-elisp/graphviz-dot" "xwl-elisp/graphviz-dot.el"
+;;;;;;  (19945 57208))
+;;; Generated autoloads from xwl-elisp/graphviz-dot.el
 
-(autoload 'gmail-notifier-start "gmail-notifier" "\
-Not documented
+(autoload 'graphviz-dot-mode "xwl-elisp/graphviz-dot" "\
+Major mode for editing Graphviz dot files.
+\\{graphviz-dot-mode-map}
 
 \(fn)" t nil)
 
 ;;;***
 
-;;;### (autoloads (finkinfo-mode) "finkinfo-mode" "xwl-elisp/finkinfo-mode.el"
+;;;### (autoloads (gmail-notifier-start) "xwl-elisp/gmail-notifier"
+;;;;;;  "xwl-elisp/gmail-notifier.el" (19839 20099))
+;;; Generated autoloads from xwl-elisp/gmail-notifier.el
+
+(autoload 'gmail-notifier-start "xwl-elisp/gmail-notifier" "\
+
+
+\(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads (finkinfo-mode) "xwl-elisp/finkinfo-mode" "xwl-elisp/finkinfo-mode.el"
 ;;;;;;  (18867 57586))
 ;;; Generated autoloads from xwl-elisp/finkinfo-mode.el
 
-(autoload 'finkinfo-mode "finkinfo-mode" "\
+(autoload 'finkinfo-mode "xwl-elisp/finkinfo-mode" "\
 Major mode for fink info files in Mac OS X.
 \\{finkinfo-mode-map}
 
@@ -1937,11 +1880,11 @@ Major mode for fink info files in Mac OS X.
 
 ;;;***
 
-;;;### (autoloads (easy-todo-mode) "easy-todo" "xwl-elisp/easy-todo.el"
+;;;### (autoloads (easy-todo-mode) "xwl-elisp/easy-todo" "xwl-elisp/easy-todo.el"
 ;;;;;;  (19120 65217))
 ;;; Generated autoloads from xwl-elisp/easy-todo.el
 
-(autoload 'easy-todo-mode "easy-todo" "\
+(autoload 'easy-todo-mode "xwl-elisp/easy-todo" "\
 Major mode for managing todos.
 \\{easy-todo-mode-map}
 
@@ -1949,10 +1892,11 @@ Major mode for managing todos.
 
 ;;;***
 
-;;;### (autoloads (cwit) "cwit" "xwl-elisp/cwit.el" (19264 47723))
+;;;### (autoloads (cwit) "xwl-elisp/cwit" "xwl-elisp/cwit.el" (19264
+;;;;;;  47723))
 ;;; Generated autoloads from xwl-elisp/cwit.el
 
-(autoload 'cwit "cwit" "\
+(autoload 'cwit "xwl-elisp/cwit" "\
 Create a *Cwit* buffer.
 
 \(fn)" t nil)
@@ -1960,10 +1904,11 @@ Create a *Cwit* buffer.
 ;;;***
 
 ;;;### (autoloads (holiday-solar-term holiday-lunar cal-china-x-birthday-from-chinese)
-;;;;;;  "cal-china-x" "xwl-elisp/cal-china-x.el" (19493 41734))
+;;;;;;  "xwl-elisp/cal-china-x" "xwl-elisp/cal-china-x.el" (19493
+;;;;;;  41734))
 ;;; Generated autoloads from xwl-elisp/cal-china-x.el
 
-(autoload 'cal-china-x-birthday-from-chinese "cal-china-x" "\
+(autoload 'cal-china-x-birthday-from-chinese "xwl-elisp/cal-china-x" "\
 Return birthday date this year in Gregorian form.
 
 LUNAR-MONTH and LUNAR-DAY are date number used in chinese lunar
@@ -1971,7 +1916,7 @@ calendar.
 
 \(fn LUNAR-MONTH LUNAR-DAY)" t nil)
 
-(autoload 'holiday-lunar "cal-china-x" "\
+(autoload 'holiday-lunar "xwl-elisp/cal-china-x" "\
 Like `holiday-fixed', but with LUNAR-MONTH and LUNAR-DAY.
 
 When there are multiple days(like Run Yue or 闰月, e.g.,
@@ -1988,7 +1933,7 @@ shows that it does not recognize Run Yue at all.
 
 \(fn LUNAR-MONTH LUNAR-DAY STRING &optional NUM)" nil nil)
 
-(autoload 'holiday-solar-term "cal-china-x" "\
+(autoload 'holiday-solar-term "xwl-elisp/cal-china-x" "\
 A holiday(STR) on SOLAR-TERM day.
 See `cal-china-x-solar-term-name' for a list of solar term names .
 
@@ -1996,11 +1941,11 @@ See `cal-china-x-solar-term-name' for a list of solar term names .
 
 ;;;***
 
-;;;### (autoloads (buffer-action-run buffer-action-compile) "buffer-action"
+;;;### (autoloads (buffer-action-run buffer-action-compile) "xwl-elisp/buffer-action"
 ;;;;;;  "xwl-elisp/buffer-action.el" (19435 65395))
 ;;; Generated autoloads from xwl-elisp/buffer-action.el
 
-(autoload 'buffer-action-compile "buffer-action" "\
+(autoload 'buffer-action-compile "xwl-elisp/buffer-action" "\
 Run `compile' by checking project builders and `buffer-action-table'.
 
 Project builders are like make, ant, etc.  When running for the
@@ -2010,7 +1955,7 @@ edit it again, please add C-u prefix.
 
 \(fn)" t nil)
 
-(autoload 'buffer-action-run "buffer-action" "\
+(autoload 'buffer-action-run "xwl-elisp/buffer-action" "\
 Run the binary file according to `buffer-action-table'.
 
 When running for the first time, you can edit the command in
@@ -2021,21 +1966,22 @@ more. If you want to edit it again, please add C-u prefix.
 
 ;;;***
 
-;;;### (autoloads (dashboard) "dashboard" "xwl-elisp/dashboard/dashboard.el"
+;;;### (autoloads (dashboard) "xwl-elisp/dashboard/dashboard" "xwl-elisp/dashboard/dashboard.el"
 ;;;;;;  (19214 33075))
 ;;; Generated autoloads from xwl-elisp/dashboard/dashboard.el
 
-(autoload 'dashboard "dashboard" "\
+(autoload 'dashboard "xwl-elisp/dashboard/dashboard" "\
 Create a *Dashboard* buffer.
 
 \(fn)" t nil)
 
 ;;;***
 
-;;;### (autoloads (ga) "ga" "xwl-elisp/ga/ga.el" (19881 1234))
+;;;### (autoloads (ga) "xwl-elisp/ga/ga" "xwl-elisp/ga/ga.el" (19881
+;;;;;;  1234))
 ;;; Generated autoloads from xwl-elisp/ga/ga.el
 
-(autoload 'ga "ga" "\
+(autoload 'ga "xwl-elisp/ga/ga" "\
 Create or switch to a ga buffer.
 
 \(fn &optional BACKEND)" t nil)
@@ -2043,18 +1989,18 @@ Create or switch to a ga buffer.
 ;;;***
 
 ;;;### (autoloads (xwl-backward-char xwl-forward-char his-isearch-backward-current-symbol
-;;;;;;  his-isearch-current-symbol his-isearch-yank-symbol) "xwl-vim"
+;;;;;;  his-isearch-current-symbol his-isearch-yank-symbol) "config/autoload/xwl-vim"
 ;;;;;;  "config/autoload/xwl-vim.el" (19453 18479))
 ;;; Generated autoloads from config/autoload/xwl-vim.el
 
-(autoload 'his-isearch-yank-symbol "xwl-vim" "\
+(autoload 'his-isearch-yank-symbol "config/autoload/xwl-vim" "\
 Put symbol at current point into search string.
 
   If PARTIALP is non-nil, find all partial matches.
 
 \(fn &optional PARTIALP)" t nil)
 
-(autoload 'his-isearch-current-symbol "xwl-vim" "\
+(autoload 'his-isearch-current-symbol "config/autoload/xwl-vim" "\
 Incremental search forward with symbol under point.
 
   Prefixed with \\[universal-argument] will find all partial
@@ -2062,7 +2008,7 @@ Incremental search forward with symbol under point.
 
 \(fn &optional PARTIALP)" t nil)
 
-(autoload 'his-isearch-backward-current-symbol "xwl-vim" "\
+(autoload 'his-isearch-backward-current-symbol "config/autoload/xwl-vim" "\
 Incremental search backward with symbol under point.
 
   Prefixed with \\[universal-argument] will find all partial
@@ -2070,23 +2016,24 @@ Incremental search backward with symbol under point.
 
 \(fn &optional PARTIALP)" t nil)
 
-(autoload 'xwl-forward-char "xwl-vim" "\
-Not documented
+(autoload 'xwl-forward-char "config/autoload/xwl-vim" "\
+
 
 \(fn N CHAR)" t nil)
 
-(autoload 'xwl-backward-char "xwl-vim" "\
-Not documented
+(autoload 'xwl-backward-char "config/autoload/xwl-vim" "\
+
 
 \(fn N CHAR)" t nil)
 
 ;;;***
 
 ;;;### (autoloads (xwl-paste-ubuntu-cn-image xwl-paste-ubuntu-cn)
-;;;;;;  "xwl-paste" "config/autoload/xwl-paste.el" (19736 30190))
+;;;;;;  "config/autoload/xwl-paste" "config/autoload/xwl-paste.el"
+;;;;;;  (19736 30190))
 ;;; Generated autoloads from config/autoload/xwl-paste.el
 
-(autoload 'xwl-paste-ubuntu-cn "xwl-paste" "\
+(autoload 'xwl-paste-ubuntu-cn "config/autoload/xwl-paste" "\
 Paste region between BEG and END to http://paste.ubuntu.org.cn.
 
 Resulted post url will be appended to your kill ring, so you can
@@ -2094,34 +2041,34 @@ simply yank it when needed.
 
 \(fn BEG END &optional CLASS)" t nil)
 
-(autoload 'xwl-paste-ubuntu-cn-image "xwl-paste" "\
-Not documented
+(autoload 'xwl-paste-ubuntu-cn-image "config/autoload/xwl-paste" "\
+
 
 \(fn FILENAME)" t nil)
 
 ;;;***
 
-;;;### (autoloads (xwl-zenity xwl-snarl xwl-growl xwl-notify) "xwl-notify"
+;;;### (autoloads (xwl-zenity xwl-snarl xwl-growl xwl-notify) "config/autoload/xwl-notify"
 ;;;;;;  "config/autoload/xwl-notify.el" (19847 14336))
 ;;; Generated autoloads from config/autoload/xwl-notify.el
 
-(autoload 'xwl-notify "xwl-notify" "\
-Not documented
+(autoload 'xwl-notify "config/autoload/xwl-notify" "\
+
 
 \(fn TITLE MESSAGE)" nil nil)
 
-(autoload 'xwl-growl "xwl-notify" "\
-Not documented
+(autoload 'xwl-growl "config/autoload/xwl-notify" "\
+
 
 \(fn TITLE MESSAGE)" nil nil)
 
-(autoload 'xwl-snarl "xwl-notify" "\
-Not documented
+(autoload 'xwl-snarl "config/autoload/xwl-notify" "\
+
 
 \(fn TITLE MESSAGE)" nil nil)
 
-(autoload 'xwl-zenity "xwl-notify" "\
-Not documented
+(autoload 'xwl-zenity "config/autoload/xwl-notify" "\
+
 
 \(fn TITLE MESSAGE)" nil nil)
 
@@ -2134,67 +2081,67 @@ Not documented
 ;;;;;;  xwl-download-book xwl-delete-line his-transpose-windows his-one-whitespace-between-ce
 ;;;;;;  xwl-soft-kill-ring-save xwl-word-count-analysis xwl-count-ce-word
 ;;;;;;  his-align-cols xwl-numerate-lines xwl-delete-blank-lines-region
-;;;;;;  xwl-delete-blank-lines-buffer ascii-table-show) "xwl-extra-util"
+;;;;;;  xwl-delete-blank-lines-buffer ascii-table-show) "config/autoload/xwl-extra-util"
 ;;;;;;  "config/autoload/xwl-extra-util.el" (19730 5190))
 ;;; Generated autoloads from config/autoload/xwl-extra-util.el
 
-(autoload 'ascii-table-show "xwl-extra-util" "\
+(autoload 'ascii-table-show "config/autoload/xwl-extra-util" "\
 Print the ascii table, by crazycool@smth.
 
 \(fn)" t nil)
 
-(autoload 'xwl-delete-blank-lines-buffer "xwl-extra-util" "\
+(autoload 'xwl-delete-blank-lines-buffer "config/autoload/xwl-extra-util" "\
 Strip all blank lines in current buffer.
 
 \(fn)" t nil)
 
-(autoload 'xwl-delete-blank-lines-region "xwl-extra-util" "\
+(autoload 'xwl-delete-blank-lines-region "config/autoload/xwl-extra-util" "\
 Strip all blank lines in region.
 
 \(fn START END)" t nil)
 
-(autoload 'xwl-numerate-lines "xwl-extra-util" "\
+(autoload 'xwl-numerate-lines "config/autoload/xwl-extra-util" "\
 Insert line number before each line.
 
 \(fn)" t nil)
 
-(autoload 'his-align-cols "xwl-extra-util" "\
+(autoload 'his-align-cols "config/autoload/xwl-extra-util" "\
 Align text between point and mark as columns.  Columns are separated by
 whitespace characters.  Prefix arg means align that many columns. (default
 is all)
 
 \(fn START END MAX-COLS)" t nil)
 
-(autoload 'xwl-count-ce-word "xwl-extra-util" "\
+(autoload 'xwl-count-ce-word "config/autoload/xwl-extra-util" "\
 Count Chinese and English words in marked region.
 
 \(fn BEG END)" t nil)
 
-(autoload 'xwl-word-count-analysis "xwl-extra-util" "\
+(autoload 'xwl-word-count-analysis "config/autoload/xwl-extra-util" "\
 Count how many times each word is used in the region.
 Punctuation is ignored.
 
 \(fn START END)" t nil)
 
-(autoload 'xwl-soft-kill-ring-save "xwl-extra-util" "\
+(autoload 'xwl-soft-kill-ring-save "config/autoload/xwl-extra-util" "\
 Same as `kill-ring-save' except it will convert hard newlines to soft newlines.
 This could be useful for copying texts from Emacs and pasting it to blog
 websites.  It also keeps original empty line for separating paragraphs.
 
 \(fn BEG END)" t nil)
 
-(autoload 'his-one-whitespace-between-ce "xwl-extra-util" "\
+(autoload 'his-one-whitespace-between-ce "config/autoload/xwl-extra-util" "\
 Automatically insert a whitespace between Chinese and English,
 Chinese and digits, which is useful when editing TeX files.
 
 \(fn &optional START END)" t nil)
 
-(autoload 'his-transpose-windows "xwl-extra-util" "\
+(autoload 'his-transpose-windows "config/autoload/xwl-extra-util" "\
 Transpose the buffers shown in two windows.
 
 \(fn ARG)" t nil)
 
-(autoload 'xwl-delete-line "xwl-extra-util" "\
+(autoload 'xwl-delete-line "config/autoload/xwl-extra-util" "\
 Delete the rest of the current line; if no nonblanks there, delete thru newline.
 With prefix argument, delete that many lines from point.
 Negative arguments delete lines backward.
@@ -2205,7 +2152,7 @@ that, the deleted contents won't be inserted to the `kill-ring'.
 
 \(fn &optional ARG)" nil nil)
 
-(autoload 'xwl-download-book "xwl-extra-util" "\
+(autoload 'xwl-download-book "config/autoload/xwl-extra-util" "\
 Download link formed of `PRE + index + POST', where `index' belongs to [BEG, END).
 `index' is formated by FMT using `format'. BEG and END are integers. The
 downloaded contents will be saved under \"~/Downloads/SUBDIR\".
@@ -2220,77 +2167,77 @@ e.g.,
 
 \(fn PRE BEG END POST FMT SUBDIR)" nil nil)
 
-(autoload 'xwl-generate-password "xwl-extra-util" "\
+(autoload 'xwl-generate-password "config/autoload/xwl-extra-util" "\
 [33, 126] is range for printable characters.
 
 \(fn LEN)" nil nil)
 
-(autoload 'xwl-shell-command-asynchronously-with-callback "xwl-extra-util" "\
+(autoload 'xwl-shell-command-asynchronously-with-callback "config/autoload/xwl-extra-util" "\
 Run CMD asynchronously and apply CALLBACK in the output buffer.
 Note: you are suggested to kill process buffer at the end of CALLBACK.
 
 \(fn CMD CALLBACK)" nil (quote macro))
 
-(autoload 'forward-ascii-symbol "xwl-extra-util" "\
+(autoload 'forward-ascii-symbol "config/autoload/xwl-extra-util" "\
 New thing for `thingapt'.
 
 \(fn ARG)" t nil)
 
-(autoload 'xwl-fortune-laozi "xwl-extra-util" "\
+(autoload 'xwl-fortune-laozi "config/autoload/xwl-extra-util" "\
 Return a random chapter from laozi.
 
 \(fn)" t nil)
 
-(autoload 'xwl-fortune-favorites-vertically "xwl-extra-util" "\
-Not documented
+(autoload 'xwl-fortune-favorites-vertically "config/autoload/xwl-extra-util" "\
+
 
 \(fn &optional FILE)" t nil)
 
-(autoload 'xwl-fortune-favorites "xwl-extra-util" "\
+(autoload 'xwl-fortune-favorites "config/autoload/xwl-extra-util" "\
 Return a random chapter from ~/notes/favorites.
 
 \(fn &optional FILE)" t nil)
 
-(autoload 'his-dos2unix "xwl-extra-util" "\
+(autoload 'his-dos2unix "config/autoload/xwl-extra-util" "\
 
  --> .
 
 \(fn)" t nil)
 
-(autoload 'his-unix2dos "xwl-extra-util" "\
+(autoload 'his-unix2dos "config/autoload/xwl-extra-util" "\
 
  --> 
 .
 
 \(fn)" t nil)
 
-(autoload 'xwl-info "xwl-extra-util" "\
-Not documented
+(autoload 'xwl-info "config/autoload/xwl-extra-util" "\
+
 
 \(fn FILE)" t nil)
 
-(autoload 'xwl-kill-buffer-name "xwl-extra-util" "\
-Not documented
+(autoload 'xwl-kill-buffer-name "config/autoload/xwl-extra-util" "\
+
 
 \(fn &optional KILL-DIRECTORY)" t nil)
 
-(autoload 'xwl-kill-buffer-full-name "xwl-extra-util" "\
-Not documented
+(autoload 'xwl-kill-buffer-full-name "config/autoload/xwl-extra-util" "\
+
 
 \(fn &optional KILL-DIRECTORY)" t nil)
 
-(autoload 'xwl-w32-start-program "xwl-extra-util" "\
-Not documented
+(autoload 'xwl-w32-start-program "config/autoload/xwl-extra-util" "\
+
 
 \(fn PROGRAM)" t nil)
 
 ;;;***
 
-;;;### (autoloads (color-theme-xwl-console) "xwl-color-theme" "config/autoload/xwl-color-theme.el"
-;;;;;;  (19528 10868))
+;;;### (autoloads (color-theme-xwl-console) "config/autoload/xwl-color-theme"
+;;;;;;  "config/autoload/xwl-color-theme.el" (19528 10868))
 ;;; Generated autoloads from config/autoload/xwl-color-theme.el
 
-(autoload 'color-theme-xwl-console "xwl-color-theme" "\
+(autoload 'color-theme-xwl-console "config/autoload/xwl-color-theme" "\
 Color theme base on console colors with `color-theme-print'.
 Created on 2005-05-13.
 

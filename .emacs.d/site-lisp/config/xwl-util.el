@@ -1,6 +1,6 @@
 ;;; xwl-util.el --- Utility functions
 
-;; Copyright (C) 2007, 2008, 2009, 2010  William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010, 2011  William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -107,7 +107,7 @@ This should not affect `buffer-undo-list'."
 
 (add-hook 'before-save-hook 'xwl-update-date)
 
-;; named-let, Thanks to Riastradh@#emacs
+;; named-let, Thanks to Riastradh@#emacs (however, still meets stack limit. )
 (defmacro his-named-let (name parameters &rest body)
   `(labels
        ((,name ,(mapcar 'car parameters) ,@body))
