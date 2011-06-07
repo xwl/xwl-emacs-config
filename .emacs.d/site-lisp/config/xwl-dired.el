@@ -313,8 +313,7 @@ be with length 3 extentions !"
       (case system-type
         ((windows-nt)
          '(("\\.qml$" "c:/Qt/2010.05/qt/bin/qmlviewer.exe")
-           (".*" (progn (w32-shell-execute "open" file)
-                        'ignore-me))))
+           (".*" file)))
 
         ((darwin)
          '((".*" "open")))
