@@ -1,6 +1,6 @@
 ;;; xwl-help.el --- Getting help
 
-;; Copyright (C) 2008, 2010 William Xu
+;; Copyright (C) 2008, 2010, 2011 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -78,8 +78,8 @@
 
      (define-key woman-mode-map "q" 'delete-window)
 
-     ;; When woman fails, man stands up, please!
      (defadvice woman (around woman-and-man activate)
+       "When `woman' fails, fall back to `man'."
        (condition-case nil
            (cond
             ((memq major-mode xwl-help-modes)
@@ -88,9 +88,10 @@
              (other-window 1)
              ad-do-it)
             (t
+             ad-do-it
              (split-window-horizontally)
-             (other-window 1)
-             ad-do-it))
+             (next-buffer)
+             (other-window 1)))
          (error
           (progn
             (winner-undo)
