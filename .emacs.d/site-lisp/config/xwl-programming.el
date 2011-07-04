@@ -584,7 +584,7 @@ yacc source files."
 (mapc (lambda (hook)
         (mapc (lambda (func)
                 (add-hook hook func))
-              '(turn-on-eldoc-mode xwl-lisp-mode-hook)))
+              '(turn-on-eldoc-mode xwl-lisp-mode-hook smart-operator-mode-on)))
       '(lisp-mode-hook emacs-lisp-mode-hook))
 
 ;;; scheme
@@ -604,6 +604,7 @@ yacc source files."
   (local-set-key (kbd "C-x C-b") 'xwl-scheme-send-buffer))
 
 (add-hook 'scheme-mode-hook 'xwl-scheme-mode-hook)
+(add-hook 'scheme-mode-hook 'smart-operator-mode-on)
 
 (defun xwl-scheme-send-buffer ()
   (interactive)
@@ -1033,11 +1034,11 @@ Useful for packing c/c++ functions with one line or empty body."
 
 ;; (semantic-mode 1)
 
-(eval-after-load 'semantic-imenu
-  '(progn
-     (defadvice semantic-create-imenu-index (after combine-with-default activate)
-       (setq ad-return-value (append (imenu-default-create-index-function)
-                                     ad-return-value)))))
+;; (eval-after-load 'semantic-imenu
+;;   '(progn
+;;      (defadvice semantic-create-imenu-index (after combine-with-default activate)
+;;        (setq ad-return-value (append (imenu-default-create-index-function)
+;;                                      ad-return-value)))))
 
 (eval-after-load 'diff-mode
   '(progn
