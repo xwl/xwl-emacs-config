@@ -57,7 +57,7 @@
 
              "~/etc"
 
-             "~/repo/cvs/cedet/common")))
+             )))
 
 (setenv "INFOPATH"
         (mapconcat 'identity
@@ -103,6 +103,12 @@
       (setq exec-path (split-string (getenv "PATH") ";")))
   (setenv "TERM" "xterm-color")
   (setq exec-path (split-string (getenv "PATH") ":")))
+
+;; load this earlier to use bzr version
+(unless (featurep 'cedet)
+  (load "~/repo/bzr/cedet/common/cedet.el")
+  ;; (global-ede-mode 1)
+  (semantic-load-enable-gaudy-code-helpers))
 
 ;; no need of `provide'.
 
