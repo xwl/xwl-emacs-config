@@ -56,8 +56,8 @@
 
 (eval-after-load 'org
   '(progn
-     (org-defkey org-mode-map "\C-c," 'next-buffer)
-     (org-defkey org-mode-map "\C-c." 'previous-buffer)))
+     (org-defkey org-mode-map (kbd "C-,") 'next-buffer)
+     (org-defkey org-mode-map (kbd "C-.") 'previous-buffer)))
 
 (require 'org-agenda)
 (defadvice org-agenda-day-view (around leave-ndays-alone activate)
