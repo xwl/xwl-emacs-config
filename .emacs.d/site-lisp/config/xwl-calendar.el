@@ -1,6 +1,6 @@
 ;;; xwl-calendar.el --- calendar related stuffs
 
-;; Copyright (C) 2007, 2008, 2009, 2010 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010, 2011 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -25,7 +25,7 @@
 
 (require 'xwl-util)
 
-;; (setq calendar-week-start-day 1)
+(setq calendar-week-start-day 1)
 
 (setq calendar-latitude +39.55
       calendar-longtitude +116.25
@@ -33,11 +33,12 @@
 ;; changting(+25.52, +116.20)
 
 (global-set-key (kbd "<f12>")
-                (lambda () (interactive)
+                (lambda ()
+                  (interactive)
                   (let ((cal "*Calendar*"))
                     (if (get-buffer cal)
                         (progn
-                          (split-window-vertically -9)
+                          (split-window-vertically (- (round (* 0.25 (window-height)))))
                           (other-window 1))
                       ;; 禁用垂直分割。
                       (let ((split-width-threshold 9999))
