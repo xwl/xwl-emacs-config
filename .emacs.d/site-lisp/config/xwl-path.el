@@ -106,9 +106,10 @@
 
 ;; load this earlier to use bzr version
 (unless (featurep 'cedet)
+  (unless (eq system-type 'windows-nt)
   (load "~/repo/bzr/cedet/common/cedet.el")
   ;; (global-ede-mode 1)
-  (semantic-load-enable-gaudy-code-helpers))
+  (semantic-load-enable-gaudy-code-helpers)))
 
 ;; no need of `provide'.
 

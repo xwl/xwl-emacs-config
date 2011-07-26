@@ -55,19 +55,19 @@
 
 (erc-autojoin-mode 1)
 (setq erc-autojoin-channels-alist
-      '(("rootdir.de"
-         "&bitlbee")
-        ("freenode.net"
-         "#osxchat" "#emacs" "#scheme" "#chicken" "#cpp-tw" ;; "#chinalug"
-         ; "#qt-qml" "#qt"
-         )
+      '(;; ("rootdir.de"
+        ;;  "&bitlbee")
+        ;; ("freenode.net"
+        ;;  "#osxchat" "#emacs" "#scheme" "#chicken" "#cpp-tw" ;; "#chinalug"
+        ;;  ; "#qt-qml" "#qt"
+        ;;  )
         ("oftc.net"
          ;; "#debian-zh"
          "#emacs-cn")      ; "#bitlbee"
         ;; ("linuxfire"
         ;;  "#linuxfire")
-        ("irc.lnx.nokia.com"
-         "#mac" "#linux" "#symbianperformance")
+        ;; ("irc.lnx.nokia.com"
+        ;;  "#mac" "#linux" "#symbianperformance")
         ))
 
 (defun his-bitlbee-identify ()

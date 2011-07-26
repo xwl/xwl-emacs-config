@@ -131,14 +131,15 @@
 ;;; C, C++
 
 (defun xwl-set-c-c++-style ()
-  (if (file-exists-p "../group")
-      ;; symbian c++
-      (progn
-        (c-set-style "whitesmith")
-        (setq c-cleanup-list '()))
+  ;; (if (file-exists-p "../group")
+  ;;     ;; symbian c++
+  ;;     (progn
+  ;;       (c-set-style "whitesmith")
+  ;;       (setq c-cleanup-list '()))
     (c-set-style "k&r")
     ;; TODO, check this.
-    (setq c-basic-offset 4)))
+    (setq c-basic-offset 4))
+;)
 
 (add-hook 'c-mode-hook 'xwl-set-c-c++-style)
 (add-hook 'c++-mode-hook 'xwl-set-c-c++-style)
@@ -785,16 +786,18 @@ If SCHEME?, `run-scheme'."
 
              ("\\.dot$"
               ,(concat "dot -Tjpg %f -o %n.jpg "
-                       (let ((fontname "Arial Unicode.ttf"))
-                         (mapconcat
-                          (lambda (i)
-                            (format i fontname))
-                          '("-Nfontname='/Library/Fonts/%s'"
-                            "-Gfontname='/Library/Fonts/%s'"
-                            "-Efontname='/Library/Fonts/%s'")
-                          " ")))
+                       ;; (let ((fontname
+                       ;;        (cdr (assq system-type
+                       ;;                   '((windows-nt . "c:/Windows/Fonts/simhei.ttf")
+                       ;;                     (darwin . "/Library/Fonts/Arial Unicode.ttf"))))))
+                       ;;   (mapconcat (lambda (i) (format i fontname))
+                       ;;              '("-Nfontname='%s'" "-Gfontname='%s'" "-Efontname='%s'")
+                       ;;              " "))
+                       )
               "%n.jpg"
-              "open -a Preview %n.jpg &")
+
+              ,(cdr (assq system-type '((windows-nt . "start %n.jpg")
+                                        (darwin . "open %n.jpg &")))))
 
              ;; FIXME: return value of abld is unreliable? so let us
              ;; keep the compilation window for now.

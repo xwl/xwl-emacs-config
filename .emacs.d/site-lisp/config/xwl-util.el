@@ -134,7 +134,7 @@ This should not affect `buffer-undo-list'."
 
 ;; Well, as Gnus and other components depend on this, we have to eval this much earlier.
 (when (and xwl-at-company? xwl-w32?)
-  (setq xwl-proxy-server "172.16.42.137"
+  (setq xwl-proxy-server "172.16.42.42"
         xwl-proxy-port 8080)
 
   (setq url-proxy-services

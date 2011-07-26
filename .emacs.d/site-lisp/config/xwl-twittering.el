@@ -119,7 +119,7 @@
 
      (when xwl-at-company?
        (setq twittering-proxy-use t)
-       (setq twittering-proxy-server "172.16.42.137"
+       (setq twittering-proxy-server "172.16.42.42"
              twittering-proxy-port 8080))
 
      ;; (setq twittering-proxy-server (xds "Q)0mQ)ocCdEl")
@@ -164,14 +164,16 @@
 
 (setq twittering-status-filter 'xwl-twittering-status-filter)
 (defun xwl-twittering-status-filter (status)
-  ;; Hide duplicated retweets
-  (not (let ((rt (twittering-is-retweet? status))
-             (table (twittering-current-timeline-referring-id-table)))
-         (when (and rt table (not (string=
-                                   (twittering-current-timeline-spec-string)
-                                   ":mentions@sina")))
-           (not (string= (gethash (assqref 'id rt) table)
-                         (assqref 'id status)))))))
+  (let ((spec-string (twittering-current-timeline-spec-string)))
+    (not (or
+          ;; Hide duplicated retweets
+          (let ((rt (twittering-is-retweet? status))
+                (table (twittering-current-timeline-referring-id-table)))
+            (when (and rt table (not (string= spec-string ":mentions@sina")))
+              (not (string= (gethash (assqref 'id rt) table)
+                            (assqref 'id status)))))
+          (and (string= spec-string ":public@socialcast")
+               (string= (assqref 'screen-name (assqref 'user status)) "VarunPrakash"))))))
 
 (provide 'xwl-twittering)
 ;;; xwl-twittering.el ends here
