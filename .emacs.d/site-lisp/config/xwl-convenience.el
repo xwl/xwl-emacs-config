@@ -53,7 +53,6 @@
 
 (setq scroll-preserve-screen-position 'always)
 
-(setq global-auto-revert-non-file-buffers t)
 (global-auto-revert-mode 1)
 
 (global-font-lock-mode t)
