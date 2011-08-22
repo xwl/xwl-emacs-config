@@ -57,7 +57,25 @@
 (eval-after-load 'org
   '(progn
      (org-defkey org-mode-map (kbd "C-,") 'next-buffer)
-     (org-defkey org-mode-map (kbd "C-.") 'previous-buffer)))
+     (org-defkey org-mode-map (kbd "C-.") 'previous-buffer)
+
+     (defun org-image-file-name-regexp (&optional extensions)
+       "Return regexp matching the file names of images.
+If EXTENSIONS is given, only match these."
+       ;;  (if (and (not extensions) (fboundp 'image-file-name-regexp))
+       ;;      (image-file-name-regexp)
+       (let ((image-file-name-extensions
+              (or extensions
+                  '("png" "jpeg" "jpg" "gif" "tiff" "tif"
+                    "xbm" "xpm" "pbm" "pgm" "ppm"))))
+         (concat "\\."
+                 (regexp-opt (nconc (mapcar 'upcase
+                                            image-file-name-extensions)
+                                    image-file-name-extensions)
+                             t)
+                 "\\'")))
+
+     ))
 
 (require 'org-agenda)
 (defadvice org-agenda-day-view (around leave-ndays-alone activate)
@@ -106,6 +124,8 @@
             (modify-syntax-entry ?- "w" org-mode-syntax-table)
             (modify-syntax-entry ?> "w" org-mode-syntax-table)))
 
+(setq org-startup-with-inline-images t)
+
 ;; remember
 (add-hook 'remember-mode-hook 'org-remember-apply-template)
 
@@ -141,6 +161,10 @@
 
 ;; Run two times to generate `Contents' table.
 (setq org-latex-to-pdf-process '("xelatex %s" "xelatex %s"))
+
+;;; html export
+
+(setq org-export-html-table-tag "<table border=\"2\" cellpadding=\"6\"")
 
 ;; (when nil
 
