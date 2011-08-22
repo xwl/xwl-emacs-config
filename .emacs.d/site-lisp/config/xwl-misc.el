@@ -888,6 +888,7 @@ prompting.  If file is a directory perform a `find-file' on it."
   (let ((inhibit-read-only t))
     (display-message-or-buffer (pp ad-do-it))))
 
+(nyan-mode 1)
 
 (provide 'xwl-misc)
 
