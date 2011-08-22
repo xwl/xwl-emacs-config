@@ -153,8 +153,8 @@
       `(":home@sina" ":replies@sina" ":mentions@sina"
         ":home@twitter" ":replies@twitter" ":direct_messages@twitter"
         ":home@douban"
-        ,@(when xwl-at-company?
-            '(":home@socialcast" ":public@socialcast"))
+        ;; ,@(when xwl-at-company?
+        ;;     '(":home@socialcast" ":public@socialcast"))
         ))
 
 (setq twittering-image-external-viewer-command
@@ -172,8 +172,12 @@
             (when (and rt table (not (string= spec-string ":mentions@sina")))
               (not (string= (gethash (assqref 'id rt) table)
                             (assqref 'id status)))))
-          (and (string= spec-string ":public@socialcast")
-               (string= (assqref 'screen-name (assqref 'user status)) "VarunPrakash"))))))
+          (when (string= spec-string ":public@socialcast")
+            (member (assqref 'screen-name (assqref 'user status))
+                    '("VarunPrakash"
+                      "Nokia Conversations - Posts"
+                      "Ovi by Nokia"
+                      "datainsight")))))))
 
 (provide 'xwl-twittering)
 ;;; xwl-twittering.el ends here

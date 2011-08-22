@@ -1,5 +1,5 @@
 @rem desproxy="%home%/usr/desproxy/desproxy.exe"
-@set proxy=172.16.42.137
+@set proxy=172.16.42.42
 @set port=8080
 
 start /B desproxy irc.debian.org    6669 %proxy% %port% 16669 > NUL

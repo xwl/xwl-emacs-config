@@ -148,8 +148,10 @@ end tell"
 ;;;               'xwl-browse-url-camino
         ;; 'xwl-browse-url-firefox-tab-only
         ;; 'xwl-browse-url-safari
-        ((windows-nt) ;; 'xwl-browse-url-chrome
-         'xwl-browse-url-firefox-tab-only)
+        ((windows-nt)
+         'xwl-browse-url-chrome
+         ;; 'xwl-browse-url-firefox-tab-only
+         )
         ((darwin) 'xwl-browse-url-firefox-tab-only)
         (t 'w3m-browse-url)))
 

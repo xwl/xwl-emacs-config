@@ -472,7 +472,7 @@ Thus generate a TAGs file."
 ;;; highlight special keywords
 (setq xwl-keyword-highlight-modes
       '(php-mode java-mode c-mode c++-mode emacs-lisp-mode scheme-mode
-	text-mode outline-mode))
+                 text-mode outline-mode org-mode))
 
 (unless (executable-find "grep")
   (when (eq system-type 'windows-nt)

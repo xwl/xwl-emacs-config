@@ -1,6 +1,6 @@
 ;;; xwl-var.el --- Global variables
 
-;; Copyright (C) 2010 William Xu
+;; Copyright (C) 2010, 2011 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -23,7 +23,7 @@
 
 (setq xwl-w32? (eq system-type 'windows-nt))
 
-(setq xwl-w32-redirect-locally? nil)
+(setq xwl-w32-redirect-locally? t)
 
 (defun xwl-at-company ()
   ;; (message "瞅瞅我们是不是在公司网络呢…")
