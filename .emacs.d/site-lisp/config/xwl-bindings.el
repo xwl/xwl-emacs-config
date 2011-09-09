@@ -187,7 +187,7 @@
           (setq sv (xwl-redirect-host))
           (setq nick "xwl_"))
 
-        ;; (erc :server sv :port 16667 :nick nick :password pwerc)
+        (erc :server sv :port 16667 :nick nick :password pwerc)
         (erc :server sv :port 16669 :nick nick :password pwdeb)
         ;; (erc :server sv :port 16668 :nick nick :password pwerc)
 

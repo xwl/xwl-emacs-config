@@ -39,7 +39,13 @@
                         "-apple-Hiragino_Sans_GB-medium-normal-normal-*-*-*-*-*-p-0-iso10646-1"
                         "-apple-Hiragino_Sans_GB-medium-normal-normal-*-*-*-*-*-p-0-iso10646-1")
                     '("Monaco-14" "Hiragino Sans GB" "Hiragino_Kaku_Gothic_ProN")))
-          (w32 . ("Monaco-10" "NSimSun" "NSimSun"
+          (w32 . ("Monaco-10"
+                  ;; "NSimSun" "NSimSun"
+                  "SimSun" "SimSun"
+
+                  ;; "-outline-SimSun-normal-normal-normal-*-*-*-*-*-p-*-iso8859-1"
+                  ;; "-outline-SimSun-normal-normal-normal-*-*-*-*-*-p-*-iso8859-1"
+
                   ;; "汉鼎繁中变" "汉鼎繁中变" "汉鼎繁中变"
                   ;; "微软雅黑" "微软雅黑"
                   ))

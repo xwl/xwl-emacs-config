@@ -1,6 +1,6 @@
 ;;; xwl-redefined.el --- Redefined functions from GNU Emacs
 
-;; Copyright (C) 2007, 2008, 2010 William Xu
+;; Copyright (C) 2007, 2008, 2010, 2011 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -67,23 +67,6 @@
 ;; description -> "", disposition -> attached, and use ido
 (require 'mml)
 
-(defun mml-minibuffer-read-type (name &optional default)
-  (mailcap-parse-mimetypes)
-  (let* ((default (or default
-		      (mm-default-file-encoding name)
-		      ;; Perhaps here we should check what the file
-		      ;; looks like, and offer text/plain if it looks
-		      ;; like text/plain.
-		      "application/octet-stream"))
-	 (string ;; (completing-read
-          (ido-completing-read
-		  (format "Content type (default %s): " default)
-		  ;; (mapcar 'list )
-                  (mailcap-mime-types))))
-    (if (not (equal string ""))
-	string
-      default)))
-
 (defun mml-attach-file (file &optional type description disposition)
   (interactive
    (let* ((file (mml-minibuffer-read-file "Attach file: "))
@@ -96,46 +79,6 @@
 			  'filename file
 			  'disposition (or disposition "attachment")
 			  'description description)))
-
-
-(eval-after-load "gnus-group"
-  '(progn
-     (defun gnus-group-make-web-group (&optional solid)
-       "Create an ephemeral nnweb group.
-If SOLID (the prefix), create a solid group."
-       (interactive "P")
-       (require 'nnweb)
-       (let* ((group
-               (if solid (gnus-read-group "Group name: ")
-                 (message-unique-id)))
-              (default-type (or (car gnus-group-web-type-history)
-                                (symbol-name (caar nnweb-type-definition))))
-              (type
-               (gnus-string-or
-                (ido-completing-read
-                 (format "Search engine type (default %s): " default-type)
-                 (mapcar (lambda (elem) (list (symbol-name (car elem))))
-                         nnweb-type-definition)
-                 nil t nil 'gnus-group-web-type-history)
-                default-type))
-              (search
-               (read-string
-                "Search string: "
-                (cons (or (car gnus-group-web-search-history) "") 0)
-                'gnus-group-web-search-history))
-              (method
-               `(nnweb ,group (nnweb-search ,search)
-                       (nnweb-type ,(intern type))
-                       (nnweb-ephemeral-p t))))
-         (if solid
-             (progn
-               (gnus-pull 'nnweb-ephemeral-p method)
-               (gnus-group-make-group group method))
-           (gnus-group-read-ephemeral-group
-            group method t
-            (cons (current-buffer)
-                  (if (eq major-mode 'gnus-summary-mode) 'summary 'group))))))
-     ))
 
 
 ;;; ispell
@@ -299,7 +242,7 @@ Returns the sum SHIFT due to changes in word replacements."
 ;;;   "Run perldoc on the given STRING.
 ;;; If the string is a recognised function then we can call `perldoc-function',
 ;;; otherwise we call `perldoc-module'."
-;;;   (interactive (list (ido-completing-read "Perl function or module: "
+;;;   (interactive (list (completing-read "Perl function or module: "
 ;;;                                           (mapcar (lambda (el) (car el))
 ;;;                                                   (perldoc-functions-alist))
 ;;;                                           nil nil)))
@@ -338,7 +281,7 @@ It may be customized with the following variables:
 `LaTeX-default-position'          Position for array and tabular."
 
   (interactive "*P")
-  (let ((environment (ido-completing-read (concat "Environment type: (default "
+  (let ((environment (completing-read (concat "Environment type: (default "
                                                   (if (TeX-near-bobp)
                                                       "document"
                                                     LaTeX-default-environment)
@@ -413,7 +356,7 @@ The following variables can be set to customize:
   "Hook to prompt for LaTeX section name.
 Insert this hook into `LaTeX-section-hook' to allow the user to change
 the name of the sectioning command inserted with `\\[LaTeX-section]'."
-  (let ((string (ido-completing-read
+  (let ((string (completing-read
                  (concat "Level: (default " name ") ")
                  (mapcar (lambda (i) (car i))
                          LaTeX-section-list)

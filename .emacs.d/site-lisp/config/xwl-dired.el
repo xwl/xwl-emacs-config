@@ -283,8 +283,8 @@ be with length 3 extentions !"
               (setq val
 ;;                     (read-from-minibuffer prompt nil nil nil
 ;;                     'dired-shell-command-history))
-                    (ido-completing-read prompt default-list nil nil nil
-                                         'dired-shell-command-history))
+                    (completing-read prompt default-list nil nil nil
+                                     'dired-shell-command-history))
               (setq failed nil)
               ;; If we got a return, then use default.
               (if (equal val "")

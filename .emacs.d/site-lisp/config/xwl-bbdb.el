@@ -1,6 +1,6 @@
 ;;; xwl-bbdb.el --- bbdb config
 
-;; Copyright (C) 2010 William Xu
+;; Copyright (C) 2010, 2011 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -51,7 +51,7 @@
   "Search records whose FIELD matches STR."
   (interactive
    (list
-    (ido-completing-read
+    (completing-read
      "Search: "
      (append (mapcar (lambda (el) (car el)) (bbdb-propnames))
              '("name")))

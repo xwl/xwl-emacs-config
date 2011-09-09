@@ -30,14 +30,15 @@
   ;;   (zerop (shell-command
   ;;          "traceroute -w 2 -m 2 www.google.com  | grep abc"))
 
-  ;; (zerop (shell-command "ping -c 1 172.28.8.246"))
+  ;; (zerop (shell-command "ping -n 1 172.16.42.42"))
 
   ;; (and (not (eq system-type 'darwin))
 ;;        (or (zerop (shell-command "ipconfig | grep 172.28"))
 ;;            (zerop (shell-command "ipconfig | grep 10.162"))))
 
   (or (and (string= (user-login-name) "wixu")
-           (not (eq system-type 'darwin)))
+           (not (eq system-type 'darwin))
+           (zerop (shell-command "ping -n 1 172.16.42.42")))
       (string= (user-login-name) "xwl")))
 
 (setq xwl-at-company? (xwl-at-company))

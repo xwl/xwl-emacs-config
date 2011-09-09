@@ -163,8 +163,7 @@
 (add-to-list 'auto-mode-alist '("\\.iby\\'" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.pkg\\'" . lisp-mode))
 
-;; 'ffap won't work as ffap is `provide' at the top.
-(eval-after-load "ffap"
+(eval-after-load 'ffap
   '(progn
      (setq ffap-c-path `("../inc"
 
@@ -256,7 +255,7 @@ Thus generate a TAGs file."
 
      (define-key sh-mode-map (kbd "C-M-a") 'sh-beginning-of-defun)
      (define-key sh-mode-map (kbd "C-M-e") 'sh-end-of-defun)
-     (define-key sh-mode-map  (kbd "<C-down>") 'xwl-sh-run)
+     (define-key sh-mode-map (kbd "<C-down>") 'xwl-sh-run)
 
      ))
 
@@ -413,7 +412,7 @@ Thus generate a TAGs file."
 (define-skeleton skeleton-c-mode-include
   "Generate include<>."
   > "#include <"
-  (ido-completing-read
+  (completing-read
    "Include File: "
    (apply 'append
           (mapcar (lambda (dir) (directory-files dir))
@@ -436,7 +435,7 @@ Thus generate a TAGs file."
 (define-skeleton skeleton-c++-mode-include
   "Generate include<>."
   > "#include <"
-  (ido-completing-read
+  (completing-read
    "Include file: "
    (apply 'append
           (mapcar (lambda (dir) (directory-files dir))
@@ -1053,6 +1052,9 @@ Useful for packing c/c++ functions with one line or empty body."
 
 (add-to-list 'auto-mode-alist '("\\.qml\\'" . qml-mode))
 (add-to-list 'auto-mode-alist '("\\.dot\\'" . graphviz-dot-mode))
+
+;; s40
+(add-to-list 'auto-mode-alist '("\\`Make.*" . makefile-mode))
 
 (provide 'xwl-programming)
 

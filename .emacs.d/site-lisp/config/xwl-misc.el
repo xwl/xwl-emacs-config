@@ -55,7 +55,7 @@
                   (shell-command-to-string "fortune"))
                  ansit-color-close)))
 
-;; (add-to-list 'auto-mode-alist '("todo" . easy-todo-mode))
+(add-to-list 'auto-mode-alist '(".easy-todo" . easy-todo-mode))
 
 ;; (load "/sw/share/emacs/site-lisp/ledger/ledger.el")
 
@@ -280,8 +280,8 @@
   (let* ((alist (mapcar '(lambda (el)
                            (cons (file-name-nondirectory el) el))
                         recentf-list))
-         (filename (ido-completing-read "Open recent file: "
-                                        (mapcar 'car alist))))
+         (filename (completing-read "Open recent file: "
+                                    (mapcar 'car alist))))
     (find-file (cdr (assoc filename alist)))))
 
 (global-set-key (kbd "C-c F") 'xwl-recentf-open-files)
@@ -427,7 +427,7 @@
   ;; (xwl-weather-update)
 
   (when (fboundp 'color-theme-xwl-console)
-    (run-at-time 1 nil 'color-theme-xwl-console))
+   (run-at-time 1 nil 'color-theme-xwl-console))
 
   (when window-system
     (require 'highlight-tail)
@@ -755,8 +755,8 @@ passphrase cache or user."
 (defun xwl-s60lxr-select-release (release)
   (interactive
    (list
-    (ido-completing-read "Use release: "
-                        (xwl-s60lxr-generate-releases))))
+    (completing-read "Use release: "
+                     (xwl-s60lxr-generate-releases))))
   (setq xwl-s60lxr-release release))
 
 ;; ,----
@@ -888,6 +888,7 @@ prompting.  If file is a directory perform a `find-file' on it."
   (let ((inhibit-read-only t))
     (display-message-or-buffer (pp ad-do-it))))
 
+(require 'nyan-mode)
 (nyan-mode 1)
 
 (provide 'xwl-misc)

@@ -179,7 +179,7 @@ If EXTENSIONS is given, only match these."
 ;; (defun xwl-org-set-tags (tag)
 ;;   "Insert TAG under point."
 ;;   (interactive
-;;    (list (ido-completing-read "Set tag: " xwl-org-tag-alist)))
+;;    (list (completing-read "Set tag: " xwl-org-tag-alist)))
 ;;   (let ((inhibit-read-only t))
 ;;     (save-excursion
 ;;       (move-end-of-line 1)

@@ -57,10 +57,10 @@
 (setq erc-autojoin-channels-alist
       '(;; ("rootdir.de"
         ;;  "&bitlbee")
-        ;; ("freenode.net"
-        ;;  "#osxchat" "#emacs" "#scheme" "#chicken" "#cpp-tw" ;; "#chinalug"
-        ;;  ; "#qt-qml" "#qt"
-        ;;  )
+        ("freenode.net"
+         "#osxchat" "#emacs" "#scheme" "#chicken" "#cpp-tw" ;; "#chinalug"
+         ; "#qt-qml" "#qt"
+         )
         ("oftc.net"
          ;; "#debian-zh"
          "#emacs-cn")      ; "#bitlbee"
@@ -280,7 +280,7 @@ If the buffer is currently not visible, makes it sticky."
   "Run /whois easily by key sequences."
   (interactive
    (list
-    (ido-completing-read
+    (completing-read
      "/whois "
      (erc-get-channel-nickname-list))))
   (let ((inhibit-read-only t))

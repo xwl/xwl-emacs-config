@@ -158,8 +158,8 @@ point.  Especially useful for w32."
   "Set `default-directory' on the fly."
   (let ((d default-directory))
     (cond (current-prefix-arg
-           (setq d (ido-completing-read "let default-directory with: "
-                                        xwl-frequent-directories))
+           (setq d (completing-read "let default-directory with: "
+                                    xwl-frequent-directories))
            (when xwl-w32?
              (setq d (replace-regexp-in-string
                       (format "^\\([a-zA-Z]\\)%s.*"
@@ -181,9 +181,6 @@ point.  Especially useful for w32."
 
 (global-set-key (kbd "C-x C-f") 'ido-find-file)
 (global-set-key (kbd "C-x C-d") 'ido-dired)
-
-(require 'ido-hacks)
-(ido-hacks-mode 1)
 
 (provide 'xwl-buffer)
 

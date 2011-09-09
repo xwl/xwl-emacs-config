@@ -26,6 +26,7 @@
                  "wget-el"
                  "emms/lisp"
                  "bbdb-vcard"
+                 "nyan-mode"
 
                  "xwl-elisp"
                  "xwl-elisp/dashboard"
@@ -98,6 +99,7 @@
     ;; Seems gnuwin32 image library has to be set before emacs starts.
     (let ((paths `(;; "c:/Program Files/GnuWin32/bin"
                   ,(file-truename "~/bin/git/bin")
+                  "C:/APPS/git/bin"
                    )))
       (setenv "PATH" (mapconcat 'identity `(,(getenv "PATH") ,@paths) ";"))
       (setq exec-path (split-string (getenv "PATH") ";")))

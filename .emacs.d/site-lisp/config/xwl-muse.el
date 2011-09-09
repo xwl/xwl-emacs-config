@@ -1,6 +1,6 @@
 ;;; xwl-muse.el --- muse config
 
-;; Copyright (C) 2007 William Xu
+;; Copyright (C) 2007, 2011 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 ;; Version: 0.1
@@ -135,7 +135,7 @@ Will result in,
 </pre></div>"
   (interactive
    (list
-    (ido-completing-read
+    (completing-read
      "Tag: "
      (mapcar 'car `(,@muse-publish-markup-tags
 		    ,@xwl-muse-tag-value)))))
