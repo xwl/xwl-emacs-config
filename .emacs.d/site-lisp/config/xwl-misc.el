@@ -416,8 +416,8 @@
   ;; (shell-command "sudo ~/bin/.xwl-after-start-hook")
   ;; (setq display-time-mail-file 'no-check)
 
-  ;; On w32: `emacsclient.exe --server-file c:\repo\xwl-emacs-environment\.emacs.d\server\server -n %*'
-  (ignore-errors (server-start))
+  ;; On w32: `emacsclient.exe --server-file ~\.emacs.d\server\server -n %*'
+  (server-start)
 
   (when (executable-find "fortune-zh")
     (setq xwl-idle-timer
