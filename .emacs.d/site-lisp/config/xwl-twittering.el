@@ -20,6 +20,9 @@
 
 ;;; Code:
 
+(defvar xwl-twitter-direct-accessible?
+  (zerop (shell-command "ping -n 1 twitter.com")))
+
 (let ((col (round (/ (frame-width) 2)))
       (padding 8))
   (setq twittering-fill-column col
@@ -95,16 +98,17 @@
        (set-face-background twittering-zebra-1-face "gray24")
        (set-face-background twittering-zebra-2-face "gray22"))
 
-     (if xwl-at-company?
-         (let ((sc (assqref 'socialcast twittering-service-method-table)))
-           (setq twittering-service-method-table
-                 `((socialcast
-                    (api ,socialcast-api)
-                    (web ,socialcast-web)
-                    ,@(remove-if (lambda (i) (memq (car i) '(api web))) sc))
+     (when xwl-at-company?
+       (let ((sc (assqref 'socialcast twittering-service-method-table)))
+         (setq twittering-service-method-table
+               `((socialcast
+                  (api ,socialcast-api)
+                  (web ,socialcast-web)
+                  ,@(remove-if (lambda (i) (memq (car i) '(api web))) sc))
 
-                   ,@(remove-if (lambda (i) (eq (car i) 'socialcast)) twittering-service-method-table))))
+                 ,@(remove-if (lambda (i) (eq (car i) 'socialcast)) twittering-service-method-table)))))
 
+     (unless xwl-twitter-direct-accessible?
        (let ((tw (assqref 'twitter twittering-service-method-table)))
          (setq twittering-service-method-table
                `((twitter
@@ -129,8 +133,7 @@
      ;;        (assqref 'web
      ;;                 (assqref 'twitter twittering-service-method-table))))
 
-     (setq-default twittering-reverse-mode t
-                   twittering-icon-mode t)
+     (setq-default twittering-reverse-mode t)
      ))
 
 ;; FIXME: in 23.2, who the hell autoload create-animated-image?? this exists in
@@ -142,7 +145,7 @@
 
 (setq twittering-accounts
       `((twitter
-         ,(if xwl-at-company?
+         ,(if (or xwl-at-company? xwl-twitter-direct-accessible?)
               '(ssl t)
             '(auth basic)))
 
@@ -151,7 +154,8 @@
 
 (setq twittering-initial-timeline-spec-string
       `(":home@sina" ":replies@sina" ":mentions@sina"
-        ":home@twitter" ":replies@twitter" ":direct_messages@twitter"
+        ,@(when (or xwl-at-company? xwl-twitter-direct-accessible?)
+            '(":home@twitter" ":replies@twitter" ":direct_messages@twitter"))
         ":home@douban"
         ;; ,@(when xwl-at-company?
         ;;     '(":home@socialcast" ":public@socialcast"))
