@@ -41,38 +41,31 @@
                     '("Monaco-14" "Hiragino Sans GB" "Hiragino_Kaku_Gothic_ProN")))
           (w32 . ("Monaco-10"
                   ;; "NSimSun" "NSimSun"
-                  "SimSun" "SimSun"
-
+                  "SimSun" "Meiryo"
+                  ;"微软雅黑" "微软雅黑"
                   ;; "-outline-SimSun-normal-normal-normal-*-*-*-*-*-p-*-iso8859-1"
-                  ;; "-outline-SimSun-normal-normal-normal-*-*-*-*-*-p-*-iso8859-1"
-
                   ;; "汉鼎繁中变" "汉鼎繁中变" "汉鼎繁中变"
-                  ;; "微软雅黑" "微软雅黑"
                   ))
           (x   . ,(if (string= system-name "debian..xwl")
                       '("DejaVu Sans Mono-11" "wenquanyi" "wenquanyi")
                     '("DejaVu LGC Sans Mono-14" "wenquanyi" "wenquanyi")
-                                        ;'("DejaVu LGC Sans Mono-13" "SimSun" "SimSun")
+                    ;;'("DejaVu LGC Sans Mono-13" "SimSun" "SimSun")
                     ))))
        (fonts (cdr (assoc window-system all-fonts)))
-       (default-font (nth 0 fonts))
-       (cn-font (nth 1 fonts))
-       (jp-font (nth 2 fonts))
-       (charset-fonts `((japanese-jisx0208 . ,jp-font)
-                        (chinese-gb2312    . ,cn-font)
-                        (chinese-gbk       . ,cn-font)
-                        (gb18030           . ,cn-font)
-                        ;; (big5           . "Hei")
-                        (japanese-jisx0208 . ,jp-font)
-                        ;; (japanese-jisx0212 . ,jp-font)
+       (def (nth 0 fonts))
+       (cn (nth 1 fonts))
+       (jp (nth 2 fonts))
+       (charset-fonts `((gb18030           . ,cn)
+                        (chinese-gbk       . ,cn)
+                        (chinese-gb2312    . ,cn)
+                        (japanese-jisx0208 . ,jp)
+                        (japanese-jisx0212 . ,jp)
                         )))
-  (set-default-font default-font)       ; this will decide font size.
+  (set-default-font def)       ; this will decide default font size.
   (mapc (lambda (cf)
-          (set-fontset-font (frame-parameter nil 'font)
-                            (car cf)
-                            (font-spec :family (cdr cf) :size 14)))
+          (set-fontset-font
+           t (car cf) (font-spec :family (cdr cf) :size 16)))
         charset-fonts))
-
 
 ;;; Misc
 
@@ -129,9 +122,13 @@
                     print-level)
                 (pp `(modify-frame-parameters
                       (selected-frame)
-                      ',(remove-if-not (lambda (i)
-                                         (memq (type-of (cdr i))
-                                               '(string symbol float integer)))
+                      ',(remove-if-not
+                         (lambda (i)
+                           ;; (memq (type-of (cdr i))
+                           ;;       '(string symbol float integer))
+                           (memq (car i) '(top left width height ;; font
+                                               ))
+                           )
                                        (frame-parameters)))
                     (current-buffer))))
             ))
