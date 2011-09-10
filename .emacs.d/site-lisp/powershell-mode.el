@@ -219,6 +219,7 @@ differently from the other variables.")
 (defvar powershell-mode-hook '(imenu-add-menubar-index)
   "Hook run after the initialization of Powershell mode.")
 
+;;;###autoload
 (define-derived-mode powershell-mode fundamental-mode "PS"
   "A major mode for editing Powershell script files."
   (set (make-local-variable 'indent-line-function) 'powershell-indent-line)
