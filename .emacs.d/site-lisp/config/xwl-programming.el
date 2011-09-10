@@ -1048,13 +1048,14 @@ Useful for packing c/c++ functions with one line or empty body."
      (define-key diff-mode-shared-map (kbd "M-o") nil)
      ))
 
+;; s40
+(add-to-list 'auto-mode-alist '("\\`Make.*" . makefile-mode))
+
 ;;; misc
 
 (add-to-list 'auto-mode-alist '("\\.qml\\'" . qml-mode))
 (add-to-list 'auto-mode-alist '("\\.dot\\'" . graphviz-dot-mode))
-
-;; s40
-(add-to-list 'auto-mode-alist '("\\`Make.*" . makefile-mode))
+(add-to-list 'auto-mode-alist '("\\.ps1\\'" . powershell-mode))
 
 (provide 'xwl-programming)
 
