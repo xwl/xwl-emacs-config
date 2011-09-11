@@ -65,7 +65,11 @@
   (mapc (lambda (cf)
           (set-fontset-font
            t (car cf) (font-spec :family (cdr cf) :size 16)))
-        charset-fonts))
+        charset-fonts)
+  (when (eq system-type 'windows-nt)
+    ;; Mathematical Operators , SimSun only partial support.
+    ;; http://en.wikipedia.org/wiki/Unicode_Mathematical_Operators#Mathematical_Operators
+    (set-fontset-font t '(#x2200 . #x22ff) jp)))
 
 ;;; Misc
 
