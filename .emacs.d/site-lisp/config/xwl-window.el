@@ -40,9 +40,8 @@
                         "-apple-Hiragino_Sans_GB-medium-normal-normal-*-*-*-*-*-p-0-iso10646-1")
                     '("Monaco-14" "Hiragino Sans GB" "Hiragino_Kaku_Gothic_ProN")))
           (w32 . ("Monaco-10"
-                  ;; "NSimSun" "NSimSun"
                   "SimSun" "Meiryo"
-                  ;"微软雅黑" "微软雅黑"
+                  ;;"微软雅黑" "微软雅黑"
                   ;; "-outline-SimSun-normal-normal-normal-*-*-*-*-*-p-*-iso8859-1"
                   ;; "汉鼎繁中变" "汉鼎繁中变" "汉鼎繁中变"
                   ))
@@ -54,22 +53,29 @@
        (fonts (cdr (assoc window-system all-fonts)))
        (def (nth 0 fonts))
        (cn (nth 1 fonts))
-       (jp (nth 2 fonts))
-       (charset-fonts `((gb18030           . ,cn)
-                        (chinese-gbk       . ,cn)
-                        (chinese-gb2312    . ,cn)
-                        (japanese-jisx0208 . ,jp)
-                        (japanese-jisx0212 . ,jp)
-                        )))
-  (set-default-font def)       ; this will decide default font size.
-  (mapc (lambda (cf)
-          (set-fontset-font
-           t (car cf) (font-spec :family (cdr cf) :size 16)))
-        charset-fonts)
-  (when (eq system-type 'windows-nt)
-    ;; Mathematical Operators , SimSun only partial support.
-    ;; http://en.wikipedia.org/wiki/Unicode_Mathematical_Operators#Mathematical_Operators
-    (set-fontset-font t '(#x2200 . #x22ff) jp)))
+       (jp (nth 2 fonts)))
+
+  ;; This will decide default font size.
+  (set-default-font def)
+  ;; Fallback font
+  (set-fontset-font t 'unicode "Arial Unicode MS")
+  ;; Font for chinese characters
+  (mapc
+   (lambda (range)
+     (set-fontset-font
+      t `(,(car range) . ,(cadr range)) (font-spec :family cn :size 16)))
+   '((#x2E80 #x2EFF)                    ; CJK Radicals Supplement
+     (#x3000 #x303F)                    ; CJK Symbols and Punctuation
+     (#x31C0 #x31EF)                    ; CJK Strokes
+     (#x3200 #x32FF)                    ; Enclosed CJK Letters and Months
+     (#x3300 #x33FF)                    ; CJK Compatibility
+     (#x3400 #x4DBF)                    ; CJK Unified Ideographs Extension A
+     (#x4E00 #x9FFF)                    ; CJK Unified Ideographs
+     (#xF900 #xFAFF)                    ; CJK Compatibility Ideographs
+     (#xFE30 #xFE4F)                    ; CJK Compatibility Forms
+
+     (#x2000 #x206f)                    ; General Punctuation
+     )))
 
 ;;; Misc
 
