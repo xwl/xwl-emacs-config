@@ -54,8 +54,8 @@
                           (call-interactively 'powershell)
                         (xwl-switch-or-create "*PowerShell*" 'powershell))
                     (if current-prefix-arg
-                        (call-interactively func)
-                      (xwl-switch-or-create "*shell*" func)))))
+                        (call-interactively 'shell)
+                      (xwl-switch-or-create "*shell*" 'shell)))))
 
 (global-set-key (kbd "<f11>")
                 (lambda ()
