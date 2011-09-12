@@ -88,7 +88,7 @@
 
 ;;; Misc
 
-;; (global-set-key (kbd "C--") 'undo)
+(global-set-key (kbd "C--") 'undo)
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
