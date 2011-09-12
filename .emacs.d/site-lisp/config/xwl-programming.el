@@ -66,6 +66,7 @@
     (doxymacs-font-lock))
   (subword-mode 1)
   ;; (flyspell-prog-mode)
+  (gtags-mode 1)
 
   (setq hide-ifdef-initially t)
 
@@ -1056,6 +1057,7 @@ Useful for packing c/c++ functions with one line or empty body."
 (add-to-list 'auto-mode-alist '("\\.qml\\'" . qml-mode))
 (add-to-list 'auto-mode-alist '("\\.dot\\'" . graphviz-dot-mode))
 (add-to-list 'auto-mode-alist '("\\.ps1\\'" . powershell-mode))
+(add-to-list 'auto-mode-alist '("make.*" . makefile-mode))
 
 (provide 'xwl-programming)
 
