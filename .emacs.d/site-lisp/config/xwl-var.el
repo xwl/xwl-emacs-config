@@ -33,13 +33,16 @@
   ;; (zerop (shell-command "ping -n 1 172.16.42.42"))
 
   ;; (and (not (eq system-type 'darwin))
-;;        (or (zerop (shell-command "ipconfig | grep 172.28"))
-;;            (zerop (shell-command "ipconfig | grep 10.162"))))
+  ;;        (or (zerop (shell-command "ipconfig | grep 172.28"))
+  ;;            (zerop (shell-command "ipconfig | grep 10.162"))))
 
-  (or (and (string= (user-login-name) "wixu")
-           (not (eq system-type 'darwin))
-           (zerop (shell-command "ping -n 1 172.16.42.42")))
-      (string= (user-login-name) "xwl")))
+  (let ((count (cdr (assq system-type
+                          '((windows-nt . "-n 1")
+                            (gnu/linux . "-c 1"))))))
+    (and (string= (user-login-name) "wixu")
+         (not (eq system-type 'darwin))
+         (zerop (shell-command
+                 (format "ping %s 172.16.42.42" count))))))
 
 (setq xwl-at-company? (xwl-at-company))
 

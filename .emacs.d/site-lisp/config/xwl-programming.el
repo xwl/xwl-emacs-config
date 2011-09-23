@@ -524,7 +524,7 @@ Thus generate a TAGs file."
                   (interactive
                    (list (read-shell-command
                           "Grep filename: "
-                          (concat find-program " . -type f | grep -nH "))))
+                          (concat find-program " . -type f -follow | grep -nH "))))
                   (shell-command cmd)))
 
 (make-face 'font-lock-fixme-face)
@@ -1058,6 +1058,38 @@ Useful for packing c/c++ functions with one line or empty body."
 (add-to-list 'auto-mode-alist '("\\.dot\\'" . graphviz-dot-mode))
 (add-to-list 'auto-mode-alist '("\\.ps1\\'" . powershell-mode))
 (add-to-list 'auto-mode-alist '("make.*" . makefile-mode))
+
+(eval-after-load 'gtags
+  '(progn
+     ;; As tab for completion takes long for large project, disable them for
+     ;; very large projects.
+     (setq xwl-gtags-large-directories-regexp
+           (regexp-opt '("s40_sw" "memory_component_")))
+
+     (defmacro xwl-advice-gtags-for-large-projects (function)
+       `(defadvice ,function (around disable-ido-for-large-project activate)
+          (if (string-match xwl-gtags-large-directories-regexp default-directory)
+              (let ((completing-read-function 'completing-read-default))
+                ad-do-it)
+            ad-do-it)))
+
+     (xwl-advice-gtags-for-large-projects gtags-find-tag)
+     (xwl-advice-gtags-for-large-projects gtags-find-rtag)
+     (xwl-advice-gtags-for-large-projects gtags-find-file)
+
+     (global-set-key (kbd "C-0") 'gtags-pop-stack)
+     (global-set-key (kbd "C-9") 'gtags-find-tag)
+     (global-set-key (kbd "C-8") 'gtags-find-file)
+     (global-set-key (kbd "C-7") 'gtags-find-rtag)
+
+     (add-hook 'gtags-select-mode-hook (lambda () (hl-line-mode 1)))
+
+     (define-key gtags-select-mode-map (kbd "RET") 'gtags-select-tag)
+     (define-key gtags-select-mode-map (kbd "n") 'next-line)
+     (define-key gtags-select-mode-map (kbd "p") 'previous-line)
+
+     ))
+
 
 (provide 'xwl-programming)
 
