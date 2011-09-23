@@ -11,12 +11,12 @@
 ;; it under the terms of the GNU General Public License as published by
 ;; the Free Software Foundation, either version 3 of the License, or
 ;; (at your option) any later version.
-;; 
+;;
 ;; This program is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; GNU General Public License for more details.
-;; 
+;;
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
@@ -69,6 +69,8 @@
 ;;
 
 ;;; Code
+
+(require 'thingatpt)
 
 (defvar gtags-mode nil
   "Non-nil if Gtags mode is enabled.")
@@ -355,20 +357,17 @@
        (setq gtags-rootdir (expand-file-name input))
        (setenv "GTAGSROOT" gtags-rootdir)))))
 
-(defun gtags-find-tag (&optional other-win)
+(defun gtags-find-tag ()
   "Input tag name and move to the definition."
   (interactive)
-  (let (tagname prompt input)
-    (setq tagname (gtags-current-token))
-    (if tagname
-      (setq prompt (concat "Find tag: (default " tagname ") "))
-     (setq prompt "Find tag: "))
-    (setq input (completing-read prompt 'gtags-completing-gtags
-                  nil nil nil gtags-history-list))
-    (if (not (equal "" input))
-      (setq tagname input))
+  (let ((tagname
+         (or (and (not current-prefix-arg)
+                  (gtags-current-token))
+             (completing-read "Find tag: "
+                              'gtags-completing-gtags
+                              nil nil nil gtags-history-list))))
     (gtags-push-context)
-    (gtags-goto-tag tagname "" other-win)))
+    (gtags-goto-tag tagname "")))
 
 (defun gtags-find-tag-other-window ()
   "Input tag name and move to the definition in other window."
@@ -378,17 +377,15 @@
 (defun gtags-find-rtag ()
   "Input tag name and move to the referenced point."
   (interactive)
-  (let (tagname prompt input)
-   (setq tagname (gtags-current-token))
-   (if tagname
-     (setq prompt (concat "Find tag (reference): (default " tagname ") "))
-    (setq prompt "Find tag (reference): "))
-   (setq input (completing-read prompt 'gtags-completing-gtags
-                 nil nil nil gtags-history-list))
-   (if (not (equal "" input))
-     (setq tagname input))
+  (let ((tagname
+         (or (and (not current-prefix-arg)
+                  (gtags-current-token))
+             (completing-read "Find rtag: "
+                              'gtags-completing-gtags
+                              nil nil nil gtags-history-list))))
     (gtags-push-context)
     (gtags-goto-tag tagname "r")))
+
 
 (defun gtags-find-symbol ()
   "Input symbol and move to the locations."
@@ -437,13 +434,15 @@
     (gtags-goto-tag tagname "I")))
 
 (defun gtags-find-file ()
-  "Input pattern and move to the top of the file."
+  "Input pattern and move to the top of the file.
+With prefix value, disable getting filename at point.  "
   (interactive)
-  (let (tagname prompt input)
-    (setq prompt "Find files: ")
-    (setq input (completing-read prompt 'gtags-completing-files
-                  nil nil nil gtags-history-list))
-    (if (not (equal "" input)) (setq tagname input))
+  (let ((tagname
+         (or (and (not current-prefix-arg)
+                  (thing-at-point 'filename))
+             (completing-read "Find files: "
+                                   'gtags-completing-files
+                                   nil nil nil gtags-history-list))))
     (gtags-push-context)
     (gtags-goto-tag tagname "Po")))
 
@@ -674,11 +673,11 @@
       ;; will be changed. This might cause loading error, if you use relative
       ;; path in [GTAGS SELECT MODE], because emacs's buffer has its own
       ;; current directory.
-      ;; 
+      ;;
       (let ((prev-buffer (current-buffer)))
         ;; move to the context
-        (if gtags-read-only 
-	    (if (null other-win) (find-file-read-only file) 
+        (if gtags-read-only
+	    (if (null other-win) (find-file-read-only file)
 	      (find-file-read-only-other-window file))
 	  (if (null other-win) (find-file file)
 	    (find-file-other-window file)))
