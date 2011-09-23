@@ -1,6 +1,6 @@
 ;;; xwl-makefile.el --- For Makefile                -*- emacs-lisp -*-
 
-;; Copyright (C) 2009, 2010 William Xu
+;; Copyright (C) 2009, 2010, 2011 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 ;; Version: 0.1
@@ -54,14 +54,13 @@
       ;;                     (file-newer-than-file-p f xwl-makefile-autoloads-file))
       ;;                   xwl-makefile-files))))
       ;; autoloads
-      (when (eq system-type 'darwin)
-        (when autoloads-not-up2date
-          (with-current-buffer (find-file-noselect xwl-makefile-autoloads-file)
-            (let ((inhibit-read-only t))
-              (erase-buffer)
-              (mapc (lambda (f) (generate-file-autoloads f)) xwl-makefile-files)
-              (insert (format "\n(provide '%s)\n" xwl-makefile-autoloads-file-base))
-              (save-buffer)))))
+      (when autoloads-not-up2date
+        (with-current-buffer (find-file-noselect xwl-makefile-autoloads-file)
+          (let ((inhibit-read-only t))
+            (erase-buffer)
+            (mapc (lambda (f) (generate-file-autoloads f)) xwl-makefile-files)
+            (insert (format "\n(provide '%s)\n" xwl-makefile-autoloads-file-base))
+            (save-buffer))))
 
       (xwl-makefile-byte-compile)
 
