@@ -115,14 +115,15 @@
 ;;       (run-with-timer 0 120 'xwl-mail-notify-update-handler))
 
 ;; frame title
-(setq frame-title-format "菩提本無樹 明鏡亦非台 本來無一物 何處惹塵埃")
+(set-frame-name ;; "菩提本無樹 明鏡亦非台 本來無一物 何處惹塵埃") ; bug in windows 7?
+ (concat "the Church of Emacs,  starting from " (current-time-string)))
 
 (defun xwl-frame-fortune-of-day ()
-  (setq frame-title-format
-        (replace-regexp-in-string
-         " +" " " (replace-regexp-in-string
-                   "\n" " " (xwl-fortune-favorites
-                             "~/.notes/favorites_now")))))
+  (set-frame-name
+   (replace-regexp-in-string
+    " +" " " (replace-regexp-in-string
+              "\n" " " (xwl-fortune-favorites
+                        "~/.notes/favorites_now")))))
 
 (when (file-exists-p "~/.notes/favorites_now")
   (setq xwl-frame-fortune-of-day-timer
