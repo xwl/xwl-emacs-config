@@ -1,6 +1,6 @@
 ;;; xwl-extra-util.el --- non-essential, autoloaded utilities
 
-;; Copyright (C) 2010  William Xu
+;; Copyright (C) 2010, 2011  William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 ;; Keywords: tools
@@ -457,6 +457,36 @@ Note: you are suggested to kill process buffer at the end of CALLBACK. "
        (insert-file-contents (file-truename "~/etc/programs"))
        (split-string (buffer-string) "\n" t)))))
   (xwl-shell-command-asynchronously (concat "\"" program "\"")))
+
+;;;###autoload
+(defun xwl-fullscreen ()
+  (interactive)
+  (case window-system
+    ((x)
+     (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+                            '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
+     (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+                            '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0)))
+    ((w32)
+     (w32-send-sys-command #xf030))
+    ((ns)
+     (if (string= system-name "tokyolove.local")
+         (progn
+           (set-frame-width nil 170)
+           (set-frame-height nil 48))
+       (ns-toggle-fullscreen)))
+    ((mac)
+     (if (string= system-name "tokyolove.local")
+         (progn
+           (set-frame-width nil 170)
+           (set-frame-height nil 48))
+       (set-frame-parameter nil 'fullscreen 'maximized)))))
+
+;;;###autoload
+(defun xwl-pure-fullscreen ()
+  (interactive)
+  (let ((fs (frame-parameter nil 'fullscreen)))
+    (set-frame-parameter nil 'fullscreen (if fs nil 'fullboth))))
 
 (provide 'xwl-extra-util)
 ;;; xwl-extra-util.el ends here

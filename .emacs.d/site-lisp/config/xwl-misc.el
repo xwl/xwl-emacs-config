@@ -891,6 +891,8 @@ prompting.  If file is a directory perform a `find-file' on it."
 (require 'nyan-mode)
 (nyan-mode 1)
 
+(menu-bar-mode -1)
+
 (provide 'xwl-misc)
 
 ;;; Local Variables: ***

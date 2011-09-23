@@ -75,7 +75,7 @@
 
 (setq history-delete-duplicates t)
 
-(setq split-width-threshold 150)
+(setq split-width-threshold 140)
 
 ;; (global-visual-line-mode 1)
 
@@ -136,8 +136,8 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
-;; FIXME: conflict with ido-hacks.el
-;; (setq completion-styles '(partial-completion initials))
+;; (setq completion-styles '(initials partial-completion ))
+;(basic partial-completion emacs22)
 ;; (setq completion-pcm-complete-word-inserts-delimiters t)
 
 ;; session
@@ -214,7 +214,7 @@
 
 (setq-default tab-width 4)
 
-(transient-mark-mode -1)
+;; (transient-mark-mode -1)
 
 (setq-default line-spacing 5)
 
@@ -567,6 +567,11 @@
                     ido-selected)
     ido-selected))
 
+     ))
+
+(eval-after-load 'warnings
+  '(progn
+     (add-to-list 'warning-suppress-types '(undo discard-info))
      ))
 
 (provide 'xwl-convenience)

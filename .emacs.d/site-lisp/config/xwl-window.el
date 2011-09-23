@@ -47,8 +47,10 @@
                   ))
           (x   . ,(if (string= system-name "debian..xwl")
                       '("DejaVu Sans Mono-11" "wenquanyi" "wenquanyi")
-                    '("DejaVu LGC Sans Mono-14" "wenquanyi" "wenquanyi")
-                    ;;'("DejaVu LGC Sans Mono-13" "SimSun" "SimSun")
+                    ;; '("DejaVu LGC Sans Mono-14" "wenquanyi" "wenquanyi")
+                    '(;"DejaVu Sans Mono-12"
+                      "Mensch-11"
+                      "SimSun" "SimSun")
                     ))))
        (fonts (cdr (assoc window-system all-fonts)))
        (def (nth 0 fonts))
