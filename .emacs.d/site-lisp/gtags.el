@@ -335,7 +335,7 @@
     (while (setq start (string-match "%\\([0-9a-f][0-9a-f]\\)" path))
       (setq result (concat result
                      (substring path 0 start)
-                     (format "%c" (string-to-int (substring path (match-beginning 1) (match-end 1)) 16))))
+                     (format "%c" (string-to-number (substring path (match-beginning 1) (match-end 1)) 16))))
       (setq path (substring path (match-end 1))))
     (concat result path)))
 ;;
@@ -372,7 +372,8 @@
 (defun gtags-find-tag-other-window ()
   "Input tag name and move to the definition in other window."
   (interactive)
-  (gtags-find-tag t))
+  ;; (gtags-find-tag t)
+  (error "not supported"))
 
 (defun gtags-find-rtag ()
   "Input tag name and move to the referenced point."
@@ -677,13 +678,14 @@ With prefix value, disable getting filename at point.  "
       (let ((prev-buffer (current-buffer)))
         ;; move to the context
         (if gtags-read-only
-	    (if (null other-win) (find-file-read-only file)
-	      (find-file-read-only-other-window file))
-	  (if (null other-win) (find-file file)
-	    (find-file-other-window file)))
+            (if (null other-win) (find-file-read-only file)
+              (find-file-read-only-other-window file))
+          (if (null other-win) (find-file file)
+            (find-file-other-window file)))
         (if delete (kill-buffer prev-buffer)))
       (setq gtags-current-buffer (current-buffer))
-      (goto-line line)
+      (goto-char (point-min))
+      (forward-line (1- line))
       (gtags-mode 1))))
 
 ;; make complete list (do nothing)
