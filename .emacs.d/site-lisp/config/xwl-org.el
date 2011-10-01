@@ -166,6 +166,8 @@ If EXTENSIONS is given, only match these."
 
 (setq org-export-html-table-tag "<table border=\"2\" cellpadding=\"6\"")
 
+(setq org-startup-with-inline-images t)
+
 ;; (when nil
 
 ;; (setq org-todo-keywords

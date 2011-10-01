@@ -164,8 +164,8 @@
 (setq mouse-wheel-scroll-amount (list 1))
 
 ;; Am i weird or Emacs is weird ?
-(global-set-key (kbd "C-.") 'next-buffer)
 (global-set-key (kbd "C-,") 'previous-buffer)
+(global-set-key (kbd "C-.") 'next-buffer)
 
 (global-set-key (kbd "C-c [")  'previous-error)
 (global-set-key (kbd "C-c ]")  'next-error)

@@ -391,7 +391,8 @@
         (pkgsrc "sudo")
         (apt-cyg "c:/cygwin/bin/sh.exe '/home/william/w32/apt-cyg'")
         (yum "sudo yum")
-        (chicken "chicken-install")))
+        (chicken "chicken-install")
+        (brew "brew")))
 
 (add-to-list 'auto-mode-alist
              '("macbluetelnet.*\\(\\.h\\|\\.mm\\|\\.m\\)$" . objc-mode))

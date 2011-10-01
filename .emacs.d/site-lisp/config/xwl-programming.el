@@ -1043,6 +1043,31 @@ Useful for packing c/c++ functions with one line or empty body."
 ;;        (setq ad-return-value (append (imenu-default-create-index-function)
 ;;                                      ad-return-value)))))
 
+;; (eval-after-load 'cedet
+;;   '(progn
+;;      ;; (global-ede-mode 1)
+;;      (semantic-load-enable-gaudy-code-helpers)
+;;      (semantic-clang-activate)
+
+;;      (setq xwl-include "/Library/Frameworks/QtCore.framework/Headers")
+;;      (semantic-add-system-include xwl-include 'c++-mode)
+;;      (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat xwl-include "/qconfig.h"))
+;;      (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat xwl-include "/qconfig-dist.h"))
+;;      (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat xwl-include "/qglobal.h"))
+
+;;      ;; (global-less-minor-mode -1)
+;;      ;; (let ((f "/usr/include/sys/cdefs.h"))
+;;      ;;   (save-window-excursion
+;;      ;;     (with-current-buffer (find-file-noselect f)
+;;      ;;       (bovinate))
+;;      ;;     (add-to-list 'semantic-lex-c-preprocessor-symbol-file f)
+;;      ;;     (semantic-gcc-setup)))
+;;      ;; (global-less-minor-mode 1)
+
+;;      ;; TODO, bind key to trigger completion.
+;;      ;; 'semantic-ia-complete-symbol-menu
+;;      ))
+
 (eval-after-load 'diff-mode
   '(progn
      (define-key diff-mode-shared-map (kbd "k") nil)
