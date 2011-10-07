@@ -976,22 +976,7 @@ Useful for packing c/c++ functions with one line or empty body."
 
 (require 'ediff)
 
-(defun xwl-ediff-revision ()
-  "Compare current state with latest revision, no questions please."
-  (interactive)
-  (if (and (buffer-modified-p)
-	   (y-or-n-p (format "Buffer %s is modified. Save buffer? "
-                             (buffer-name))))
-      (save-buffer (current-buffer)))
-  (let ((rev1 "")
-        (rev2 "")
-        (startup-hooks '()))
-    (ediff-load-version-control)
-    (funcall
-     (intern (format "ediff-%S-internal" ediff-version-control-package))
-     rev1 rev2 startup-hooks)))
-
-(global-set-key (kbd "C-x v =") 'xwl-ediff-revision)
+(global-set-key (kbd "C-x v =") 'vc-ediff)
 
 (global-set-key (kbd "C-c E b") 'ediff-buffers)
 (global-set-key (kbd "C-c E f") 'ediff-files)

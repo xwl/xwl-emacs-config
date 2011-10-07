@@ -391,7 +391,8 @@
         (pkgsrc "sudo")
         (apt-cyg "c:/cygwin/bin/sh.exe '/home/william/w32/apt-cyg'")
         (yum "sudo yum")
-        (chicken "chicken-install")))
+        (chicken "chicken-install")
+        (brew "brew")))
 
 (add-to-list 'auto-mode-alist
              '("macbluetelnet.*\\(\\.h\\|\\.mm\\|\\.m\\)$" . objc-mode))
@@ -428,6 +429,9 @@
 
   (when (fboundp 'color-theme-xwl-console)
    (run-at-time 1 nil 'color-theme-xwl-console))
+
+  (when (string= system-name "zen.local")
+    (xwl-fullscreen))
 
   (when window-system
     (require 'highlight-tail)
