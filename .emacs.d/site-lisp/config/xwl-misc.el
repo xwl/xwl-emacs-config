@@ -201,19 +201,21 @@
      ))
 
 ;; imenu
-(eval-after-load 'imenu
-  '(progn
-     (defadvice imenu-default-create-index-function (around add-more-default-index activate)
-       (let ((imenu-generic-expression
-              (cons (list "Outlines"
-                          (format "\\(%s\\|%s\\)\\(%s\\)"
-                                  outline-regexp
-                                  (concat "^" comment-start "+ | ")
-                                  ".*")
-                          2)
-                    imenu-generic-expression)))
-         ad-do-it))
-     ))
+
+;; TODO, why this conflicts with which-func mode in c-mode.
+;; (eval-after-load 'imenu
+;;   '(progn
+;;      (defadvice imenu-default-create-index-function (around add-more-default-index activate)
+;;        (let ((imenu-generic-expression
+;;               (cons (list "Outlines"
+;;                           (format "\\(%s\\|%s\\)\\(%s\\)"
+;;                                   outline-regexp
+;;                                   (concat "^" comment-start "+ | ")
+;;                                   ".*")
+;;                           2)
+;;                     imenu-generic-expression)))
+;;          ad-do-it))
+;;      ))
 
 (setq auto-mode-alist
       `(("\\.h$"               . c++-mode)
@@ -242,6 +244,7 @@
 
 (when (fboundp 'tramp-cleanup-all-buffers)
   (add-hook 'kill-emacs-hook 'tramp-cleanup-all-buffers))
+
 
 (setq mac-pass-command-to-system nil)
 
