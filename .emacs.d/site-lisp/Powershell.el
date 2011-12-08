@@ -457,19 +457,18 @@ See the help for `shell' for more details.  \(Type
 ;; The following advice suppresses the call to
 ;; `ansi-color-apply-on-region` when the begin marker points
 ;; nowhere.
-(defadvice ansi-color-apply-on-region (around
-                                       powershell-throttle-ansi-colorizing
-                                       (begin end)
-                                       activate compile)
-  (progn
-    (let ((start-pos (marker-position begin)))
-    (cond
-     (start-pos
-      (progn
-        ad-do-it))))))
-
-
-
+(when (= emacs-major-version 23)
+  (defadvice ansi-color-apply-on-region (around
+                                         powershell-throttle-ansi-colorizing
+                                         (begin end)
+                                         activate compile)
+    (progn
+      (let ((start-pos (marker-position begin)))
+        (cond
+         (start-pos
+          (progn
+            ad-do-it))))))
+  )
 
 (defun powershell--silent-cmd-filter (process result)
 "A process filter that captures output from a shell and stores it
