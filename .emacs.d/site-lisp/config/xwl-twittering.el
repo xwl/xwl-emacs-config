@@ -20,8 +20,8 @@
 
 ;;; Code:
 
-(defvar xwl-twitter-direct-accessible?
-  (zerop (shell-command "ping -n 1 twitter.com")))
+(defvar xwl-twitter-direct-accessible? nil)
+;;  (zerop (shell-command "ping -n 1 twitter.com")))
 
 (let ((col (round (/ (frame-width) 2)))
       (padding 8))
@@ -108,7 +108,7 @@
 
                  ,@(remove-if (lambda (i) (eq (car i) 'socialcast)) twittering-service-method-table)))))
 
-     (unless xwl-twitter-direct-accessible?
+     (unless (or xwl-at-company? xwl-twitter-direct-accessible?)
        (let ((tw (assqref 'twitter twittering-service-method-table)))
          (setq twittering-service-method-table
                `((twitter
