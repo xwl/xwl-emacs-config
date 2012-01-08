@@ -90,9 +90,6 @@
 (setq visible-bell nil)
 (setq ring-bell-function 'ignore)
 
-(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
-(setq x-select-enable-clipboard t)
-
 (mouse-avoidance-mode 'animate)
 
 ;; expansions, abbreviations & completions
@@ -572,6 +569,9 @@
   '(progn
      (add-to-list 'warning-suppress-types '(undo discard-info))
      ))
+
+(electric-pair-mode 1)
+(electric-indent-mode 1)
 
 (provide 'xwl-convenience)
 

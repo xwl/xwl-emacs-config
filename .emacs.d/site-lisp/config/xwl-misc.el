@@ -430,6 +430,9 @@
   (when (fboundp 'color-theme-xwl-console)
    (run-at-time 1 nil 'color-theme-xwl-console))
 
+  (when (string= system-name "zen.local")
+    (xwl-fullscreen))
+
   (when window-system
     (require 'highlight-tail)
     (setq highlight-tail-colors
