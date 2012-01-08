@@ -1,6 +1,6 @@
 ;;; xwl-mode-line.el --- mode line display stuffs
 
-;; Copyright (C) 2007, 2008, 2009, 2010, 2011 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -67,7 +67,9 @@
           (lambda ()
             (xwl-notify "Gmail" (format "You've got %d new mails"
                                         (length gmail-notifier-unread-entries)))
-            (xwl-shell-command-asynchronously "say Lao-ban, ni you shee you-jan.")
+            (let ((hour (string-to-number (format-time-string "%H" (current-time)))))
+              (when (and (< hour 22) (> hour 9))
+                (xwl-shell-command-asynchronously "say Boss, you\\'ve got mail.")))
             ))
 
 (add-hook 'xwl-timers-hook 'gmail-notifier-start)
