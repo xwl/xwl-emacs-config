@@ -1,6 +1,6 @@
 ;;; xwl-twittering.el --- twittering-mode
 
-;; Copyright (C) 2010, 2011  William Xu
+;; Copyright (C) 2010, 2011, 2012  William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 ;; Keywords: comm
@@ -182,6 +182,9 @@
                       "Nokia Conversations - Posts"
                       "Ovi by Nokia"
                       "datainsight")))))))
+
+(setq twittering-use-icon-storage t)
+
 
 (provide 'xwl-twittering)
 ;;; xwl-twittering.el ends here
