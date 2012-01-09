@@ -478,8 +478,8 @@
 
 ;; (require 'faith)
 
-;; (require 'page-break)
-;; (turn-on-page-break-mode)
+(require 'page-break)
+(turn-on-page-break-mode)
 
 (setq image-file-name-regexps
       (mapcar (lambda (el)

@@ -77,9 +77,9 @@
                 ;;         (nnimap-server-port 10993)
                 ;;         (nnimap-stream ssl))
 
-                ;; (nntp "news.cn99.com"
-                ;;       (nntp-address ,(xwl-redirect-host))
-                ;;       (nntp-port-number 11119))
+                (nntp "nntp.aioe.org"
+                      (nntp-address ,(xwl-redirect-host))
+                      (nntp-port-number 12119))
                 )
             '(;; (nnimap "imap.gmail.com"
               ;;         (nnimap-server-port 993)
@@ -659,13 +659,14 @@
 
 (defun gnus-user-format-function-from (head)
   "Trim `From:' to 20 bytes."
-  (let* ((re "[\" ]")
-         (from
+  (let ((re "[\" ]")
+        (from (gnus-header-from head)))
+    (when (string-match ".+@newsmth.net-SPAM.no (\\(.+\\))" from)
+      (setq from (replace-match "\\1" nil nil from)))
+    (setq from
           (replace-regexp-in-string
-           (format "^%s+\\|%s+$" re re)
-           ""
-           (replace-regexp-in-string
-            "<.*>" "" (gnus-header-from head)))))
+           (format "^%s+\\|%s+$" re re) ""
+           (replace-regexp-in-string "<.*>" "" from)))
     (when (> (length from) 20)
       (setq from (concat (substring from 0 18) "..")))
     (format "%-20s" from)))
