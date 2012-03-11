@@ -1,6 +1,6 @@
 ;;; xwl-paste.el --- Paste to irc channels from emacs
 
-;; Copyright (C) 2010  William Xu
+;; Copyright (C) 2010, 2012  William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 ;; Keywords: convenience
@@ -44,27 +44,54 @@ simply yank it when needed."
     (if current-prefix-arg
         (setq class (ido-completing-read "Use mode: " xwl-paste-ubuntu-cn-classes))
       (setq class (xwl-paste-match-mode))))
-  (let ((url "http://paste.ubuntu.org.cn"))
-    (with-current-buffer
-        (url-extra-http-post url
-                       `((poster . ,xwl-paste-username)
-                         (class . ,class)
-                         (paste . "1")
-                         (code2 . ,(buffer-substring-no-properties beg end))
-                         ;; (screenshot . "c:/Users/My Pictures/orgmode.PNG")
-                         ;; (x . "---xwl\r\nContent-Disposition: form-data;name=screenshot;filename=\"c:/Users/My Pictures/orgmode.PNG\"\r\n---xwl")
-                         ))
-      (setq deactivate-mark t)
+  (let* ((url "http://paste.ubuntu.org.cn")
+         (cmd (format "curl -i -d %s %s"
+                      (mapconcat (lambda (i)
+                                   (concat (car i) "=\""
+                                           (let ((escape (url-hexify-string "\\")))
+                                             (replace-regexp-in-string
+                                              escape (concat escape escape)
+                                              (url-hexify-string (cdr i))))
+                                           "\""))
+                                 `(("poster" . ,xwl-paste-username)
+                                   ("class" . ,class)
+                                   ("paste" . "1")
+                                   ("code2" . ,(buffer-substring-no-properties beg end)))
+                                 " -d ")
+                      url)))
+    (when (and (boundp 'xwl-proxy-server) xwl-proxy-server)
+      (setq cmd (format "%s -x %s:%d" cmd xwl-proxy-server xwl-proxy-port)))
+    (with-temp-buffer
+      (shell-command cmd (current-buffer))
       (goto-char (point-min))
-      (if (re-search-forward
-           (concat "<li class=\"highlight\"><a href=\"\/\\([0-9]+\\)\">" xwl-paste-username)
-           nil t 1)
-          (let ((s (concat url "/" (match-string 1))))
+      (if (re-search-forward "Location: \\(/[0-9]+\\)" nil t 1)
+          (let ((s (concat url (match-string 1))))
             (kill-new s)
             (message s)
             (kill-buffer (current-buffer)))
         (message "paste failed")
         (switch-to-buffer (current-buffer))))))
+
+    ;; (with-current-buffer
+    ;;     (url-extra-http-post url
+    ;;                    `((poster . ,xwl-paste-username)
+    ;;                      (class . ,class)
+    ;;                      (paste . "1")
+    ;;                      (code2 . ,(buffer-substring-no-properties beg end))
+    ;;                      ;; (screenshot . "c:/Users/My Pictures/orgmode.PNG")
+    ;;                      ;; (x . "---xwl\r\nContent-Disposition: form-data;name=screenshot;filename=\"c:/Users/My Pictures/orgmode.PNG\"\r\n---xwl")
+    ;;                      ))
+    ;;   (setq deactivate-mark t)
+    ;;   (goto-char (point-min))
+    ;;   (if (re-search-forward
+    ;;        (concat "<li class=\"highlight\"><a href=\"\/\\([0-9]+\\)\">" xwl-paste-username)
+    ;;        nil t 1)
+    ;;       (let ((s (concat url "/" (match-string 1))))
+    ;;         (kill-new s)
+    ;;         (message s)
+    ;;         (kill-buffer (current-buffer)))
+    ;;     (message "paste failed")
+    ;;     (switch-to-buffer (current-buffer))))
 
 ;;;###autoload
 (defun xwl-paste-ubuntu-cn-image (filename)
