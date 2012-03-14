@@ -1,6 +1,6 @@
 ;;; xwl-window.el --- GUI window related config
 
-;; Copyright (C) 2007, 2008, 2009, 2010, 2011 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -32,7 +32,12 @@
 
 ;; http://www.gringod.com/2006/02/24/return-of-monacottf/
 
-(let* ((all-fonts
+;; fontforge
+;; cn_font_size = (en_font_size * width_factor) * 2
+;; monaco width factor is 0.6.
+(let* ((en-font-size 15)
+       (cn-font-size (ceiling (* en-font-size 0.6 2)))
+       (all-fonts
         `((mac . ("Monaco-14" "stheiti*" "hiragino maru gothic pro"))
           (ns  . ,(if (equal user-login-name "william")
                       '("Monaco-16"
@@ -42,30 +47,31 @@
           (w32 . ("Monaco-10"
                   "SimSun" "Meiryo"
                   ;;"微软雅黑" "微软雅黑"
-                  ;; "-outline-SimSun-normal-normal-normal-*-*-*-*-*-p-*-iso8859-1"
                   ;; "汉鼎繁中变" "汉鼎繁中变" "汉鼎繁中变"
                   ))
-          (x   . ,(if (string= system-name "debian..xwl")
-                      '("DejaVu Sans Mono-11" "wenquanyi" "wenquanyi")
-                    ;; '("DejaVu LGC Sans Mono-14" "wenquanyi" "wenquanyi")
-                    '(;"DejaVu Sans Mono-12"
-                      "Mensch-11"
-                      "SimSun" "SimSun")
-                    ))))
+          (x   . ,(cond ((string= system-name "debian..xwl")
+                         '("DejaVu Sans Mono-11" "wenquanyi" "wenquanyi"))
+                        ((string= system-name "debian-iMac")
+                         `(,(format "Monaco:pixelsize=%d" en-font-size)
+                           "WenQuanYi Micro Hei"
+                           "WenQuanYi Micro Hei"))
+                        (t ;;"DejaVu Sans Mono-12"
+                         '("Mensch-11" "SimSun" "SimSun")))
+                    )))
        (fonts (cdr (assoc window-system all-fonts)))
-       (def (nth 0 fonts))
+       (en (nth 0 fonts))
        (cn (nth 1 fonts))
        (jp (nth 2 fonts)))
 
   ;; This will decide default font size.
-  (set-default-font def)
+  (set-frame-font en)
   ;; Fallback font
   (set-fontset-font t 'unicode "Arial Unicode MS")
   ;; Font for chinese characters
   (mapc
    (lambda (range)
      (set-fontset-font
-      t `(,(car range) . ,(cadr range)) (font-spec :family cn :size 16)))
+      t `(,(car range) . ,(cadr range)) (font-spec :family cn :size cn-font-size)))
    '((#x2E80 #x2EFF)                    ; CJK Radicals Supplement
      (#x3000 #x303F)                    ; CJK Symbols and Punctuation
      (#x31C0 #x31EF)                    ; CJK Strokes
