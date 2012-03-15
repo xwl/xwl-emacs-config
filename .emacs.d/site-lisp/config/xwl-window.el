@@ -35,31 +35,28 @@
 ;; fontforge
 ;; cn_font_size = (en_font_size * width_factor) * 2
 ;; monaco width factor is 0.6.
-(let* ((en-font-size 15)
+(let* ((en-font-size
+        (cond
+         ((eq window-system 'w32) 13)
+         ((equal system-name "debian-iMac") 15)
+         ((string-match "beleod" system-name) 14)
+         (t 12)))
+
        (cn-font-size (ceiling (* en-font-size 0.6 2)))
        (all-fonts
-        `((mac . ("Monaco-14" "stheiti*" "hiragino maru gothic pro"))
+        `((mac . ("Monaco" "stheiti*" "hiragino maru gothic pro"))
           (ns  . ,(if (equal user-login-name "william")
-                      '("Monaco-16"
+                      '("Monaco"
                         "-apple-Hiragino_Sans_GB-medium-normal-normal-*-*-*-*-*-p-0-iso10646-1"
                         "-apple-Hiragino_Sans_GB-medium-normal-normal-*-*-*-*-*-p-0-iso10646-1")
-                    '("Monaco-14" "Hiragino Sans GB" "Hiragino_Kaku_Gothic_ProN")))
-          (w32 . ("Monaco-10"
-                  "SimSun" "Meiryo"
-                  ;;"微软雅黑" "微软雅黑"
-                  ;; "汉鼎繁中变" "汉鼎繁中变" "汉鼎繁中变"
-                  ))
-          (x   . ,(cond ((string= system-name "debian..xwl")
-                         '("DejaVu Sans Mono-11" "wenquanyi" "wenquanyi"))
-                        ((string= system-name "debian-iMac")
-                         `(,(format "Monaco:pixelsize=%d" en-font-size)
-                           "WenQuanYi Micro Hei"
-                           "WenQuanYi Micro Hei"))
-                        (t ;;"DejaVu Sans Mono-12"
-                         '("Mensch-11" "SimSun" "SimSun")))
-                    )))
+                    '("Monaco" "Hiragino Sans GB" "Hiragino_Kaku_Gothic_ProN")))
+          (w32 . ("Monaco" "SimSun" "Meiryo"))
+          (x   . ,(cond ((string= system-name "debian-iMac")
+                         `("Monaco" "WenQuanYi Micro Hei" "WenQuanYi Micro Hei"))
+                        ((string-match "beleod" system-name)
+                         '("DejaVu Sans Mono" "SimSun" "SimSun"))))))
        (fonts (cdr (assoc window-system all-fonts)))
-       (en (nth 0 fonts))
+       (en (format "%s:pixelsize=%d" (nth 0 fonts) en-font-size))
        (cn (nth 1 fonts))
        (jp (nth 2 fonts)))
 
