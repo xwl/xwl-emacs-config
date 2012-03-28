@@ -1,6 +1,6 @@
 ;;; xwl-misc.el --- miscellaneous
 
-;; Copyright (C) 2007, 2008, 2009, 2010, 2011 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -284,7 +284,12 @@
                            (cons (file-name-nondirectory el) el))
                         recentf-list))
          (filename (completing-read "Open recent file: "
-                                    (mapcar 'car alist))))
+                                    (remove-if
+                                     (lambda (i)
+                                       (some (lambda (j)
+                                               (string-match j i))
+                                             ido-ignore-files))
+                                     (mapcar 'car alist)))))
     (find-file (cdr (assoc filename alist)))))
 
 (global-set-key (kbd "C-c F") 'xwl-recentf-open-files)
@@ -394,7 +399,7 @@
         (pkgsrc "sudo")
         (apt-cyg "c:/cygwin/bin/sh.exe '/home/william/w32/apt-cyg'")
         (yum "sudo yum")
-        (chicken "chicken-install")
+        (chicken "sudo chicken-install")
         (brew "brew")))
 
 (add-to-list 'auto-mode-alist
@@ -899,6 +904,10 @@ prompting.  If file is a directory perform a `find-file' on it."
 (nyan-mode 1)
 
 (menu-bar-mode -1)
+
+(defadvice ispell-message (around check-language activate)
+  (unless (string-match "zh_CN" (getenv "LANG"))
+    ad-do-it))
 
 (provide 'xwl-misc)
 

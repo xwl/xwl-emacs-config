@@ -1,6 +1,6 @@
 ;;; xwl-buffer.el --- Buffer level operations like switching or listing
 
-;; Copyright (C) 2009, 2010, 2011 William Xu
+;; Copyright (C) 2009, 2010, 2011, 2012 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -111,14 +111,16 @@ point.  Especially useful for w32."
 
 ;; 1. if no visible match, will match against ignored buffers.
 ;; 2. one can also toggle this by C-a
-(setq ido-ignore-buffers
-      `(,(regexp-opt '(".diary" ".scratch"  "&bitlbee" ".newsrc"
-                       ".bbdb" "todo.org" "172.28.206.207" ":6667"
-                       ))
-        "\\*.+\\*" "^#" "^localhost:" ;; "^:"
-        ,@ido-ignore-files))
+(mapc (lambda (i)
+       (add-to-list 'ido-ignore-buffers i))
 
-(setq ido-ignore-files '("~master~"))
+     `(,(regexp-opt '(".diary" ".scratch"  "&bitlbee" ".newsrc"
+                      ".bbdb" "todo.org" "172.28.206.207" ":6667"
+                      ))
+       "\\*.+\\*" "^#" "^localhost:" ;; "^:"
+       ,@ido-ignore-files))
+
+(add-to-list 'ido-ignore-files "~")
 
 (defun xwl-update-frequent-directories ()
   (interactive)
