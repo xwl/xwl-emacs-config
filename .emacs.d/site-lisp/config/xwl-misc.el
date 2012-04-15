@@ -909,6 +909,8 @@ prompting.  If file is a directory perform a `find-file' on it."
   (unless (string-match "zh_CN" (getenv "LANG"))
     ad-do-it))
 
+(add-to-list 'auto-mode-alist '("COMMIT_EDITMSG" . sh-mode))
+
 (provide 'xwl-misc)
 
 ;;; Local Variables: ***
