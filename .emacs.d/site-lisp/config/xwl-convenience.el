@@ -1,6 +1,6 @@
 ;;; xwl-convenience.el --- Must have cookies, keep it small and stable
 
-;; Copyright (C) 2007, 2008, 2009, 2010, 2011 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -200,11 +200,22 @@
   ad-do-it)
 
 ;; (setq cua-enable-cua-keys nil)
-;; (cua-mode 1)
+;; (setq cua-remap-control-v nil)
+(cua-mode 1)
 
-;; (global-unset-key (kbd "C-z"))
-;; (global-unset-key (kbd "C-w"))
-;; (global-unset-key (kbd "M-w"))
+(global-unset-key (kbd "C--"))
+(global-unset-key (kbd "C-_"))
+(global-unset-key (kbd "C-y"))
+(global-unset-key (kbd "M-w"))
+(global-unset-key (kbd "C-w"))
+
+(eval-after-load 'org
+  '(progn
+     (defun org-yank (&optional arg)
+       (interactive "P")
+       (org-yank-generic  (if cua-mode 'cua-paste 'yank) arg))
+     ))
+
 ;; (global-set-key (kbd "C-S-v") 'scroll-up)
 ;; (global-set-key (kbd "M-V") 'scroll-down)
 
