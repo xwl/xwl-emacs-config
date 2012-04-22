@@ -199,15 +199,16 @@
   (global-less-minor-mode -1)
   ad-do-it)
 
-;; (setq cua-enable-cua-keys nil)
 ;; (setq cua-remap-control-v nil)
+
+(setq cua-enable-cua-keys nil)
 (cua-mode 1)
 
-(global-unset-key (kbd "C--"))
-(global-unset-key (kbd "C-_"))
-(global-unset-key (kbd "C-y"))
-(global-unset-key (kbd "M-w"))
-(global-unset-key (kbd "C-w"))
+;; (global-unset-key (kbd "C--"))
+;; (global-unset-key (kbd "C-_"))
+;; (global-unset-key (kbd "C-y"))
+;; (global-unset-key (kbd "M-w"))
+;; (global-unset-key (kbd "C-w"))
 
 (eval-after-load 'org
   '(progn
