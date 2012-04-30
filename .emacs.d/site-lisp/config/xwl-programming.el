@@ -1,6 +1,6 @@
 ;;; xwl-programming.el --- programming config
 
-;; Copyright (C) 2007, 2009, 2010, 2011 William Xu
+;; Copyright (C) 2007, 2009, 2010, 2011, 2012 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -392,6 +392,8 @@ Thus generate a TAGs file."
            (switch-to-buffer b)
            (other-window 1))))
      ))
+
+(setq magit-omit-untracked-dir-contents t)
 
 ;;; skeletons
 ;; -----------
