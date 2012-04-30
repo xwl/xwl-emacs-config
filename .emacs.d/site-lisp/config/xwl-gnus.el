@@ -1,6 +1,6 @@
 ;;; xwl-gnus.el --- Gnus config
 
-;; Copyright (C) 2007, 2008, 2009, 2010, 2011 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -787,8 +787,8 @@
 
 ;; (add-hook 'gnus-article-prepare-hook 'xwl-gnus-article-mode-hook)
 
-(setq message-yank-prefix nil)
-;; "> ")
+(setq message-yank-prefix;; nil)
+      "> ")
 
 ;; TODO
 ;; (fset 'w3m-safe-view-this-url (symbol-function 'w3m-safe-view-this-url))

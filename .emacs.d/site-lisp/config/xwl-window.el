@@ -40,16 +40,20 @@
          ((eq window-system 'w32) 13)
          ((equal system-name "debian-iMac") 15)
          ((string-match "beleod" system-name) 14)
+         ((string-match system-name "tokyolove.local")
+          15
+          ;; 25
+          )
+
          (t 12)))
 
-       (cn-font-size (ceiling (* en-font-size 0.6 2)))
+       (cn-font-size ;(ceiling (* en-font-size 0.6 2)))
+        17
+        ;; 30
+        )
        (all-fonts
-        `((mac . ("Monaco" "stheiti*" "hiragino maru gothic pro"))
-          (ns  . ,(if (equal user-login-name "william")
-                      '("Monaco"
-                        "-apple-Hiragino_Sans_GB-medium-normal-normal-*-*-*-*-*-p-0-iso10646-1"
-                        "-apple-Hiragino_Sans_GB-medium-normal-normal-*-*-*-*-*-p-0-iso10646-1")
-                    '("Monaco" "Hiragino Sans GB" "Hiragino_Kaku_Gothic_ProN")))
+        `((mac . ("Monaco" "Hiragino Sans GB" "Hiragino Sans GB"))
+          (ns  . ("Monaco" "Hiragino Sans GB" "Hiragino Sans GB"))
           (w32 . ("Monaco" "SimSun" "Meiryo"))
           (x   . ,(cond ((string= system-name "debian-iMac")
                          `("Monaco" "WenQuanYi Micro Hei" "WenQuanYi Micro Hei"))
@@ -84,7 +88,7 @@
 
 ;;; Misc
 
-(global-set-key (kbd "C--") 'undo)
+;; (global-set-key (kbd "C--") 'undo)
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)

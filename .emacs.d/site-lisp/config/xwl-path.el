@@ -1,6 +1,6 @@
 ;;; xwl-path.el --- path setup
 
-;; Copyright (C) 2009, 2010, 2011 William Xu
+;; Copyright (C) 2009, 2010, 2011, 2012 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -27,6 +27,7 @@
                  "emms/lisp"
                  "bbdb-vcard"
                  "nyan-mode"
+                 "magit"
 
                  "xwl-elisp"
                  "xwl-elisp/dashboard"

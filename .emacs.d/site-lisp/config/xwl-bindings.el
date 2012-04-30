@@ -1,6 +1,6 @@
 ;;; xwl-bindings.el --- Key bindings
 
-;; Copyright (C) 2008, 2009, 2010, 2011 William Xu
+;; Copyright (C) 2008, 2009, 2010, 2011, 2012 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -164,9 +164,9 @@
 (global-set-key (kbd "C-\\") 'hippie-expand)
 (global-set-key (kbd "C-2") 'set-mark-command)
 
-(global-set-key (kbd "C--") 'undo)
 (global-set-key (kbd "C-c m s") '(lambda () (interactive) (find-file "~/.scratch")))
 (global-set-key (kbd "C-c m r") 'revert-buffer)
+(global-set-key (kbd "C--") 'undo)
 
 ;;; These Will Load Some Modules Dynamically.
 
@@ -249,7 +249,7 @@
           (color-theme-xwl-console))
 
         ;; TODO: 23.1 mac port doesn't work with this.
-        (when (eq system-type 'windows-nt)
+        (when t ;(eq system-type 'windows-nt)
           (unless gnus-plugged
             (unless xwl-gnus-agent-timer
               (setq xwl-gnus-agent-timer

@@ -1,6 +1,6 @@
 ;;; xwl-calendar.el --- calendar related stuffs
 
-;; Copyright (C) 2007, 2008, 2009, 2010, 2011 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -105,7 +105,7 @@
       `(,@cal-china-x-chinese-holidays
 
         (holiday-lunar 5 11 (xds ",f`I,,h<,,J],g\\c..p9"))
-        (holiday-lunar 12 30 "過年啦！")
+        ;; (holiday-lunar 12 30 "過年啦！")
         ;; (holiday-lunar 4 13  (xds "Xd0hYp;edfKecA&dc-Omm@<="))
         ;; (holiday-lunar 6 7 (xds "\\>c_Y*E_XJ9`XOA'X>I_\\J<="))
 

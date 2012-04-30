@@ -111,6 +111,8 @@ point.  Especially useful for w32."
 
 ;; 1. if no visible match, will match against ignored buffers.
 ;; 2. one can also toggle this by C-a
+(add-to-list 'ido-ignore-files "~")
+
 (mapc (lambda (i)
        (add-to-list 'ido-ignore-buffers i))
 
@@ -119,8 +121,6 @@ point.  Especially useful for w32."
                       ))
        "\\*.+\\*" "^#" "^localhost:" ;; "^:"
        ,@ido-ignore-files))
-
-(add-to-list 'ido-ignore-files "~")
 
 (defun xwl-update-frequent-directories ()
   (interactive)
