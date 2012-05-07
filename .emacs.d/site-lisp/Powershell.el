@@ -457,6 +457,7 @@ See the help for `shell' for more details.  \(Type
 ;; The following advice suppresses the call to
 ;; `ansi-color-apply-on-region` when the begin marker points
 ;; nowhere.
+
 (when (= emacs-major-version 23)
   (defadvice ansi-color-apply-on-region (around
                                          powershell-throttle-ansi-colorizing

@@ -51,28 +51,29 @@
 
 ;;; Gmail Notify
 
-(setq gmail-notifier-username "william.xwl"
-      gmail-notifier-password pwgmail)
+(when pwgmail
+  (setq gmail-notifier-username "william.xwl"
+        gmail-notifier-password pwgmail)
 
-(when xwl-at-company?
-  (setq gmail-notifier-curl-command
-        (concat "curl "
-                (if (boundp 'xwl-proxy-server)
-                    (format "-x %s:%d" xwl-proxy-server xwl-proxy-port)
-                  ""))))
+  (when xwl-at-company?
+    (setq gmail-notifier-curl-command
+          (concat "curl "
+                  (if (boundp 'xwl-proxy-server)
+                      (format "-x %s:%d" xwl-proxy-server xwl-proxy-port)
+                    ""))))
 
-(setq gmail-notifier-timer-interval (* 30 60))
+  (setq gmail-notifier-timer-interval (* 30 60))
 
-(add-hook 'gmail-notifier-new-mails-hook
-          (lambda ()
-            (xwl-notify "Gmail" (format "You've got %d new mails"
-                                        (length gmail-notifier-unread-entries)))
-            (let ((hour (string-to-number (format-time-string "%H" (current-time)))))
-              (when (and (< hour 22) (> hour 9))
-                (xwl-shell-command-asynchronously "say Boss, you\\'ve got mail.")))
-            ))
+  (add-hook 'gmail-notifier-new-mails-hook
+            (lambda ()
+              (xwl-notify "Gmail" (format "You've got %d new mails"
+                                          (length gmail-notifier-unread-entries)))
+              (xwl-shell-command-asynchronously "say Lao-ban, ni you shee you-jan.")
+              ))
 
-(add-hook 'xwl-timers-hook 'gmail-notifier-start)
+  (add-hook 'xwl-timers-hook 'gmail-notifier-start)
+
+  )
 
 ;;; Misc
 

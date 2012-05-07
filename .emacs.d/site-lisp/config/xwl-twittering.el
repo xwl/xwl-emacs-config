@@ -23,7 +23,7 @@
 (defvar xwl-twitter-direct-accessible? nil)
 ;;  (zerop (shell-command "ping -n 1 twitter.com")))
 
-(let ((col (round (/ (frame-width) 2)))
+(let ((col (max (round (/ (frame-width) 2)) 78))
       (padding 8))
   (setq twittering-fill-column col
         twittering-my-fill-column (- twittering-fill-column padding)))
@@ -54,7 +54,7 @@
                                     (setq line-spacing 5))))
 
 ;; Disable URI handling in twittering, let's use goto-address-mode instead.
-(setq twittering-regexp-uri "^^$")
+;; (setq twittering-regexp-uri "^^$")
 
 (eval-after-load 'twittering-mode
   '(progn
@@ -164,7 +164,10 @@
 (setq twittering-image-external-viewer-command
       (case system-type
         ((darwin) "open")
-        ((windows-nt) "")))
+        ((windows-nt)
+         (unless (equal system-name "3CNL12234")
+           ""))
+        ))
 
 (setq twittering-status-filter 'xwl-twittering-status-filter)
 (defun xwl-twittering-status-filter (status)
@@ -185,6 +188,7 @@
 
 (setq twittering-use-icon-storage t)
 
+;; (define-key special-mode-map (kbd "q") 'bury-buffer)
 
 (provide 'xwl-twittering)
 ;;; xwl-twittering.el ends here

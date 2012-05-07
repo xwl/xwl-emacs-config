@@ -1,6 +1,6 @@
 ;;; xwl-color-theme.el --- color theme setup
 
-;; Copyright (C) 2009, 2010 William Xu
+;; Copyright (C) 2009, 2010, 2011 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -39,7 +39,9 @@ Created on 2005-05-13."
   (color-theme-install
    '(color-theme-xwl-console
      (
-      (foreground-color  . "#c0c0c0")
+      (foreground-color  . ;"#c0c0c0"
+                         "#d0d0d0"
+                         )
       (background-color  . ;; "black"
                          ;; "#202020"
                          ;; "#2d2d2d"

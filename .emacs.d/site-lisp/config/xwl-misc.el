@@ -436,7 +436,7 @@
   ;; (xwl-weather-update)
 
   (when (fboundp 'color-theme-xwl-console)
-   (run-at-time 1 nil 'color-theme-xwl-console))
+    (run-at-time 1 nil 'color-theme-xwl-console))
 
   (when (string= system-name "zen.local")
     (xwl-fullscreen))
@@ -683,7 +683,8 @@ passphrase cache or user."
 (require 'auto-complete-config)
 
 (global-auto-complete-mode 1)
-(setq ac-auto-start 3)
+(setq ac-auto-start 3
+      ac-ignore-case nil)
 
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/site-lisp/auto-complete/dict")
 (ac-config-default)

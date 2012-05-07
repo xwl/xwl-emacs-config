@@ -765,7 +765,8 @@
           '(lambda ()
              ;; FIXME, why do i have to re-eval?
              (when  (and xwl-enter-first-article window-system)
-               (when (fboundp 'color-theme-xwl-console)
+               (when (and (fboundp 'color-theme-xwl-console)
+                          xwl-black-background?)
                  (color-theme-xwl-console))
                (setq xwl-enter-first-article nil))))
 
