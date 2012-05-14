@@ -20,8 +20,8 @@
 
 ;;; Code:
 
-(defvar xwl-twitter-direct-accessible? nil)
-;;  (zerop (shell-command "ping -n 1 twitter.com")))
+(defvar xwl-twitter-direct-accessible?
+ (zerop (shell-command "ping -n 1 twitter.com")))
 
 (let ((col (max (round (/ (frame-width) 2)) 78))
       (padding 8))
@@ -121,7 +121,8 @@
 
                  ,@(remove-if (lambda (i) (eq (car i) 'twitter)) twittering-service-method-table)))))
 
-     (when xwl-at-company?
+     (when (and xwl-at-company?
+                (not xwl-twitter-direct-accessible?))
        (setq twittering-proxy-use t)
        (setq twittering-proxy-server "172.16.42.42"
              twittering-proxy-port 8080))
