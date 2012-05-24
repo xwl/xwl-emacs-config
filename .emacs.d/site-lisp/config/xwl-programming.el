@@ -1009,7 +1009,76 @@ Useful for packing c/c++ functions with one line or empty body."
       ;; (select-frame ctl-frm)
       ;; (raise-frame ctl-frm)
       ;; (message ""))
-        ))
+    ))
+
+;; refine more ediffs
+
+;; (setq xwl-ediff-refine-number 10)
+
+;; (defadvice ediff-make-fine-diffs (around xwl-refine-more)
+(defadvice ediff-install-fine-diff-if-necessary (around xwl-refine-more)
+  ;; (let* ((total (min xwl-ediff-refine-number ediff-number-of-differences))
+  ;;        (start (max 0 (- ediff-current-difference (/ total 2))))
+  ;;        (end (min ediff-number-of-differences
+  ;;                  (+ ediff-current-difference (/ total 2)))))
+
+  ;;   (when (zerop start)
+  ;;     (setq end (min ediff-current-difference
+  ;;                    (+ ediff-current-difference
+  ;;                       (- total ediff-current-difference)))))
+
+  ;;   (when (eq end ediff-number-of-differences)
+  ;;     (setq start (max 0 (- ediff-current-difference
+  ;;                           (- total
+  ;;                              (- ediff-number-of-differences
+  ;;                                 ediff-current-difference))))))
+
+  ;;   (message " (%d, %d, %d)"  start ediff-current-difference end)
+
+    ;; (dotimes (i (- end start))
+    ;;   (ad-set-arg 0 (+ start i))
+  ;;   ad-do-it)))
+
+
+  (dotimes (i ediff-number-of-differences)
+    (ad-set-arg 0 i)
+    ad-do-it))
+
+(defun xwl-ediff-refine-more (&optional start end)
+  (interactive)
+  (when start (setq xwl-ediff-refine-start start))
+  (when end (setq xwl-ediff-refine-end end))
+
+  (unless (facep 'xwl-ediff-odd-diff-A)
+    (copy-face 'ediff-odd-diff-A 'xwl-ediff-odd-diff-A)
+    (copy-face 'ediff-even-diff-A 'xwl-ediff-even-diff-A)
+    (copy-face 'ediff-odd-diff-B 'xwl-ediff-odd-diff-B)
+    (copy-face 'ediff-even-diff-B 'xwl-ediff-even-diff-B)
+    (copy-face 'ediff-odd-diff-C 'xwl-ediff-odd-diff-C)
+    (copy-face 'ediff-even-diff-C 'xwl-ediff-even-diff-C))
+
+  (unless (face-equal 'ediff-current-diff-A 'ediff-odd-diff-A)
+    (copy-face 'ediff-current-diff-A 'ediff-odd-diff-A)
+    (copy-face 'ediff-current-diff-A 'ediff-even-diff-A)
+    (copy-face 'ediff-current-diff-B 'ediff-odd-diff-B)
+    (copy-face 'ediff-current-diff-B 'ediff-even-diff-B)
+    (copy-face 'ediff-current-diff-C 'ediff-odd-diff-C)
+    (copy-face 'ediff-current-diff-C 'ediff-even-diff-C))
+
+  (ad-activate 'ediff-install-fine-diff-if-necessary))
+
+(defun xwl-ediff-restore-original-refine ()
+  (interactive)
+  (when (and (facep 'xwl-ediff-odd-diff-A)
+             (not (face-equal 'xwl-ediff-odd-diff-A 'ediff-odd-diff-A)))
+    (copy-face 'ediff-odd-diff-A 'xwl-ediff-odd-diff-A)
+    (copy-face 'ediff-even-diff-A 'xwl-ediff-even-diff-A)
+    (copy-face 'ediff-odd-diff-B 'xwl-ediff-odd-diff-B)
+    (copy-face 'ediff-even-diff-B 'xwl-ediff-even-diff-B)
+    (copy-face 'ediff-odd-diff-C 'xwl-ediff-odd-diff-C)
+    (copy-face 'ediff-even-diff-C 'xwl-ediff-even-diff-C))
+
+  (ad-deactivate 'ediff-install-fine-diff-if-necessary))
 
 ;; git
 
