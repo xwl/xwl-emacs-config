@@ -1,6 +1,6 @@
 ;;; xwl-web.el --- w3m config
 
-;; Copyright (C) 2007, 2010, 2011 William Xu
+;; Copyright (C) 2007, 2010, 2011, 2012 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 ;; Version: 0.1
@@ -149,8 +149,8 @@ end tell"
         ;; 'xwl-browse-url-firefox-tab-only
         ;; 'xwl-browse-url-safari
         ((windows-nt)
-         'xwl-browse-url-chrome
-         ;; 'xwl-browse-url-firefox-tab-only
+         ;; 'xwl-browse-url-chrome
+         'xwl-browse-url-firefox-tab-only
          )
         ((darwin) 'xwl-browse-url-firefox-tab-only)
         (t 'w3m-browse-url)))
