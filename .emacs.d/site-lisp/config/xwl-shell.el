@@ -1,6 +1,6 @@
 ;;; xwl-shell.el --- comint modes
 
-;; Copyright (C) 2007, 2008, 2009, 2010, 2011 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -60,8 +60,9 @@
                                          (concat "> *" (car i)))
                                         (cadr i)))
                                   '(;;("ls" "-x --color=always")
-                                    ;; ("cd" "%home%")
-                                    ("cd" "$home")))))
+                                    ("cd" "%home%")
+                                    ;; ("cd" "$home")
+                                    ))))
                (when matched
                  (insert " " matched))
                (call-interactively 'comint-send-input)
