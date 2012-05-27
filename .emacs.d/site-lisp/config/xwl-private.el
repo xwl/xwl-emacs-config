@@ -21,8 +21,12 @@
 (defvar pwtwitter nil)
 
 (require 'server)
-(defun server-ensure-safe-dir (dir)
-  t)
+
+(when (eq window-system 'w32)
+  (defun server-ensure-safe-dir (dir)
+    t)
+  )
+
 (ignore-errors
   (unless (server-running-p)            ; FIXME: hack for gnus agent script.
     (load "xwl-private-setup.el.gpg")))
