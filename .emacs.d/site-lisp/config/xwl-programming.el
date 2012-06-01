@@ -60,7 +60,7 @@
   (smart-operator-mode 1)
   (abbrev-mode 1)
   (cwarn-mode 1)
-  ;;  (which-func-mode 1)
+   (which-func-mode 1)
   (when (fboundp 'doxymacs-mode)
     (doxymacs-mode 1)
     (doxymacs-font-lock))
@@ -133,15 +133,16 @@
 ;;; C, C++
 
 (defun xwl-set-c-c++-style ()
-  ;; (if (file-exists-p "../group")
-  ;;     ;; symbian c++
-  ;;     (progn
-  ;;       (c-set-style "whitesmith")
-  ;;       (setq c-cleanup-list '()))
+  (if (or (file-exists-p "../group")
+          (string-match "common_sw" (buffer-file-name)))
+      ;; symbian c++
+      (progn
+        (c-set-style "whitesmith")
+        (setq c-cleanup-list '()))
     (c-set-style "k&r")
     ;; TODO, check this.
     (setq c-basic-offset 4))
-;)
+  )
 
 (add-hook 'c-mode-hook 'xwl-set-c-c++-style)
 (add-hook 'c++-mode-hook 'xwl-set-c-c++-style)
@@ -161,9 +162,13 @@
 (add-to-list 'auto-mode-alist '("\\.mmp\\'" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.inf\\'" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.rls\\'" . c-mode))
-(add-to-list 'auto-mode-alist '("\\.pro\\'" . makefile-mode))
 (add-to-list 'auto-mode-alist '("\\.iby\\'" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.ti\\'"  . c-mode))
+
+(add-to-list 'auto-mode-alist '("\\.pro\\'" . makefile-mode))
+
 (add-to-list 'auto-mode-alist '("\\.pkg\\'" . lisp-mode))
+
 
 (eval-after-load 'ffap
   '(progn
@@ -1155,14 +1160,20 @@ Useful for packing c/c++ functions with one line or empty body."
                 ad-do-it)
             ad-do-it)))
 
-     (xwl-advice-gtags-for-large-projects gtags-find-tag)
-     (xwl-advice-gtags-for-large-projects gtags-find-rtag)
+     (xwl-advice-gtags-for-large-projects gtags-find-any)
+     (xwl-advice-gtags-for-large-projects gtags-find-any-reference)
+
+     (xwl-advice-gtags-for-large-projects gtags-find-function)
+     (xwl-advice-gtags-for-large-projects gtags-find-symbol)
+     (xwl-advice-gtags-for-large-projects gtags-find-text)
      (xwl-advice-gtags-for-large-projects gtags-find-file)
+     (xwl-advice-gtags-for-large-projects gtags-find-function-reference)
+     (xwl-advice-gtags-for-large-projects gtags-find-symbol-reference)
 
      (global-set-key (kbd "C-0") 'gtags-pop-stack)
-     (global-set-key (kbd "C-9") 'gtags-find-tag)
-     (global-set-key (kbd "C-8") 'gtags-find-file)
-     (global-set-key (kbd "C-7") 'gtags-find-rtag)
+     (global-set-key (kbd "C-9") 'gtags-find-any)
+     (global-set-key (kbd "C-8") 'gtags-find-any-reference)
+     (global-set-key (kbd "C-7") 'gtags-find-text)
 
      (add-hook 'gtags-select-mode-hook (lambda () (hl-line-mode 1)))
 
