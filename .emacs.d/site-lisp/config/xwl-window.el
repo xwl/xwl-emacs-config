@@ -45,7 +45,7 @@
           ;; 25
           )
 
-         (t 12)))
+         (t 14)))
 
        (cn-font-size ;(ceiling (* en-font-size 0.6 2)))
         17
@@ -57,8 +57,11 @@
           (w32 . ("Monaco" "SimSun" "Meiryo"))
           (x   . ,(cond ((string= system-name "debian-iMac")
                          `("Monaco" "WenQuanYi Micro Hei" "WenQuanYi Micro Hei"))
-                        ((string-match "beleod" system-name)
-                         '("DejaVu Sans Mono" "SimSun" "SimSun"))))))
+                        ;; ((string-match "beleod" system-name)
+                        ;;  '("DejaVu Sans Mono" "SimSun" "SimSun"))
+                        ((string-match "becoresw" system-name)
+                         '("lucidatypewriter" "fangsong ti" "fangsong ti"))
+                        ))))
        (fonts (cdr (assoc window-system all-fonts)))
        (en (format "%s:pixelsize=%d" (nth 0 fonts) en-font-size))
        (cn (nth 1 fonts))
@@ -85,6 +88,10 @@
 
      (#x2000 #x206f)                    ; General Punctuation
      )))
+
+(when (string-match "be" system-name)
+  (set-frame-font "-b&h-lucidatypewriter-medium-r-normal-sans-14-135-75-75-m-90-iso8859-1")
+  )
 
 ;;; Misc
 

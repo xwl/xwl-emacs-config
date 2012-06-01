@@ -42,6 +42,7 @@
  '(erc-input-face ((t (:foreground "magenta3"))))
  '(erc-keyword-face ((t (:foreground "green" :weight bold))))
  '(font-lock-constant-face ((((class color) (min-colors 88) (background light)) (:foreground "magenta"))))
+ '(font-lock-preprocessor-face ((t (:foreground "RoyalBlue2"))))
  '(font-lock-string-face ((((class color) (min-colors 88) (background light)) (:foreground "green4"))))
  '(gnus-signature ((t (:slant italic))))
  '(gnus-summary-high-read ((t (:foreground "magenta"))))

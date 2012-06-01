@@ -582,9 +582,10 @@
      (add-to-list 'warning-suppress-types '(undo discard-info))
      ))
 
-(electric-pair-mode 1)
-(electric-indent-mode 1)
-
+(when (> emacs-major-version 23)
+  (electric-pair-mode 1)
+  (electric-indent-mode 1)
+  )
 (provide 'xwl-convenience)
 
 ;;; xwl-convenience.el ends here

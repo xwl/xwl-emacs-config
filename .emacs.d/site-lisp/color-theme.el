@@ -254,12 +254,13 @@ and no alist.
 
 This is used to make sure `default-frame-alist' really is an alist and not
 a plist.  In XEmacs, the alist is deprecated; a plist is used instead."
+(when plist
   (cond ((consp (car plist))
 	 plist)
 	((not (symbolp (car plist)))
 	 (error "Wrong type argument: plist, %S" plist))
 	(t
-	 (plist-to-alist plist)))); XEmacs only
+	 (plist-to-alist plist))))); XEmacs only
 
 ;; Customization
 
@@ -478,7 +479,7 @@ libraries are mainly useful for color theme authors."
 	  (library (nth 3 theme))
 	  (desc))
       (when (or (not library) arg)
-	(setq desc (format "%-23s %s" 
+	(setq desc (format "%-23s %s"
 			   (if library (concat name " [lib]") name)
 			   author))
 	(put-text-property 0 (length desc) 'color-theme func desc)
@@ -770,15 +771,15 @@ OLD is the current setting, NEW is the setting inherited from."
 		more-atts (cddr more-atts))
 	  ;; Color-theme assumes that no value is ever 'unspecified.
 	  (cond ((eq att ':height); cumulative effect!
-		 (setq atts (plist-put atts 
-				       ':height 
+		 (setq atts (plist-put atts
+				       ':height
 				       (color-theme-spec-resolve-height
-					(plist-get atts att) 
+					(plist-get atts att)
 					val))))
 		;; Default: Only put if it has not been specified before.
 		((not (plist-get atts att))
 		 (setq atts (cons att (cons val atts))))
-		  
+
 ))))
     atts))
 ;; (color-theme-spec-resolve-inheritance '(:bold t))
@@ -9332,10 +9333,10 @@ This builds on `color-theme-jsc-light'."
 
 (defun color-theme-kingsajz ()
   "Color theme by Olgierd \"Kingsajz\" Ziolko, created 2001-12-04.
-Another theme with wheat on DarkSlatGrey. Based on Subtle Hacker. 
-Used on Emacs 21.1 @ WinMe. Not tested on any other systems. 
+Another theme with wheat on DarkSlatGrey. Based on Subtle Hacker.
+Used on Emacs 21.1 @ WinMe. Not tested on any other systems.
 
-Some faces uses Andale mono font (nice fixed-width font). 
+Some faces uses Andale mono font (nice fixed-width font).
 It is available at:  http://www.microsoft.com/typography/downloads/andale32.exe
 
 Hail Eris! All hail Discordia!"
@@ -12855,7 +12856,7 @@ Bonus: do not use 3D modeline."
      (zmacs-region ((t (:background "gray65")))))))
 
 (defun color-theme-emacs-nw ()
-  "Follow emacs21's color-theme, with -nw getting 100% compatibility. 
+  "Follow emacs21's color-theme, with -nw getting 100% compatibility.
 
 Alex's `color-theme-emacs-21' follows emacs21's theme, but in the
 current scheme of things, that means that when it works on X, it won't
@@ -12865,7 +12866,7 @@ there are multiple windows.
 
 OTOH, `color-theme-emacs-nw' follows emacs21's theme but the goal is
 100% -nw compatibility, and in X; we shall try for decent color
-scheme, and as much compability default emacs21's X as possble. 
+scheme, and as much compability default emacs21's X as possble.
 Bugs to deego@gnufans.org.
 
 TODO: Try to make this theme relative to color-theme-emacs-21 rather
@@ -15099,7 +15100,7 @@ There is very limited undo capability to the previous state only."
   :set (lambda (symbol value)
          (set-default symbol value)
          (cond
-          (value             
+          (value
            (fset 'color-theme-snapshot (color-theme-make-snapshot))
            (eval
             (delq nil

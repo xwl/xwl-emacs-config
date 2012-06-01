@@ -1,17 +1,17 @@
 #!/bin/sh
 
-desproxy irc.debian.org    6669 $http_proxy $http_port 16669 &
-desproxy irc.freenode.net  6667 $http_proxy $http_port 16667 &
-desproxy irc.lnx.nokia.com 6668 $http_proxy $http_port 16668 &
+desproxy irc.debian.org    6669 $desproxy_http_proxy $desproxy_http_port 16669 &
+desproxy irc.freenode.net  6667 $desproxy_http_proxy $desproxy_http_port 16667 &
+desproxy irc.lnx.nokia.com 6668 $desproxy_http_proxy $desproxy_http_port 16668 &
 
-desproxy news.gmane.org    119  $http_proxy $http_port 10119 &
-desproxy news.cn99.com     119  $http_proxy $http_port 11119 &
-desproxy news.gwene.org    119  $http_proxy $http_port 12119 &
+desproxy news.gmane.org    119  $desproxy_http_proxy $desproxy_http_port 10119 &
+desproxy news.cn99.com     119  $desproxy_http_proxy $desproxy_http_port 11119 &
+desproxy news.gwene.org    119  $desproxy_http_proxy $desproxy_http_port 12119 &
 
-desproxy dict.org          2628 $http_proxy $http_port 12628 &
-desproxy github.com        22   $http_proxy $http_port 10022 &
+desproxy dict.org          2628 $desproxy_http_proxy $desproxy_http_port 12628 &
+desproxy github.com        22   $desproxy_http_proxy $desproxy_http_port 10022 &
 
-desproxy $xwl              6667 $http_proxy $http_port 26667 &
-desproxy $xwl              22   $http_proxy $http_port 20022 &
+desproxy $xwl              6667 $desproxy_http_proxy $desproxy_http_port 26667 &
+desproxy $xwl              22   $desproxy_http_proxy $desproxy_http_port 20022 &
 
-desproxy imap.gmail.com    993  $http_proxy $http_port 10993 &
+desproxy imap.gmail.com    993  $desproxy_http_proxy $desproxy_http_port 10993 &

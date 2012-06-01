@@ -901,8 +901,10 @@ prompting.  If file is a directory perform a `find-file' on it."
   (let ((inhibit-read-only t))
     (display-message-or-buffer (pp ad-do-it))))
 
-(require 'nyan-mode)
-(nyan-mode 1)
+(unless (string-match "\\`be" system-name)
+  (require 'nyan-mode)                  ; need XPM support.
+  (nyan-mode 1)
+  )
 
 (menu-bar-mode -1)
 

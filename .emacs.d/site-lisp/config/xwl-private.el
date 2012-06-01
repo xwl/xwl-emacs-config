@@ -29,7 +29,8 @@
 
 (ignore-errors
   (unless (server-running-p)            ; FIXME: hack for gnus agent script.
-    (load "xwl-private-setup.el.gpg")))
+    (unless (eq window-system 'x)
+      (load "xwl-private-setup.el.gpg"))))
 
 (provide 'xwl-private)
 

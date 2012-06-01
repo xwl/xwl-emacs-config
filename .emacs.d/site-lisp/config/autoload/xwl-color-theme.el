@@ -1,6 +1,6 @@
 ;;; xwl-color-theme.el --- color theme setup
 
-;; Copyright (C) 2009, 2010, 2011 William Xu
+;; Copyright (C) 2009, 2010, 2011, 2012 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -37,17 +37,16 @@ Created on 2005-05-13."
     (error "Better not use color theme on console"))
   (require 'color-theme)
   (color-theme-install
-   '(color-theme-xwl-console
+   `(color-theme-xwl-console
      (
-      (foreground-color  . ;"#c0c0c0"
-                         "#d0d0d0"
+      (foreground-color  . "#c0c0c0"
+                           ; "#d0d0d0"
                          )
-      (background-color  . ;; "black"
-                         ;; "#202020"
-                         ;; "#2d2d2d"
-                         ;; "#2e3436"
-                         ;; "#111111"
-                         "#333333"
+      (background-color  .
+                         ;"black"
+                         "#111111"
+                         ;"#222222"
+                         ;"#333333"
                          )
 
       ;; (foreground-color  . "black")
