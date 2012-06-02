@@ -3,5 +3,6 @@
 	email = william.xwl@gmail.com
 [alias]
     logg = log --graph --date-order -C -M --pretty=format:'%C(bold green)%d%Creset %Cblue%h%Creset - "%ar" - (%an) %s' --all
+    log-new = log --graph --date-order -C -M --pretty=format:'%C(bold green)%d%Creset %Cblue%h%Creset - "%ar" - (%an) %s' master..origin
 [color]
 	ui = true
