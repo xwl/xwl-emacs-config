@@ -68,7 +68,7 @@
             (lambda ()
               (xwl-notify "Gmail" (format "You've got %d new mails"
                                           (length gmail-notifier-unread-entries)))
-              (xwl-shell-command-asynchronously "say Lao-ban, ni you shee you-jan.")
+              ;; (xwl-shell-command-asynchronously "say Lao-ban, ni you shee you-jan.")
               ))
 
   (add-hook 'xwl-timers-hook 'gmail-notifier-start)

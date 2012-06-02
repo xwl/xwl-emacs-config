@@ -23,10 +23,10 @@
 (defvar xwl-twitter-direct-accessible?
  (zerop (shell-command "ping -n 1 twitter.com")))
 
-(let ((col (max (round (/ (frame-width) 2)) 78))
-      (padding 8))
-  (setq twittering-fill-column col
-        twittering-my-fill-column (- twittering-fill-column padding)))
+;; (let ((col (max (round (/ (frame-width) 2)) 78))
+;;       (padding 8))
+;;   (setq twittering-fill-column col
+;;         twittering-my-fill-column (- twittering-fill-column padding)))
 
 (setq twittering-retweet-format "RT @%s: %t"
       twittering-use-native-retweet t)
@@ -95,8 +95,8 @@
      (twittering-enable-unread-status-notifier)
 
      (when xwl-black-background?
-       (set-face-background twittering-zebra-1-face "gray24")
-       (set-face-background twittering-zebra-2-face "gray22"))
+       (set-face-background twittering-zebra-1-face "gray16")
+       (set-face-background twittering-zebra-2-face "gray11"))
 
      (when xwl-at-company?
        (let ((sc (assqref 'socialcast twittering-service-method-table)))
@@ -108,18 +108,18 @@
 
                  ,@(remove-if (lambda (i) (eq (car i) 'socialcast)) twittering-service-method-table)))))
 
-     (unless (or xwl-at-company? xwl-twitter-direct-accessible?)
-       (let ((tw (assqref 'twitter twittering-service-method-table)))
-         (setq twittering-service-method-table
-               `((twitter
-                  (api        ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC)FnXH=="))
-                  (web        ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0k"))
-                  (search     ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*EcPOAaX8=="))
-                  (stream     ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*E'ZdM_YH=="))
-                  (userstream ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*MqQOAq[?AcPN'="))
-                  ,@(remove-if (lambda (i) (memq (car i) '(api web search stream userstream))) tw))
+     ;; (unless xwl-twitter-direct-accessible?
+     ;;   (let ((tw (assqref 'twitter twittering-service-method-table)))
+     ;;     (setq twittering-service-method-table
+     ;;           `((twitter
+     ;;              (api        ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC)FnXH=="))
+     ;;              (web        ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0k"))
+     ;;              (search     ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*EcPOAaX8=="))
+     ;;              (stream     ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*E'ZdM_YH=="))
+     ;;              (userstream ,(xds "\\?[jCOI*CdFnZ?EnY*HlP)0kC*MqQOAq[?AcPN'="))
+     ;;              ,@(remove-if (lambda (i) (memq (car i) '(api web search stream userstream))) tw))
 
-                 ,@(remove-if (lambda (i) (eq (car i) 'twitter)) twittering-service-method-table)))))
+     ;;             ,@(remove-if (lambda (i) (eq (car i) 'twitter)) twittering-service-method-table)))))
 
      (when (and xwl-at-company?
                 (not xwl-twitter-direct-accessible?))
@@ -127,12 +127,12 @@
        (setq twittering-proxy-server "172.16.42.42"
              twittering-proxy-port 8080))
 
-     ;; (setq twittering-proxy-server (xds "Q)0mQ)ocCdEl")
-     ;;       twittering-proxy-port 80
-     ;;       twittering-uri-regexp-to-proxy
-     ;;       (car
-     ;;        (assqref 'web
-     ;;                 (assqref 'twitter twittering-service-method-table))))
+       ;; (setq twittering-proxy-server "127.0.0.1"
+       ;;       twittering-proxy-port 8087
+       ;;       twittering-uri-regexp-to-proxy
+       ;;       (car
+       ;;        (assqref 'web
+       ;;                 (assqref 'twitter twittering-service-method-table))))
 
      (setq-default twittering-reverse-mode t)
      ))
@@ -148,14 +148,17 @@
       `((twitter
          ,(if (or xwl-at-company? xwl-twitter-direct-accessible?)
               '(ssl t)
-            '(auth basic)))
+            '(ssl t)
+            ;; '(auth basic)
+            ))
 
         (socialcast (auth basic)
                     (ssl t))))
 
 (setq twittering-initial-timeline-spec-string
       `(":home@sina" ":replies@sina" ":mentions@sina"
-        ,@(when (or xwl-at-company? xwl-twitter-direct-accessible?)
+        ,@(when (or (string-match "tokyo" system-name)
+                    xwl-at-company? xwl-twitter-direct-accessible?)
             '(":home@twitter" ":replies@twitter" ":direct_messages@twitter"))
         ":home@douban"
         ,@(when xwl-at-company?
@@ -164,6 +167,7 @@
 
 (setq twittering-image-external-viewer-command
       (case system-type
+        ;; ((gnu/linux) "gnome-open")
         ((darwin) "open")
         ((windows-nt)
          (unless (equal system-name "3CNL12234")
@@ -180,16 +184,44 @@
             (when (and rt table (not (string= spec-string ":mentions@sina")))
               (not (string= (gethash (assqref 'id rt) table)
                             (assqref 'id status)))))
-          (when (string= spec-string ":public@socialcast")
+
+          (cond
+           ((string= spec-string ":public@socialcast")
             (member (assqref 'screen-name (assqref 'user status))
-                    '("VarunPrakash"
-                      "Nokia Conversations - Posts"
-                      "Ovi by Nokia"
-                      "datainsight")))))))
+                    (mapcar 'xds
+                            '("MdFp[N,HZdFiPOEf"
+                              "Kd0iXN<^H)0l[dMpZ)F'XN0lZp8k@F9mZ*Iq"
+                              "K*Qg@>A,@<,mX)c_"
+                              "Q>F'PNclZ)ceX?H="))))
+
+           ((string= spec-string ":home@sina")
+            (string-match
+             (regexp-opt
+              (mapcar 'xds
+                      '(",Y\\d,P)ONeMmKdFl"
+                        ",X)],-Nc,X`?O'Ac[?I,"
+                        ",f`I,g`m,P-]-CJ'"
+                        "O)ogYec(PN+="
+                        "-CN(,gpA,fdEHdMpYdcc"
+                        ",hB9,gXDZ>MlYeb="
+                        )))
+             (assqref 'screen-name (assqref 'user status))))
+
+           ((string= spec-string ":home@twitter")
+            (member (assqref 'screen-name (assqref 'user status))
+                    (mapcar 'xds
+                            '("P*MjXOL="
+                              "[eMiXN,e"
+                              ))))
+           )))))
 
 (setq twittering-use-icon-storage t)
 
+
 ;; (define-key special-mode-map (kbd "q") 'bury-buffer)
+
+(when (eq window-system 'ns)
+  (setq twittering-curl-program "~/bin/curl-pac"))
 
 (provide 'xwl-twittering)
 ;;; xwl-twittering.el ends here

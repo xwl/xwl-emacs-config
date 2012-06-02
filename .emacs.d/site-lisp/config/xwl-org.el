@@ -1,6 +1,6 @@
 ;;; xwl-org.el --- configs for org-mode
 
-;; Copyright (C) 2008, 2009, 2010, 2011 William Xu
+;; Copyright (C) 2008, 2009, 2010, 2011, 2012 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -140,13 +140,17 @@ If EXTENSIONS is given, only match these."
 
 ;; latex export
 
-(eval-after-load 'org-export
+(eval-after-load 'org-exp
   '(progn
      (defadvice org-export (around disable-less activate)
-       (let ((orig global-less-minor-mode))
-         (global-less-minor-mode -1)
-         ad-do-it
-         (global-less-minor-mode 1)))
+       ;; (let ((orig global-less-minor-mode))
+       ;;   (global-less-minor-mode -1)
+       ;;   ad-do-it
+       ;;   (global-less-minor-mode 1))
+       (let ((inhibit-read-only t))
+         ad-do-it)
+
+       )
      ))
 
 (setq org-export-latex-packages-alist

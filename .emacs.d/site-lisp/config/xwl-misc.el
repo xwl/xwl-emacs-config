@@ -354,7 +354,14 @@
 
 (add-hook 'write-file-functions 'xwl-write-file-functions)
 
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(add-hook 'before-save-hook
+          (lambda ()
+            (save-excursion
+              (goto-char (point-min))
+              (when (search-forward
+                     "# To remove '+' lines, make them ' ' lines"
+                     nil t 1)
+                (delete-trailing-whitespace)))))
 
 (defun xwl-kill-buffer-hook ()
   (let ((file (buffer-file-name)))
@@ -418,7 +425,9 @@
                   ;; (when window-system
                   ;;    (xwl-fullscreen))
                   (sit-for 0.5)
-                  (let ((col (round (/ (frame-width) 2))))
+                  (let ((col (round ;(/ (frame-width) 2)
+                              (frame-width)
+                              )))
                     (setq erc-fill-column (- col 2))) ; 6 for leading timestamp.
                   ))
 
@@ -869,8 +878,8 @@ passphrase cache or user."
 (setq package-enable-at-startup nil)
 
 (when (eq system-type 'darwin)
-  (run-at-time "11:00pm" 86400 (lambda ()
-                                 (let ((s "Get to sleep now."))
+  (run-at-time "10:30pm" 86400 (lambda ()
+                                 (let ((s "Swee la Swee la"))
                                    (xwl-notify "Time!" s)
                                    (xwl-shell-command-asynchronously
                                     (concat "say " s))))))
@@ -930,6 +939,39 @@ prompting.  If file is a directory perform a `find-file' on it."
                       (cdr (or (assoc d xwl-w32-drives)
                                (assoc (downcase d) xwl-w32-drives)))
                       ":/" ad-return-value)))))))
+
+(eval-after-load 'calc
+  '(progn
+     (define-key calc-mode-map (kbd "<S-tab>") 'calc-roll-up)
+     ))
+
+(eval-after-load 'image-dired
+  '(progn
+     (define-key image-dired-thumbnail-mode-map (kbd "p") (kbd "C-b RET"))
+     (define-key image-dired-thumbnail-mode-map (kbd "n") (kbd "C-f RET"))
+
+     (define-key image-dired-thumbnail-mode-map (kbd "<left>") (kbd "C-b RET"))
+     (define-key image-dired-thumbnail-mode-map (kbd "<right>") (kbd "C-f RET"))
+     (define-key image-dired-thumbnail-mode-map (kbd "<up>") (kbd "C-p RET"))
+     (define-key image-dired-thumbnail-mode-map (kbd "<down>") (kbd "C-n RET"))
+
+     ;; show original size?
+
+     (defun image-dired-really-slideshow-start ()
+       (interactive)
+       (when (<= (- (point-max) (point)) 2)
+         (goto-char (point-min)))
+       (command-execute (kbd "RET"))
+       (sleep-for 2)
+       (command-execute (kbd "C-f"))
+       (image-dired-really-slideshow-start))
+
+     ))
+
+(defun xwl-goto-emacs-bug (id)
+  (interactive "sBug ID: ")
+  (browse-url (concat "http://debbugs.gnu.org/cgi/bugreport.cgi?bug=" id)))
+
 
 (provide 'xwl-misc)
 
