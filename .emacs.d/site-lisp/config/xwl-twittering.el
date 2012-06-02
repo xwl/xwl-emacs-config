@@ -158,8 +158,8 @@
         ,@(when (or xwl-at-company? xwl-twitter-direct-accessible?)
             '(":home@twitter" ":replies@twitter" ":direct_messages@twitter"))
         ":home@douban"
-        ;; ,@(when xwl-at-company?
-        ;;     '(":home@socialcast" ":public@socialcast"))
+        ,@(when xwl-at-company?
+            '(":home@socialcast" ":public@socialcast"))
         ))
 
 (setq twittering-image-external-viewer-command

@@ -790,7 +790,10 @@ If SCHEME?, `run-scheme'."
 (eval-after-load 'buffer-action
   '(progn
      (setq buffer-action-table
-           `(("\\.tex$" "xelatex %f" "%n.pdf" "open -a Preview %n.pdf &")
+           `(("\\.tex$" "xelatex %f" "%n.pdf"
+              ,(cdr (assq system-type
+                          '((darwin . "open -a Preview %n.pdf &")
+                            (windows-nt . "start %n.pdf" )))))
 
              ("\\.dot$"
               ,(concat "dot -Tjpg %f -o %n.jpg "

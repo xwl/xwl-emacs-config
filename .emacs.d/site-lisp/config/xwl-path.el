@@ -101,6 +101,7 @@
     (let ((paths `(;; "c:/Program Files/GnuWin32/bin"
                   ,(file-truename "~/bin/git/bin")
                   "C:/APPS/git/bin"
+                  ,(file-truename "~/bin/glo597wb/bin")
                    )))
       (setenv "PATH" (mapconcat 'identity `(,(getenv "PATH") ,@paths) ";"))
       (setq exec-path (split-string (getenv "PATH") ";")))

@@ -914,6 +914,23 @@ prompting.  If file is a directory perform a `find-file' on it."
 
 (add-to-list 'auto-mode-alist '("COMMIT_EDITMSG" . sh-mode))
 
+;; 1. Prepend drive name on buffer on w32
+;; 2. show SDK week on linux
+(defadvice uniquify-get-proposed-name (after prepend-drive-name activate)
+  (let ((dir (ad-get-arg 1)))
+    (cond
+     ((string-match "WilliamXu/sdk/\\([^/]+\\)/" dir)
+      (let ((wk (match-string 1 dir)))
+        (setq ad-return-value
+              (concat wk ":/" ad-return-value))))
+     ((eq system-type 'windows-nt)
+      (let ((d (upcase (substring dir 0 1))))
+        (setq ad-return-value
+              (concat d xwl-w32-drive-separator
+                      (cdr (or (assoc d xwl-w32-drives)
+                               (assoc (downcase d) xwl-w32-drives)))
+                      ":/" ad-return-value)))))))
+
 (provide 'xwl-misc)
 
 ;;; Local Variables: ***

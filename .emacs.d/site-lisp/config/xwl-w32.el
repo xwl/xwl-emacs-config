@@ -1,6 +1,6 @@
 ;;; xwl-vim.el --- w32 specific utilites
 
-;; Copyright (C) 2010 William Xu
+;; Copyright (C) 2010, 2012 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -31,15 +31,6 @@
 	       (expand-file-name "~/w32/get_drives.py")))))))
 
 (setq xwl-w32-drive-separator ".")
-
-;; Prepend drive name on buffer on w32
-(defadvice uniquify-get-proposed-name (after prepend-drive-name activate)
-  (let ((d (upcase (substring (ad-get-arg 1) 0 1))))
-    (setq ad-return-value
-          (concat d xwl-w32-drive-separator
-                  (cdr (or (assoc d xwl-w32-drives)
-                           (assoc (downcase d) xwl-w32-drives)))
-                  ":/" ad-return-value))))
 
 (when xwl-w32?
   (setq xwl-w32-drives (xwl-w32-get-drives)))
