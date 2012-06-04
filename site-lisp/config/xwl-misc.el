@@ -933,8 +933,8 @@ prompting.  If file is a directory perform a `find-file' on it."
 (defadvice uniquify-get-proposed-name (after prepend-drive-name activate)
   (let ((dir (ad-get-arg 1)))
     (cond
-     ((string-match "WilliamXu/sdk/\\([^/]+\\)/" dir)
-      (let ((wk (match-string 1 dir)))
+     ((string-match "\\(sdk\\|repo\\)/\\([^/]+\\|ng\\)/" dir)
+      (let ((wk (match-string 2 dir)))
         (setq ad-return-value
               (concat wk ":/" ad-return-value))))
      ((eq system-type 'windows-nt)
