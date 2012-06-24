@@ -918,7 +918,8 @@ prompting.  If file is a directory perform a `find-file' on it."
 (menu-bar-mode -1)
 
 (defadvice ispell-message (around check-language activate)
-  (unless (string-match "zh_CN" (getenv "LANG"))
+  (unless (and (getenv "LANG")
+               (string-match "zh_CN" (getenv "LANG")))
     ad-do-it))
 
 (add-to-list 'auto-mode-alist '("COMMIT_EDITMSG" . sh-mode))
