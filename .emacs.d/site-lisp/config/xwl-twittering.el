@@ -34,7 +34,8 @@
 (setq twittering-new-tweets-count-excluding-me t
       twittering-new-tweets-count-excluding-replies-in-home t
       twittering-timer-interval 300
-      twittering-use-master-password t)
+      twittering-use-master-password t
+      )
 
 (setq twittering-allow-insecure-server-cert t)
 
@@ -95,8 +96,8 @@
      (twittering-enable-unread-status-notifier)
 
      (when xwl-black-background?
-       (set-face-background twittering-zebra-1-face "gray16")
-       (set-face-background twittering-zebra-2-face "gray11"))
+       (set-face-background 'twittering-zebra-1-face "gray15")
+       (set-face-background 'twittering-zebra-2-face "gray11"))
 
      (when xwl-at-company?
        (let ((sc (assqref 'socialcast twittering-service-method-table)))
@@ -135,6 +136,17 @@
        ;;                 (assqref 'twitter twittering-service-method-table))))
 
      (setq-default twittering-reverse-mode t)
+
+     (setq twittering-accounts
+           (let* ((socialcast (assqref 'socialcast twittering-accounts))
+                  (others (remove-if (lambda (i) (eq (car i) 'socialcast))
+                                     twittering-accounts)))
+             `((socialcast
+                (auth basic)
+                ,@(remove-if (lambda (i) (eq (car i) 'auth))
+                             socialcast))
+          
+               ,@others)))
      ))
 
 ;; FIXME: in 23.2, who the hell autoload create-animated-image?? this exists in
@@ -143,17 +155,6 @@
   (defalias 'create-animated-image 'create-image))
 
 (setq twittering-tinyurl-service 'toly)
-
-(setq twittering-accounts
-      `((twitter
-         ,(if (or xwl-at-company? xwl-twitter-direct-accessible?)
-              '(ssl t)
-            '(ssl t)
-            ;; '(auth basic)
-            ))
-
-        (socialcast (auth basic)
-                    (ssl t))))
 
 (setq twittering-initial-timeline-spec-string
       `(":home@sina" ":replies@sina" ":mentions@sina"
@@ -195,18 +196,20 @@
                               "Q>F'PNclZ)ceX?H="))))
 
            ((string= spec-string ":home@sina")
-            (string-match
-             (regexp-opt
-              (mapcar 'xds
-                      '(",Y\\d,P)ONeMmKdFl"
-                        ",X)],-Nc,X`?O'Ac[?I,"
-                        ",f`I,g`m,P-]-CJ'"
-                        "O)ogYec(PN+="
-                        "-CN(,gpA,fdEHdMpYdcc"
-                        ",hB9,gXDZ>MlYeb="
-                        )))
-             (assqref 'screen-name (assqref 'user status))))
+            (or (string-match
+                 (regexp-opt
+                  (mapcar 'xds
+                          '(",Y\\d,P)ONeMmKdFl"
+                            ",X)],-Nc,X`?O'Ac[?I,"
+                            ",f`I,g`m,P-]-CJ'"
+                            "O)ogYec(PN+="
+                            ",hB9,gXDZ>MlYeb="
+                            )))
+                 (assqref 'screen-name (assqref 'user status)))
 
+                (string-match (xds "DK^nEa^,E;Z,D8==")
+                              (assqref 'id (assqref 'user status)))))
+           
            ((string= spec-string ":home@twitter")
             (member (assqref 'screen-name (assqref 'user status))
                     (mapcar 'xds
@@ -220,7 +223,7 @@
 
 ;; (define-key special-mode-map (kbd "q") 'bury-buffer)
 
-(when (eq window-system 'ns)
+(when (memq window-system '(ns mac))
   (setq twittering-curl-program "~/bin/curl-pac"))
 
 (provide 'xwl-twittering)
