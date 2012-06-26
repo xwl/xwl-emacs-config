@@ -68,6 +68,19 @@ end tell" d)))
          ((x)
           (xwl-shell-command-asynchronously "gnome-terminal"))))))
 
+(define-key dired-mode-map (kbd "b")
+  (lambda ()
+    (interactive)
+    (let* ((orig (dired-filename-at-point))
+           (new (concat orig ".orig")))
+      (when (file-exists-p new)
+        (error "File `%s' already exists" new))
+      (rename-file orig new)
+      (copy-file new orig)
+      (chmod orig (file-modes-symbolic-to-number
+                   "u+w" (file-modes orig)))
+      (revert-buffer))))
+
 (defun xwl-dired-mode-hook ()
   (dired-omit-mode 1)
 
@@ -75,7 +88,7 @@ end tell" d)))
   (local-unset-key (kbd "<down>"))
   (local-unset-key (kbd "<left>"))
   (local-unset-key (kbd "<right>"))
-
+  
   )
 
 (add-hook 'dired-mode-hook 'xwl-dired-mode-hook)
