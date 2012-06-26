@@ -113,7 +113,7 @@ Created on 2005-05-13."
      (emms-pbi-song-face ((t (:foreground "green"))))
 
      (fixed-pitch ((t (:family "courier"))))
-     (font-lock-builtin-face ((t (:foreground "blue" :weight light))))
+     (font-lock-builtin-face ((t (:foreground "RoyalBlue" :weight light))))
      (font-lock-comment-face ((t (:foreground "red1"))))
      (font-lock-constant-face ((t (:foreground "magenta"))))
      (font-lock-doc-face ((t (:foreground "green"))))
