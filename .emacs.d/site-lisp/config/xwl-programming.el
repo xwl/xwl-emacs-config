@@ -42,7 +42,7 @@
                          compact-empty-funcall
 
                          one-liner-defun))
-  (setq tab-width 4)
+  ;; (setq tab-width 4)
 
   ;; Don't enable for lex/yacc files.
   (when (and (buffer-file-name) ; mmm-mode submodes don't have a  valid buffer name.
@@ -710,7 +710,20 @@ If SCHEME?, `run-scheme'."
   (turn-on-haskell-simple-indent)
 
   (glasses-mode 1)
-  (smart-operator-mode))
+  (smart-operator-mode)
+
+  (local-set-key (kbd "RET")
+                 (lambda ()
+                   (interactive)
+                   (let ((indent? (save-excursion
+                                    (goto-char (line-beginning-position))
+                                    (looking-at "[[:space:]]"))))
+
+                     (if indent?
+                         (newline)
+                       (command-execute (kbd "C-q C-j"))
+                       (goto-char (line-beginning-position))))))
+  )
 
 (defun xwl-inferior-haskell-mode-hook ()
   (glasses-mode 1)

@@ -207,7 +207,10 @@
                             )))
                  (assqref 'screen-name (assqref 'user status)))
 
-                (string-match (xds "DK^nEa^,E;Z,D8==")
+                (string-match (regexp-opt
+                               (mapcar 'xds
+                                       '("DK^nEa^,E;Z,D8=="
+                                         "DKP+E;HoD;Z*DH==")))
                               (assqref 'id (assqref 'user status)))))
            
            ((string= spec-string ":home@twitter")

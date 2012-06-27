@@ -199,7 +199,7 @@
         )
 
     (erc :server "irc.debian.org"       :port 6669 :nick "xwl" :password pwdeb)
-    (erc :server "irc.freenode.net"     :port 6667 :nick "xwl" :password pwerc)
+    (erc :server "irc.freenode.net"     :port 7000 :nick "xwl" :password pwerc)
 
     ;; (erc :server "irc.linuxfire.com.cn" :port 6667 :nick "xwl" :password "")
     ;; (erc :server "irc.mozilla.org"      :port 6667 :nick "xwl" :password "")
@@ -245,7 +245,8 @@
         ;; )
 
         (gnus-demon-init)
-        (when (fboundp 'color-theme-xwl-console)
+        (when (and xwl-black-background?
+                   (fboundp 'color-theme-xwl-console))
           (color-theme-xwl-console))
 
         ;; TODO: 23.1 mac port doesn't work with this.

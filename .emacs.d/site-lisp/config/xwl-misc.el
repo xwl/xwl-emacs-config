@@ -444,7 +444,8 @@
   ;; (run-with-timer 0 86400 'xwl-running-daily) ; dialy stuffs
   ;; (xwl-weather-update)
 
-  (when (fboundp 'color-theme-xwl-console)
+  (when (and xwl-black-background?
+             (fboundp 'color-theme-xwl-console))
     (run-at-time 1 nil 'color-theme-xwl-console))
 
   (when (string= system-name "zen.local")
@@ -453,8 +454,7 @@
   (when window-system
     (require 'highlight-tail)
     (setq highlight-tail-colors
-          `((;; ,(if xwl-black-background? "#bc2525" "#d8971d")
-             "#bc2525" . 0)))
+          `((,(if xwl-black-background? "#bc2525" "#d8971d") . 0)))
     (highlight-tail-reload))
 
   (appt-activate 1)
@@ -874,9 +874,6 @@ passphrase cache or user."
 (global-set-key (kbd "C-c K") 'xwl-kill-buffer-full-name)
 (global-set-key (kbd "C-c m x") 'xwl-w32-start-program)
 
-;; trunk temp fix
-(setq package-enable-at-startup nil)
-
 (when (eq system-type 'darwin)
   (run-at-time "10:30pm" 86400 (lambda ()
                                  (let ((s "Swee la Swee la"))
@@ -970,7 +967,14 @@ prompting.  If file is a directory perform a `find-file' on it."
      ))
 
 (defun xwl-goto-emacs-bug (id)
-  (interactive "sBug ID: ")
+  (interactive
+   `(,(if (looking-at "[[:digit:]]+")
+          (save-excursion
+            (skip-chars-backward "[[:digit:]]+" (line-beginning-position))
+            (looking-at "[[:digit:]]+")
+            (match-string 0))
+        (read-string "Bug Id: "))))
+  (message "Opening bug %s...  " id)
   (browse-url (concat "http://debbugs.gnu.org/cgi/bugreport.cgi?bug=" id)))
 
 

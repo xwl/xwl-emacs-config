@@ -39,18 +39,12 @@
         (cond
          ((eq window-system 'w32) 13)
          ((equal system-name "debian-iMac") 15)
-         ((string-match "beleod" system-name) 14)
-         ((string-match system-name "tokyolove.local")
-          15
-          ;; 25
-          )
-
+         ((string-match system-name "beleod") 14)
+         ((string-match system-name "tokyolove.local") 15)
          (t 14)))
 
        (cn-font-size ;(ceiling (* en-font-size 0.6 2)))
-        17
-        ;; 30
-        )
+        17)
        (all-fonts
         `((mac . ("Monaco" "Hiragino Sans GB" "Hiragino Sans GB"))
           (ns  . ("Monaco" "Hiragino Sans GB" "Hiragino Sans GB"))
