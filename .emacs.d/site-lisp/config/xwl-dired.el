@@ -1,6 +1,6 @@
 ;;; xwl-dired.el --- Dired config
 
-;; Copyright (C) 2007, 2008, 2009, 2010, 2011 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -134,6 +134,9 @@ be with length 3 extentions !"
 
 (setq dired-omit-size-limit nil)
 
+(define-key dired-mode-map (kbd "o") 'dired-omit-mode)
+
+
 ;;; Sort
 
 (setq dired-listing-switches "-lh")
