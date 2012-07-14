@@ -192,14 +192,14 @@
           (setq nick "xwl_"))
 
         (erc :server sv :port 16667 :nick nick :password pwerc)
-        (erc :server sv :port 16669 :nick nick :password pwdeb)
+        (erc-ssl :server sv :port 16669 :nick nick :password pwdeb)
         ;; (erc :server sv :port 16668 :nick nick :password pwerc)
 
         (erc :server "irc.lnx.nokia.com" :port 6667 :nick "xwl" :password pwdeb)
         )
 
     (erc :server "irc.debian.org"       :port 6669 :nick "xwl" :password pwdeb)
-    (erc :server "irc.freenode.net"     :port 7000 :nick "xwl" :password pwerc)
+    (erc-ssl :server "irc.freenode.net"     :port 7000 :nick "xwl" :password pwerc)
 
     ;; (erc :server "irc.linuxfire.com.cn" :port 6667 :nick "xwl" :password "")
     ;; (erc :server "irc.mozilla.org"      :port 6667 :nick "xwl" :password "")

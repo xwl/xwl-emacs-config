@@ -1,6 +1,6 @@
 ;;; xwl-erc.el --- erc config
 
-;; Copyright (C) 2007, 2008, 2009, 2010, 2011 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -58,8 +58,9 @@
       '(;; ("rootdir.de"
         ;;  "&bitlbee")
         ("freenode.net"
+         "#haskell"
          "#osxchat" "#emacs" "#scheme" "#chicken" "#cpp-tw" ;; "#chinalug"
-         ; "#qt-qml" "#qt"
+         ; "#q t-qml" "#qt"
          )
         ("oftc.net"
          ;; "#debian-zh"
