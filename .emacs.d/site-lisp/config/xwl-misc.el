@@ -564,6 +564,12 @@
 (define-key occur-mode-map (kbd "C-o") nil)
 ;; ))
 
+(define-key occur-mode-map (kbd "r") 'occur-edit-mode)
+
+(add-hook 'occur-edit-mode-hook
+          (lambda ()
+            (local-unset-key (kbd "C-o"))))
+
 ;; ,----
 ;; | Window
 ;; `----
@@ -977,6 +983,27 @@ prompting.  If file is a directory perform a `find-file' on it."
   (message "Opening bug %s...  " id)
   (browse-url (concat "http://debbugs.gnu.org/cgi/bugreport.cgi?bug=" id)))
 
+(when (eq system-type 'darwin)
+  (defun xwl-warn-low-battery ()
+    "Check bluetooth keyboard, trackpad batteries.  "
+    (let* ((warn-value 5)
+           (cmd-format "ioreg -n %s | grep -i batterypercent | sed 's/^[ \t|]*//' | grep '^\"Batter' | sed 's/.*= //'")
+           (trackpad (string-to-number (shell-command-to-string (format cmd-format "BNBTrackpadDevice"))))
+           (kb (string-to-number (shell-command-to-string (format cmd-format "AppleBluetoothHIDKeyboard")))))
+      (when (<= trackpad warn-value)
+        (xwl-notify "Trackpad" (format "Battery low! %d%% remaining." trackpad)))
+      (when (<= kb warn-value)
+        (xwl-notify "Keyboard" (format "Battery low! %d%% remaining." kb)))))
+
+  (run-with-timer 0 (* 24 60) 'xwl-warn-low-battery)
+  )
+
+(eval-after-load 'package
+  '(progn
+     (defadvice package-menu-execute (around disable-less activate)
+       (let ((inhibit-read-only t))
+         ad-do-it))
+     ))
 
 (provide 'xwl-misc)
 
