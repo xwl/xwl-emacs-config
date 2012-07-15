@@ -40,11 +40,11 @@
          ((eq window-system 'w32) 13)
          ((equal system-name "debian-iMac") 15)
          ((string-match system-name "beleod") 14)
-         ((string-match system-name "tokyolove.local") 15)
+         ((string-match system-name "tokyolove.local") 14)
          (t 14)))
 
-       (cn-font-size ;(ceiling (* en-font-size 0.6 2)))
-        17)
+       (cn-font-size (ceiling (* en-font-size 0.6 2)))
+        ;; 16)
        (all-fonts
         `((mac . ("Monaco" "Hiragino Sans GB" "Hiragino Sans GB"))
           (ns  . ("Monaco" "Hiragino Sans GB" "Hiragino Sans GB"))
@@ -93,7 +93,7 @@
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
-(scroll-bar-mode -1)
+(scroll-bar-mode 1)
 (mouse-wheel-mode 1)
 
 (setq woman-use-own-frame nil)

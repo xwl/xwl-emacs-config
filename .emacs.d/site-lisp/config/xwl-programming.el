@@ -343,6 +343,15 @@ Thus generate a TAGs file."
 (setq vc-darcs-mail-address "William Xu <william.xwl@gmail.com>")
 
 (global-set-key (kbd "C-x v p") (lambda () (interactive) (compile "git push")))
+(global-set-key (kbd "C-x v a")
+                (lambda ()
+                  (interactive)
+                  (let* ((f (file-name-nondirectory (buffer-file-name)))
+                         (cmd (concat "git add " f)))
+                    (message (concat cmd "..."))
+                    (if (zerop (shell-command cmd))
+                        (message (concat cmd "...done"))
+                      (message (concat cmd "...failed"))))))
 
 (eval-after-load 'vc-dir
   '(progn
@@ -709,7 +718,7 @@ If SCHEME?, `run-scheme'."
   (turn-on-haskell-indent)
   (turn-on-haskell-simple-indent)
 
-  (glasses-mode 1)
+  ;; (glasses-mode 1)
   (smart-operator-mode)
 
   (local-set-key (kbd "RET")
@@ -726,7 +735,7 @@ If SCHEME?, `run-scheme'."
   )
 
 (defun xwl-inferior-haskell-mode-hook ()
-  (glasses-mode 1)
+  ;; (glasses-mode 1)
   (smart-operator-mode))
 
 (add-hook 'haskell-mode-hook 'xwl-haskell-mode-hook)
@@ -853,6 +862,9 @@ If SCHEME?, `run-scheme'."
              (c++-mode "g++ -O2 \"%f\" -lm -I/sw/include -o %n" ,@(if (eq system-type 'windows-nt)
                                                                       '("%n.exe" "%n.exe")
                                                                     '("%n" "./%n")))
+
+             (haskell-mode "ghc --make '%f'" "%n" "./%n")
+             
              ,@buffer-action-table))
      ))
 
