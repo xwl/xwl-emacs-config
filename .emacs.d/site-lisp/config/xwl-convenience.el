@@ -187,6 +187,7 @@
                                  "outgoing"
                                  "*gud"
                                  "*anything"
+                                 "*All*"
                                  ))))
      (setq auto-less-exclude-modes
            (append auto-less-exclude-modes
@@ -224,7 +225,7 @@
 
 ;; (transient-mark-mode -1)
 
-(setq-default line-spacing 5)
+(setq-default line-spacing 2)
 
 (eval-after-load 'ido
   '(progn
