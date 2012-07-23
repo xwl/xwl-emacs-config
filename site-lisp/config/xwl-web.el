@@ -31,7 +31,7 @@
   (setq w3m-default-display-inline-images t
         w3m-default-save-directory "~/download/"
         w3m-home-page "http://localhost/"
-        w3m-init-file "~/.emacs.d/.emacs-w3m"
+        w3m-init-file (concat xwl-emacs-top "/.emacs-w3m")
         ;; w3m-command-arguments
         ;;       (append w3m-command-arguments
         ;;               ;; '("-o" "http_proxy=http://222.43.34.94:3128/"))

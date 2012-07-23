@@ -1,0 +1,9 @@
+[submodule "site-lisp/xwl-elisp"]
+	path = site-lisp/xwl-elisp
+	url = git@github.com:xwl/xwl-elisp.git
+[submodule "site-lisp/twittering-mode"]
+	path = site-lisp/twittering-mode
+	url = git@github.com:xwl/twittering-mode.git
+[submodule "site-lisp/emms"]
+	path = site-lisp/emms
+	url = git://git.sv.gnu.org/emms.git

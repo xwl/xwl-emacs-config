@@ -337,7 +337,7 @@
     ;;   (xwl-update-date)
 
     (cond
-     ((and (string-match (regexp-opt (list (file-truename xwl-site-lisp))) f)
+     ((and (string-match (regexp-opt (list (file-truename xwl-emacs-top))) f)
            (not (string-match "twittering-mode" f)))
       (copyright-update)
 
@@ -485,7 +485,7 @@
 
 (add-hook 'kill-emacs-hook
           (lambda ()
-            (let ((default-directory "~/.emacs.d/site-lisp/"))
+            (let ((default-directory xwl-emacs-top))
               (xwl-makefile-byte-compile))))
 
 ;; (autoload 'typing-of-emacs "The Typing Of Emacs, a game." t)
@@ -701,7 +701,8 @@ passphrase cache or user."
 (setq ac-auto-start 3
       ac-ignore-case nil)
 
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/site-lisp/auto-complete/dict")
+(add-to-list 'ac-dictionary-directories
+             (concat xwl-emacs-top "auto-complete/dict"))
 (ac-config-default)
 
 (defun auto-complete-mode-maybe ()

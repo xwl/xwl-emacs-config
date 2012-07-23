@@ -1,0 +1,8 @@
+#!/bin/sh
+
+top=`dirname $0`
+if [[ $top = "." ]]; then
+    top=`pwd`
+fi
+
+ln -s $top/../News $HOME

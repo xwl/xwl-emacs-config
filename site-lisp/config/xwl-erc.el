@@ -165,7 +165,7 @@ so as to keep an eye on work when necessarily."
 
 (erc-fill-mode 1)
 (setq erc-fill-function 'erc-fill-static
-      erc-fill-static-center 10
+      erc-fill-static-center 15
       erc-fill-prefix nil)
 
 ;; trim erc nicks
@@ -174,7 +174,7 @@ so as to keep an eye on work when necessarily."
 (defun xwl-erc-format-nick (&optional user channel-data)
   "Like `erc-format-nick' but trim nick to a fixed length. "
   (let ((nick (erc-format-nick user channel-data)))
-    (when (> (length nick) 7)
+    (when (> (length nick) erc-fill-static-center)          ; 7
       (setq nick (concat (substring nick 0 4)
                          ".."
                          (substring nick -1))))

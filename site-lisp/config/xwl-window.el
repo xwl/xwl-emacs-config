@@ -43,8 +43,13 @@
          ((string-match system-name "tokyolove.local") 14)
          (t 14)))
 
-       (cn-font-size (ceiling (* en-font-size 0.6 2)))
-        ;; 16)
+       (cn-font-size
+        (cond
+         ((string-match "tokyolove.local" system-name)
+          16)
+         (t
+          (ceiling (* en-font-size 0.6 2)))))
+       
        (all-fonts
         `((mac . ("Monaco" "Hiragino Sans GB" "Hiragino Sans GB"))
           (ns  . ("Monaco" "Hiragino Sans GB" "Hiragino Sans GB"))

@@ -90,6 +90,8 @@
      (define-key twittering-mode-map (kbd "<S-tab>") 'twittering-goto-previous-thing)
      (define-key twittering-mode-map (kbd "C-c C-SPC") 'twittering-switch-to-unread-timeline)
 
+     (define-key twittering-mode-map (kbd "A") 'twittering-open-all-thumbnails-externally)
+     
      (setq twittering-timeline-most-active-spec-strings
            `(":mentions" ,@twittering-timeline-most-active-spec-strings))
 
@@ -157,14 +159,19 @@
 (setq twittering-tinyurl-service 'toly)
 
 (setq twittering-initial-timeline-spec-string
-      `(":home@sina" ":replies@sina" ":mentions@sina"
-        ,@(when (or (string-match "tokyo" system-name)
-                    xwl-at-company? xwl-twitter-direct-accessible?)
-            '(":home@twitter" ":replies@twitter" ":direct_messages@twitter"))
-        ":home@douban"
-        ,@(when xwl-at-company?
-            '(":home@socialcast" ":public@socialcast"))
-        ))
+      (remove-duplicates 
+       `(":home@sina" ":replies@sina" ":mentions@sina"
+         ,@(when (or (string-match "tokyo" system-name)
+                     xwl-at-company? xwl-twitter-direct-accessible?)
+             '(":home@twitter" ":replies@twitter" ":direct_messages@twitter"))
+         ":home@douban"
+
+         ,@(when xwl-at-company?
+             '(":home@socialcast" ":public@socialcast"))
+
+         ,@(when twittering-initial-timeline-spec-string
+             twittering-initial-timeline-spec-string))
+       :test 'equal))
 
 (setq twittering-image-external-viewer-command
       (case system-type

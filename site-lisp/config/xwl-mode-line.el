@@ -64,13 +64,14 @@
 
   (setq gmail-notifier-timer-interval (* 30 60))
 
-  (add-hook 'gmail-notifier-new-mails-hook
-            (lambda ()
-              (xwl-notify "Gmail" (format "You've got %d new mails"
-                                          (length gmail-notifier-unread-entries)))
-              ;; (xwl-shell-command-asynchronously "say Lao-ban, ni you shee you-jan.")
-              ))
+  ;; (add-hook 'gmail-notifier-new-mails-hook
+  ;;           (lambda ()
+  ;;             (xwl-notify "Gmail" (format "You've got %d new mails"
+  ;;                                         (length gmail-notifier-unread-entries)))
+  ;;             ;; (xwl-shell-command-asynchronously "say Lao-ban, ni you shee you-jan.")
+  ;;             ))
 
+  (require 'gmail-notifier)
   (add-hook 'xwl-timers-hook 'gmail-notifier-start)
 
   )

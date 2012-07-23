@@ -111,6 +111,7 @@
 
 (setq save-abbrevs t)
 
+(setq abbrev-file-name "~/.emacs.d/.abbrev_defs")
 (when (file-exists-p abbrev-file-name)
   (quietly-read-abbrev-file))
 

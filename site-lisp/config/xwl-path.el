@@ -8,41 +8,41 @@
 
 (require 'cl)
 
-(setq xwl-site-lisp "~/.emacs.d/site-lisp")
+(setq xwl-emacs-top "~/.emacs.d/site-lisp/")
 
 (setq xwl-makefile-subdir-list
       (remove-if-not
        'file-exists-p
-       (mapcar (lambda (f) (concat xwl-site-lisp "/" f))
-               '("."
-                 "auto-complete"
-                 "debian"
-                 "dictionary-el"
-                 "haskell-mode-2.4"
-                 "qterm"
-                 "ruby"
-                 "slightly-modified"
-                 "twittering-mode"
-                 "wget-el"
-                 "emms/lisp"
-                 "bbdb-vcard"
-                 "nyan-mode"
-                 "magit"
+       (append
+        (mapcar (lambda (f) (concat xwl-emacs-top f))
+                '("."
+                  "auto-complete"
+                  "debian"
+                  "dictionary-el"
+                  "haskell-mode-2.4"
+                  "qterm"
+                  "ruby"
+                  "slightly-modified"
+                  "wget-el"
+                  "bbdb-vcard"
+                  "nyan-mode"
+                  "magit"
+        
+                  "xwl-elisp"
+                  "xwl-elisp/dashboard"
+                  "xwl-elisp/ga"
 
-                 "xwl-elisp"
-                 "xwl-elisp/dashboard"
-                 "xwl-elisp/ga"
-
-                 "config/autoload"
-                 ))))
-
+                  "config/autoload"
+                  "emms/lisp"
+                  "twittering-mode")))))
+  
 (mapc (lambda (path) (add-to-list 'load-path path))
       (append
        ;; essential
-       (list xwl-site-lisp
-             (concat xwl-site-lisp "/config")
+       (list xwl-emacs-top
+             (concat xwl-emacs-top "/config")
              ;; FIXME: byte-compile never stops?
-             (concat xwl-site-lisp "/xwl-elisp/wubi"))
+             (concat xwl-emacs-top "/xwl-elisp/wubi"))
        ;; others in site-lisp
        xwl-makefile-subdir-list
        ;; optional
@@ -60,6 +60,7 @@
              "~/etc"
 
              )))
+
 
 (setenv "INFOPATH"
         (mapconcat 'identity
