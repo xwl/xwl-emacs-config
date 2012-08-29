@@ -27,10 +27,20 @@
                   "bbdb-vcard"
                   "nyan-mode"
                   "magit"
-        
+
+                  "xwl/ga"
+                  "xwl/cal-china-x"
+                  "xwl/wubi"
+                  "xwl/finkinfo-mode"
+                  "xwl/easy-todo"
+                  "xwl/gmail-notifier"
+                  "xwl/less"
+                  "xwl/qml-mode"
+                  "xwl/graphviz-dot"
+                  "xwl/smart-operator"
+
                   "xwl-elisp"
                   "xwl-elisp/dashboard"
-                  "xwl-elisp/ga"
 
                   "config/autoload"
                   "emms/lisp"
@@ -42,7 +52,7 @@
        (list xwl-emacs-top
              (concat xwl-emacs-top "/config")
              ;; FIXME: byte-compile never stops?
-             (concat xwl-emacs-top "/xwl-elisp/wubi"))
+             (concat xwl-emacs-top "/xwl/wubi"))
        ;; others in site-lisp
        xwl-makefile-subdir-list
        ;; optional

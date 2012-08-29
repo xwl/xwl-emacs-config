@@ -143,7 +143,7 @@ point.  Especially useful for w32."
           "~/"
           "/sudo::/"
           ,(concat xwl-emacs-top "/config")
-          ,(concat xwl-emacs-top "/xwl-elisp")
+          ,(concat xwl-emacs-top "/xwl")
           "~/.notes"
 
           ,@(when xwl-w32?

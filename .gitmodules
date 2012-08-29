@@ -7,3 +7,33 @@
 [submodule "site-lisp/emms"]
 	path = site-lisp/emms
 	url = git://git.sv.gnu.org/emms.git
+[submodule "site-lisp/xwl/ga"]
+	path = site-lisp/xwl/ga
+	url = git@github.com:xwl/ga.git
+[submodule "site-lisp/xwl/cal-china-x"]
+	path = site-lisp/xwl/cal-china-x
+	url = git@github.com:xwl/cal-china-x.git
+[submodule "site-lisp/xwl/wubi"]
+	path = site-lisp/xwl/wubi
+	url = git@github.com:xwl/wubi.git
+[submodule "site-lisp/xwl/finkinfo-mode"]
+	path = site-lisp/xwl/finkinfo-mode
+	url = git@github.com:xwl/finkinfo-mode.git
+[submodule "site-lisp/xwl/easy-todo"]
+	path = site-lisp/xwl/easy-todo
+	url = git@github.com:xwl/easy-todo.git
+[submodule "site-lisp/xwl/gmail-notifier"]
+	path = site-lisp/xwl/gmail-notifier
+	url = git@github.com:xwl/gmail-notifier.git
+[submodule "site-lisp/xwl/less"]
+	path = site-lisp/xwl/less
+	url = git@github.com:xwl/less.git
+[submodule "site-lisp/xwl/qml-mode"]
+	path = site-lisp/xwl/qml-mode
+	url = git@github.com:xwl/qml-mode.git
+[submodule "site-lisp/xwl/graphviz-dot"]
+	path = site-lisp/xwl/graphviz-dot
+	url = git@github.com:xwl/graphviz-dot.git
+[submodule "site-lisp/xwl/smart-operator"]
+	path = site-lisp/xwl/smart-operator
+	url = git@github.com:xwl/smart-operator.git

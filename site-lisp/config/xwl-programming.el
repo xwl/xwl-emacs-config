@@ -809,6 +809,9 @@ If SCHEME?, `run-scheme'."
 ;; (autoload 'buffer-action-compile "buffer-action")
 ;; (autoload 'buffer-action-run "buffer-action")
 
+(setq xwl-cc (some 'executable-find '("clang" "gcc"))
+      xwl-c++ (some 'executable-find '("clang++" "g++")))
+
 (eval-after-load 'buffer-action
   '(progn
      (setq buffer-action-table
