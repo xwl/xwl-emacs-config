@@ -37,3 +37,9 @@
 [submodule "site-lisp/xwl/smart-operator"]
 	path = site-lisp/xwl/smart-operator
 	url = git@github.com:xwl/smart-operator.git
+[submodule "site-lisp/xwl/chicken-scheme-extras"]
+	path = site-lisp/xwl/chicken-scheme-extras
+	url = git@github.com:xwl/chicken-scheme-extras.git
+[submodule "site-lisp/xwl/dired-view"]
+	path = site-lisp/xwl/dired-view
+	url = git@github.com:xwl/dired-view.git
