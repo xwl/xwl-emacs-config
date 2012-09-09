@@ -62,7 +62,8 @@
                   (interactive)
                   (require 'xwl-twittering)
                   (xwl-switch-or-create
-                   (car twittering-initial-timeline-spec-string)
+                     (or (ignore-errors (caar twittering-unread-status-info))
+                         (car twittering-initial-timeline-spec-string))
                    (lambda ()
                      (interactive)
                      (twit)
@@ -371,8 +372,8 @@
      (define-key dired-mode-map (kbd "M-o") nil)
      ))
 
-(global-set-key (kbd "C-x o") 'xwl-forward-char)
-(global-set-key (kbd "C-x O") 'xwl-backward-char)
+(global-set-key (kbd "C-j") 'xwl-forward-char)
+(global-set-key (kbd "M-j") 'xwl-backward-char)
 
 (global-set-key (kbd "C-c m u") 'twittering-update-status-interactive)
 
