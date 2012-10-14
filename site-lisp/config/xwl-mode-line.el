@@ -127,9 +127,9 @@
               "\n" " " (xwl-fortune-favorites
                         "~/.notes/favorites_now")))))
 
-(when (file-exists-p "~/.notes/favorites_now")
-  (setq xwl-frame-fortune-of-day-timer
-        (run-at-time 0 600 'xwl-frame-fortune-of-day)))
+;; (when (file-exists-p "~/.notes/favorites_now")
+;;   (setq xwl-frame-fortune-of-day-timer
+;;         (run-at-time 0 600 'xwl-frame-fortune-of-day)))
 
 
 (provide 'xwl-mode-line)
