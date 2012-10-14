@@ -228,6 +228,60 @@ If EXTENSIONS is given, only match these."
 
 ;; )
 
+;;; iCalendar export
+
+;; org-export-icalendar-this-file
+
+(defun xwl-calendar-convert-locale-from-chinese (str)
+  "Convert chinese locale in STR to english."
+  (when (string-match "\
+\\([[:space:]]*\\([0-9]+\\)[[:space:]]*年\\)?\
+\\([[:space:]]*\\([0-9]+\\)[[:space:]]*月\\)?\
+\[[:space:]]*\\([0-9]+\\)[[:space:]]*日\
+\\([[:space:]]*周\\([一二三四五六日]\\)\\)?\
+\\([[:space:]]*\\([0-9][0-9]?:[0-9][0-9]?\\)[[:space:]]*\\([apAP][mM]\\)?\\)?"
+                      str)
+    (let* ((matches (match-data))
+           (year (if (nth 4 matches)
+                     (substring str (nth 4 matches) (nth 5 matches))
+                   (format-time-string "%Y" (current-time))))
+           (month (if (nth 8 matches)
+                      (substring str (nth 8 matches) (nth 9 matches))
+                    (format-time-string "%m" (current-time))))                 
+           (day (if (nth 10 matches)
+                    (substring str (nth 10 matches) (nth 11 matches))
+                  (format-time-string "%d" (current-time))))
+           week-day
+           (time (when (nth 18 matches)
+                   (substring str (nth 18 matches) (nth 19 matches)))))
+          
+      (when (nth 20 matches) 
+        (setq time (concat time " " (substring str (nth 20 matches) (nth 21 matches)))))
+
+      (setq month (format "%02d" (string-to-number month)))
+      (setq day (format "%02d" (string-to-number day)))
+      (setq week-day (calendar-day-name
+                      (mapcar 'string-to-number (list year month day))))
+
+      (replace-match
+       (concat " <"
+               (mapconcat 'identity (list year month day) "-")
+               " " week-day
+               (if time (concat " " time) "")
+               "> ")
+       nil nil str))))
+
+(defun xwl-calendar-convert-locale-from-chinese-in-buffer ()
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (while (not (eobp))
+      (let ((str (buffer-substring (line-beginning-position) (line-end-position))))
+        (delete-region (line-beginning-position) (line-end-position))
+        (insert (xwl-calendar-convert-locale-from-chinese str))
+        (forward-line 1)))))
+
+
 (provide 'xwl-org)
 
 ;;; xwl-org.el ends here
