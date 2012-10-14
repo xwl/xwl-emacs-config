@@ -32,7 +32,7 @@
       twittering-use-native-retweet t)
 
 (setq twittering-new-tweets-count-excluding-me t
-      twittering-new-tweets-count-excluding-replies-in-home t
+      twittering-new-tweets-count-excluding-my-replies t
       twittering-timer-interval 300
       twittering-use-master-password t
       )
@@ -159,19 +159,22 @@
 (setq twittering-tinyurl-service 'toly)
 
 (setq twittering-initial-timeline-spec-string
-      (remove-duplicates 
-       `(":home@sina" ":replies@sina" ":mentions@sina"
-         ,@(when (or (string-match "tokyo" system-name)
-                     xwl-at-company? xwl-twitter-direct-accessible?)
-             '(":home@twitter" ":replies@twitter" ":direct_messages@twitter"))
-         ":home@douban"
+      (sort 
+       (remove-duplicates 
+        `(":home@sina"
+          ":replies@sina" ":mentions@sina"
+          ,@(when (or (string-match "tokyo" system-name)
+                      xwl-at-company? xwl-twitter-direct-accessible?)
+              '(":home@twitter" ":replies@twitter" ":direct_messages@twitter"))
+          ":home@douban"
 
-         ,@(when xwl-at-company?
-             '(":home@socialcast" ":public@socialcast"))
+          ,@(when xwl-at-company?
+              '(":home@socialcast" ":public@socialcast"))
 
-         ,@(when twittering-initial-timeline-spec-string
-             twittering-initial-timeline-spec-string))
-       :test 'equal))
+          ,@(when twittering-initial-timeline-spec-string
+              twittering-initial-timeline-spec-string))
+        :test 'equal)
+       '(lambda (a b) (string-match ":home" a))))
 
 (setq twittering-image-external-viewer-command
       (case system-type

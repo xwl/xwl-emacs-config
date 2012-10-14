@@ -809,9 +809,6 @@ If SCHEME?, `run-scheme'."
 ;; (autoload 'buffer-action-compile "buffer-action")
 ;; (autoload 'buffer-action-run "buffer-action")
 
-(setq xwl-cc (some 'executable-find '("clang" "gcc"))
-      xwl-c++ (some 'executable-find '("clang++" "g++")))
-
 (eval-after-load 'buffer-action
   '(progn
      (setq buffer-action-table
@@ -862,9 +859,8 @@ If SCHEME?, `run-scheme'."
                           (caar (directory-files-and-attributes "." nil "\\.pro$" t))))))
               )
 
-             (c++-mode "g++ -O2 \"%f\" -lm -I/sw/include -o %n" ,@(if (eq system-type 'windows-nt)
-                                                                      '("%n.exe" "%n.exe")
-                                                                    '("%n" "./%n")))
+             (c++-mode ,(concat buffer-action-c++ " -O2 \"%f\" -lm -I/sw/include -o %n")
+                       ,@(if (eq system-type 'windows-nt) '("%n.exe" "%n.exe") '("%n" "./%n")))
 
              (haskell-mode "ghc --make '%f'" "%n" "./%n")
              

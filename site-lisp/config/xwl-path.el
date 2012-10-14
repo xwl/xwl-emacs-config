@@ -38,6 +38,8 @@
                   "xwl/qml-mode"
                   "xwl/graphviz-dot"
                   "xwl/smart-operator"
+                  "xwl/chicken-scheme-extras"
+                  "xwl/dired-view"
 
                   "xwl-elisp"
                   "xwl-elisp/dashboard"
