@@ -1,6 +1,6 @@
 ;; xwl-main.el --- Main entry for The One True Editor
 
-;; Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011 William Xu
+;; Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2013 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -54,6 +54,12 @@
 (load "~/.emacs.d/site-lisp/config/xwl-path.el")
 
 ;;; Load at startup
+
+(unless (file-exists-p "~/.emacs.d/site-lisp/xwl-autoloads.el")
+  (with-current-buffer (find-file-noselect
+                      "~/.emacs.d/site-lisp/xwl-makefile.el")
+  (eval-buffer)
+  (xwl-makefile-all)))
 
 (require 'xwl-autoloads)
 (require 'xwl-convenience)
