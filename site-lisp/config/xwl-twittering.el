@@ -1,6 +1,6 @@
 ;;; xwl-twittering.el --- twittering-mode
 
-;; Copyright (C) 2010, 2011, 2012  William Xu
+;; Copyright (C) 2010, 2011, 2012, 2013  William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 ;; Keywords: comm
@@ -149,7 +149,11 @@
                              socialcast))
           
                ,@others)))
-     ))
+
+     (defadvice twittering-edit-post-status (after play-sound activate)
+       (xwl-shell-command-asynchronously "mplayer ~/.emacs.d/sound/roar.au"))
+     
+       ))
 
 ;; FIXME: in 23.2, who the hell autoload create-animated-image?? this exists in
 ;; 24 only.
@@ -171,7 +175,7 @@
           ,@(when xwl-at-company?
               '(":home@socialcast" ":public@socialcast"))
 
-          ,@(when twittering-initial-timeline-spec-string
+          ,@(when (boundp 'twittering-initial-timeline-spec-string)
               twittering-initial-timeline-spec-string))
         :test 'equal)
        '(lambda (a b) (string-match ":home" a))))
