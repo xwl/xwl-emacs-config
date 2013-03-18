@@ -1,6 +1,6 @@
 ;;; xwl-help.el --- Getting help
 
-;; Copyright (C) 2008, 2010, 2011 William Xu
+;; Copyright (C) 2008, 2010, 2011, 2013 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -55,8 +55,13 @@
      (define-key help-mode-map (kbd "l") 'help-go-back)
      (define-key help-mode-map (kbd "L") 'locate)
      (define-key help-mode-map "q" 'delete-window)
+     ))
+
+(eval-after-load 'view-mode
+  '(progn
      (define-key view-mode-map "q" 'delete-window)
      ))
+
 
 
 ;;; woman & man
