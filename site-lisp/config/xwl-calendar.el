@@ -1,6 +1,6 @@
 ;;; xwl-calendar.el --- calendar related stuffs
 
-;; Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012, 2013 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -155,6 +155,8 @@
 (define-key calendar-mode-map (kbd "k") 'calendar-backward-week)
 (define-key calendar-mode-map (kbd "l") 'calendar-forward-day)
 (define-key calendar-mode-map (kbd "h") 'calendar-backward-day)
+
+(define-key calendar-mode-map (kbd "q") 'delete-window)
 
 ;; (add-hook 'today-visible-calendar-hook 'calendar-star-date)
 
