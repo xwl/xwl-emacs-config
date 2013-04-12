@@ -384,6 +384,21 @@ Thus generate a TAGs file."
                     )
                (ewoc-delete vc-ewoc crt))
              (setq crt prev)))))
+
+     ;; always diff current file only in vc-dir.  
+     (define-key vc-dir-mode-map (kbd "=") 'xwl-vc-dir-diff)
+
+     (defadvice vc-dir-marked-files (around xwl-check-current-file-only)
+       nil)
+
+     (defun xwl-vc-dir-diff ()
+       "Like `vc-diff', but always diff current file only."
+       (interactive)
+       (ad-activate 'vc-dir-marked-files)
+       (unwind-protect
+           (call-interactively 'vc-diff)
+         (ad-deactivate 'vc-dir-marked-files)))
+
      ))
 
 (eval-after-load 'vc
@@ -408,6 +423,36 @@ Thus generate a TAGs file."
      ))
 
 (setq magit-omit-untracked-dir-contents t)
+
+(eval-after-load 'vc-git
+  '(progn
+     (defun vc-git-print-log (files buffer &optional shortlog start-revision limit)
+  "Get change log associated with FILES.
+Note that using SHORTLOG requires at least Git version 1.5.6,
+for the --graph option."
+  (let ((coding-system-for-read vc-git-commits-coding-system))
+    ;; `vc-do-command' creates the buffer, but we need it before running
+    ;; the command.
+    (vc-setup-buffer buffer)
+    ;; If the buffer exists from a previous invocation it might be
+    ;; read-only.
+    (let ((inhibit-read-only t))
+      (with-current-buffer
+          buffer
+	(apply 'vc-git-command buffer
+	       'async files
+	       (append
+		'("log" "--no-color"); "--follow") ; xwl
+		(when shortlog
+		  `("--graph" "--decorate" "--date=short" "--follow"
+                    ,(format "--pretty=tformat:%s"
+			     (car vc-git-root-log-format))
+		    "--abbrev-commit"))
+		(when limit (list "-n" (format "%s" limit)))
+		(when start-revision (list start-revision))
+		'("--")))))))
+   
+   ))
 
 ;;; skeletons
 ;; -----------
@@ -702,6 +747,8 @@ If SCHEME?, `run-scheme'."
     (progn
       (run-scsh nil)
       (rename-buffer "*scsh*"))))
+
+(add-to-list 'auto-mode-alist '("\\.sx$" . scheme-mode))
 
 
 ;;; haskell
@@ -1201,6 +1248,17 @@ Useful for packing c/c++ functions with one line or empty body."
      (global-set-key (kbd "C-9") 'gtags-find-any)
      (global-set-key (kbd "C-8") 'gtags-find-any-reference)
      (global-set-key (kbd "C-7") 'gtags-find-text)
+
+     ;; (global-set-key (kbd "<mouse-2>") '(lambda ()
+     ;;                                      (interactive)
+     ;;                                      ;; FIXME:  how to jump to mouse position.  
+     ;;                                      ;; (call-interactively 'mouse-drag-region)
+     ;;                                      (call-interactively 'gtags-find-any)))
+
+     ;; (global-set-key (kbd "<mouse-3>") '(lambda ()
+     ;;                                      (interactive)                                          
+     ;;                                      ;; (goto-char (mouse-position))
+     ;;                                      (call-interactively 'gtags-pop-stack)))
 
      (add-hook 'gtags-select-mode-hook (lambda () (hl-line-mode 1)))
 

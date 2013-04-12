@@ -58,9 +58,9 @@
                          `("Monaco" "WenQuanYi Micro Hei" "WenQuanYi Micro Hei"))
                         ;; ((string-match "beleod" system-name)
                         ;;  '("DejaVu Sans Mono" "SimSun" "SimSun"))
-                        ((string-match "becoresw" system-name)
-                         '("lucidatypewriter" "fangsong ti" "fangsong ti"))
-                        ))))
+                        ((string-match "be" system-name)
+                         ;; '("lucidatypewriter" "fangsong ti" "fangsong ti"))
+                         '("DejaVu Sans Mono" "SimSun" "SimSun"))))))
        (fonts (cdr (assoc window-system all-fonts)))
        (en (format "%s:pixelsize=%d" (nth 0 fonts) en-font-size))
        (cn (nth 1 fonts))
@@ -88,9 +88,9 @@
      (#x2000 #x206f)                    ; General Punctuation
      )))
 
-(when (string-match "be" system-name)
-  (set-frame-font "-b&h-lucidatypewriter-medium-r-normal-sans-14-135-75-75-m-90-iso8859-1")
-  )
+;; (when (string-match "be" system-name)
+;;   (set-frame-font "-b&h-lucidatypewriter-medium-r-normal-sans-14-135-75-75-m-90-iso8859-1")
+;;   )
 
 ;;; Misc
 
@@ -98,7 +98,7 @@
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
-(scroll-bar-mode 1)
+(scroll-bar-mode -1)
 (mouse-wheel-mode 1)
 
 (setq woman-use-own-frame nil)

@@ -437,9 +437,7 @@
   ;; On w32: `emacsclient.exe --server-file ~\.emacs.d\server\server -n %*'
   (server-start)
 
-  (when (executable-find "fortune-zh")
-    (setq xwl-idle-timer
-          (run-with-idle-timer 300 t 'xwl-run-when-idle-hook)))
+  (run-with-idle-timer 300 t 'xwl-run-when-idle-hook)
 
   ;; (run-with-timer 0 86400 'xwl-running-daily) ; dialy stuffs
   ;; (xwl-weather-update)
@@ -502,7 +500,8 @@
                 "pbm" "pgm" "ppm" "pnm")))
 
 (setq xwl-run-when-idle-hook nil)  ; Functions to run when Emacs is idle.
-(add-hook 'xwl-run-when-idle-hook 'xwl-fortune-of-the-day)
+(when (executable-find "fortune-zh")
+  (add-hook 'xwl-run-when-idle-hook 'xwl-fortune-of-the-day))
 
 (eval-after-load 'image-mode
   '(progn
@@ -552,6 +551,7 @@
   (interactive)
   (next-line 1)
   (occur-mode-goto-occurrence)
+  (hl-line-highlight)
   (other-window 1))
 
 ;; (eval-after-load 'replace
@@ -1006,7 +1006,8 @@ prompting.  If file is a directory perform a `find-file' on it."
          ad-do-it))
      ))
 
-(run-with-idle-timer 600 t (lambda () (command-execute (kbd "<f8>"))))
+(add-hook 'xwl-run-when-idle-hook 'recentf-save-list)
+(add-hook 'xwl-run-when-idle-hook (lambda () (command-execute (kbd "<f8>"))))
 
 (provide 'xwl-misc)
 

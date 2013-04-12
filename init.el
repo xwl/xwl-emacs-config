@@ -1,9 +1,9 @@
 ;; init.el --- journey of emacs starts from here...
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(LaTeX-section-hook (quote (LaTeX-section-heading LaTeX-section-section)))
  '(Man-width 78)
  '(bbdb-update-records-mode (quote (quote searching)))
@@ -31,16 +31,18 @@
  '(ns-command-modifier (quote meta))
  '(safe-local-variable-values (quote ((line-spacing . 5) (flyspell-mode . t) (longlines-mode . t))))
  '(thinks-from (quote bottom-diagonal)))
+
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(diary ((((min-colors 88) (class color) (background light)) (:background "yellow"))))
  '(emms-playlist-selected-face ((t (:background "blue4" :foreground "Yellow"))))
  '(emms-playlist-track-face ((t nil)))
  '(erc-input-face ((t (:foreground "magenta3"))))
  '(erc-keyword-face ((t (:foreground "green" :weight bold))))
+ '(font-lock-builtin-face ((t (:foreground "royal blue" :weight light))))
  '(font-lock-constant-face ((((class color) (min-colors 88) (background light)) (:foreground "magenta"))))
  '(font-lock-preprocessor-face ((t (:foreground "RoyalBlue2"))))
  '(font-lock-string-face ((((class color) (min-colors 88) (background light)) (:foreground "green4"))))

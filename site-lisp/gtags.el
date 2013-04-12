@@ -130,7 +130,7 @@
   "Stack for tag browsing.")
 (defvar gtags-history-list nil
   "Gtags history list.")
-(defconst gtags-symbol-regexp  "[A-Za-z_\"][A-Za-z_0-9.\"]*"
+(defconst gtags-symbol-regexp  "[A-Za-z_\"][A-Za-z_0-9.\"><]*"
   "Regexp matching tag name.")
 (defconst gtags-definition-regexp "#[ \t]*define[ \t]+\\|ENTRY(\\|ALTENTRY("
   "Regexp matching tag definition name.")
@@ -231,7 +231,7 @@
       `(tagname . ,(car token)))))
 
 (defun gtags-current-token ()
-  (let ((allowed "[0-9A-Za-z_.\"]")
+  (let ((allowed "[0-9A-Za-z_.\"><]")
         (spaces "[ \t]")
         dot-at-back)          ; where is the dot compared with current position.
     (save-excursion
