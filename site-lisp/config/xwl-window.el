@@ -1,6 +1,6 @@
 ;;; xwl-window.el --- GUI window related config
 
-;; Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012, 2013 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -68,8 +68,8 @@
 
   ;; This will decide default font size.
   (set-frame-font en)
-  ;; Fallback font
-  (set-fontset-font t 'unicode "Arial Unicode MS")
+  ;; ;; Fallback font
+  ;; (set-fontset-font t 'unicode "Arial Unicode MS")
   ;; Font for chinese characters
   (mapc
    (lambda (range)

@@ -252,7 +252,7 @@
     (cond
      ;; nnfolder:blog - send mails as text/html.
      ((string-match "nnfolder:blog" group)
-      (smart-operator-mode -1)
+      (electric-spacing-mode -1)
       (save-excursion
         (forward-paragraph)
         (forward-line)

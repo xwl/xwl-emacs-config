@@ -1,6 +1,6 @@
 ;;; xwl-misc.el --- miscellaneous
 
-;; Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012, 2013 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -248,14 +248,14 @@
 
 (setq mac-pass-command-to-system nil)
 
-(require 'smart-operator)
+(require 'electric-spacing)
 
 (defun xwl-text-mode-hook ()
   (auto-compression-mode 1)
   (abbrev-mode 1)
   ;; (flyspell-mode 1)
 
-  (smart-operator-mode 1)
+  (electric-spacing-mode 1)
   (local-unset-key (kbd "."))
   ;; (local-set-key (kbd "M-S") 'wordnet-search)
   (local-set-key (kbd "M-s") 'dictionary-search)
@@ -721,7 +721,7 @@ passphrase cache or user."
      (define-key ac-completing-map "\M-p" 'ac-previous)
      ))
 
-(add-hook 'log-edit-mode-hook (lambda () (smart-operator-mode -1)))
+(add-hook 'log-edit-mode-hook (lambda () (electric-spacing-mode -1)))
 
 (add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
 
@@ -1005,6 +1005,8 @@ prompting.  If file is a directory perform a `find-file' on it."
        (let ((inhibit-read-only t))
          ad-do-it))
      ))
+
+(run-with-idle-timer 600 t (lambda () (command-execute (kbd "<f8>"))))
 
 (provide 'xwl-misc)
 

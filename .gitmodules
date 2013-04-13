@@ -43,3 +43,6 @@
 [submodule "site-lisp/xwl/dired-view"]
 	path = site-lisp/xwl/dired-view
 	url = git@github.com:xwl/dired-view.git
+[submodule "site-lisp/xwl/buffer-action"]
+	path = site-lisp/xwl/buffer-action
+	url = git@github.com:xwl/buffer-action

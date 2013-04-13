@@ -57,7 +57,7 @@
   ;; (xwl-hs-minor-mode-hook)
   ;; (hide-ifdef-mode 1)
   (auto-fill-mode -1)
-  (smart-operator-mode 1)
+  (electric-spacing-mode 1)
   (abbrev-mode 1)
   (cwarn-mode 1)
    (which-func-mode 1)
@@ -97,8 +97,8 @@
                              (if (save-excursion
                                    (backward-word)
                                    (memq font-lock-keyword-face (text-properties-at (point))))
-                                 (smart-operator-insert "(")
-                               (smart-operator-insert "(" t))))
+                                 (electric-spacing-insert "(")
+                               (electric-spacing-insert "(" t))))
         (local-set-key ")" (lambda ()
                              (interactive)
                              (just-one-space)
@@ -216,7 +216,7 @@ Thus generate a TAGs file."
 ;;; python
 
 (defun xwl-python-mode-hook ()
-  (smart-operator-mode 1)
+  (electric-spacing-mode 1)
   ;; (local-unset-key (kbd "."))
   )
 
@@ -289,8 +289,8 @@ Thus generate a TAGs file."
              (insert ";")))
          (comint-send-input)))
 
-     (add-hook 'sql-mode-hook 'smart-operator-mode-on)
-     (add-hook 'sql-interactive-mode-hook 'smart-operator-mode-on)
+     (add-hook 'sql-mode-hook 'electric-spacing-mode)
+     (add-hook 'sql-interactive-mode-hook 'electric-spacing-mode)
      ))
 
 (eval-after-load "xwl-private"
@@ -602,7 +602,7 @@ yacc source files."
 (mapc (lambda (hook)
         (mapc (lambda (func)
                 (add-hook hook func))
-              '(turn-on-eldoc-mode xwl-lisp-mode-hook smart-operator-mode-on)))
+              '(turn-on-eldoc-mode xwl-lisp-mode-hook electric-spacing-mode)))
       '(lisp-mode-hook emacs-lisp-mode-hook))
 
 ;;; scheme
@@ -622,7 +622,7 @@ yacc source files."
   (local-set-key (kbd "C-x C-b") 'xwl-scheme-send-buffer))
 
 (add-hook 'scheme-mode-hook 'xwl-scheme-mode-hook)
-(add-hook 'scheme-mode-hook 'smart-operator-mode-on)
+(add-hook 'scheme-mode-hook 'electric-spacing-mode)
 
 (defun xwl-scheme-send-buffer ()
   (interactive)
@@ -719,7 +719,7 @@ If SCHEME?, `run-scheme'."
   (turn-on-haskell-simple-indent)
 
   ;; (glasses-mode 1)
-  (smart-operator-mode)
+  (electric-spacing-mode)
 
   (local-set-key (kbd "RET")
                  (lambda ()
@@ -736,7 +736,7 @@ If SCHEME?, `run-scheme'."
 
 (defun xwl-inferior-haskell-mode-hook ()
   ;; (glasses-mode 1)
-  (smart-operator-mode))
+  (electric-spacing-mode))
 
 (add-hook 'haskell-mode-hook 'xwl-haskell-mode-hook)
 (add-hook 'inferior-haskell-mode-hook 'xwl-inferior-haskell-mode-hook)
@@ -912,7 +912,7 @@ If SCHEME?, `run-scheme'."
 
 ;; (eval-after-load "cperl-mode"
 ;;   '(progn
-;;      (add-hook 'cperl-mode-hook 'smart-operator-mode-on)
+;;      (add-hook 'cperl-mode-hook 'electric-spacing-mode)
 ;;      (define-key cperl-mode-map (kbd "C-c <f1> f") 'cperl-perldoc)
 ;;      ))
 
@@ -970,7 +970,7 @@ If SCHEME?, `run-scheme'."
 
 ;;; sgml, html, xml, css
 
-(add-hook 'html-mode-hook (lambda () (smart-operator-mode -1)))
+(add-hook 'html-mode-hook (lambda () (electric-spacing-mode -1)))
 (add-hook 'css-mode-hook 'rainbow-turn-on)
 
 ;; dvc

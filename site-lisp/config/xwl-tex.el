@@ -36,7 +36,7 @@
 (setq-default TeX-master nil)
 
 (defun xwl-latex-mode-hook ()
-  (smart-operator-mode 1)
+  (electric-spacing-mode 1)
 
   (setq ispell-parser 'tex)
   (flyspell-mode 1)

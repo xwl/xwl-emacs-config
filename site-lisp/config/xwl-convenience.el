@@ -1,6 +1,6 @@
 ;;; xwl-convenience.el --- Must have cookies, keep it small and stable
 
-;; Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012, 2013 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -222,7 +222,7 @@
 ;; (global-set-key (kbd "C-S-v") 'scroll-up)
 ;; (global-set-key (kbd "M-V") 'scroll-down)
 
-;; (setq-default tab-width 4)
+(setq-default tab-width 4)
 
 ;; (transient-mark-mode -1)
 

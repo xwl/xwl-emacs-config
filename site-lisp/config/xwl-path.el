@@ -1,6 +1,6 @@
 ;;; xwl-path.el --- path setup
 
-;; Copyright (C) 2009, 2010, 2011, 2012 William Xu
+;; Copyright (C) 2009, 2010, 2011, 2012, 2013 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -29,6 +29,7 @@
                   "magit"
 
                   "xwl/ga"
+                  "xwl/buffer-action"
                   "xwl/cal-china-x"
                   "xwl/wubi"
                   "xwl/finkinfo-mode"
@@ -37,7 +38,7 @@
                   "xwl/less"
                   "xwl/qml-mode"
                   "xwl/graphviz-dot"
-                  "xwl/smart-operator"
+                  "xwl/electric-spacing"
                   "xwl/chicken-scheme-extras"
                   "xwl/dired-view"
 
