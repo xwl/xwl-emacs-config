@@ -34,9 +34,6 @@
 [submodule "site-lisp/xwl/graphviz-dot"]
 	path = site-lisp/xwl/graphviz-dot
 	url = git@github.com:xwl/graphviz-dot.git
-[submodule "site-lisp/xwl/smart-operator"]
-	path = site-lisp/xwl/smart-operator
-	url = git@github.com:xwl/smart-operator.git
 [submodule "site-lisp/xwl/chicken-scheme-extras"]
 	path = site-lisp/xwl/chicken-scheme-extras
 	url = git@github.com:xwl/chicken-scheme-extras.git
@@ -46,3 +43,6 @@
 [submodule "site-lisp/xwl/buffer-action"]
 	path = site-lisp/xwl/buffer-action
 	url = git@github.com:xwl/buffer-action
+[submodule "site-lisp/xwl/electric-spacing"]
+	path = site-lisp/xwl/electric-spacing
+	url = git@github.com:xwl/electric-spacing
