@@ -1,6 +1,6 @@
 ;;; xwl-makefile.el --- For Makefile                -*- emacs-lisp -*-
 
-;; Copyright (C) 2009, 2010, 2011 William Xu
+;; Copyright (C) 2009, 2010, 2011, 2013 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 ;; Version: 0.1
@@ -42,6 +42,10 @@
 
 ;;;###autoload
 (defun xwl-makefile-all ()
+  (unless (boundp 'global-less-minor-mode)
+    (setq global-less-minor-mode nil)
+    (defun global-less-minor-mode (dummy)))
+
   (let ((less-p global-less-minor-mode))
     (global-less-minor-mode -1)
     (xwl-makefile-ensure-directory)
