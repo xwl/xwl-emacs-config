@@ -62,3 +62,7 @@
 	path = site-lisp/xwl/electric-spacing
 	url = git@github.com:xwl/electric-spacing
     ignore = untracked      
+[submodule "site-lisp/magit"]
+	path = site-lisp/magit
+	url = git://github.com/magit/magit.git
+    ignore = untracked      
