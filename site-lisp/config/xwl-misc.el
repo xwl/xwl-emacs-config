@@ -435,7 +435,8 @@
   ;; (setq display-time-mail-file 'no-check)
 
   ;; On w32: `emacsclient.exe --server-file ~\.emacs.d\server\server -n %*'
-  (server-start)
+  (unless (server-running-p)
+    (server-start))
 
   (run-with-idle-timer 300 t 'xwl-run-when-idle-hook)
 
@@ -1008,6 +1009,11 @@ prompting.  If file is a directory perform a `find-file' on it."
 
 (add-hook 'xwl-run-when-idle-hook 'recentf-save-list)
 (add-hook 'xwl-run-when-idle-hook (lambda () (command-execute (kbd "<f8>"))))
+
+(when (daemonp)
+  (global-set-key (kbd "C-x C-c") 'delete-frame)
+
+  (xwl-after-init-hook))
 
 
 (provide 'xwl-misc)

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+emacs -Q --daemon && emacsclient -t -e "(load \"~/.emacs.d/init.el\")"

@@ -198,8 +198,8 @@
 (global-less-minor-mode 1)
 
 (defadvice save-buffers-kill-terminal (around disable-less activate)
-  (global-less-minor-mode -1)
-  ad-do-it)
+  (let ((global-less-minor-mode nil))
+    ad-do-it))
 
 ;; (setq cua-remap-control-v nil)
 

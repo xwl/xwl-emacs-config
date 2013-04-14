@@ -7,5 +7,3 @@ fi
 
 git config --global core.gitproxy `pwd`/socks5proxy
 git config --global http.proxy $http_proxy
-
-export GIT_SSH=`pwd`/socks5proxy_ssh
