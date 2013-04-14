@@ -1009,6 +1009,7 @@ prompting.  If file is a directory perform a `find-file' on it."
 (add-hook 'xwl-run-when-idle-hook 'recentf-save-list)
 (add-hook 'xwl-run-when-idle-hook (lambda () (command-execute (kbd "<f8>"))))
 
+
 (provide 'xwl-misc)
 
 ;;; Local Variables: ***

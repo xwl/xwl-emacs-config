@@ -1244,6 +1244,19 @@ Useful for packing c/c++ functions with one line or empty body."
      (xwl-advice-gtags-for-large-projects gtags-find-function-reference)
      (xwl-advice-gtags-for-large-projects gtags-find-symbol-reference)
 
+     (define-key gtags-mode-map (kbd "C-c C-b") 'gtags-pop-stack)
+     (define-key gtags-mode-map (kbd "C-c C-f") 'gtags-find-any)
+     (define-key gtags-mode-map (kbd "C-c C-r") 'gtags-find-any-reference)
+     
+     (define-key gtags-select-mode-map (kbd "C-c C-b") 'gtags-pop-stack)
+     (define-key gtags-select-mode-map (kbd "C-c C-f") 'gtags-find-any)
+     (define-key gtags-select-mode-map (kbd "C-c C-r") 'gtags-find-any-reference)
+     
+     ;; (global-set-key (kbd "C-0") 'gtags-pop-stack)
+     ;; (global-set-key (kbd "C-9") 'gtags-find-any)
+     ;; (global-set-key (kbd "C-8") 'gtags-find-any-reference)
+     ;; (global-set-key (kbd "C-7") 'gtags-find-text)
+     
      (global-set-key (kbd "C-0") 'gtags-pop-stack)
      (global-set-key (kbd "C-9") 'gtags-find-any)
      (global-set-key (kbd "C-8") 'gtags-find-any-reference)
