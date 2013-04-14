@@ -1,48 +1,64 @@
 [submodule "site-lisp/xwl-elisp"]
 	path = site-lisp/xwl-elisp
 	url = git@github.com:xwl/xwl-elisp.git
+    ignore = untracked      
 [submodule "site-lisp/twittering-mode"]
 	path = site-lisp/twittering-mode
 	url = git@github.com:xwl/twittering-mode.git
+    ignore = untracked
 [submodule "site-lisp/emms"]
 	path = site-lisp/emms
 	url = git://git.sv.gnu.org/emms.git
+    ignore = untracked     
 [submodule "site-lisp/xwl/ga"]
 	path = site-lisp/xwl/ga
 	url = git@github.com:xwl/ga.git
+    ignore = untracked      
 [submodule "site-lisp/xwl/cal-china-x"]
 	path = site-lisp/xwl/cal-china-x
 	url = git@github.com:xwl/cal-china-x.git
+    ignore = untracked
 [submodule "site-lisp/xwl/wubi"]
 	path = site-lisp/xwl/wubi
 	url = git@github.com:xwl/wubi.git
+    ignore = untracked
 [submodule "site-lisp/xwl/finkinfo-mode"]
 	path = site-lisp/xwl/finkinfo-mode
 	url = git@github.com:xwl/finkinfo-mode.git
+    ignore = untracked
 [submodule "site-lisp/xwl/easy-todo"]
 	path = site-lisp/xwl/easy-todo
 	url = git@github.com:xwl/easy-todo.git
+    ignore = untracked
 [submodule "site-lisp/xwl/gmail-notifier"]
 	path = site-lisp/xwl/gmail-notifier
 	url = git@github.com:xwl/gmail-notifier.git
+    ignore = untracked
 [submodule "site-lisp/xwl/less"]
 	path = site-lisp/xwl/less
 	url = git@github.com:xwl/less.git
+    ignore = untracked
 [submodule "site-lisp/xwl/qml-mode"]
 	path = site-lisp/xwl/qml-mode
 	url = git@github.com:xwl/qml-mode.git
+    ignore = untracked
 [submodule "site-lisp/xwl/graphviz-dot"]
 	path = site-lisp/xwl/graphviz-dot
 	url = git@github.com:xwl/graphviz-dot.git
+    ignore = untracked
 [submodule "site-lisp/xwl/chicken-scheme-extras"]
 	path = site-lisp/xwl/chicken-scheme-extras
 	url = git@github.com:xwl/chicken-scheme-extras.git
+    ignore = untracked
 [submodule "site-lisp/xwl/dired-view"]
 	path = site-lisp/xwl/dired-view
 	url = git@github.com:xwl/dired-view.git
+    ignore = untracked
 [submodule "site-lisp/xwl/buffer-action"]
 	path = site-lisp/xwl/buffer-action
 	url = git@github.com:xwl/buffer-action
+    ignore = untracked
 [submodule "site-lisp/xwl/electric-spacing"]
 	path = site-lisp/xwl/electric-spacing
 	url = git@github.com:xwl/electric-spacing
+    ignore = untracked      
