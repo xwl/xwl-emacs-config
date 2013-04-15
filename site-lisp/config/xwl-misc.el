@@ -165,9 +165,9 @@
   (interactive)
   (message
    (ansi-color-filter-apply
-    (shell-command-to-string "fortune-zh"))))
+    (shell-command-to-string "fortune-zh  2>/dev/null || fortune"))))
 
-(global-set-key (kbd "C-c m f") 'xwl-fortune-of-the-day)
+(global-set-key (kbd "C-c m F") 'xwl-fortune-of-the-day)
 
 ;; webjump
 (global-set-key (kbd "C-c m w") 'webjump)
@@ -501,7 +501,8 @@
                 "pbm" "pgm" "ppm" "pnm")))
 
 (setq xwl-run-when-idle-hook nil)  ; Functions to run when Emacs is idle.
-(when (executable-find "fortune-zh")
+(when (or (executable-find "fortune-zh")
+          (executable-find "fortune"))
   (add-hook 'xwl-run-when-idle-hook 'xwl-fortune-of-the-day))
 
 (eval-after-load 'image-mode

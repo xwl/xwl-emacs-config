@@ -138,7 +138,6 @@
 ;; (global-set-key (kbd "C-c m m") 'apply-macro-to-region-lines)
 (global-set-key (kbd "C-c m q") 'query-replace-regexp)
 (global-set-key (kbd "C-c m h") 'htmlize-file)
-(global-set-key (kbd "C-c m v") 'visit-tags-table)
 (global-set-key (kbd "C-c m S") '(lambda () (interactive)
 				   (unless (get-buffer ".wubi_scratch")
 				     (find-file "~/.wubi_scratch"))
@@ -376,6 +375,13 @@
 (global-set-key (kbd "M-j") 'xwl-backward-char)
 
 (global-set-key (kbd "C-c m u") 'twittering-update-status-interactive)
+
+(global-set-key (kbd "C-c d v") 'describe-variable)
+(global-set-key (kbd "C-c d f") 'describe-function)
+(global-set-key (kbd "C-c d k") 'describe-key)
+(global-set-key (kbd "C-c d m") 'describe-mode)
+(global-set-key (kbd "C-c d F") 'describe-face)
+
 
 (provide 'xwl-bindings)
 

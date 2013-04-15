@@ -33,8 +33,8 @@
   "Color theme base on console colors with `color-theme-print'.
 Created on 2005-05-13."
   (interactive)
-  (unless window-system
-    (error "Better not use color theme on console"))
+  ;; (unless window-system
+  ;;   (error "Better not use color theme on console"))
   (require 'color-theme)
   (color-theme-install
    `(color-theme-xwl-console
