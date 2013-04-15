@@ -1,6 +1,6 @@
 ;;; xwl-bindings.el --- Key bindings
 
-;; Copyright (C) 2008, 2009, 2010, 2011, 2012 William Xu
+;; Copyright (C) 2008, 2009, 2010, 2011, 2012, 2013 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -256,16 +256,17 @@
               (setq xwl-gnus-agent-timer
                     (run-with-timer
                      0 (* 3600 24) (lambda ()
-                                     (xwl-shell-command-asynchronously
-                                      (concat
-                                       ;; Company PC is always on, so we won't have
-                                       ;; too many instances running at the same
-                                       ;; time...
-                                       (if xwl-at-company?
-                                           ""
-                                         "(ps -ef|grep \"emacs --eval\" | grep -v grep) || ")
-                                       "emacs --eval \"(progn (require 'xwl-gnus-agent))\""
-                                       ))))))
+                                     (unless gnus-plugged
+                                       (xwl-shell-command-asynchronously
+                                        (concat
+                                         ;; Company PC is always on, so we won't have
+                                         ;; too many instances running at the same
+                                         ;; time...
+                                         (if xwl-at-company?
+                                             ""
+                                           "(ps -ef|grep \"emacs --eval\" | grep -v grep) || ")
+                                         "emacs --eval \"(progn (require 'xwl-gnus-agent))\""
+                                         )))))))
             (message "Gnus agent timer started")))
         ))))
 

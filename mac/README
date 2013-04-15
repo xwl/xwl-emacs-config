@@ -1,1 +1,4 @@
 Symbolic them to /Users/william/Library/LaunchAgents.
+
+Use `launchctl unload' to completely stop a daemon.
+

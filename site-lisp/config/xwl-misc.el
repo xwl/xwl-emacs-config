@@ -1016,7 +1016,6 @@ prompting.  If file is a directory perform a `find-file' on it."
 
   (xwl-after-init-hook))
 
-
 (provide 'xwl-misc)
 
 ;;; Local Variables: ***
