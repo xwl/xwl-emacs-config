@@ -66,3 +66,6 @@
 	path = site-lisp/magit
 	url = git://github.com/magit/magit.git
     ignore = untracked      
+[submodule "w32/mintty-color-solarized"]
+	path = w32/mintty-color-solarized
+	url = git://github.com/karlin/mintty-colors-solarized.git

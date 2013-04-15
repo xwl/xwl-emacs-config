@@ -424,9 +424,11 @@ Thus generate a TAGs file."
 
 (setq magit-omit-untracked-dir-contents t)
 (global-set-key (kbd "C-c m m") 'magit-status)
+
 (eval-after-load 'magit
-  (progn
-    (defun magit-highlight-section ())
+  '(progn
+     (defun magit-highlight-section ())
+     (define-key magit-status-mode-map (kbd "y") 'magit-refresh)
     ))
 
 (eval-after-load 'vc-git

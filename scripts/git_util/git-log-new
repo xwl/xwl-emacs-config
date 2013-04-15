@@ -1,0 +1,6 @@
+#!/bin/sh
+
+local=`git branch | grep "\* " | cut -d " " -f 2`
+tracked_remote=`git branch -vv | grep $local | grep "\[" | cut -d "[" -f 2 | cut -d ":" -f 1`
+
+git log --graph --date-order -C -M --pretty=format:'%C(bold green)%d%Creset %Cblue%h%Creset - "%ar" - (%an) %s' ..$tracked_remote
