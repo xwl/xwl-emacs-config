@@ -1,6 +1,6 @@
 ;;; xwl-extra-util.el --- non-essential, autoloaded utilities
 
-;; Copyright (C) 2010, 2011  William Xu
+;; Copyright (C) 2010, 2011, 2013  William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 ;; Keywords: tools
@@ -487,6 +487,12 @@ Note: you are suggested to kill process buffer at the end of CALLBACK. "
   (interactive)
   (let ((fs (frame-parameter nil 'fullscreen)))
     (set-frame-parameter nil 'fullscreen (if fs nil 'fullboth))))
+
+;;;###autoload
+(defun xwl-unfill-region (begin end)
+  (interactive "r")
+  (let ((fill-column 9999))
+    (fill-region begin end)))
 
 (provide 'xwl-extra-util)
 ;;; xwl-extra-util.el ends here
