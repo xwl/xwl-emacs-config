@@ -46,16 +46,16 @@
                                 (call-interactively 'xwl-bbdb)))
 
 ;;'eshell) ;xwl-term ;xwl-run-scsh
-(global-set-key (kbd "<f9>") 'xwl-term)
-                ;; (lambda ()
-                ;;   (interactive)
-                ;;   ;; (if (eq system-type 'windows-nt)
-                ;;   ;;     (if current-prefix-arg
-                ;;   ;;         (call-interactively 'powershell)
-                ;;   ;;       (xwl-switch-or-create "*PowerShell*" 'powershell))
-                ;;     (if current-prefix-arg
-                ;;         (call-interactively 'shell)
-                ;;       (xwl-switch-or-create "*shell*" 'shell))));)
+(global-set-key (kbd "<f9>") ;'xwl-term)
+                (lambda ()
+                  (interactive)
+                  ;; (if (eq system-type 'windows-nt)
+                  ;;     (if current-prefix-arg
+                  ;;         (call-interactively 'powershell)
+                  ;;       (xwl-switch-or-create "*PowerShell*" 'powershell))
+                    (if current-prefix-arg
+                        (call-interactively 'shell)
+                      (xwl-switch-or-create "*shell*" 'shell))));)
 
 (global-set-key (kbd "<f11>")
                 (lambda ()

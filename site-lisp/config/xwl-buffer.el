@@ -129,17 +129,7 @@ point.  Especially useful for w32."
     (setq xwl-w32-drives (xwl-w32-get-drives)))
 
   (setq xwl-frequent-directories
-        `("/sf/mw/hapticsservices"
-          "/sf/os/devicesrv/hwrmhaptics"
-          "/sf/mw/classicui/uifw/avkon/src"
-          "/sf/mw/hapticsservices/tactilefeedback/tactilefeedbackresolver/plugins/tactilehapticsplugin/src/"
-
-          "/s60/mw/classicui/uifw/avkon/src"
-          "/s60/mw/classicui/uifw/tactilefeedback"
-
-          "/epoc32/release/winscw/udeb"
-          "/epoc32/data"
-
+        `("~/yapas/middleware/s40_sw"
           "~/"
           "/sudo::/"
           ,(concat xwl-emacs-top "/config")

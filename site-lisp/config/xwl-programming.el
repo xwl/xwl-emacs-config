@@ -1288,6 +1288,7 @@ Useful for packing c/c++ functions with one line or empty body."
 
      ))
 
+(add-hook 'makefile-mode-hook (lambda () (gtags-mode 1)))
 
 (provide 'xwl-programming)
 
