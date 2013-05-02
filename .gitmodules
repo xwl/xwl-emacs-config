@@ -69,3 +69,6 @@
 [submodule "w32/mintty-color-solarized"]
 	path = w32/mintty-color-solarized
 	url = git://github.com/karlin/mintty-colors-solarized.git
+[submodule "site-lisp/auto-complete"]
+	path = site-lisp/auto-complete
+	url = git://github.com/auto-complete/auto-complete.git

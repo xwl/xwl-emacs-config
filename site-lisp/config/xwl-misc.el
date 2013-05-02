@@ -723,10 +723,6 @@ passphrase cache or user."
      (define-key ac-completing-map "\M-p" 'ac-previous)
      ))
 
-(add-hook 'log-edit-mode-hook (lambda () (electric-spacing-mode -1)))
-
-(add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
-
 ;; ,----
 ;; | Track cahnges for some buffer
 ;; `----
@@ -1018,6 +1014,9 @@ prompting.  If file is a directory perform a `find-file' on it."
 
 (setq vc-command-messages t)
 
+(add-hook 'log-edit-mode-hook (lambda () (electric-spacing-mode -1)))
+
+(add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
 
 (provide 'xwl-misc)
 

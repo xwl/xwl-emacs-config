@@ -17,6 +17,9 @@
         (mapcar (lambda (f) (concat xwl-emacs-top f))
                 '("."
                   "auto-complete"
+                  "auto-complete/lib/popup"
+                  "auto-complete/lib/fuzzy"                  
+                  
                   "debian"
                   "dictionary-el"
                   "haskell-mode-2.4"
