@@ -50,13 +50,10 @@
     (global-less-minor-mode -1)
     (xwl-makefile-ensure-directory)
 
-    (let ((autoloads-not-up2date t))
-      ;; (xs-accumulate
-      ;;           (lambda (a b) (or a b))
-      ;;           nil
-      ;;           (mapcar (lambda (f)
-      ;;                     (file-newer-than-file-p f xwl-makefile-autoloads-file))
-      ;;                   xwl-makefile-files))))
+    (let ((autoloads-not-up2date
+           (some (lambda (f)
+                   (file-newer-than-file-p f xwl-makefile-autoloads-file))
+                 xwl-makefile-files)))
       ;; autoloads
       (when autoloads-not-up2date
         (with-current-buffer (find-file-noselect xwl-makefile-autoloads-file)
