@@ -280,17 +280,18 @@
 
 (defun xwl-recentf-open-files ()
   (interactive)
-  (let* ((alist (mapcar '(lambda (el)
-                           (cons (file-name-nondirectory el) el))
-                        recentf-list))
-         (filename (completing-read "Open recent file: "
-                                    (remove-if
-                                     (lambda (i)
-                                       (some (lambda (j)
-                                               (string-match j i))
-                                             ido-ignore-files))
-                                     (mapcar 'car alist)))))
-    (find-file (cdr (assoc filename alist)))))
+  (let ((name-full (mapcar (lambda (filename)
+                             (cons (or (with-temp-buffer
+                                         (uniquify-rationalize-file-buffer-names
+                                          (file-name-nondirectory filename)
+                                          (file-name-directory filename)
+                                          (current-buffer)))
+                                       (file-name-nondirectory filename))
+                                   filename))
+                           recentf-list)))
+    (find-file
+     (cdr (assoc (completing-read "Open recent file: " (mapcar 'car name-full))
+                 name-full)))))
 
 (global-set-key (kbd "C-c F") 'xwl-recentf-open-files)
 

@@ -249,7 +249,8 @@ point.  Especially useful for w32."
            ido-enable-flex-matching
            (> (length ido-text) 1)
            (not ido-enable-regexp))
-      (setq matches (mapcar (lambda (ma) (cons ma 0)) matches))
+      ;; (setq matches (mapcar (lambda (ma) (cons ma 0)) matches))
+      (setq matches)
       (setq re (mapconcat #'regexp-quote (split-string ido-text "" t) ".*"))
       (if ido-enable-prefix
           (setq re (concat "\\`" re)))
