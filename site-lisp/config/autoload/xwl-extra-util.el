@@ -494,5 +494,18 @@ Note: you are suggested to kill process buffer at the end of CALLBACK. "
   (let ((fill-column 9999))
     (fill-region begin end)))
 
+;;;###autoload
+(defun xwl-show-public-ip ()
+  "Show public IP when behind NAT."
+  (interactive)
+  (url-retrieve "http://checkip.dyndns.org"
+                (lambda (any)
+                  (goto-char (point-min))
+                  (when (re-search-forward
+                         "[0-9]\\{1,3\\}\\.[0-9]\\{1,3\\}\\.[0-9]\\{1,3\\}\\.[0-9]\\{1,3\\}"
+                         nil t 1)
+                    (message "%s" (match-string 0)))
+                  (kill-buffer))))
+
 (provide 'xwl-extra-util)
 ;;; xwl-extra-util.el ends here
