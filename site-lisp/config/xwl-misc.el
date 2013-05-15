@@ -280,17 +280,18 @@
 
 (defun xwl-recentf-open-files ()
   (interactive)
-  (let* ((alist (mapcar '(lambda (el)
-                           (cons (file-name-nondirectory el) el))
-                        recentf-list))
-         (filename (completing-read "Open recent file: "
-                                    (remove-if
-                                     (lambda (i)
-                                       (some (lambda (j)
-                                               (string-match j i))
-                                             ido-ignore-files))
-                                     (mapcar 'car alist)))))
-    (find-file (cdr (assoc filename alist)))))
+  (let ((name-full (mapcar (lambda (filename)
+                             (cons (or (with-temp-buffer
+                                         (uniquify-rationalize-file-buffer-names
+                                          (file-name-nondirectory filename)
+                                          (file-name-directory filename)
+                                          (current-buffer)))
+                                       (file-name-nondirectory filename))
+                                   filename))
+                           recentf-list)))
+    (find-file
+     (cdr (assoc (completing-read "Open recent file: " (mapcar 'car name-full))
+                 name-full)))))
 
 (global-set-key (kbd "C-c F") 'xwl-recentf-open-files)
 
@@ -482,10 +483,9 @@
          (scroll-all-function-all this-command nil)))
      ))
 
-(add-hook 'kill-emacs-hook
-          (lambda ()
-            (let ((default-directory xwl-emacs-top))
-              (xwl-makefile-byte-compile))))
+(add-hook 'kill-emacs-hook (lambda ()
+                             (let ((default-directory xwl-emacs-top))
+                               (xwl-makefile-all))))
 
 ;; (autoload 'typing-of-emacs "The Typing Of Emacs, a game." t)
 
@@ -519,12 +519,15 @@
   (require 'battery)
   (setq battery-mode-line-format "[%b%p%% %t]")
 
-  (when (fboundp battery-status-function)
+  (when (and (fboundp battery-status-function)
+             (not (string-match-p "N/A"
+                                  (battery-format "%p" (funcall battery-status-function)))))
+
     (setq battery-mode-line-string
           (battery-format battery-mode-line-format
                           (funcall battery-status-function)))
 
-    (defadvice battery-update-handler (around check-on-line)
+    (defadvice battery-update-handler (around check-on-line activate)
       "If on-line (not using battery), don't display on mode line."
       (if (>=  (string-to-number
                 (battery-format "%p" (funcall battery-status-function)))
@@ -534,10 +537,8 @@
             (force-mode-line-update))
         ad-do-it))
 
-    (ad-activate 'battery-update-handler)
-
-    (run-with-timer 0 battery-update-interval 'battery-update-handler))
-  )
+    (display-battery-mode 1)
+    ))
 
 ;; ,----
 ;; | occur
@@ -928,20 +929,20 @@ prompting.  If file is a directory perform a `find-file' on it."
 
 ;; 1. Prepend drive name on buffer on w32
 ;; 2. show SDK week on linux
-(defadvice uniquify-get-proposed-name (after prepend-drive-name activate)
-  (let ((dir (ad-get-arg 1)))
-    (cond
-     ((string-match "\\(sdk\\|repo\\)/\\([^/]+\\|ng\\)/" dir)
-      (let ((wk (match-string 2 dir)))
-        (setq ad-return-value
-              (concat wk ":/" ad-return-value))))
-     ((eq system-type 'windows-nt)
-      (let ((d (upcase (substring dir 0 1))))
-        (setq ad-return-value
-              (concat d xwl-w32-drive-separator
-                      (cdr (or (assoc d xwl-w32-drives)
-                               (assoc (downcase d) xwl-w32-drives)))
-                      ":/" ad-return-value)))))))
+;; (defadvice uniquify-get-proposed-name (after prepend-drive-name activate)
+;;   (let ((dir (ad-get-arg 1)))
+;;     (cond
+;;      ((string-match "\\(sdk\\|repo\\)/\\([^/]+\\|ng\\)/" dir)
+;;       (let ((wk (match-string 2 dir)))
+;;         (setq ad-return-value
+;;               (concat wk ":/" ad-return-value))))
+;;      ((eq system-type 'windows-nt)
+;;       (let ((d (upcase (substring dir 0 1))))
+;;         (setq ad-return-value
+;;               (concat d xwl-w32-drive-separator
+;;                       (cdr (or (assoc d xwl-w32-drives)
+;;                                (assoc (downcase d) xwl-w32-drives)))
+;;                       ":/" ad-return-value)))))))
 
 (eval-after-load 'calc
   '(progn
