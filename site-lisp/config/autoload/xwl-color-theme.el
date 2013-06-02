@@ -1,6 +1,6 @@
 ;;; xwl-color-theme.el --- color theme setup
 
-;; Copyright (C) 2009, 2010, 2011, 2012 William Xu
+;; Copyright (C) 2009, 2010, 2011, 2012, 2013 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -313,8 +313,8 @@ Created on 2005-05-13."
 
      ))
 
-  (setq xwl-black-background? t))
-
+  (setq xwl-black-background? t)
+  (run-hooks 'color-theme-xwl-console-hook))
 
 (provide 'xwl-color-theme)
 ;;; xwl-color-theme.el ends here

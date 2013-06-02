@@ -417,6 +417,14 @@
 
 ;; (remove-hook 'find-file-hook 'bracketphobia-hide)
 
+(add-hook 'color-theme-xwl-console-hook
+          (lambda ()
+            (when window-system
+              (require 'highlight-tail)
+              (setq highlight-tail-colors
+                    `((,(if xwl-black-background? "#bc2525" "#d8971d") . 0)))
+              (highlight-tail-reload))))
+
 (defun xwl-after-init-hook ()
   ;; FIXME: how to set this only after window has been maximized?
   (run-at-time 3
@@ -451,11 +459,7 @@
   (when (string= system-name "zen.local")
     (xwl-fullscreen))
 
-  (when window-system
-    (require 'highlight-tail)
-    (setq highlight-tail-colors
-          `((,(if xwl-black-background? "#bc2525" "#d8971d") . 0)))
-    (highlight-tail-reload))
+  (run-hooks 'color-theme-xwl-console-hook)
 
   (appt-activate 1)
 
@@ -856,8 +860,10 @@ passphrase cache or user."
 
 (eval-after-load 'hl-line
   '(progn
-     (when xwl-black-background?
-       (set-face-background hl-line-face "magenta4"))
+     (add-hook 'color-theme-xwl-console-hook
+               (lambda ()
+                 (when xwl-black-background?
+                   (set-face-background hl-line-face "magenta4"))))
      ))
 
 (setq thing-at-point-url-path-regexp "[a-zA-Z0-9.?=%,&/:_#@+~-]+")

@@ -97,10 +97,12 @@
 
      (twittering-enable-unread-status-notifier)
 
-     (when xwl-black-background?
-       (set-face-background 'twittering-zebra-1-face "gray15")
-       (set-face-background 'twittering-zebra-2-face "gray11"))
-
+     (add-hook 'color-theme-xwl-console-hook
+               (lambda ()
+                 (when xwl-black-background?
+                   (set-face-background 'twittering-zebra-1-face "gray15")
+                   (set-face-background 'twittering-zebra-2-face "gray11"))))
+     
      (when xwl-at-company?
        (let ((sc (assqref 'socialcast twittering-service-method-table)))
          (setq twittering-service-method-table
