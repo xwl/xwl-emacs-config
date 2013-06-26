@@ -1,6 +1,6 @@
 ;;; xwl-programming.el --- programming config
 
-;; Copyright (C) 2007, 2009, 2010, 2011, 2012 William Xu
+;; Copyright (C) 2007, 2009, 2010, 2011, 2012, 2013 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -133,16 +133,14 @@
 ;;; C, C++
 
 (defun xwl-set-c-c++-style ()
-  (if (or (file-exists-p "../group")
-          (string-match "common_sw" (buffer-file-name)))
+  (if (or (string-match "s40_sw" (or (buffer-file-name) "")))
       ;; symbian c++
       (progn
         (c-set-style "whitesmith")
         (setq c-cleanup-list '()))
     (c-set-style "k&r")
     ;; TODO, check this.
-    (setq c-basic-offset 4))
-  )
+    (setq c-basic-offset 4)))
 
 (add-hook 'c-mode-hook 'xwl-set-c-c++-style)
 (add-hook 'c++-mode-hook 'xwl-set-c-c++-style)

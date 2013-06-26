@@ -1025,6 +1025,23 @@ prompting.  If file is a directory perform a `find-file' on it."
 
 (add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
 
+(require 'hi-lock)
+(defun xwl-highlight-phrase ()
+  (interactive)
+  (if (thing-at-point 'symbol)
+      (highlight-phrase (thing-at-point 'symbol) 'hi-yellow)
+    (call-interactively 'highlight-phrase)))
+
+(defun xwl-unhighlight-regexp ()
+  (interactive)
+  (if (thing-at-point 'symbol)
+      (unhighlight-regexp (thing-at-point 'symbol))
+    (call-interactively 'unhighlight-regexp)))
+
+(define-key hi-lock-map (kbd "C-x w h") 'xwl-highlight-phrase)
+(define-key hi-lock-map (kbd "C-x w u") 'xwl-unhighlight-regexp)
+
+
 (provide 'xwl-misc)
 
 ;;; Local Variables: ***
