@@ -315,8 +315,8 @@
                       (t                  "-c")))
         (complete-list (make-vector 63 0))
         (prev-buffer (current-buffer)))
-    (if case-fold-search
-        (setq option (concat option "i")))
+    ;; (if case-fold-search
+    ;;     (setq option (concat option "i")))
     ; build completion list
     (set-buffer (generate-new-buffer "*Completions*"))
     (call-process "global" nil t nil option string)
@@ -560,8 +560,8 @@
     (setq flag-char (string-to-char flag))
     ;; Use always ctags-x format.
     (setq option "-x")
-    (if case-fold-search
-        (setq option (concat option "i")))
+    ;; (if case-fold-search
+    ;;     (setq option (concat option "i")))
     (if (char-equal flag-char ?C)
         (setq context (concat "--from-here=" (number-to-string (gtags-current-lineno)) ":" buffer-file-name))
       (setq option (concat option flag)))
