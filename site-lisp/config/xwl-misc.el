@@ -642,48 +642,6 @@
 
 ;; (setq inhibit-eol-conversion nil)
 
-
-;; ,----
-;; | pgg
-;; `----
-
-(require 'pgg)
-
-(defun pgg-encrypt (rcpts &optional sign start end passphrase)
-  "(Redefined) Encrypt the current buffer for RCPTS.
-
-If optional argument SIGN is non-nil, do a combined sign and encrypt.
-
-If optional arguments START and END are specified, only encrypt within
-the region.
-
-If optional PASSPHRASE is not specified, it will be obtained from the
-passphrase cache or user."
-
-  (interactive (list (split-string (read-string "Recipients: ") "[ \t,]+")))
-  (let* ((start (or start (point-min)))
-         (end (or end (point-max)))
-         (status (pgg-encrypt-region start end rcpts sign passphrase)))
-    ;; (when (interactive-p) ; xwl
-    (pgg-display-output-buffer start end status) ; )
-    status))
-
-(defun pgg-decrypt (&optional start end passphrase)
-  "(Redefined) Decrypt the current buffer.
-
-If optional arguments START and END are specified, only decrypt within
-the region.
-
-If optional PASSPHRASE is not specified, it will be obtained from the
-passphrase cache or user."
-  (interactive "")
-  (let* ((start (or start (point-min)))
-         (end (or end (point-max)))
-         (status (pgg-decrypt-region start end passphrase)))
-    ;; (when (interactive-p) ; xwl
-    (pgg-display-output-buffer start end status) ;)
-    status))
-
 (defun xs-find-first (predicate sequence)
   "Find first element of SEQUENCE that satifies PREDICATE."
   (let ((ret nil)

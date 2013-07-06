@@ -1,6 +1,6 @@
 ;;; xwl-web.el --- w3m config
 
-;; Copyright (C) 2007, 2010, 2011, 2012 William Xu
+;; Copyright (C) 2007, 2010, 2011, 2012, 2013 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 ;; Version: 0.1
@@ -23,7 +23,7 @@
 ;;; Code:
 
 (require 'xwl-util)
-(ignore-errors (require 'w3m))
+(ignore-errors (require 'w3m-load))
 
 ;;; w3m
 
@@ -77,20 +77,18 @@
           ("application/pdf" "\\.pdf\\'" ("xpdf" file) nil)
           ("application/xhtml+xml" nil nil "text/html")))
 
-  )
+  (add-hook 'w3m-mode-hook
+            (lambda ()
+              (local-set-key (kbd "M-n") 'less-scroll-up-line)
+              (local-set-key (kbd "M-p") 'less-scroll-down-line)
+              (local-set-key (kbd "<left>") 'w3m-previous-buffer)
+              (local-set-key (kbd "<right>") 'w3m-next-buffer)
+              (local-set-key (kbd "p") 'w3m-previous-buffer)
+              (local-set-key (kbd "n") 'w3m-next-buffer)
+              (local-set-key (kbd "c") 'w3m-delete-buffer)))
+)
 
 (setq wget-download-directory "~/Downloads")
-
-(add-hook 'w3m-mode-hook
-	  (lambda ()
-	    (local-set-key (kbd "M-n") 'less-scroll-up-line)
-	    (local-set-key (kbd "M-p") 'less-scroll-down-line)
-	    (local-set-key (kbd "<left>") 'w3m-previous-buffer)
-	    (local-set-key (kbd "<right>") 'w3m-next-buffer)
-	    (local-set-key (kbd "p") 'w3m-previous-buffer)
-	    (local-set-key (kbd "n") 'w3m-next-buffer)
-	    (local-set-key (kbd "c") 'w3m-delete-buffer)))
-
 
 ;;; External Browser
 

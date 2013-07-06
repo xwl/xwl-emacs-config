@@ -1,6 +1,6 @@
 ;;; xwl-util.el --- Utility functions
 
-;; Copyright (C) 2007, 2008, 2009, 2010, 2011  William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010, 2011, 2013  William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -60,7 +60,7 @@ each OS has different set of tools. "
 (defun xwl-os-type ()
   "Return envrionment $OSTYPE."
   (interactive)
-  (message (car (split-string (shell-command-to-string "echo $OSTYPE")))))
+  (car (split-string (shell-command-to-string "echo $OSTYPE"))))
 
 ;; Should be re-defun later.
 (defun xds (any) "abcdefg")
@@ -109,7 +109,7 @@ This should not affect `buffer-undo-list'."
 
 ;; named-let, Thanks to Riastradh@#emacs (however, still meets stack limit. )
 (defmacro his-named-let (name parameters &rest body)
-  `(labels
+  `(cl-labels
        ((,name ,(mapcar 'car parameters) ,@body))
      (,name ,@(mapcar 'cadr parameters))))
 
