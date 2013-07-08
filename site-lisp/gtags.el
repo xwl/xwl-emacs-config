@@ -2,7 +2,7 @@
 
 ;;
 ;; Copyright (c) 1997, 1998, 1999, 2000, 2006, 2007, 2008, 2009, 2010
-;;		2011, 2012
+;;		2011, 2012, 2013
 ;;	Tama Communications Corporation
 ;;
 ;; This file is part of GNU GLOBAL.
@@ -298,9 +298,15 @@
   (gtags-completing 'files string predicate code))
 
 (defun gtags-completing-any (string predicate code)
-  (append (gtags-completing-gtags string predicate code)
-          (gtags-completing-gsyms string predicate code)
-          (gtags-completing-files string predicate code)))
+  ;; Can be partial completion string or completions table.  
+  (let ((gtags (gtags-completing-gtags string predicate code))
+        (gsyms (gtags-completing-gsyms string predicate code))
+        (files (gtags-completing-files string predicate code)))
+    (case code
+      ((nil)
+       (or gtags gsyms files))
+      ((t)
+       (remove nil (append gtags gsyms files))))))
 
 (defun gtags-completing-idutils (string predicate code)
   (gtags-completing 'idutils string predicate code))
