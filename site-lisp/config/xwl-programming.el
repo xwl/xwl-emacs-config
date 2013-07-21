@@ -661,7 +661,7 @@ yacc source files."
 (require 'scheme)
 (require 'chicken-scheme-extras)
 
-(setq scheme-program-name "csi")
+(setq scheme-program-name "csi -no-warnings")
 (defun xwl-scheme-mode-hook ()
   (setq comment-add 1)
 
@@ -1127,6 +1127,303 @@ Useful for packing c/c++ functions with one line or empty body."
   (dotimes (i ediff-number-of-differences)
     (ad-set-arg 0 i)
     ad-do-it))
+
+;; Stop ediff session when where is no difference.
+(defun ediff-setup (buffer-A file-A buffer-B file-B buffer-C file-C
+                             startup-hooks setup-parameters
+                             &optional merge-buffer-file)
+  (run-hooks 'ediff-before-setup-hook)
+  ;; ediff-convert-standard-filename puts file names in the form appropriate
+  ;; for the OS at hand.
+  (setq file-A (ediff-convert-standard-filename (expand-file-name file-A)))
+  (setq file-B (ediff-convert-standard-filename (expand-file-name file-B)))
+  (if (stringp file-C)
+      (setq file-C
+            (ediff-convert-standard-filename (expand-file-name file-C))))
+  (if (stringp merge-buffer-file)
+      (progn
+        (setq merge-buffer-file
+              (ediff-convert-standard-filename
+               (expand-file-name merge-buffer-file)))
+        ;; check the directory exists
+        (or (file-exists-p (file-name-directory merge-buffer-file))
+            (error "Directory %s given as place to save the merge doesn't exist"
+                   (abbreviate-file-name
+                    (file-name-directory merge-buffer-file))))
+        (if (and (file-exists-p merge-buffer-file)
+                 (file-directory-p merge-buffer-file))
+            (error "The merge buffer file %s must not be a directory"
+                   (abbreviate-file-name merge-buffer-file)))
+        ))
+  (let* ((control-buffer-name
+          (ediff-unique-buffer-name "*Ediff Control Panel" "*"))
+         (control-buffer (ediff-with-current-buffer buffer-A
+                           (get-buffer-create control-buffer-name))))
+    (ediff-with-current-buffer control-buffer
+      (ediff-mode)
+
+      (make-local-variable 'ediff-use-long-help-message)
+      (make-local-variable 'ediff-prefer-iconified-control-frame)
+      (make-local-variable 'ediff-split-window-function)
+      (make-local-variable 'ediff-default-variant)
+      (make-local-variable 'ediff-merge-window-share)
+      (make-local-variable 'ediff-window-setup-function)
+      (make-local-variable 'ediff-keep-variants)
+
+      (make-local-variable 'window-min-height)
+      (setq window-min-height 2)
+
+      (if (featurep 'xemacs)
+          (make-local-hook 'ediff-after-quit-hook-internal))
+
+      ;; unwrap set up parameters passed as argument
+      (while setup-parameters
+        (set (car (car setup-parameters)) (cdr (car setup-parameters)))
+        (setq setup-parameters (cdr setup-parameters)))
+
+      ;; set variables classifying the current ediff job
+      ;; must come AFTER setup-parameters
+      (setq ediff-3way-comparison-job (ediff-3way-comparison-job)
+            ediff-merge-job (ediff-merge-job)
+            ediff-merge-with-ancestor-job (ediff-merge-with-ancestor-job)
+            ediff-3way-job (ediff-3way-job)
+            ediff-diff3-job (ediff-diff3-job)
+            ediff-narrow-job (ediff-narrow-job)
+            ediff-windows-job (ediff-windows-job)
+            ediff-word-mode-job (ediff-word-mode-job))
+
+      ;; Don't delete variants in case of ediff-buffer-* jobs without asking.
+      ;; This is because one may lose work---dangerous.
+      (if (string-match "buffer" (symbol-name ediff-job-name))
+          (setq ediff-keep-variants t))
+
+      (if (featurep 'xemacs)
+          (make-local-hook 'pre-command-hook))
+
+      (if (ediff-window-display-p)
+          (add-hook 'pre-command-hook 'ediff-spy-after-mouse nil 'local))
+      (setq ediff-mouse-pixel-position (mouse-pixel-position))
+
+      ;; adjust for merge jobs
+      (if ediff-merge-job
+          (let ((buf
+                 ;; If default variant is `combined', the right stuff is
+                 ;; inserted by ediff-do-merge
+                 ;; Note: at some point, we tried to put ancestor buffer here
+                 ;; (which is currently buffer C.  This didn't work right
+                 ;; because the merge buffer will contain lossage: diff regions
+                 ;; in the ancestor, which correspond to revisions that agree
+                 ;; in both buf A and B.
+                 (cond ((eq ediff-default-variant 'default-B)
+                        buffer-B)
+                       (t buffer-A))))
+
+            (setq ediff-split-window-function
+                  ediff-merge-split-window-function)
+
+            ;; remember the ancestor buffer, if any
+            (setq ediff-ancestor-buffer buffer-C)
+
+            (setq buffer-C
+                  (get-buffer-create
+                   (ediff-unique-buffer-name "*ediff-merge" "*")))
+            (with-current-buffer buffer-C
+              (insert-buffer-substring buf)
+              (goto-char (point-min))
+              (funcall (ediff-with-current-buffer buf major-mode))
+              (widen)                   ; merge buffer is always widened
+              (add-hook 'local-write-file-hooks 'ediff-set-merge-mode nil t)
+              )))
+      (setq buffer-read-only nil
+            ediff-buffer-A buffer-A
+            ediff-buffer-B buffer-B
+            ediff-buffer-C buffer-C
+            ediff-control-buffer control-buffer)
+
+      (ediff-choose-syntax-table)
+
+      (setq ediff-control-buffer-suffix
+            (if (string-match "<[0-9]*>" control-buffer-name)
+                (substring control-buffer-name
+                           (match-beginning 0) (match-end 0))
+              "")
+            ediff-control-buffer-number
+            (max
+             0
+             (1-
+              (string-to-number
+               (substring
+                ediff-control-buffer-suffix
+                (or
+                 (string-match "[0-9]+" ediff-control-buffer-suffix)
+                 0))))))
+
+      (setq ediff-error-buffer
+            (get-buffer-create (ediff-unique-buffer-name "*ediff-errors" "*")))
+
+      (with-current-buffer ediff-error-buffer
+        (setq buffer-undo-list t))
+
+      (ediff-with-current-buffer buffer-A (ediff-strip-mode-line-format))
+      (ediff-with-current-buffer buffer-B (ediff-strip-mode-line-format))
+      (if ediff-3way-job
+          (ediff-with-current-buffer buffer-C (ediff-strip-mode-line-format)))
+      (if (ediff-buffer-live-p ediff-ancestor-buffer)
+          (ediff-with-current-buffer ediff-ancestor-buffer
+            (ediff-strip-mode-line-format)))
+
+      (ediff-save-protected-variables)  ; save variables to be restored on exit
+
+      ;; ediff-setup-diff-regions-function must be set after setup
+      ;; parameters are processed.
+      (setq ediff-setup-diff-regions-function
+            (if ediff-diff3-job
+                'ediff-setup-diff-regions3
+              'ediff-setup-diff-regions))
+
+      (setq ediff-wide-bounds
+            (list (ediff-make-bullet-proof-overlay
+                   '(point-min) '(point-max) ediff-buffer-A)
+                  (ediff-make-bullet-proof-overlay
+                   '(point-min) '(point-max) ediff-buffer-B)
+                  (ediff-make-bullet-proof-overlay
+                   '(point-min) '(point-max) ediff-buffer-C)))
+
+      ;; This has effect only on ediff-windows/regions
+      ;; In all other cases, ediff-visible-region sets visibility bounds to
+      ;; ediff-wide-bounds, and ediff-narrow-bounds are ignored.
+      (if ediff-start-narrowed
+          (setq ediff-visible-bounds ediff-narrow-bounds)
+        (setq ediff-visible-bounds ediff-wide-bounds))
+
+      (ediff-set-keys)                  ; comes after parameter setup
+
+      ;; set up ediff-narrow-bounds, if not set
+      (or ediff-narrow-bounds
+          (setq ediff-narrow-bounds ediff-wide-bounds))
+
+      ;; All these must be inside ediff-with-current-buffer control-buffer,
+      ;; since these vars are local to control-buffer
+      ;; These won't run if there are errors in diff
+      (ediff-with-current-buffer ediff-buffer-A
+        (ediff-nuke-selective-display)
+        (run-hooks 'ediff-prepare-buffer-hook)
+        (if (ediff-with-current-buffer control-buffer ediff-merge-job)
+            (setq buffer-read-only t))
+        ;; add control-buffer to the list of sessions--no longer used, but may
+        ;; be used again in the future
+        (or (memq control-buffer ediff-this-buffer-ediff-sessions)
+            (setq ediff-this-buffer-ediff-sessions
+                  (cons control-buffer ediff-this-buffer-ediff-sessions)))
+        (if ediff-make-buffers-readonly-at-startup
+            (setq buffer-read-only t))
+        )
+
+      (ediff-with-current-buffer ediff-buffer-B
+        (ediff-nuke-selective-display)
+        (run-hooks 'ediff-prepare-buffer-hook)
+        (if (ediff-with-current-buffer control-buffer ediff-merge-job)
+            (setq buffer-read-only t))
+        ;; add control-buffer to the list of sessions
+        (or (memq control-buffer ediff-this-buffer-ediff-sessions)
+            (setq ediff-this-buffer-ediff-sessions
+                  (cons control-buffer ediff-this-buffer-ediff-sessions)))
+        (if ediff-make-buffers-readonly-at-startup
+            (setq buffer-read-only t))
+        )
+
+      (if ediff-3way-job
+          (ediff-with-current-buffer ediff-buffer-C
+            (ediff-nuke-selective-display)
+            ;; the merge buffer should never be narrowed
+            ;; (it can happen if it is on rmail-mode or similar)
+            (if (ediff-with-current-buffer control-buffer ediff-merge-job)
+                (widen))
+            (run-hooks 'ediff-prepare-buffer-hook)
+            ;; add control-buffer to the list of sessions
+            (or (memq control-buffer ediff-this-buffer-ediff-sessions)
+                (setq ediff-this-buffer-ediff-sessions
+                      (cons control-buffer
+                            ediff-this-buffer-ediff-sessions)))
+            (if ediff-make-buffers-readonly-at-startup
+                (setq buffer-read-only t)
+              (setq buffer-read-only nil))
+            ))
+
+      (if (ediff-buffer-live-p ediff-ancestor-buffer)
+          (ediff-with-current-buffer ediff-ancestor-buffer
+            (ediff-nuke-selective-display)
+            (setq buffer-read-only t)
+            (run-hooks 'ediff-prepare-buffer-hook)
+            (or (memq control-buffer ediff-this-buffer-ediff-sessions)
+                (setq ediff-this-buffer-ediff-sessions
+                      (cons control-buffer
+                            ediff-this-buffer-ediff-sessions)))
+            ))
+
+      ;; the following must be after setting up  ediff-narrow-bounds AND after
+      ;; nuking selective display
+      (funcall ediff-setup-diff-regions-function file-A file-B file-C)
+      (setq ediff-number-of-differences (length ediff-difference-vector-A))
+      (when (zerop ediff-number-of-differences) ; xwl
+        (mapc 'kill-buffer (list ediff-control-buffer
+                                 ediff-error-buffer
+                                 ediff-diff-buffer))
+        (message "xwl: %S" ediff-diff-buffer)
+        (error "No difference"))
+      (setq ediff-current-difference -1)
+
+      (ediff-make-current-diff-overlay 'A)
+      (ediff-make-current-diff-overlay 'B)
+      (if ediff-3way-job
+          (ediff-make-current-diff-overlay 'C))
+      (if ediff-merge-with-ancestor-job
+          (ediff-make-current-diff-overlay 'Ancestor))
+
+      (ediff-setup-windows buffer-A buffer-B buffer-C control-buffer)
+
+      (let ((shift-A (ediff-overlay-start
+                      (ediff-get-value-according-to-buffer-type
+                       'A ediff-narrow-bounds)))
+            (shift-B (ediff-overlay-start
+                      (ediff-get-value-according-to-buffer-type
+                       'B ediff-narrow-bounds)))
+            (shift-C (ediff-overlay-start
+                      (ediff-get-value-according-to-buffer-type
+                       'C ediff-narrow-bounds))))
+        ;; position point in buf A
+        (save-excursion
+          (select-window ediff-window-A)
+          (goto-char shift-A))
+        ;; position point in buf B
+        (save-excursion
+          (select-window ediff-window-B)
+          (goto-char shift-B))
+        (if ediff-3way-job
+            (save-excursion
+              (select-window ediff-window-C)
+              (goto-char shift-C)))
+        )
+
+      (select-window ediff-control-window)
+      (ediff-visible-region)
+
+      (run-hooks 'startup-hooks)
+      (ediff-arrange-autosave-in-merge-jobs merge-buffer-file)
+
+      (ediff-refresh-mode-lines)
+      (setq buffer-read-only t)
+      (setq ediff-session-registry
+            (cons control-buffer ediff-session-registry))
+      (ediff-update-registry)
+      (if (ediff-buffer-live-p ediff-meta-buffer)
+          (ediff-update-meta-buffer
+           ediff-meta-buffer nil ediff-meta-session-number))
+      (run-hooks 'ediff-startup-hook)
+      )                                 ; eval in control-buffer
+    control-buffer))
+
+(add-hook 'ediff-startup-hook 'ediff-next-difference)
 
 (defun xwl-ediff-refine-more (&optional start end)
   (interactive)
