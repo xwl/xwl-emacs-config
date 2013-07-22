@@ -1066,6 +1066,15 @@ Useful for packing c/c++ functions with one line or empty body."
 (global-set-key (kbd "C-x v =") 'vc-ediff)
 
 (global-set-key (kbd "C-c E b") 'ediff-buffers)
+(global-set-key (kbd "C-c E B")
+                (lambda ()
+                  (interactive)
+                  (let ((b1 (current-buffer))
+                        (b2 (save-excursion
+                              (other-window 1)
+                              (current-buffer))))
+                    (ediff-buffers b1 b2))))
+
 (global-set-key (kbd "C-c E f") 'ediff-files)
 (global-set-key (kbd "C-c E p b") 'ediff-patch-buffer)
 (global-set-key (kbd "C-c E p f") 'ediff-patch-file)

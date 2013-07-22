@@ -816,13 +816,11 @@
       (cons '(:source "~/.authinfo" :host t :protocol t)
             auth-sources))
 
-(eval-after-load 'hl-line
-  '(progn
-     (add-hook 'color-theme-xwl-console-hook
-               (lambda ()
-                 (when xwl-black-background?
-                   (set-face-background hl-line-face "magenta4"))))
-     ))
+(add-hook 'color-theme-xwl-console-hook
+          (lambda ()
+            (eval-after-load 'hl-line
+              '(when xwl-black-background?
+                 (set-face-background hl-line-face "magenta4")))))
 
 (setq thing-at-point-url-path-regexp "[a-zA-Z0-9.?=%,&/:_#@+~-]+")
 

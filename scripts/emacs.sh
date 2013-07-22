@@ -1,4 +1,4 @@
-alias ec='emacsclient -t -e "(command-execute (kbd \"C-c m s\"))"'
+alias ec='LC_ALL=zh_CN.utf8 emacsclient -t -e "(command-execute (kbd \"C-c m s\"))"'
 
 export ALTERNATE_EDITOR=~/.emacs.d/scripts/emacs-daemon
 
