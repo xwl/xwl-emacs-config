@@ -652,7 +652,10 @@ yacc source files."
 (mapc (lambda (hook)
         (mapc (lambda (func)
                 (add-hook hook func))
-              '(turn-on-eldoc-mode xwl-lisp-mode-hook electric-spacing-mode)))
+              '(turn-on-eldoc-mode
+                xwl-lisp-mode-hook
+                electric-spacing-mode
+                enable-paredit-mode)))
       '(lisp-mode-hook emacs-lisp-mode-hook))
 
 ;;; scheme
@@ -673,6 +676,7 @@ yacc source files."
 
 (add-hook 'scheme-mode-hook 'xwl-scheme-mode-hook)
 (add-hook 'scheme-mode-hook 'electric-spacing-mode)
+(add-hook 'scheme-mode-hook 'enable-paredit-mode)
 
 (defun xwl-scheme-send-buffer ()
   (interactive)

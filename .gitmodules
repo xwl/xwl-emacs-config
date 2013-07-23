@@ -73,3 +73,6 @@
 	path = site-lisp/auto-complete
 	url = git://github.com/auto-complete/auto-complete.git
     ignore = untracked      
+[submodule "site-lisp/paredit"]
+	path = site-lisp/paredit
+	url = http://mumble.net/~campbell/git/paredit.git/

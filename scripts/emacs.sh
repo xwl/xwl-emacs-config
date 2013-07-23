@@ -1,4 +1,4 @@
-alias ec='emacsclient -t -e "(command-execute (kbd \"C-c m s\"))"'
+alias ec='TERM=xterm-256color emacsclient -t -e "(command-execute (kbd \"C-c m s\"))"'
 
 export ALTERNATE_EDITOR=~/.emacs.d/scripts/emacs-daemon
 
