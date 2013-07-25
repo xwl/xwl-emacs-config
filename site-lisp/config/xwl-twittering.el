@@ -180,7 +180,7 @@
           ,@(when (boundp 'twittering-initial-timeline-spec-string)
               twittering-initial-timeline-spec-string))
         :test 'equal)
-       '(lambda (a b) (string-match ":home" a))))
+       (lambda (a b) (string-match ":home" a))))
 
 (setq twittering-image-external-viewer-command
       (case system-type
