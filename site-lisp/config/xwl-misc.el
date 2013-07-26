@@ -447,7 +447,7 @@
   (unless (server-running-p)
     (server-start))
 
-  (run-with-idle-timer 300 t 'xwl-run-when-idle-hook)
+  (run-with-idle-timer 300 t (lambda () (run-hooks 'xwl-run-when-idle-hook)))
 
   ;; (run-with-timer 0 86400 'xwl-running-daily) ; dialy stuffs
   ;; (xwl-weather-update)
