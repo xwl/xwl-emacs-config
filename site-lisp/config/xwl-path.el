@@ -16,9 +16,6 @@
        (append
         (mapcar (lambda (f) (concat xwl-emacs-top f))
                 '("."
-                  "auto-complete"
-                  "auto-complete/lib/popup"
-                  "auto-complete/lib/fuzzy"                  
                   
                   "debian"
                   "dictionary-el"
@@ -29,28 +26,22 @@
                   "wget-el"
                   "bbdb-vcard"
                   "nyan-mode"
-                  "magit"
-
-                  "xwl/ga"
-                  "xwl/buffer-action"
-                  "xwl/cal-china-x"
-                  "xwl/wubi"
-                  "xwl/finkinfo-mode"
-                  "xwl/easy-todo"
-                  "xwl/gmail-notifier"
-                  "xwl/less"
-                  "xwl/qml-mode"
-                  "xwl/graphviz-dot"
-                  "xwl/electric-spacing"
-                  "xwl/chicken-scheme-extras"
-                  "xwl/dired-view"
 
                   "xwl-elisp"
                   "xwl-elisp/dashboard"
-
                   "config/autoload"
+
+                  ;; submodules with lisp subdir.
+                  "auto-complete"
+                  "auto-complete/lib/popup"
+                  "auto-complete/lib/fuzzy"                  
                   "emms/lisp"
-                  "twittering-mode")))))
+                  ))
+
+        (split-string
+         (shell-command-to-string
+          "cd ~/.emacs.d && git submodule --quiet foreach pwd | grep site-lisp"
+          )))))
   
 (mapc (lambda (path) (add-to-list 'load-path path))
       (append
