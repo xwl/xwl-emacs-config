@@ -8,6 +8,31 @@
 
 (require 'cl)
 
+;; ,----
+;; | PATH & exec-path
+;; `----
+
+;; Note: w32 will also search for dos batch file under current directory by default.
+(case system-type
+  ((darwin)
+   (setenv "PATH"
+           (concat "/usr/local/bin:"
+                   (shell-command-to-string
+                    "source $HOME/.bashrc && printf $PATH")))
+   (setq exec-path (split-string (getenv "PATH") ":")))
+  
+  ((windows-nt)
+   ;; Seems gnuwin32 image library has to be set before emacs starts.
+   (let ((paths `( ;; "c:/Program Files/GnuWin32/bin"
+                  ,(file-truename "~/bin/git/bin")
+                  "C:/APPS/git/bin"
+                  ,(file-truename "~/bin/glo597wb/bin")
+                  )))
+     (setenv "PATH" (mapconcat 'identity `(,(getenv "PATH") ,@paths) ";"))
+     (setq exec-path (split-string (getenv "PATH") ";")))))
+
+(setenv "TERM" "xterm-color")
+
 (setq xwl-emacs-top "~/.emacs.d/site-lisp/")
 
 (setq xwl-makefile-subdir-list
@@ -17,16 +42,9 @@
         (mapcar (lambda (f) (concat xwl-emacs-top f))
                 '("."
                   
-                  "debian"
-                  "dictionary-el"
-                  "haskell-mode-2.4"
-                  "qterm"
-                  "ruby"
-                  "slightly-modified"
-                  "wget-el"
-                  "bbdb-vcard"
-                  "nyan-mode"
-
+                  "debian" "dictionary-el" "haskell-mode-2.4" "qterm" "ruby"
+                  "slightly-modified" "wget-el" "bbdb-vcard" "nyan-mode"
+                  
                   "xwl-elisp"
                   "xwl-elisp/dashboard"
                   "config/autoload"
@@ -86,35 +104,6 @@
                      ,(getenv "INFOPATH")
                      )
                    ":"))
-
-;; ,----
-;; | PATH & exec-path
-;; `----
-
-;; Note: w32 will also search for dos batch file under current directory by default.
-(when (eq system-type 'darwin)
-  ;; 从 .bashrc 拷贝来的！
-  (setenv "PATH"
-	  (mapconcat 'identity
-		     '("/Users/william/bin" "/Users/william/bin/scripts"
-		       "/usr/bin" "/bin" "/usr/sbin" "/sbin" "/usr/local/bin"
-		       "/usr/texbin" "/usr/X11/bin"
-		       "/usr/pkg/bin" "/usr/pkg/sbin"
-		       "/sw/bin" "/sw/sbin"
-		       "/usr/X11R6/bin" )
-		     ":")))
-
-(if (eq system-type 'windows-nt)
-    ;; Seems gnuwin32 image library has to be set before emacs starts.
-    (let ((paths `(;; "c:/Program Files/GnuWin32/bin"
-                  ,(file-truename "~/bin/git/bin")
-                  "C:/APPS/git/bin"
-                  ,(file-truename "~/bin/glo597wb/bin")
-                   )))
-      (setenv "PATH" (mapconcat 'identity `(,(getenv "PATH") ,@paths) ";"))
-      (setq exec-path (split-string (getenv "PATH") ";")))
-  (setenv "TERM" "xterm-color")
-  (setq exec-path (split-string (getenv "PATH") ":")))
 
 ;; load this earlier to use bzr version
 ;; (ignore-errors

@@ -75,5 +75,5 @@
     ignore = untracked      
 [submodule "site-lisp/paredit"]
 	path = site-lisp/paredit
-	url = http://mumble.net/~campbell/git/paredit.git/
+	url = git@github.com:xwl/paredit.git
     ignore = untracked      
