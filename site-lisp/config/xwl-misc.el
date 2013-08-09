@@ -161,11 +161,11 @@
 
 ;; fortune
 (defun xwl-fortune-of-the-day ()
-  "$ fortune-zh"
+  "$ fortune-zh || fortune"
   (interactive)
-  (message
-   (ansi-color-filter-apply
-    (shell-command-to-string "fortune-zh  2>/dev/null || fortune"))))
+  (message "%s"
+           (ansi-color-filter-apply
+            (shell-command-to-string "fortune-zh  2>/dev/null || fortune"))))
 
 (global-set-key (kbd "C-c m F") 'xwl-fortune-of-the-day)
 
@@ -504,7 +504,6 @@
               '("png" "jpeg" "jpg" "gif" "tiff" "tif" "xbm" "xpm"
                 "pbm" "pgm" "ppm" "pnm")))
 
-(setq xwl-run-when-idle-hook nil)  ; Functions to run when Emacs is idle.
 (when (or (executable-find "fortune-zh")
           (executable-find "fortune"))
   (add-hook 'xwl-run-when-idle-hook 'xwl-fortune-of-the-day))

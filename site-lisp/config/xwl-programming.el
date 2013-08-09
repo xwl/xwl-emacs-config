@@ -423,6 +423,11 @@ Thus generate a TAGs file."
 (setq magit-omit-untracked-dir-contents t)
 (global-set-key (kbd "C-c m m") 'magit-status)
 
+(defun xwl-magit-commit-amend-reuse ()
+  "commit --amend --reuse-message=HEAD"
+  (interactive)
+  (magit-git-command "commit --amend --reuse-message=HEAD"))
+
 (eval-after-load 'magit
   '(progn
      (defun magit-highlight-section ())
@@ -635,11 +640,22 @@ yacc source files."
   (local-set-key (kbd "|") 'insert-little-line)
   (local-set-key (kbd ":") 'insert-semicolon))
 
+(defun xwl-paredit-mode-hook ()
+  (local-set-key (kbd "C-c C-r") 'paredit-raise-sexp)
+  (local-set-key (kbd "C-c C-w") 'paredit-wrap-round)
+  
+  (local-set-key (kbd "C-c C-b")   'paredit-forward-barf-sexp)
+  (local-set-key (kbd "C-c C-S-b") 'paredit-backward-barf-sexp)
+  (local-set-key (kbd "C-c C-s")   'paredit-forward-slurp-sexp)
+  (local-set-key (kbd "C-c C-S-s") 'paredit-backward-slurp-sexp))
+
+(add-hook 'paredit-mode-hook 'xwl-paredit-mode-hook)
+
 ;;; elisp
 ;; -------
 
 (defun xwl-lisp-mode-hook ()
-  ;; (which-func-mode 1)
+  (which-func-mode 1)
 
   (set (make-local-variable 'outline-regexp) ";;;+ ")
   (outline-minor-mode 1)

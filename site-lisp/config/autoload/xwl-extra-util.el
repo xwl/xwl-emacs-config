@@ -507,5 +507,17 @@ Note: you are suggested to kill process buffer at the end of CALLBACK. "
                     (message "%s" (match-string 0)))
                   (kill-buffer))))
 
+;;;###autoload
+(defun xwl-show-key ()
+  "Insert as (kbd KEY) for elisp usage."
+  (interactive)
+  (let ((key
+         (help-key-description
+          (read-key-sequence "Describe key (or click or menu item): ") nil)))
+    (setq key (format "(kbd %S)" key))
+    (if current-prefix-arg
+        (insert key)
+      (message key))))
+
 (provide 'xwl-extra-util)
 ;;; xwl-extra-util.el ends here
