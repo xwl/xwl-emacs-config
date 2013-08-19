@@ -587,8 +587,10 @@
 
 (when (> emacs-major-version 23)
   (electric-pair-mode 1)
-  (electric-indent-mode 1)
-  )
+  (electric-indent-mode 1))
+
+(blink-cursor-mode -1)
+
 (provide 'xwl-convenience)
 
 ;;; xwl-convenience.el ends here
