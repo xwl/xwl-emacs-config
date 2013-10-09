@@ -1615,6 +1615,108 @@ Useful for packing c/c++ functions with one line or empty body."
 
 (add-hook 'makefile-mode-hook (lambda () (gtags-mode 1)))
 
+;;; imenu
+(require 'imenu)
+(defun imenu--generic-function (patterns)
+  "Return an index alist of the current buffer based on PATTERNS.
+PATTERNS should be an alist which has the same form as
+`imenu-generic-expression'.
+
+The return value is an alist of the form
+ (INDEX-NAME . INDEX-POSITION)
+or
+ (INDEX-NAME INDEX-POSITION FUNCTION ARGUMENTS...)
+The return value may also consist of nested index alists like:
+ (INDEX-NAME . INDEX-ALIST)
+depending on PATTERNS."
+  (let ((index-alist (list 'dummy))
+        (case-fold-search (if (or (local-variable-p 'imenu-case-fold-search)
+				  (not (local-variable-p 'font-lock-defaults)))
+			      imenu-case-fold-search
+			    (nth 2 font-lock-defaults)))
+        (old-table (syntax-table))
+        (table (copy-syntax-table (syntax-table)))
+        (slist imenu-syntax-alist))
+    ;; Modify the syntax table used while matching regexps.
+    (dolist (syn slist)
+      ;; The character(s) to modify may be a single char or a string.
+      (if (numberp (car syn))
+	  (modify-syntax-entry (car syn) (cdr syn) table)
+        (mapc (lambda (c)
+                (modify-syntax-entry c (cdr syn) table))
+              (car syn))))
+    (goto-char (point-max))
+    (unwind-protect			; For syntax table.
+	(save-match-data
+	  (set-syntax-table table)
+	  ;; Map over the elements of imenu-generic-expression
+	  ;; (typically functions, variables ...).
+	  (dolist (pat patterns)
+	    (let ((menu-title (car pat))
+		  (regexp (nth 1 pat))
+		  (index (nth 2 pat))
+		  (function (nth 3 pat))
+		  (rest (nthcdr 4 pat))
+		  start beg)
+	      ;; Go backwards for convenience of adding items in order.
+	      (goto-char (point-max))
+	      (while (and (if (functionp regexp)
+			      (funcall regexp)
+			    (and
+			     (re-search-backward regexp nil t)
+			     ;; Do not count invisible definitions.
+			     (let ((invis (invisible-p (point))))
+			       (or (not invis)
+				   (progn
+				     (while (and invis
+						 (not (bobp)))
+				       (setq invis (not (re-search-backward
+							 regexp nil 'move))))
+				     (not invis))))))
+			  ;; Exit the loop if we get an empty match,
+			  ;; because it means a bad regexp was specified.
+			  (not (= (match-beginning 0) (match-end 0))))
+		(setq start (point))
+                ;; Record the start of the line in which the match starts.
+                ;; That's the official position of this definition.
+                (goto-char (match-beginning index))
+                (beginning-of-line)
+                (setq beg (point))
+                ;; Add this sort of submenu only when we've found an
+                ;; item for it, avoiding empty, duff menus.
+                (unless (assoc menu-title index-alist)
+                  (push (list menu-title) index-alist))
+                (if imenu-use-markers
+                    (setq beg (copy-marker beg)))
+                (let ((item
+                       (if function
+                           (nconc (list (match-string-no-properties index)
+                                        beg function)
+                                  rest)
+                         (cons (match-string-no-properties index)
+                               beg)))
+                      ;; This is the desired submenu,
+                      ;; starting with its title (or nil).
+                      (menu (assoc menu-title index-alist)))
+                  ;; Insert the item unless it is already present.
+                  (unless (nth 8 (syntax-ppss)) ; inside comment block? --------------------- xwl
+                    (unless (member item (cdr menu))
+                      (setcdr menu
+                              (cons item (cdr menu))))))
+		;; Go to the start of the match, to make sure we
+		;; keep making progress backwards.
+		(goto-char start))))
+	  (set-syntax-table old-table)))
+    ;; Sort each submenu by position.
+    ;; This is in case one submenu gets items from two different regexps.
+    (dolist (item index-alist)
+      (when (listp item)
+	(setcdr item (sort (cdr item) 'imenu--sort-by-position))))
+    (let ((main-element (assq nil index-alist)))
+      (nconc (delq main-element (delq 'dummy index-alist))
+             (cdr main-element)))))
+
+
 (provide 'xwl-programming)
 
 ;;; xwl-programming.el ends here
