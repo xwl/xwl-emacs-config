@@ -60,7 +60,7 @@
   (electric-spacing-mode 1)
   (abbrev-mode 1)
   (cwarn-mode 1)
-   (which-func-mode 1)
+  (which-func-mode 1)
   (when (fboundp 'doxymacs-mode)
     (doxymacs-mode 1)
     (doxymacs-font-lock))
@@ -887,7 +887,8 @@ If SCHEME?, `run-scheme'."
            `(("\\.tex$" "xelatex %f" "%n.pdf"
               ,(cdr (assq system-type
                           '((darwin . "open -a Preview %n.pdf &")
-                            (windows-nt . "start %n.pdf" )))))
+                            (windows-nt . "start %n.pdf" )
+                            (gnu/linux . "gnome-open %n.pdf")))))
 
              ("\\.dot$"
               ,(concat "dot -Tjpg %f -o %n.jpg "
@@ -1556,7 +1557,7 @@ Useful for packing c/c++ functions with one line or empty body."
      ;; As tab for completion takes long for large project, disable them for
      ;; very large projects.
      (setq xwl-gtags-large-directories-regexp
-           (regexp-opt '("s40_sw" "memory_component_")))
+           (regexp-opt '("s40_sw" "memory_component_" "linux")))
 
      (defmacro xwl-advice-gtags-for-large-projects (function)
        `(defadvice ,function (around disable-ido-for-large-project activate)

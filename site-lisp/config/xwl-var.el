@@ -39,10 +39,11 @@
   (let ((count (cdr (assq system-type
                           '((windows-nt . "-n 1")
                             (gnu/linux . "-c 1"))))))
-    (and (string= (user-login-name) "wixu")
-         (not (eq system-type 'darwin))
-         (zerop (shell-command
-                 (format "ping %s 172.16.42.42" count))))))
+    (or (zerop (shell-command "ifconfig | grep 10.233"))
+        (and (string= (user-login-name) "wixu")
+             (not (eq system-type 'darwin))
+             (zerop (shell-command
+                     (format "ping %s 172.16.42.42" count)))))))
 
 (setq xwl-at-company? (xwl-at-company))
 

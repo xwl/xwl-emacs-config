@@ -149,7 +149,7 @@ be with length 3 extentions !"
 
 (define-key dired-mode-map (kbd "o") 'dired-omit-mode)
 
-(add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode 1)))
+;; (add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode 1)))
 
 
 ;;; Sort

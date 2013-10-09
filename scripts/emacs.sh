@@ -1,13 +1,18 @@
 alias ec='LC_ALL=zh_CN.utf8 TERM=xterm-256color emacsclient -t -e "(command-execute (kbd \"C-c m s\"))"'
 
 export ALTERNATE_EDITOR=~/.emacs.d/scripts/emacs-daemon
+export PATH=$PATH:~/.emacs.d/scripts/git_util:~/.emacs.d/scripts/http_proxy4git/connect
 
-if [[ `uname -s` != "Darwin" ]]; then
-    export GIT_SSH=~/.emacs.d/scripts/http_proxy4git/socks5proxy_ssh
+if [[ $http_proxy = "" ]]; then
+    echo "Empty http_proxy!"
+    exit
 fi
 
-export PATH=$PATH:~/.emacs.d/scripts/git_util
-
+connect > /dev/null 2>&1 && {
+    export GIT_SSH=~/.emacs.d/scripts/http_proxy4git/socks5proxy_ssh;
+    git config --global core.gitproxy ~/.emacs.d/scripts/http_proxy4git/socks5proxy
+    git config --global http.proxy $http_proxy
+}
 
 # ,----
 # | git 
@@ -20,7 +25,7 @@ function git_local ()
 
 function git_remote ()
 {
-    LC_ALL=C git branch -vv | grep ^\* | cut -d[ -f2 | cut -d] -d\: -f1
+    LC_ALL=C git branch -vv | grep ^\* | cut -d[ -f2 | cut -d: -f1 | cut -d] -f1
 }
 
 function git_remote_short ()

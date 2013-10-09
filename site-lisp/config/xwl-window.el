@@ -41,6 +41,7 @@
          ((equal system-name "debian-iMac") 15)
          ((string-match system-name "beleod") 14)
          ((string-match system-name "tokyolove.local") 14)
+         ((string-match system-name "william-ubuntu") 16)
          (t 14)))
 
        (cn-font-size
