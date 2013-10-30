@@ -4,16 +4,18 @@ alias ec='LC_ALL=zh_CN.utf8 TERM=xterm-256color emacsclient -t'
 export ALTERNATE_EDITOR=~/.emacs.d/scripts/emacs-daemon
 export PATH=$PATH:~/.emacs.d/scripts/git_util:~/.emacs.d/scripts/http_proxy4git/connect
 
-if [[ $http_proxy = "" ]]; then
-    echo "Empty http_proxy!"
-    exit
-fi
+if [[ `uname -s` != "Darwin" ]]; then
+    if [[ $http_proxy = "" ]]; then
+        echo "Empty http_proxy!"
+        exit
+    fi
 
-connect > /dev/null 2>&1 && {
-    export GIT_SSH=~/.emacs.d/scripts/http_proxy4git/socks5proxy_ssh;
-    git config --global core.gitproxy ~/.emacs.d/scripts/http_proxy4git/socks5proxy
-    git config --global http.proxy $http_proxy
-}
+    connect > /dev/null 2>&1 && {
+        export GIT_SSH=~/.emacs.d/scripts/http_proxy4git/socks5proxy_ssh;
+        git config --global core.gitproxy ~/.emacs.d/scripts/http_proxy4git/socks5proxy
+        git config --global http.proxy $http_proxy
+    }
+fi
 
 # ,----
 # | git 
