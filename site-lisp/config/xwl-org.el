@@ -171,7 +171,13 @@ If EXTENSIONS is given, only match these."
 (setq org-export-html-table-tag "<table border=\"2\" cellpadding=\"6\"")
 
 (setq org-export-html-style-include-default nil
-      org-export-html-style "<link rel=\"stylesheet\" type=\"text/css\" href=\"org.css\">")
+      ;;"<link rel=\"stylesheet\" type=\"text/css\" href=\"org.css\">")
+      org-export-html-style (concat 
+                             "<style type=\"text/css\">"
+                             (with-temp-buffer
+                               (insert-file-contents "~/.emacs.d/site-lisp/config/org.css")
+                               (buffer-string))
+                             "</style>"))
 
 (setq org-startup-with-inline-images t)
 
