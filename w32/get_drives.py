@@ -15,6 +15,6 @@ for drive in win32api.GetLogicalDriveStrings().strip("\000").split("\000"):
     try: 
         sys.stdout.write("(\"" + drive[0] + "\" . \"" 
                          + win32api.GetVolumeInformation(drive)[0] + "\")")
-    except pywintypes.error: 
+    except (pywintypes.error): 
         pass
-print ")"
+print (")")

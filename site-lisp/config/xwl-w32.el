@@ -1,6 +1,6 @@
-;;; xwl-vim.el --- w32 specific utilites
+;;; xwl-w32.el --- w32 specific utilites
 
-;; Copyright (C) 2010, 2012 William Xu
+;; Copyright (C) 2010, 2012, 2013 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -23,17 +23,20 @@
 
 (defun xwl-w32-get-drives ()
   "Get a list of drive names from get_drives.py."
-  (when (executable-find "python")
-    (read
-     (shell-command-to-string
-      (concat "python "
-	      (shell-quote-argument
-	       (expand-file-name "~/w32/get_drives.py")))))))
+  (let ((cmd (concat "python "
+                     (shell-quote-argument
+                      (expand-file-name
+                       (concat xwl-emacs-top "/../w32/get_drives.py"))))))
+    (with-temp-buffer
+      (when (zerop (shell-command cmd (current-buffer)))
+        (buffer-string)))))
 
 (setq xwl-w32-drive-separator ".")
 
 (when xwl-w32?
   (setq xwl-w32-drives (xwl-w32-get-drives)))
+
+(setenv "CYGWIN" "nodosfilewarning")
 
 (provide 'xwl-w32)
 ;;; xwl-w32.el ends here

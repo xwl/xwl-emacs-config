@@ -36,10 +36,13 @@
   ;;        (or (zerop (shell-command "ipconfig | grep 172.28"))
   ;;            (zerop (shell-command "ipconfig | grep 10.162"))))
 
-  (let ((count (cdr (assq system-type
-                          '((windows-nt . "-n 1")
-                            (gnu/linux . "-c 1"))))))
-    (or (zerop (shell-command "ifconfig | grep 10.233"))
+  (let (count cmd)
+    (case  system-type
+      ((windows-nt) (setq count "-n 1"
+                          cmd "ipconfig"))
+      (t (setq count "-c 1"
+               cmd "ifconfig")))
+    (or (zerop (shell-command (concat cmd " | grep 10.233")))
         (and (string= (user-login-name) "wixu")
              (not (eq system-type 'darwin))
              (zerop (shell-command

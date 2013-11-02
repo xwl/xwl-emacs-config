@@ -24,7 +24,7 @@
   ((windows-nt)
    ;; Seems gnuwin32 image library has to be set before emacs starts.
    (let ((paths `( ;; "c:/Program Files/GnuWin32/bin"
-                  ,(file-truename "~/bin/git/bin")
+                  ,(file-truename "c:/Program Files/Git/bin")
                   "C:/APPS/git/bin"
                   ,(file-truename "~/bin/glo597wb/bin")
                   )))
@@ -57,9 +57,13 @@
                   ))
 
         (split-string
-         (shell-command-to-string
-          "cd ~/.emacs.d && git submodule --quiet foreach pwd | grep site-lisp"
-          )))))
+         (with-temp-buffer
+           (unless (zerop (shell-command
+                           "cd ~/.emacs.d && git submodule --quiet foreach pwd | grep site-lisp"
+                           (current-buffer)))
+             (erase-buffer)
+             (insert-file-contents "~/.emacs.d/submodules")
+             (buffer-string)))))))
   
 (mapc (lambda (path) (add-to-list 'load-path path))
       (append
@@ -104,14 +108,6 @@
                      ,(getenv "INFOPATH")
                      )
                    ":"))
-
-;; load this earlier to use bzr version
-;; (ignore-errors
-;;   (unless (featurep 'cedet)
-;;     (unless (eq system-type 'windows-nt)
-;;       (load "~/repo/bzr/cedet/common/cedet.el")
-;;       ;; (global-ede-mode 1)
-;;       (semantic-load-enable-gaudy-code-helpers))))
 
 ;; no need of `provide'.
 

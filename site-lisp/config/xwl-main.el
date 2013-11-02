@@ -57,9 +57,9 @@
 
 (unless (file-exists-p "~/.emacs.d/site-lisp/xwl-autoloads.el")
   (with-current-buffer (find-file-noselect
-                      "~/.emacs.d/site-lisp/xwl-makefile.el")
-  (eval-buffer)
-  (xwl-makefile-all)))
+                        "~/.emacs.d/site-lisp/xwl-makefile.el")
+    (eval-buffer)
+    (xwl-makefile-all)))
 
 (require 'xwl-autoloads)
 (require 'xwl-convenience)
@@ -97,6 +97,13 @@
 (when window-system
   (require 'xwl-window)
   )
+
+(unless (file-exists-p "~/.emacs.d/elpa")
+  (package-list-packages)
+  (package-install 'oauth2)
+  (with-current-buffer (find-file-noselect
+                        "~/.emacs.d/site-lisp/xwl-makefile.el")
+    (xwl-makefile-all)))
 
 ;;; not used
 

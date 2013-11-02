@@ -1,0 +1,7 @@
+#!/bin/sh
+
+git config user.name "William Xu"
+git config user.email "william.xwl@gmail.com"
+git config core.autocrlf false
+
+git submodule --quiet foreach pwd | grep site-lisp | sed 's:.*.emacs.d:~/.emacs.d:' > submodules

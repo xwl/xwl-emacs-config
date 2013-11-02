@@ -445,6 +445,9 @@
 
   ;; On w32: `emacsclient.exe --server-file ~\.emacs.d\server\server -n %*'
   (unless (server-running-p)
+    (let ((server-dir "~/.emacs.d/server"))
+      (unless (file-exists-p server-dir)
+        (mkdir server-dir)))
     (server-start))
 
   (run-with-idle-timer 600 t (lambda () (run-hooks 'xwl-run-when-idle-hook)))
