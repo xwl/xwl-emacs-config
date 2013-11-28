@@ -55,7 +55,10 @@
   ;; (hs-minor-mode 1)
   ;; (hs-hide-all)
   ;; (xwl-hs-minor-mode-hook)
-  ;; (hide-ifdef-mode 1)
+
+  ;; (when (xwl-hide-ifdef-setup)
+  ;;   (hide-ifdef-mode 1))
+  
   (auto-fill-mode -1)
   (electric-spacing-mode 1)
   (abbrev-mode 1)
@@ -67,8 +70,6 @@
   (subword-mode 1)
   ;; (flyspell-prog-mode)
   (gtags-mode 1)
-
-  (setq hide-ifdef-initially t)
 
   ;; == keys ==
   (local-unset-key (kbd "."))
@@ -124,6 +125,12 @@
     (local-set-key "}" 'c-electric-brace)))
 
 (add-hook 'c-mode-common-hook 'xwl-c-mode-common-hook)
+
+;; (require 'hideif)
+;; (setq hide-ifdef-shadow t)
+;; (setq hide-ifdef-initially t)
+
+(add-to-list 'auto-mode-alist '("\\.c$" . c++-mode))
 
 ;;; Java
 ;; ------
@@ -1653,59 +1660,59 @@ depending on PATTERNS."
 	  ;; (typically functions, variables ...).
 	  (dolist (pat patterns)
 	    (let ((menu-title (car pat))
-		  (regexp (nth 1 pat))
-		  (index (nth 2 pat))
-		  (function (nth 3 pat))
-		  (rest (nthcdr 4 pat))
-		  start beg)
+              (regexp (nth 1 pat))
+              (index (nth 2 pat))
+              (function (nth 3 pat))
+              (rest (nthcdr 4 pat))
+              start beg)
 	      ;; Go backwards for convenience of adding items in order.
 	      (goto-char (point-max))
 	      (while (and (if (functionp regexp)
-			      (funcall regexp)
-			    (and
-			     (re-search-backward regexp nil t)
-			     ;; Do not count invisible definitions.
-			     (let ((invis (invisible-p (point))))
-			       (or (not invis)
-				   (progn
-				     (while (and invis
-						 (not (bobp)))
-				       (setq invis (not (re-search-backward
-							 regexp nil 'move))))
-				     (not invis))))))
-			  ;; Exit the loop if we get an empty match,
-			  ;; because it means a bad regexp was specified.
-			  (not (= (match-beginning 0) (match-end 0))))
-		(setq start (point))
-                ;; Record the start of the line in which the match starts.
-                ;; That's the official position of this definition.
-                (goto-char (match-beginning index))
-                (beginning-of-line)
-                (setq beg (point))
-                ;; Add this sort of submenu only when we've found an
-                ;; item for it, avoiding empty, duff menus.
-                (unless (assoc menu-title index-alist)
-                  (push (list menu-title) index-alist))
-                (if imenu-use-markers
-                    (setq beg (copy-marker beg)))
-                (let ((item
-                       (if function
-                           (nconc (list (match-string-no-properties index)
-                                        beg function)
-                                  rest)
-                         (cons (match-string-no-properties index)
-                               beg)))
-                      ;; This is the desired submenu,
-                      ;; starting with its title (or nil).
-                      (menu (assoc menu-title index-alist)))
-                  ;; Insert the item unless it is already present.
-                  (unless (nth 8 (syntax-ppss)) ; inside comment block? --------------------- xwl
-                    (unless (member item (cdr menu))
-                      (setcdr menu
-                              (cons item (cdr menu))))))
-		;; Go to the start of the match, to make sure we
-		;; keep making progress backwards.
-		(goto-char start))))
+                          (funcall regexp)
+                        (and
+                         (re-search-backward regexp nil t)
+                         ;; Do not count invisible definitions.
+                         (let ((invis (invisible-p (point))))
+                           (or (not invis)
+                               (progn
+                                 (while (and invis
+                                             (not (bobp)))
+                                   (setq invis (not (re-search-backward
+                                                     regexp nil 'move))))
+                                 (not invis))))))
+                      ;; Exit the loop if we get an empty match,
+                      ;; because it means a bad regexp was specified.
+                      (not (= (match-beginning 0) (match-end 0))))
+            (setq start (point))
+            ;; Record the start of the line in which the match starts.
+            ;; That's the official position of this definition.
+            (goto-char (match-beginning index))
+            (beginning-of-line)
+            (setq beg (point))
+            ;; Add this sort of submenu only when we've found an
+            ;; item for it, avoiding empty, duff menus.
+            (unless (assoc menu-title index-alist)
+              (push (list menu-title) index-alist))
+            (if imenu-use-markers
+                (setq beg (copy-marker beg)))
+            (let ((item
+                   (if function
+                       (nconc (list (match-string-no-properties index)
+                                    beg function)
+                              rest)
+                     (cons (match-string-no-properties index)
+                           beg)))
+                  ;; This is the desired submenu,
+                  ;; starting with its title (or nil).
+                  (menu (assoc menu-title index-alist)))
+              ;; Insert the item unless it is already present.
+              (unless (nth 8 (syntax-ppss)) ; inside comment block? --------------------- xwl
+                (unless (member item (cdr menu))
+                  (setcdr menu
+                          (cons item (cdr menu))))))
+            ;; Go to the start of the match, to make sure we
+            ;; keep making progress backwards.
+            (goto-char start))))
 	  (set-syntax-table old-table)))
     ;; Sort each submenu by position.
     ;; This is in case one submenu gets items from two different regexps.
