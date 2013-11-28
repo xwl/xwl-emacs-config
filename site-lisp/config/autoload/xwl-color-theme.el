@@ -311,6 +311,9 @@ Created on 2005-05-13."
      (woman-italic-face ((t (:italic t :underline t :slant italic))))
      (woman-unknown-face ((t (:foreground "cyan"))))
 
+     ;; misc
+     (shadow ((t (:background "grey15"))))
+
      ))
 
   (setq xwl-black-background? t)
