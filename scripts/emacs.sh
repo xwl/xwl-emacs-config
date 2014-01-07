@@ -1,4 +1,5 @@
-alias ec='LC_ALL=zh_CN.utf8 TERM=xterm-256color emacsclient -t -e "(command-execute (kbd \"C-c m s\"))"'
+# alias ec='LC_ALL=zh_CN.utf8 TERM=xterm-256color emacsclient -t -e "(command-execute (kbd \"C-c m s\"))"'
+alias ec='LC_ALL=zh_CN.utf8 TERM=xterm-256color emacsclient -t'
 
 export ALTERNATE_EDITOR=~/.emacs.d/scripts/emacs-daemon
 export PATH=$PATH:~/.emacs.d/scripts/git_util:~/.emacs.d/scripts/http_proxy4git/connect

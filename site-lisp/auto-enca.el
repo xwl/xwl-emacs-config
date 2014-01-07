@@ -24,6 +24,7 @@
 
 ;;; Code:
 
+;;;###autoload
 (defun enca-detect-coding (arg)
   (if (not (and (eq (car arg) 'insert-file-contents) (nth 1 arg)))
       'undecided

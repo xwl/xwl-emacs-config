@@ -307,24 +307,11 @@
                 "~/.notes/life_blog")))
 
 (defun xwl-find-file-hook ()
-  (let ((file (expand-file-name (buffer-file-name))))
-    ;; ;; gpg todo
-    ;; (when (and (xs-find-first (lambda (f)
-    ;;                             (string= file f))
-    ;;                           xwl-sensitive-files)
-    ;;            (xwl-has-pgg-header-p))
-    ;;   (pgg-decrypt)
-    ;;   (write-file file)
-    ;;   ;; Apply local file var, etc.
-    ;;   (revert-buffer))
-    ))
-
-(defun xwl-has-pgg-header-p ()
   (save-excursion
     (goto-char (point-min))
-    (re-search-forward
-     (mapconcat 'identity pgg-armor-header-lines "\\|")
-     nil t 1)))
+    (when (search-forward "\r\n" nil t 1)
+      (let ((revert-without-query (list (buffer-file-name))))
+        (revert-buffer-with-coding-system 'dos)))))
 
 (add-hook 'find-file-hook 'xwl-find-file-hook)
 
@@ -365,18 +352,7 @@
                 (delete-trailing-whitespace)))))
 
 (defun xwl-kill-buffer-hook ()
-  (let ((file (buffer-file-name)))
-    ;; ;; pgp
-    ;; (when (and file
-    ;;            (file-exists-p file)
-    ;;            (xs-find-first (lambda (f)
-    ;;                             (string= file f))
-    ;;                           xwl-sensitive-files)
-    ;;            (not (xwl-has-pgg-header-p)))
-    ;;   (let ((inhibit-read-only t))
-    ;;     (pgg-encrypt '("weilin"))
-    ;;     (write-file file)))
-    ))
+  )
 
 (add-hook 'kill-buffer-hook 'xwl-kill-buffer-hook)
 
@@ -709,14 +685,14 @@
 ;; | s60lxr
 ;; `----
 
-(global-set-key (kbd "C-c s") 'xwl-s60lxr-search)
+;; (global-set-key (kbd "C-c s") 'xwl-s60lxr-search)
 
 (defun xwl-s60lxr-search (filename str)
   (interactive "s(s60lxr) File named: \ns(s60lxr) Containing: ")
   (unless xwl-s60lxr-release
     (xwl-s60lxr-generate-releases))
   (xwl-browse-url-firefox-tab-only
-   (format "http://s60lxr/search?v=%s&filestring=%s&string=%s"
+   (format "http://s40lxr.europe.nokia.com/search?v=%s&filestring=%s&string=%s"
            xwl-s60lxr-release
            (url-hexify-string filename)
            (url-hexify-string str))))
@@ -967,7 +943,7 @@ prompting.  If file is a directory perform a `find-file' on it."
      ))
 
 (add-hook 'xwl-run-when-idle-hook 'recentf-save-list)
-(add-hook 'xwl-run-when-idle-hook (lambda () (command-execute (kbd "<f8>"))))
+;; (add-hook 'xwl-run-when-idle-hook (lambda () (command-execute (kbd "<f8>")))) ; org agenda
 
 (when (daemonp)
   (global-set-key (kbd "C-x C-c") 'delete-frame)
@@ -996,6 +972,10 @@ prompting.  If file is a directory perform a `find-file' on it."
 (define-key hi-lock-map (kbd "C-x w h") 'xwl-highlight-phrase)
 (define-key hi-lock-map (kbd "C-x w u") 'xwl-unhighlight-regexp)
 
+;;; delete window, winner undo. won't respect dedicated window setup.
+(global-set-key (kbd "C-c s") 'sticky-window-keep-window-visible)
+(global-set-key (kbd "C-x 0") 'sticky-window-delete-window)
+(global-set-key (kbd "C-x 1") 'sticky-window-delete-other-windows)
 
 (provide 'xwl-misc)
 

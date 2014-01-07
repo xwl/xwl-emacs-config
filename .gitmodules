@@ -77,3 +77,7 @@
 	path = site-lisp/paredit
 	url = git@github.com:xwl/paredit.git
     ignore = untracked      
+[submodule "site-lisp/git-modes"]
+	path = site-lisp/git-modes
+	url = git://github.com/magit/git-modes.git
+    ignore = untracked      
