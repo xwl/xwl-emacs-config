@@ -62,8 +62,8 @@
                            "cd ~/.emacs.d && git submodule --quiet foreach pwd | grep site-lisp"
                            (current-buffer)))
              (erase-buffer)
-             (insert-file-contents "~/.emacs.d/submodules")
-             (buffer-string)))))))
+             (insert-file-contents "~/.emacs.d/submodules"))
+           (buffer-string))))))
   
 (mapc (lambda (path) (add-to-list 'load-path path))
       (append
