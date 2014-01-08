@@ -30,6 +30,11 @@
 
 ;;;###autoload
 (defun color-theme-xwl-console ()
+  (load-theme 'xwl-dark)
+  (setq xwl-black-background? t)
+  (run-hooks 'color-theme-xwl-console-hook))
+
+(defun color-theme-xwl-console-old ()
   "Color theme base on console colors with `color-theme-print'.
 Created on 2005-05-13."
   (interactive)

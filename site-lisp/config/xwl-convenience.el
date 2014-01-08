@@ -190,6 +190,7 @@
                                  "*anything"
                                  "*All*"
                                  "*magit"
+                                 "*Custom"
                                  ))))
      (setq auto-less-exclude-modes
            (append auto-less-exclude-modes

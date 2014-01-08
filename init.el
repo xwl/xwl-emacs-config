@@ -9,11 +9,16 @@
  '(bbdb-update-records-mode (quote (quote searching)))
  '(bookmark-save-flag 1)
  '(canlock-password "bbb62aab53d41c421d28ea701c910a5c34ea84be")
+ '(custom-safe-themes
+   (quote
+    ("c053103accca1549376a67e558ede49bea5c4aae8344952db4e6558163d6cb21" default)))
  '(dired-dwim-target t)
  '(dired-isearch-filenames t)
  '(enable-recursive-minibuffers t)
  '(file-template-insert-automatically t)
- '(file-template-paths (quote ("~/insert/" "/usr/share/emacs/insert/" "~/.emacs.d/templates/")))
+ '(file-template-paths
+   (quote
+    ("~/insert/" "/usr/share/emacs/insert/" "~/.emacs.d/templates/")))
  '(file-template-search-current-dir nil)
  '(glasses-original-separator "_")
  '(glasses-separator "-")
@@ -29,7 +34,11 @@
  '(ido-auto-merge-delay-time 1000)
  '(message-syntax-checks (quote ((sender . disabled) (signature . disabled))))
  '(ns-command-modifier (quote meta))
- '(safe-local-variable-values (quote ((line-spacing . 5) (flyspell-mode . t) (longlines-mode . t))))
+ '(safe-local-variable-values
+   (quote
+    ((line-spacing . 5)
+     (flyspell-mode . t)
+     (longlines-mode . t))))
  '(thinks-from (quote bottom-diagonal)))
 
 (custom-set-faces
