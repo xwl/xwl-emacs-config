@@ -1,6 +1,6 @@
 ;;; xwl-var.el --- Global variables
 
-;; Copyright (C) 2010, 2011, 2013 William Xu
+;; Copyright (C) 2010, 2011, 2013, 2014 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -52,7 +52,7 @@
 
 (setq xwl-w3m-arguments '())
 
-(setq xwl-black-background? (eq system-type 'gnu/linux))
+(setq xwl-black-background? (memq system-type '(windows-nt gnu/linux)))
 
 (provide 'xwl-var)
 

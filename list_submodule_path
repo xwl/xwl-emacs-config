@@ -1,0 +1,1 @@
+git submodule foreach --quiet pwd | sed -e 's:.*site-lisp:~/.emacs.d:' -e 's:.*w32:~/.emacs.d/w32:' -e "s:/xwl/:/site-lisp/xwl/:"

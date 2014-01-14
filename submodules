@@ -1,9 +1,10 @@
-~/.emacs.d/site-lisp/auto-complete
-~/.emacs.d/site-lisp/emms
-~/.emacs.d/site-lisp/magit
-~/.emacs.d/site-lisp/paredit
-~/.emacs.d/site-lisp/twittering-mode
-~/.emacs.d/site-lisp/xwl-elisp
+~/.emacs.d/auto-complete
+~/.emacs.d/emms
+~/.emacs.d/git-modes
+~/.emacs.d/magit
+~/.emacs.d/paredit
+~/.emacs.d/twittering-mode
+~/.emacs.d/xwl-elisp
 ~/.emacs.d/site-lisp/xwl/buffer-action
 ~/.emacs.d/site-lisp/xwl/cal-china-x
 ~/.emacs.d/site-lisp/xwl/chicken-scheme-extras
@@ -17,3 +18,4 @@
 ~/.emacs.d/site-lisp/xwl/less
 ~/.emacs.d/site-lisp/xwl/qml-mode
 ~/.emacs.d/site-lisp/xwl/wubi
+~/.emacs.d/w32/mintty-color-solarized

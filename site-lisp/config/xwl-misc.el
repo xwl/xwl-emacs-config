@@ -1,6 +1,6 @@
 ;;; xwl-misc.el --- miscellaneous
 
-;; Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012, 2013 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -448,8 +448,8 @@
     (delete-other-windows)
     (message (substring (emacs-version) 0 16))))
 
-(unless noninteractive
-  (add-hook 'after-init-hook 'xwl-after-init-hook))
+(when (or (not noninteractive))
+  (add-hook 'emacs-startup-hook 'xwl-after-init-hook))
 
 (savehist-mode 1)
 
@@ -692,13 +692,16 @@
 
 (defun xwl-s60lxr-search (filename str)
   (interactive "s(s60lxr) File named: \ns(s60lxr) Containing: ")
-  (unless xwl-s60lxr-release
-    (xwl-s60lxr-generate-releases))
-  (xwl-browse-url-firefox-tab-only
-   (format "http://s40lxr.europe.nokia.com/search?v=%s&filestring=%s&string=%s"
-           xwl-s60lxr-release
-           (url-hexify-string filename)
-           (url-hexify-string str))))
+  (require 'org)
+  (let ((host (org-reverse-string "moc.aikon.eporue.rxl04s")))
+    (unless xwl-s60lxr-release
+      (xwl-s60lxr-generate-releases))
+    (xwl-browse-url-firefox-tab-only
+     (format "http://%s/search?v=%s&filestring=%s&string=%s"
+             host
+             xwl-s60lxr-release
+             (url-hexify-string filename)
+             (url-hexify-string str)))))
 
 (setq xwl-s60lxr-release nil)
 

@@ -67,8 +67,6 @@
          "#emacs-cn")      ; "#bitlbee"
         ;; ("linuxfire"
         ;;  "#linuxfire")
-        ;; ("irc.lnx.nokia.com"
-        ;;  "#mac" "#linux" "#symbianperformance")
         ))
 
 (defun his-bitlbee-identify ()

@@ -1,6 +1,6 @@
 ;;; xwl-color-theme.el --- color theme setup
 
-;; Copyright (C) 2009, 2010, 2011, 2012, 2013 William Xu
+;; Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -30,7 +30,11 @@
 
 ;;;###autoload
 (defun color-theme-xwl-console ()
-  (load-theme 'xwl-dark)
+  (case system-type
+    ((windows-nt)
+     (load-theme 'xwl-dark-w32 t))
+    (t 
+     (load-theme 'xwl-dark t)))
   (setq xwl-black-background? t)
   (run-hooks 'color-theme-xwl-console-hook))
 

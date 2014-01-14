@@ -1,6 +1,6 @@
 ;;; xwl-path.el --- path setup
 
-;; Copyright (C) 2009, 2010, 2011, 2012, 2013 William Xu
+;; Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -40,17 +40,14 @@
        'file-exists-p
        (append
         (mapcar (lambda (f) (concat xwl-emacs-top f))
-                '("."
+                `(,@(remove-if
+                     (lambda (f) (or (not (file-directory-p (concat xwl-emacs-top "/" f)))
+                                     (member f '(".." "config" "emms"))))
+                     (directory-files xwl-emacs-top))
                   
-                  "debian" "dictionary-el" "haskell-mode-2.4" "qterm" "ruby"
-                  "slightly-modified" "wget-el" "bbdb-vcard" "nyan-mode"
-                  
-                  "xwl-elisp"
+                  ;; with lisp subdir
                   "xwl-elisp/dashboard"
                   "config/autoload"
-
-                  ;; submodules with lisp subdir.
-                  "auto-complete"
                   "auto-complete/lib/popup"
                   "auto-complete/lib/fuzzy"                  
                   "emms/lisp"

@@ -195,7 +195,6 @@
         (erc-ssl :server sv :port 16669 :nick nick :password pwdeb)
         ;; (erc :server sv :port 16668 :nick nick :password pwerc)
 
-        (erc :server "irc.lnx.nokia.com" :port 6667 :nick "xwl" :password pwdeb)
         )
 
     (erc :server "irc.debian.org"       :port 6669 :nick "xwl" :password pwdeb)

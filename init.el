@@ -11,7 +11,7 @@
  '(canlock-password "bbb62aab53d41c421d28ea701c910a5c34ea84be")
  '(custom-safe-themes
    (quote
-    ("c053103accca1549376a67e558ede49bea5c4aae8344952db4e6558163d6cb21" default)))
+    ("bb3eee872cb8543be8ca33d6de29e5997fabc1a2380e8e1b5ab7534906523842" "c053103accca1549376a67e558ede49bea5c4aae8344952db4e6558163d6cb21" default)))
  '(dired-dwim-target t)
  '(dired-isearch-filenames t)
  '(enable-recursive-minibuffers t)

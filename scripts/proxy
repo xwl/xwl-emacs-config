@@ -2,7 +2,6 @@
 
 desproxy irc.debian.org        6669  $desproxy_http_proxy $desproxy_http_port 16669 &
 desproxy irc.freenode.net      6667  $desproxy_http_proxy $desproxy_http_port 16667 &
-desproxy irc.lnx.nokia.com     6668  $desproxy_http_proxy $desproxy_http_port 16668 &
 
 desproxy news.gmane.org        119   $desproxy_http_proxy $desproxy_http_port 10119 &
 desproxy news.cn99.com         119   $desproxy_http_proxy $desproxy_http_port 11119 &
