@@ -1,6 +1,6 @@
 ;;; xwl-programming.el --- programming config
 
-;; Copyright (C) 2007, 2009, 2010, 2011, 2012, 2013 William Xu
+;; Copyright (C) 2007, 2009, 2010, 2011, 2012, 2013, 2014 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -58,7 +58,7 @@
 
   ;; (when (xwl-hide-ifdef-setup)
   ;;   (hide-ifdef-mode 1))
-  
+
   (auto-fill-mode -1)
   (electric-spacing-mode 1)
   (abbrev-mode 1)
@@ -390,7 +390,7 @@ Thus generate a TAGs file."
                (ewoc-delete vc-ewoc crt))
              (setq crt prev)))))
 
-     ;; always diff current file only in vc-dir.  
+     ;; always diff current file only in vc-dir.
      (define-key vc-dir-mode-map (kbd "=") 'xwl-vc-dir-diff)
 
      (defadvice vc-dir-marked-files (around xwl-check-current-file-only)
@@ -468,7 +468,7 @@ for the --graph option."
 		(when limit (list "-n" (format "%s" limit)))
 		(when start-revision (list start-revision))
 		'("--")))))))
-   
+
    ))
 
 ;;; skeletons
@@ -650,7 +650,7 @@ yacc source files."
 (defun xwl-paredit-mode-hook ()
   (local-set-key (kbd "C-c C-r") 'paredit-raise-sexp)
   (local-set-key (kbd "C-c C-w") 'paredit-wrap-round)
-  
+
   (local-set-key (kbd "C-c C-b")   'paredit-forward-barf-sexp)
   (local-set-key (kbd "C-c C-S-b") 'paredit-backward-barf-sexp)
   (local-set-key (kbd "C-c C-s")   'paredit-forward-slurp-sexp)
@@ -943,7 +943,7 @@ If SCHEME?, `run-scheme'."
                        ,@(if (eq system-type 'windows-nt) '("%n.exe" "%n.exe") '("%n" "./%n")))
 
              (haskell-mode "ghc --make '%f'" "%n" "./%n")
-             
+
              ,@buffer-action-table))
      ))
 
@@ -1586,16 +1586,16 @@ Useful for packing c/c++ functions with one line or empty body."
      (define-key gtags-mode-map (kbd "C-c C-b") 'gtags-pop-stack)
      (define-key gtags-mode-map (kbd "C-c C-f") 'gtags-find-any)
      (define-key gtags-mode-map (kbd "C-c C-r") 'gtags-find-any-reference)
-     
+
      (define-key gtags-select-mode-map (kbd "C-c C-b") 'gtags-pop-stack)
      (define-key gtags-select-mode-map (kbd "C-c C-f") 'gtags-find-any)
      (define-key gtags-select-mode-map (kbd "C-c C-r") 'gtags-find-any-reference)
-     
+
      ;; (global-set-key (kbd "C-0") 'gtags-pop-stack)
      ;; (global-set-key (kbd "C-9") 'gtags-find-any)
      ;; (global-set-key (kbd "C-8") 'gtags-find-any-reference)
      ;; (global-set-key (kbd "C-7") 'gtags-find-text)
-     
+
      (global-set-key (kbd "C-0") 'gtags-pop-stack)
      (global-set-key (kbd "C-9") 'gtags-find-any)
      (global-set-key (kbd "C-8") 'gtags-find-any-reference)
@@ -1603,12 +1603,12 @@ Useful for packing c/c++ functions with one line or empty body."
 
      ;; (global-set-key (kbd "<mouse-2>") '(lambda ()
      ;;                                      (interactive)
-     ;;                                      ;; FIXME:  how to jump to mouse position.  
+     ;;                                      ;; FIXME:  how to jump to mouse position.
      ;;                                      ;; (call-interactively 'mouse-drag-region)
      ;;                                      (call-interactively 'gtags-find-any)))
 
      ;; (global-set-key (kbd "<mouse-3>") '(lambda ()
-     ;;                                      (interactive)                                          
+     ;;                                      (interactive)
      ;;                                      ;; (goto-char (mouse-position))
      ;;                                      (call-interactively 'gtags-pop-stack)))
 
@@ -1731,6 +1731,7 @@ depending on PATTERNS."
 
 
 (add-to-list 'auto-mode-alist '("\\.pac$" . java-mode))
+(add-to-list 'auto-mode-alist '("\\.bashrc" . sh-mode))
 
 (provide 'xwl-programming)
 

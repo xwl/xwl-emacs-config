@@ -41,3 +41,12 @@ function review ()
 {
     git push origin $(echo HEAD:refs/for/$(git_remote_short))
 }
+
+# Sort branch by commit date.
+function git_branch()
+{
+    for i in `git for-each-ref --sort=-committerdate --format='%(refname:short)' refs/heads/`
+    do
+        printf "  %-30s %s\n" $i "`git log -1 --pretty=format:'%h [%C(blue)%cr%Creset] %s' $i`"
+    done
+}

@@ -342,14 +342,16 @@
 
 (add-hook 'write-file-functions 'xwl-write-file-functions)
 
-(add-hook 'before-save-hook
-          (lambda ()
-            (save-excursion
-              (goto-char (point-min))
-              (when (search-forward
-                     "# To remove '+' lines, make them ' ' lines"
-                     nil t 1)
-                (delete-trailing-whitespace)))))
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;; (add-hook 'before-save-hook
+;;           (lambda ()
+;;             (save-excursion
+;;               (goto-char (point-min))
+;;               (when (search-forward
+;;                      "# To remove '+' lines, make them ' ' lines"
+;;                      nil t 1)
+;;                 (delete-trailing-whitespace)))))
 
 (defun xwl-kill-buffer-hook ()
   )
