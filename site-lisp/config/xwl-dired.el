@@ -88,7 +88,7 @@ end tell" d)))
   (local-unset-key (kbd "<down>"))
   (local-unset-key (kbd "<left>"))
   (local-unset-key (kbd "<right>"))
-  
+
   )
 
 (add-hook 'dired-mode-hook 'xwl-dired-mode-hook)
@@ -408,8 +408,8 @@ be with length 3 extentions !"
 (defun xwl-dircolors-get-escape-seq (regexp)
   "Get escape-seq by matching REGEXP against `xwl-dircolors-string'.
 e.g., (xwl-dircolors-get-escape-seq \"*.gz\") => \"01;31\""
-  (string-match (concat regexp "=\\([^:]+\\):") xwl-dircolors-string)
-  (match-string 1 xwl-dircolors-string))
+  (string-match (concat regexp "=\\([^:]+\\);\\([^:]+\\):") xwl-dircolors-string)
+  (concat (match-string 2 xwl-dircolors-string) ";" (match-string 1 xwl-dircolors-string)))
 
 (setq dired-font-lock-keywords
       `(
@@ -466,7 +466,8 @@ e.g., (xwl-dircolors-get-escape-seq \"*.gz\") => \"01;31\""
                `(".+"
                  (dired-move-to-filename)
                  nil
-                 (0 (ansi-color-get-face ,(xwl-dircolors-get-escape-seq "ex")))))
+                 (0 (ansi-color--find-face
+                           (ansi-color-parse-sequence ,(xwl-dircolors-get-escape-seq "ex"))))))
 
         ;; colorful by extensions
         ,@(mapcar (lambda (ext)
@@ -474,7 +475,8 @@ e.g., (xwl-dircolors-get-escape-seq \"*.gz\") => \"01;31\""
                       (".+"
                        (dired-move-to-filename)
                        nil
-                       (0 (ansi-color-get-face ,(xwl-dircolors-get-escape-seq ext))))))
+                       (0 (ansi-color--find-face
+                           (ansi-color-parse-sequence ,(xwl-dircolors-get-escape-seq ext)))))))
                   xwl-dircolors-extensions)
 
         ;;

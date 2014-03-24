@@ -34,7 +34,7 @@
   (case system-type
     ((darwin) (load-theme 'xwl-dark-mac))
     ((windows-nt) (load-theme 'xwl-dark-w32 t))
-    (t (error "no theme configured")))
+    (t (load-theme 'xwl-dark t)))
   (setq xwl-black-background? t)
   (run-hooks 'color-theme-xwl-console-hook))
 
