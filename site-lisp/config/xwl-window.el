@@ -32,63 +32,67 @@
 
 ;; http://www.gringod.com/2006/02/24/return-of-monacottf/
 
-;; fontforge
-;; cn_font_size = (en_font_size * width_factor) * 2
-;; monaco width factor is 0.6.
-(ignore-errors 
-  (let* ((en-font-size
-          (cond
-           ((eq window-system 'w32) 13)
-           ((equal system-name "debian-iMac") 15)
-           ((string-match system-name "beleod") 14)
-           ((string-match system-name "tokyolove.local") 14)
-           ((string-match system-name "william-ubuntu") 16)
-           (t 14)))
+(defun xwl-setup-font ()
+  ;; fontforge
+  ;; cn_font_size = (en_font_size * width_factor) * 2
+  ;; monaco width factor is 0.6.
+  (ignore-errors 
+    (let* ((en-font-size
+            (cond
+             ((eq window-system 'w32) 13)
+             ((equal system-name "debian-iMac") 15)
+             ((string-match system-name "beleod") 14)
+             ((string-match system-name "tokyolove.local") (if xwl-black-background? 15 14))
+             ((string-match system-name "william-ubuntu") 16)
+             (t 14)))
 
-         (cn-font-size
-          (cond
-           ((string-match "tokyolove.local" system-name)
-            16)
-           (t
-            (ceiling (* en-font-size 0.6 2)))))
-         
-         (all-fonts
-          `((mac . ("Monaco" "Hiragino Sans GB" "Hiragino Sans GB"))
-            (ns  . ("Monaco" "Hiragino Sans GB" "Hiragino Sans GB"))
-            (w32 . ("Monaco" "SimSun" "Meiryo"))
-            (x   . ,(cond ((string= system-name "debian-iMac")
-                           `("Monaco" "WenQuanYi Micro Hei" "WenQuanYi Micro Hei"))
-                          ;; ((string-match "beleod" system-name)
-                          ;;  '("DejaVu Sans Mono" "SimSun" "SimSun"))
-                          ((string-match "be" system-name)
-                           ;; '("lucidatypewriter" "fangsong ti" "fangsong ti"))
-                           '("DejaVu Sans Mono" "SimSun" "SimSun"))))))
-         (fonts (cdr (assoc window-system all-fonts)))
-         (en (format "%s:pixelsize=%d" (nth 0 fonts) en-font-size))
-         (cn (nth 1 fonts))
-         (jp (nth 2 fonts)))
+           (cn-font-size
+            (cond
+             ((string-match "tokyolove.local" system-name) (if xwl-black-background? 18 16))
+             (t
+              (ceiling (* en-font-size 0.6 2)))))
+           
+           (all-fonts
+            `((mac . ("Monaco" "Hiragino Sans GB" "Hiragino Sans GB"))
+              (ns  . ("Monaco" "Hiragino Sans GB" "Hiragino Sans GB"))
+              (w32 . ("Monaco" "SimSun" "Meiryo"))
+              (x   . ,(cond ((string= system-name "debian-iMac")
+                             `("Monaco" "WenQuanYi Micro Hei" "WenQuanYi Micro Hei"))
+                            ;; ((string-match "beleod" system-name)
+                            ;;  '("DejaVu Sans Mono" "SimSun" "SimSun"))
+                            ((string-match "be" system-name)
+                             ;; '("lucidatypewriter" "fangsong ti" "fangsong ti"))
+                             '("DejaVu Sans Mono" "SimSun" "SimSun"))))))
+           (fonts (cdr (assoc window-system all-fonts)))
+           (en (format "%s:pixelsize=%d" (nth 0 fonts) en-font-size))
+           (cn (nth 1 fonts))
+           (jp (nth 2 fonts)))
 
-    ;; This will decide default font size.
-    (set-frame-font en)
-    ;; ;; Fallback font
-    ;; (set-fontset-font t 'unicode "Arial Unicode MS")
-    ;; Font for chinese characters
-    (mapc
-     (lambda (range)
-       (set-fontset-font
-        t `(,(car range) . ,(cadr range)) (font-spec :family cn :size cn-font-size)))
-     '((#x2E80 #x2EFF)                    ; CJK Radicals Supplement
-       (#x3000 #x303F)                    ; CJK Symbols and Punctuation
-       (#x31C0 #x31EF)                    ; CJK Strokes
-       (#x3200 #x32FF)                    ; Enclosed CJK Letters and Months
-       (#x3300 #x33FF)                    ; CJK Compatibility
-       (#x3400 #x4DBF)                    ; CJK Unified Ideographs Extension A
-       (#x4E00 #x9FFF)                    ; CJK Unified Ideographs
-       (#xF900 #xFAFF)                    ; CJK Compatibility Ideographs
-       (#xFE30 #xFE4F)                    ; CJK Compatibility Forms
+      ;; This will decide default font size.
+      (set-frame-font en)
+      ;; ;; Fallback font
+      ;; (set-fontset-font t 'unicode "Arial Unicode MS")
+      ;; Font for chinese characters
+      (mapc
+       (lambda (range)
+         (set-fontset-font
+          t `(,(car range) . ,(cadr range)) (font-spec :family cn :size cn-font-size)))
+       '((#x2E80 #x2EFF)                    ; CJK Radicals Supplement
+         (#x3000 #x303F)                    ; CJK Symbols and Punctuation
+         (#x31C0 #x31EF)                    ; CJK Strokes
+         (#x3200 #x32FF)                    ; Enclosed CJK Letters and Months
+         (#x3300 #x33FF)                    ; CJK Compatibility
+         (#x3400 #x4DBF)                    ; CJK Unified Ideographs Extension A
+         (#x4E00 #x9FFF)                    ; CJK Unified Ideographs
+         (#xF900 #xFAFF)                    ; CJK Compatibility Ideographs
+         (#xFE30 #xFE4F)                    ; CJK Compatibility Forms
 
-       (#x2000 #x206f)                    ; General Punctuation
-       ))))
+         (#x2000 #x206f)                    ; General Punctuation
+         )))))
+
+(xwl-setup-font)
+
+(add-hook 'color-theme-xwl-console-hook 'xwl-setup-font)
 
 ;; (when (string-match "be" system-name)
 ;;   (set-frame-font "-b&h-lucidatypewriter-medium-r-normal-sans-14-135-75-75-m-90-iso8859-1")

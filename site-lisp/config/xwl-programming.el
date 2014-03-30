@@ -1723,6 +1723,14 @@ depending on PATTERNS."
       (nconc (delq main-element (delq 'dummy index-alist))
              (cdr main-element)))))
 
+(setq which-func-modes '(emacs-lisp-mode c-mode c++-mode objc-mode perl-mode
+                                         cperl-mode python-mode makefile-mode
+                                         sh-mode fortran-mode f90-mode ada-mode
+                                         diff-mode))
+(which-function-mode 1)
+
+
+(add-to-list 'auto-mode-alist '("\\.pac$" . java-mode))
 
 (provide 'xwl-programming)
 

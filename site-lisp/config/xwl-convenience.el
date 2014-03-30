@@ -194,7 +194,7 @@
                                  ))))
      (setq auto-less-exclude-modes
            (append auto-less-exclude-modes
-                   '(proced-mode)))
+                   '(proced-mode image-dired-thumbnail-mode)))
      ))
 
 (global-less-minor-mode 1)

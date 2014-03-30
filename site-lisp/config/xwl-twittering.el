@@ -172,7 +172,7 @@
           ,@(when (or (string-match "tokyo" system-name)
                       xwl-at-company? xwl-twitter-direct-accessible?)
               '(":home@twitter" ":replies@twitter" ":direct_messages@twitter"))
-          ":home@douban"
+          ;; ":home@douban"
 
           ,@(when xwl-at-company?
               '(":home@socialcast" ":public@socialcast"))

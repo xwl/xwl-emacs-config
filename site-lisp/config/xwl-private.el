@@ -30,7 +30,8 @@
 (ignore-errors
   (unless (server-running-p)            ; FIXME: hack for gnus agent script.
     (when (eq system-type 'darwin)
-      (load "xwl-private-setup.el.gpg"))))
+      ;(load "xwl-private-setup.el.gpg")
+      )))
 
 (provide 'xwl-private)
 

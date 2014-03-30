@@ -1,6 +1,6 @@
 ;;; xwl-erc.el --- erc config
 
-;; Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012, 2014 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -67,6 +67,8 @@
          "#emacs-cn")      ; "#bitlbee"
         ;; ("linuxfire"
         ;;  "#linuxfire")
+        ;; ("irc.lnx.nokia.com"
+        ;;  "#mac" "#linux" "#symbianperformance")
         ))
 
 (defun his-bitlbee-identify ()
