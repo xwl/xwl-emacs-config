@@ -58,6 +58,8 @@
   '(progn
      (org-defkey org-mode-map (kbd "C-c ,") 'next-buffer)
      (org-defkey org-mode-map (kbd "C-c .") 'previous-buffer)
+     (org-defkey org-mode-map (kbd "C-,") 'next-buffer)
+     (org-defkey org-mode-map (kbd "C-.") 'previous-buffer)
 
      (defun org-image-file-name-regexp (&optional extensions)
        "Return regexp matching the file names of images.

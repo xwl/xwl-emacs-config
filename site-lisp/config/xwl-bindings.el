@@ -244,9 +244,9 @@
         ;; )
 
         (gnus-demon-init)
-        (when (and xwl-black-background?
-                   (fboundp 'color-theme-xwl-console))
-          (color-theme-xwl-console))
+        ;; (when (and xwl-black-background?
+        ;;            (fboundp 'color-theme-xwl-console))
+        ;;   (color-theme-xwl-console))
 
         ;; TODO: 23.1 mac port doesn't work with this.
         (when t ;(eq system-type 'windows-nt)

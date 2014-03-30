@@ -164,6 +164,8 @@
 ;; Am i weird or Emacs is weird ?
 (global-set-key (kbd "C-c ,") 'previous-buffer)
 (global-set-key (kbd "C-c .") 'next-buffer)
+(global-set-key (kbd "C-,") 'previous-buffer)
+(global-set-key (kbd "C-.") 'next-buffer)
 
 (global-set-key (kbd "C-c [")  'previous-error)
 (global-set-key (kbd "C-c ]")  'next-error)
@@ -171,6 +173,8 @@
 (winner-mode 1)
 (global-set-key (kbd "C-c <") 'winner-undo)
 (global-set-key (kbd "C-c >") 'winner-redo)
+(global-set-key (kbd "C-<") 'winner-undo)
+(global-set-key (kbd "C->") 'winner-redo)
 
 (global-set-key (kbd "C-c n t") 'visual-line-mode)
 (global-set-key (kbd "C-c m D") 'toggle-debug-on-error)
