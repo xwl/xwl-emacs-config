@@ -20,7 +20,7 @@
                    (shell-command-to-string
                     "source $HOME/.bashrc && printf $PATH")))
    (setq exec-path (split-string (getenv "PATH") ":")))
-  
+
   ((windows-nt)
    ;; Seems gnuwin32 image library has to be set before emacs starts.
    (let ((paths `( ;; "c:/Program Files/GnuWin32/bin"
@@ -44,12 +44,12 @@
                      (lambda (f) (or (not (file-directory-p (concat xwl-emacs-top "/" f)))
                                      (member f '(".." "config" "emms"))))
                      (directory-files xwl-emacs-top))
-                  
+
                   ;; with lisp subdir
                   "xwl-elisp/dashboard"
                   "config/autoload"
                   "auto-complete/lib/popup"
-                  "auto-complete/lib/fuzzy"                  
+                  "auto-complete/lib/fuzzy"
                   "emms/lisp"
                   ))
 
@@ -61,7 +61,7 @@
              (erase-buffer)
              (insert-file-contents "~/.emacs.d/submodules"))
            (buffer-string))))))
-  
+
 (mapc (lambda (path) (add-to-list 'load-path path))
       (append
        ;; essential
@@ -73,7 +73,6 @@
        xwl-makefile-subdir-list
        ;; optional
        (list "~/repo/cvs/mmm-mode"
-             "~/repo/misc/auctex-11.84"
              "~/repo/cvs/bbdb/lisp"
              "~/repo/git/dvc/lisp"
 

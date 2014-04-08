@@ -42,7 +42,7 @@
 (define-key dired-mode-map (kbd "f")
   '(lambda ()
      (interactive)
-     (let ((d (dired-current-directory)))
+     (let ((d (shell-quote-argument (dired-current-directory))))
        (case window-system
          ((w32)
           (w32-shell-execute "open" d))
@@ -237,7 +237,7 @@ be with length 3 extentions !"
 	".kys" ".pg" ".pgs" ".tp" ".tps" ".vr" ".vrs" ".flc"
         ".hi" ".p_hi" ".p_o" ".hi-boot" ".o-boot" ".p_o-boot"
         ".p_hi-boot" ".hs-boot" ".obj" ".ncb" ".suo" ".user" ".idb"
-        ".pdb" ".moc" ".manifest" ".ilk"))
+        ".pdb" ".moc" ".manifest" ".ilk" ".log"))
 
 (setq dired-omit-verbose nil)
 

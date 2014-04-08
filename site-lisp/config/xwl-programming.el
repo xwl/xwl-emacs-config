@@ -433,7 +433,7 @@ Thus generate a TAGs file."
 (defun xwl-magit-commit-amend-reuse ()
   "commit --amend --reuse-message=HEAD"
   (interactive)
-  (magit-git-command "commit --amend --reuse-message=HEAD"))
+  (magit-git-command "commit --amend --reuse-message=HEAD" default-directory))
 
 (eval-after-load 'magit
   '(progn

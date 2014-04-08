@@ -36,7 +36,7 @@
   ;; fontforge
   ;; cn_font_size = (en_font_size * width_factor) * 2
   ;; monaco width factor is 0.6.
-  (ignore-errors 
+  (ignore-errors
     (let* ((en-font-size
             (cond
              ((eq window-system 'w32) 13)
@@ -51,7 +51,7 @@
              ((string-match "tokyolove.local" system-name) (if xwl-black-background? 18 16))
              (t
               (ceiling (* en-font-size 0.6 2)))))
-           
+
            (all-fonts
             `((mac . ("Monaco" "Hiragino Sans GB" "Hiragino Sans GB"))
               (ns  . ("Monaco" "Hiragino Sans GB" "Hiragino Sans GB"))
@@ -147,21 +147,22 @@
             ;;                                      (frame-parameter f 'top)))
             ;;     (ns-set-resource nil "FrameLeft" (number-to-string
             ;;                                       (frame-parameter f 'left)))))
-
-            (with-temp-file xwl-session-cache-file
-              (let (print-length
-                    print-level)
-                (pp `(modify-frame-parameters
-                      (selected-frame)
-                      ',(remove-if-not
-                         (lambda (i)
-                           ;; (memq (type-of (cdr i))
-                           ;;       '(string symbol float integer))
-                           (memq (car i) '(top left width height ;; font
-                                               ))
-                           )
-                                       (frame-parameters)))
-                    (current-buffer))))
+            (unless (and (eq system-type 'darwin)
+                         (not (null (cdr (assq 'fullscreen (frame-parameters))))))
+              (with-temp-file xwl-session-cache-file
+                (let (print-length
+                      print-level)
+                  (pp `(modify-frame-parameters
+                        (selected-frame)
+                        ',(remove-if-not
+                           (lambda (i)
+                             ;; (memq (type-of (cdr i))
+                             ;;       '(string symbol float integer))
+                             (memq (car i) '(top left width height ;; font
+                                                 ))
+                             )
+                           (frame-parameters)))
+                      (current-buffer)))))
             ))
 
 (set-cursor-color "Magenta")

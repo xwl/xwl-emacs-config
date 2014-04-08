@@ -213,6 +213,8 @@ the name of the sectioning command inserted with `\\[LaTeX-section]'."
 
   ))
 
+
+
 (eval-after-load "sql"
 '(progn
    (defun sql-product-interactive (&optional product)

@@ -100,7 +100,7 @@
 
 (unless (file-exists-p "~/.emacs.d/elpa")
   (package-list-packages)
-  (package-install 'oauth2)
+  (mapc 'package-install '(oauth2 auctex))
   (with-current-buffer (find-file-noselect
                         "~/.emacs.d/site-lisp/xwl-makefile.el")
     (xwl-makefile-all)))
