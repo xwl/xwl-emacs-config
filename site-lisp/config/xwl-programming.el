@@ -130,7 +130,7 @@
 ;; (setq hide-ifdef-shadow t)
 ;; (setq hide-ifdef-initially t)
 
-(add-to-list 'auto-mode-alist '("\\.c$" . c++-mode))
+;; (add-to-list 'auto-mode-alist '("\\.c$" . c++-mode))
 
 ;;; Java
 ;; ------

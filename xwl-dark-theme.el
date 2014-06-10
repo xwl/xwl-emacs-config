@@ -3,7 +3,7 @@
 
 (custom-theme-set-faces
  'xwl-dark
- '(default ((t (:inherit nil :stipple nil :background "#111111" :foreground "#c0c0c0" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 136 :width normal :foundry "misc" :family "fixed"))))
+ '(default ((t (:inherit nil :stipple nil :background "#111111" :foreground "#c5c5c5" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 136 :width normal :foundry "misc" :family "fixed"))))
  '(cursor ((t (:background "medium turquoise"))))
  '(fixed-pitch ((t (:family "courier"))))
  '(variable-pitch ((t (:family "helv"))))

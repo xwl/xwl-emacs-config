@@ -206,6 +206,7 @@ websites.  It also keeps original empty line for separating paragraphs."
           (move-beginning-of-line 2)))
       (copy-region-as-kill (point-min) (point-max)))))
 
+;;;###autoload
 (defun xwl-revert-buffer-with-sudo ()
   "Revert buffer using tramp sudo.
 This will also reserve changes already made by a non-root user."

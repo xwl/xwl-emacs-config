@@ -103,15 +103,15 @@
                    (set-face-background 'twittering-zebra-1-face "gray15")
                    (set-face-background 'twittering-zebra-2-face "gray11"))))
      
-     (when xwl-at-company?
-       (let ((sc (assqref 'socialcast twittering-service-method-table)))
-         (setq twittering-service-method-table
-               `((socialcast
-                  (api ,socialcast-api)
-                  (web ,socialcast-web)
-                  ,@(remove-if (lambda (i) (memq (car i) '(api web))) sc))
+     ;; (when xwl-at-company?
+     ;;   (let ((sc (assqref 'socialcast twittering-service-method-table)))
+     ;;     (setq twittering-service-method-table
+     ;;           `((socialcast
+     ;;              (api ,socialcast-api)
+     ;;              (web ,socialcast-web)
+     ;;              ,@(remove-if (lambda (i) (memq (car i) '(api web))) sc))
 
-                 ,@(remove-if (lambda (i) (eq (car i) 'socialcast)) twittering-service-method-table)))))
+     ;;             ,@(remove-if (lambda (i) (eq (car i) 'socialcast)) twittering-service-method-table)))))
 
      ;; (unless xwl-twitter-direct-accessible?
      ;;   (let ((tw (assqref 'twitter twittering-service-method-table)))
@@ -141,16 +141,16 @@
 
      (setq-default twittering-reverse-mode t)
 
-     (setq twittering-accounts
-           (let* ((socialcast (assqref 'socialcast twittering-accounts))
-                  (others (remove-if (lambda (i) (eq (car i) 'socialcast))
-                                     twittering-accounts)))
-             `((socialcast
-                (auth basic)
-                ,@(remove-if (lambda (i) (eq (car i) 'auth))
-                             socialcast))
+     ;; (setq twittering-accounts
+     ;;       (let* ((socialcast (assqref 'socialcast twittering-accounts))
+     ;;              (others (remove-if (lambda (i) (eq (car i) 'socialcast))
+     ;;                                 twittering-accounts)))
+     ;;         `((socialcast
+     ;;            (auth basic)
+     ;;            ,@(remove-if (lambda (i) (eq (car i) 'auth))
+     ;;                         socialcast))
           
-               ,@others)))
+     ;;           ,@others)))
 
      (defadvice twittering-edit-post-status (after play-sound activate)
        (xwl-shell-command-asynchronously "mplayer ~/.emacs.d/sound/roar.au"))
@@ -174,8 +174,8 @@
               '(":home@twitter" ":replies@twitter" ":direct_messages@twitter"))
           ;; ":home@douban"
 
-          ,@(when xwl-at-company?
-              '(":home@socialcast" ":public@socialcast"))
+          ;; ,@(when xwl-at-company?
+          ;;     '(":home@socialcast" ":public@socialcast"))
 
           ,@(when (boundp 'twittering-initial-timeline-spec-string)
               twittering-initial-timeline-spec-string))

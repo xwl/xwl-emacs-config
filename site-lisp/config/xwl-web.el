@@ -151,7 +151,8 @@ end tell"
          'xwl-browse-url-firefox-tab-only
          )
         ((darwin) 'xwl-browse-url-firefox-tab-only)
-        (t 'w3m-browse-url)))
+        ((fboundp 'w3m-browse-url) 'w3m-browse-url)
+        (t browse-url-browser-function)))
 
 (global-set-key (kbd "C-c n b") 'browse-url)
 

@@ -237,7 +237,7 @@ be with length 3 extentions !"
 	".kys" ".pg" ".pgs" ".tp" ".tps" ".vr" ".vrs" ".flc"
         ".hi" ".p_hi" ".p_o" ".hi-boot" ".o-boot" ".p_o-boot"
         ".p_hi-boot" ".hs-boot" ".obj" ".ncb" ".suo" ".user" ".idb"
-        ".pdb" ".moc" ".manifest" ".ilk" ".log"))
+        ".pdb" ".moc" ".manifest" ".ilk"))
 
 (setq dired-omit-verbose nil)
 

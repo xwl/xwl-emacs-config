@@ -43,7 +43,7 @@
              ((equal system-name "debian-iMac") 15)
              ((string-match system-name "beleod") 14)
              ((string-match system-name "tokyolove.local") (if xwl-black-background? 15 14))
-             ((string-match system-name "william-ubuntu") 16)
+             ((string-match system-name "william-ubuntu") 14)
              (t 14)))
 
            (cn-font-size
@@ -56,7 +56,7 @@
             `((mac . ("Monaco" "Hiragino Sans GB" "Hiragino Sans GB"))
               (ns  . ("Monaco" "Hiragino Sans GB" "Hiragino Sans GB"))
               (w32 . ("Monaco" "SimSun" "Meiryo"))
-              (x   . ,(cond ((string= system-name "debian-iMac")
+	      (x   . ,(cond ((member system-name '("william-ubuntu" "debian-iMac" "linux-xwl"))
                              `("Monaco" "WenQuanYi Micro Hei" "WenQuanYi Micro Hei"))
                             ;; ((string-match "beleod" system-name)
                             ;;  '("DejaVu Sans Mono" "SimSun" "SimSun"))

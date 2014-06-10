@@ -434,6 +434,7 @@
   ;; (xwl-weather-update)
 
   (when (and xwl-black-background?
+             window-system
              (fboundp 'color-theme-xwl-console))
     (run-at-time 1 nil 'color-theme-xwl-console))
 
@@ -965,10 +966,13 @@ prompting.  If file is a directory perform a `find-file' on it."
 (add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
 
 (require 'hi-lock)
+
+(setq  hi-lock-auto-select-face t)
+
 (defun xwl-highlight-phrase ()
   (interactive)
   (if (thing-at-point 'symbol)
-      (highlight-phrase (thing-at-point 'symbol) 'hi-yellow)
+      (highlight-phrase (thing-at-point 'symbol) (hi-lock-read-face-name))
     (call-interactively 'highlight-phrase)))
 
 (defun xwl-unhighlight-regexp ()
@@ -977,8 +981,18 @@ prompting.  If file is a directory perform a `find-file' on it."
       (unhighlight-regexp (thing-at-point 'symbol))
     (call-interactively 'unhighlight-regexp)))
 
+(defun xwl-highlight-line ()
+  (interactive)
+  (require 'org)
+  (let ((str (org-current-line-string)))
+    (if (not (string-match "^[ \t]*$" str))
+        (highlight-lines-matching-regexp
+         (regexp-opt (list str)) (hi-lock-read-face-name))
+      (call-interactively 'highlight-lines-matching-regexp))))
+
 (define-key hi-lock-map (kbd "C-x w h") 'xwl-highlight-phrase)
 (define-key hi-lock-map (kbd "C-x w u") 'xwl-unhighlight-regexp)
+(define-key hi-lock-map (kbd "C-x w l") 'xwl-highlight-line)
 
 ;;; delete window, winner undo. won't respect dedicated window setup.
 (global-set-key (kbd "C-c s") 'sticky-window-keep-window-visible)
@@ -1070,6 +1084,9 @@ prompting.  If file is a directory perform a `find-file' on it."
     (remove-hook 'window-configuration-change-hook 'hidden-mode-line-mode)))
 
 
+
+(add-to-list 'auto-mode-alist '("sources.list" . conf-mode))
+
 
 (provide 'xwl-misc)
 

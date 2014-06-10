@@ -86,8 +86,8 @@
   (mapc (lambda (f)
           (let ((elc (concat f "c")))
             (when (file-exists-p elc)
-            (message "(delete-file \"%s\")..." elc)
-            (delete-file elc))))
+              (message "(delete-file \"%s\")..." elc)
+              (delete-file elc))))
         xwl-makefile-files)
 
   (message "xwl-makefile-clean done"))

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-desproxy irc.debian.org        6669  $desproxy_http_proxy $desproxy_http_port 16669 &
+desproxy irc.debian.org        6697  $desproxy_http_proxy $desproxy_http_port 16669 &
 desproxy irc.freenode.net      6667  $desproxy_http_proxy $desproxy_http_port 16667 &
 
 desproxy news.gmane.org        119   $desproxy_http_proxy $desproxy_http_port 10119 &
@@ -10,8 +10,8 @@ desproxy news.gwene.org        119   $desproxy_http_proxy $desproxy_http_port 12
 desproxy dict.org              2628  $desproxy_http_proxy $desproxy_http_port 12628 &
 desproxy github.com            22    $desproxy_http_proxy $desproxy_http_port 10022 &
 
-desproxy $xwl                  6667  $desproxy_http_proxy $desproxy_http_port 26667 &
-desproxy $xwl                  22    $desproxy_http_proxy $desproxy_http_port 20022 &
+# desproxy $xwl                  6667  $desproxy_http_proxy $desproxy_http_port 26667 &
+# desproxy $xwl                  22    $desproxy_http_proxy $desproxy_http_port 20022 &
 
 desproxy imap.gmail.com        993   $desproxy_http_proxy $desproxy_http_port 10993 &
 

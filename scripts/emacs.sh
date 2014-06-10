@@ -5,7 +5,7 @@ alias ecui='LC_ALL=zh_CN.utf8 TERM=xterm-256color emacsclient -c'
 export ALTERNATE_EDITOR=~/.emacs.d/scripts/emacs-daemon
 export PATH=$PATH:~/.emacs.d/scripts/git_util:~/.emacs.d/scripts/http_proxy4git/connect
 
-if [[ `uname -s` != "Darwin" ]]; then
+if [[ $(uname -s) != "Darwin" ]]; then
     if [[ $http_proxy = "" ]]; then
         echo "Empty http_proxy!"
         exit
@@ -19,34 +19,64 @@ if [[ `uname -s` != "Darwin" ]]; then
 fi
 
 # ,----
-# | git 
+# | git
 # `----
 
-function git_local ()
+git_local ()
 {
     (git branch > /dev/null 2>&1) && (git branch | grep ^\* | sed 's/* //')
 }
 
-function git_remote ()
+git_remote ()
 {
     LC_ALL=C git branch -vv | grep ^\* | cut -d[ -f2 | cut -d: -f1 | cut -d] -f1
 }
 
-function git_remote_short ()
+git_remote_short ()
 {
     git_remote | sed 's:origin/::'
 }
 
-function review ()
+review ()
 {
     git push origin $(echo HEAD:refs/for/$(git_remote_short))
 }
 
 # Sort branch by commit date.
-function git_branch()
+git_branch()
 {
-    for i in `git for-each-ref --sort=-committerdate --format='%(refname:short)' refs/heads/`
+    for i in $(git for-each-ref --sort=-committerdate --format='%(refname:short)' refs/heads/)
     do
-        printf "  %-30s %s\n" $i "`git log -1 --pretty=format:'%h [%C(blue)%cr%Creset] %s' $i`"
+        printf "  %-30s %s\n" $i "$(git log -1 --pretty=format:'%h [%C(blue)%cr%Creset] %s' $i)"
     done
 }
+
+git_current_branch()
+{
+    local result
+    result=$(__git_ps1 "%s" 2>/dev/null)
+
+    [[ $result != "" ]] && echo :$result
+}
+
+repo_rev ()
+{
+    [[ $(pwd) = *LINUX/android* ]] || return
+
+    local result
+    result=$((repo info ./ |grep "Manifest branch" | cut -d: -f2 | cut -d' ' -f2 | cut -d'/' -f 3) 2>/dev/null)
+
+    [[ $result != "" ]] && echo :$result
+}
+
+repo_project ()
+{
+    [[ $(pwd) = *LINUX/android* ]] || return
+
+    local result
+    result=$((repo info ./ |grep "Project:" | cut -d' ' -f2) 2>/dev/null)
+
+    [[ $result != "" ]] && echo :$result
+}
+
+export PS1='\u@\h\[\e[m\]\[\e[0;33m\]$(repo_rev)\[\e[m\]\[\e[1;36m\]$(repo_project)\[\e[m\]\[\e[1;35m\]$(git_current_branch)\[\e[m\]:\W \$ '
