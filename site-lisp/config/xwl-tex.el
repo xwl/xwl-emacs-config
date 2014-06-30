@@ -1,6 +1,6 @@
 ;;; xwl-tex.el --- TeX or LaTeX config
 
-;; Copyright (C) 2009, 2010 William Xu
+;; Copyright (C) 2009, 2010, 2014 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -28,12 +28,38 @@
 ;; - 插入 macro: C-c RET
 ;; - 插入各种字体, 或改变选区域字体: C-c C-f *
 ;; - 快速插入 \item: C-c C-j
+;; - show error: C-c C-l/C-c `
 
 (ignore-errors (load "auctex.el" nil t t))
 
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
 (setq-default TeX-master nil)
+
+(setq TeX-engine 'xetex
+      TeX-PDF-mode t)
+
+;; ~/.latexmkrc
+;; $pdflatex = '/usr/texbin/xelatex -interaction=nonstopmode -synctex=1 %O %S';
+;; $pdf_previewer = 'open -a skim';
+;; $clean_ext = 'bbl rel %R-blx.bib %R.synctex.gz';
+(when (eq system-type 'darwin)
+  ;; Use Skim as viewer, enable source <-> PDF sync
+  ;; make latexmk available via C-c C-c
+  ;; Note: SyncTeX is setup via ~/.latexmkrc (see below)
+  (add-hook 'LaTeX-mode-hook (lambda ()
+                               (push
+                                '("latexmk" "latexmk -pdf %s" TeX-run-TeX nil t
+                                  :help "Run latexmk on file")
+                                TeX-command-list)))
+  (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
+
+  ;; use Skim as default pdf viewer
+  ;; Skim's displayline is used for forward search (from .tex to .pdf)
+  ;; option -b highlights the current line; option -g opens Skim in the background
+  (setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
+  (setq TeX-view-program-list
+        '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b"))))
 
 (defun xwl-latex-mode-hook ()
   (electric-spacing-mode 1)
@@ -61,7 +87,7 @@
 ;; | preview latex
 ;; `----
 
-;; Typical Error: 
+;; Typical Error:
 ;;   DviPS sentinel: Opening input file: no such file or directory
 
 ;; Solution: on Mac OS X, if you have installed MacTeX and fink, be
@@ -156,7 +182,7 @@
 	 (setq TeX-default-macro symbol)))
   ;; Generate @node automatically
   (if (member symbol '("chapter" "section" "subsection" "subsubsection"
-                       
+
                        "unnumbered" "unnumberedsec" "unnumberedsubsec"
                        "unnumberedsubsubsec"))
       (let ((title (read-string "Chapter title: ")))

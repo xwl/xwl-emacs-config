@@ -196,10 +196,10 @@
         ;; (erc :server sv :port 16668 :nick nick :password pwerc)
 
         )
-    
+
     (erc     :server "irc.debian.org"   :port 6669 :nick "xwl" :password pwdeb)
     (erc-ssl :server "irc.freenode.net" :port 7000 :nick "xwl" :password pwerc)
-    
+
     ;; (erc :server "irc.linuxfire.com.cn" :port 6667 :nick "xwl" :password "")
     ;; (erc :server "irc.mozilla.org"      :port 6667 :nick "xwl" :password "")
     ))
@@ -254,18 +254,22 @@
             (unless xwl-gnus-agent-timer
               (setq xwl-gnus-agent-timer
                     (run-with-timer
-                     0 (* 3600 24) (lambda ()
-                                     (unless gnus-plugged
-                                       (xwl-shell-command-asynchronously
-                                        (concat
-                                         ;; Company PC is always on, so we won't have
-                                         ;; too many instances running at the same
-                                         ;; time...
-                                         (if xwl-at-company?
-                                             ""
-                                           "(ps -ef|grep \"emacs --eval\" | grep -v grep) || ")
-                                         "emacs --eval \"(progn (require 'xwl-gnus-agent))\""
-                                         )))))))
+                     0 (* 3600 24)
+                     (lambda ()
+                       (unless gnus-plugged
+                         (xwl-shell-command-asynchronously
+                          ;; Company PC is always on, so we won't have
+                          ;; too many instances running at the same
+                          ;; time...
+                          (format
+                           (if (eq system-type 'windows-nt)
+                               "%s"
+                             "PATH=$HOME/bin:$PATH bash -c '%s'")
+                           (concat
+                            (if xwl-at-company?
+                                ""
+                              "(ps -ef|grep \"emacs --eval\" | grep -v grep) || ")
+                            "emacs --eval \"(progn (require (quote xwl-gnus-agent)))\""))))))))
             (message "Gnus agent timer started")))
         ))))
 

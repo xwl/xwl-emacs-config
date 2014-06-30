@@ -174,7 +174,7 @@ If EXTENSIONS is given, only match these."
 
 (setq org-export-html-style-include-default nil
       ;;"<link rel=\"stylesheet\" type=\"text/css\" href=\"org.css\">")
-      org-export-html-style (concat 
+      org-export-html-style (concat
                              "<style type=\"text/css\">"
                              (with-temp-buffer
                                (insert-file-contents "~/.emacs.d/site-lisp/config/org.css")
@@ -258,15 +258,15 @@ If EXTENSIONS is given, only match these."
                    (format-time-string "%Y" (current-time))))
            (month (if (nth 8 matches)
                       (substring str (nth 8 matches) (nth 9 matches))
-                    (format-time-string "%m" (current-time))))                 
+                    (format-time-string "%m" (current-time))))
            (day (if (nth 10 matches)
                     (substring str (nth 10 matches) (nth 11 matches))
                   (format-time-string "%d" (current-time))))
            week-day
            (time (when (nth 18 matches)
                    (substring str (nth 18 matches) (nth 19 matches)))))
-          
-      (when (nth 20 matches) 
+
+      (when (nth 20 matches)
         (setq time (concat time " " (substring str (nth 20 matches) (nth 21 matches)))))
 
       (setq month (format "%02d" (string-to-number month)))
@@ -291,6 +291,8 @@ If EXTENSIONS is given, only match these."
         (delete-region (line-beginning-position) (line-end-position))
         (insert (xwl-calendar-convert-locale-from-chinese str))
         (forward-line 1)))))
+
+(add-to-list 'auto-mode-alist '("-org\\.txt" . org-mode))
 
 
 (provide 'xwl-org)
