@@ -395,13 +395,14 @@
 
 ;; (remove-hook 'find-file-hook 'bracketphobia-hide)
 
-(add-hook 'color-theme-xwl-console-hook
-          (lambda ()
-            (when window-system
-              (require 'highlight-tail)
-              (setq highlight-tail-colors
-                    `((,(if xwl-black-background? "#bc2525" "#d8971d") . 0)))
-              (highlight-tail-reload))))
+;; FIXME: conflict with cedet, causing cursor random bouncing.
+;; (add-hook 'color-theme-xwl-console-hook
+;;           (lambda ()
+;;             (when window-system
+;;               (require 'highlight-tail)
+;;               (setq highlight-tail-colors
+;;                     `((,(if xwl-black-background? "#bc2525" "#d8971d") . 0)))
+;;               (highlight-tail-reload))))
 
 (defun xwl-after-init-hook ()
   ;; FIXME: how to set this only after window has been maximized?
@@ -438,7 +439,8 @@
              (fboundp 'color-theme-xwl-console))
     (run-at-time 1 nil 'color-theme-xwl-console))
 
-  (when (string= system-name "zen.local")
+  (when (or (string= system-name "zen.local")
+            (eq system-type 'gnu/linux))
     (xwl-fullscreen))
 
   (run-hooks 'color-theme-xwl-console-hook)
@@ -803,8 +805,9 @@
 (add-hook 'color-theme-xwl-console-hook
           (lambda ()
             (eval-after-load 'hl-line
-              '(when xwl-black-background?
-                 (set-face-background hl-line-face "magenta4")))))
+              '(progn
+                 (when xwl-black-background?
+                   (set-face-background hl-line-face "magenta4"))))))
 
 (setq thing-at-point-url-path-regexp "[a-zA-Z0-9.?=%,&/:_#@+~-]+")
 
@@ -863,8 +866,6 @@ prompting.  If file is a directory perform a `find-file' on it."
 ;;   (require 'nyan-mode)                  ; need XPM support.
 ;;   (nyan-mode 1)
 ;;   )
-
-(menu-bar-mode -1)
 
 (defadvice ispell-message (around check-language activate)
   (unless (and (getenv "LANG")

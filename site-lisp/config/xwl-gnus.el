@@ -731,10 +731,10 @@
 (setq gnus-use-cache 'passive)
 
 (case window-system
-  ((w32)
-   (rs-gnus-summary-tree-arrows-wide))
+  ((darwin)
+   (xwl-gnus-summary-tree-plain))
   (t
-   (xwl-gnus-summary-tree-plain)))
+   (rs-gnus-summary-tree-arrows-wide)))
 
 ;; ,----
 ;; | threading

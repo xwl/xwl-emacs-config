@@ -44,6 +44,7 @@
              ((string-match system-name "beleod") 14)
              ((string-match system-name "tokyolove.local") (if xwl-black-background? 15 14))
              ((string-match system-name "william-ubuntu") 14)
+             ((string-match system-name "linux-xwl") 14)
              (t 14)))
 
            (cn-font-size
@@ -56,7 +57,7 @@
             `((mac . ("Monaco" "Hiragino Sans GB" "Hiragino Sans GB"))
               (ns  . ("Monaco" "Hiragino Sans GB" "Hiragino Sans GB"))
               (w32 . ("Monaco" "SimSun" "Meiryo"))
-	      (x   . ,(cond ((member system-name '("william-ubuntu" "debian-iMac" "linux-xwl"))
+              (x   . ,(cond ((member system-name '("william-ubuntu" "debian-iMac" "linux-xwl"))
                              `("Monaco" "WenQuanYi Micro Hei" "WenQuanYi Micro Hei"))
                             ;; ((string-match "beleod" system-name)
                             ;;  '("DejaVu Sans Mono" "SimSun" "SimSun"))
@@ -102,9 +103,9 @@
 
 (global-set-key (kbd "C--") 'undo)
 
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
+;; (menu-bar-mode -1)
+;; (tool-bar-mode -1)
+;; (scroll-bar-mode -1)
 (mouse-wheel-mode 1)
 
 (setq woman-use-own-frame nil)
@@ -165,9 +166,15 @@
                       (current-buffer)))))
             ))
 
-(set-cursor-color "Magenta")
+;; (setq-default cursor-color "Magenta")
 
 (setq frame-inherited-parameters '(font))
+
+(defun xwl-light-background ()
+  (interactive)
+  (set-background-color "#f8f8f8"))
+
+(xwl-light-background)
 
 (provide 'xwl-window)
 

@@ -474,6 +474,8 @@ for the --graph option."
 ;;; skeletons
 ;; -----------
 
+(require 'semantic/bovine/gcc)
+
 ;;  c
 (define-skeleton skeleton-c-mode-main-fun
   "generate main(int argc, char *argv[])"
@@ -496,8 +498,10 @@ for the --graph option."
    "Include File: "
    (apply 'append
           (mapcar (lambda (dir) (directory-files dir))
-                  '("/usr/include"
-                    "~/include")))) ">\n")
+                  (append (semantic-gcc-get-include-paths "c")
+                          (remove-if-not 'file-exists-p '("~/include"))))
+          ))
+  ">\n")
 
 ;; c++
 (define-skeleton skeleton-c++-mode-main-fun
@@ -519,13 +523,9 @@ for the --graph option."
    "Include file: "
    (apply 'append
           (mapcar (lambda (dir) (directory-files dir))
-                  '("/usr/include"
-                    "/usr/include/c++/4.0.0"
-                    ;; Qt4 on mac
-                    "/sw/lib/qt4-mac/include/QtCore"
-                    "/sw/lib/qt4-mac/include/QtGui"
-                    "/sw/lib/qt4-mac/include"
-                    )))) ">\n")
+                  (semantic-gcc-get-include-paths "c++"))
+          ))
+  ">\n")
 
 ;; java
 (define-skeleton skeleton-jde-mode-main-fun
@@ -831,9 +831,9 @@ If SCHEME?, `run-scheme'."
 ;;        (setq xwl-layout-before-compilation (current-window-configuration)))
 ;;      ))
 
-(defadvice compile (around use-new-frame activate)
-  (let ((pop-up-frames t))
-    ad-do-it))
+;; (defadvice compile (around use-new-frame activate)
+;;   (let ((pop-up-frames t))
+;;     ad-do-it))
 
 (defun xwl-compilation-exit-autoclose (status code msg)
   (cond ((not (and (eq status 'exit) (zerop code)))
@@ -844,12 +844,12 @@ If SCHEME?, `run-scheme'."
              (re-search-forward "warning:" nil t 1)))
          (setq msg "has warnings"))
         (t
-         (run-at-time 1 nil (lambda ()
-                              ;; (set-window-configuration
-                              ;; xwl-layout-before-compilation)
-                              ;; (delete-windows-on "*compilation*")
-                              (xwl-delete-frame)
-                              ))
+         ;; (run-at-time 1 nil (lambda ()
+         ;;                      ;; (set-window-configuration
+         ;;                      ;; xwl-layout-before-compilation)
+         ;;                      ;; (delete-windows-on "*compilation*")
+         ;;                      (xwl-delete-frame)
+         ;;                      ))
          (setq msg "succeed")))
   (cons msg code))
 
@@ -1512,12 +1512,6 @@ Useful for packing c/c++ functions with one line or empty body."
 
 ;; (semantic-mode 1)
 
-;; (eval-after-load 'semantic-imenu
-;;   '(progn
-;;      (defadvice semantic-create-imenu-index (after combine-with-default activate)
-;;        (setq ad-return-value (append (imenu-default-create-index-function)
-;;                                      ad-return-value)))))
-
 ;; (eval-after-load 'cedet
 ;;   '(progn
 ;;      ;; (global-ede-mode 1)
@@ -1542,6 +1536,20 @@ Useful for packing c/c++ functions with one line or empty body."
 ;;      ;; TODO, bind key to trigger completion.
 ;;      ;; 'semantic-ia-complete-symbol-menu
 ;;      ))
+
+;; 2014/06/18 try
+(semantic-load-enable-excessive-code-helpers)
+(setq semantic-decoration-styles
+      ;; disable boundary overline!
+      (remove-if (lambda (dec) (equal (car dec) "semantic-tag-boundary"))
+                 semantic-decoration-styles))
+(global-semantic-stickyfunc-mode -1)
+
+(eval-after-load 'semantic/imenu
+  '(progn
+     (defadvice semantic-create-imenu-index (after combine-with-default activate)
+       (setq ad-return-value (append (imenu-default-create-index-function)
+                                     ad-return-value)))))
 
 (eval-after-load 'diff-mode
   '(progn

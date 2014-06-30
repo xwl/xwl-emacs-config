@@ -53,6 +53,8 @@
 
 (load "~/.emacs.d/site-lisp/config/xwl-path.el")
 
+(load-file "~/tools/cedet/cedet-devel-load.el")
+
 ;;; Load at startup
 
 (unless (file-exists-p "~/.emacs.d/site-lisp/xwl-autoloads.el")

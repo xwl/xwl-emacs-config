@@ -52,7 +52,8 @@
 
 (setq xwl-w3m-arguments '())
 
-(setq xwl-black-background? (memq system-type '(windows-nt gnu/linux)))
+(setq xwl-black-background? (and (memq system-type '(windows-nt gnu/linux))
+                                 (not (equal system-name "linux-xwl"))))
 
 (provide 'xwl-var)
 

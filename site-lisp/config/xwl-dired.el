@@ -75,8 +75,7 @@ end tell" d)))
            (new (concat orig ".orig")))
       (when (file-exists-p new)
         (error "File `%s' already exists" new))
-      (rename-file orig new)
-      (copy-file new orig)
+      (copy-file orig new)
       (chmod orig (file-modes-symbolic-to-number
                    "u+w" (file-modes orig)))
       (revert-buffer))))
@@ -261,62 +260,33 @@ be with length 3 extentions !"
 ;; 2. Use ido style prompt when there are mutiple matches
 (defun dired-guess-shell-command (prompt files)
   "Ask user with PROMPT for a shell command, guessing a default from FILES."
-
   (let ((default (dired-guess-default files))
-        default-list old-history val (failed t))
-
+        default-list val)
     (if (null default)
         ;; Nothing to guess
-        (read-from-minibuffer prompt nil nil nil 'dired-shell-command-history)
-
-      ;; Save current history list
-      (setq old-history dired-shell-command-history)
-
+        (read-shell-command prompt nil 'dired-shell-command-history)
+      (setq prompt (replace-regexp-in-string ": $" " " prompt))
       (if (listp default)
-
           ;; More than one guess
           (setq default-list default
                 default (car default)
                 prompt (concat
                         prompt
                         (format "{%d guesses} " (length default-list))))
-
         ;; Just one guess
         (setq default-list (list default)))
-
-      ;; Push all guesses onto history so that they can be retrieved with M-p
-      ;; and put the first guess in the prompt but not in the initial value.
-      (setq dired-shell-command-history
-            (append default-list dired-shell-command-history)
-            prompt (concat prompt (format "[%s] " default)))
-
-      ;; The unwind-protect returns VAL, and we too.
-      (unwind-protect
-          ;; BODYFORM
+      ;; Put the first guess in the prompt but not in the initial value.
+      (setq prompt (concat prompt (format "[%s]: " default)))
+      (if (= (length default-list) 1)
           (progn
-            (if (= (length default-list) 1)
-                (progn
-                  (message "Running `%s' at background" default)
-                  (setq val default))
-              (setq val
-;;                     (read-from-minibuffer prompt nil nil nil
-;;                     'dired-shell-command-history))
-                    (completing-read prompt default-list nil nil nil
-                                     'dired-shell-command-history))
-              (setq failed nil)
-              ;; If we got a return, then use default.
-              (if (equal val "")
-                  (setq val default)))
-            val)
-
-        ;; UNWINDFORMS
-        ;; Undo pushing onto the history list so that an aborted
-        ;; command doesn't get the default in the next command.
-        (setq dired-shell-command-history old-history)
-        (if (not failed)
-            (or (equal val (car-safe dired-shell-command-history))
-                (setq dired-shell-command-history
-                      (cons val dired-shell-command-history))))))))
+            (message "Running `%s' at background" default)
+            (setq val default))
+        ;; All guesses can be retrieved with M-n
+        (setq val (read-shell-command prompt nil
+                                      'dired-shell-command-history
+                                      default-list))
+        ;; If we got a return, then return default.
+        (if (equal val "") default val)))))
 
 ;; ;; I don't like to use wildcards in shell command, so simply replace
 ;; ;; them with operated files.
@@ -358,6 +328,7 @@ be with length 3 extentions !"
 
            ("\\.pdf$" ,(xwl-compat-select-by-executable
                         '(("xpdf" "xpdf")
+                          ("gnome-open" "gnome-open")
                           ("open" "open -a Preview"))))
 
            ("\\.pdf.gz$" "zxpdf")

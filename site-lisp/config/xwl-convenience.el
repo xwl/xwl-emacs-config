@@ -195,6 +195,10 @@
                                  "*All*"
                                  "*magit"
                                  "*Custom"
+
+                                 ;; cedet
+                                 "*SPP parse hack"
+                                 "*CEDET Global*"
                                  ))))
      (setq auto-less-exclude-modes
            (append auto-less-exclude-modes
@@ -595,6 +599,8 @@
   (electric-indent-mode 1))
 
 (blink-cursor-mode -1)
+
+(global-hl-line-mode 1)
 
 (provide 'xwl-convenience)
 
