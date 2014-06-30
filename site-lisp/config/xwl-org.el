@@ -1,6 +1,6 @@
 ;;; xwl-org.el --- configs for org-mode
 
-;; Copyright (C) 2008, 2009, 2010, 2011, 2012 William Xu
+;; Copyright (C) 2008, 2009, 2010, 2011, 2012, 2014 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -123,6 +123,8 @@ If EXTENSIONS is given, only match these."
 
 (add-hook 'org-mode-hook
           (lambda ()
+            (auto-fill-mode -1)
+            (visual-line-mode 1)
             (modify-syntax-entry ?- "w" org-mode-syntax-table)
             (modify-syntax-entry ?> "w" org-mode-syntax-table)))
 
@@ -293,7 +295,7 @@ If EXTENSIONS is given, only match these."
         (forward-line 1)))))
 
 (add-to-list 'auto-mode-alist '("-org\\.txt" . org-mode))
-
+(setq org-export-author-info t)
 
 (provide 'xwl-org)
 

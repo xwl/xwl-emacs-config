@@ -364,6 +364,22 @@
   (add-to-list 'tramp-default-proxies-alist
                '("localhost" "\\`root\\'" "/ssh:%h#2222:")))
 
+(setq password-cache-expiry nil)
+
+(add-to-list 'tramp-methods
+              '("plinkxwl"
+                (tramp-login-program "plink")
+                (tramp-login-args
+                 (("-l" "%u")
+                  ("-P" "%p")
+                  ("-ssh")
+                  ("%h")
+                  ("-i" "c:/Users/wixu/xwl/.ssh/putty.ppk")))
+                (tramp-remote-shell "/bin/sh")
+                (tramp-remote-shell-args
+                 ("-c"))
+                (tramp-default-port 22)))
+
 (setq ga-pkgsrc-dir "~/repo/cvs/pkgsrc")
 
 (global-set-key (kbd "<f10>") 'xwl-ga)
@@ -439,9 +455,10 @@
              (fboundp 'color-theme-xwl-console))
     (run-at-time 1 nil 'color-theme-xwl-console))
 
-  (when (or (string= system-name "zen.local")
-            (eq system-type 'gnu/linux))
-    (xwl-fullscreen))
+  ;; (when (or (string= system-name "zen.local")
+  ;;           (eq system-type 'gnu/linux))
+  ;;   (xwl-fullscreen))
+  (xwl-fullscreen)
 
   (run-hooks 'color-theme-xwl-console-hook)
 
@@ -1088,6 +1105,19 @@ prompting.  If file is a directory perform a `find-file' on it."
 
 (add-to-list 'auto-mode-alist '("sources.list" . conf-mode))
 
+;; TODO: remove after update to latest emacs.
+(defun hif-string-to-number (string &optional base)
+  "Like `string-to-number', but it understands non-decimal floats."
+  (if (or (not base) (= base 10))
+      (string-to-number string base)
+    (let* ((parts (split-string string "\\." t "[ \t]+"))
+           (frac (cadr parts))
+           (quot (expt (* base 1.0) (length frac)))
+           (num (/ (string-to-number (concat (car parts) frac) base)
+                   quot)))
+      (if (= num (truncate num))
+          (truncate num)
+        num))))
 
 (provide 'xwl-misc)
 

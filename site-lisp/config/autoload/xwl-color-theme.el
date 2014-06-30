@@ -31,12 +31,13 @@
 ;;;###autoload
 (defun color-theme-xwl-console ()
   (interactive)
-  (case system-type
-    ((darwin) (load-theme 'xwl-dark-mac))
-    ((windows-nt) (load-theme 'xwl-dark-w32 t))
-    (t (load-theme 'xwl-dark t)))
-  (setq xwl-black-background? t)
-  (run-hooks 'color-theme-xwl-console-hook))
+  ;; (case system-type
+  ;;   ((darwin) (load-theme 'xwl-dark-mac))
+  ;;   ((windows-nt) (load-theme 'xwl-dark-w32 t))
+  ;;   (t (load-theme 'xwl-dark t)))
+  ;; (setq xwl-black-background? t)
+  ;; (run-hooks 'color-theme-xwl-console-hook)
+  )
 
 (defun color-theme-xwl-console-old ()
   "Color theme base on console colors with `color-theme-print'.

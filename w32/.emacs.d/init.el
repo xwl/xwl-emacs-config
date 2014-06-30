@@ -1,9 +1,7 @@
-(unless (file-exists-p "q:")
-  (shell-command "c:/xwl/scripts/map_sdk.bat"))
+;;; remember to delete .elc if copied from other OS.
 
-(setq xwl-home "Q:/repo/git/xwl-emacs-config")
+(setq xwl-home "C:/Users/wixu/xwl/")
 
 (setenv "HOME" xwl-home)
 
-(load (concat xwl-home "/.emacs.d/init.el"))
-
+(load (concat xwl-home ".emacs.d/init.el"))

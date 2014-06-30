@@ -1,6 +1,6 @@
 ;;; xwl-window.el --- GUI window related config
 
-;; Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012, 2013 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -39,7 +39,9 @@
   (ignore-errors
     (let* ((en-font-size
             (cond
+             ((equal system-name "3CNL16305") 15)
              ((eq window-system 'w32) 13)
+
              ((equal system-name "debian-iMac") 15)
              ((string-match system-name "beleod") 14)
              ((string-match system-name "tokyolove.local") (if xwl-black-background? 15 14))

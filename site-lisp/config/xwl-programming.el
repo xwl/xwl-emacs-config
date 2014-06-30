@@ -1538,18 +1538,19 @@ Useful for packing c/c++ functions with one line or empty body."
 ;;      ))
 
 ;; 2014/06/18 try
-(semantic-load-enable-excessive-code-helpers)
-(setq semantic-decoration-styles
-      ;; disable boundary overline!
-      (remove-if (lambda (dec) (equal (car dec) "semantic-tag-boundary"))
-                 semantic-decoration-styles))
-(global-semantic-stickyfunc-mode -1)
+(unless (eq system-type 'windows-nt)
+  (semantic-load-enable-excessive-code-helpers)
+  (setq semantic-decoration-styles
+        ;; disable boundary overline!
+        (remove-if (lambda (dec) (equal (car dec) "semantic-tag-boundary"))
+                   semantic-decoration-styles))
+  (global-semantic-stickyfunc-mode -1)
 
-(eval-after-load 'semantic/imenu
-  '(progn
-     (defadvice semantic-create-imenu-index (after combine-with-default activate)
-       (setq ad-return-value (append (imenu-default-create-index-function)
-                                     ad-return-value)))))
+  (eval-after-load 'semantic/imenu
+    '(progn
+       (defadvice semantic-create-imenu-index (after combine-with-default activate)
+         (setq ad-return-value (append (imenu-default-create-index-function)
+                                       ad-return-value))))))
 
 (eval-after-load 'diff-mode
   '(progn

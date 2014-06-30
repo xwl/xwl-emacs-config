@@ -1,6 +1,6 @@
 ;;; xwl-convenience.el --- Must have cookies, keep it small and stable
 
-;; Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012, 2013 William Xu
+;; Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -22,11 +22,12 @@
 ;;; Code:
 
 ;; coding system
-(case system-type
-  ((windows-nt)
-   (prefer-coding-system 'gbk))
-  (t
-   (prefer-coding-system 'utf-8-emacs)))
+;; (case system-type
+;;   ((windows-nt)
+;;    (prefer-coding-system 'gbk))
+;;   (t
+(prefer-coding-system 'utf-8-emacs)
+;;))
 
 ;; (require 'auto-enca)
 ;; (modify-coding-system-alist 'file "" 'enca-detect-coding)
@@ -601,6 +602,9 @@
 (blink-cursor-mode -1)
 
 (global-hl-line-mode 1)
+
+(setq user-full-name "William Xu")
+
 
 (provide 'xwl-convenience)
 
