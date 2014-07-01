@@ -891,11 +891,19 @@ If SCHEME?, `run-scheme'."
 (eval-after-load 'buffer-action
   '(progn
      (setq buffer-action-table
-           `(("\\.tex$" "xelatex %f" "%n.pdf"
-              ,(cdr (assq system-type
-                          '((darwin . "open -a Preview %n.pdf &")
-                            (windows-nt . "start %n.pdf" )
-                            (gnu/linux . "gnome-open %n.pdf")))))
+           `(("\\.tex$"
+              ,(case system-type
+                           ((darwin)
+                            "latexmk -pdf %f && ( if grep 'Missing character' %n.log; then bad; fi)")
+                           (t
+                            "xelatex %f && ( if grep 'Missing character' %n.log; then bad; fi)"))
+              "%n.pdf"
+              (lambda () (TeX-view))
+              ;; ,(cdr (assq system-type
+              ;;             '((darwin . "open -a Preview %n.pdf &")
+              ;;               (windows-nt . "start %n.pdf" )
+              ;;               (gnu/linux . "gnome-open %n.pdf"))))
+              )
 
              ("\\.dot$"
               ,(concat "dot -Tjpg %f -o %n.jpg "
