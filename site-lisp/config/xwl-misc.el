@@ -280,15 +280,21 @@
 
 (defun xwl-recentf-open-files ()
   (interactive)
-  (let ((name-full (mapcar (lambda (filename)
-                             (cons (or (with-temp-buffer
-                                         (uniquify-rationalize-file-buffer-names
-                                          (file-name-nondirectory filename)
-                                          (file-name-directory filename)
-                                          (current-buffer)))
-                                       (file-name-nondirectory filename))
-                                   filename))
-                           recentf-list)))
+  (let ((dups '())
+        (unis '())
+        (name-full '()))
+    ;; find duplicates
+    (dolist (path recentf-list)
+      (let ((file (file-name-nondirectory path)))
+        (if (member file unis)
+            (push file dups)
+          (push file unis))))
+    ;; construct list
+    (dolist (path recentf-list)
+      (let ((file (file-name-nondirectory path)))
+        (if (member file dups)
+            (push (cons path path) name-full)
+          (push (cons file path) name-full))))
     (find-file
      (cdr (assoc (completing-read "Open recent file: " (mapcar 'car name-full))
                  name-full)))))
