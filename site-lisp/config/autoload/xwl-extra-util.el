@@ -520,5 +520,29 @@ Note: you are suggested to kill process buffer at the end of CALLBACK. "
         (insert key)
       (message key))))
 
+;;;###autoload
+(defun xwl-raw-region (start end)
+  "http://permalink.gmane.org/gmane.emacs.help/98558
+You may also use `paredit-doublequote'.  "
+  (interactive "r")
+  (let ((r (prin1-to-string (buffer-substring-no-properties start end))))
+    (delete-region start end)
+    (insert r)))
+
+;;;###autoload
+;; (defun xwl-raw-string (str)
+;;   "Raw string macro."
+;;   (save-excursion
+;;     (narrow-to-defun)
+;;     (goto-char (point-min))
+;;     (while (re-search-forward "( *xwl-raw-string[\n ]*\"\\|\"[\n ]*)" nil t 1)
+;;       (replace-match ""))
+;;     (let ((s (prin1-to-string
+;;               (buffer-substring-no-properties (point-min) (1- (point-max))))))
+;;       (delete-region (point-min) (point-max))
+;;       (insert s "\n"))
+;;     (widen)))
+
+
 (provide 'xwl-extra-util)
 ;;; xwl-extra-util.el ends here
