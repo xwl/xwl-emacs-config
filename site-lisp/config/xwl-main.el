@@ -71,6 +71,10 @@
 (require 'xwl-convenience)
 (require 'xwl-var)
 (when xwl-w32? (require 'xwl-w32))
+
+(when xwl-at-company?
+  (load "kaixya.el"))
+
 (require 'xwl-util)
 (require 'xwl-private)
 (require 'xwl-mode-line)
@@ -116,4 +120,3 @@
 ;; (require 'xwl-muse)
 
 ;;; xwl-main.el ends here
-

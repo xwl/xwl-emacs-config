@@ -21,6 +21,9 @@
 
 ;;; Code:
 
+(setq message-directory "~/.emacs.d/Mail/")
+(setq gnus-directory "~/.emacs.d/News/")
+
 ;;; Backends
 
 (setq gnus-interactive-exit nil)
@@ -99,10 +102,15 @@
 
 (eval-after-load "gnus"
   '(progn
+     ;; see gnus-demon-handlers for help.
+     (setq gnus-demon-timestep 1)
+
      ;; When idle 2 minutes, then check news every 3 minutes.
-     (if gnus-plugged
-         (gnus-demon-add-handler 'xwl-gnus-group-get-new-news 30 10)
-       (gnus-demon-add-handler 'xwl-gnus-group-get-new-news 30 nil))
+     ;; (if gnus-plugged
+     ;;     (gnus-demon-add-handler 'xwl-gnus-group-get-new-news 30 10)
+     ;;   (gnus-demon-add-handler 'xwl-gnus-group-get-new-news 30 nil))
+
+     (gnus-demon-add-handler 'xwl-gnus-group-get-new-news 120 5)
 
      ;; FIXME: can i remove this?
      (load "rs-gnus-summary.el")
@@ -133,9 +141,7 @@
     (if (zerop new)
         (setq xwl-mail-notify-string "")
       (setq xwl-mail-notify-string (format "Mail(%d)" new))
-      ;; (shell-command
-      ;;  (format "~/bin/growlnotify -a Emacs.app -m '收到 %d 封信啦!'"
-      ;; new))
+      ;; (xwl-notify "" (format  "收到 %d 封信啦!" new))
       )
     (force-mode-line-update)))
 
@@ -159,7 +165,7 @@
 ;; (from server port user passwd key cert)
 (setq xwl-smtp-accounts
       `((ssl "william.xwl@gmail.com" "smtp.gmail.com" 587 "william.xwl@gmail.com" ,pwgmail nil nil)
-        ;;(plain ...
+        ;(plain "william.xwl@gmail.com" "smtp.gmail.com" 587 "william.xwl@gmail.com" ,pwgmail)
         ))
 
 (defun xwl-set-smtp-plain (server port user password)
@@ -711,12 +717,12 @@
   (define-key gnus-summary-mode-map (kbd "/ n") 'gnus-summary-insert-new-articles)
 
   (define-key gnus-summary-mode-map (kbd "r") (lambda () (interactive)
-			       (gnus-summary-show-article)
-			       (other-window 1)))
+    		       (gnus-summary-show-article)
+    		       (other-window 1)))
 
   (define-key gnus-summary-mode-map (kbd "RET") (lambda () (interactive)
-			       (gnus-summary-show-article)
-			       (other-window 1)))
+    		       (gnus-summary-show-article)
+    		       (other-window 1)))
 
   (define-key gnus-summary-mode-map (kbd "C-o") nil))
 
@@ -1173,6 +1179,14 @@ This function does nothing when \"foo@bar\" is not base64 encoded."
 (setq gnus-agent-queue-mail nil)
 
 (setq imap-use-utf7 nil)
+
+;; window/buffer/layout configuration
+(gnus-add-configuration
+ '(article (horizontal 1.0 (summary 0.5 point)
+                       (article 1.0))))
+
+;; shortup note
+;; article: `K H' -- view text/html mail in external browser
 
 (provide 'xwl-gnus)
 

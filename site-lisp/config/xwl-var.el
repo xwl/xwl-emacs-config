@@ -41,7 +41,7 @@
       ((windows-nt) (setq count "-n 1"
                           cmd "ipconfig"))
       (t (setq count "-c 1"
-               cmd "ifconfig")))
+               cmd "/sbin/ifconfig")))
     (or (zerop (shell-command (concat cmd " | grep 10.233")))
         (and (string= (user-login-name) "wixu")
              (not (eq system-type 'darwin))

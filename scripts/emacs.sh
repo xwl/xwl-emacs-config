@@ -2,7 +2,8 @@ export EDITOR='LC_ALL=zh_CN.utf8 TERM=xterm-256color emacsclient -t'
 
 # alias ec='LC_ALL=zh_CN.utf8 TERM=xterm-256color emacsclient -t -e "(command-execute (kbd \"C-c m s\"))"'
 alias ec=$EDITOR
-alias ecui='LC_ALL=zh_CN.utf8 TERM=xterm-256color emacsclient -c'
+alias ecui='LC_ALL=zh_CN.utf8 TERM=xterm-256color emacsclient -n'
+alias ecui2='LC_ALL=zh_CN.utf8 TERM=xterm-256color emacsclient -c'
 
 export ALTERNATE_EDITOR=~/.emacs.d/scripts/emacs-daemon
 
@@ -64,7 +65,7 @@ git_current_branch()
 
 repo_rev ()
 {
-    [[ $(pwd) = *LINUX/android* ]] || return
+    [[ $(pwd) = */android* ]] || return
 
     local result
     result=$((repo info ./ |grep "Manifest branch" | cut -d: -f2 | cut -d' ' -f2 | cut -d'/' -f 3) 2>/dev/null)
@@ -74,7 +75,7 @@ repo_rev ()
 
 repo_project ()
 {
-    [[ $(pwd) = *LINUX/android* ]] || return
+    [[ $(pwd) = */android* ]] || return
 
     local result
     result=$((repo info ./ |grep "Project:" | cut -d' ' -f2) 2>/dev/null)

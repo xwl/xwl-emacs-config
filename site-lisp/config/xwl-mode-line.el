@@ -36,7 +36,7 @@
         ;; xwl-memory-usage-string " "
         ;; xwl-week-at-school-string " "
         ;; battery-mode-line-string " "
-        ;; xwl-mail-notify-string " "
+        xwl-mail-notify-string " "
 
         ;; cwit-mode-line-string " "
         ;; rcirc-activity-string

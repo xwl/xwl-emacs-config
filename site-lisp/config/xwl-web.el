@@ -23,11 +23,12 @@
 ;;; Code:
 
 (require 'xwl-util)
-(ignore-errors (require 'w3m-load))
+(ignore-errors (require 'w3m-load)
+               (setq xwl-w3m-loaded t))
 
 ;;; w3m
 
-(when (featurep 'w3m)
+(when xwl-w3m-loaded
   (setq w3m-default-display-inline-images t
         w3m-default-save-directory "~/download/"
         w3m-home-page "http://localhost/"
@@ -158,7 +159,7 @@ end tell"
 
 ;;; MIME
 
-(if (featurep 'w3m)
+(if xwl-w3m-loaded
     (setq mm-text-html-renderer 'w3m)
   (setq mm-text-html-renderer 'html2text))
 
