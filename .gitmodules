@@ -1,7 +1,7 @@
 [submodule "site-lisp/xwl-elisp"]
 	path = site-lisp/xwl-elisp
 	url = git@github.com:xwl/xwl-elisp.git
-    ignore = untracked      
+    ignore = untracked
 [submodule "site-lisp/twittering-mode"]
 	path = site-lisp/twittering-mode
 	url = git@github.com:xwl/twittering-mode.git
@@ -9,11 +9,11 @@
 [submodule "site-lisp/emms"]
 	path = site-lisp/emms
 	url = git://git.sv.gnu.org/emms.git
-    ignore = untracked     
+    ignore = untracked
 [submodule "site-lisp/xwl/ga"]
 	path = site-lisp/xwl/ga
 	url = git@github.com:xwl/ga.git
-    ignore = untracked      
+    ignore = untracked
 [submodule "site-lisp/xwl/cal-china-x"]
 	path = site-lisp/xwl/cal-china-x
 	url = git@github.com:xwl/cal-china-x.git
@@ -61,23 +61,26 @@
 [submodule "site-lisp/xwl/electric-spacing"]
 	path = site-lisp/xwl/electric-spacing
 	url = git@github.com:xwl/electric-spacing
-    ignore = untracked      
+    ignore = untracked
 [submodule "site-lisp/magit"]
 	path = site-lisp/magit
 	url = git://github.com/magit/magit.git
-    ignore = untracked      
+    ignore = untracked
 [submodule "w32/mintty-color-solarized"]
 	path = w32/mintty-color-solarized
 	url = git://github.com/karlin/mintty-colors-solarized.git
 [submodule "site-lisp/auto-complete"]
 	path = site-lisp/auto-complete
 	url = git://github.com/auto-complete/auto-complete.git
-    ignore = untracked      
+    ignore = untracked
 [submodule "site-lisp/paredit"]
 	path = site-lisp/paredit
 	url = git@github.com:xwl/paredit.git
-    ignore = untracked      
+    ignore = untracked
 [submodule "site-lisp/git-modes"]
 	path = site-lisp/git-modes
 	url = git://github.com/magit/git-modes.git
-    ignore = untracked      
+    ignore = untracked
+[submodule "site-lisp/pangu-spacing"]
+	path = site-lisp/pangu-spacing
+	url = git://github.com/coldnew/pangu-spacing.git

@@ -1126,6 +1126,12 @@ prompting.  If file is a directory perform a `find-file' on it."
           (truncate num)
         num))))
 
+
+(require 'pangu-spacing)
+(setq pangu-spacing-real-insert-separtor t)
+(global-pangu-spacing-mode 1)
+
+
 (provide 'xwl-misc)
 
 ;;; Local Variables: ***
