@@ -469,6 +469,10 @@ for the --graph option."
 		(when start-revision (list start-revision))
 		'("--")))))))
 
+     (defun vc-git-annotate-command (file buf &optional rev)
+       (let ((name (file-relative-name file)))
+         (vc-git-command buf 'async nil "blame" "--date=iso" rev "--" name)))
+
    ))
 
 ;;; skeletons
