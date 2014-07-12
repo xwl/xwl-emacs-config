@@ -408,7 +408,8 @@
         (apt-cyg "c:/cygwin/bin/sh.exe '/home/william/w32/apt-cyg'")
         (yum "sudo yum")
         (chicken "sudo chicken-install")
-        (brew "brew")))
+        (brew "brew")
+        (tlmgr "sudo tlmgr")))
 
 (add-to-list 'auto-mode-alist
              '("macbluetelnet.*\\(\\.h\\|\\.mm\\|\\.m\\)$" . objc-mode))
