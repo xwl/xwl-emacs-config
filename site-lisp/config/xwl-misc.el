@@ -1112,24 +1112,10 @@ prompting.  If file is a directory perform a `find-file' on it."
 
 (add-to-list 'auto-mode-alist '("sources.list" . conf-mode))
 
-;; TODO: remove after update to latest emacs.
-(defun hif-string-to-number (string &optional base)
-  "Like `string-to-number', but it understands non-decimal floats."
-  (if (or (not base) (= base 10))
-      (string-to-number string base)
-    (let* ((parts (split-string string "\\." t "[ \t]+"))
-           (frac (cadr parts))
-           (quot (expt (* base 1.0) (length frac)))
-           (num (/ (string-to-number (concat (car parts) frac) base)
-                   quot)))
-      (if (= num (truncate num))
-          (truncate num)
-        num))))
-
-
 (require 'pangu-spacing)
 (setq pangu-spacing-real-insert-separtor t)
-(global-pangu-spacing-mode 1)
+;; (global-pangu-spacing-mode 1)
+(add-hook 'text-mode-hook (lambda () (pangu-spacing-mode 1)))
 
 
 (provide 'xwl-misc)
