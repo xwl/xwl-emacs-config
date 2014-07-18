@@ -1117,6 +1117,7 @@ prompting.  If file is a directory perform a `find-file' on it."
 ;; (global-pangu-spacing-mode 1)
 (add-hook 'text-mode-hook (lambda () (pangu-spacing-mode 1)))
 
+(evil-mode 1)
 
 (provide 'xwl-misc)
 

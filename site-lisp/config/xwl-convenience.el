@@ -160,7 +160,7 @@
 	     (local-set-key (kbd "M-n") 'less-scroll-up-line)
 	     (local-set-key (kbd "M-p") 'less-scroll-down-line)))
 
-(setq mouse-wheel-scroll-amount (list 1))
+;; (setq mouse-wheel-scroll-amount (list 1))
 
 ;; Am i weird or Emacs is weird ?
 (global-set-key (kbd "C-c ,") 'previous-buffer)
@@ -206,7 +206,7 @@
                    '()))
      ))
 
-(global-less-minor-mode 1)
+;; (global-less-minor-mode 1)
 
 (defadvice save-buffers-kill-terminal (around disable-less activate)
   (let ((global-less-minor-mode nil))

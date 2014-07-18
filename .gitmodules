@@ -84,3 +84,6 @@
 [submodule "site-lisp/pangu-spacing"]
 	path = site-lisp/pangu-spacing
 	url = git://github.com/coldnew/pangu-spacing.git
+[submodule "site-lisp/evil"]
+	path = site-lisp/evil
+	url = git://gitorious.org/evil/evil.git
