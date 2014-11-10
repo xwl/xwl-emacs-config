@@ -23,6 +23,7 @@
 ;;; Code:
 
 (require 'xwl-util)
+(setq xwl-w3m-loaded nil)
 (ignore-errors (require 'w3m-load)
                (setq xwl-w3m-loaded t))
 

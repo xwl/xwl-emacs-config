@@ -1118,6 +1118,11 @@ prompting.  If file is a directory perform a `find-file' on it."
 (add-hook 'text-mode-hook (lambda () (pangu-spacing-mode 1)))
 
 (evil-mode 1)
+(define-key evil-normal-state-map  "\C-t" 'evil-force-normal-state)
+(define-key evil-insert-state-map  "\C-t" 'evil-force-normal-state)
+(define-key evil-motion-state-map  "\C-t" 'evil-force-normal-state)
+(define-key evil-visual-state-map  "\C-t" 'evil-force-normal-state)
+(define-key evil-replace-state-map "\C-t" 'evil-force-normal-state)
 
 (provide 'xwl-misc)
 
