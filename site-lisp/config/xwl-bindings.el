@@ -164,7 +164,7 @@
 (global-set-key (kbd "C-\\") 'hippie-expand)
 (global-set-key (kbd "C-2") 'set-mark-command)
 
-(global-set-key (kbd "C-c m s") '(lambda () (interactive) (find-file "~/.scratch")))
+(global-set-key (kbd "C-c m s") '(lambda () (interactive) (find-file "~/.emacs.d/scratch")))
 (global-set-key (kbd "C-c m r") 'revert-buffer)
 (global-set-key (kbd "C--") 'undo)
 

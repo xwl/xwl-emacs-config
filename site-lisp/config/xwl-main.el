@@ -1,6 +1,6 @@
 ;; xwl-main.el --- Main entry for The One True Editor
 
-;; Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2013 William Xu
+;; Copyright (C) 2003-2014 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 
@@ -57,7 +57,7 @@
   ((gnu/linux)
    (load-file "~/tools/cedet/cedet-devel-load.el"))
   ((darwin)
-   (load-file "~/repo/bzr/cedet/cedet-devel-load.el")))
+   (load-file "~/xwl-no-backup/huge-and-famous-repo/cedet/cedet-devel-load.el")))
 
 ;;; Load at startup
 
@@ -110,7 +110,10 @@
 
 (unless (file-exists-p "~/.emacs.d/elpa")
   (package-list-packages)
-  (mapc 'package-install '(oauth2 auctex))
+  (mapc 'package-install
+        ;; package-activated-list
+        '(ace-jump-mode ace-jump-mode all auctex goto-last-change oauth2)
+                 )
   (with-current-buffer (find-file-noselect
                         "~/.emacs.d/site-lisp/xwl-makefile.el")
     (xwl-makefile-all)))

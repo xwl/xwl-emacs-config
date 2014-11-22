@@ -764,7 +764,7 @@
 
 
 ;; 用 `C-u g' 显示原始文章样式。W w, W Q
-(add-hook 'gnus-article-prepare-hook 'gnus-article-fill-long-lines)
+;; (remove-hook 'gnus-article-prepare-hook 'gnus-article-fill-long-lines)
 
 (setq xwl-enter-first-article t)
 (add-hook 'gnus-article-prepare-hook

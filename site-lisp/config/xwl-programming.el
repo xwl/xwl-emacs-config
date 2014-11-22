@@ -951,10 +951,12 @@ If SCHEME?, `run-scheme'."
                           (caar (directory-files-and-attributes "." nil "\\.pro$" t))))))
               )
 
-             (c++-mode ,(concat buffer-action-c++ " -O2 \"%f\" -lm -I/sw/include -o %n")
+             (c++-mode ,(concat buffer-action-c++ " -O2 \"%f\" -lm -I/sw/include -std=c++11 -o %n")
                        ,@(if (eq system-type 'windows-nt) '("%n.exe" "%n.exe") '("%n" "./%n")))
 
              (haskell-mode "ghc --make '%f'" "%n" "./%n")
+
+             (".swift" (lambda () (message "Just run!")) nil "open -a ~/bin/xcode-run.app")
 
              ,@buffer-action-table))
      ))

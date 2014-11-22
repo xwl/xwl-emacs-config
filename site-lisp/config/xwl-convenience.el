@@ -203,10 +203,10 @@
                                  ))))
      (setq auto-less-exclude-modes
            (append auto-less-exclude-modes
-                   '()))
+                   '(text-mode prog-mode)))
      ))
 
-;; (global-less-minor-mode 1)
+(global-less-minor-mode 1)
 
 (defadvice save-buffers-kill-terminal (around disable-less activate)
   (let ((global-less-minor-mode nil))

@@ -301,6 +301,7 @@
 
 (global-set-key (kbd "C-c F") 'xwl-recentf-open-files)
 
+(setq auto-insert-query nil)
 (add-hook 'find-file-hook 'auto-insert)
 
 ;; ,----
@@ -472,7 +473,7 @@
   (appt-activate 1)
 
   (unless (xwl-check-holidays)
-    (find-file "~/.scratch")
+    (find-file "~/.emacs.d/scratch")
     ;; (xwl-todo-find-do)
     (delete-other-windows)
     (message (substring (emacs-version) 0 16))))
@@ -1117,12 +1118,25 @@ prompting.  If file is a directory perform a `find-file' on it."
 ;; (global-pangu-spacing-mode 1)
 (add-hook 'text-mode-hook (lambda () (pangu-spacing-mode 1)))
 
-(evil-mode 1)
-(define-key evil-normal-state-map  "\C-t" 'evil-force-normal-state)
-(define-key evil-insert-state-map  "\C-t" 'evil-force-normal-state)
+;; (evil-mode 1)
+
+(require 'evil)
+(add-hook 'find-file-hook (lambda ()
+                            (less-minor-mode-off)
+                            (evil-local-mode 1)))
+(define-key evil-insert-state-map (kbd "C-t") 'evil-force-normal-state)
+(define-key evil-normal-state-map (kbd "C-t") 'evil-force-normal-state)
 (define-key evil-motion-state-map  "\C-t" 'evil-force-normal-state)
 (define-key evil-visual-state-map  "\C-t" 'evil-force-normal-state)
 (define-key evil-replace-state-map "\C-t" 'evil-force-normal-state)
+
+(eval-after-load 'package
+  '(progn
+     (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+     ))
+
+(setq mac-system-move-file-to-trash-use-finder t)
+(setq delete-by-moving-to-trash t)
 
 (provide 'xwl-misc)
 
