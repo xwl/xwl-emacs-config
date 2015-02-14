@@ -37,36 +37,23 @@
   ;; cn_font_size = (en_font_size * width_factor) * 2
   ;; monaco width factor is 0.6.
   (ignore-errors
-    (let* ((en-font-size
-            (cond
-             ((equal system-name "3CNL16305") 15)
-             ((eq window-system 'w32) 13)
+    (let* ((hst (car (split-string (shell-command-to-string "hostname"))))
 
-             ((equal system-name "debian-iMac") 15)
-             ((string-match system-name "beleod") 14)
-             ((string-match system-name "tokyolove.local") (if xwl-black-background? 15 14))
-             ((string-match system-name "william-ubuntu") 14)
-             ((string-match system-name "linux-xwl") 14)
-             (t 14)))
+           (configs '(("ubuntu" 17 "DejaVu Sans Mono" "SimSun" "SimSun")
+                      ("tokyolove.local" (if xwl-black-background? 15 14) "Monaco" "Hiragino Sans GB" "Hiragino Sans GB")
+                      ))
 
+           (en-font-size (if (assoc hst configs) (nth 1 (assoc hst configs)) 14))
            (cn-font-size
             (cond
              ((string-match "tokyolove.local" system-name) (if xwl-black-background? 18 16))
              (t
               (ceiling (* en-font-size 0.6 2)))))
 
-           (all-fonts
-            `((mac . ("Monaco" "Hiragino Sans GB" "Hiragino Sans GB"))
-              (ns  . ("Monaco" "Hiragino Sans GB" "Hiragino Sans GB"))
-              (w32 . ("Monaco" "SimSun" "Meiryo"))
-              (x   . ,(cond ((member system-name '("william-ubuntu" "debian-iMac" "linux-xwl"))
-                             `("Monaco" "WenQuanYi Micro Hei" "WenQuanYi Micro Hei"))
-                            ;; ((string-match "beleod" system-name)
-                            ;;  '("DejaVu Sans Mono" "SimSun" "SimSun"))
-                            ((string-match "be" system-name)
-                             ;; '("lucidatypewriter" "fangsong ti" "fangsong ti"))
-                             '("DejaVu Sans Mono" "SimSun" "SimSun"))))))
-           (fonts (cdr (assoc window-system all-fonts)))
+           (fonts (if (assoc hst configs)
+                      (cddr (assoc hst configs))
+                    '("Monaco" "SimSun" "SimSun")))
+
            (en (format "%s:pixelsize=%d" (nth 0 fonts) en-font-size))
            (cn (nth 1 fonts))
            (jp (nth 2 fonts)))
