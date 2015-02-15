@@ -39,7 +39,7 @@
   (ignore-errors
     (let* ((hst (car (split-string (shell-command-to-string "hostname"))))
 
-           (configs '(("ubuntu" 17 "DejaVu Sans Mono" "SimSun" "SimSun")
+           (configs '(("ubuntu" 15 "Monaco" "SimSun" "SimSun")
                       ("tokyolove.local" (if xwl-black-background? 15 14) "Monaco" "Hiragino Sans GB" "Hiragino Sans GB")
                       ))
 

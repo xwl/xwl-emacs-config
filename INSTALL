@@ -1,0 +1,8 @@
+-*- org -*-
+
+** build emacs dep
+   sudo apt-get install build-dep emacs24
+
+** termail setup
+   1. source ~/.emacs.d/scripts/emacs.sh
+      Then run `ec'.
