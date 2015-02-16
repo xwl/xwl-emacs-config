@@ -459,7 +459,6 @@
   ;; (xwl-weather-update)
 
   (when (and xwl-black-background?
-             window-system
              (fboundp 'color-theme-xwl-console))
     (run-at-time 1 nil 'color-theme-xwl-console))
 
@@ -832,7 +831,14 @@
             (eval-after-load 'hl-line
               '(progn
                  (when xwl-black-background?
-                   (set-face-background hl-line-face "magenta4"))))))
+                   (set-face-background hl-line-face ;"magenta4"
+                                        ;"color-22"
+                                        "color-236"
+                                        ))))))
+
+(when xwl-black-background?
+  (set-face-background 'show-paren-match "color-130")
+  (set-face-background 'region "color-24"))
 
 (setq thing-at-point-url-path-regexp "[a-zA-Z0-9.?=%,&/:_#@+~-]+")
 
@@ -1126,8 +1132,9 @@ prompting.  If file is a directory perform a `find-file' on it."
 (add-hook 'find-file-hook (lambda ()
                             (less-minor-mode-off)
                             (evil-local-mode 1)))
-(define-key evil-insert-state-map (kbd "C-t") 'evil-force-normal-state)
-(define-key evil-normal-state-map (kbd "C-t") 'evil-force-normal-state)
+
+(define-key evil-insert-state-map  "\C-t" 'evil-force-normal-state)
+(define-key evil-normal-state-map  "\C-t" 'evil-force-normal-state)
 (define-key evil-motion-state-map  "\C-t" 'evil-force-normal-state)
 (define-key evil-visual-state-map  "\C-t" 'evil-force-normal-state)
 (define-key evil-replace-state-map "\C-t" 'evil-force-normal-state)

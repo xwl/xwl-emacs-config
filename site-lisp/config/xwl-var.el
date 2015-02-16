@@ -26,33 +26,13 @@
 (setq xwl-w32-redirect-locally? t)
 
 (defun xwl-at-company ()
-  ;; (message "瞅瞅我们是不是在公司网络呢…")
-  ;;   (zerop (shell-command
-  ;;          "traceroute -w 2 -m 2 www.google.com  | grep abc"))
-
-  ;; (zerop (shell-command "ping -n 1 172.16.42.42"))
-
-  ;; (and (not (eq system-type 'darwin))
-  ;;        (or (zerop (shell-command "ipconfig | grep 172.28"))
-  ;;            (zerop (shell-command "ipconfig | grep 10.162"))))
-
-  (let (count cmd)
-    (case  system-type
-      ((windows-nt) (setq count "-n 1"
-                          cmd "ipconfig"))
-      (t (setq count "-c 1"
-               cmd "/sbin/ifconfig")))
-    (or (zerop (shell-command (concat cmd " | grep 10.233")))
-        (and (string= (user-login-name) "wixu")
-             (not (eq system-type 'darwin))
-             (zerop (shell-command
-                     (format "ping %s 172.16.42.42" count)))))))
+  (file-exists-p "~/.emacs.d/site-lisp/config/kaixya.el"))
 
 (setq xwl-at-company? (xwl-at-company))
 
 (setq xwl-w3m-arguments '())
 
-(setq xwl-black-background? nil)
+(setq xwl-black-background? xwl-at-company?)
 
 (provide 'xwl-var)
 

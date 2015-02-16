@@ -42,7 +42,7 @@
 (line-number-mode 1)
 
 (show-paren-mode 1)
-(setq show-paren-style 'expression)
+(setq show-paren-style 'parenthesis)
 
 (setq scroll-step 1
       ;; FIXME: This will cause eshell jumping when at the bottom of the buffer.

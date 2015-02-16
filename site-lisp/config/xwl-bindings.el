@@ -110,7 +110,7 @@
   (interactive)
   (require 'thingatpt)
   (set-mark (beginning-of-thing 'ascii-symbol))
-  (goto-char (end-of-thing 'ascii-symbol)))
+  (goto-char (1- (end-of-thing 'ascii-symbol))))
 
 (global-set-key (kbd "M-H") 'xwl-mark-ascii-symbol)
 
