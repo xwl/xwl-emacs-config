@@ -1,6 +1,6 @@
 ;;; xwl-extra-util.el --- non-essential, autoloaded utilities
 
-;; Copyright (C) 2010, 2011, 2013  William Xu
+;; Copyright (C) 2010, 2011, 2013, 2015  William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
 ;; Keywords: tools
@@ -543,6 +543,14 @@ You may also use `paredit-doublequote'.  "
 ;;       (insert s "\n"))
 ;;     (widen)))
 
+;;;###autoload
+(defun xwl-host-accessible? (host)
+  (let ((count-arg
+         (case system-type
+           ((windows-nt) "-n")
+           (t "-c")))
+         (n "1"))
+    (zerop (shell-command (format "ping %s %s %s" count-arg n host)))))
 
 (provide 'xwl-extra-util)
 ;;; xwl-extra-util.el ends here

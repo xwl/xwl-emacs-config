@@ -1560,6 +1560,9 @@ Useful for packing c/c++ functions with one line or empty body."
                    semantic-decoration-styles))
   (global-semantic-stickyfunc-mode -1)
 
+  ;; C-M-i: semantic-ia-complete-symbol
+  (setq semantic-ia-completion-format-tag-function 'semantic-format-tag-uml-concise-prototype)
+
   (eval-after-load 'semantic/imenu
     '(progn
        (defadvice semantic-create-imenu-index (after combine-with-default activate)
@@ -1580,7 +1583,7 @@ Useful for packing c/c++ functions with one line or empty body."
 (add-to-list 'auto-mode-alist '("\\.qml\\'" . qml-mode))
 (add-to-list 'auto-mode-alist '("\\.dot\\'" . graphviz-dot-mode))
 (add-to-list 'auto-mode-alist '("\\.ps1\\'" . powershell-mode))
-(add-to-list 'auto-mode-alist '("make.*" . makefile-mode))
+(add-to-list 'auto-mode-alist '("make[^.]*$" . makefile-mode))
 
 (eval-after-load 'gtags
   '(progn

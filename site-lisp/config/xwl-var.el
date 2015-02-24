@@ -34,6 +34,10 @@
 
 (setq xwl-black-background? xwl-at-company?)
 
+(let ((local-file "~/.emacs.d/site-lisp/config/local.el"))
+  (when (file-exists-p local-file)
+    (load local-file)))
+
 (provide 'xwl-var)
 
 ;;; xwl-var.el ends here

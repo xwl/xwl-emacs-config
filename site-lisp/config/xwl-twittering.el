@@ -20,8 +20,7 @@
 
 ;;; Code:
 
-(defvar xwl-twitter-direct-accessible?
- (zerop (shell-command "ping -n 1 twitter.com")))
+(defvar xwl-twitter-direct-accessible? (xwl-host-accessible? "twitter.com"))
 
 ;; (let ((col (max (round (/ (frame-width) 2)) 78))
 ;;       (padding 8))
@@ -91,7 +90,7 @@
      (define-key twittering-mode-map (kbd "C-c C-SPC") 'twittering-switch-to-unread-timeline)
 
      (define-key twittering-mode-map (kbd "A") 'twittering-open-all-thumbnails-externally)
-     
+
      (setq twittering-timeline-most-active-spec-strings
            `(":mentions" ,@twittering-timeline-most-active-spec-strings))
 
@@ -102,7 +101,7 @@
                  (when xwl-black-background?
                    (set-face-background 'twittering-zebra-1-face "gray15")
                    (set-face-background 'twittering-zebra-2-face "gray11"))))
-     
+
      ;; (when xwl-at-company?
      ;;   (let ((sc (assqref 'socialcast twittering-service-method-table)))
      ;;     (setq twittering-service-method-table
@@ -149,12 +148,12 @@
      ;;            (auth basic)
      ;;            ,@(remove-if (lambda (i) (eq (car i) 'auth))
      ;;                         socialcast))
-          
+
      ;;           ,@others)))
 
      (defadvice twittering-edit-post-status (after play-sound activate)
        (xwl-shell-command-asynchronously "mplayer ~/.emacs.d/sound/roar.au"))
-     
+
        ))
 
 ;; FIXME: in 23.2, who the hell autoload create-animated-image?? this exists in
@@ -165,8 +164,8 @@
 (setq twittering-tinyurl-service 'toly)
 
 (setq twittering-initial-timeline-spec-string
-      (sort 
-       (remove-duplicates 
+      (sort
+       (remove-duplicates
         `(":home@sina"
           ":replies@sina" ":mentions@sina"
           ,@(when (or (string-match "tokyo" system-name)
@@ -228,7 +227,7 @@
                                        '("DK^nEa^,E;Z,D8=="
                                          "DKP+E;HoD;Z*DH==")))
                               (assqref 'id (assqref 'user status)))))
-           
+
            ((string= spec-string ":home@twitter")
             (member (assqref 'screen-name (assqref 'user status))
                     (mapcar 'xds

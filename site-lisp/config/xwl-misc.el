@@ -1183,6 +1183,11 @@ prompting.  If file is a directory perform a `find-file' on it."
 (setq mac-system-move-file-to-trash-use-finder t)
 (setq delete-by-moving-to-trash t)
 
+(unless window-system
+  (menu-bar-mode -1))
+;; (tool-bar-mode -1)
+;; (scroll-bar-mode -1)
+
 (provide 'xwl-misc)
 
 ;;; Local Variables: ***
