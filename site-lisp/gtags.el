@@ -231,34 +231,52 @@
       `(tagname . ,(car token)))))
 
 (defun gtags-current-token ()
-  (let ((allowed "[0-9A-Za-z_.\"><]")
-        (spaces "[ \t]")
-        dot-at-back)          ; where is the dot compared with current position.
-    (save-excursion
-      ;; Goto start or end of token.
-      (unless (looking-at allowed)
-        (skip-chars-forward spaces (line-end-position))
-        (when (eolp)
-          (skip-chars-backward spaces (line-beginning-position))
-          (unless (bolp)
-            (backward-char))))
+  (or
+   ;; 1. is it #include file?
+   (let ((include (save-excursion
+                    (goto-char (line-beginning-position))
+                    (looking-at "#include"))))
+     (when include
+       (let ((file (thing-at-point 'filename)))
+         (when file
+           `(filename . ,(replace-regexp-in-string ".*/" "" file))))))
 
-      ;; Goto start of token and decide if dot is before or after point.
-      (when (looking-at allowed)
-        (while (and (not (bolp)) (looking-back allowed))
-          (when (eq (char-before) ?.)
-            (setq dot-at-back t))
-          (backward-char)))
+   ;; 2. gtags original
+   (let ((allowed "[0-9A-Za-z_.\"><]")
+         (spaces "[ \t]")
+         dot-at-back)          ; where is the dot compared with current position.
+     (save-excursion
+       ;; Goto start or end of token.
+       (unless (looking-at allowed)
+         (skip-chars-forward spaces (line-end-position))
+         (when (eolp)
+           (skip-chars-backward spaces (line-beginning-position))
+           (unless (bolp)
+             (backward-char))))
 
-      ;; FIXME
-      (when (and (bolp) (looking-at gtags-definition-regexp))
-        (goto-char (match-end 0)))
+       ;; Goto start of token and decide if dot is before or after point.
+       (when (looking-at allowed)
+         (while (and (not (bolp)) (looking-back allowed))
+           (when (eq (char-before) ?.)
+             (setq dot-at-back t))
+           (backward-char)))
 
-      ;; Extract filename or tagname
-      (when (looking-at gtags-symbol-regexp)
-        (gtags-parse-token
-         (substring-no-properties (gtags-match-string 0))
-         dot-at-back)))))
+       ;; FIXME
+       (when (and (bolp) (looking-at gtags-definition-regexp))
+         (goto-char (match-end 0)))
+
+       ;; Extract filename or tagname
+       (when (looking-at gtags-symbol-regexp)
+         (gtags-parse-token
+          (substring-no-properties (gtags-match-string 0))
+          dot-at-back))))
+
+   ;; 3.  Handle ->SYMBOL.
+   (let ((bounds (bounds-of-thing-at-point 'ascii-symbol)))
+     (when bounds
+       (gtags-parse-token
+        (buffer-substring-no-properties (car bounds) (cdr bounds))
+        nil)))))
 
 ;; push current context to stack
 (defun gtags-push-context ()
@@ -298,7 +316,7 @@
   (gtags-completing 'files string predicate code))
 
 (defun gtags-completing-any (string predicate code)
-  ;; Can be partial completion string or completions table.  
+  ;; Can be partial completion string or completions table.
   (let ((gtags (gtags-completing-gtags string predicate code))
         (gsyms (gtags-completing-gsyms string predicate code))
         (files (gtags-completing-files string predicate code)))
