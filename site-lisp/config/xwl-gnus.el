@@ -37,7 +37,7 @@
       gnus-use-cross-reference nil)
 
 (setq gnus-select-method
-      (if xwl-at-company?
+      (if (not (xwl-host-accessible? "news.gmane.org"))
           `(nntp "news.gmane.org"
                  (nntp-address ,(xwl-redirect-host))
                  (nntp-port-number 10119))
@@ -74,7 +74,7 @@
         ;; gmail using IMAP. Maybe try hamster some timer later.
         ;;   http://www.arcorhome.de/newshamster/tgl/misc/hamster_en.html
 
-        ,@(if xwl-at-company?
+        ,@(if (not (xwl-host-accessible? "news.gmane.org"))
               `( ;; (nnimap "imap.gmail.com"
                 ;;         (nnimap-address ,(xwl-redirect-host))
                 ;;         (nnimap-server-port 10993)
@@ -87,7 +87,8 @@
             '(;; (nnimap "imap.gmail.com"
               ;;         (nnimap-server-port 993)
               ;;         (nnimap-stream ssl))
-              (nntp "news.cn99.com")
+              ;; (nntp "news.cn99.com")
+              (nntp "nntp.aioe.org")
               ))
 
         ;; (nntp "news.gwene.org")

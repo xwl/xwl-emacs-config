@@ -39,8 +39,9 @@
   (ignore-errors
     (let* ((hst (car (split-string (shell-command-to-string "hostname"))))
 
-           (configs '(("ubuntu" 15 "Droid Sans Mono" "SimSun" "SimSun")
-                      ("tokyolove.local" (if xwl-black-background? 15 14) "Monaco" "Hiragino Sans GB" "Hiragino Sans GB")
+           (configs `(,(when xwl-local-fonts xwl-local-fonts)
+                      ("ubuntu" 15 "Droid Sans Mono" "SimSun" "SimSun")
+                      ("tokyolove.local" ,(if xwl-black-background? 15 14) "Monaco" "Hiragino Sans GB" "Hiragino Sans GB")
                       ))
 
            (en-font-size (if (assoc hst configs) (nth 1 (assoc hst configs)) 14))

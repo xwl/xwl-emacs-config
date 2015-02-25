@@ -133,11 +133,7 @@ This should not affect `buffer-undo-list'."
     "172.28.206.207"))
 
 ;; Well, as Gnus and other components depend on this, we have to eval this much earlier.
-(when (and xwl-at-company? ;; xwl-w32?
-           )
-  (setq xwl-proxy-server "172.16.42.42"
-        xwl-proxy-port 8080)
-
+(when xwl-proxy-server
   (setq url-proxy-services
         `(("http" . ,(format "%s:%d" xwl-proxy-server xwl-proxy-port))))
 

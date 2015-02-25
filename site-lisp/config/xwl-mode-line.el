@@ -117,10 +117,10 @@
 ;;       (run-with-timer 0 120 'xwl-mail-notify-update-handler))
 
 ;; frame title
-(when window-system
-(set-frame-name ;; "菩提本無樹 明鏡亦非台 本來無一物 何處惹塵埃") ; bug in windows 7?
- (concat "the Church of Emacs,  starting from " (current-time-string)))
-)
+;; (when window-system
+;; (set-frame-name ;; "菩提本無樹 明鏡亦非台 本來無一物 何處惹塵埃") ; bug in windows 7?
+;;  (concat "the Church of Emacs,  starting from " (current-time-string)))
+;; )
 
 (defun xwl-frame-fortune-of-day ()
   (set-frame-name

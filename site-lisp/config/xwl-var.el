@@ -33,6 +33,10 @@
 (setq xwl-w3m-arguments '())
 
 (setq xwl-black-background? xwl-at-company?)
+(setq xwl-proxy-server nil
+      xwl-proxy-port nil)
+
+(setq xwl-local-fonts nil)
 
 (let ((local-file "~/.emacs.d/site-lisp/config/local.el"))
   (when (file-exists-p local-file)

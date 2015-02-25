@@ -103,14 +103,20 @@
 (global-set-key (kbd "M-+") 'highlight-changes-next-change)
 (global-set-key (kbd "C-M-k") 'kill-paragraph)
 (global-set-key (kbd "M-K") 'kill-sexp)
-;; (global-set-key (kbd "M-H") 'mark-sexp)
+;; (global-set-key (kbd "M-H") 'mark-sexp
+
+(defun xwl-is-evil-mode ()
+  (and (boundp 'evil-state)
+       (eq evil-state 'emacs)))
 
 (defun xwl-mark-ascii-symbol ()
   "Mark ascii-symbol by `thing-at-point'."
   (interactive)
   (require 'thingatpt)
   (set-mark (beginning-of-thing 'ascii-symbol))
-  (goto-char (1- (end-of-thing 'ascii-symbol))))
+  (if (xwl-is-evil-mode)
+      (goto-char (end-of-thing 'ascii-symbol))
+    (goto-char (1- (end-of-thing 'ascii-symbol)))))
 
 (global-set-key (kbd "M-H") 'xwl-mark-ascii-symbol)
 
@@ -184,7 +190,7 @@
 
 (defun xwl-erc-select ()
   (interactive)
-  (if xwl-at-company?
+  (if xwl-proxy-server
       (let ((sv "localhost")
             (nick "xwl__"))
         (when (eq system-type 'windows-nt)

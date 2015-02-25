@@ -565,6 +565,9 @@ for the --graph option."
       (setq find-program "cmd /c c:/usr/bin/find"
             grep-program "cmd /c c:/usr/bin/grep"))))
 
+(when (executable-find "ack-grep")
+  (setq grep-program "ack-grep"))
+
 (eval-after-load 'grep
   '(progn
      (defadvice grep (around append-star activate)
@@ -593,14 +596,17 @@ for the --graph option."
 (global-set-key (kbd "C-c g")
                 (lambda ()
                   (interactive)
-                  (require 'grep)
-                  (let ((cmd
-                         (if (string-match "[^*]\\.gz" (shell-command-to-string
-                                                        "ls *.gz | head -1"))
-                             "zgrep -nH "
-                           (concat grep-program " -nH "))))
-                    (grep-apply-setting 'grep-command cmd)
-                    (call-interactively 'grep))))
+                  (if (fboundp 'ack)
+                      (call-interactively 'ack)
+
+                    (require 'grep)
+                    (let ((cmd
+                           (if (string-match "[^*]\\.gz" (shell-command-to-string
+                                                          "ls *.gz | head -1"))
+                               "zgrep -nH "
+                             (concat grep-program " -nH "))))
+                      (grep-apply-setting 'grep-command cmd)
+                      (call-interactively 'grep)))))
 
 (global-set-key (kbd "C-c G")
                 (lambda (cmd)
@@ -842,10 +848,11 @@ If SCHEME?, `run-scheme'."
 (defun xwl-compilation-exit-autoclose (status code msg)
   (cond ((not (and (eq status 'exit) (zerop code)))
          (setq msg "failed"))
-        ((with-current-buffer "*compilation*"
-           (save-excursion
-             (goto-char (point-min))
-             (re-search-forward "warning:" nil t 1)))
+        ((and (get-buffer "*compilation*")
+              (with-current-buffer "*compilation*"
+                (save-excursion
+                  (goto-char (point-min))
+                  (re-search-forward "warning:" nil t 1))))
          (setq msg "has warnings"))
         (t
          ;; (run-at-time 1 nil (lambda ()

@@ -31,7 +31,7 @@
 ;;         dictionary-proxy-port xwl-proxy-port
 ;;         dictionary-proxy-server xwl-proxy-server))
 
-(when xwl-at-company?
+(when xwl-proxy-server
   (setq dictionary-server (xwl-redirect-host))
   (setq dictionary-port 12628))
 
