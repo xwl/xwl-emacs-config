@@ -112,7 +112,7 @@
   (package-list-packages)
   (mapc 'package-install
         ;; package-activated-list
-        '(ace-jump-mode ace-jump-mode all auctex goto-last-change oauth2)
+        '(ace-jump-mode all auctex goto-last-change oauth2 rtags)
                  )
   (with-current-buffer (find-file-noselect
                         "~/.emacs.d/site-lisp/xwl-makefile.el")

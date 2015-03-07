@@ -1648,6 +1648,21 @@ Useful for packing c/c++ functions with one line or empty body."
 
 (add-hook 'makefile-mode-hook (lambda () (gtags-mode 1)))
 
+;; rtag
+(eval-after-load 'rtags
+  '(progn
+     (rtags-enable-standard-keybindings)
+     
+     (define-key rtags-mode-map (kbd "C-c C-b") 'rtags-location-stack-back)
+     (define-key rtags-mode-map (kbd "C-c C-f") 'rtags-find-symbol-at-point)
+     (define-key rtags-mode-map (kbd "C-c C-r") 'rtags-find-all-references-at-point)
+
+     (global-set-key (kbd "C-0") 'rtags-location-stack-back)
+     (global-set-key (kbd "C-9") 'rtags-find-symbol-at-point)
+     (global-set-key (kbd "C-8") 'rtags-find-all-references-at-point)
+     (global-set-key (kbd "C-7") 'rtags-location-stack-forward)
+     ))
+
 ;;; imenu
 
 (setq which-func-modes '(emacs-lisp-mode c-mode c++-mode objc-mode perl-mode

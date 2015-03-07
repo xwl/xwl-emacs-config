@@ -255,29 +255,28 @@ point.  Especially useful for w32."
       (if ido-enable-prefix
           (setq re (concat "\\`" re)))
       (let ((cmd-re (mapconcat #'regexp-quote (split-string ido-text "" t) "[^-]*-")))
-        (mapc
-         (lambda (item)
-           (let ((name (ido-name item))
-                 (point 0))
-             (when (string-match re name)
-               ;; prefix match
-               (when (equal (substring ido-text 0 1) (substring name 0 1))
-                 (setq point (+ point 2)))
+        (mapc (lambda (item)
+                (let ((name (ido-name item))
+                      (score 0))
+                  (when (string-match re name)
+                    ;; prefix match
+                    (when (equal (substring ido-text 0 1) (substring name 0 1))
+                      (setq score (+ score 2)))
 
-               ;; longest common substring
-               (setq point (+ point (xwl-algorithm-longest-common-substring-length ido-text name)))
+                    ;; longest common substring
+                    (setq score (+ score (xwl-algorithm-longest-common-substring-length
+                                          ido-text name)))
 
-               ;; command match
-               (when (string-match cmd-re name)
-                 (setq point (+ point 1))
-                 ;; command suffix match
-                 (let ((r (concat ido-text "[^-]+\\'")))
-                   (when (string-match r name)
-                     (setq point (1+ point)))))
-               (setq matches (cons (cons item point) matches)))))
+                    ;; command match
+                    (when (string-match cmd-re name)
+                      (setq score (+ score 1))
+                      ;; command suffix match
+                      (let ((r (concat ido-text "[^-]+\\'")))
+                        (when (string-match r name)
+                          (setq score (1+ score)))))
+                    (setq matches (cons (cons item score) matches)))))
          items))
-      (setq matches (mapcar 'car 
-                            (sort matches (lambda (a b) (> (cdr a) (cdr b)))))))
+      (setq matches (mapcar 'car (sort matches (lambda (a b) (> (cdr a) (cdr b)))))))
     matches))
 
 (provide 'xwl-buffer)

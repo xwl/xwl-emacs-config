@@ -243,7 +243,7 @@
   '(progn
      (defun ido-completing-read (prompt choices &optional _predicate require-match
                                         initial-input hist def _inherit-input-method)
-       "Redefined to support non-string argument `choices' as used in `completing-read'. "
+       "xwl: Redefined to support non-string argument `choices' as used in `completing-read'. "
        (let ((ido-current-directory nil)
              (ido-directory-nonreadable nil)
              (ido-directory-too-big nil)
@@ -260,7 +260,7 @@
 
 
 (defun ido-read-internal (item prompt history &optional default require-match initial)
-  "Ido bug when `history' is a cons. repro in ffap.  "
+  "xwl: Ido bug when `history' is a cons. repro in ffap.  "
   (let
       ((ido-cur-item item)
        (ido-entry-buffer (current-buffer))
