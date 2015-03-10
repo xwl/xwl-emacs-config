@@ -593,18 +593,54 @@ for the --graph option."
                           'grep-mode))
      ))
 
+(eval-after-load 'ack
+  '(progn
+    (defun ack (command-args &optional directory)
+       "Run ack using COMMAND-ARGS and collect output in a buffer.
+When called interactively, the value of DIRECTORY is provided by
+`ack-default-directory-function'.
+
+The following keys are available while reading from the
+minibuffer:
+
+\\{ack-minibuffer-local-map}"
+       (interactive
+        (let ((ack--project-root (or (funcall ack-default-directory-function
+                                              current-prefix-arg)
+                                     default-directory))
+              ;; Disable completion cycling; see http://debbugs.gnu.org/12221
+              (completion-cycle-threshold nil))
+          (list (minibuffer-with-setup-hook 'ack-minibuffer-setup-function
+                  (read-from-minibuffer "Ack: "
+                                        ;; xwl: search thing at point by default
+                                        (if current-prefix-arg 
+                                            ack-command
+                                          (let ((init (concat ack-command "\"" (thing-at-point 'ascii-symbol) "\" *")))
+                                            (cons init (- (length init) 2))))
+                                        ack-minibuffer-local-map
+                                        nil 'ack-history))
+                ack--project-root)))
+       (let ((default-directory (expand-file-name
+                                 (or directory default-directory))))
+         ;; Change to the compilation buffer so that `ack-buffer-name-function' can
+         ;; make use of `compilation-arguments'.
+         (with-current-buffer (compilation-start command-args 'ack-mode)
+           (when ack-buffer-name-function
+             (rename-buffer (funcall ack-buffer-name-function "ack"))))))
+     ))
+
 (global-set-key (kbd "C-c g")
                 (lambda ()
                   (interactive)
-                  (if (fboundp 'ack)
-                      (call-interactively 'ack)
+                  (require 'grep)
+                  (let ((cmd
+                         (if (string-match "[^*]\\.gz" (shell-command-to-string
+                                                        "ls *.gz | head -1"))
+                             "zgrep -nH "
+                           (concat grep-program " -nH "))))
 
-                    (require 'grep)
-                    (let ((cmd
-                           (if (string-match "[^*]\\.gz" (shell-command-to-string
-                                                          "ls *.gz | head -1"))
-                               "zgrep -nH "
-                             (concat grep-program " -nH "))))
+                    (if (fboundp 'ack)
+                        (call-interactively 'ack)
                       (grep-apply-setting 'grep-command cmd)
                       (call-interactively 'grep)))))
 
