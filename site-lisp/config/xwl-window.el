@@ -155,7 +155,9 @@
 
 ;; (setq-default cursor-color "Magenta")
 
-(setq frame-inherited-parameters '(font))
+;; FIXME: in emacs daemon mode, emacsclient -c will cause fatal error: unknown
+;; font 'tty'.
+;; (setq frame-inherited-parameters '(font))
 
 (defun xwl-light-background ()
   (interactive)

@@ -1,9 +1,9 @@
-export EDITOR='LC_ALL=zh_CN.utf8 TERM=xterm-256color emacsclient -t'
+export EDITOR='LC_ALL=zh_CN.utf8 TERM=xterm-256color emacsclient -n -c -e "(load \"~/.emacs.d/site-lisp/config/xwl-window.el\")" '
 
 # alias ec='LC_ALL=zh_CN.utf8 TERM=xterm-256color emacsclient -t -e "(command-execute (kbd \"C-c m s\"))"'
+#alias ec='LC_ALL=zh_CN.utf8 TERM=xterm-256color emacsclient -t'
+#alias ecui='LC_ALL=zh_CN.utf8 TERM=xterm-256color emacsclient -n'
 alias ec=$EDITOR
-alias ecui='LC_ALL=zh_CN.utf8 TERM=xterm-256color emacsclient -n'
-alias ecui2='LC_ALL=zh_CN.utf8 TERM=xterm-256color emacsclient -c'
 
 export ALTERNATE_EDITOR=~/.emacs.d/scripts/emacs-daemon
 
